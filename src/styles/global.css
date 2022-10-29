@@ -1,3 +1,22 @@
+:root {
+  --brand: rgb(220, 187, 123);
+  --brand-semi: rgba(220, 187, 123, 0.5);
+  --brand-transparent: rgba(220, 187, 123, 0);
+  --elevation0: #121212;
+  --elevation1: #151515;
+  --elevation2: #171717;
+  --elevation3: #1c1c1c;
+  --elevation4: #202020;
+  --elevation5: #242424;
+  --elevation6: #282828;
+  --elevation8: #2f2f2f;
+  --elevation10: #444444;
+  --scrollbar: #ebddd2;
+  --text-highlight: #ffffff;
+  --text-primary: #e8dacf;
+  --text-secondary: #948b82;
+}
+
 html {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 400;
