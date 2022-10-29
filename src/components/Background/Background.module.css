@@ -1,0 +1,13 @@
+.Background {
+  background-image: url("/img/cover.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: -1em;
+  filter: blur(0.5em) brightness(40%);
+  left: -1em;
+  position: absolute;
+  right: -1em;
+  top: -1em;
+  z-index: -1;
+}
