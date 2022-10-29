@@ -21,3 +21,16 @@ html {
   font-family: 'Fira Sans', sans-serif;
   font-weight: 400;
 }
+
+html, body {
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+#__next {
+  display: flex;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
