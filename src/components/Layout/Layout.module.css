@@ -1,0 +1,19 @@
+.Layout {
+  display: grid;
+  grid-gap: 0 0;
+  grid-template-areas:
+    "header header"
+    "sidebar content";
+  grid-template-columns: 15em 1fr;
+  grid-template-rows: 3.5rem 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .Layout {
+    grid-template-columns: 11em 1fr;
+    grid-template-rows: 2.5rem 1fr;
+  }
+}
