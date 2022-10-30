@@ -1,0 +1,126 @@
+.WeaponGrid {
+  user-select: none;
+  width: 100%;
+}
+
+.WeaponTier {
+  background: linear-gradient(90deg, var(--elevation6) 0%, transparent 100%);
+  margin: 0 0 0.5em 0;
+  padding: 1em 0.75em;
+}
+
+.WeaponTierText {
+  color: var(--text-primary);
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.25em;
+  letter-spacing: 0.15em;
+  line-height: 1em;
+}
+
+.WeaponRows {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr;
+}
+
+.WeaponRows + .WeaponTier {
+  margin-top: 1.5em;
+}
+
+.WeaponRow {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.WeaponName {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  padding: 0.5em 0 0.5em 0.75em;
+  width: 15em;
+}
+
+.WeaponName:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.WeaponNameOptimal {
+  color: var(--brand);
+}
+
+.WeaponCalibre {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.WeaponEnergyList {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  flex: 1;
+}
+
+.WeaponEnergy {
+  align-items: center;
+  background-color: var(--elevation4);
+  border-radius: 0.25em;
+  color: var(--text-secondary);
+  display: flex;
+  flex: 1;
+  font-weight: 500;
+  justify-content: center;
+  opacity: 0.75;
+  padding: 0.25em 0.45em;
+  text-align: center;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+}
+
+.WeaponGridHeader .WeaponEnergy {
+  background-color: #023e8a;
+  color: var(--text-highlight);
+  margin: 1em 0;
+  opacity: unset;
+}
+
+.WeaponEnergyOptimal {
+  background-color: var(--variance-optimal);
+  color: var(--text-highlight);
+  opacity: unset;
+}
+
+.WeaponEnergySuboptimal {
+  background-color: var(--variance-suboptimal);
+  color: var(--text-highlight);
+  opacity: unset;
+}
+
+@media (max-width: 768px) {
+  .WeaponCalibre {
+    margin-left: 0.5em;
+  }
+
+  .WeaponName {
+    align-items: baseline;
+    flex-direction: row;
+    padding-left: 0;
+  }
+
+  .WeaponNameHeader {
+    display: none;
+  }
+
+  .WeaponRow {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 864px) {
+  .WeaponGrid {
+    font-size: 0.9em;
+  }
+}
