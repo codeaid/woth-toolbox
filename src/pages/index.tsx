@@ -30,7 +30,7 @@ const Home = () => {
   return (
     <Layout>
       <Background />
-      <Header>Animal Weapon Matcher</Header>
+      <Header>Weapon Energy Calculator</Header>
       <Sidebar
         animals={animals}
         selected={selectedAnimal}

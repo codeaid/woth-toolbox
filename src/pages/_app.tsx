@@ -39,7 +39,7 @@ const App = (props: AppProps) => {
     <>
       {renderGoogleAnalytics()}
       <Head>
-        <title>Way Of The Hunter - Animal Weapon Matcher</title>
+        <title>Weapon Energy Calculator - Way Of The Hunter</title>
       </Head>
       <Component {...pageProps} />
     </>
