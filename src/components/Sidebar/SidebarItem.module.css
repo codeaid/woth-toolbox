@@ -1,0 +1,90 @@
+@keyframes highlight {
+  0% {
+    opacity: 0;
+    width: 0.1rem;
+  }
+  50% {
+    opacity: 1;
+    width: 0.2rem;
+  }
+  100% {
+    opacity: 1;
+    width: 0.1rem;
+  }
+}
+
+.SidebarItem {
+  border-left: 0.1rem transparent solid;
+  cursor: pointer;
+  position: relative;
+  transition: border-left-color 125ms ease-in-out;
+}
+
+.SidebarItem:hover {
+  border-left-color: var(--brand);
+}
+
+.SidebarItem::after {
+  background: var(--brand);
+  background: linear-gradient(90deg, var(--brand-semi) 0%, var(--brand-transparent) 100%);
+  bottom: 0;
+  content: '';
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 125ms ease-in-out;
+}
+
+.SidebarItemActive {
+  border-left-color: var(--brand);
+}
+
+.SidebarItemActive::after {
+  opacity: 1;
+}
+
+.SidebarItemContainer {
+  padding: 0.5em 0.75em;
+  position: relative;
+}
+
+.SidebarItemContainer::before {
+  background-color: var(--brand);
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
+.SidebarItemActive .SidebarItemContainer::before {
+  animation-delay: 120ms;
+  animation-duration: 300ms;
+  animation-name: highlight;
+  animation-fill-mode: forwards;
+}
+
+.SidebarItemTitle {
+  color: var(--text-primary);
+  transition: color 125ms ease-in-out;
+}
+
+.SidebarItemActive .SidebarItemTitle {
+  color: var(--brand);
+}
+
+.SidebarItemSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+@media (max-width: 864px) {
+  .SidebarItemContainer {
+    padding: 0.4em 0.65em;
+  }
+}
