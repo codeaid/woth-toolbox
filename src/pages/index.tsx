@@ -1,3 +1,47 @@
-const Home = () => null;
+import { useState } from 'react';
+import { AnimalDetails } from 'components/AnimalDetails';
+import { Background } from 'components/Background';
+import { Content } from 'components/Content';
+import { Header } from 'components/Header';
+import { Layout } from 'components/Layout';
+import { Sidebar } from 'components/Sidebar';
+import { WeaponGrid } from 'components/WeaponGrid';
+import { animals } from 'config/animals';
+import { weapons } from 'config/weapons';
+import { Animal } from 'types/animals';
+
+const Home = () => {
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | undefined>();
+
+  /**
+   * Render details of an animal
+   */
+  const renderAnimalDetails = () =>
+    selectedAnimal ? <AnimalDetails animal={selectedAnimal} /> : null;
+
+  /**
+   * Render list of weapons and their matches for the selected animal
+   */
+  const renderWeaponGrid = () =>
+    selectedAnimal ? (
+      <WeaponGrid animal={selectedAnimal} weapons={weapons} />
+    ) : null;
+
+  return (
+    <Layout>
+      <Background />
+      <Header>Animal Weapon Matcher</Header>
+      <Sidebar
+        animals={animals}
+        selected={selectedAnimal}
+        onAnimalClick={setSelectedAnimal}
+      />
+      <Content>
+        {renderAnimalDetails()}
+        {renderWeaponGrid()}
+      </Content>
+    </Layout>
+  );
+};
 
 export default Home;
