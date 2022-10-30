@@ -24,7 +24,7 @@ export const animals: Array<Animal> = [
   },
   {
     description:
-      'The European badger is a powerfully built black, white, brown and gry animal with a small head, stocky body, small black eyes and a short tail.',
+      'The European badger is a powerfully built black, white, brown and gray animal with a small head, stocky body, small black eyes and a short tail.',
     hitEnergy: [700, 2100],
     latin: 'Meles meles',
     name: 'Eurasian Badger',
@@ -108,7 +108,7 @@ export const animals: Array<Animal> = [
   },
   {
     description:
-      'The deer can be recognized by the characteristic white underside to its tail. It raises its tail when alarmed to warn the predator that it has been detected. Bucks have either a typical or atypical andler arrangement. Typical antlers are symmetrical with points growing straight up from the main beam. Atypical antlers are asymmetrical and the points may project at any angle from the main beam.',
+      'The deer can be recognized by the characteristic white underside to its tail. It raises its tail when alarmed to warn the predator that it has been detected. Bucks have either a typical or atypical antler arrangement. Typical antlers are symmetrical with points growing straight up from the main beam. Atypical antlers are asymmetrical and the points may project at any angle from the main beam.',
     hitEnergy: [1543, 3705],
     latin: 'Odocoileus virginianus',
     name: 'White-Tailed Deer',
