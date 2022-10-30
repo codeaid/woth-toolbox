@@ -11,7 +11,10 @@ import { weapons } from 'config/weapons';
 import { Animal } from 'types/animals';
 
 const Home = () => {
-  const [selectedAnimal, setSelectedAnimal] = useState<Animal | undefined>();
+  // Preselect the very first animal on page load
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | undefined>(
+    () => animals[0],
+  );
 
   /**
    * Render details of an animal
