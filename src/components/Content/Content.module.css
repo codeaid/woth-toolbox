@@ -1,0 +1,13 @@
+.Content {
+  color: var(--text-primary);
+  grid-area: content;
+  line-height: 1.3em;
+  overflow: auto;
+  padding: 1.5em;
+}
+
+.ContentBody {
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 100%;
+}
