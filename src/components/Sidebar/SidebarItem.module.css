@@ -1,27 +1,33 @@
 @keyframes highlight {
   0% {
     opacity: 0;
-    width: 0.1rem;
+    width: 4px;
   }
   50% {
     opacity: 1;
-    width: 0.2rem;
+    width: 6px;
   }
   100% {
     opacity: 1;
-    width: 0.1rem;
+    width: 4px;
   }
 }
 
 .SidebarItem {
-  border-left: 0.1rem transparent solid;
   cursor: pointer;
   position: relative;
-  transition: border-left-color 125ms ease-in-out;
 }
 
-.SidebarItem:hover {
-  border-left-color: var(--brand);
+.SidebarItem::before {
+  background-color: var(--brand);
+  bottom: 0;
+  content: '';
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 125ms ease-in-out;
+  width: 2px;
 }
 
 .SidebarItem::after {
@@ -35,6 +41,10 @@
   right: 0;
   top: 0;
   transition: opacity 125ms ease-in-out;
+}
+
+.SidebarItem:hover::before {
+  opacity: 1;
 }
 
 .SidebarItemActive {
@@ -55,14 +65,15 @@
   bottom: 0;
   content: '';
   left: 0;
+  opacity: 0;
   position: absolute;
   top: 0;
-  width: 0;
+  width: 4px;
 }
 
 .SidebarItemActive .SidebarItemContainer::before {
   animation-delay: 120ms;
-  animation-duration: 300ms;
+  animation-duration: 350ms;
   animation-name: highlight;
   animation-fill-mode: forwards;
 }
