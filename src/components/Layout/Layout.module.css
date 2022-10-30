@@ -11,7 +11,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 864px) {
   .Layout {
     grid-template-columns: 11em 1fr;
     grid-template-rows: 2.5rem 1fr;
