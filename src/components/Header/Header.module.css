@@ -1,0 +1,33 @@
+.Header {
+  align-items: center;
+  background-color: var(--elevation2);
+  box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  grid-area: header;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  user-select: none;
+  z-index: 1;
+}
+
+.HeaderText {
+  color: var(--text-highlight);
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.4em;
+  margin-top: 0.25em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 864px) {
+  .Header {
+    padding: 0.5rem;
+  }
+
+  .Header img {
+    display: none;
+  }
+
+  .HeaderText {
+    font-size: 1.2em;
+  }
+}
