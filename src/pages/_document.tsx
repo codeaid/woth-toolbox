@@ -9,9 +9,6 @@ const Document = () => (
         href="https://fonts.googleapis.com/css2?family=BenchNine&family=Fira+Sans:ital@0;1&display=swap"
         rel="stylesheet"
       />
-
-      {/* eslint-disable-next-line @next/next/no-title-in-document-head */}
-      <title>Way Of The Hunter - Hit Energy Calculator</title>
     </Head>
     <body>
       <div className="overlay"></div>
