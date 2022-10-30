@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { baseUrl } from 'config/app';
 import styles from './Header.module.css';
 import { HeaderProps } from './types';
 
@@ -12,7 +13,7 @@ export const Header = (props: HeaderProps) => {
         draggable={false}
         height={35}
         priority={false}
-        src="/img/logo.png"
+        src={`${baseUrl}/img/logo.png`}
         width={150}
       />
       <div className={styles.HeaderText}>{children}</div>
