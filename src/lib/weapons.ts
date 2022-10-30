@@ -125,23 +125,35 @@ export const isOptimal = (
  * @param animal Source animal
  * @param weapon Source weapon
  * @param distance Target distance
- * @param deviation Allowed deviation (0-1)
+ * @param maxDeviation Allowed deviation (0-1)
  */
 export const isSuboptimal = (
   animal: Animal,
   weapon: Weapon,
   distance: WeaponDistance,
-  deviation = 0.1,
+  maxDeviation = 0.1,
 ) => {
+  // Extract animal hit energy range boundaries
   const [animalFrom, animalTo] = animal.hitEnergy;
-  const animalFromDev = Math.round(animalFrom * (1 - deviation));
-  const animalToDev = Math.round(animalTo * (1 + deviation));
 
-  // Determine if weapon is already at optimal range
-  const optimal = isOptimal(animal, weapon, distance);
+  // Calculate maximum hit energy deviation value
+  const energyDiff = animalTo - animalFrom;
+  const energyOffset = Math.round(energyDiff * maxDeviation);
 
-  return (
-    !optimal &&
-    isWithinRange(getWeaponEnergy(weapon, distance), animalFromDev, animalToDev)
+  // Calculate weapon hit energy at the specified distance
+  const weaponEnergy = getWeaponEnergy(weapon, distance);
+
+  // Determine if the hit energy is just over or under the ethical hit energy
+  const isUnderpowered = isWithinRange(
+    weaponEnergy,
+    animalFrom - energyOffset,
+    animalFrom,
   );
+  const isOverpowered = isWithinRange(
+    weaponEnergy,
+    animalTo,
+    animalTo + energyOffset,
+  );
+
+  return isUnderpowered || isOverpowered;
 };
