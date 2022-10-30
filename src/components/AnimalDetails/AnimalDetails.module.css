@@ -1,0 +1,52 @@
+.AnimalDetails {
+  font-size: 1.1em;
+  user-select: none;
+}
+
+.AnimalName {
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.4em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.AnimalNameLatin {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+.AnimalDescription {
+  height: calc(1.3em * 4);
+  line-height: 1.3em;
+  overflow: auto;
+  padding-right: 1em;
+}
+
+.AnimalStat {
+  align-items: baseline;
+  display: flex;
+  line-height: 1.4em;
+  margin-top: 0.5em;
+  text-transform: uppercase;
+}
+
+.AnimalStatName {
+  color: var(--text-secondary);
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+}
+
+.AnimalStatValue {
+  color: var(--text-primary);
+  font-size: 1.1em;
+  letter-spacing: unset;
+  margin-left: 0.8em;
+}
+
+@media (max-width: 864px) {
+  .AnimalDetails {
+    font-size: unset;
+  }
+}
