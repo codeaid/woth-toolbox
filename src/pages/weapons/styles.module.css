@@ -1,0 +1,13 @@
+.WeaponsPage {
+  display: grid;
+  flex: 1;
+  grid-gap: 0 0;
+  grid-template-areas: "sidebar content";
+  grid-template-columns: 15em 1fr;
+}
+
+@media (max-width: 864px) {
+  .WeaponsPage {
+    grid-template-columns: 11em 1fr;
+  }
+}
