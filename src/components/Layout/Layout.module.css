@@ -1,9 +1,6 @@
 .Layout {
-  display: grid;
-  grid-template-areas:
-      "layout-toolbar"
-      "layout-content";
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   position: relative;
   width: 100%;
@@ -24,6 +21,5 @@
 
 .LayoutContent {
   display: flex;
-  grid-area: layout-content;
   overflow: hidden;
 }
