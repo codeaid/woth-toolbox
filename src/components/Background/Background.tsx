@@ -1,11 +1,11 @@
-import { baseUrl } from 'config/app';
 import styles from './Background.module.css';
+import BackgroundImage from './Background.jpg';
 
 export const Background = () => (
   <div
     className={styles.Background}
     style={{
-      backgroundImage: `url("${baseUrl}/img/cover.jpg")`,
+      backgroundImage: `url("${BackgroundImage.src}")`,
     }}
   ></div>
 );
