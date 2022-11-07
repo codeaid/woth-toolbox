@@ -1,33 +1,27 @@
 .Toolbar {
-  align-items: center;
   background-color: var(--elevation2);
   box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
   display: flex;
-  grid-area: header;
-  justify-content: space-between;
-  padding: 0 0.75rem;
+  font-family: 'BenchNine', sans-serif;
+  grid-area: layout-toolbar;
+  height: 3.5em;
   user-select: none;
   z-index: 1;
+  width: 100%;
 }
 
 .ToolbarText {
+  align-items: center;
   color: var(--text-highlight);
-  font-family: 'BenchNine', sans-serif;
+  display: flex;
   font-size: 1.4em;
-  margin-top: 0.25em;
+  font-weight: bold;
+  padding: 0 1em;
   text-transform: uppercase;
 }
 
 @media (max-width: 864px) {
-  .Toolbar {
-    padding: 0.5rem;
-  }
-
   .Toolbar img {
     display: none;
-  }
-
-  .ToolbarText {
-    font-size: 1.2em;
   }
 }

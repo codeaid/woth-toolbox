@@ -8,7 +8,7 @@ export const Layout = (props: LayoutProps) => {
 
   return (
     <div className={styles.Layout}>
-      <Toolbar>Way Of The Hunter Toolbox</Toolbar>
+      <Toolbar />
       <div
         className={styles.LayoutBackground}
         style={{ backgroundImage: `url("${LayoutBackground.src}")` }}
