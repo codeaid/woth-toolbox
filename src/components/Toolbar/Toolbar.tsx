@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { baseUrl } from 'config/app';
-import styles from './Header.module.css';
-import { HeaderProps } from './types';
+import styles from './Toolbar.module.css';
+import { ToolbarProps } from './types';
 
-export const Header = (props: HeaderProps) => {
+export const Toolbar = (props: ToolbarProps) => {
   const { children } = props;
 
   return (
-    <div className={styles.Header}>
+    <div className={styles.Toolbar}>
       <Image
         alt="logo"
         draggable={false}
@@ -16,7 +16,7 @@ export const Header = (props: HeaderProps) => {
         src={`${baseUrl}/img/logo.png`}
         width={150}
       />
-      <div className={styles.HeaderText}>{children}</div>
+      <div className={styles.ToolbarText}>{children}</div>
     </div>
   );
 };

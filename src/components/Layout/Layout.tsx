@@ -1,5 +1,5 @@
 import { Background } from 'components/Background';
-import { Header } from 'components/Header';
+import { Toolbar } from 'components/Toolbar';
 import styles from './Layout.module.css';
 import { LayoutProps } from './types';
 
@@ -8,7 +8,7 @@ export const Layout = (props: LayoutProps) => {
 
   return (
     <div className={styles.Layout}>
-      <Header>Way Of The Hunter Toolbox</Header>
+      <Toolbar>Way Of The Hunter Toolbox</Toolbar>
       <Background />
       <div className={styles.LayoutContent}>{children}</div>
     </div>

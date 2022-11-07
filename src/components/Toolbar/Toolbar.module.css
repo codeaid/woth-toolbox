@@ -1,4 +1,4 @@
-.Header {
+.Toolbar {
   align-items: center;
   background-color: var(--elevation2);
   box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
@@ -10,7 +10,7 @@
   z-index: 1;
 }
 
-.HeaderText {
+.ToolbarText {
   color: var(--text-highlight);
   font-family: 'BenchNine', sans-serif;
   font-size: 1.4em;
@@ -19,15 +19,15 @@
 }
 
 @media (max-width: 864px) {
-  .Header {
+  .Toolbar {
     padding: 0.5rem;
   }
 
-  .Header img {
+  .Toolbar img {
     display: none;
   }
 
-  .HeaderText {
+  .ToolbarText {
     font-size: 1.2em;
   }
 }
