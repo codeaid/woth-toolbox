@@ -1,6 +1,10 @@
 import { MouseEvent, useCallback } from 'react';
 import { AnimalName } from 'components/AnimalName';
-import { getActivityByHour, getCurrentActivityByHour } from 'lib/animals';
+import {
+  getActivityByHour,
+  getActivityDescription,
+  getCurrentActivityByHour,
+} from 'lib/animals';
 import { formatHour } from 'lib/utils';
 import { AnimalActivityGridIcon } from './AnimalActivityGridIcon';
 import { AnimalActivityGridRowProps } from './types';
@@ -60,6 +64,9 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
           <AnimalActivityGridIcon
             intermediate={true}
             key={`${animal.id}:${hour}:icon`}
+            title={`${formatHour(hour)} - ${getActivityDescription(
+              currentActivity.activity,
+            )}`}
             value={currentActivity}
           />
         );
@@ -71,6 +78,9 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
     return (
       <AnimalActivityGridIcon
         key={`${animal.id}:${hour}:icon`}
+        title={`${formatHour(hour)} - ${getActivityDescription(
+          hourActivity.activity,
+        )}`}
         value={hourActivity}
       />
     );
@@ -86,7 +96,6 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
       className={styles.AnimalActivityGridRowSlot}
       data-hour={hour}
       key={`${animal.id}:${hour}`}
-      title={formatHour(hour)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

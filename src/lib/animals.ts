@@ -1,4 +1,9 @@
-import { Animal, AnimalActivityValue, AnimalGroup } from 'types/animals';
+import {
+  Animal,
+  AnimalActivity,
+  AnimalActivityValue,
+  AnimalGroup,
+} from 'types/animals';
 
 /**
  * Find activity defined for the exact hour
@@ -36,6 +41,19 @@ export const getCurrentActivityByHour = (
   }
 
   return current;
+};
+
+export const getActivityDescription = (activity: AnimalActivity) => {
+  switch (activity) {
+    case AnimalActivity.Drinking:
+      return 'Drinking';
+    case AnimalActivity.Feeding:
+      return 'Feeding';
+    case AnimalActivity.Sleeping:
+      return 'Sleeping';
+    default:
+      return 'Unknown';
+  }
 };
 
 /**

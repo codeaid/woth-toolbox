@@ -10,6 +10,7 @@ export interface AnimalActivityGridGroupProps {
 
 export interface AnimalActivityGridIconProps {
   intermediate?: boolean;
+  title?: string;
   value: AnimalActivityValue;
 }
 
