@@ -1,0 +1,46 @@
+.AnimalActivityGridRow {
+  display: flex;
+}
+
+.AnimalActivityGridRowName {
+  padding: 0.25em 0.5em;
+  width: 13rem;
+}
+
+.AnimalActivityGridRowSlots {
+  display: grid;
+  grid-gap: 0.25em;
+  grid-template-columns: repeat(24, 1fr);
+  width: 100%;
+}
+
+.AnimalActivityGridRowSlot {
+  align-items: center;
+  border-radius: 0.25em;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 0.5em 0;
+  transition: background-color 50ms ease-in-out;
+  width: 100%;
+}
+
+.AnimalActivityGridRowSlotHighlighted {
+  background-color: var(--elevation2);
+}
+
+@media (max-width: 864px) {
+  .AnimalActivityGridRow {
+    flex-direction: column;
+  }
+
+  .AnimalActivityGridRowName {
+    margin-bottom: 0.5em;
+    padding: 0;
+  }
+
+  .AnimalActivityGridRowSlots {
+    grid-gap: 0.5em;
+    grid-template-columns: repeat(12, 1fr);
+  }
+}

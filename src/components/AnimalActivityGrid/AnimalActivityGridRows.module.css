@@ -1,0 +1,5 @@
+.AnimalActivityGridRows {
+  display: grid;
+  grid-gap: 0.25em;
+  margin: 0.5em 0 1em;
+}

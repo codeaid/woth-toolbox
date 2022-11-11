@@ -1,4 +1,42 @@
-import { Animal, AnimalGroup } from 'types/animals';
+import { Animal, AnimalActivityValue, AnimalGroup } from 'types/animals';
+
+/**
+ * Find activity defined for the exact hour
+ *
+ * @param activities List of source activities
+ * @param hour Target hour
+ */
+export const getActivityByHour = (
+  activities: Array<AnimalActivityValue>,
+  hour: number,
+) => activities.find(activity => activity.time === hour);
+
+/**
+ * Find activity occurring at the specified hour
+ *
+ * @param activities List of source activities
+ * @param hour Target hour
+ */
+export const getCurrentActivityByHour = (
+  activities: Array<AnimalActivityValue>,
+  hour: number,
+) => {
+  let current;
+
+  // Sort activities by hour
+  const sortedActivities = [...activities].sort((a, b) => a.time - b.time);
+
+  // Find the latest activity occurring at the specified hour
+  for (const activity of sortedActivities) {
+    if (activity.time > hour) {
+      break;
+    }
+
+    current = activity;
+  }
+
+  return current;
+};
 
 /**
  * Sort animals first by tier and then by name

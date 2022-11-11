@@ -1,0 +1,11 @@
+.AnimalActivityGrid {
+  overflow: auto;
+  user-select: none;
+  width: 100%;
+}
+
+@media (max-width: 864px) {
+  .AnimalActivityGrid {
+    font-size: 0.9em;
+  }
+}

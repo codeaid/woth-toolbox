@@ -1,0 +1,1 @@
+export { AnimalActivityGrid } from './AnimalActivityGrid';

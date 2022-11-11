@@ -1,0 +1,37 @@
+.AnimalActivityGridHeader {
+  display: flex;
+  margin: 1em 0;
+  user-select: none;
+  width: 100%;
+}
+
+.AnimalActivityGridHeaderPlaceholder {
+  width: 13rem;
+}
+
+.AnimalActivityGridHeaderCells {
+  display: grid;
+  grid-gap: 0.25em;
+  grid-template-columns: repeat(24, 1fr);
+  width: 100%;
+}
+
+.AnimalActivityGridHeaderCell {
+  align-items: center;
+  background-color: var(--highlight);
+  border-radius: 0.25em;
+  display: flex;
+  font-size: 0.85em;
+  justify-content: center;
+  padding: 0.25em;
+}
+
+@media (max-width: 864px) {
+  .AnimalActivityGridHeaderCells {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .AnimalActivityGridHeaderPlaceholder {
+    display: none;
+  }
+}
