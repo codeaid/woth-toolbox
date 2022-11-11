@@ -1,26 +1,9 @@
 .Toolbar {
-  background-color: var(--elevation2);
+  background-color: var(--elevation0);
   box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
   display: flex;
   font-family: 'BenchNine', sans-serif;
   user-select: none;
   z-index: 1;
   width: 100%;
-}
-
-.ToolbarText {
-  align-items: center;
-  color: var(--text-highlight);
-  display: flex;
-  font-size: 1.4em;
-  font-weight: bold;
-  height: 3.5rem;
-  padding: 0 1em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 864px) {
-  .Toolbar img {
-    display: none;
-  }
 }

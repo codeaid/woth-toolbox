@@ -1,9 +1,8 @@
+import { PropsWithChildren } from 'react';
 import styles from './Toolbar.module.css';
 
-export const Toolbar = () => {
-  return (
-    <div className={styles.Toolbar}>
-      <div className={styles.ToolbarText}>Way Of The Hunter Toolbox</div>
-    </div>
-  );
+export const Toolbar = (props: PropsWithChildren) => {
+  const { children } = props;
+
+  return <div className={styles.Toolbar}>{children}</div>;
 };
