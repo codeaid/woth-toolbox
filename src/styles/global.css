@@ -2,6 +2,8 @@
   --brand: rgb(220, 187, 123);
   --brand-semi: rgba(220, 187, 123, 0.5);
   --brand-transparent: rgba(220, 187, 123, 0);
+  --elevation0: #000000;
+  --elevation1: #121212;
   --elevation2: #171717;
   --elevation4: #202020;
   --elevation6: #282828;
