@@ -1,0 +1,9 @@
+.Card {
+  background-color: var(--elevation2);
+  border-radius: 0.25em;
+  box-shadow: var(--shadow);
+  color: var(--text-primary);
+  min-width: 15rem;
+  padding: 2rem;
+  text-align: center;
+}
