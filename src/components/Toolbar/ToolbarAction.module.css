@@ -9,7 +9,7 @@
   text-decoration: none;
   text-transform: uppercase;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
-  min-width: 7em;
+  min-width: 11rem;
 }
 
 .ToolbarAction:hover {

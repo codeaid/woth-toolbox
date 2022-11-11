@@ -2,11 +2,12 @@
   align-items: center;
   color: var(--text-highlight);
   display: flex;
-  font-size: 1.4em;
+  font-size: 1.3em;
   font-weight: bold;
   height: 3.5rem;
   padding: 0 1em;
   text-transform: uppercase;
+  width: 15rem;
 }
 
 @media (max-width: 864px) {

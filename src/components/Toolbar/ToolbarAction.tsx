@@ -1,8 +1,8 @@
-import { ActiveLink, ActiveLinkProps } from 'components/ActiveLink';
+import { NavLink, NavLinkProps } from 'components/NavLink';
 import styles from './ToolbarAction.module.css';
 
-export const ToolbarAction = (props: ActiveLinkProps) => (
-  <ActiveLink
+export const ToolbarAction = (props: NavLinkProps) => (
+  <NavLink
     {...props}
     activeClassName={styles.ToolbarActionActive}
     className={styles.ToolbarAction}

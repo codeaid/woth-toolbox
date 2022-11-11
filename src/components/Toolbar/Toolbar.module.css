@@ -1,6 +1,6 @@
 .Toolbar {
   background-color: var(--elevation0);
-  box-shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
   display: flex;
   font-family: 'BenchNine', sans-serif;
   user-select: none;
