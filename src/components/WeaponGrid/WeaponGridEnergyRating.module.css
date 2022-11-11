@@ -7,6 +7,8 @@
   flex: 1;
   font-weight: 500;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 10em;
   min-width: 5em;
   opacity: 0.75;
   padding: 0.5em;
@@ -14,6 +16,7 @@
   transition: background-color 500ms ease-in-out,
     color 500ms ease-in-out,
     opacity 500ms ease-in-out;
+  width: 100%;
 }
 
 .WeaponGridEnergyRatingOptimal {
