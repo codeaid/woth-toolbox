@@ -6,6 +6,10 @@
   grid-template-columns: 15rem 1fr;
 }
 
+.WeaponSelectorPageSeparator {
+  margin: 1em 0;
+}
+
 @media (max-width: 864px) {
   .WeaponSelectorPage {
     grid-template-columns: 11rem 1fr;

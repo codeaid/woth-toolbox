@@ -25,7 +25,6 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
           energyFrom,
         )} - ${formatNumber(energyTo)} J`}</div>
       </div>
-      <hr />
     </div>
   );
 };

@@ -45,6 +45,7 @@ const WeaponSelectorPage = () => {
     return (
       <>
         <AnimalDetails animal={selectedAnimal} />
+        <hr className={styles.WeaponSelectorPageSeparator} />
         <WeaponGrid animal={selectedAnimal} weapons={weapons} />
       </>
     );
