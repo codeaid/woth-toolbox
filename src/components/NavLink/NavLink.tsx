@@ -35,8 +35,6 @@ export const NavLink = (props: NavLinkProps) => {
     // Only keep the actual path part
     const currentPath = new URL(asPath, location.href).pathname;
 
-    console.info('targetPath', targetPath, 'currentPath', currentPath);
-
     const isMatch = exact
       ? currentPath === targetPath
       : currentPath.startsWith(targetPath);
