@@ -29,6 +29,11 @@
   background-color: var(--elevation2);
 }
 
+.AnimalActivityGridRowSlotHighlighted img {
+  opacity: 1;
+  transform: scale(1);
+}
+
 @media (max-width: 864px) {
   .AnimalActivityGridRow {
     flex-direction: column;

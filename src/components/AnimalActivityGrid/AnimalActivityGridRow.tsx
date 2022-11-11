@@ -60,7 +60,6 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
           <AnimalActivityGridIcon
             intermediate={true}
             key={`${animal.id}:${hour}:icon`}
-            size={15}
             value={currentActivity}
           />
         );
@@ -72,7 +71,6 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
     return (
       <AnimalActivityGridIcon
         key={`${animal.id}:${hour}:icon`}
-        size={24}
         value={hourActivity}
       />
     );

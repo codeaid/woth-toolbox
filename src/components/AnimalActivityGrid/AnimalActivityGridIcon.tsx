@@ -6,7 +6,7 @@ import { AnimalActivityGridIconProps } from './types';
 import styles from './AnimalActivityGridIcon.module.css';
 
 export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
-  const { intermediate = false, size, value } = props;
+  const { intermediate = false, value } = props;
 
   // Extract activity type
   const { activity } = value;
@@ -16,8 +16,8 @@ export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
       [styles.AnimalActivityGridIconIntermediate]: intermediate,
     }),
     draggable: false,
-    height: size,
-    width: size,
+    height: 24,
+    width: 24,
   };
 
   switch (activity) {

@@ -10,7 +10,6 @@ export interface AnimalActivityGridGroupProps {
 
 export interface AnimalActivityGridIconProps {
   intermediate?: boolean;
-  size: number;
   value: AnimalActivityValue;
 }
 
