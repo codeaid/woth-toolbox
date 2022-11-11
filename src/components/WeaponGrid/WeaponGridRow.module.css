@@ -5,6 +5,7 @@
 }
 
 .WeaponGridRowName {
+  padding: 0.25em 0.5em;
   width: 15em;
 }
 
@@ -18,5 +19,9 @@
 @media (max-width: 864px) {
   .WeaponGridRow {
     flex-direction: column;
+  }
+
+  .WeaponGridRowName {
+    margin-bottom: 0.5em;
   }
 }
