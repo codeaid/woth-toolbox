@@ -1,16 +1,10 @@
 .Sidebar {
-  background-color: var(--elevation4);
+  background-color: var(--elevation1);
   grid-area: sidebar;
   height: 100%;
   overflow-y: auto;
   user-select: none;
   width: 100%;
-}
-
-.SidebarList {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 @media (max-width: 864px) {
