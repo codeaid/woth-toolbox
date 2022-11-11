@@ -1,13 +1,13 @@
 .SectionHeader {
   background: linear-gradient(90deg, var(--elevation4) 0%, transparent 100%);
-  font-size: 1rem;
   padding: 1em 0.75em 1em 0.85em;
+  user-select: none;
 }
 
 .SectionHeaderContent {
   color: var(--text-primary);
   font-family: 'BenchNine', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.25em;
   letter-spacing: 0.15em;
   line-height: 1em;
   text-transform: uppercase;
