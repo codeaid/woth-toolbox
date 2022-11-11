@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NavLinkProps } from './types';
 
 export const NavLink = (props: NavLinkProps) => {
   const {
+    active = false,
     activeClassName = 'active',
     children,
     className,
@@ -14,8 +15,10 @@ export const NavLink = (props: NavLinkProps) => {
 
   const { asPath, isReady } = useRouter();
 
-  const [internalClassName, setInternalClassName] = useState(className);
+  // Flag indicating that link's href matches the current path
+  const [hasPathMatch, setHasPathMatch] = useState(false);
 
+  // Update path match status
   useEffect(() => {
     // Ensure that the router has been initialized
     if (!isReady) {
@@ -31,24 +34,20 @@ export const NavLink = (props: NavLinkProps) => {
     // Only keep the actual path part
     const currentPath = new URL(asPath, location.href).pathname;
 
-    // Generate and set the new class name
-    const newClass = classnames(className, {
-      [activeClassName]: currentPath === targetPath,
-    });
+    setHasPathMatch(currentPath === targetPath);
+  }, [asPath, isReady, linkProps.as, linkProps.href]);
 
-    setInternalClassName(newClass);
-  }, [
-    activeClassName,
-    asPath,
-    className,
-    internalClassName,
-    isReady,
-    linkProps.as,
-    linkProps.href,
-  ]);
+  // Generate component's class name
+  const componentClassName = useMemo(
+    () =>
+      classnames(className, {
+        [activeClassName]: active || hasPathMatch,
+      }),
+    [active, activeClassName, className, hasPathMatch],
+  );
 
   return (
-    <Link {...linkProps} className={internalClassName}>
+    <Link {...linkProps} className={componentClassName}>
       {children}
     </Link>
   );
