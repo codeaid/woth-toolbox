@@ -1,0 +1,21 @@
+.WeaponName {
+  font-weight: 500;
+  padding: 0.5em 0.75em;
+}
+
+.WeaponNameCalibre {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.WeaponNameTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.WeaponNameHighlighted .WeaponNameTitle {
+  color: var(--brand);
+}
