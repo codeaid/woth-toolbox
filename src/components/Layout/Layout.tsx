@@ -19,7 +19,9 @@ export const Layout = (props: LayoutProps) => {
           <ToolbarAction exact={false} href="/weapon-selector">
             Weapon Selector
           </ToolbarAction>
-          <ToolbarAction href="/life-cycles">Animal Life Cycles</ToolbarAction>
+          <ToolbarAction href="/animal-life-cycles">
+            Animal Life Cycles
+          </ToolbarAction>
         </ToolbarActions>
       </Toolbar>
 
