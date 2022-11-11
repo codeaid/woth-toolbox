@@ -24,7 +24,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_BASE_PATH: "/woth-energy-calc"
+      NEXT_PUBLIC_BASE_PATH: "/woth-toolbox"
       NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-3NG0GF80JK"
     steps:
       - name: Checkout
