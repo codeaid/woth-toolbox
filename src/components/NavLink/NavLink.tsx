@@ -2,9 +2,9 @@ import classnames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { ActiveLinkProps } from './types';
+import { NavLinkProps } from './types';
 
-export const ActiveLink = (props: ActiveLinkProps) => {
+export const NavLink = (props: NavLinkProps) => {
   const {
     activeClassName = 'active',
     children,
