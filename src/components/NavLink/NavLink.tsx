@@ -10,6 +10,7 @@ export const NavLink = (props: NavLinkProps) => {
     activeClassName = 'active',
     children,
     className,
+    exact = true,
     ...linkProps
   } = props;
 
@@ -34,8 +35,13 @@ export const NavLink = (props: NavLinkProps) => {
     // Only keep the actual path part
     const currentPath = new URL(asPath, location.href).pathname;
 
-    setHasPathMatch(currentPath === targetPath);
-  }, [asPath, isReady, linkProps.as, linkProps.href]);
+    console.info('targetPath', targetPath, 'currentPath', currentPath);
+
+    const isMatch = exact
+      ? currentPath === targetPath
+      : currentPath.startsWith(targetPath);
+    setHasPathMatch(isMatch);
+  }, [asPath, exact, isReady, linkProps.as, linkProps.href]);
 
   // Generate component's class name
   const componentClassName = useMemo(

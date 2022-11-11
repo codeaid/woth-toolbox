@@ -5,4 +5,5 @@ export type NavLinkProps = PropsWithChildren<LinkProps> & {
   active?: boolean;
   activeClassName?: string;
   className?: string;
+  exact?: boolean;
 };
