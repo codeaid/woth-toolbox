@@ -1,4 +1,4 @@
-.Content {
+.PageContent {
   color: var(--text-primary);
   grid-area: content;
   line-height: 1.3em;
@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.ContentBody {
+.PageContentBody {
   margin: 0 auto;
   max-width: 1000px;
   width: 100%;
