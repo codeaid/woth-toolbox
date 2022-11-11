@@ -1,0 +1,15 @@
+.AnimalName {
+  padding: 0.5em 0.75em;
+}
+
+.AnimalNameLatin {
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+.AnimalNameTitle {
+  color: var(--text-primary);
+  transition: color 125ms ease-in-out;
+}

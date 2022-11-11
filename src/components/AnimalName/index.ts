@@ -1,0 +1,1 @@
+export { AnimalName } from './AnimalName';
