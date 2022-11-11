@@ -48,7 +48,6 @@
 }
 
 .AnimalListItemContent {
-  padding: 0.5em 0.75em;
   position: relative;
 }
 
@@ -61,19 +60,6 @@
   position: absolute;
   top: 0;
   width: 4px;
-}
-
-
-.AnimalListItemTitle {
-  color: var(--text-primary);
-  transition: color 125ms ease-in-out;
-}
-
-.AnimalListItemSubtitle {
-  color: var(--text-secondary);
-  font-size: 0.8em;
-  font-style: italic;
-  margin-top: 0.25em;
 }
 
 .AnimalListItemActive {
@@ -93,10 +79,4 @@
 
 .AnimalListItemActive .AnimalListItemTitle {
   color: var(--brand);
-}
-
-@media (max-width: 864px) {
-  .AnimalListItemContent {
-    padding: 0.4em 0.65em;
-  }
 }

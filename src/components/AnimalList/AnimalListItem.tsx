@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { AnimalName } from 'components/AnimalName';
 import { AnimalListItemProps } from './types';
 import styles from './AnimalListItem.module.css';
 
@@ -23,8 +24,7 @@ export const AnimalListItem = (props: AnimalListItemProps) => {
   return (
     <li className={className} onClick={handleClick}>
       <div className={styles.AnimalListItemContent}>
-        <div className={styles.AnimalListItemTitle}>{animal.name}</div>
-        <div className={styles.AnimalListItemSubtitle}>{animal.latin}</div>
+        <AnimalName animal={animal} />
       </div>
     </li>
   );
