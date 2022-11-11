@@ -1,9 +1,7 @@
 import classnames from 'classnames';
 import Image from 'next/image';
+import { baseUrl } from 'config/app';
 import { AnimalActivity } from 'types/animals';
-import IconDrink from './assets/drink.png';
-import IconFeed from './assets/feed.png';
-import IconSleep from './assets/sleep.png';
 import { AnimalActivityGridIconProps } from './types';
 import styles from './AnimalActivityGridIcon.module.css';
 
@@ -24,11 +22,17 @@ export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
 
   switch (activity) {
     case AnimalActivity.Drinking:
-      return <Image {...imgProps} alt="Drinking" src={IconDrink.src} />;
+      return (
+        <Image {...imgProps} alt="Drinking" src={`${baseUrl}/img/drink.png`} />
+      );
     case AnimalActivity.Feeding:
-      return <Image {...imgProps} alt="Feeding" src={IconFeed.src} />;
+      return (
+        <Image {...imgProps} alt="Feeding" src={`${baseUrl}/img/feed.png`} />
+      );
     case AnimalActivity.Sleeping:
-      return <Image {...imgProps} alt="Sleeping" src={IconSleep.src} />;
+      return (
+        <Image {...imgProps} alt="Sleeping" src={`${baseUrl}/img/sleep.png`} />
+      );
 
     default:
       return null;
