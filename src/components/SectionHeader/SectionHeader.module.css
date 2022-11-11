@@ -1,12 +1,13 @@
-.SidebarHeader {
-  background: linear-gradient(90deg, var(--elevation8) 0%, transparent 100%);
+.SectionHeader {
+  background: linear-gradient(90deg, var(--elevation4) 0%, transparent 100%);
   padding: 1em 0.75em 1em 0.85rem;
 }
 
-.SidebarHeaderText {
+.SectionHeaderContent {
   color: var(--text-primary);
   font-family: 'BenchNine', sans-serif;
   font-size: 1.25em;
   letter-spacing: 0.15em;
   line-height: 1em;
+  text-transform: uppercase;
 }
