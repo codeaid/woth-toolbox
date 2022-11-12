@@ -15,8 +15,7 @@ import styles from './styles.module.css';
 const WeaponSelectorPage = () => {
   // Extract route parameters
   const router = useRouter();
-  const { slug = [] } = router.query;
-  const [animalId] = slug as unknown as Array<string>;
+  const { animal: animalId } = router.query;
 
   // Find animal specified in the URL parameter
   const selectedAnimal = useMemo(
@@ -29,7 +28,7 @@ const WeaponSelectorPage = () => {
    */
   const handleAnimalClick = useCallback(
     (animal: Animal) =>
-      router.push(`/weapon-selector/${encodeURIComponent(animal.id)}`),
+      router.push(`/weapon-selector?animal=${encodeURIComponent(animal.id)}`),
     [router],
   );
 
