@@ -6,6 +6,11 @@
   grid-template-columns: 15rem 1fr;
 }
 
+.WeaponSelectorPageNotification {
+  margin: 10vh auto 0 auto;
+  max-width: 50em;
+}
+
 .WeaponSelectorPageSeparator {
   margin: 1em 0;
 }

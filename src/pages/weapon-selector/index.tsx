@@ -37,11 +37,19 @@ const WeaponSelectorPage = () => {
    */
   const renderDetails = () => {
     if (animalId && !selectedAnimal) {
-      return <Card>Invalid animal identifier</Card>;
+      return (
+        <div className={styles.WeaponSelectorPageNotification}>
+          <Card>Invalid animal identifier</Card>
+        </div>
+      );
     }
 
     if (!selectedAnimal) {
-      return <Card>Please select an animal to start</Card>;
+      return (
+        <div className={styles.WeaponSelectorPageNotification}>
+          <Card>Please select an animal to start</Card>
+        </div>
+      );
     }
 
     return (
