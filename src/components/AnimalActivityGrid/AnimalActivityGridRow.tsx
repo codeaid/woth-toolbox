@@ -106,7 +106,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
   return (
     <div className={styles.AnimalActivityGridRow}>
       <div className={styles.AnimalActivityGridRowName}>
-        <AnimalName animal={animal} />
+        <AnimalName animal={animal} responsive={true} />
       </div>
 
       <div className={styles.AnimalActivityGridRowSlots}>

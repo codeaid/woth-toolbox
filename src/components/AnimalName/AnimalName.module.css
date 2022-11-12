@@ -8,11 +8,22 @@
   font-style: italic;
   font-weight: normal;
   line-height: 1em;
-  margin-top: 0.5em;
+  margin-top: 0.3em;
 }
 
 .AnimalNameTitle {
   color: var(--text-primary);
   line-height: 1em;
   transition: color 125ms ease-in-out;
+}
+
+@media (max-width: 864px) {
+  .AnimalNameResponsive {
+    align-items: baseline;
+    display: flex;
+  }
+
+  .AnimalNameResponsive .AnimalNameLatin {
+    margin: 0 0 0 0.5em;
+  }
 }
