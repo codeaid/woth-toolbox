@@ -1,5 +1,5 @@
 .WeaponGridRows {
   display: grid;
   grid-gap: 0.5em;
-  margin: 0.5em 0 2em;
+  margin: 0.5em 0 1em;
 }
