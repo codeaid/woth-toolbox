@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { AnimalDetails } from 'components/AnimalDetails';
 import { AnimalList } from 'components/AnimalList';
 import { Card } from 'components/Card';
@@ -19,7 +19,10 @@ const WeaponSelectorPage = () => {
   const [animalId] = slug as unknown as Array<string>;
 
   // Find animal specified in the URL parameter
-  const selectedAnimal = animals.find(a => a.id === animalId);
+  const selectedAnimal = useMemo(
+    () => animals.find(a => a.id === animalId),
+    [animalId],
+  );
 
   /**
    * Handle selecting individual animals
