@@ -12,11 +12,9 @@ export const AnimalActivityGrid = (props: AnimalActivityGridProps) => {
 
   return (
     <div className={styles.AnimalActivityGrid}>
-      <div className={styles.AnimalActivityGrid}>
-        {animalGroups.map(group => (
-          <AnimalActivityGridGroup group={group} key={group.tier} />
-        ))}
-      </div>
+      {animalGroups.map(group => (
+        <AnimalActivityGridGroup group={group} key={group.tier} />
+      ))}
     </div>
   );
 };
