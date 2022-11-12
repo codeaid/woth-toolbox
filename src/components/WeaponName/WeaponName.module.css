@@ -21,3 +21,14 @@
 .WeaponNameHighlighted .WeaponNameTitle {
   color: var(--brand);
 }
+
+@media (max-width: 864px) {
+  .WeaponNameResponsive {
+    align-items: baseline;
+    display: flex;
+  }
+
+  .WeaponNameResponsive .WeaponNameCalibre {
+    margin: 0 0 0 0.5em;
+  }
+}

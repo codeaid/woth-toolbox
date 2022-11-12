@@ -5,15 +5,16 @@ import styles from './WeaponName.module.css';
 import { useMemo } from 'react';
 
 export const WeaponName = (props: WeaponNameProps) => {
-  const { highlighted = false, weapon } = props;
+  const { highlighted = false, responsive = false, weapon } = props;
 
   // Generate component's class name
   const className = useMemo(
     () =>
       classnames(styles.WeaponName, {
         [styles.WeaponNameHighlighted]: highlighted,
+        [styles.WeaponNameResponsive]: responsive,
       }),
-    [highlighted],
+    [highlighted, responsive],
   );
 
   return (

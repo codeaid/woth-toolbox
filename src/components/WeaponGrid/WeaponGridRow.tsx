@@ -63,7 +63,11 @@ export const WeaponGridRow = (props: WeaponGridRowProps) => {
   return (
     <div className={styles.WeaponGridRow}>
       <div className={styles.WeaponGridRowName}>
-        <WeaponName highlighted={isAllOptimal} weapon={weapon} />
+        <WeaponName
+          highlighted={isAllOptimal}
+          responsive={true}
+          weapon={weapon}
+        />
       </div>
 
       <div className={styles.WeaponGridRowRatings}>
