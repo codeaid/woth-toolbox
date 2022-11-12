@@ -23,10 +23,11 @@ const config = {
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   images: {
-    unoptimized: true,
+    unoptimized: true
   },
   reactStrictMode: true,
   swcMinify: true,
+  trailingSlash: false,
   webpack: (config, { dev }) => {
     const rules = config.module.rules
       .find(rule => typeof rule.oneOf === 'object')
@@ -48,7 +49,7 @@ const config = {
     });
 
     return config;
-  },
+  }
 };
 
 module.exports = config;
