@@ -1,0 +1,22 @@
+.AnimalSelectorPage {
+  display: grid;
+  flex: 1;
+  grid-gap: 0 0;
+  grid-template-areas: "sidebar content";
+  grid-template-columns: 15rem 1fr;
+}
+
+.AnimalSelectorPageNotification {
+  margin: 10vh auto 0 auto;
+  max-width: 50em;
+}
+
+.AnimalSelectorPageSeparator {
+  margin: 1em 0;
+}
+
+@media (max-width: 864px) {
+  .AnimalSelectorPage {
+    grid-template-columns: 11rem 1fr;
+  }
+}
