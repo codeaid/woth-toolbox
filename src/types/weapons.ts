@@ -8,6 +8,7 @@ export enum Brand {
 export interface Weapon {
   brand: Brand;
   calibre: string;
+  description: string;
   hitEnergy: [number, number, number, number, number]; // 50m, 100m, 150m, 200m, 300m
   id: string;
   model: string;
