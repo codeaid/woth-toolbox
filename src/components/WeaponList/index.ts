@@ -1,0 +1,1 @@
+export { WeaponList } from './WeaponList';
