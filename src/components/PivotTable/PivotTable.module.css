@@ -1,0 +1,10 @@
+.PivotTable {
+  user-select: none;
+  width: 100%;
+}
+
+@media (max-width: 864px) {
+  .PivotTable {
+    font-size: 0.9em;
+  }
+}

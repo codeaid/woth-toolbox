@@ -1,0 +1,32 @@
+.PivotTableEnergyRating {
+  align-items: center;
+  background-color: var(--elevation4);
+  border-radius: 0.25em;
+  color: var(--text-secondary);
+  display: flex;
+  flex: 1;
+  font-weight: 500;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 10em;
+  min-width: 5em;
+  opacity: 0.75;
+  padding: 0.5em;
+  text-align: center;
+  transition: background-color 500ms ease-in-out,
+    color 500ms ease-in-out,
+    opacity 500ms ease-in-out;
+  width: 100%;
+}
+
+.PivotTableEnergyRatingOptimal {
+  background-color: var(--variance-optimal);
+  color: var(--text-highlight);
+  opacity: unset;
+}
+
+.PivotTableEnergyRatingSuboptimal {
+  background-color: var(--variance-suboptimal);
+  color: var(--text-highlight);
+  opacity: unset;
+}

@@ -1,0 +1,12 @@
+.PivotTableRows {
+  display: grid;
+  grid-gap: 0.5em;
+  margin: 0.5em 0 1em;
+}
+
+@media (max-width: 864px) {
+  .PivotTableRows {
+    grid-gap: 1em;
+    margin: 1em 0;
+  }
+}
