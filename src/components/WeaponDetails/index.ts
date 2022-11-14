@@ -1,0 +1,1 @@
+export { WeaponDetails } from './WeaponDetails';

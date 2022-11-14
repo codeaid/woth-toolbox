@@ -1,0 +1,52 @@
+.WeaponDetails {
+  font-size: 1.1em;
+  user-select: none;
+}
+
+.WeaponName {
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.4em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.WeaponNameLatin {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+.WeaponDescription {
+  height: calc(1.3em * 3);
+  line-height: 1.3em;
+  overflow: auto;
+  padding-right: 1em;
+}
+
+.WeaponStat {
+  align-items: baseline;
+  display: flex;
+  line-height: 1.4em;
+  margin-top: 0.5em;
+  text-transform: uppercase;
+}
+
+.WeaponStatName {
+  color: var(--text-secondary);
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+}
+
+.WeaponStatValue {
+  color: var(--text-primary);
+  font-size: 1.1em;
+  letter-spacing: unset;
+  margin-left: 0.8em;
+}
+
+@media (max-width: 864px) {
+  .WeaponDetails {
+    font-size: unset;
+  }
+}
