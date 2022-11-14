@@ -21,8 +21,3 @@ export enum WeaponDistance {
   M200 = 200,
   M300 = 300,
 }
-
-export interface WeaponGroup {
-  tier: number;
-  weapons: Array<Weapon>;
-}

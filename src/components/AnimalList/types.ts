@@ -1,9 +1,10 @@
-import { Animal, AnimalGroup } from 'types/animals';
+import { Animal } from 'types/animals';
+import { EntityGroup } from 'types/global';
 
 type AnimalListItemClickHandler = (animal: Animal) => void;
 
 export interface AnimalListGroupProps {
-  group: AnimalGroup;
+  group: EntityGroup<Animal>;
   selected?: Animal;
   onAnimalClick: AnimalListItemClickHandler;
 }

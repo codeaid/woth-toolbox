@@ -11,7 +11,7 @@ export const WeaponListGroup = (props: WeaponListGroupProps) => {
         <SectionHeader>Tier {group.tier}</SectionHeader>
       </li>
 
-      {group.weapons.map(weapon => (
+      {group.entities.map(weapon => (
         <WeaponListItem
           active={weapon.id === selected?.id}
           weapon={weapon}

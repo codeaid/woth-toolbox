@@ -15,7 +15,7 @@ export const AnimalActivityGridGroup = (
     <>
       <SectionHeader>Tier {group.tier}</SectionHeader>
       <AnimalActivityGridHeaderMemo />
-      <AnimalActivityGridRows animals={group.animals} />
+      <AnimalActivityGridRows animals={group.entities} />
     </>
   );
 };

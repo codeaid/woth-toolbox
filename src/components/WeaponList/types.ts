@@ -1,9 +1,10 @@
-import { Weapon, WeaponGroup } from 'types/weapons';
+import { EntityGroup } from 'types/global';
+import { Weapon } from 'types/weapons';
 
 type WeaponListItemClickHandler = (weapon: Weapon) => void;
 
 export interface WeaponListGroupProps {
-  group: WeaponGroup;
+  group: EntityGroup<Weapon>;
   selected?: Weapon;
   onWeaponClick: WeaponListItemClickHandler;
 }

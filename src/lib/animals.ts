@@ -1,9 +1,5 @@
-import {
-  Animal,
-  AnimalActivity,
-  AnimalActivityValue,
-  AnimalGroup,
-} from 'types/animals';
+import { Animal, AnimalActivity, AnimalActivityValue } from 'types/animals';
+import { EntityGroup } from 'types/global';
 
 /**
  * Find activity defined for the exact hour
@@ -76,21 +72,24 @@ const getSortedAnimals = (animals: Array<Animal>) =>
  * @param animals List of animals to group
  */
 export const getAnimalGroups = (animals: Array<Animal>) =>
-  getSortedAnimals(animals).reduce<Array<AnimalGroup>>((groups, animal) => {
-    // Attempt to find the existing group for the current tier
-    const group = groups.find(g => g.tier === animal.tier);
+  getSortedAnimals(animals).reduce<Array<EntityGroup<Animal>>>(
+    (groups, animal) => {
+      // Attempt to find the existing group for the current tier
+      const group = groups.find(g => g.tier === animal.tier);
 
-    // Create a new group if it doesn't exist
-    if (!group) {
-      return [...groups, { animals: [animal], tier: animal.tier }];
-    }
-
-    return groups.map(group => {
-      // Update existing group by adding the animal
-      if (group.tier === animal.tier) {
-        return { ...group, animals: [...group.animals, animal] };
+      // Create a new group if it doesn't exist
+      if (!group) {
+        return [...groups, { entities: [animal], tier: animal.tier }];
       }
 
-      return group;
-    });
-  }, []);
+      return groups.map(group => {
+        // Update existing group by adding the animal
+        if (group.tier === animal.tier) {
+          return { ...group, entities: [...group.entities, animal] };
+        }
+
+        return group;
+      });
+    },
+    [],
+  );

@@ -18,8 +18,3 @@ export interface AnimalActivityValue {
   activity: AnimalActivity;
   time: number;
 }
-
-export interface AnimalGroup {
-  animals: Array<Animal>;
-  tier: number;
-}

@@ -5,11 +5,14 @@ import { AnimalDetails } from 'components/AnimalDetails';
 import { AnimalList } from 'components/AnimalList';
 import { Card } from 'components/Card';
 import { PageContent } from 'components/PageContent';
+import { PivotTable } from 'components/PivotTable';
 import { Sidebar } from 'components/Sidebar';
-import { WeaponGrid } from 'components/WeaponGrid';
+import { WeaponName } from 'components/WeaponName';
 import { animals } from 'config/animals';
 import { weapons } from 'config/weapons';
+import { getWeaponGroups, isOptimal, isSuboptimal } from 'lib/weapons';
 import { Animal } from 'types/animals';
+import { Weapon, WeaponDistance } from 'types/weapons';
 import styles from './styles.module.css';
 
 const WeaponSelectorPage = () => {
@@ -33,6 +36,42 @@ const WeaponSelectorPage = () => {
   );
 
   /**
+   * Extract weapon hit energy
+   */
+  const handleGetWeaponHitEnergy = useCallback(
+    (weapon: Weapon) => weapon.hitEnergy,
+    [],
+  );
+
+  /**
+   * Determine if weapon is optimal at the specified distance
+   */
+  const handleGetWeaponOptimal = useCallback(
+    (weapon: Weapon, animal: Animal, distance: WeaponDistance) =>
+      isOptimal(animal, weapon, distance),
+    [],
+  );
+
+  /**
+   * Determine if weapon is suboptimal at the specified distance
+   */
+  const handleGetWeaponSuboptimal = useCallback(
+    (weapon: Weapon, animal: Animal, distance: WeaponDistance) =>
+      isSuboptimal(animal, weapon, distance),
+    [],
+  );
+
+  /**
+   * Render name of the specified weapon
+   */
+  const handleRenderEntityName = useCallback(
+    (weapon: Weapon, highlighted: boolean) => (
+      <WeaponName highlighted={highlighted} responsive={true} weapon={weapon} />
+    ),
+    [],
+  );
+
+  /**
    * Render details of an animal and weapons
    */
   const renderDetails = () => {
@@ -47,7 +86,7 @@ const WeaponSelectorPage = () => {
     if (!selectedAnimal) {
       return (
         <div className={styles.WeaponSelectorPageNotification}>
-          <Card>Please select an animal to start</Card>
+          <Card>Please select an animal to begin</Card>
         </div>
       );
     }
@@ -56,7 +95,15 @@ const WeaponSelectorPage = () => {
       <>
         <AnimalDetails animal={selectedAnimal} />
         <hr className={styles.WeaponSelectorPageSeparator} />
-        <WeaponGrid animal={selectedAnimal} weapons={weapons} />
+        <PivotTable
+          entities={weapons}
+          pivot={selectedAnimal}
+          onGetEntityGroups={getWeaponGroups}
+          onGetWeaponHitEnergy={handleGetWeaponHitEnergy}
+          onGetWeaponOptimal={handleGetWeaponOptimal}
+          onGetWeaponSuboptimal={handleGetWeaponSuboptimal}
+          onRenderEntityName={handleRenderEntityName}
+        />
       </>
     );
   };

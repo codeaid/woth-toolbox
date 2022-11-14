@@ -11,7 +11,7 @@ export const AnimalListGroup = (props: AnimalListGroupProps) => {
         <SectionHeader>Tier {group.tier}</SectionHeader>
       </li>
 
-      {group.animals.map(animal => (
+      {group.entities.map(animal => (
         <AnimalListItem
           active={animal.id === selected?.id}
           animal={animal}

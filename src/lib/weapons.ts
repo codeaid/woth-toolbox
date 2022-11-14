@@ -1,5 +1,6 @@
 import { Animal } from 'types/animals';
-import { Brand, Weapon, WeaponDistance, WeaponGroup } from 'types/weapons';
+import { EntityGroup } from 'types/global';
+import { Brand, Weapon, WeaponDistance } from 'types/weapons';
 
 /**
  * Sort a list of weapons by their tier and name
@@ -19,23 +20,26 @@ export const getSortedWeapons = (weapons: Array<Weapon>) =>
  * @param weapons List of weapons to group
  */
 export const getWeaponGroups = (weapons: Array<Weapon>) =>
-  getSortedWeapons(weapons).reduce<Array<WeaponGroup>>((groups, weapon) => {
-    // Attempt to find the existing group for the current tier
-    const group = groups.find(g => g.tier === weapon.tier);
+  getSortedWeapons(weapons).reduce<Array<EntityGroup<Weapon>>>(
+    (groups, weapon) => {
+      // Attempt to find the existing group for the current tier
+      const group = groups.find(g => g.tier === weapon.tier);
 
-    // Create a new group if it doesn't exist
-    if (!group) {
-      return [...groups, { tier: weapon.tier, weapons: [weapon] }];
-    }
-
-    return groups.map(group => {
-      if (group.tier === weapon.tier) {
-        return { ...group, weapons: [...group.weapons, weapon] };
+      // Create a new group if it doesn't exist
+      if (!group) {
+        return [...groups, { tier: weapon.tier, entities: [weapon] }];
       }
 
-      return group;
-    });
-  }, []);
+      return groups.map(group => {
+        if (group.tier === weapon.tier) {
+          return { ...group, entities: [...group.entities, weapon] };
+        }
+
+        return group;
+      });
+    },
+    [],
+  );
 
 /**
  * Get weapon brand name
