@@ -25,6 +25,7 @@
   width: 100%;
 }
 
+.AnimalActivityGridRow:hover .AnimalActivityGridRowSlot,
 .AnimalActivityGridRowSlotHighlighted {
   background-color: var(--elevation2);
 }
