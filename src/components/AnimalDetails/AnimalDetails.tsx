@@ -14,7 +14,9 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
       <div className={styles.AnimalName}>{animal.name}</div>
       <div className={styles.AnimalNameLatin}>{animal.latin}</div>
       <hr />
-      <div className={styles.AnimalDescription}>{animal.description}</div>
+      <div className={styles.AnimalDescription} key={animal.name}>
+        {animal.description}
+      </div>
       <div className={styles.AnimalStat}>
         <div className={styles.AnimalStatName}>Hunting Tier</div>
         <div className={styles.AnimalStatValue}>{animal.tier}</div>
