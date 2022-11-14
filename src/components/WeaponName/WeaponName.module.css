@@ -12,6 +12,7 @@
 }
 
 .WeaponNameTitle {
+  color: var(--text-primary);
   line-height: 1em;
   overflow: hidden;
   text-overflow: ellipsis;
