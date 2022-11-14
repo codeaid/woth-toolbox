@@ -17,6 +17,10 @@
   transition: color 125ms ease-in-out;
 }
 
+.AnimalNameHighlighted .AnimalNameTitle {
+  color: var(--brand);
+}
+
 @media (max-width: 864px) {
   .AnimalNameResponsive {
     align-items: baseline;

@@ -3,11 +3,12 @@ import { AnimalNameProps } from './types';
 import styles from './AnimalName.module.css';
 
 export const AnimalName = (props: AnimalNameProps) => {
-  const { animal, responsive = false } = props;
+  const { animal, highlighted = false, responsive = false } = props;
 
   return (
     <div
       className={classnames(styles.AnimalName, {
+        [styles.AnimalNameHighlighted]: highlighted,
         [styles.AnimalNameResponsive]: responsive,
       })}
     >
