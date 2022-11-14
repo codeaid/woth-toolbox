@@ -9,6 +9,7 @@ export interface Weapon {
   brand: Brand;
   calibre: string;
   hitEnergy: [number, number, number, number, number]; // 50m, 100m, 150m, 200m, 300m
+  id: string;
   model: string;
   tier: number;
 }
