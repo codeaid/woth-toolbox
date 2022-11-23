@@ -10,7 +10,6 @@
   backface-visibility: hidden;
   background-color: var(--elevation0);
   box-shadow: var(--shadow-strong);
-  cursor: pointer;
   position: absolute;
   top: 0;
   left: 0;
