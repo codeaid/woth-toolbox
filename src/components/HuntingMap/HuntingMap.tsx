@@ -218,12 +218,16 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Handle map being zoomed in
    */
   const handleZoomIn = useCallback(
-    () =>
+    (offsetX?: number, offsetY?: number) =>
       setOptions(current => {
         const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
 
         // Calculate next scale after scaling it up
-        const nextScale = Math.min(maxScale, mapScale + scaleIncrement);
+        const nextScale =
+          Math.round(
+            (Math.min(maxScale, mapScale + scaleIncrement) + Number.EPSILON) *
+              100,
+          ) / 100;
 
         // Calculate map's size at the next scale
         const nextWidth = imageWidth * nextScale;
@@ -233,10 +237,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const diffWidth = nextWidth - mapWidth;
         const diffHeight = nextHeight - mapHeight;
 
+        // Calculate position of the mouse within the map as percentages
+        const percentX = offsetX ? offsetX / mapWidth : 0.5;
+        const percentY = offsetY ? offsetY / mapWidth : 0.5;
+
         // Ensure map remains within the boundaries when zooming in
         const [translateX, translateY] = getBoundMapCoords(
-          mapLeft - diffWidth / 2,
-          mapTop - diffHeight / 2,
+          mapLeft - diffWidth * percentX,
+          mapTop - diffHeight * percentY,
           nextWidth,
           nextHeight,
         );
@@ -256,12 +264,16 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Handle map being zoomed out
    */
   const handleZoomOut = useCallback(
-    () =>
+    (offsetX?: number, offsetY?: number) =>
       setOptions(current => {
         const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
 
         // Calculate next scale after scaling it down
-        const nextScale = Math.max(minScale, mapScale - scaleIncrement);
+        const nextScale =
+          Math.round(
+            (Math.max(minScale, mapScale - scaleIncrement) + Number.EPSILON) *
+              100,
+          ) / 100;
 
         // Calculate map's size at the next scale
         const nextWidth = imageWidth * nextScale;
@@ -271,10 +283,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const diffWidth = mapWidth - nextWidth;
         const diffHeight = mapHeight - nextHeight;
 
+        // Calculate position of the mouse within the map as percentages
+        const percentX = offsetX ? offsetX / mapWidth : 0.5;
+        const percentY = offsetY ? offsetY / mapWidth : 0.5;
+
         // Ensure map remains within the boundaries when zooming out
         const [translateX, translateY] = getBoundMapCoords(
-          mapLeft + diffWidth / 2,
-          mapTop + diffHeight / 2,
+          mapLeft + diffWidth * percentX,
+          mapTop + diffHeight * percentY,
           nextWidth,
           nextHeight,
         );
@@ -288,6 +304,22 @@ export const HuntingMap = (props: HuntingMapProps) => {
         };
       }),
     [getBoundMapCoords, imageHeight, imageWidth, minScale, scaleIncrement],
+  );
+
+  /**
+   * Handle zoom in button being clicked
+   */
+  const handleButtonZoomInClick = useCallback(
+    () => handleZoomIn(),
+    [handleZoomIn],
+  );
+
+  /**
+   * Handle zoom out button being clicked
+   */
+  const handleButtonZoomOutClick = useCallback(
+    () => handleZoomOut(),
+    [handleZoomOut],
   );
 
   /**
@@ -348,9 +380,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param event Wheel event
    */
   const handleContainerWheel = useCallback(
-    (event: WheelEvent<EventTarget>) =>
+    (event: WheelEvent<EventTarget>) => {
+      const { offsetX, offsetY } = event.nativeEvent;
+
       // Scroll down = positive delta, scroll up = negative delta
-      Math.sign(event.deltaY) < 0 ? handleZoomIn() : handleZoomOut(),
+      Math.sign(event.deltaY) < 0
+        ? handleZoomIn(offsetX, offsetY)
+        : handleZoomOut(offsetX, offsetY);
+    },
     [handleZoomIn, handleZoomOut],
   );
 
@@ -437,10 +474,16 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
     return (
       <>
-        <button className={styles.HuntingMapButton} onClick={handleZoomIn}>
+        <button
+          className={styles.HuntingMapButton}
+          onClick={handleButtonZoomInClick}
+        >
           <RiZoomInLine />
         </button>
-        <button className={styles.HuntingMapButton} onClick={handleZoomOut}>
+        <button
+          className={styles.HuntingMapButton}
+          onClick={handleButtonZoomOutClick}
+        >
           <RiZoomOutLine />
         </button>
         <button className={styles.HuntingMapButton} onClick={handleReset}>
