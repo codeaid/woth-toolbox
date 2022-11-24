@@ -1,5 +1,4 @@
 .AnimalActivityGridIconIntermediate {
   opacity: 0.8;
   transform: scale(0.6);
-  transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
 }
