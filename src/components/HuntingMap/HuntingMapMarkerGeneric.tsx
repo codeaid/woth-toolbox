@@ -9,6 +9,7 @@ export const HuntingMapMarkerGeneric = (
   props: HuntingMapMarkerGenericProps,
 ) => {
   const {
+    className,
     mapScale,
     marker,
     markerVisibilityMap = new Map(),
@@ -21,7 +22,7 @@ export const HuntingMapMarkerGeneric = (
   const [left, top] = coords;
 
   // Generate marker's class name
-  const className = useMemo(() => {
+  const classNames = useMemo(() => {
     // Determine if marker is visible
     const visible = isMarkerVisibleAtScale(
       mapScale,
@@ -29,10 +30,14 @@ export const HuntingMapMarkerGeneric = (
       markerVisibilityMap,
     );
 
-    return classnames(styles.HuntingMapMarker, {
-      [styles.HuntingMapMarkerInvisible]: !visible,
-    });
-  }, [mapScale, marker, markerVisibilityMap]);
+    return classnames(
+      styles.HuntingMapMarker,
+      {
+        [styles.HuntingMapMarkerInvisible]: !visible,
+      },
+      className,
+    );
+  }, [className, mapScale, marker, markerVisibilityMap]);
 
   // Calculate marker size at the current map scale
   const size = useMemo(
@@ -53,7 +58,7 @@ export const HuntingMapMarkerGeneric = (
 
   return (
     <Marker
-      className={className}
+      className={classNames}
       size={size}
       style={{
         left: `calc(${left * 100}% - ${size / 2}px)`,

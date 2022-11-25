@@ -11,6 +11,7 @@ export interface HuntingMapOffsets {
 }
 
 export interface HuntingMapMarkerGenericProps {
+  className?: string;
   mapScale: number;
   marker: MarkerOptions;
   markerVisibilityMap?: Map<MarkerType, number>;
