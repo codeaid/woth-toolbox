@@ -25,3 +25,7 @@ export const echoMarkers = (
 export const lodgeMarkers = (
   [[0.66796875, 0.47509765625]] as Array<MarkerPosition>
 ).map(createMarkerPositionConverter('lodge'));
+
+export const shootingRangeMarkers = (
+  [[0.650634765625, 0.48193359375]] as Array<MarkerPosition>
+).map(createMarkerPositionConverter('shooting range'));

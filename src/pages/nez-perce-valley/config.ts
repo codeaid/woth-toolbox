@@ -1,4 +1,9 @@
-import { cabinMarkers, echoMarkers, lodgeMarkers } from 'config/idaho';
+import {
+  cabinMarkers,
+  echoMarkers,
+  lodgeMarkers,
+  shootingRangeMarkers,
+} from 'config/idaho';
 import { MarkerOptions, MarkerType } from 'types/markers';
 
 // Map size configuration
@@ -10,6 +15,7 @@ export const genericMarkers: Array<MarkerOptions> = [
   cabinMarkers,
   echoMarkers,
   lodgeMarkers,
+  shootingRangeMarkers,
 ].flat();
 
 // Map of marker types and their maximum map scale visibility
@@ -17,4 +23,5 @@ export const markerVisibilityMap = new Map<MarkerType, number>([
   ['cabin', 0.25],
   ['echo', 0.35],
   ['lodge', 0],
+  ['shooting range', 0.25],
 ]);
