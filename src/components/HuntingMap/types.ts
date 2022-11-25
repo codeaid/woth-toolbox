@@ -9,6 +9,13 @@ export interface HuntingMapOffsets {
   translateY: number;
 }
 
+export interface HuntingMapMarkerGenericProps {
+  mapScale: number;
+  marker: MarkerOptions;
+  markerVisibilityMap?: Map<MarkerType, number>;
+  maxMarkerSize: number;
+}
+
 export interface HuntingMapOptions {
   mapHeight: number;
   mapLeft: number;
@@ -19,13 +26,13 @@ export interface HuntingMapOptions {
 
 export interface HuntingMapProps {
   defaultScale?: number;
+  genericMarkers?: Array<MarkerOptions>;
   imageHeight: number;
   imageSrc: string;
   imageWidth: number;
   markerFilter?: Array<MarkerType>;
   markerVisibilityMap?: Map<MarkerType, number>;
-  markers?: Array<MarkerOptions>;
-  maxGenericMarkerSize?: number;
+  maxMarkerSize?: number;
   maxScale?: number;
   minOverflow?: number;
   minScale?: number;

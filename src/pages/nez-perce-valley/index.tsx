@@ -16,7 +16,7 @@ const NezPerceValleyPage = () => (
         imageHeight={mapHeight}
         imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
         imageWidth={mapWidth}
-        markers={genericMarkers}
+        genericMarkers={genericMarkers}
         markerVisibilityMap={markerVisibilityMap}
       />
     </NoSSR>

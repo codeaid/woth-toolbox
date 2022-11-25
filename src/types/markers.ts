@@ -48,7 +48,7 @@ export type MarkerType = AnimalMarkerType | GenericMarkerType | ZoneMarkerType;
 
 export type MarkerPosition = [number, number];
 
-export interface MarkerOptions {
-  pos: MarkerPosition;
-  type: MarkerType;
+export interface MarkerOptions<TMarkerType = MarkerType> {
+  coords: MarkerPosition;
+  type: TMarkerType;
 }

@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import {
   MouseEvent,
   TouchEvent,
@@ -11,26 +10,21 @@ import {
 } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { Marker } from 'components/Marker';
-import {
-  getMarkerSize,
-  getVisibleMarkers,
-  isGenericMarker,
-  isMarkerVisibleAtScale,
-} from 'lib/markers';
+import { getVisibleMarkers, isGenericMarker } from 'lib/markers';
+import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
     defaultScale = 0.25,
+    genericMarkers = [],
     imageHeight,
     imageSrc,
     imageWidth,
     markerFilter = [],
     markerVisibilityMap = new Map(),
-    markers = [],
-    maxGenericMarkerSize = 38,
+    maxMarkerSize = 38,
     maxScale = 2.5,
     minOverflow = 200,
     minScale = 0.2,
@@ -69,47 +63,21 @@ export const HuntingMap = (props: HuntingMapProps) => {
     mapWidth: imageWidth * defaultScale,
   });
 
-  // Calculate marker size at the current map scale
-  const markerSizeGeneric = useMemo(
-    () => getMarkerSize(options.mapScale, maxGenericMarkerSize),
-    [maxGenericMarkerSize, options.mapScale],
-  );
-
   // List of generic map marker elements
   const markerListGeneric = useMemo(
     () =>
-      getVisibleMarkers(markers, markerFilter)
+      getVisibleMarkers(genericMarkers, markerFilter)
         .filter(isGenericMarker)
-        .map((marker, index) => {
-          const { pos, type } = marker;
-          const [markerLeft, markerTop] = pos;
-
-          const visible = isMarkerVisibleAtScale(
-            options.mapScale,
-            marker.type,
-            markerVisibilityMap,
-          );
-
-          // Generate marker's class name
-          const className = classnames(styles.HuntingMapMarker, {
-            [styles.HuntingMapMarkerInvisible]: !visible,
-          });
-
-          return (
-            <Marker
-              className={className}
-              key={index}
-              size={markerSizeGeneric}
-              style={{
-                left: `calc(${markerLeft * 100}% - ${markerSizeGeneric / 2}px)`,
-                top: `calc(${markerTop * 100}% - ${markerSizeGeneric / 2}px)`,
-              }}
-              title={`${markerLeft} ... ${markerTop}`}
-              type={type}
-            />
-          );
-        }),
-    [markerFilter, markerSizeGeneric, markerVisibilityMap, markers, options],
+        .map((marker, index) => (
+          <HuntingMapMarkerGeneric
+            key={index}
+            mapScale={options.mapScale}
+            marker={marker}
+            markerVisibilityMap={markerVisibilityMap}
+            maxMarkerSize={maxMarkerSize}
+          />
+        )),
+    [genericMarkers, markerFilter, markerVisibilityMap, maxMarkerSize, options],
   );
 
   /**
