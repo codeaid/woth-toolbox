@@ -8,7 +8,6 @@ import {
   WheelEvent,
 } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
-import { baseUrl } from 'config/app';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
@@ -528,9 +527,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     <div
       className={styles.HuntingMap}
       ref={containerRef}
-      style={{
-        cursor: `url("${baseUrl}/img/mouse.png"), auto`,
-      }}
       onMouseDown={handleContainerMouseDown}
       onMouseLeave={handleDragEnd}
       onMouseMove={handleContainerMouseMove}

@@ -40,6 +40,11 @@ const Document = () => {
           rel="stylesheet"
         />
         <link rel="shortcut icon" href={`${baseUrl}/img/favicon.png`} />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `html { cursor: url("${baseUrl}/img/mouse.png"), auto; }`,
+          }}
+        ></style>
         {renderGoogleAnalytics()}
       </Head>
       <body>
