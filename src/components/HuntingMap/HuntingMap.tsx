@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   MouseEvent,
   TouchEvent,
@@ -9,6 +10,7 @@ import {
   WheelEvent,
 } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
+import { LoadingOverlay } from 'components/LoadingOverlay';
 import { Marker } from 'components/Marker';
 import {
   getMarkerOpacity,
@@ -39,7 +41,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // References to internal elements
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   // Variable holding mouse offset on mousedown on the image
   const imageMouseDownOffset = useRef<[number, number]>([0, 0]);
@@ -54,6 +56,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
     translateX: 0,
     translateY: 0,
   });
+
+  // Flag indicating that the map image has loaded
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Current map offsets and options
   const [options, setOptions] = useState<HuntingMapOptions>({
@@ -432,7 +437,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const handleContainerWheel = useCallback(
     (event: WheelEvent<EventTarget>) => {
       // Determine if scroll wheel was used on the map image itself
-      const isImageScroll = event.target === imageRef.current;
+      const isImageScroll = event.target === imageWrapperRef.current;
 
       // Zoom map at its centre if not scrolling directly on the image
       const { offsetX, offsetY } = isImageScroll
@@ -446,6 +451,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
     },
     [handleZoomIn, handleZoomOut],
   );
+
+  /**
+   * Handle map image having been fully loaded
+   */
+  const handleMapImageLoaded = useCallback(() => setImageLoaded(true), []);
 
   /**
    * Handle clicking on the map
@@ -524,7 +534,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Render zoom in, out and reset buttons if enabled
    */
   const renderButtons = () => {
-    if (!showButtons) {
+    if (!imageLoaded || !showButtons) {
       return null;
     }
 
@@ -548,6 +558,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
       </>
     );
   };
+
+  /**
+   * Show notification while loading the map asset
+   */
+  const renderLoadingOverlay = () =>
+    imageLoaded ? null : (
+      <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
+    );
 
   /**
    * Center map on component being mounted the first time
@@ -575,42 +593,45 @@ export const HuntingMap = (props: HuntingMapProps) => {
   }, [getBoundMapCoords, handleWindowResize, options]);
 
   return (
-    <div
-      className={styles.HuntingMap}
-      ref={containerRef}
-      onMouseDown={handleContainerMouseDown}
-      onMouseLeave={handleDragEnd}
-      onMouseMove={handleContainerMouseMove}
-      onMouseUp={handleDragEnd}
-      onTouchEnd={handleDragEnd}
-      onTouchMove={handleContainerTouchMove}
-      onTouchStart={handleContainerTouchStart}
-      onWheel={handleContainerWheel}
-    >
-      {renderButtons()}
-
+    <>
+      {renderLoadingOverlay()}
       <div
-        className={styles.HuntingMapImageWrapper}
-        style={{
-          height: `${options.mapHeight}px`,
-          left: `${options.mapLeft}px`,
-          top: `${options.mapTop}px`,
-          width: `${options.mapWidth}px`,
-        }}
-        onMouseDownCapture={handleMapMouseDown}
-        onMouseUpCapture={handleMapMouseUp}
+        className={styles.HuntingMap}
+        ref={containerRef}
+        onMouseDown={handleContainerMouseDown}
+        onMouseLeave={handleDragEnd}
+        onMouseMove={handleContainerMouseMove}
+        onMouseUp={handleDragEnd}
+        onTouchEnd={handleDragEnd}
+        onTouchMove={handleContainerTouchMove}
+        onTouchStart={handleContainerTouchStart}
+        onWheel={handleContainerWheel}
       >
-        {markerListGeneric}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="Nez Perez map"
-          className={styles.HuntingMapImage}
-          height={options.mapHeight}
-          ref={imageRef}
-          src={imageSrc}
-          width={options.mapWidth}
-        />
+        {renderButtons()}
+
+        <div
+          className={styles.HuntingMapImageWrapper}
+          ref={imageWrapperRef}
+          style={{
+            height: `${options.mapHeight}px`,
+            left: `${options.mapLeft}px`,
+            top: `${options.mapTop}px`,
+            width: `${options.mapWidth}px`,
+          }}
+          onMouseDownCapture={handleMapMouseDown}
+          onMouseUpCapture={handleMapMouseUp}
+        >
+          {imageLoaded && markerListGeneric}
+          <Image
+            alt="Nez Perez map"
+            className={styles.HuntingMapImage}
+            height={options.mapHeight}
+            src={imageSrc}
+            width={options.mapWidth}
+            onLoad={handleMapImageLoaded}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
