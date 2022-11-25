@@ -30,6 +30,7 @@ export type GenericMarker =
   | 'cabin'
   | 'cabin:undiscovered'
   | 'camp'
+  | 'echo'
   | 'hunting stand'
   | 'lodge'
   | 'photo'

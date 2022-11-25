@@ -4,6 +4,7 @@ export const iconMap: Partial<Record<MarkerType, string>> = {
   'cabin': 'cabin',
   'cabin:undiscovered': 'cabin_undiscovered',
   'camp': 'camp',
+  'echo': 'echo',
   'hunting stand': 'hunting_stand',
   'lodge': 'lodge',
   'photo': 'photo',
