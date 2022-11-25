@@ -10,19 +10,6 @@ export const createMarkerPositionConverter =
   (pos: MarkerPosition): MarkerOptions => ({ pos, type });
 
 /**
- * Get marker's opacity at the current map scale
- *
- * @param mapScale Current map scale (zoom)
- * @param marker Marker options
- * @param visibilityMap Map of marker types and their minimum visibility scale
- */
-export const getMarkerOpacity = (
-  mapScale: number,
-  marker: MarkerOptions,
-  visibilityMap: Map<MarkerType, number>,
-) => (isMarkerVisibleAtScale(mapScale, marker.type, visibilityMap) ? 1 : 0);
-
-/**
  * Calculate marker size at the current map scale
  *
  * @param mapScale Current map scale (zoom)
@@ -72,7 +59,7 @@ export const isGenericMarker = (marker: MarkerOptions) =>
  * @param type Marker type
  * @param visibilityMap Map of marker types and their minimum visibility scale
  */
-const isMarkerVisibleAtScale = (
+export const isMarkerVisibleAtScale = (
   mapScale: number,
   type: MarkerType,
   visibilityMap: Map<MarkerType, number>,

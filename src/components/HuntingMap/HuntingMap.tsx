@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import {
   MouseEvent,
   TouchEvent,
@@ -12,10 +13,10 @@ import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { Marker } from 'components/Marker';
 import {
-  getMarkerOpacity,
   getMarkerSize,
   getVisibleMarkers,
   isGenericMarker,
+  isMarkerVisibleAtScale,
 } from 'lib/markers';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
@@ -83,20 +84,24 @@ export const HuntingMap = (props: HuntingMapProps) => {
           const { pos, type } = marker;
           const [markerLeft, markerTop] = pos;
 
-          const opacity = getMarkerOpacity(
+          const visible = isMarkerVisibleAtScale(
             options.mapScale,
-            marker,
+            marker.type,
             markerVisibilityMap,
           );
 
+          // Generate marker's class name
+          const className = classnames(styles.HuntingMapMarker, {
+            [styles.HuntingMapMarkerInvisible]: !visible,
+          });
+
           return (
             <Marker
-              className={styles.HuntingMapMarker}
+              className={className}
               key={index}
               size={markerSizeGeneric}
               style={{
                 left: `calc(${markerLeft * 100}% - ${markerSizeGeneric / 2}px)`,
-                opacity,
                 top: `calc(${markerTop * 100}% - ${markerSizeGeneric / 2}px)`,
               }}
               title={`${markerLeft} ... ${markerTop}`}

@@ -63,5 +63,19 @@
 }
 
 .HuntingMapMarker {
+  filter: unset;
+  opacity: 1;
   position: absolute;
+  transition: opacity 150ms linear, transform 150ms linear;
+  z-index: 1;
+}
+
+.HuntingMapMarker:hover {
+  transform: scale(1.2);
+  z-index: 2;
+}
+
+.HuntingMapMarkerInvisible {
+  opacity: 0;
+  transform: scale(0);
 }
