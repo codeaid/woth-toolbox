@@ -1,4 +1,4 @@
-export type AnimalMarker =
+export type AnimalMarkerType =
   | 'animal:american badger'
   | 'animal:american black bear'
   | 'animal:bighorn sheep'
@@ -26,7 +26,7 @@ export type AnimalMarker =
   | 'animal:wild boar'
   | 'animal:wild duck';
 
-export type GenericMarker =
+export type GenericMarkerType =
   | 'cabin'
   | 'cabin:undiscovered'
   | 'camp'
@@ -37,16 +37,16 @@ export type GenericMarker =
   | 'shooting range'
   | 'view';
 
-export type ZoneMarker =
+export type ZoneMarkerType =
   | 'zone:drink'
   | 'zone:eat'
   | 'zone:gather'
   | 'zone:path'
   | 'zone:sleep';
 
-export type MarkerType = AnimalMarker | GenericMarker | ZoneMarker;
+export type MarkerType = AnimalMarkerType | GenericMarkerType | ZoneMarkerType;
 
-type MarkerPosition = [number, number];
+export type MarkerPosition = [number, number];
 
 export interface MarkerOptions {
   pos: MarkerPosition;

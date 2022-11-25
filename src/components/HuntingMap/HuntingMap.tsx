@@ -3,11 +3,19 @@ import {
   TouchEvent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   WheelEvent,
 } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
+import { Marker } from 'components/Marker';
+import {
+  getMarkerOpacity,
+  getMarkerSize,
+  getVisibleMarkers,
+  isGenericMarker,
+} from 'lib/markers';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
@@ -17,6 +25,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
     imageHeight,
     imageSrc,
     imageWidth,
+    markerFilter = [],
+    markerVisibilityMap = new Map(),
+    markers = [],
+    maxGenericMarkerSize = 38,
     maxScale = 2.5,
     minOverflow = 200,
     minScale = 1,
@@ -51,6 +63,45 @@ export const HuntingMap = (props: HuntingMapProps) => {
     mapTop: 0,
     mapWidth: imageWidth * defaultScale,
   });
+
+  // Calculate marker size at the current map scale
+  const markerSizeGeneric = useMemo(
+    () => getMarkerSize(options.mapScale, maxGenericMarkerSize),
+    [maxGenericMarkerSize, options.mapScale],
+  );
+
+  // List of generic map marker elements
+  const markerListGeneric = useMemo(
+    () =>
+      getVisibleMarkers(markers, markerFilter)
+        .filter(isGenericMarker)
+        .map((marker, index) => {
+          const { pos, type } = marker;
+          const [markerLeft, markerTop] = pos;
+
+          const opacity = getMarkerOpacity(
+            options.mapScale,
+            marker,
+            markerVisibilityMap,
+          );
+
+          return (
+            <Marker
+              className={styles.HuntingMapMarker}
+              key={index}
+              size={markerSizeGeneric}
+              style={{
+                left: `calc(${markerLeft * 100}% - ${markerSizeGeneric / 2}px)`,
+                opacity,
+                top: `calc(${markerTop * 100}% - ${markerSizeGeneric / 2}px)`,
+              }}
+              title={`${markerLeft} ... ${markerTop}`}
+              type={type}
+            />
+          );
+        }),
+    [markerFilter, markerSizeGeneric, markerVisibilityMap, markers, options],
+  );
 
   /**
    * Ensure specified coordinates remain within the allowed boundaries
@@ -537,23 +588,29 @@ export const HuntingMap = (props: HuntingMapProps) => {
       onWheel={handleContainerWheel}
     >
       {renderButtons()}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        alt="Nez Perez map"
-        className={styles.HuntingMapImage}
-        height={options.mapHeight}
-        ref={imageRef}
-        src={imageSrc}
+
+      <div
+        className={styles.HuntingMapImageWrapper}
         style={{
           height: `${options.mapHeight}px`,
           left: `${options.mapLeft}px`,
           top: `${options.mapTop}px`,
           width: `${options.mapWidth}px`,
         }}
-        width={options.mapWidth}
         onMouseDownCapture={handleMapMouseDown}
         onMouseUpCapture={handleMapMouseUp}
-      />
+      >
+        {markerListGeneric}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt="Nez Perez map"
+          className={styles.HuntingMapImage}
+          height={options.mapHeight}
+          ref={imageRef}
+          src={imageSrc}
+          width={options.mapWidth}
+        />
+      </div>
     </div>
   );
 };

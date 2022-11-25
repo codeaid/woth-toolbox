@@ -1,5 +1,5 @@
 .HuntingMap {
-  background-color: var(--elevation2);
+  background-color: var(--elevation1);
   flex: 1;
   height: 100%;
   overflow: hidden;
@@ -10,9 +10,14 @@
   backface-visibility: hidden;
   background-color: var(--elevation0);
   box-shadow: var(--shadow-strong);
+  height: 100%;
+  width: 100%;
+}
+
+.HuntingMapImageWrapper {
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   will-change: left, top;
 }
 
@@ -55,4 +60,8 @@
 
 .HuntingMapButton:nth-of-type(3) {
   top: 6.5em;
+}
+
+.HuntingMapMarker {
+  position: absolute;
 }
