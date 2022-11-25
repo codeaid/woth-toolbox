@@ -436,12 +436,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const handleContainerWheel = useCallback(
     (event: WheelEvent<EventTarget>) => {
       // Determine if scroll wheel was used on the map image itself
-      const isImageScroll = event.target === imageRef.current;
+      if (event.target !== imageRef.current) {
+        return;
+      }
 
       // Zoom map at its centre if not scrolling directly on the image
-      const { offsetX, offsetY } = isImageScroll
-        ? event.nativeEvent
-        : { offsetX: undefined, offsetY: undefined };
+      const { offsetX, offsetY } = event.nativeEvent;
 
       // Scroll down = positive delta, scroll up = negative delta
       Math.sign(event.deltaY) < 0
