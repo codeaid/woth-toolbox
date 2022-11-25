@@ -11,7 +11,10 @@ const App = (props: AppProps) => {
     <>
       <Head>
         <title>Way Of The Hunter Toolbox</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="initial-scale=1, maximum-scale=1.0, minimum-scale=1.0 user-scalable=no, width=device-width"
+        />
       </Head>
       <Layout>
         <Component {...pageProps} />
