@@ -1,6 +1,7 @@
 import { MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
+type HuntingMapMarkerClickHandler = (marker: MarkerOptions) => void;
 
 export interface HuntingMapOffsets {
   pageX: number;
@@ -14,6 +15,7 @@ export interface HuntingMapMarkerGenericProps {
   marker: MarkerOptions;
   markerVisibilityMap?: Map<MarkerType, number>;
   maxMarkerSize: number;
+  onClick?: HuntingMapMarkerClickHandler;
 }
 
 export interface HuntingMapOptions {

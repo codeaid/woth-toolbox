@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Marker } from 'components/Marker';
 import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
 import { HuntingMapMarkerGenericProps } from './types';
@@ -13,6 +13,7 @@ export const HuntingMapMarkerGeneric = (
     marker,
     markerVisibilityMap = new Map(),
     maxMarkerSize,
+    onClick,
   } = props;
 
   // Extract marker details
@@ -39,6 +40,17 @@ export const HuntingMapMarkerGeneric = (
     [maxMarkerSize, mapScale],
   );
 
+  /**
+   * Handle clicking on the marker
+   */
+  const handleClick = useCallback(() => {
+    if (!onClick) {
+      return;
+    }
+
+    onClick(marker);
+  }, [marker, onClick]);
+
   return (
     <Marker
       className={className}
@@ -49,6 +61,7 @@ export const HuntingMapMarkerGeneric = (
       }}
       title={`${left} ... ${top}`}
       type={type}
+      onClick={handleClick}
     />
   );
 };
