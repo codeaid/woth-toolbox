@@ -1,5 +1,5 @@
 .Card {
-  background-color: var(--elevation2);
+  background-color: var(--elevation1);
   border-radius: 0.25em;
   box-shadow: var(--shadow);
   color: var(--text-primary);
