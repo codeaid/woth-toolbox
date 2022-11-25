@@ -1,10 +1,10 @@
+import { LayoutBackground } from 'components/LayoutBackground';
 import {
   Toolbar,
   ToolbarAction,
   ToolbarActions,
   ToolbarTitle,
 } from 'components/Toolbar';
-import LayoutBackground from './LayoutBackground.jpg';
 import styles from './Layout.module.css';
 import { LayoutProps } from './types';
 
@@ -27,10 +27,7 @@ export const Layout = (props: LayoutProps) => {
         </ToolbarActions>
       </Toolbar>
 
-      <div
-        className={styles.LayoutBackground}
-        style={{ backgroundImage: `url("${LayoutBackground.src}")` }}
-      ></div>
+      <LayoutBackground />
       <div className={styles.LayoutContent}>{children}</div>
     </div>
   );

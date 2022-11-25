@@ -1,0 +1,12 @@
+.LayoutBackground {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: -2em;
+  filter: blur(1em) brightness(40%);
+  left: -2em;
+  position: absolute;
+  right: -2em;
+  top: -2em;
+  z-index: -1;
+}
