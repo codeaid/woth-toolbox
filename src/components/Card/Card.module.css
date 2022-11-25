@@ -6,4 +6,5 @@
   min-width: 15rem;
   padding: 2rem;
   text-align: center;
+  user-select: none;
 }
