@@ -21,7 +21,7 @@ import styles from './HuntingMap.module.css';
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
-    defaultScale = 1,
+    defaultScale = 0.25,
     imageHeight,
     imageSrc,
     imageWidth,
@@ -31,8 +31,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
     maxGenericMarkerSize = 38,
     maxScale = 2.5,
     minOverflow = 200,
-    minScale = 1,
-    scaleIncrement = 0.1,
+    minScale = 0.2,
+    scaleIncrement = 0.02,
     showButtons = true,
     onClick,
   } = props;
