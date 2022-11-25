@@ -1,0 +1,22 @@
+.LoadingOverlay {
+  align-items: center;
+  background-color: var(--elevation2);
+  bottom: 0;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  user-select: none;
+  z-index: 1000;
+}
+
+.LoadingOverlayContent {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-top: 1.5em;
+}
