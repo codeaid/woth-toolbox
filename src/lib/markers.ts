@@ -1,4 +1,13 @@
-import { MarkerOptions, MarkerType } from 'types/markers';
+import { MarkerOptions, MarkerPosition, MarkerType } from 'types/markers';
+
+/**
+ * Create marker position to option object converter
+ *
+ * @param type Target marker type
+ */
+export const createMarkerPositionConverter =
+  (type: MarkerType) =>
+  (pos: MarkerPosition): MarkerOptions => ({ pos, type });
 
 /**
  * Get marker's opacity at the current map scale
