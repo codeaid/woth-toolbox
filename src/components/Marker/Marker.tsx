@@ -4,7 +4,15 @@ import { iconMap } from './config';
 import { MarkerProps } from './types';
 
 export const Marker = (props: MarkerProps) => {
-  const { alt = '', className, size = 128, style, title, type } = props;
+  const {
+    alt = '',
+    className,
+    size = 128,
+    style,
+    title,
+    type,
+    onClick,
+  } = props;
 
   // Retrieve image source file for the current type
   const imageName = useMemo(() => iconMap[type] ?? 'default', [type]);
@@ -24,6 +32,7 @@ export const Marker = (props: MarkerProps) => {
       style={style}
       title={title}
       width={size}
+      onClick={onClick}
     />
   );
 };
