@@ -1,5 +1,6 @@
 import {
   cabinMarkers,
+  campMarkers,
   echoMarkers,
   lodgeMarkers,
   shootingRangeMarkers,
@@ -14,6 +15,7 @@ export const mapWidth = 4096;
 // List of generic markers to show on the Nex Perce map
 export const genericMarkers: Array<MarkerOptions> = [
   cabinMarkers,
+  campMarkers,
   echoMarkers,
   lodgeMarkers,
   shootingRangeMarkers,
@@ -23,6 +25,7 @@ export const genericMarkers: Array<MarkerOptions> = [
 // Map of marker types and their maximum map scale visibility
 export const markerVisibilityMap = new Map<MarkerType, number>([
   ['cabin', 0.25],
+  ['camp', 0.25],
   ['echo', 0.35],
   ['lodge', 0],
   ['shooting range', 0.25],
