@@ -22,7 +22,7 @@ const getLocalIdentHash = (context, localIdentName, localName) =>
 const config = {
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  pageExtensions: ['.tsx'],
+  pageExtensions: ['tsx'],
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: false,
