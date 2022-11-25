@@ -25,6 +25,7 @@ const config = {
   images: {
     unoptimized: true
   },
+  pageExtensions: ['.tsx'],
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: false,
