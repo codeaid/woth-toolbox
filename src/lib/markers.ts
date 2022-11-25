@@ -1,13 +1,15 @@
 import { MarkerOptions, MarkerPosition, MarkerType } from 'types/markers';
 
 /**
- * Create marker position to option object converter
+ * Convert marker position to a marker options object of the specified type
  *
  * @param type Target marker type
+ * @param positions Source list of marker positions
  */
-export const createMarkerPositionConverter =
-  (type: MarkerType) =>
-  (pos: MarkerPosition): MarkerOptions => ({ pos, type });
+export const createMarkerOptions = (
+  type: MarkerType,
+  positions: Array<MarkerPosition>,
+): Array<MarkerOptions> => positions.map(pos => ({ pos, type }));
 
 /**
  * Calculate marker size at the current map scale

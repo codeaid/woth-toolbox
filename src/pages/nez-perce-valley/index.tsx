@@ -2,12 +2,8 @@ import Head from 'next/head';
 import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
-import {
-  genericMarkers,
-  mapHeight,
-  mapWidth,
-  markerVisibilityMap,
-} from './config';
+import { mapHeight, mapWidth, markerVisibilityMap } from './config';
+import { genericMarkers } from './markers/generic';
 
 const NezPerceValleyPage = () => (
   <>
