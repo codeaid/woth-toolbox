@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import {
@@ -14,13 +15,15 @@ const NezPerceValleyPage = () => (
       <title>Nez Perce Valley - Way Of The Hunter</title>
     </Head>
 
-    <HuntingMap
-      imageHeight={mapHeight}
-      imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
-      imageWidth={mapWidth}
-      markers={genericMarkers}
-      markerVisibilityMap={markerVisibilityMap}
-    />
+    <NoSSR>
+      <HuntingMap
+        imageHeight={mapHeight}
+        imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
+        imageWidth={mapWidth}
+        markers={genericMarkers}
+        markerVisibilityMap={markerVisibilityMap}
+      />
+    </NoSSR>
   </>
 );
 

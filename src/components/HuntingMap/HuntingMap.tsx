@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import {
   MouseEvent,
   TouchEvent,
@@ -41,7 +40,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // References to internal elements
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   // Variable holding mouse offset on mousedown on the image
   const imageMouseDownOffset = useRef<[number, number]>([0, 0]);
@@ -437,7 +436,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const handleContainerWheel = useCallback(
     (event: WheelEvent<EventTarget>) => {
       // Determine if scroll wheel was used on the map image itself
-      const isImageScroll = event.target === imageWrapperRef.current;
+      const isImageScroll = event.target === imageRef.current;
 
       // Zoom map at its centre if not scrolling directly on the image
       const { offsetX, offsetY } = isImageScroll
@@ -611,7 +610,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
         <div
           className={styles.HuntingMapImageWrapper}
-          ref={imageWrapperRef}
           style={{
             height: `${options.mapHeight}px`,
             left: `${options.mapLeft}px`,
@@ -622,10 +620,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
           onMouseUpCapture={handleMapMouseUp}
         >
           {imageLoaded && markerListGeneric}
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             alt="Nez Perez map"
             className={styles.HuntingMapImage}
             height={options.mapHeight}
+            ref={imageRef}
             src={imageSrc}
             width={options.mapWidth}
             onLoad={handleMapImageLoaded}
