@@ -21,6 +21,9 @@ export const Layout = (props: LayoutProps) => {
           <ToolbarAction href="/animal-life-cycles">
             Animal Life Cycles
           </ToolbarAction>
+          <ToolbarAction href="/nez-perce-valley">
+            Nez Perce Valley
+          </ToolbarAction>
         </ToolbarActions>
       </Toolbar>
 
