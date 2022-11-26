@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapMarkerAnimalProps } from './types';
@@ -40,9 +41,9 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
    */
   const renderZones = (markers: Array<MarkerOptions>) => (
     <>
-      {markers.map((marker, index) => (
+      {markers.map(marker => (
         <HuntingMapMarkerGeneric
-          key={`d:${index}`}
+          key={getMarkerKey(marker)}
           mapScale={mapScale}
           marker={marker}
           markerVisibilityMap={markerVisibilityMap}
@@ -83,6 +84,7 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
     />
   );
 
+  // Monitor clicks outside the current marker and hide zones when needed
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
 

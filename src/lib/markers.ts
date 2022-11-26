@@ -13,6 +13,16 @@ export const createMarkerOptions = <TMarkerType extends MarkerType>(
   positions.map(coords => ({ coords, type }));
 
 /**
+ * Generate marker key
+ *
+ * @param marker Source marker
+ */
+export const getMarkerKey = (marker: MarkerOptions) =>
+  `${marker.type}:${marker.coords[0].toFixed(4)}:${marker.coords[1].toFixed(
+    4,
+  )}`;
+
+/**
  * Calculate marker size at the current map scale
  *
  * @param mapScale Current map scale (zoom)
