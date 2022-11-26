@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, useMemo } from 'react';
 import { baseUrl } from 'config/app';
-import { iconMap } from './config';
+import { iconMap, iconMapHighlighted } from './config';
 import { MarkerProps } from './types';
 
 export const Marker = forwardRef(
@@ -8,6 +8,7 @@ export const Marker = forwardRef(
     const {
       alt = '',
       className,
+      highlighted = false,
       size = 128,
       style,
       title,
@@ -16,7 +17,13 @@ export const Marker = forwardRef(
     } = props;
 
     // Retrieve image source file for the current type
-    const imageName = useMemo(() => iconMap[type] ?? 'default', [type]);
+    const imageName = useMemo(
+      () =>
+        (!highlighted
+          ? iconMap[type]
+          : iconMapHighlighted[type] ?? iconMap[type]) ?? 'default',
+      [highlighted, type],
+    );
     const imageSrc = useMemo(
       () => `${baseUrl}/img/markers/${imageName}.png`,
       [imageName],

@@ -6,6 +6,7 @@ type MarkerClickHandler = () => void;
 export interface MarkerProps {
   alt?: string;
   className?: string;
+  highlighted?: boolean;
   size?: number;
   style?: CSSProperties;
   title?: string;
