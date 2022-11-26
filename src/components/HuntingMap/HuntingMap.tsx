@@ -1,5 +1,6 @@
 import {
   DragEvent,
+  memo,
   MouseEvent,
   TouchEvent,
   useCallback,
@@ -17,6 +18,9 @@ import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapToolbar } from './HuntingMapToolbar';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
+
+const HuntingMapMarkerAnimalMemo = memo(HuntingMapMarkerAnimal);
+const HuntingMapMarkerGenericMemo = memo(HuntingMapMarkerGeneric);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
@@ -68,7 +72,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const markerListAnimals = useMemo(
     () =>
       getVisibleMarkers(animalMarkers, markerFilter).map((marker, index) => (
-        <HuntingMapMarkerAnimal
+        <HuntingMapMarkerAnimalMemo
           key={index}
           mapScale={options.mapScale}
           marker={marker}
@@ -83,7 +87,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const markerListGeneric = useMemo(
     () =>
       getVisibleMarkers(genericMarkers, markerFilter).map((marker, index) => (
-        <HuntingMapMarkerGeneric
+        <HuntingMapMarkerGenericMemo
           key={index}
           mapScale={options.mapScale}
           marker={marker}

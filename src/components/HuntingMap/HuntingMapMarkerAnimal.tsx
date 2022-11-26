@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
@@ -39,49 +39,56 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
    *
    * @param markers List of need zone markers to render
    */
-  const renderZones = (markers: Array<MarkerOptions>) => (
-    <>
-      {markers.map(marker => (
-        <HuntingMapMarkerGeneric
-          key={getMarkerKey(marker)}
-          mapScale={mapScale}
-          marker={marker}
-          markerVisibilityMap={markerVisibilityMap}
-          maxMarkerSize={maxMarkerSize * 1.2}
-          visible={zonesVisible}
-        />
-      ))}
-    </>
+  const renderZones = useCallback(
+    (markers: Array<MarkerOptions>) => (
+      <>
+        {markers.map(marker => (
+          <HuntingMapMarkerGeneric
+            key={getMarkerKey(marker)}
+            mapScale={mapScale}
+            marker={marker}
+            markerVisibilityMap={markerVisibilityMap}
+            maxMarkerSize={maxMarkerSize * 1.2}
+            visible={zonesVisible}
+          />
+        ))}
+      </>
+    ),
+    [mapScale, markerVisibilityMap, maxMarkerSize, zonesVisible],
   );
 
-  /**
-   * Render drink need zones
-   */
-  const renderDrinkZones = () => renderZones(marker.drink);
+  // Drink need zones
+  const drinkZones = useMemo(
+    () => renderZones(marker.drink),
+    [marker.drink, renderZones],
+  );
 
-  /**
-   * Render eat need zones
-   */
-  const renderEatZones = () => renderZones(marker.eat);
+  // Eat need zones
+  const eatZones = useMemo(
+    () => renderZones(marker.eat),
+    [marker.eat, renderZones],
+  );
 
-  /**
-   * Render sleep need zones
-   */
-  const renderSleepZones = () => renderZones(marker.sleep);
+  // Sleep need zones
+  const sleepZones = useMemo(
+    () => renderZones(marker.sleep),
+    [marker.sleep, renderZones],
+  );
 
-  /**
-   * Render main animal icon
-   */
-  const renderTrigger = () => (
-    <HuntingMapMarkerGeneric
-      className={styles.HuntingMapMarkerAnimal}
-      mapScale={mapScale}
-      marker={marker}
-      markerVisibilityMap={markerVisibilityMap}
-      maxMarkerSize={70}
-      ref={triggerRef}
-      onClick={handleTriggerClick}
-    />
+  // Main animal icon
+  const trigger = useMemo(
+    () => (
+      <HuntingMapMarkerGeneric
+        className={styles.HuntingMapMarkerAnimal}
+        mapScale={mapScale}
+        marker={marker}
+        markerVisibilityMap={markerVisibilityMap}
+        maxMarkerSize={70}
+        ref={triggerRef}
+        onClick={handleTriggerClick}
+      />
+    ),
+    [handleTriggerClick, mapScale, marker, markerVisibilityMap],
   );
 
   // Monitor clicks outside the current marker and hide zones when needed
@@ -95,10 +102,10 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
 
   return (
     <>
-      {renderTrigger()}
-      {renderDrinkZones()}
-      {renderEatZones()}
-      {renderSleepZones()}
+      {trigger}
+      {drinkZones}
+      {eatZones}
+      {sleepZones}
     </>
   );
 };
