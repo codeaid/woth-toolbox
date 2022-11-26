@@ -1,6 +1,6 @@
+import { AnimalType } from 'types/animals';
 import {
   AnimalMarkerOptions,
-  AnimalMarkerType,
   MarkerOptions,
   MarkerPosition,
   MarkerType,
@@ -16,7 +16,7 @@ import {
  * @param sleepZones List of sleep zone coordinates
  */
 export const createAnimalMarker = (
-  type: AnimalMarkerType,
+  type: AnimalType,
   coords: MarkerPosition,
   drinkZones: Array<MarkerPosition>,
   eatZones: Array<MarkerPosition>,
