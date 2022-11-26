@@ -10,7 +10,7 @@ import {
 } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { getVisibleMarkers, isGenericMarker } from 'lib/markers';
+import { getVisibleMarkers } from 'lib/markers';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
@@ -66,17 +66,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // List of generic map marker elements
   const markerListGeneric = useMemo(
     () =>
-      getVisibleMarkers(genericMarkers, markerFilter)
-        .filter(isGenericMarker)
-        .map((marker, index) => (
-          <HuntingMapMarkerGeneric
-            key={index}
-            mapScale={options.mapScale}
-            marker={marker}
-            markerVisibilityMap={markerVisibilityMap}
-            maxMarkerSize={maxMarkerSize}
-          />
-        )),
+      getVisibleMarkers(genericMarkers, markerFilter).map((marker, index) => (
+        <HuntingMapMarkerGeneric
+          key={index}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerVisibilityMap={markerVisibilityMap}
+          maxMarkerSize={maxMarkerSize}
+        />
+      )),
     [genericMarkers, markerFilter, markerVisibilityMap, maxMarkerSize, options],
   );
 

@@ -35,26 +35,6 @@ export const getVisibleMarkers = (
   );
 
 /**
- * Check if the specified marker is a generic marker
- *
- * @param marker Source marker options
- */
-export const isGenericMarker = (marker: MarkerOptions) =>
-  (
-    [
-      'cabin',
-      'cabin:undiscovered',
-      'camp',
-      'echo',
-      'hunting stand',
-      'lodge',
-      'photo',
-      'shooting range',
-      'view',
-    ] as Array<MarkerType>
-  ).includes(marker.type);
-
-/**
  * Determine if a marker is visible at the current map scale
  *
  * @param mapScale Current map scale (zoom)
