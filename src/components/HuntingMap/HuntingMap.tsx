@@ -14,6 +14,7 @@ import { LoadingOverlay } from 'components/LoadingOverlay';
 import { getVisibleMarkers } from 'lib/markers';
 import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
+import { HuntingMapToolbar } from './HuntingMapToolbar';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
@@ -476,29 +477,17 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Render zoom in, out and reset buttons if enabled
    */
-  const renderButtons = () => {
+  const renderToolButtons = () => {
     if (!imageLoaded || !showButtons) {
       return null;
     }
 
     return (
-      <>
-        <button
-          className={styles.HuntingMapButton}
-          onClick={() => handleMapZoomIn()}
-        >
-          <RiZoomInLine />
-        </button>
-        <button
-          className={styles.HuntingMapButton}
-          onClick={() => handleMapZoomOut()}
-        >
-          <RiZoomOutLine />
-        </button>
-        <button className={styles.HuntingMapButton} onClick={handleReset}>
-          <RiArrowGoBackFill />
-        </button>
-      </>
+      <HuntingMapToolbar
+        onReset={handleReset}
+        onZoomIn={() => handleMapZoomIn()}
+        onZoomOut={() => handleMapZoomOut()}
+      />
     );
   };
 
@@ -550,7 +539,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onTouchStart={handleTouchStart}
         onWheel={handleWheel}
       >
-        {renderButtons()}
+        {renderToolButtons()}
 
         <div
           className={styles.HuntingMapContainer}

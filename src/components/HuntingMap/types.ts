@@ -2,6 +2,9 @@ import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
 type HuntingMapMarkerClickHandler = (marker: MarkerOptions) => void;
+type HuntingMapResetHandler = () => void;
+type HuntingMapZoomInHandler = () => void;
+type HuntingMapZoomOutHandler = () => void;
 
 export interface HuntingMapOffsets {
   pageX: number;
@@ -51,4 +54,10 @@ export interface HuntingMapProps {
   scaleIncrement?: number;
   showButtons?: boolean;
   onClick?: HuntingMapClickHandler;
+}
+
+export interface HuntingMapToolbarProps {
+  onReset: HuntingMapResetHandler;
+  onZoomIn: HuntingMapZoomInHandler;
+  onZoomOut: HuntingMapZoomOutHandler;
 }
