@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { Transition } from 'react-transition-group';
 import { Marker } from 'components/Marker';
 import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
 import { HuntingMapMarkerGenericProps } from './types';
@@ -12,8 +13,9 @@ export const HuntingMapMarkerGeneric = (
     className,
     mapScale,
     marker,
-    markerVisibilityMap = new Map(),
+    markerVisibilityMap,
     maxMarkerSize,
+    visible = true,
     onClick,
   } = props;
 
@@ -21,23 +23,11 @@ export const HuntingMapMarkerGeneric = (
   const { coords, type } = marker;
   const [left, top] = coords;
 
-  // Generate marker's class name
-  const classNames = useMemo(() => {
-    // Determine if marker is visible
-    const visible = isMarkerVisibleAtScale(
-      mapScale,
-      marker.type,
-      markerVisibilityMap,
-    );
-
-    return classnames(
-      styles.HuntingMapMarker,
-      {
-        [styles.HuntingMapMarkerInvisible]: !visible,
-      },
-      className,
-    );
-  }, [className, mapScale, marker, markerVisibilityMap]);
+  // Check if the marker is visible at the current scale
+  const visibleAtScale = useMemo(
+    () => isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
+    [mapScale, marker, markerVisibilityMap],
+  );
 
   // Calculate marker size at the current map scale
   const size = useMemo(
@@ -48,25 +38,39 @@ export const HuntingMapMarkerGeneric = (
   /**
    * Handle clicking on the marker
    */
-  const handleClick = useCallback(() => {
-    if (!onClick) {
-      return;
-    }
-
-    onClick(marker);
-  }, [marker, onClick]);
+  const handleClick = useCallback(
+    () => onClick && onClick(marker),
+    [marker, onClick],
+  );
 
   return (
-    <Marker
-      className={classNames}
-      size={size}
-      style={{
-        left: `calc(${left * 100}% - ${size / 2}px)`,
-        top: `calc(${top * 100}% - ${size / 2}px)`,
-      }}
-      title={`${left} ... ${top}`}
-      type={type}
-      onClick={handleClick}
-    />
+    <Transition
+      in={visible && visibleAtScale}
+      mountOnEnter={true}
+      timeout={150}
+      unmountOnExit={true}
+    >
+      {state => (
+        <Marker
+          className={classnames(
+            styles.HuntingMapMarker,
+            {
+              [styles.HuntingMapMarkerStateEntering]: state === 'entering',
+              [styles.HuntingMapMarkerStateEntered]: state === 'entered',
+              [styles.HuntingMapMarkerStateExiting]: state === 'exiting',
+              [styles.HuntingMapMarkerStateExited]: state === 'exited',
+            },
+            className,
+          )}
+          size={size}
+          style={{
+            left: `calc(${left * 100}% - ${size / 2}px)`,
+            top: `calc(${top * 100}% - ${size / 2}px)`,
+          }}
+          type={type}
+          onClick={handleClick}
+        />
+      )}
+    </Transition>
   );
 };

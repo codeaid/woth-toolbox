@@ -1,7 +1,7 @@
 .HuntingMapMarker {
-  filter: unset;
   opacity: 1;
   position: absolute;
+  transform: scale(0);
   transition: opacity 150ms linear, transform 150ms linear;
   z-index: 1;
 }
@@ -11,7 +11,24 @@
   z-index: 2;
 }
 
-.HuntingMapMarkerInvisible {
-  opacity: 0;
+.HuntingMapMarkerAnimal {
+  cursor: pointer;
+}
+
+.HuntingMapMarkerStateEntering {
+  opacity: 1;
   transform: scale(0);
+}
+
+.HuntingMapMarkerStateEntered {
+  opacity: 1;
+  transform: scale(1);
+
+}
+.HuntingMapMarkerStateExiting {
+  opacity: 0;
+}
+
+.HuntingMapMarkerStateExited {
+  opacity: 0;
 }

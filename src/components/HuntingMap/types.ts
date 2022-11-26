@@ -14,8 +14,9 @@ export interface HuntingMapMarkerGenericProps {
   className?: string;
   mapScale: number;
   marker: MarkerOptions;
-  markerVisibilityMap?: Map<MarkerType, number>;
+  markerVisibilityMap: Map<MarkerType, number>;
   maxMarkerSize: number;
+  visible?: boolean;
   onClick?: HuntingMapMarkerClickHandler;
 }
 
