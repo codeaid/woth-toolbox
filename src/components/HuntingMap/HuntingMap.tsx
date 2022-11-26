@@ -12,12 +12,14 @@ import {
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { getVisibleMarkers } from 'lib/markers';
+import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
+    animalMarkers = [],
     defaultScale = 0.25,
     genericMarkers = [],
     imageHeight,
@@ -60,6 +62,21 @@ export const HuntingMap = (props: HuntingMapProps) => {
     mapTop: 0,
     mapWidth: imageWidth * defaultScale,
   });
+
+  // List of animal map marker elements
+  const markerListAnimals = useMemo(
+    () =>
+      getVisibleMarkers(animalMarkers, markerFilter).map((marker, index) => (
+        <HuntingMapMarkerAnimal
+          key={index}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerVisibilityMap={markerVisibilityMap}
+          maxMarkerSize={maxMarkerSize}
+        />
+      )),
+    [animalMarkers, markerFilter, markerVisibilityMap, maxMarkerSize, options],
+  );
 
   // List of generic map marker elements
   const markerListGeneric = useMemo(
@@ -544,6 +561,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
             width: `${options.mapWidth}px`,
           }}
         >
+          {imageLoaded && markerListAnimals}
           {imageLoaded && markerListGeneric}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
