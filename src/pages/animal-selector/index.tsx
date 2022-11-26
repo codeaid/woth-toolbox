@@ -23,7 +23,7 @@ const AnimalSelectorPage = () => {
 
   // Find weapon specified in the URL parameter
   const selectedWeapon = useMemo(
-    () => weapons.find(w => w.id === weaponId),
+    () => weapons.find(w => w.slug === weaponId),
     [weaponId],
   );
 
@@ -50,7 +50,7 @@ const AnimalSelectorPage = () => {
    */
   const handleWeaponClick = useCallback(
     (weapon: Weapon) =>
-      router.push(`/animal-selector?weapon=${encodeURIComponent(weapon.id)}`),
+      router.push(`/animal-selector?weapon=${encodeURIComponent(weapon.slug)}`),
     [router],
   );
 

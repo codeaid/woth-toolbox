@@ -13,9 +13,9 @@ export const AnimalListGroup = (props: AnimalListGroupProps) => {
 
       {group.entities.map(animal => (
         <AnimalListItem
-          active={animal.id === selected?.id}
+          active={animal.slug === selected?.slug}
           animal={animal}
-          key={animal.id}
+          key={animal.slug}
           onClick={onAnimalClick}
         />
       ))}

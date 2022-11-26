@@ -22,7 +22,7 @@ export const PivotTableRows = <
       {entities.map(entity => (
         <PivotTableRow
           entity={entity}
-          key={entity.id}
+          key={entity.slug}
           pivot={pivot}
           onGetWeaponHitEnergy={onGetWeaponHitEnergy}
           onGetWeaponOptimal={onGetWeaponOptimal}

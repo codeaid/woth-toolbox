@@ -63,7 +63,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
         return (
           <AnimalActivityGridIcon
             intermediate={true}
-            key={`${animal.id}:${hour}:icon`}
+            key={`${animal.slug}:${hour}:icon`}
             title={`${formatHour(hour)} - ${getActivityDescription(
               currentActivity.activity,
             )}`}
@@ -77,7 +77,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
 
     return (
       <AnimalActivityGridIcon
-        key={`${animal.id}:${hour}:icon`}
+        key={`${animal.slug}:${hour}:icon`}
         title={`${formatHour(hour)} - ${getActivityDescription(
           hourActivity.activity,
         )}`}
@@ -95,7 +95,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
     <div
       className={styles.AnimalActivityGridRowSlot}
       data-hour={hour}
-      key={`${animal.id}:${hour}`}
+      key={`${animal.slug}:${hour}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

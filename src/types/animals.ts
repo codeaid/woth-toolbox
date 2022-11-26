@@ -1,10 +1,10 @@
 export interface Animal {
   description: string;
   hitEnergy: [number, number];
-  id: string;
   latin: string;
   lifeCycle: Array<AnimalActivityValue>;
   name: string;
+  slug: string;
   tier: number;
 }
 

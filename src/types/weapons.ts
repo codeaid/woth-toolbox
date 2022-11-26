@@ -10,7 +10,7 @@ export interface Weapon {
   calibre: string;
   description: string;
   hitEnergy: [number, number, number, number, number]; // 50m, 100m, 150m, 200m, 300m
-  id: string;
+  slug: string;
   model: string;
   tier: number;
 }
