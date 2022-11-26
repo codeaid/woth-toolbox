@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { Marker } from 'components/Marker';
 import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
@@ -22,6 +22,9 @@ export const HuntingMapMarkerGeneric = (
   // Extract marker details
   const { coords, type } = marker;
   const [left, top] = coords;
+
+  // Reference to marker's image element
+  const markerRef = useRef<HTMLImageElement>(null);
 
   // Check if the marker is visible at the current scale
   const visibleAtScale = useMemo(
@@ -47,6 +50,7 @@ export const HuntingMapMarkerGeneric = (
     <Transition
       in={visible && visibleAtScale}
       mountOnEnter={true}
+      nodeRef={markerRef}
       timeout={150}
       unmountOnExit={true}
     >
@@ -62,6 +66,7 @@ export const HuntingMapMarkerGeneric = (
             },
             className,
           )}
+          ref={markerRef}
           size={size}
           style={{
             left: `calc(${left * 100}% - ${size / 2}px)`,
