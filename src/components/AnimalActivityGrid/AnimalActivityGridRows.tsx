@@ -8,7 +8,7 @@ export const AnimalActivityGridRows = (props: AnimalActivityGridRowsProps) => {
   return (
     <div className={styles.AnimalActivityGridRows}>
       {animals.map(animal => (
-        <AnimalActivityGridRow animal={animal} key={animal.slug} />
+        <AnimalActivityGridRow animal={animal} key={animal.type} />
       ))}
     </div>
   );

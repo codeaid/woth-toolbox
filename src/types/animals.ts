@@ -6,6 +6,7 @@ export interface Animal {
   name: string;
   slug: string;
   tier: number;
+  type: AnimalType;
 }
 
 export enum AnimalActivity {

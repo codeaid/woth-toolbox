@@ -18,6 +18,7 @@ export const animals: Array<Animal> = [
     name: 'European Hare',
     slug: 'european-hare',
     tier: 1,
+    type: 'animal:european hare',
   },
 
   // Tier 3
@@ -37,6 +38,7 @@ export const animals: Array<Animal> = [
     name: 'American Badger',
     slug: 'american-badger',
     tier: 3,
+    type: 'animal:american badger',
   },
   {
     description:
@@ -54,6 +56,7 @@ export const animals: Array<Animal> = [
     name: 'Eurasian Badger',
     slug: 'eurasian-badger',
     tier: 3,
+    type: 'animal:eurasian badger',
   },
   {
     description:
@@ -71,6 +74,7 @@ export const animals: Array<Animal> = [
     name: 'Red Fox',
     slug: 'red-fox',
     tier: 3,
+    type: 'animal:red fox',
   },
 
   // Tier 4
@@ -90,6 +94,7 @@ export const animals: Array<Animal> = [
     name: 'Roe Deer',
     slug: 'roe-deer',
     tier: 4,
+    type: 'animal:roe deer',
   },
 
   // Tier 5
@@ -109,6 +114,7 @@ export const animals: Array<Animal> = [
     name: 'Bighorn Sheep',
     slug: 'bighorn-sheep',
     tier: 5,
+    type: 'animal:bighorn sheep',
   },
   {
     description:
@@ -126,6 +132,7 @@ export const animals: Array<Animal> = [
     name: 'Chamois',
     slug: 'chamois',
     tier: 5,
+    type: 'animal:chamois',
   },
   {
     description:
@@ -143,6 +150,7 @@ export const animals: Array<Animal> = [
     name: 'Fallow Deer',
     slug: 'fallow-deer',
     tier: 5,
+    type: 'animal:fallow deer',
   },
   {
     description:
@@ -160,6 +168,7 @@ export const animals: Array<Animal> = [
     name: 'Gray Wolf',
     slug: 'gray-wolf',
     tier: 5,
+    type: 'animal:gray wolf',
   },
   {
     description:
@@ -177,6 +186,7 @@ export const animals: Array<Animal> = [
     name: 'Mouflon',
     slug: 'mouflon',
     tier: 5,
+    type: 'animal:mouflon',
   },
   {
     description:
@@ -194,6 +204,7 @@ export const animals: Array<Animal> = [
     name: 'Mountain Goat',
     slug: 'mountain-goat',
     tier: 5,
+    type: 'animal:mountain goat',
   },
   {
     description:
@@ -211,6 +222,7 @@ export const animals: Array<Animal> = [
     name: 'Mule Deer',
     slug: 'mule-deer',
     tier: 5,
+    type: 'animal:mule deer',
   },
   {
     description:
@@ -228,6 +240,7 @@ export const animals: Array<Animal> = [
     name: 'White-Tailed Deer',
     slug: 'white-tailed-deer',
     tier: 5,
+    type: 'animal:white-tailed deer',
   },
   {
     description:
@@ -245,6 +258,7 @@ export const animals: Array<Animal> = [
     name: 'Wild Boar',
     slug: 'wild-boar',
     tier: 5,
+    type: 'animal:wild boar',
   },
 
   // Tier 6
@@ -264,6 +278,7 @@ export const animals: Array<Animal> = [
     name: 'American Black Bear',
     slug: 'american-black-bear',
     tier: 6,
+    type: 'animal:american black bear',
   },
   {
     description:
@@ -281,6 +296,7 @@ export const animals: Array<Animal> = [
     name: 'Brown Bear',
     slug: 'brown-bear',
     tier: 6,
+    type: 'animal:brown bear',
   },
   {
     description:
@@ -298,6 +314,7 @@ export const animals: Array<Animal> = [
     name: 'Elk',
     slug: 'elk',
     tier: 6,
+    type: 'animal:elk',
   },
   {
     description:
@@ -315,6 +332,7 @@ export const animals: Array<Animal> = [
     name: 'Moose',
     slug: 'moose',
     tier: 6,
+    type: 'animal:moose',
   },
   {
     description:
@@ -332,5 +350,6 @@ export const animals: Array<Animal> = [
     name: 'Red Deer',
     slug: 'red-deer',
     tier: 6,
+    type: 'animal:red deer',
   },
 ];
