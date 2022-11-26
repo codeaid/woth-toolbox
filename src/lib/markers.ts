@@ -61,20 +61,6 @@ export const getMarkerSize = (mapScale: number, maxMarkerSize: number) =>
   Math.min(maxMarkerSize, 100 * mapScale);
 
 /**
- * Get list of visible marker options
- *
- * @param markers Source list of markers
- * @param visibleTypes List of visible marker types
- */
-export const getVisibleMarkers = <TMarkerOptions extends MarkerOptions>(
-  markers: Array<TMarkerOptions>,
-  visibleTypes: Array<MarkerType>,
-) =>
-  markers.filter(
-    marker => !visibleTypes.length || visibleTypes.includes(marker.type),
-  );
-
-/**
  * Determine if a marker is visible at the current map scale
  *
  * @param mapScale Current map scale (zoom)

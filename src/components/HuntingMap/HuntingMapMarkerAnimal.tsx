@@ -1,19 +1,31 @@
 import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { getMarkerKey } from 'lib/markers';
+import { getMarkerKey, isMarkerVisibleAtScale } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapMarkerAnimalProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
 export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
-  const { mapScale, marker, markerVisibilityMap, maxMarkerSize } = props;
+  const {
+    mapScale,
+    marker,
+    markerFilter = [],
+    markerVisibilityMap,
+    maxMarkerSize,
+  } = props;
 
   // Flag indicating whether the need zone icons are visible or not
   const [zonesVisible, setZonesVisible] = useState(false);
 
   // Reference to the trigger element (animal icon)
   const triggerRef = useRef<HTMLImageElement>(null);
+
+  // Determine if marker is visible
+  const markerVisible = useMemo(
+    () => isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
+    [mapScale, marker.type, markerVisibilityMap],
+  );
 
   /**
    * Handle clicking on the trigger icon
@@ -50,12 +62,12 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
             marker={marker}
             markerVisibilityMap={markerVisibilityMap}
             maxMarkerSize={maxMarkerSize * 1.2}
-            visible={zonesVisible}
+            visible={markerVisible && zonesVisible}
           />
         ))}
       </>
     ),
-    [mapScale, markerVisibilityMap, maxMarkerSize, zonesVisible],
+    [mapScale, markerVisibilityMap, markerVisible, maxMarkerSize, zonesVisible],
   );
 
   // Drink need zones
@@ -86,13 +98,21 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
         highlighted={zonesVisible}
         mapScale={mapScale}
         marker={marker}
+        markerFilter={markerFilter}
         markerVisibilityMap={markerVisibilityMap}
         maxMarkerSize={70}
         ref={triggerRef}
         onClick={handleTriggerClick}
       />
     ),
-    [handleTriggerClick, mapScale, marker, markerVisibilityMap, zonesVisible],
+    [
+      handleTriggerClick,
+      mapScale,
+      marker,
+      markerFilter,
+      markerVisibilityMap,
+      zonesVisible,
+    ],
   );
 
   // Monitor clicks outside the current marker and hide zones when needed

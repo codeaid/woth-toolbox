@@ -16,6 +16,7 @@ export interface HuntingMapOffsets {
 export interface HuntingMapMarkerAnimalProps {
   mapScale: number;
   marker: AnimalMarkerOptions;
+  markerFilter?: Array<MarkerType>;
   markerVisibilityMap: Map<MarkerType, number>;
   maxMarkerSize: number;
 }
@@ -25,6 +26,7 @@ export interface HuntingMapMarkerGenericProps {
   highlighted?: boolean;
   mapScale: number;
   marker: MarkerOptions;
+  markerFilter?: Array<MarkerType>;
   markerVisibilityMap: Map<MarkerType, number>;
   maxMarkerSize: number;
   visible?: boolean;

@@ -17,6 +17,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
       highlighted,
       mapScale,
       marker,
+      markerFilter = [],
       markerVisibilityMap,
       maxMarkerSize,
       visible = true,
@@ -30,14 +31,17 @@ export const HuntingMapMarkerGeneric = forwardRef(
     // Reference to marker's image element
     const markerRef = useRef<HTMLImageElement>(null);
 
+    // Determine if marker is visible
+    const markerVisible = useMemo(
+      () =>
+        visible &&
+        (!markerFilter.length || markerFilter.includes(marker.type)) &&
+        isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
+      [mapScale, marker.type, markerFilter, markerVisibilityMap, visible],
+    );
+
     // Container reference wrapping around outer an inner refs
     const [, setInnerRef] = useRefCallback<HTMLImageElement>(markerRef, ref);
-
-    // Check if the marker is visible at the current scale
-    const visibleAtScale = useMemo(
-      () => isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
-      [mapScale, marker, markerVisibilityMap],
-    );
 
     // Calculate marker size at the current map scale
     const size = useMemo(
@@ -55,7 +59,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
 
     return (
       <Transition
-        in={visible && visibleAtScale}
+        in={markerVisible}
         mountOnEnter={true}
         nodeRef={markerRef}
         timeout={150}
