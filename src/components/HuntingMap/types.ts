@@ -1,4 +1,4 @@
-import { MarkerOptions, MarkerType } from 'types/markers';
+import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
 type HuntingMapMarkerClickHandler = (marker: MarkerOptions) => void;
@@ -8,6 +8,13 @@ export interface HuntingMapOffsets {
   pageY: number;
   translateX: number;
   translateY: number;
+}
+
+export interface HuntingMapMarkerAnimalProps {
+  mapScale: number;
+  marker: AnimalMarkerOptions;
+  markerVisibilityMap: Map<MarkerType, number>;
+  maxMarkerSize: number;
 }
 
 export interface HuntingMapMarkerGenericProps {
@@ -29,6 +36,7 @@ export interface HuntingMapOptions {
 }
 
 export interface HuntingMapProps {
+  animalMarkers?: Array<AnimalMarkerOptions>;
   defaultScale?: number;
   genericMarkers?: Array<MarkerOptions>;
   imageHeight: number;
