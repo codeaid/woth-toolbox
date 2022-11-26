@@ -7,10 +7,10 @@ import {
   shootingRangeMarkers,
   viewMarkers,
 } from 'config/idaho';
-import { MarkerOptions } from 'types/markers';
+import { GenericMarkerType, MarkerOptions } from 'types/markers';
 
 // List of generic markers to show on the Nex Perce map
-export const genericMarkers: Array<MarkerOptions> = [
+export const genericMarkers: Array<MarkerOptions<GenericMarkerType>> = [
   cabinMarkers,
   campMarkers,
   echoMarkers,
