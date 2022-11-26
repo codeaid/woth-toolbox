@@ -52,3 +52,9 @@ export interface MarkerOptions<TMarkerType = MarkerType> {
   coords: MarkerPosition;
   type: TMarkerType;
 }
+
+export interface AnimalMarkerOptions extends MarkerOptions<AnimalMarkerType> {
+  drink: Array<MarkerOptions<'zone:drink'>>;
+  eat: Array<MarkerOptions<'zone:eat'>>;
+  sleep: Array<MarkerOptions<'zone:sleep'>>;
+}
