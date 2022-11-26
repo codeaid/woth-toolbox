@@ -6,10 +6,11 @@ import { MarkerOptions, MarkerPosition, MarkerType } from 'types/markers';
  * @param type Target marker type
  * @param positions Source list of marker positions
  */
-export const createMarkerOptions = (
-  type: MarkerType,
+export const createMarkerOptions = <TMarkerType extends MarkerType>(
+  type: TMarkerType,
   positions: Array<MarkerPosition>,
-): Array<MarkerOptions> => positions.map(coords => ({ coords, type }));
+): Array<MarkerOptions<TMarkerType>> =>
+  positions.map(coords => ({ coords, type }));
 
 /**
  * Calculate marker size at the current map scale
@@ -26,8 +27,8 @@ export const getMarkerSize = (mapScale: number, maxMarkerSize: number) =>
  * @param markers Source list of markers
  * @param visibleTypes List of visible marker types
  */
-export const getVisibleMarkers = (
-  markers: Array<MarkerOptions>,
+export const getVisibleMarkers = <TMarkerOptions extends MarkerOptions>(
+  markers: Array<TMarkerOptions>,
   visibleTypes: Array<MarkerType>,
 ) =>
   markers.filter(
