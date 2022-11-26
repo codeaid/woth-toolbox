@@ -4,6 +4,22 @@ import { MarkerType } from 'types/markers';
 export const mapHeight = 4096;
 export const mapWidth = 4096;
 
+// List of marker types that are available on the map
+export const enabledTypes: Array<MarkerType> = [
+  'animal:american badger',
+  'animal:bighorn sheep',
+  'animal:gray wolf',
+  'animal:moose',
+  'animal:mountain goat',
+  'cabin',
+  'camp',
+  'echo',
+  'hunting stand',
+  'lodge',
+  'shooting range',
+  'view',
+];
+
 // Map of marker types and their maximum map scale visibility
 export const markerVisibilityMap = new Map<MarkerType, number>([
   ['animal:american badger', 0.65],
