@@ -14,6 +14,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
   ) => {
     const {
       className,
+      highlighted,
       mapScale,
       marker,
       markerVisibilityMap,
@@ -29,6 +30,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
     // Reference to marker's image element
     const markerRef = useRef<HTMLImageElement>(null);
 
+    // Container reference wrapping around outer an inner refs
     const [, setInnerRef] = useRefCallback<HTMLImageElement>(markerRef, ref);
 
     // Check if the marker is visible at the current scale
@@ -71,6 +73,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
               },
               className,
             )}
+            highlighted={highlighted}
             ref={setInnerRef}
             size={size}
             style={{

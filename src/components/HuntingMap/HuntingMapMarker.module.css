@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.HuntingMapMarkerAnimalActive {
+  transform: scale(1.2) !important;
+}
+
 .HuntingMapMarkerStateEntering {
   opacity: 1;
   transform: scale(0);

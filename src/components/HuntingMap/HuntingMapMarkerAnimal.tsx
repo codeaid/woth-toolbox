@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
@@ -79,7 +80,10 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
   const trigger = useMemo(
     () => (
       <HuntingMapMarkerGeneric
-        className={styles.HuntingMapMarkerAnimal}
+        className={classnames(styles.HuntingMapMarkerAnimal, {
+          [styles.HuntingMapMarkerAnimalActive]: zonesVisible,
+        })}
+        highlighted={zonesVisible}
         mapScale={mapScale}
         marker={marker}
         markerVisibilityMap={markerVisibilityMap}
@@ -88,7 +92,7 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
         onClick={handleTriggerClick}
       />
     ),
-    [handleTriggerClick, mapScale, marker, markerVisibilityMap],
+    [handleTriggerClick, mapScale, marker, markerVisibilityMap, zonesVisible],
   );
 
   // Monitor clicks outside the current marker and hide zones when needed

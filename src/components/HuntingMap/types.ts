@@ -22,6 +22,7 @@ export interface HuntingMapMarkerAnimalProps {
 
 export interface HuntingMapMarkerGenericProps {
   className?: string;
+  highlighted?: boolean;
   mapScale: number;
   marker: MarkerOptions;
   markerVisibilityMap: Map<MarkerType, number>;
