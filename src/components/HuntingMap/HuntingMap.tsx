@@ -1,4 +1,5 @@
 import {
+  DragEvent,
   MouseEvent,
   TouchEvent,
   useCallback,
@@ -34,11 +35,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
   } = props;
 
   // References to internal elements
-  const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-
-  // Variable holding mouse offset on mousedown on the image
-  const imageMouseDownOffset = useRef<[number, number]>([0, 0]);
+  const ref = useRef<HTMLDivElement>(null);
 
   // Flag indicating whether the map is currently being dragged
   const isDragging = useRef(false);
@@ -83,6 +81,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param x Horizontal offset
    * @param y Vertical offset
+   * @param targetWidth Custom map width override
+   * @param targetHeight Custom map height override
    */
   const getBoundMapCoords = useCallback(
     (
@@ -92,7 +92,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       targetHeight?: number,
     ): [number, number] => {
       // Ensure container element has been initialized
-      const containerElement = containerRef.current;
+      const containerElement = ref.current;
       if (!containerElement) {
         return [x, y];
       }
@@ -127,12 +127,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Get map offset coordinates for a centered position
    *
-   * @param targetWidth Custom width to use when calculating offsets
-   * @param targetHeight Custom height to use when calculating offsets
+   * @param targetWidth Custom map width to use when calculating offsets
+   * @param targetHeight Custom map height to use when calculating offsets
    */
   const getCenteredMapCoords = useCallback(
     (targetWidth?: number, targetHeight?: number): [number, number] => {
-      const containerElement = containerRef.current;
+      const containerElement = ref.current;
 
       // Ensure container element is initialised before proceeding
       if (!containerElement) {
@@ -156,18 +156,18 @@ export const HuntingMap = (props: HuntingMapProps) => {
   );
 
   /**
+   * Handle map image having been fully loaded
+   */
+  const handleImageLoaded = useCallback(() => setImageLoaded(true), []);
+
+  /**
    * Handle the start of map being dragged
    *
    * @param pageX Current horizontal pointer position in relation to the page
    * @param pageY Current vertical pointer position in relation to the page
-   * @param event Target mouse or touch event that was triggered
    */
-  const handleDragStart = useCallback(
-    (
-      pageX: number,
-      pageY: number,
-      event: MouseEvent<EventTarget> | TouchEvent<EventTarget>,
-    ) => {
+  const handleMapDragStart = useCallback(
+    (pageX: number, pageY: number) => {
       // Extract current map position offsets
       const { mapLeft, mapTop } = options;
 
@@ -182,11 +182,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       // Enable drag functionality
       isDragging.current = true;
-
-      // Cancel events to prevent further logic from being executed
-      event.preventDefault();
-      event.stopPropagation();
-      event.nativeEvent.stopPropagation();
     },
     [options],
   );
@@ -197,16 +192,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param pageX Current horizontal pointer position in relation to the page
    * @param pageY Current vertical pointer position in relation to the page
    */
-  const handleDragProgress = useCallback(
+  const handleMapDrag = useCallback(
     (pageX: number, pageY: number) => {
       // Ensure map is being dragged
-      if (!isDragging.current) {
-        return;
-      }
-
-      // Ensure container element has been initialized
-      const containerElement = containerRef.current;
-      if (!containerElement) {
+      if (!isDragging.current || (pageX === 0 && pageY === 0)) {
         return;
       }
 
@@ -234,15 +223,18 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Handle the end of map being dragged
    */
-  const handleDragEnd = useCallback(() => {
+  const handleMapDragCancel = useCallback(() => {
     // Disable drag functionality
     isDragging.current = false;
   }, []);
 
   /**
    * Handle map being zoomed in
+   *
+   * @param offsetX Custom vertical cursor offset to zoom the map into
+   * @param offsetY Custom horizontal cursor offset to zoom the map into
    */
-  const handleZoomIn = useCallback(
+  const handleMapZoomIn = useCallback(
     (offsetX?: number, offsetY?: number) =>
       setOptions(current => {
         const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
@@ -287,8 +279,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   /**
    * Handle map being zoomed out
+   *
+   * @param offsetX Custom vertical cursor offset to zoom the map out of
+   * @param offsetY Custom horizontal cursor offset to zoom the map out of
    */
-  const handleZoomOut = useCallback(
+  const handleMapZoomOut = useCallback(
     (offsetX?: number, offsetY?: number) =>
       setOptions(current => {
         const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
@@ -332,45 +327,42 @@ export const HuntingMap = (props: HuntingMapProps) => {
   );
 
   /**
-   * Handle zoom in button being clicked
-   */
-  const handleButtonZoomInClick = useCallback(
-    () => handleZoomIn(),
-    [handleZoomIn],
-  );
-
-  /**
-   * Handle zoom out button being clicked
-   */
-  const handleButtonZoomOutClick = useCallback(
-    () => handleZoomOut(),
-    [handleZoomOut],
-  );
-
-  /**
-   * Handle initiating map being dragged using a mouse
+   * Handle the start of drag operation
    *
-   * @param event Mouse event
+   * @param event Drag event object
    */
-  const handleContainerMouseDown = useCallback(
-    (event: MouseEvent<EventTarget>) => {
-      const { pageX, pageY } = event;
-      handleDragStart(pageX, pageY, event);
-    },
-    [handleDragStart],
+  const handleDragStart = useCallback(
+    (event: DragEvent<EventTarget>) =>
+      handleMapDragStart(event.pageX, event.pageY),
+    [handleMapDragStart],
   );
 
   /**
-   * Handle mouse being moved while dragging the map
+   * Handle progress of drag operation
    *
-   * @param event Mouse event
+   * @param event Drag event object
    */
-  const handleContainerMouseMove = useCallback(
+  const handleDrag = useCallback(
+    (event: DragEvent<EventTarget>) => handleMapDrag(event.pageX, event.pageY),
+    [handleMapDrag],
+  );
+
+  /**
+   * Handle clicking on the map
+   */
+  const handleClick = useCallback(
     (event: MouseEvent<EventTarget>) => {
-      const { pageX, pageY } = event;
-      handleDragProgress(pageX, pageY);
+      // Ignore clicks on markers
+      if (!onClick || event.target !== imageRef.current) {
+        return;
+      }
+
+      const { offsetX, offsetY } = event.nativeEvent;
+      const { mapScale } = options;
+
+      onClick(Math.round(offsetX / mapScale), Math.round(offsetY / mapScale));
     },
-    [handleDragProgress],
+    [onClick, options],
   );
 
   /**
@@ -378,12 +370,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param event Touch event
    */
-  const handleContainerTouchStart = useCallback(
+  const handleTouchStart = useCallback(
     (event: TouchEvent<EventTarget>) => {
+      // Fix for touch enabled devices that fixes lag on drag start
+      event.stopPropagation();
+
       const { pageX, pageY } = event.touches[0];
-      handleDragStart(pageX, pageY, event);
+      handleMapDragStart(pageX, pageY);
     },
-    [handleDragStart],
+    [handleMapDragStart],
   );
 
   /**
@@ -391,12 +386,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param event Touch event
    */
-  const handleContainerTouchMove = useCallback(
+  const handleTouchMove = useCallback(
     (event: TouchEvent<EventTarget>) => {
       const { pageX, pageY } = event.touches[0];
-      handleDragProgress(pageX, pageY);
+      handleMapDrag(pageX, pageY);
     },
-    [handleDragProgress],
+    [handleMapDrag],
   );
 
   /**
@@ -404,7 +399,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param event Wheel event
    */
-  const handleContainerWheel = useCallback(
+  const handleWheel = useCallback(
     (event: WheelEvent<EventTarget>) => {
       // Determine if scroll wheel was used on the map image itself
       if (event.target !== imageRef.current) {
@@ -416,50 +411,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       // Scroll down = positive delta, scroll up = negative delta
       Math.sign(event.deltaY) < 0
-        ? handleZoomIn(offsetX, offsetY)
-        : handleZoomOut(offsetX, offsetY);
+        ? handleMapZoomIn(offsetX, offsetY)
+        : handleMapZoomOut(offsetX, offsetY);
     },
-    [handleZoomIn, handleZoomOut],
-  );
-
-  /**
-   * Handle map image having been fully loaded
-   */
-  const handleMapImageLoaded = useCallback(() => setImageLoaded(true), []);
-
-  /**
-   * Handle clicking on the map
-   */
-  const handleMapMouseDown = useCallback((event: MouseEvent<EventTarget>) => {
-    imageMouseDownOffset.current = [event.pageX, event.pageY];
-  }, []);
-
-  /**
-   * Handle clicking on the map
-   */
-  const handleMapMouseUp = useCallback(
-    (event: MouseEvent<EventTarget>) => {
-      event.preventDefault();
-
-      // Ignore clicks on markers
-      if (!onClick || event.target !== imageRef.current) {
-        return;
-      }
-
-      // Retrieve previous and current cursor offset in relation to the page
-      const { pageX, pageY } = event;
-      const [previousX, previousY] = imageMouseDownOffset.current;
-
-      // Only trigger the event if mouse was released at the same offset
-      // as it was pressed down (is a click without the map being dragged)
-      if (pageX === previousX && pageY === previousY) {
-        const { offsetX, offsetY } = event.nativeEvent;
-        const { mapScale } = options;
-
-        onClick(Math.round(offsetX / mapScale), Math.round(offsetY / mapScale));
-      }
-    },
-    [onClick, options],
+    [handleMapZoomIn, handleMapZoomOut],
   );
 
   /**
@@ -513,13 +468,13 @@ export const HuntingMap = (props: HuntingMapProps) => {
       <>
         <button
           className={styles.HuntingMapButton}
-          onClick={handleButtonZoomInClick}
+          onClick={() => handleMapZoomIn()}
         >
           <RiZoomInLine />
         </button>
         <button
           className={styles.HuntingMapButton}
-          onClick={handleButtonZoomOutClick}
+          onClick={() => handleMapZoomOut()}
         >
           <RiZoomOutLine />
         </button>
@@ -568,28 +523,26 @@ export const HuntingMap = (props: HuntingMapProps) => {
       {renderLoadingOverlay()}
       <div
         className={styles.HuntingMap}
-        ref={containerRef}
-        onMouseDown={handleContainerMouseDown}
-        onMouseLeave={handleDragEnd}
-        onMouseMove={handleContainerMouseMove}
-        onMouseUp={handleDragEnd}
-        onTouchEnd={handleDragEnd}
-        onTouchMove={handleContainerTouchMove}
-        onTouchStart={handleContainerTouchStart}
-        onWheel={handleContainerWheel}
+        ref={ref}
+        onClick={handleClick}
+        onDrag={handleDrag}
+        onDragEnd={handleMapDragCancel}
+        onDragStart={handleDragStart}
+        onTouchEnd={handleMapDragCancel}
+        onTouchMove={handleTouchMove}
+        onTouchStart={handleTouchStart}
+        onWheel={handleWheel}
       >
         {renderButtons()}
 
         <div
-          className={styles.HuntingMapImageWrapper}
+          className={styles.HuntingMapContainer}
           style={{
             height: `${options.mapHeight}px`,
             left: `${options.mapLeft}px`,
             top: `${options.mapTop}px`,
             width: `${options.mapWidth}px`,
           }}
-          onMouseDownCapture={handleMapMouseDown}
-          onMouseUpCapture={handleMapMouseUp}
         >
           {imageLoaded && markerListGeneric}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -600,7 +553,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
             ref={imageRef}
             src={imageSrc}
             width={options.mapWidth}
-            onLoad={handleMapImageLoaded}
+            onLoad={handleImageLoaded}
           />
         </div>
       </div>
