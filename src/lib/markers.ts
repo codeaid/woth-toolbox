@@ -75,3 +75,30 @@ export const isMarkerVisibleAtScale = (
   visibilityMap.has(type)
     ? mapScale >= (visibilityMap.get(type) ?? mapScale)
     : true;
+
+/**
+ * Check if a marker of the specified type is enabled based on a list of filters
+ *
+ * @param type Target marker type
+ * @param enabled List of enabled marker types
+ */
+export const isMarkerEnabled = (
+  type: MarkerType,
+  enabled?: Array<MarkerType>,
+) => {
+  // List of need zone markers that should always be enabled
+  const zoneMarkers: Array<MarkerType> = [
+    'zone:drink',
+    'zone:eat',
+    'zone:gather',
+    'zone:path',
+    'zone:sleep',
+  ];
+
+  return (
+    zoneMarkers.includes(type) ||
+    !enabled ||
+    !enabled.length ||
+    enabled.includes(type)
+  );
+};

@@ -1,0 +1,47 @@
+.HuntingMapFilter {
+  left: 0.5em;
+  margin-top: 0.5em;
+  position: absolute;
+  user-select: none;
+  z-index: 1000;
+}
+
+.HuntingMapFilterMenu {
+  background-color: var(--elevation1);
+  border-radius: 0.5em;
+  box-shadow: var(--shadow);
+  bottom: 0.5em;
+  color: var(--text-primary);
+  left: 0.5em;
+  list-style-type: none;
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 20em;
+  z-index: 100;
+}
+
+.HuntingMapFilterMenuItem {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 3.5em;
+  justify-content: space-between;
+  padding: 0 1em;
+  transition: background-color 100ms ease-in-out;
+  user-select: none;
+}
+
+.HuntingMapFilterMenuItem:hover {
+  background-color: var(--elevation4);
+}
+
+.HuntingMapFilterMenuItemLabel {
+  font-size: 1.2em;
+}
+
+.HuntingMapFilterMenuItemEnabled .HuntingMapFilterMenuItemLabel {
+  color: var(--brand);
+}

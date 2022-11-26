@@ -1,10 +1,28 @@
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
+type HuntingMapFilterValueChangeHandler = (
+  type: MarkerType,
+  selected: boolean,
+) => void;
+type HuntingMapFilterChangeHandler = (types: Array<MarkerType>) => void;
 type HuntingMapMarkerClickHandler = (marker: MarkerOptions) => void;
 type HuntingMapResetHandler = () => void;
 type HuntingMapZoomInHandler = () => void;
 type HuntingMapZoomOutHandler = () => void;
+
+export interface HuntingMapFilterProps {
+  enabledTypes?: Array<MarkerType>;
+  markerFilter: Array<MarkerType>;
+  onChange?: HuntingMapFilterChangeHandler;
+}
+
+export interface HuntingMapFilterItemProps {
+  children: string;
+  selected: boolean;
+  type: MarkerType;
+  onToggle: HuntingMapFilterValueChangeHandler;
+}
 
 export interface HuntingMapOffsets {
   pageX: number;
@@ -44,6 +62,7 @@ export interface HuntingMapOptions {
 export interface HuntingMapProps {
   animalMarkers?: Array<AnimalMarkerOptions>;
   defaultScale?: number;
+  enabledTypes?: Array<MarkerType>;
   genericMarkers?: Array<MarkerOptions>;
   imageHeight: number;
   imageSrc: string;
@@ -55,8 +74,8 @@ export interface HuntingMapProps {
   minOverflow?: number;
   minScale?: number;
   scaleIncrement?: number;
-  showButtons?: boolean;
   onClick?: HuntingMapClickHandler;
+  onFilterChange?: HuntingMapFilterChangeHandler;
 }
 
 export interface HuntingMapToolbarProps {

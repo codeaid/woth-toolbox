@@ -10,9 +10,9 @@ import {
   useState,
   WheelEvent,
 } from 'react';
-import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { getVisibleMarkers } from 'lib/markers';
+import { isMarkerEnabled } from 'lib/markers';
+import { HuntingMapFilter } from './HuntingMapFilter';
 import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapToolbar } from './HuntingMapToolbar';
@@ -26,6 +26,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkers = [],
     defaultScale = 0.25,
+    enabledTypes,
     genericMarkers = [],
     imageHeight,
     imageSrc,
@@ -37,8 +38,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
     minOverflow = 200,
     minScale = 0.2,
     scaleIncrement = 0.02,
-    showButtons = true,
     onClick,
+    onFilterChange,
   } = props;
 
   // References to internal elements
@@ -71,31 +72,51 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // List of animal map marker elements
   const markerListAnimals = useMemo(
     () =>
-      getVisibleMarkers(animalMarkers, markerFilter).map((marker, index) => (
-        <HuntingMapMarkerAnimalMemo
-          key={index}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerVisibilityMap={markerVisibilityMap}
-          maxMarkerSize={maxMarkerSize}
-        />
-      )),
-    [animalMarkers, markerFilter, markerVisibilityMap, maxMarkerSize, options],
+      animalMarkers
+        .filter(marker => isMarkerEnabled(marker.type, enabledTypes))
+        .map((marker, index) => (
+          <HuntingMapMarkerAnimalMemo
+            key={index}
+            mapScale={options.mapScale}
+            marker={marker}
+            markerFilter={markerFilter}
+            markerVisibilityMap={markerVisibilityMap}
+            maxMarkerSize={maxMarkerSize}
+          />
+        )),
+    [
+      animalMarkers,
+      enabledTypes,
+      markerFilter,
+      markerVisibilityMap,
+      maxMarkerSize,
+      options.mapScale,
+    ],
   );
 
   // List of generic map marker elements
   const markerListGeneric = useMemo(
     () =>
-      getVisibleMarkers(genericMarkers, markerFilter).map((marker, index) => (
-        <HuntingMapMarkerGenericMemo
-          key={index}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerVisibilityMap={markerVisibilityMap}
-          maxMarkerSize={maxMarkerSize}
-        />
-      )),
-    [genericMarkers, markerFilter, markerVisibilityMap, maxMarkerSize, options],
+      genericMarkers
+        .filter(marker => isMarkerEnabled(marker.type, enabledTypes))
+        .map((marker, index) => (
+          <HuntingMapMarkerGenericMemo
+            key={index}
+            mapScale={options.mapScale}
+            marker={marker}
+            markerFilter={markerFilter}
+            markerVisibilityMap={markerVisibilityMap}
+            maxMarkerSize={maxMarkerSize}
+          />
+        )),
+    [
+      enabledTypes,
+      genericMarkers,
+      markerFilter,
+      markerVisibilityMap,
+      maxMarkerSize,
+      options.mapScale,
+    ],
   );
 
   /**
@@ -397,6 +418,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
       // Fix for touch enabled devices that fixes lag on drag start
       event.stopPropagation();
 
+      // Determine if scroll wheel was used on the map image itself
+      if (event.target !== imageRef.current) {
+        return;
+      }
+
       const { pageX, pageY } = event.touches[0];
       handleMapDragStart(pageX, pageY);
     },
@@ -479,31 +505,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
   }, [getBoundMapCoords, options]);
 
   /**
-   * Render zoom in, out and reset buttons if enabled
-   */
-  const renderToolButtons = () => {
-    if (!imageLoaded || !showButtons) {
-      return null;
-    }
-
-    return (
-      <HuntingMapToolbar
-        onReset={handleReset}
-        onZoomIn={() => handleMapZoomIn()}
-        onZoomOut={() => handleMapZoomOut()}
-      />
-    );
-  };
-
-  /**
-   * Show notification while loading the map asset
-   */
-  const renderLoadingOverlay = () =>
-    imageLoaded ? null : (
-      <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
-    );
-
-  /**
    * Center map on component being mounted the first time
    */
   useEffect(() => {
@@ -530,7 +531,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   return (
     <>
-      {renderLoadingOverlay()}
+      {!imageLoaded && (
+        <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
+      )}
       <div
         className={styles.HuntingMap}
         ref={ref}
@@ -543,7 +546,16 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onTouchStart={handleTouchStart}
         onWheel={handleWheel}
       >
-        {renderToolButtons()}
+        <HuntingMapFilter
+          enabledTypes={enabledTypes}
+          markerFilter={markerFilter}
+          onChange={onFilterChange}
+        />
+        <HuntingMapToolbar
+          onReset={handleReset}
+          onZoomIn={() => handleMapZoomIn()}
+          onZoomOut={() => handleMapZoomOut()}
+        />
 
         <div
           className={styles.HuntingMapContainer}
