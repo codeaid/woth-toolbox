@@ -9,7 +9,7 @@ import { MarkerOptions, MarkerPosition, MarkerType } from 'types/markers';
 export const createMarkerOptions = (
   type: MarkerType,
   positions: Array<MarkerPosition>,
-): Array<MarkerOptions> => positions.map(pos => ({ pos, type }));
+): Array<MarkerOptions> => positions.map(coords => ({ coords, type }));
 
 /**
  * Calculate marker size at the current map scale
