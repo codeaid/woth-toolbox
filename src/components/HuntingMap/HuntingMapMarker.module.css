@@ -4,6 +4,7 @@
   transform: scale(0);
   transition: opacity 100ms linear, transform 100ms linear;
   z-index: 1;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
 
 .HuntingMapMarker:hover {
