@@ -441,7 +441,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
     (event: MouseEvent<EventTarget>) => {
       event.preventDefault();
 
-      if (!onClick) {
+      // Ignore clicks on markers
+      if (!onClick || event.target !== imageRef.current) {
         return;
       }
 
