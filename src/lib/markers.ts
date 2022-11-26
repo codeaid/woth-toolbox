@@ -1,4 +1,33 @@
-import { MarkerOptions, MarkerPosition, MarkerType } from 'types/markers';
+import {
+  AnimalMarkerOptions,
+  AnimalMarkerType,
+  MarkerOptions,
+  MarkerPosition,
+  MarkerType,
+} from 'types/markers';
+
+/**
+ * Create an animal marker from the supplied coordinates
+ *
+ * @param type Animal type
+ * @param coords Animal icon coordinates
+ * @param drinkZones List of drink zone coordinates
+ * @param eatZones List of eat zone coordinates
+ * @param sleepZones List of sleep zone coordinates
+ */
+export const createAnimalMarker = (
+  type: AnimalMarkerType,
+  coords: MarkerPosition,
+  drinkZones: Array<MarkerPosition>,
+  eatZones: Array<MarkerPosition>,
+  sleepZones: Array<MarkerPosition>,
+): AnimalMarkerOptions => ({
+  coords,
+  drink: createMarkerOptions('zone:drink', drinkZones),
+  eat: createMarkerOptions('zone:eat', eatZones),
+  sleep: createMarkerOptions('zone:sleep', sleepZones),
+  type,
+});
 
 /**
  * Convert marker position to a marker options object of the specified type
