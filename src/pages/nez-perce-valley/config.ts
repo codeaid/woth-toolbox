@@ -7,6 +7,7 @@ export const mapWidth = 4096;
 // Map of marker types and their maximum map scale visibility
 export const markerVisibilityMap = new Map<MarkerType, number>([
   ['animal:american badger', 0.65],
+  ['animal:bighorn sheep', 0.65],
   ['cabin', 0.25],
   ['camp', 0.25],
   ['echo', 0.35],
