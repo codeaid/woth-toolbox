@@ -6,3 +6,4 @@ export * from './moose';
 export * from './mountainGoat';
 export * from './pheasant';
 export * from './rossGoose';
+export * from './wildDuck';
