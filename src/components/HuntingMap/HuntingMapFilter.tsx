@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import { SectionHeader } from 'components/SectionHeader';
@@ -180,7 +181,11 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           ref={buttonRef}
           onClick={handleButtonClick}
         >
-          <BsEyeFill />
+          <BsEyeFill
+            className={classnames({
+              [buttonStyles.HuntingMapIconHighlighted]: !!selectedTypes.length,
+            })}
+          />
         </button>
       </div>
       {renderedFilterMenu}

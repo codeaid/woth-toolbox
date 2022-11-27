@@ -27,3 +27,7 @@
 .HuntingMapButton:hover svg {
   transform: scale(1.2);
 }
+
+.HuntingMapIconHighlighted {
+  color: var(--brand);
+}
