@@ -8,7 +8,7 @@ import {
   useRef,
 } from 'react';
 import { Transition } from 'react-transition-group';
-import { Marker } from 'components/Marker';
+import { Icon } from 'components/Icon';
 import { useRefCallback } from 'hooks';
 import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
 import { HuntingMapMarkerGenericProps } from './types';
@@ -69,7 +69,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
         unmountOnExit={true}
       >
         {state => (
-          <Marker
+          <Icon
             className={classnames(
               styles.HuntingMapMarker,
               {

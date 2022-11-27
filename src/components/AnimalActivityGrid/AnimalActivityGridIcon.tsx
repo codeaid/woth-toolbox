@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Marker } from 'components/Marker';
+import { Icon } from 'components/Icon';
 import { AnimalActivity } from 'types/animals';
 import { AnimalActivityGridIconProps } from './types';
 import styles from './AnimalActivityGridIcon.module.css';
@@ -20,11 +20,11 @@ export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
 
   switch (activity) {
     case AnimalActivity.Drinking:
-      return <Marker {...imgProps} type="zone:drink" />;
+      return <Icon {...imgProps} type="zone:drink" />;
     case AnimalActivity.Feeding:
-      return <Marker {...imgProps} type="zone:eat" />;
+      return <Icon {...imgProps} type="zone:eat" />;
     case AnimalActivity.Sleeping:
-      return <Marker {...imgProps} type="zone:sleep" />;
+      return <Icon {...imgProps} type="zone:sleep" />;
     default:
       return null;
   }

@@ -3,7 +3,7 @@ import { baseUrl } from 'config/app';
 import { iconMap, iconMapHighlighted } from './config';
 import { MarkerProps } from './types';
 
-export const Marker = forwardRef(
+export const Icon = forwardRef(
   (props: MarkerProps, ref: ForwardedRef<HTMLImageElement>) => {
     const {
       alt = '',
@@ -47,4 +47,4 @@ export const Marker = forwardRef(
   },
 );
 
-Marker.displayName = 'Marker';
+Icon.displayName = 'Marker';
