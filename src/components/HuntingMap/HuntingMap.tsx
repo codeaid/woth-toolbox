@@ -381,6 +381,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
       event.preventDefault();
 
       const { pageX, pageY } = event;
+
+      imageMouseDownOffset.current = [pageX, pageY];
       handleMapDragStart(pageX, pageY);
     },
     [handleMapDragStart],
@@ -391,7 +393,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param event Mouse event
    */
-  const handleContainerMouseMove = useCallback(
+  const handleMouseMove = useCallback(
     (event: MouseEvent<EventTarget>) => {
       const { pageX, pageY } = event;
       handleMapDrag(pageX, pageY);
@@ -402,21 +404,22 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Handle clicking on the map
    */
-  const handleMapMouseDown = useCallback((event: MouseEvent<EventTarget>) => {
-    imageMouseDownOffset.current = [event.pageX, event.pageY];
-  }, []);
-
-  /**
-   * Handle clicking on the map
-   */
   const handleMouseUp = useCallback(
     (event: MouseEvent<EventTarget>) => {
       event.preventDefault();
 
       handleMapDragCancel();
 
+      // Determine if mouse event occurred on map elements
+      const mouseOnWrapper = ref.current
+        ? ref.current.contains(event.nativeEvent.target as Node)
+        : false;
+      const mouseOnMap = imageRef.current
+        ? imageRef.current.contains(event.nativeEvent.target as Node)
+        : false;
+
       // Ignore clicks on markers
-      if (!onClick || event.target !== imageRef.current) {
+      if (!onClick || (!mouseOnWrapper && !mouseOnMap)) {
         return;
       }
 
@@ -446,11 +449,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
       // Fix for touch enabled devices that fixes lag on drag start
       event.stopPropagation();
 
+      // Determine if taps occurred on map elements
       const tapOnWrapper = ref.current
-        ? ref.current.contains(event.target as Node)
+        ? ref.current.contains(event.nativeEvent.target as Node)
         : false;
       const tapOnMap = imageRef.current
-        ? imageRef.current.contains(event.target as Node)
+        ? imageRef.current.contains(event.nativeEvent.target as Node)
         : false;
 
       // Determine if scroll wheel was used on the map image itself
@@ -585,7 +589,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         ref={ref}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMapDragCancel}
-        onMouseMove={handleContainerMouseMove}
+        onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onTouchEnd={handleMapDragCancel}
         onTouchMove={handleTouchMove}
@@ -612,7 +616,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
             src={imageSrc}
             width={options.mapWidth}
             onLoad={handleImageLoaded}
-            onMouseDown={handleMapMouseDown}
           />
         </div>
       </div>
