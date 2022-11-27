@@ -1,5 +1,5 @@
 import {
-  badgerMarkers,
+  americanBadgerMarkers,
   bighornSheepMarkers,
   grayWolfMarkers,
   mooseMarkers,
@@ -8,7 +8,7 @@ import {
 import { AnimalMarkerOptions } from 'types/markers';
 
 export const animalMarkers: Array<AnimalMarkerOptions> = [
-  badgerMarkers,
+  americanBadgerMarkers,
   bighornSheepMarkers,
   grayWolfMarkers,
   mooseMarkers,

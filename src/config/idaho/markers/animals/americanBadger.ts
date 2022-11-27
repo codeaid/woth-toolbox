@@ -1,6 +1,6 @@
 import { createAnimalMarkerOptions } from 'lib/markers';
 
-export const badgerMarkers = [
+export const americanBadgerMarkers = [
   createAnimalMarkerOptions(
     'animal:american badger',
     [0.475830078125, 0.13330078125],
