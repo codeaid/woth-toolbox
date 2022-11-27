@@ -1,5 +1,5 @@
 import { AnimalActivity, AnimalType } from 'types/animals';
-import { GenericMarkerType } from 'types/markers';
+import { GenericIconType } from 'types/icons';
 
 // List of animal activity types and their human-readable representations
 export const animalActivityNameMap = new Map<AnimalActivity, string>([
@@ -39,7 +39,7 @@ export const animalNameMap = new Map<AnimalType, string>([
 ]);
 
 // List of generic marker types and their names
-export const genericNameMap = new Map<GenericMarkerType, string>([
+export const genericNameMap = new Map<GenericIconType, string>([
   ['cabin', 'Cabin'],
   ['cabin:undiscovered', 'Cabin (undiscovered)'],
   ['camp', 'Camp'],

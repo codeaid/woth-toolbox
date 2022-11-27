@@ -1,10 +1,10 @@
 import { ForwardedRef, forwardRef, useMemo } from 'react';
 import { baseUrl } from 'config/app';
 import { iconMap, iconMapHighlighted } from './config';
-import { MarkerProps } from './types';
+import { IconProps } from './types';
 
 export const Icon = forwardRef(
-  (props: MarkerProps, ref: ForwardedRef<HTMLImageElement>) => {
+  (props: IconProps, ref: ForwardedRef<HTMLImageElement>) => {
     const {
       alt = '',
       className,

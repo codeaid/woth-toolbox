@@ -1,31 +1,17 @@
-import { AnimalType } from 'types/animals';
-
-export type AnimalMarkerType = AnimalType;
-
-export type GenericMarkerType =
-  | 'cabin'
-  | 'cabin:undiscovered'
-  | 'camp'
-  | 'echo'
-  | 'hunting stand'
-  | 'lodge'
-  | 'photo'
-  | 'shooting range'
-  | 'view';
-
-export type NeedZoneMarkerType =
-  | 'zone:drink'
-  | 'zone:eat'
-  | 'zone:gather'
-  | 'zone:path'
-  | 'zone:sleep';
-
-export type MarkerType =
-  | AnimalMarkerType
-  | GenericMarkerType
-  | NeedZoneMarkerType;
+import {
+  AnimalIconType,
+  GenericIconType,
+  IconType,
+  NeedZoneIconType,
+} from 'types/icons';
 
 export type MarkerPosition = [number, number];
+
+// Alias types for more logical naming conventions
+export type MarkerType = IconType;
+export type AnimalMarkerType = AnimalIconType;
+export type GenericMarkerType = GenericIconType;
+export type NeedZoneMarkerType = NeedZoneIconType;
 
 export interface MarkerOptions<TMarkerType = MarkerType> {
   coords: MarkerPosition;

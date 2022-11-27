@@ -1,6 +1,6 @@
-import { MarkerType } from 'types/markers';
+import { IconType } from 'types/icons';
 
-export const iconMap: Partial<Record<MarkerType, string>> = {
+export const iconMap: Partial<Record<IconType, string>> = {
   'animal:american badger': 'animals/american_badger',
   'animal:american black bear': 'animals/american_black_bear',
   'animal:bighorn sheep': 'animals/bighorn_sheep',
@@ -43,7 +43,7 @@ export const iconMap: Partial<Record<MarkerType, string>> = {
   'zone:sleep': 'zones/sleep',
 };
 
-export const iconMapHighlighted: Partial<Record<MarkerType, string>> = {
+export const iconMapHighlighted: Partial<Record<IconType, string>> = {
   'animal:american badger': 'animals/highlighted/american_badger',
   'animal:american black bear': 'animals/highlighted/american_black_bear',
   'animal:bighorn sheep': 'animals/highlighted/bighorn_sheep',

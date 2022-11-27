@@ -1,8 +1,11 @@
-import { GenericMarkerType, NeedZoneMarkerType } from 'types/markers';
-import { AnimalType } from 'types/animals';
+import {
+  AnimalMarkerType,
+  GenericMarkerType,
+  NeedZoneMarkerType,
+} from 'types/markers';
 
 // List of types representing animal markers
-export const animalMarkerTypes: Array<AnimalType> = [
+export const animalMarkerTypes: Array<AnimalMarkerType> = [
   'animal:american badger',
   'animal:american black bear',
   'animal:bighorn sheep',

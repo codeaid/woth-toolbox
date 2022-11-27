@@ -7,11 +7,11 @@ import {
   isAnimalMarkerType,
   isGenericMarkerType,
 } from 'lib/markers';
-import { MarkerType } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterProps } from './types';
 import buttonStyles from './HuntingMapButton.module.css';
 import styles from './HuntingMapFilter.module.css';
+import { MarkerType } from 'types/markers';
 
 export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const { animalMarkers, genericMarkers, selectedTypes, onChange } = props;

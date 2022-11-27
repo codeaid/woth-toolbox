@@ -1,15 +1,15 @@
 import { CSSProperties, MouseEvent } from 'react';
-import { MarkerType } from 'types/markers';
+import { IconType } from 'types/icons';
 
-type MarkerClickHandler = (event: MouseEvent<EventTarget>) => void;
+type IconClickHandler = (event: MouseEvent<EventTarget>) => void;
 
-export interface MarkerProps {
+export interface IconProps {
   alt?: string;
   className?: string;
   highlighted?: boolean;
   size?: number;
   style?: CSSProperties;
   title?: string;
-  type: MarkerType;
-  onClick?: MarkerClickHandler;
+  type: IconType;
+  onClick?: IconClickHandler;
 }
