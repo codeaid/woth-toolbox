@@ -1,7 +1,7 @@
-import { createAnimalMarker } from 'lib/markers';
+import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const bighornSheepMarkers = [
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.143798828125, 0.192626953125],
     [
@@ -17,7 +17,7 @@ export const bighornSheepMarkers = [
       [0.169677734375, 0.18212890625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.340576171875, 0.185546875],
     [
@@ -33,7 +33,7 @@ export const bighornSheepMarkers = [
       [0.326171875, 0.166015625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.289306640625, 0.20556640625],
     [
@@ -49,7 +49,7 @@ export const bighornSheepMarkers = [
       [0.28955078125, 0.17578125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.23046875, 0.252685546875],
     [
@@ -65,7 +65,7 @@ export const bighornSheepMarkers = [
       [0.204345703125, 0.2685546875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.36474609375, 0.2978515625],
     [
@@ -81,7 +81,7 @@ export const bighornSheepMarkers = [
       [0.37646484375, 0.3056640625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.285400390625, 0.295166015625],
     [
@@ -97,7 +97,7 @@ export const bighornSheepMarkers = [
       [0.2919921875, 0.288818359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.18896484375, 0.361083984375],
     [
@@ -113,7 +113,7 @@ export const bighornSheepMarkers = [
       [0.16748046875, 0.381591796875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.1201171875, 0.318115234375],
     [
@@ -129,7 +129,7 @@ export const bighornSheepMarkers = [
       [0.12939453125, 0.2744140625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.145751953125, 0.435791015625],
     [
@@ -145,7 +145,7 @@ export const bighornSheepMarkers = [
       [0.166015625, 0.420654296875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.219482421875, 0.500732421875],
     [
@@ -161,7 +161,7 @@ export const bighornSheepMarkers = [
       [0.240234375, 0.493408203125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.22900390625, 0.54541015625],
     [
@@ -177,7 +177,7 @@ export const bighornSheepMarkers = [
       [0.218017578125, 0.574462890625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:bighorn sheep',
     [0.072021484375, 0.59375],
     [

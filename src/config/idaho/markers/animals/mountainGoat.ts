@@ -1,7 +1,7 @@
-import { createAnimalMarker } from 'lib/markers';
+import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const mountainGoatMarkers = [
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.170166015625, 0.137939453125],
     [
@@ -17,7 +17,7 @@ export const mountainGoatMarkers = [
       [0.1513671875, 0.13134765625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.247314453125, 0.21533203125],
     [
@@ -33,7 +33,7 @@ export const mountainGoatMarkers = [
       [0.24169921875, 0.180908203125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.28955078125, 0.225830078125],
     [
@@ -49,7 +49,7 @@ export const mountainGoatMarkers = [
       [0.3232421875, 0.231689453125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.280029296875, 0.282958984375],
     [
@@ -65,7 +65,7 @@ export const mountainGoatMarkers = [
       [0.287109375, 0.304931640625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.183837890625, 0.2841796875],
     [
@@ -81,7 +81,7 @@ export const mountainGoatMarkers = [
       [0.164306640625, 0.243408203125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.126953125, 0.32958984375],
     [
@@ -97,7 +97,7 @@ export const mountainGoatMarkers = [
       [0.113037109375, 0.309326171875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.1416015625, 0.423095703125],
     [
@@ -113,7 +113,7 @@ export const mountainGoatMarkers = [
       [0.14404296875, 0.409423828125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.206787109375, 0.43017578125],
     [
@@ -129,7 +129,7 @@ export const mountainGoatMarkers = [
       [0.23291015625, 0.41015625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.302734375, 0.446533203125],
     [
@@ -145,7 +145,7 @@ export const mountainGoatMarkers = [
       [0.28857421875, 0.452880859375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.091796875, 0.54052734375],
     [
@@ -161,7 +161,7 @@ export const mountainGoatMarkers = [
       [0.082763671875, 0.529052734375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.12109375, 0.720703125],
     [
@@ -177,7 +177,7 @@ export const mountainGoatMarkers = [
       [0.154296875, 0.712890625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.310546875, 0.7314453125],
     [
@@ -193,7 +193,7 @@ export const mountainGoatMarkers = [
       [0.298828125, 0.735107421875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:mountain goat',
     [0.2099609375, 0.790283203125],
     [

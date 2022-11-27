@@ -1,7 +1,7 @@
-import { createAnimalMarker } from 'lib/markers';
+import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const mooseMarkers = [
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.614501953125, 0.15869140625],
     [
@@ -17,7 +17,7 @@ export const mooseMarkers = [
       [0.600830078125, 0.13720703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.635009765625, 0.073974609375],
     [
@@ -33,7 +33,7 @@ export const mooseMarkers = [
       [0.59423828125, 0.111083984375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.68359375, 0.1142578125],
     [
@@ -49,7 +49,7 @@ export const mooseMarkers = [
       [0.6650390625, 0.11376953125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.696044921875, 0.06494140625],
     [
@@ -65,7 +65,7 @@ export const mooseMarkers = [
       [0.780029296875, 0.048095703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.696533203125, 0.164794921875],
     [
@@ -81,7 +81,7 @@ export const mooseMarkers = [
       [0.707275390625, 0.12841796875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.724853515625, 0.072509765625],
     [
@@ -97,7 +97,7 @@ export const mooseMarkers = [
       [0.69287109375, 0.060791015625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.7666015625, 0.164306640625],
     [
@@ -113,7 +113,7 @@ export const mooseMarkers = [
       [0.795166015625, 0.12939453125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.804931640625, 0.071533203125],
     [
@@ -129,7 +129,7 @@ export const mooseMarkers = [
       [0.827392578125, 0.0859375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.8369140625, 0.1142578125],
     [
@@ -145,7 +145,7 @@ export const mooseMarkers = [
       [0.811767578125, 0.15185546875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.920166015625, 0.095947265625],
     [
@@ -161,7 +161,7 @@ export const mooseMarkers = [
       [0.931396484375, 0.138671875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.897705078125, 0.1484375],
     [
@@ -177,7 +177,7 @@ export const mooseMarkers = [
       [0.89013671875, 0.191162109375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.78271484375, 0.198974609375],
     [
@@ -193,7 +193,7 @@ export const mooseMarkers = [
       [0.7373046875, 0.189697265625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.816650390625, 0.215576171875],
     [
@@ -209,7 +209,7 @@ export const mooseMarkers = [
       [0.8828125, 0.203369140625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.66796875, 0.22021484375],
     [
@@ -225,7 +225,7 @@ export const mooseMarkers = [
       [0.717041015625, 0.230712890625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.589599609375, 0.260986328125],
     [
@@ -241,7 +241,7 @@ export const mooseMarkers = [
       [0.592529296875, 0.23974609375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.693359375, 0.283447265625],
     [
@@ -257,7 +257,7 @@ export const mooseMarkers = [
       [0.708984375, 0.25927734375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.769287109375, 0.290771484375],
     [
@@ -273,7 +273,7 @@ export const mooseMarkers = [
       [0.797607421875, 0.3193359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.813720703125, 0.3037109375],
     [
@@ -289,7 +289,7 @@ export const mooseMarkers = [
       [0.825439453125, 0.3349609375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.884521484375, 0.288818359375],
     [
@@ -305,7 +305,7 @@ export const mooseMarkers = [
       [0.904541015625, 0.257080078125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.85205078125, 0.323486328125],
     [
@@ -321,7 +321,7 @@ export const mooseMarkers = [
       [0.87841796875, 0.354248046875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.749267578125, 0.33984375],
     [
@@ -337,7 +337,7 @@ export const mooseMarkers = [
       [0.771728515625, 0.318603515625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:moose',
     [0.63671875, 0.34130859375],
     [

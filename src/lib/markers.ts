@@ -16,7 +16,7 @@ import {
  * @param eatZones List of eat zone coordinates
  * @param sleepZones List of sleep zone coordinates
  */
-export const createAnimalMarker = (
+export const createAnimalMarkerOptions = (
   type: AnimalMarkerType,
   coords: MarkerPosition,
   drinkZones: Array<MarkerPosition>,

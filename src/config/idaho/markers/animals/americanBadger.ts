@@ -1,7 +1,7 @@
-import { createAnimalMarker } from 'lib/markers';
+import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const badgerMarkers = [
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.475830078125, 0.13330078125],
     [
@@ -17,7 +17,7 @@ export const badgerMarkers = [
       [0.51220703125, 0.13037109375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.5205078125, 0.2001953125],
     [
@@ -33,7 +33,7 @@ export const badgerMarkers = [
       [0.5458984375, 0.184814453125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.567626953125, 0.212158203125],
     [
@@ -49,7 +49,7 @@ export const badgerMarkers = [
       [0.595947265625, 0.179931640625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.4912109375, 0.294677734375],
     [
@@ -65,7 +65,7 @@ export const badgerMarkers = [
       [0.494873046875, 0.293701171875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.628662109375, 0.33837890625],
     [
@@ -81,7 +81,7 @@ export const badgerMarkers = [
       [0.6513671875, 0.3515625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.510498046875, 0.37109375],
     [
@@ -97,7 +97,7 @@ export const badgerMarkers = [
       [0.531005859375, 0.3916015625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.80419921875, 0.39306640625],
     [
@@ -113,7 +113,7 @@ export const badgerMarkers = [
       [0.807373046875, 0.41455078125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.466064453125, 0.420654296875],
     [
@@ -129,7 +129,7 @@ export const badgerMarkers = [
       [0.49267578125, 0.42236328125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.609375, 0.459716796875],
     [
@@ -145,7 +145,7 @@ export const badgerMarkers = [
       [0.5986328125, 0.4521484375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.68115234375, 0.46630859375],
     [
@@ -161,7 +161,7 @@ export const badgerMarkers = [
       [0.679443359375, 0.47509765625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.762451171875, 0.44775390625],
     [
@@ -177,7 +177,7 @@ export const badgerMarkers = [
       [0.765380859375, 0.444580078125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.830078125, 0.4921875],
     [
@@ -193,7 +193,7 @@ export const badgerMarkers = [
       [0.846923828125, 0.4697265625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.61669921875, 0.529541015625],
     [
@@ -209,7 +209,7 @@ export const badgerMarkers = [
       [0.618896484375, 0.5341796875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.500244140625, 0.513427734375],
     [
@@ -225,7 +225,7 @@ export const badgerMarkers = [
       [0.50732421875, 0.49560546875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.5673828125, 0.5693359375],
     [
@@ -241,7 +241,7 @@ export const badgerMarkers = [
       [0.552734375, 0.556884765625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.735107421875, 0.5390625],
     [
@@ -257,7 +257,7 @@ export const badgerMarkers = [
       [0.71337890625, 0.51220703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.687744140625, 0.611572265625],
     [
@@ -273,7 +273,7 @@ export const badgerMarkers = [
       [0.728515625, 0.593505859375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.59814453125, 0.631591796875],
     [
@@ -289,7 +289,7 @@ export const badgerMarkers = [
       [0.584716796875, 0.6416015625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.565673828125, 0.6259765625],
     [
@@ -305,7 +305,7 @@ export const badgerMarkers = [
       [0.565185546875, 0.635986328125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.541259765625, 0.603271484375],
     [
@@ -321,7 +321,7 @@ export const badgerMarkers = [
       [0.529052734375, 0.58984375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.46044921875, 0.58740234375],
     [
@@ -337,7 +337,7 @@ export const badgerMarkers = [
       [0.4384765625, 0.62158203125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.396240234375, 0.590087890625],
     [
@@ -353,7 +353,7 @@ export const badgerMarkers = [
       [0.411376953125, 0.621826171875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.34765625, 0.65185546875],
     [
@@ -369,7 +369,7 @@ export const badgerMarkers = [
       [0.390625, 0.6474609375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.427001953125, 0.68310546875],
     [
@@ -385,7 +385,7 @@ export const badgerMarkers = [
       [0.445556640625, 0.7021484375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.547607421875, 0.66357421875],
     [
@@ -401,7 +401,7 @@ export const badgerMarkers = [
       [0.543701171875, 0.656005859375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.5322265625, 0.708984375],
     [
@@ -417,7 +417,7 @@ export const badgerMarkers = [
       [0.518310546875, 0.73095703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.645263671875, 0.710205078125],
     [
@@ -433,7 +433,7 @@ export const badgerMarkers = [
       [0.671630859375, 0.71435546875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.734375, 0.671142578125],
     [
@@ -449,7 +449,7 @@ export const badgerMarkers = [
       [0.74072265625, 0.648193359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.84228515625, 0.601806640625],
     [
@@ -465,7 +465,7 @@ export const badgerMarkers = [
       [0.811279296875, 0.599365234375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.883056640625, 0.68896484375],
     [
@@ -481,7 +481,7 @@ export const badgerMarkers = [
       [0.90283203125, 0.671142578125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.811279296875, 0.76708984375],
     [
@@ -497,7 +497,7 @@ export const badgerMarkers = [
       [0.794921875, 0.780029296875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.74951171875, 0.74560546875],
     [
@@ -513,7 +513,7 @@ export const badgerMarkers = [
       [0.805908203125, 0.762939453125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.706787109375, 0.7734375],
     [
@@ -529,7 +529,7 @@ export const badgerMarkers = [
       [0.68994140625, 0.751220703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.60888671875, 0.804931640625],
     [
@@ -545,7 +545,7 @@ export const badgerMarkers = [
       [0.5859375, 0.848388671875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.66650390625, 0.89453125],
     [
@@ -561,7 +561,7 @@ export const badgerMarkers = [
       [0.726318359375, 0.8681640625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:american badger',
     [0.46728515625, 0.87353515625],
     [

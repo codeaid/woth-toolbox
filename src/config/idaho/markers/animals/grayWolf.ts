@@ -1,7 +1,7 @@
-import { createAnimalMarker } from 'lib/markers';
+import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const grayWolfMarkers = [
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.1708984375, 0.147705078125],
     [
@@ -17,7 +17,7 @@ export const grayWolfMarkers = [
       [0.197265625, 0.15478515625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.30126953125, 0.190185546875],
     [
@@ -33,7 +33,7 @@ export const grayWolfMarkers = [
       [0.2783203125, 0.181640625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.396728515625, 0.105712890625],
     [
@@ -49,7 +49,7 @@ export const grayWolfMarkers = [
       [0.42724609375, 0.071044921875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.421875, 0.267822265625],
     [
@@ -65,7 +65,7 @@ export const grayWolfMarkers = [
       [0.3857421875, 0.23193359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.24951171875, 0.27783203125],
     [
@@ -81,7 +81,7 @@ export const grayWolfMarkers = [
       [0.3046875, 0.251220703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.135009765625, 0.33349609375],
     [
@@ -97,7 +97,7 @@ export const grayWolfMarkers = [
       [0.13671875, 0.34765625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.167724609375, 0.435302734375],
     [
@@ -113,7 +113,7 @@ export const grayWolfMarkers = [
       [0.207763671875, 0.41845703125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.3740234375, 0.4189453125],
     [
@@ -129,7 +129,7 @@ export const grayWolfMarkers = [
       [0.385986328125, 0.4365234375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.270751953125, 0.497314453125],
     [
@@ -145,7 +145,7 @@ export const grayWolfMarkers = [
       [0.3017578125, 0.49951171875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.109130859375, 0.808837890625],
     [
@@ -161,7 +161,7 @@ export const grayWolfMarkers = [
       [0.108154296875, 0.7880859375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.22412109375, 0.830078125],
     [
@@ -177,7 +177,7 @@ export const grayWolfMarkers = [
       [0.23876953125, 0.79150390625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.35009765625, 0.820556640625],
     [
@@ -193,7 +193,7 @@ export const grayWolfMarkers = [
       [0.33154296875, 0.837890625],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.597900390625, 0.397216796875],
     [
@@ -209,7 +209,7 @@ export const grayWolfMarkers = [
       [0.60693359375, 0.435546875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.459228515625, 0.55126953125],
     [
@@ -225,7 +225,7 @@ export const grayWolfMarkers = [
       [0.432861328125, 0.5986328125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.710693359375, 0.57763671875],
     [
@@ -241,7 +241,7 @@ export const grayWolfMarkers = [
       [0.684814453125, 0.58984375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.65234375, 0.679931640625],
     [
@@ -257,7 +257,7 @@ export const grayWolfMarkers = [
       [0.620361328125, 0.696044921875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.567138671875, 0.796142578125],
     [
@@ -273,7 +273,7 @@ export const grayWolfMarkers = [
       [0.49169921875, 0.849365234375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.5625, 0.920166015625],
     [
@@ -289,7 +289,7 @@ export const grayWolfMarkers = [
       [0.566650390625, 0.851318359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.859375, 0.89453125],
     [
@@ -305,7 +305,7 @@ export const grayWolfMarkers = [
       [0.794677734375, 0.898193359375],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.77001953125, 0.82568359375],
     [
@@ -321,7 +321,7 @@ export const grayWolfMarkers = [
       [0.762939453125, 0.819091796875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.833251953125, 0.767578125],
     [
@@ -337,7 +337,7 @@ export const grayWolfMarkers = [
       [0.833740234375, 0.796142578125],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.794189453125, 0.663330078125],
     [
@@ -353,7 +353,7 @@ export const grayWolfMarkers = [
       [0.839599609375, 0.651123046875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.891357421875, 0.55810546875],
     [
@@ -369,7 +369,7 @@ export const grayWolfMarkers = [
       [0.90234375, 0.584716796875],
     ],
   ),
-  createAnimalMarker(
+  createAnimalMarkerOptions(
     'animal:gray wolf',
     [0.82470703125, 0.509033203125],
     [
