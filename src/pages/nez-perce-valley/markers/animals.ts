@@ -5,6 +5,7 @@ import {
   grayWolfMarkers,
   mooseMarkers,
   mountainGoatMarkers,
+  pheasantMarkers,
 } from 'config/idaho';
 import { AnimalMarkerOptions } from 'types/markers';
 
@@ -15,4 +16,5 @@ export const animalMarkers: Array<AnimalMarkerOptions> = [
   grayWolfMarkers,
   mooseMarkers,
   mountainGoatMarkers,
+  pheasantMarkers,
 ].flat();
