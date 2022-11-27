@@ -446,8 +446,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
       // Fix for touch enabled devices that fixes lag on drag start
       event.stopPropagation();
 
+      const tapOnWrapper = ref.current
+        ? ref.current.contains(event.target as Node)
+        : false;
+      const tapOnMap = imageRef.current
+        ? imageRef.current.contains(event.target as Node)
+        : false;
+
       // Determine if scroll wheel was used on the map image itself
-      if (event.target !== imageRef.current) {
+      if (!tapOnWrapper && !tapOnMap) {
         return;
       }
 
@@ -562,6 +569,17 @@ export const HuntingMap = (props: HuntingMapProps) => {
       {!imageLoaded && (
         <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
       )}
+      <HuntingMapFilter
+        enabledTypes={enabledTypes}
+        markerFilter={markerFilter}
+        onChange={onFilterChange}
+      />
+      <HuntingMapToolbar
+        onReset={handleReset}
+        onZoomIn={() => handleMapZoomIn()}
+        onZoomOut={() => handleMapZoomOut()}
+      />
+
       <div
         className={styles.HuntingMap}
         ref={ref}
@@ -574,17 +592,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onTouchStart={handleTouchStart}
         onWheel={handleWheel}
       >
-        <HuntingMapFilter
-          enabledTypes={enabledTypes}
-          markerFilter={markerFilter}
-          onChange={onFilterChange}
-        />
-        <HuntingMapToolbar
-          onReset={handleReset}
-          onZoomIn={() => handleMapZoomIn()}
-          onZoomOut={() => handleMapZoomOut()}
-        />
-
         <div
           className={styles.HuntingMapContainer}
           style={{
