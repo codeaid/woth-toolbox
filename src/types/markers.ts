@@ -1,5 +1,7 @@
 import { AnimalType } from 'types/animals';
 
+export type AnimalMarkerType = AnimalType;
+
 export type GenericMarkerType =
   | 'cabin'
   | 'cabin:undiscovered'
@@ -11,14 +13,17 @@ export type GenericMarkerType =
   | 'shooting range'
   | 'view';
 
-export type ZoneMarkerType =
+export type NeedZoneMarkerType =
   | 'zone:drink'
   | 'zone:eat'
   | 'zone:gather'
   | 'zone:path'
   | 'zone:sleep';
 
-export type MarkerType = AnimalType | GenericMarkerType | ZoneMarkerType;
+export type MarkerType =
+  | AnimalMarkerType
+  | GenericMarkerType
+  | NeedZoneMarkerType;
 
 export type MarkerPosition = [number, number];
 
@@ -27,7 +32,7 @@ export interface MarkerOptions<TMarkerType = MarkerType> {
   type: TMarkerType;
 }
 
-export interface AnimalMarkerOptions extends MarkerOptions<AnimalType> {
+export interface AnimalMarkerOptions extends MarkerOptions<AnimalMarkerType> {
   drink: Array<MarkerOptions<'zone:drink'>>;
   eat: Array<MarkerOptions<'zone:eat'>>;
   sleep: Array<MarkerOptions<'zone:sleep'>>;

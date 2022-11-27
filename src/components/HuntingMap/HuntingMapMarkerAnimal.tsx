@@ -1,6 +1,13 @@
 import classnames from 'classnames';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { getMarkerKey, isMarkerVisibleAtScale } from 'lib/markers';
+import {
+  MouseEvent as ReactMouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapMarkerAnimalProps } from './types';
@@ -10,10 +17,15 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
   const {
     mapScale,
     marker,
-    markerFilter = [],
-    markerVisibilityMap,
+    markerRangeMap,
     maxMarkerSize,
+    selectedFilterTypes,
+    visible = true,
   } = props;
+
+  // Mouse coordinates that allow detecting if drag occurred while holding
+  // mouse cursor over the animal trigger icon
+  const [pageCoords, setPageCoords] = useState<[number, number]>([-1, -1]);
 
   // Flag indicating whether the need zone icons are visible or not
   const [zonesVisible, setZonesVisible] = useState(false);
@@ -21,30 +33,45 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
   // Reference to the trigger element (animal icon)
   const triggerRef = useRef<HTMLImageElement>(null);
 
-  // Determine if marker is visible
-  const markerVisible = useMemo(
-    () => isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
-    [mapScale, marker.type, markerVisibilityMap],
-  );
-
   /**
    * Handle clicking on the trigger icon
    */
   const handleDocumentClick = useCallback((event: MouseEvent) => {
-    // Ignore clicks on the trigger element
-    if (event.target === triggerRef.current) {
-      return;
+    // Hide need zones if clicking on another animal icon
+    if (
+      (event.target as HTMLElement).classList.contains(
+        styles.HuntingMapMarkerAnimal,
+      ) &&
+      event.target !== triggerRef.current
+    ) {
+      setZonesVisible(false);
     }
+  }, []);
 
-    setZonesVisible(false);
+  /**
+   * Handle mouse down on the document
+   */
+  const handleDocumentMouseDown = useCallback((event: MouseEvent) => {
+    setPageCoords([event.pageX, event.pageY]);
   }, []);
 
   /**
    * Handle clicking on the trigger icon
    */
   const handleTriggerClick = useCallback(
-    () => setZonesVisible(current => !current),
-    [],
+    (marker: MarkerOptions, event: ReactMouseEvent<EventTarget>) => {
+      const [mouseDownX, mouseDownY] = pageCoords;
+      const { pageX: mouseUpX, pageY: mouseUpY } = event;
+
+      // Cancel trigger click if mouse up coordinates aren't the same as down
+      if (mouseUpX !== mouseDownX || mouseUpY !== mouseDownY) {
+        event.stopPropagation();
+        return;
+      }
+
+      setZonesVisible(current => !current);
+    },
+    [pageCoords],
   );
 
   /**
@@ -60,14 +87,22 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
             key={getMarkerKey(marker)}
             mapScale={mapScale}
             marker={marker}
-            markerVisibilityMap={markerVisibilityMap}
+            markerRangeMap={markerRangeMap}
             maxMarkerSize={maxMarkerSize * 1.2}
-            visible={markerVisible && zonesVisible}
+            selectedFilterTypes={selectedFilterTypes}
+            visible={visible && zonesVisible}
           />
         ))}
       </>
     ),
-    [mapScale, markerVisibilityMap, markerVisible, maxMarkerSize, zonesVisible],
+    [
+      mapScale,
+      markerRangeMap,
+      maxMarkerSize,
+      selectedFilterTypes,
+      visible,
+      zonesVisible,
+    ],
   );
 
   // Drink need zones
@@ -98,10 +133,11 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
         highlighted={zonesVisible}
         mapScale={mapScale}
         marker={marker}
-        markerFilter={markerFilter}
-        markerVisibilityMap={markerVisibilityMap}
+        markerRangeMap={markerRangeMap}
         maxMarkerSize={70}
         ref={triggerRef}
+        selectedFilterTypes={selectedFilterTypes}
+        visible={visible}
         onClick={handleTriggerClick}
       />
     ),
@@ -109,20 +145,30 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
       handleTriggerClick,
       mapScale,
       marker,
-      markerFilter,
-      markerVisibilityMap,
+      markerRangeMap,
+      selectedFilterTypes,
+      visible,
       zonesVisible,
     ],
   );
 
+  // Hide need zone icons when current animal type is removed through filters
+  useEffect(() => {
+    if (!visible) {
+      setZonesVisible(false);
+    }
+  }, [visible]);
+
   // Monitor clicks outside the current marker and hide zones when needed
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('mousedown', handleDocumentMouseDown);
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('mousedown', handleDocumentMouseDown);
     };
-  }, [handleDocumentClick]);
+  }, [handleDocumentClick, handleDocumentMouseDown]);
 
   return (
     <>

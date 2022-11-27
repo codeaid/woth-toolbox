@@ -10,7 +10,7 @@ import {
   WheelEvent,
 } from 'react';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { isMarkerEnabled } from 'lib/markers';
+import { hasListValue } from 'lib/utils';
 import { HuntingMapFilter } from './HuntingMapFilter';
 import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
 import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
@@ -23,20 +23,19 @@ const HuntingMapMarkerGenericMemo = memo(HuntingMapMarkerGeneric);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
-    animalMarkers = [],
+    animalMarkers,
     defaultScale = 0.25,
-    enabledTypes,
-    genericMarkers = [],
+    genericMarkers,
     imageHeight,
     imageSrc,
     imageWidth,
-    markerFilter = [],
-    markerVisibilityMap = new Map(),
+    markerRangeMap = new Map(),
     maxMarkerSize = 38,
     maxScale = 2.5,
     minOverflow = 200,
     minScale = 0.2,
     scaleIncrement = 0.02,
+    selectedFilterTypes = [],
     onClick,
     onFilterChange,
   } = props;
@@ -74,50 +73,46 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // List of animal map marker elements
   const markerListAnimals = useMemo(
     () =>
-      animalMarkers
-        .filter(marker => isMarkerEnabled(marker.type, enabledTypes))
-        .map((marker, index) => (
-          <HuntingMapMarkerAnimalMemo
-            key={index}
-            mapScale={options.mapScale}
-            marker={marker}
-            markerFilter={markerFilter}
-            markerVisibilityMap={markerVisibilityMap}
-            maxMarkerSize={maxMarkerSize}
-          />
-        )),
+      animalMarkers.map((marker, index) => (
+        <HuntingMapMarkerAnimalMemo
+          key={index}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerRangeMap={markerRangeMap}
+          maxMarkerSize={maxMarkerSize}
+          selectedFilterTypes={selectedFilterTypes}
+          visible={hasListValue(marker.type, selectedFilterTypes)}
+        />
+      )),
     [
       animalMarkers,
-      enabledTypes,
-      markerFilter,
-      markerVisibilityMap,
+      markerRangeMap,
       maxMarkerSize,
       options.mapScale,
+      selectedFilterTypes,
     ],
   );
 
   // List of generic map marker elements
   const markerListGeneric = useMemo(
     () =>
-      genericMarkers
-        .filter(marker => isMarkerEnabled(marker.type, enabledTypes))
-        .map((marker, index) => (
-          <HuntingMapMarkerGenericMemo
-            key={index}
-            mapScale={options.mapScale}
-            marker={marker}
-            markerFilter={markerFilter}
-            markerVisibilityMap={markerVisibilityMap}
-            maxMarkerSize={maxMarkerSize}
-          />
-        )),
+      genericMarkers.map((marker, index) => (
+        <HuntingMapMarkerGenericMemo
+          key={index}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerRangeMap={markerRangeMap}
+          maxMarkerSize={maxMarkerSize}
+          selectedFilterTypes={selectedFilterTypes}
+          visible={hasListValue(marker.type, selectedFilterTypes)}
+        />
+      )),
     [
-      enabledTypes,
       genericMarkers,
-      markerFilter,
-      markerVisibilityMap,
+      markerRangeMap,
       maxMarkerSize,
       options.mapScale,
+      selectedFilterTypes,
     ],
   );
 
@@ -574,8 +569,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
         <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
       )}
       <HuntingMapFilter
-        enabledTypes={enabledTypes}
-        markerFilter={markerFilter}
+        animalMarkers={animalMarkers}
+        genericMarkers={genericMarkers}
+        selectedTypes={selectedFilterTypes}
         onChange={onFilterChange}
       />
       <HuntingMapToolbar

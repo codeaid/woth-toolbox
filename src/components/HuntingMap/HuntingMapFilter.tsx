@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import { SectionHeader } from 'components/SectionHeader';
-import { animalNameMap } from 'config/animals';
-import { genericMarkerNameMap } from 'config/markers';
-import { isMarkerEnabled } from 'lib/markers';
+import { animalNameMap, genericNameMap } from 'config/names';
+import {
+  getMarkerOptionTypes,
+  isAnimalMarkerType,
+  isGenericMarkerType,
+} from 'lib/markers';
 import { MarkerType } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterProps } from './types';
@@ -11,7 +14,7 @@ import buttonStyles from './HuntingMapButton.module.css';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
-  const { enabledTypes, markerFilter, onChange } = props;
+  const { animalMarkers, genericMarkers, selectedTypes, onChange } = props;
 
   // Flag indicating whether the filter menu is currently visible
   const [menuVisible, setMenuVisible] = useState(false);
@@ -20,26 +23,22 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
 
-  // Filter animal name map to only include enabled markers
-  const enabledAnimalNames = useMemo(
-    () =>
-      new Map(
-        [...animalNameMap.entries()].filter(([type]) =>
-          isMarkerEnabled(type, enabledTypes),
-        ),
-      ),
-    [enabledTypes],
+  // Extract list of types available in the options
+  const markerTypes = useMemo(
+    () => getMarkerOptionTypes(...animalMarkers, ...genericMarkers),
+    [animalMarkers, genericMarkers],
   );
 
-  // Filter generic name map to only include enabled markers
-  const enabledGenericNames = useMemo(
-    () =>
-      new Map(
-        [...genericMarkerNameMap.entries()].filter(([type]) =>
-          isMarkerEnabled(type, enabledTypes),
-        ),
-      ),
-    [enabledTypes],
+  // Extract list of types available in the options
+  const markerTypesAnimals = useMemo(
+    () => markerTypes.filter(isAnimalMarkerType),
+    [markerTypes],
+  );
+
+  // Extract list of types available in the options
+  const markerTypesGeneric = useMemo(
+    () => markerTypes.filter(isGenericMarkerType),
+    [markerTypes],
   );
 
   /**
@@ -80,12 +79,12 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
       // Update list of enabled types
       const types = selected
-        ? [...new Set(markerFilter).add(type)]
-        : markerFilter.filter(marker => marker !== type);
+        ? [...new Set(selectedTypes).add(type)]
+        : selectedTypes.filter(marker => marker !== type);
 
       onChange(types);
     },
-    [markerFilter, onChange],
+    [selectedTypes, onChange],
   );
 
   /**
@@ -94,15 +93,15 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * @param options Map of option types and names to render
    */
   const renderOptions = useCallback(
-    (options: Map<MarkerType, string>) => (
+    (types: Array<MarkerType>, nameMap: Map<MarkerType, string>) => (
       <>
-        {[...options.entries()]
-          .filter(([type]) => isMarkerEnabled(type, enabledTypes))
-          .sort(([, nameA], [nameB]) => nameA.localeCompare(nameB))
-          .map(([type, name]) => (
+        {types
+          .map(type => ({ name: nameMap.get(type) ?? '', type }))
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(({ name, type }) => (
             <HuntingMapFilterItem
               key={type}
-              selected={markerFilter.includes(type)}
+              selected={selectedTypes.includes(type)}
               type={type}
               onToggle={handleToggleType}
             >
@@ -111,31 +110,31 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           ))}
       </>
     ),
-    [enabledTypes, handleToggleType, markerFilter],
+    [handleToggleType, selectedTypes],
   );
 
   // Render animal options
   const renderedAnimalOptions = useMemo(
     () =>
-      enabledAnimalNames.size && (
+      markerTypesAnimals.length && (
         <>
           <SectionHeader>Animals</SectionHeader>
-          {renderOptions(enabledAnimalNames)}
+          {renderOptions(markerTypesAnimals, animalNameMap)}
         </>
       ),
-    [enabledAnimalNames, renderOptions],
+    [markerTypesAnimals, renderOptions],
   );
 
   // Render generic options
   const renderedGenericOptions = useMemo(
     () =>
-      enabledGenericNames.size && (
+      markerTypesGeneric.length && (
         <>
           <SectionHeader>General</SectionHeader>
-          {renderOptions(enabledGenericNames)}
+          {renderOptions(markerTypesGeneric, genericNameMap)}
         </>
       ),
-    [enabledGenericNames, renderOptions],
+    [markerTypesGeneric, renderOptions],
   );
 
   // Filter options list

@@ -1,7 +1,7 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, MouseEvent } from 'react';
 import { MarkerType } from 'types/markers';
 
-type MarkerClickHandler = () => void;
+type MarkerClickHandler = (event: MouseEvent<EventTarget>) => void;
 
 export interface MarkerProps {
   alt?: string;

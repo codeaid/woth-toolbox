@@ -1,4 +1,4 @@
-import { Animal, AnimalActivity, AnimalActivityValue } from 'types/animals';
+import { Animal, AnimalActivityValue } from 'types/animals';
 import { EntityGroup } from 'types/global';
 
 /**
@@ -11,6 +11,34 @@ export const getActivityByHour = (
   activities: Array<AnimalActivityValue>,
   hour: number,
 ) => activities.find(activity => activity.time === hour);
+
+/**
+ * Group animals by their tier
+ *
+ * @param animals List of animals to group
+ */
+export const getAnimalGroups = (animals: Array<Animal>) =>
+  getSortedAnimals(animals).reduce<Array<EntityGroup<Animal>>>(
+    (groups, animal) => {
+      // Attempt to find the existing group for the current tier
+      const group = groups.find(g => g.tier === animal.tier);
+
+      // Create a new group if it doesn't exist
+      if (!group) {
+        return [...groups, { entities: [animal], tier: animal.tier }];
+      }
+
+      return groups.map(group => {
+        // Update existing group by adding the animal
+        if (group.tier === animal.tier) {
+          return { ...group, entities: [...group.entities, animal] };
+        }
+
+        return group;
+      });
+    },
+    [],
+  );
 
 /**
  * Find activity occurring at the specified hour
@@ -39,19 +67,6 @@ export const getCurrentActivityByHour = (
   return current;
 };
 
-export const getActivityDescription = (activity: AnimalActivity) => {
-  switch (activity) {
-    case AnimalActivity.Drinking:
-      return 'Drinking';
-    case AnimalActivity.Feeding:
-      return 'Feeding';
-    case AnimalActivity.Sleeping:
-      return 'Sleeping';
-    default:
-      return 'Unknown';
-  }
-};
-
 /**
  * Sort animals first by tier and then by name
  *
@@ -64,32 +79,4 @@ const getSortedAnimals = (animals: Array<Animal>) =>
         a.tier - b.tier
       : // Next sort by animal name within the tier
         a.name.localeCompare(b.name),
-  );
-
-/**
- * Group animals by their tier
- *
- * @param animals List of animals to group
- */
-export const getAnimalGroups = (animals: Array<Animal>) =>
-  getSortedAnimals(animals).reduce<Array<EntityGroup<Animal>>>(
-    (groups, animal) => {
-      // Attempt to find the existing group for the current tier
-      const group = groups.find(g => g.tier === animal.tier);
-
-      // Create a new group if it doesn't exist
-      if (!group) {
-        return [...groups, { entities: [animal], tier: animal.tier }];
-      }
-
-      return groups.map(group => {
-        // Update existing group by adding the animal
-        if (group.tier === animal.tier) {
-          return { ...group, entities: [...group.entities, animal] };
-        }
-
-        return group;
-      });
-    },
-    [],
   );

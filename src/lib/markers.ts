@@ -1,6 +1,7 @@
-import { AnimalType } from 'types/animals';
+import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
 import {
   AnimalMarkerOptions,
+  AnimalMarkerType,
   MarkerOptions,
   MarkerPosition,
   MarkerType,
@@ -16,7 +17,7 @@ import {
  * @param sleepZones List of sleep zone coordinates
  */
 export const createAnimalMarker = (
-  type: AnimalType,
+  type: AnimalMarkerType,
   coords: MarkerPosition,
   drinkZones: Array<MarkerPosition>,
   eatZones: Array<MarkerPosition>,
@@ -52,6 +53,19 @@ export const getMarkerKey = (marker: MarkerOptions) =>
   )}`;
 
 /**
+ * Get list of marker types from the specified list of options
+ *
+ * @param markers Source list of markers
+ */
+export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
+  Array.from(
+    markers.reduce<Set<MarkerType>>(
+      (acc, current) => acc.add(current.type),
+      new Set(),
+    ),
+  );
+
+/**
  * Calculate marker size at the current map scale
  *
  * @param mapScale Current map scale (zoom)
@@ -59,6 +73,24 @@ export const getMarkerKey = (marker: MarkerOptions) =>
  */
 export const getMarkerSize = (mapScale: number, maxMarkerSize: number) =>
   Math.min(maxMarkerSize, 100 * mapScale);
+
+/**
+ * Check if the specified type represents an animal marker type
+ *
+ * @param type Target type to check
+ */
+export const isAnimalMarkerType = <TMarkerType extends MarkerType>(
+  type: TMarkerType,
+) => animalMarkerTypes.includes(type as any);
+
+/**
+ * Check if the specified type represents a generic marker type
+ *
+ * @param type Target type to check
+ */
+export const isGenericMarkerType = <TMarkerType extends MarkerType>(
+  type: TMarkerType,
+) => genericMarkerTypes.includes(type as any);
 
 /**
  * Determine if a marker is visible at the current map scale
@@ -75,30 +107,3 @@ export const isMarkerVisibleAtScale = (
   visibilityMap.has(type)
     ? mapScale >= (visibilityMap.get(type) ?? mapScale)
     : true;
-
-/**
- * Check if a marker of the specified type is enabled based on a list of filters
- *
- * @param type Target marker type
- * @param enabled List of enabled marker types
- */
-export const isMarkerEnabled = (
-  type: MarkerType,
-  enabled?: Array<MarkerType>,
-) => {
-  // List of need zone markers that should always be enabled
-  const zoneMarkers: Array<MarkerType> = [
-    'zone:drink',
-    'zone:eat',
-    'zone:gather',
-    'zone:path',
-    'zone:sleep',
-  ];
-
-  return (
-    zoneMarkers.includes(type) ||
-    !enabled ||
-    !enabled.length ||
-    enabled.includes(type)
-  );
-};

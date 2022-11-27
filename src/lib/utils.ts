@@ -15,3 +15,12 @@ export const formatNumber = (value: number) =>
   Intl.NumberFormat(undefined, {
     useGrouping: true,
   }).format(value);
+
+/**
+ * Check if a list includes the specified value (or is empty)
+ *
+ * @param value Value to lookup
+ * @param list Source value list
+ */
+export const hasListValue = <TValue>(value: TValue, list?: Array<TValue>) =>
+  !list || !list.length || list.includes(value);

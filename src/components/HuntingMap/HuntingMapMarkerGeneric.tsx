@@ -1,5 +1,12 @@
 import classnames from 'classnames';
-import { ForwardedRef, forwardRef, useCallback, useMemo, useRef } from 'react';
+import {
+  ForwardedRef,
+  forwardRef,
+  MouseEvent,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react';
 import { Transition } from 'react-transition-group';
 import { Marker } from 'components/Marker';
 import { useRefCallback } from 'hooks';
@@ -17,8 +24,7 @@ export const HuntingMapMarkerGeneric = forwardRef(
       highlighted,
       mapScale,
       marker,
-      markerFilter = [],
-      markerVisibilityMap,
+      markerRangeMap,
       maxMarkerSize,
       visible = true,
       onClick,
@@ -32,12 +38,9 @@ export const HuntingMapMarkerGeneric = forwardRef(
     const markerRef = useRef<HTMLImageElement>(null);
 
     // Determine if marker is visible
-    const markerVisible = useMemo(
-      () =>
-        visible &&
-        (!markerFilter.length || markerFilter.includes(marker.type)) &&
-        isMarkerVisibleAtScale(mapScale, marker.type, markerVisibilityMap),
-      [mapScale, marker.type, markerFilter, markerVisibilityMap, visible],
+    const markerVisibleAtScale = useMemo(
+      () => isMarkerVisibleAtScale(mapScale, marker.type, markerRangeMap),
+      [mapScale, marker.type, markerRangeMap],
     );
 
     // Container reference wrapping around outer an inner refs
@@ -53,13 +56,13 @@ export const HuntingMapMarkerGeneric = forwardRef(
      * Handle clicking on the marker
      */
     const handleClick = useCallback(
-      () => onClick && onClick(marker),
+      (event: MouseEvent<EventTarget>) => onClick && onClick(marker, event),
       [marker, onClick],
     );
 
     return (
       <Transition
-        in={markerVisible}
+        in={visible && markerVisibleAtScale}
         mountOnEnter={true}
         nodeRef={markerRef}
         timeout={150}

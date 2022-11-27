@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
@@ -5,15 +6,19 @@ type HuntingMapFilterValueChangeHandler = (
   type: MarkerType,
   selected: boolean,
 ) => void;
-type HuntingMapFilterChangeHandler = (types: Array<MarkerType>) => void;
-type HuntingMapMarkerClickHandler = (marker: MarkerOptions) => void;
+type HuntingMapFilterChangeHandler = (selectedTypes: Array<MarkerType>) => void;
+type HuntingMapMarkerClickHandler = (
+  marker: MarkerOptions,
+  event: MouseEvent<EventTarget>,
+) => void;
 type HuntingMapResetHandler = () => void;
 type HuntingMapZoomInHandler = () => void;
 type HuntingMapZoomOutHandler = () => void;
 
 export interface HuntingMapFilterProps {
-  enabledTypes?: Array<MarkerType>;
-  markerFilter: Array<MarkerType>;
+  animalMarkers: Array<AnimalMarkerOptions>;
+  genericMarkers: Array<MarkerOptions>;
+  selectedTypes: Array<MarkerType>;
   onChange?: HuntingMapFilterChangeHandler;
 }
 
@@ -34,9 +39,10 @@ export interface HuntingMapOffsets {
 export interface HuntingMapMarkerAnimalProps {
   mapScale: number;
   marker: AnimalMarkerOptions;
-  markerFilter?: Array<MarkerType>;
-  markerVisibilityMap: Map<MarkerType, number>;
+  markerRangeMap: Map<MarkerType, number>;
   maxMarkerSize: number;
+  selectedFilterTypes: Array<MarkerType>;
+  visible?: boolean;
 }
 
 export interface HuntingMapMarkerGenericProps {
@@ -44,9 +50,9 @@ export interface HuntingMapMarkerGenericProps {
   highlighted?: boolean;
   mapScale: number;
   marker: MarkerOptions;
-  markerFilter?: Array<MarkerType>;
-  markerVisibilityMap: Map<MarkerType, number>;
+  markerRangeMap: Map<MarkerType, number>;
   maxMarkerSize: number;
+  selectedFilterTypes: Array<MarkerType>;
   visible?: boolean;
   onClick?: HuntingMapMarkerClickHandler;
 }
@@ -60,20 +66,19 @@ export interface HuntingMapOptions {
 }
 
 export interface HuntingMapProps {
-  animalMarkers?: Array<AnimalMarkerOptions>;
+  animalMarkers: Array<AnimalMarkerOptions>;
   defaultScale?: number;
-  enabledTypes?: Array<MarkerType>;
-  genericMarkers?: Array<MarkerOptions>;
+  genericMarkers: Array<MarkerOptions>;
   imageHeight: number;
   imageSrc: string;
   imageWidth: number;
-  markerFilter?: Array<MarkerType>;
-  markerVisibilityMap?: Map<MarkerType, number>;
+  markerRangeMap?: Map<MarkerType, number>;
   maxMarkerSize?: number;
   maxScale?: number;
   minOverflow?: number;
   minScale?: number;
   scaleIncrement?: number;
+  selectedFilterTypes?: Array<MarkerType>;
   onClick?: HuntingMapClickHandler;
   onFilterChange?: HuntingMapFilterChangeHandler;
 }
