@@ -13,6 +13,7 @@ export const markerVisibilityMap = new Map<MarkerType, number>([
   ['animal:moose', 0.65],
   ['animal:mountain goat', 0.65],
   ['animal:pheasant', 0.65],
+  ['animal:ross goose', 0.65],
   ['cabin', 0.25],
   ['camp', 0.25],
   ['echo', 0.35],

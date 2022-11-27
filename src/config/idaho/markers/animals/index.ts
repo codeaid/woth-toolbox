@@ -5,3 +5,4 @@ export * from './grayWolf';
 export * from './moose';
 export * from './mountainGoat';
 export * from './pheasant';
+export * from './rossGoose';
