@@ -405,16 +405,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       handleMapDragCancel();
 
-      // Determine if mouse event occurred on map elements
-      const mouseOnWrapper = ref.current
-        ? ref.current.contains(event.nativeEvent.target as Node)
-        : false;
-      const mouseOnMap = imageRef.current
-        ? imageRef.current.contains(event.nativeEvent.target as Node)
-        : false;
-
       // Ignore clicks on markers
-      if (!onClick || (!mouseOnWrapper && !mouseOnMap)) {
+      if (!onClick || event.target !== imageRef.current) {
         return;
       }
 
