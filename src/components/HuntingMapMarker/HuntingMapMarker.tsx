@@ -62,7 +62,7 @@ export const HuntingMapMarker = forwardRef(
         in={visible && markerVisibleAtScale}
         mountOnEnter={true}
         nodeRef={markerRef}
-        timeout={150}
+        timeout={100}
         unmountOnExit={true}
       >
         {state => (
