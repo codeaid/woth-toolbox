@@ -7,9 +7,9 @@ import {
   useRef,
   useState,
 } from 'react';
+import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
-import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapMarkerAnimalProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
@@ -83,7 +83,7 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
     (markers: Array<MarkerOptions>) => (
       <>
         {markers.map(marker => (
-          <HuntingMapMarkerGeneric
+          <HuntingMapMarker
             key={getMarkerKey(marker)}
             mapScale={mapScale}
             marker={marker}
@@ -126,7 +126,7 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
   // Main animal icon
   const trigger = useMemo(
     () => (
-      <HuntingMapMarkerGeneric
+      <HuntingMapMarker
         className={classnames(styles.HuntingMapMarkerAnimal, {
           [styles.HuntingMapMarkerAnimalActive]: zonesVisible,
         })}

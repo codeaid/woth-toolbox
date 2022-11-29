@@ -1,39 +1,7 @@
-.HuntingMapMarker {
-  opacity: 1;
-  position: absolute;
-  transform: scale(0);
-  transition: opacity 100ms linear, transform 100ms linear;
-  z-index: 1;
-  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
-}
-
-.HuntingMapMarker:hover {
-  transform: scale(1.2);
-  z-index: 2;
-}
-
 .HuntingMapMarkerAnimal {
   cursor: pointer;
 }
 
 .HuntingMapMarkerAnimalActive {
   transform: scale(1.2) !important;
-}
-
-.HuntingMapMarkerStateEntering {
-  opacity: 1;
-  transform: scale(0);
-}
-
-.HuntingMapMarkerStateEntered {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.HuntingMapMarkerStateExiting {
-  opacity: 0;
-}
-
-.HuntingMapMarkerStateExited {
-  opacity: 0;
 }

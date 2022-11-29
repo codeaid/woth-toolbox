@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
@@ -7,10 +6,6 @@ type HuntingMapFilterValueChangeHandler = (
   selected: boolean,
 ) => void;
 type HuntingMapFilterChangeHandler = (selectedTypes: Array<MarkerType>) => void;
-type HuntingMapMarkerClickHandler = (
-  marker: MarkerOptions,
-  event: MouseEvent<EventTarget>,
-) => void;
 type HuntingMapResetHandler = () => void;
 type HuntingMapZoomInHandler = () => void;
 type HuntingMapZoomOutHandler = () => void;
@@ -44,18 +39,6 @@ export interface HuntingMapMarkerAnimalProps {
   maxMarkerSize: number;
   selectedFilterTypes: Array<MarkerType>;
   visible?: boolean;
-}
-
-export interface HuntingMapMarkerGenericProps {
-  className?: string;
-  highlighted?: boolean;
-  mapScale: number;
-  marker: MarkerOptions;
-  markerRangeMap: Map<MarkerType, number>;
-  maxMarkerSize: number;
-  selectedFilterTypes: Array<MarkerType>;
-  visible?: boolean;
-  onClick?: HuntingMapMarkerClickHandler;
 }
 
 export interface HuntingMapOptions {

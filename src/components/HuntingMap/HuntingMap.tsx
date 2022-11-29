@@ -9,18 +9,17 @@ import {
   useState,
   WheelEvent,
 } from 'react';
+import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { isHighlightedMarker } from 'lib/markers';
 import { hasListValue } from 'lib/utils';
 import { HuntingMapFilter } from './HuntingMapFilter';
 import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
-import { HuntingMapMarkerGeneric } from './HuntingMapMarkerGeneric';
 import { HuntingMapToolbar } from './HuntingMapToolbar';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
 const HuntingMapMarkerAnimalMemo = memo(HuntingMapMarkerAnimal);
-const HuntingMapMarkerGenericMemo = memo(HuntingMapMarkerGeneric);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
@@ -98,7 +97,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const markerListGeneric = useMemo(
     () =>
       genericMarkers.map((marker, index) => (
-        <HuntingMapMarkerGenericMemo
+        <HuntingMapMarker
           highlighted={isHighlightedMarker(marker)}
           key={index}
           mapScale={options.mapScale}

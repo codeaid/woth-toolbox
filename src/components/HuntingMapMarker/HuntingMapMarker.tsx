@@ -11,14 +11,11 @@ import { Transition } from 'react-transition-group';
 import { Icon } from 'components/Icon';
 import { useRefCallback } from 'hooks';
 import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
-import { HuntingMapMarkerGenericProps } from './types';
+import { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
-export const HuntingMapMarkerGeneric = forwardRef(
-  (
-    props: HuntingMapMarkerGenericProps,
-    ref: ForwardedRef<HTMLImageElement>,
-  ) => {
+export const HuntingMapMarker = forwardRef(
+  (props: HuntingMapMarkerProps, ref: ForwardedRef<HTMLImageElement>) => {
     const {
       className,
       highlighted,
@@ -96,4 +93,4 @@ export const HuntingMapMarkerGeneric = forwardRef(
   },
 );
 
-HuntingMapMarkerGeneric.displayName = 'HuntingMapMarkerGeneric';
+HuntingMapMarker.displayName = 'HuntingMapMarkerGeneric';
