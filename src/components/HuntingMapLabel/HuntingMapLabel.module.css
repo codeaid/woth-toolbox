@@ -1,0 +1,68 @@
+.HuntingMapLabel {
+  border-radius: 0.5em;
+  color: var(--text-primary);
+  opacity: 0;
+  overflow: hidden;
+  padding: 0.5em 1em;
+  position: absolute;
+  transition: opacity 150ms linear, transform 150ms linear;
+  z-index: 10;
+}
+
+.HuntingMapLabelBlur {
+  background-color: var(--elevation1);
+  bottom: -1em;
+  filter: blur(0.1em);
+  left: -1em;
+  opacity: 0.657;
+  position: absolute;
+  right: -1em;
+  top: -1em;
+  z-index: -1;
+}
+
+.HuntingMapLabelSeparator {
+  background: rgba(235, 221, 210, 0.5);
+  background: linear-gradient(
+      90deg,
+      rgba(235, 221, 210, 0.1) 0%,
+      rgba(235, 221, 210, 0.8) 50%,
+      rgba(235, 221, 210, 0.1) 100%);
+  box-shadow: var(--shadow);
+  height: 1px;
+  margin: 0.1em 0 0.5em;
+}
+
+.HuntingMapLabelStateEntering {
+  opacity: 1;
+}
+
+.HuntingMapLabelStateEntered {
+  opacity: 1;
+}
+
+.HuntingMapLabelStateExiting {
+  opacity: 0;
+}
+
+.HuntingMapLabelStateExited {
+  opacity: 0;
+}
+
+.HuntingMapLabelSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  text-align: center;
+  z-index: 1;
+}
+
+.HuntingMapLabelTitle {
+  display: flex;
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.1em;
+  font-weight: 500;
+  justify-content: center;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 1;
+}
