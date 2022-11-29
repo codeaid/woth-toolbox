@@ -12,10 +12,10 @@ import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
 import { HuntingMapFilter } from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
+import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { isHighlightedMarker } from 'lib/markers';
 import { hasListValue } from 'lib/utils';
-import { HuntingMapToolbar } from './HuntingMapToolbar';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 

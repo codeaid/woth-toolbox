@@ -1,6 +1,6 @@
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
+import { IconButton } from 'components/IconButton';
 import { HuntingMapToolbarProps } from './types';
-import buttonStyles from './HuntingMapButton.module.css';
 import styles from './HuntingMapToolbar.module.css';
 
 export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {
@@ -8,15 +8,15 @@ export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {
 
   return (
     <div className={styles.HuntingMapToolbar}>
-      <button className={buttonStyles.HuntingMapButton} onClick={onZoomIn}>
+      <IconButton onClick={onZoomIn}>
         <RiZoomInLine />
-      </button>
-      <button className={buttonStyles.HuntingMapButton} onClick={onZoomOut}>
+      </IconButton>
+      <IconButton onClick={onZoomOut}>
         <RiZoomOutLine />
-      </button>
-      <button className={buttonStyles.HuntingMapButton} onClick={onReset}>
+      </IconButton>
+      <IconButton onClick={onReset}>
         <RiArrowGoBackFill />
-      </button>
+      </IconButton>
     </div>
   );
 };

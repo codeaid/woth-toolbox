@@ -3,9 +3,6 @@ import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
-type HuntingMapResetHandler = () => void;
-type HuntingMapZoomInHandler = () => void;
-type HuntingMapZoomOutHandler = () => void;
 
 export interface HuntingMapOffsets {
   pageX: number;
@@ -39,10 +36,4 @@ export interface HuntingMapProps {
   selectedFilterTypes?: Array<MarkerType>;
   onClick?: HuntingMapClickHandler;
   onFilterChange?: HuntingMapFilterChangeHandler;
-}
-
-export interface HuntingMapToolbarProps {
-  onReset: HuntingMapResetHandler;
-  onZoomIn: HuntingMapZoomInHandler;
-  onZoomOut: HuntingMapZoomOutHandler;
 }
