@@ -32,15 +32,6 @@ export interface HuntingMapOffsets {
   translateY: number;
 }
 
-export interface HuntingMapMarkerAnimalProps {
-  mapScale: number;
-  marker: AnimalMarkerOptions;
-  markerRangeMap: Map<MarkerType, number>;
-  maxMarkerSize: number;
-  selectedFilterTypes: Array<MarkerType>;
-  visible?: boolean;
-}
-
 export interface HuntingMapOptions {
   mapHeight: number;
   mapLeft: number;

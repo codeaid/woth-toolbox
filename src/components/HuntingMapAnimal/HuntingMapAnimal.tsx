@@ -10,10 +10,10 @@ import {
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { getMarkerKey } from 'lib/markers';
 import { MarkerOptions } from 'types/markers';
-import { HuntingMapMarkerAnimalProps } from './types';
-import styles from './HuntingMapMarker.module.css';
+import { HuntingMapAnimalProps } from './types';
+import styles from './HuntingMapAnimal.module.css';
 
-export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
+export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
   const {
     mapScale,
     marker,
@@ -40,7 +40,7 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
     // Hide need zones if clicking on another animal icon
     if (
       (event.target as HTMLElement).classList.contains(
-        styles.HuntingMapMarkerAnimal,
+        styles.HuntingMapAnimal,
       ) &&
       event.target !== triggerRef.current
     ) {
@@ -127,8 +127,8 @@ export const HuntingMapMarkerAnimal = (props: HuntingMapMarkerAnimalProps) => {
   const trigger = useMemo(
     () => (
       <HuntingMapMarker
-        className={classnames(styles.HuntingMapMarkerAnimal, {
-          [styles.HuntingMapMarkerAnimalActive]: zonesVisible,
+        className={classnames(styles.HuntingMapAnimal, {
+          [styles.HuntingMapAnimalActive]: zonesVisible,
         })}
         highlighted={zonesVisible}
         mapScale={mapScale}

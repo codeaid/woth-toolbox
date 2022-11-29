@@ -1,7 +1,7 @@
-.HuntingMapMarkerAnimal {
+.HuntingMapAnimal {
   cursor: pointer;
 }
 
-.HuntingMapMarkerAnimalActive {
+.HuntingMapAnimalActive {
   transform: scale(1.2) !important;
 }

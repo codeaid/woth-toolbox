@@ -1,5 +1,4 @@
 import {
-  memo,
   MouseEvent,
   TouchEvent,
   useCallback,
@@ -9,17 +8,15 @@ import {
   useState,
   WheelEvent,
 } from 'react';
+import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { isHighlightedMarker } from 'lib/markers';
 import { hasListValue } from 'lib/utils';
 import { HuntingMapFilter } from './HuntingMapFilter';
-import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
 import { HuntingMapToolbar } from './HuntingMapToolbar';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
-
-const HuntingMapMarkerAnimalMemo = memo(HuntingMapMarkerAnimal);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
@@ -74,7 +71,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const markerListAnimals = useMemo(
     () =>
       animalMarkers.map((marker, index) => (
-        <HuntingMapMarkerAnimalMemo
+        <HuntingMapAnimal
           key={index}
           mapScale={options.mapScale}
           marker={marker}
