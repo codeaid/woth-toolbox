@@ -105,4 +105,4 @@ export const HuntingMapMarker = forwardRef(
   },
 );
 
-HuntingMapMarker.displayName = 'HuntingMapMarkerGeneric';
+HuntingMapMarker.displayName = 'HuntingMapMarker';
