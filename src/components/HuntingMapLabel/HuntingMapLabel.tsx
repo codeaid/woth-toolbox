@@ -8,10 +8,13 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
   const { name, habitat, left, mapScale, maxMapScale, minMapScale, top } =
     props;
 
+  // Reference to the parent label element
   const ref = useRef<HTMLDivElement>(null);
 
+  // Tuple storing label's width and height once it becomes available
   const [size, setSize] = useState<[number, number]>([0, 0]);
 
+  // Generate CSS styles to apply to the parent element
   const style = useMemo<CSSProperties>(() => {
     const [width, height] = size;
 
@@ -21,11 +24,13 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
     };
   }, [left, size, top]);
 
+  // Determine if the label is visible at current map scale
   const visible = useMemo(
     () => mapScale >= minMapScale && mapScale <= maxMapScale,
     [mapScale, maxMapScale, minMapScale],
   );
 
+  // Store parent element's height and width once the component mounts
   useEffect(() => {
     if (!ref.current) {
       return;
