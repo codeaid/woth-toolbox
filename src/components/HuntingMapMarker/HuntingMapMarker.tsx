@@ -49,6 +49,17 @@ export const HuntingMapMarker = forwardRef(
       [maxMarkerSize, mapScale],
     );
 
+    // Generate marker's coordinate title in development mode
+    const title = useMemo(() => {
+      // Disable marker titles in production mode
+      if (process.env.NODE_ENV !== 'development') {
+        return;
+      }
+
+      const [x, y] = marker.coords;
+      return `${x} ... ${y}`;
+    }, [marker.coords]);
+
     /**
      * Handle clicking on the marker
      */
@@ -84,6 +95,7 @@ export const HuntingMapMarker = forwardRef(
               left: `calc(${left * 100}% - ${size / 2}px)`,
               top: `calc(${top * 100}% - ${size / 2}px)`,
             }}
+            title={title}
             type={type}
             onClick={handleClick}
           />
