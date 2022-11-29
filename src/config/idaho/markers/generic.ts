@@ -10,6 +10,7 @@ export const cabinMarkers = createMarkerOptions('cabin', [
 export const campMarkers = createMarkerOptions('camp', [
   [0.0888671875, 0.565673828125],
   [0.121826171875, 0.328125],
+  [0.152099609375, 0.85107421875],
   [0.20556640625, 0.52734375],
   [0.22314453125, 0.12890625],
   [0.30029296875, 0.921875],
