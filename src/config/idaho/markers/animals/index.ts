@@ -8,4 +8,5 @@ export * from './mountainGoat';
 export * from './muleDeer';
 export * from './pheasant';
 export * from './rossGoose';
+export * from './showshoeHare';
 export * from './wildDuck';
