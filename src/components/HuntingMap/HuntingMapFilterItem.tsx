@@ -5,7 +5,7 @@ import { HuntingMapFilterItemProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
-  const { children, selected, type, onToggle } = props;
+  const { children, large = false, selected, type, onToggle } = props;
 
   /**
    * Handle clicking on the filter item
@@ -22,7 +22,7 @@ export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
       onClick={handleClick}
     >
       <span className={styles.HuntingMapFilterMenuItemLabel}>{children}</span>
-      <Icon highlighted={selected} size={40} type={type} />
+      <Icon highlighted={selected} size={large ? 38 : 28} type={type} />
     </li>
   );
 };

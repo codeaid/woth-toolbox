@@ -93,6 +93,16 @@ export const isGenericMarkerType = <TMarkerType extends MarkerType>(
 ) => genericMarkerTypes.includes(type as any);
 
 /**
+ * Determine if marker should always be represented in its highlighted form
+ *
+ * @param marker Marker to validate
+ */
+export const isHighlightedMarker = (marker: MarkerOptions) =>
+  (['cabin', 'camp', 'lodge', 'shooting range'] as Array<MarkerType>).includes(
+    marker.type,
+  );
+
+/**
  * Determine if a marker is visible at the current map scale
  *
  * @param mapScale Current map scale (zoom)

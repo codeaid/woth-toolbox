@@ -10,6 +10,7 @@ import {
   WheelEvent,
 } from 'react';
 import { LoadingOverlay } from 'components/LoadingOverlay';
+import { isHighlightedMarker } from 'lib/markers';
 import { hasListValue } from 'lib/utils';
 import { HuntingMapFilter } from './HuntingMapFilter';
 import { HuntingMapMarkerAnimal } from './HuntingMapMarkerAnimal';
@@ -98,6 +99,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () =>
       genericMarkers.map((marker, index) => (
         <HuntingMapMarkerGenericMemo
+          highlighted={isHighlightedMarker(marker)}
           key={index}
           mapScale={options.mapScale}
           marker={marker}

@@ -24,6 +24,7 @@ export interface HuntingMapFilterProps {
 
 export interface HuntingMapFilterItemProps {
   children: string;
+  large?: boolean;
   selected: boolean;
   type: MarkerType;
   onToggle: HuntingMapFilterValueChangeHandler;

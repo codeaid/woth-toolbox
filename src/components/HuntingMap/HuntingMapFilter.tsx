@@ -94,7 +94,11 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * @param options Map of option types and names to render
    */
   const renderOptions = useCallback(
-    (types: Array<MarkerType>, nameMap: Map<MarkerType, string>) => (
+    (
+      types: Array<MarkerType>,
+      nameMap: Map<MarkerType, string>,
+      large: boolean,
+    ) => (
       <>
         {types
           .map(type => ({ name: nameMap.get(type) ?? '', type }))
@@ -102,6 +106,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           .map(({ name, type }) => (
             <HuntingMapFilterItem
               key={type}
+              large={large}
               selected={selectedTypes.includes(type)}
               type={type}
               onToggle={handleToggleType}
@@ -120,7 +125,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       markerTypesAnimals.length && (
         <>
           <SectionHeader>Animals</SectionHeader>
-          {renderOptions(markerTypesAnimals, animalNameMap)}
+          {renderOptions(markerTypesAnimals, animalNameMap, true)}
         </>
       ),
     [markerTypesAnimals, renderOptions],
@@ -132,7 +137,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       markerTypesGeneric.length && (
         <>
           <SectionHeader>General</SectionHeader>
-          {renderOptions(markerTypesGeneric, genericNameMap)}
+          {renderOptions(markerTypesGeneric, genericNameMap, false)}
         </>
       ),
     [markerTypesGeneric, renderOptions],

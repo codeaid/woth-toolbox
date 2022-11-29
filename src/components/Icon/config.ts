@@ -70,4 +70,12 @@ export const iconMapHighlighted: Partial<Record<IconType, string>> = {
   'animal:white-tailed deer': 'animals/highlighted/white_tailed_deer',
   'animal:wild boar': 'animals/highlighted/wild_boar',
   'animal:wild duck': 'animals/highlighted/wild_duck',
+  'cabin': 'highlighted/cabin',
+  'camp': 'highlighted/camp',
+  'echo': 'highlighted/echo',
+  'hunting stand': 'highlighted/hunting_stand',
+  'lodge': 'highlighted/lodge',
+  'photo': 'highlighted/photo',
+  'shooting range': 'highlighted/shooting_range',
+  'view': 'highlighted/view',
 };

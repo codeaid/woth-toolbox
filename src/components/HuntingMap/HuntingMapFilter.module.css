@@ -27,7 +27,7 @@
   align-items: center;
   cursor: pointer;
   display: flex;
-  height: 3.5em;
+  height: 3em;
   justify-content: space-between;
   padding: 0 1em;
   transition: background-color 100ms ease-in-out;
@@ -38,8 +38,19 @@
   background-color: var(--elevation4);
 }
 
+.HuntingMapFilterMenuItem img {
+  filter: grayscale(100%);
+  transition: filter 100ms ease-in-out, transform 100ms ease-in-out;
+}
+
+.HuntingMapFilterMenuItemEnabled img {
+  filter: grayscale(0%);
+  transform: scale(1.15);
+}
+
 .HuntingMapFilterMenuItemLabel {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 
 .HuntingMapFilterMenuItemEnabled .HuntingMapFilterMenuItemLabel {
