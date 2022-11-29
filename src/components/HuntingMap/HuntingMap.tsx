@@ -477,13 +477,27 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleWheel = useCallback(
     (event: WheelEvent<EventTarget>) => {
-      // Determine if scroll wheel was used on the map image itself
-      if (event.target !== imageRef.current) {
+      // Ensure image element is available
+      if (!imageRef.current) {
         return;
       }
 
-      // Zoom map at its centre if not scrolling directly on the image
-      const { offsetX, offsetY } = event.nativeEvent;
+      // Use map's mouse offset by default
+      let { offsetX, offsetY } = event.nativeEvent;
+
+      // Calculate offsets using page and image position if scroll did not occur
+      // over the image
+      if (event.target !== imageRef.current) {
+        // Determine current mouse position in relation to the page
+        const { pageX, pageY } = event.nativeEvent;
+
+        // Get position of the image in relation to the page
+        const { x, y } = imageRef.current.getBoundingClientRect();
+
+        // Calculate map offset at which the mouse is being scrolled
+        offsetX = Math.round(pageX - x);
+        offsetY = Math.round(pageY - y);
+      }
 
       // Scroll down = positive delta, scroll up = negative delta
       Math.sign(event.deltaY) < 0
