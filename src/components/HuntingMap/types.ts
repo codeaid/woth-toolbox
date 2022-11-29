@@ -1,3 +1,4 @@
+import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
@@ -47,6 +48,7 @@ export interface HuntingMapProps {
   imageHeight: number;
   imageSrc: string;
   imageWidth: number;
+  labels?: Array<HuntingMapLabelOptions>;
   markerRangeMap?: Map<MarkerType, number>;
   maxMarkerSize?: number;
   maxScale?: number;

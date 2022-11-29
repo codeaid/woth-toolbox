@@ -9,6 +9,7 @@ import {
   WheelEvent,
 } from 'react';
 import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
+import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { isHighlightedMarker } from 'lib/markers';
@@ -26,6 +27,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     imageHeight,
     imageSrc,
     imageWidth,
+    labels = [],
     markerRangeMap = new Map(),
     maxMarkerSize = 38,
     maxScale = 2.5,
@@ -66,6 +68,21 @@ export const HuntingMap = (props: HuntingMapProps) => {
     mapTop: 0,
     mapWidth: imageWidth * defaultScale,
   });
+
+  // List of map habitat labels
+  const mapLabels = useMemo(
+    () =>
+      labels.map((label, index) => (
+        <HuntingMapLabel
+          {...label}
+          key={index}
+          mapScale={options.mapScale}
+          maxMapScale={0.64}
+          minMapScale={0.25}
+        />
+      )),
+    [labels, options.mapScale],
+  );
 
   // List of animal map marker elements
   const markerListAnimals = useMemo(
@@ -567,6 +584,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
     };
   }, [getBoundMapCoords, handleWindowResize, options]);
 
+  useEffect(() => console.info('Scale:', options.mapScale), [options.mapScale]);
+
   return (
     <>
       {!imageLoaded && (
@@ -605,6 +624,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
             width: `${options.mapWidth}px`,
           }}
         >
+          {imageLoaded && mapLabels}
           {imageLoaded && markerListAnimals}
           {imageLoaded && markerListGeneric}
           {/* eslint-disable-next-line @next/next/no-img-element */}
