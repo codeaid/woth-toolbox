@@ -14,7 +14,7 @@
   --shadow: 0 0.2rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
   --shadow-strong: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   --text-highlight: #ffffff;
-  --text-primary: #e8dacf;
+  --text-primary: rgb(235, 221, 210);
   --text-secondary: #948b82;
   --variance-optimal: #208b3a;
   --variance-suboptimal: #f35b04;
