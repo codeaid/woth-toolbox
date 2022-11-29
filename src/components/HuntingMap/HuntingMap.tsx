@@ -584,8 +584,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     };
   }, [getBoundMapCoords, handleWindowResize, options]);
 
-  useEffect(() => console.info('Scale:', options.mapScale), [options.mapScale]);
-
   return (
     <>
       {!imageLoaded && (
