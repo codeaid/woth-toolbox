@@ -5,6 +5,7 @@ export * from './grayWolf';
 export * from './lesserScoup';
 export * from './moose';
 export * from './mountainGoat';
+export * from './muleDeer';
 export * from './pheasant';
 export * from './rossGoose';
 export * from './wildDuck';
