@@ -5,7 +5,7 @@ import styles from './IconButton.module.css';
 
 export const IconButton = forwardRef(
   (props: IconButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
-    const { className, highlighted = false } = props;
+    const { className, highlighted = false, ...rest } = props;
 
     // Generate component class names
     const classNames = useMemo(
@@ -20,7 +20,7 @@ export const IconButton = forwardRef(
       [className, highlighted],
     );
 
-    return <button {...props} className={classNames} ref={ref} />;
+    return <button {...rest} className={classNames} ref={ref} />;
   },
 );
 
