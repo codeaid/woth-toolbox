@@ -1,18 +1,17 @@
-import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import { SectionHeader } from 'components/SectionHeader';
 import { animalNameMap, genericNameMap } from 'config/names';
+import { IconButton } from 'components/IconButton';
 import {
   getMarkerOptionTypes,
   isAnimalMarkerType,
   isGenericMarkerType,
 } from 'lib/markers';
+import { MarkerType } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterProps } from './types';
-import buttonStyles from './HuntingMapButton.module.css';
 import styles from './HuntingMapFilter.module.css';
-import { MarkerType } from 'types/markers';
 
 export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const { animalMarkers, genericMarkers, selectedTypes, onChange } = props;
@@ -181,17 +180,13 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   return (
     <>
       <div className={styles.HuntingMapFilter}>
-        <button
-          className={buttonStyles.HuntingMapButton}
+        <IconButton
+          highlighted={!!selectedTypes.length}
           ref={buttonRef}
           onClick={handleButtonClick}
         >
-          <BsEyeFill
-            className={classnames({
-              [buttonStyles.HuntingMapIconHighlighted]: !!selectedTypes.length,
-            })}
-          />
-        </button>
+          <BsEyeFill />
+        </IconButton>
       </div>
       {renderedFilterMenu}
     </>

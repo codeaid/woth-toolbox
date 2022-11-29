@@ -1,30 +1,11 @@
+import { HuntingMapFilterChangeHandler } from 'components/HuntingMapFilter';
 import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
-type HuntingMapFilterValueChangeHandler = (
-  type: MarkerType,
-  selected: boolean,
-) => void;
-type HuntingMapFilterChangeHandler = (selectedTypes: Array<MarkerType>) => void;
 type HuntingMapResetHandler = () => void;
 type HuntingMapZoomInHandler = () => void;
 type HuntingMapZoomOutHandler = () => void;
-
-export interface HuntingMapFilterProps {
-  animalMarkers: Array<AnimalMarkerOptions>;
-  genericMarkers: Array<MarkerOptions>;
-  selectedTypes: Array<MarkerType>;
-  onChange?: HuntingMapFilterChangeHandler;
-}
-
-export interface HuntingMapFilterItemProps {
-  children: string;
-  large?: boolean;
-  selected: boolean;
-  type: MarkerType;
-  onToggle: HuntingMapFilterValueChangeHandler;
-}
 
 export interface HuntingMapOffsets {
   pageX: number;
