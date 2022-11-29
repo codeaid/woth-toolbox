@@ -77,8 +77,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
           {...label}
           key={index}
           mapScale={options.mapScale}
-          maxMapScale={0.64}
-          minMapScale={0.25}
+          maxMapScale={0.6}
+          minMapScale={0.22}
         />
       )),
     [labels, options.mapScale],
