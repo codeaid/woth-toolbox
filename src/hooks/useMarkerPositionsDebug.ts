@@ -47,12 +47,12 @@ export const useMarkerPositionsDebug = (
 
       // Print position to the console
       const position: MarkerPosition = [ratioX, ratioY];
-      consoleLogClean(position);
 
       // Add marker to the list
       setPositions(current => [...current, position]);
+      consoleLogClean(position, positions.length + 1);
     },
-    [mapHeight, mapWidth],
+    [mapHeight, mapWidth, positions],
   );
 
   // Total target number of coordinates
