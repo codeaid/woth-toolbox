@@ -50,7 +50,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const isDragging = useRef(false);
 
   // Information containing pointer offsets at the start of the drag operation
-  const [dragStart, setDragStart] = useState<HuntingMapOffsets>({
+  const dragStart = useRef<HuntingMapOffsets>({
     pageX: 0,
     pageY: 0,
     translateX: 0,
@@ -228,12 +228,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       // Store the starting pointer position as well as current
       // map position offsets for use during the drag process
-      setDragStart({
+      dragStart.current = {
         pageX,
         pageY,
         translateX: mapLeft,
         translateY: mapTop,
-      });
+      };
 
       // Enable drag functionality
       isDragging.current = true;
@@ -255,12 +255,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
       }
 
       // Calculate differences between initial pointer position and current
-      const deltaX = dragStart.pageX - pageX;
-      const deltaY = dragStart.pageY - pageY;
+      const deltaX = dragStart.current.pageX - pageX;
+      const deltaY = dragStart.current.pageY - pageY;
 
       // Offset map position by the deltas
-      let translateX = dragStart.translateX - deltaX;
-      let translateY = dragStart.translateY - deltaY;
+      let translateX = dragStart.current.translateX - deltaX;
+      let translateY = dragStart.current.translateY - deltaY;
 
       // Ensure map remains within the boundaries
       const [mapLeft, mapTop] = getBoundMapCoords(translateX, translateY);
@@ -272,7 +272,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         mapTop,
       }));
     },
-    [dragStart, getBoundMapCoords],
+    [getBoundMapCoords],
   );
 
   /**
