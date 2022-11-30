@@ -34,7 +34,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     maxScale = 2.5,
     minOverflow = 200,
     minScale = 0.2,
-    scaleIncrement = 0.02,
+    scaleIncrement = 0.1,
     onClick,
     onFilterChange,
   } = props;
