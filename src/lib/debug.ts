@@ -45,5 +45,8 @@ export const getMarkerOptionSnippet = (
  *
  * @param text Text to copy
  */
-export const copyTextToClipboard = async (text: string) =>
-  await navigator.clipboard.writeText(text);
+export const copyTextToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (e) {}
+};
