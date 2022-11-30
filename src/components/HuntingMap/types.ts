@@ -1,4 +1,7 @@
-import { HuntingMapFilterChangeHandler } from 'components/HuntingMapFilter';
+import {
+  HuntingMapFilterChangeHandler,
+  HuntingMapFilterOptions,
+} from 'components/HuntingMapFilter';
 import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
 import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
 
@@ -22,6 +25,7 @@ export interface HuntingMapOptions {
 export interface HuntingMapProps {
   animalMarkers: Array<AnimalMarkerOptions>;
   defaultScale?: number;
+  filterOptions: HuntingMapFilterOptions;
   genericMarkers: Array<MarkerOptions>;
   imageHeight: number;
   imageSrc: string;
@@ -33,7 +37,6 @@ export interface HuntingMapProps {
   minOverflow?: number;
   minScale?: number;
   scaleIncrement?: number;
-  selectedFilterTypes?: Array<MarkerType>;
   onClick?: HuntingMapClickHandler;
   onFilterChange?: HuntingMapFilterChangeHandler;
 }

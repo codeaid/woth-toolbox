@@ -14,7 +14,7 @@ import { HuntingMapFilterProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
-  const { animalMarkers, genericMarkers, selectedTypes, onChange } = props;
+  const { animalMarkers, genericMarkers, options, onChange } = props;
 
   // Flag indicating whether the filter menu is currently visible
   const [menuVisible, setMenuVisible] = useState(false);
@@ -79,12 +79,15 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
       // Update list of enabled types
       const types = selected
-        ? [...new Set(selectedTypes).add(type)]
-        : selectedTypes.filter(marker => marker !== type);
+        ? [...new Set(options.selectedTypes).add(type)]
+        : options.selectedTypes.filter(marker => marker !== type);
 
-      onChange(types);
+      onChange({
+        ...options,
+        selectedTypes: types,
+      });
     },
-    [selectedTypes, onChange],
+    [options, onChange],
   );
 
   /**
@@ -106,7 +109,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
             <HuntingMapFilterItem
               key={type}
               large={large}
-              selected={selectedTypes.includes(type)}
+              selected={options.selectedTypes.includes(type)}
               type={type}
               onToggle={handleToggleType}
             >
@@ -115,7 +118,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           ))}
       </>
     ),
-    [handleToggleType, selectedTypes],
+    [handleToggleType, options],
   );
 
   // Render animal options
@@ -181,7 +184,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     <>
       <div className={styles.HuntingMapFilter}>
         <IconButton
-          highlighted={!!selectedTypes.length}
+          highlighted={!!options.selectedTypes.length}
           ref={buttonRef}
           onClick={handleButtonClick}
         >

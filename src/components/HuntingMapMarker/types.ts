@@ -13,7 +13,6 @@ export interface HuntingMapMarkerProps {
   marker: MarkerOptions;
   markerRangeMap: Map<MarkerType, number>;
   maxMarkerSize: number;
-  selectedFilterTypes: Array<MarkerType>;
   visible?: boolean;
   onClick?: HuntingMapMarkerClickHandler;
 }

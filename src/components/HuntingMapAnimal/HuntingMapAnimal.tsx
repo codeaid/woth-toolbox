@@ -19,7 +19,6 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
     marker,
     markerRangeMap,
     maxMarkerSize,
-    selectedFilterTypes,
     visible = true,
   } = props;
 
@@ -89,20 +88,12 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
             marker={marker}
             markerRangeMap={markerRangeMap}
             maxMarkerSize={maxMarkerSize * 1.2}
-            selectedFilterTypes={selectedFilterTypes}
             visible={visible && zonesVisible}
           />
         ))}
       </>
     ),
-    [
-      mapScale,
-      markerRangeMap,
-      maxMarkerSize,
-      selectedFilterTypes,
-      visible,
-      zonesVisible,
-    ],
+    [mapScale, markerRangeMap, maxMarkerSize, visible, zonesVisible],
   );
 
   // Drink need zones
@@ -136,7 +127,6 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
         markerRangeMap={markerRangeMap}
         maxMarkerSize={70}
         ref={triggerRef}
-        selectedFilterTypes={selectedFilterTypes}
         visible={visible}
         onClick={handleTriggerClick}
       />
@@ -146,7 +136,6 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
       mapScale,
       marker,
       markerRangeMap,
-      selectedFilterTypes,
       visible,
       zonesVisible,
     ],

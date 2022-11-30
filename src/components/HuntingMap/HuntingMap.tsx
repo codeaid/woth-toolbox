@@ -23,6 +23,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkers,
     defaultScale = 0.25,
+    filterOptions,
     genericMarkers,
     imageHeight,
     imageSrc,
@@ -34,7 +35,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     minOverflow = 200,
     minScale = 0.2,
     scaleIncrement = 0.02,
-    selectedFilterTypes = [],
     onClick,
     onFilterChange,
   } = props;
@@ -94,16 +94,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
           marker={marker}
           markerRangeMap={markerRangeMap}
           maxMarkerSize={maxMarkerSize}
-          selectedFilterTypes={selectedFilterTypes}
-          visible={hasListValue(marker.type, selectedFilterTypes)}
+          visible={hasListValue(marker.type, filterOptions.selectedTypes)}
         />
       )),
     [
       animalMarkers,
+      filterOptions.selectedTypes,
       markerRangeMap,
       maxMarkerSize,
       options.mapScale,
-      selectedFilterTypes,
     ],
   );
 
@@ -118,16 +117,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
           marker={marker}
           markerRangeMap={markerRangeMap}
           maxMarkerSize={maxMarkerSize}
-          selectedFilterTypes={selectedFilterTypes}
-          visible={hasListValue(marker.type, selectedFilterTypes)}
+          visible={hasListValue(marker.type, filterOptions.selectedTypes)}
         />
       )),
     [
+      filterOptions.selectedTypes,
       genericMarkers,
       markerRangeMap,
       maxMarkerSize,
       options.mapScale,
-      selectedFilterTypes,
     ],
   );
 
@@ -592,7 +590,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       <HuntingMapFilter
         animalMarkers={animalMarkers}
         genericMarkers={genericMarkers}
-        selectedTypes={selectedFilterTypes}
+        options={filterOptions}
         onChange={onFilterChange}
       />
       <HuntingMapToolbar

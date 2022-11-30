@@ -2,17 +2,17 @@ import Head from 'next/head';
 import { useState } from 'react';
 import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
+import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
 import { baseUrl } from 'config/app';
-import { MarkerType } from 'types/markers';
 import { mapHeight, mapLabels, mapWidth, markerVisibilityMap } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
 
 const NezPerceValleyPage = () => {
   // Marker filter state
-  const [selectedFilterTypes, setSelectedFilterTypes] = useState<
-    Array<MarkerType>
-  >([]);
+  const [filterOptions, setFilterOptions] = useState<HuntingMapFilterOptions>({
+    selectedTypes: [],
+  });
 
   return (
     <>
@@ -23,14 +23,14 @@ const NezPerceValleyPage = () => {
       <NoSSR>
         <HuntingMap
           animalMarkers={animalMarkers}
+          filterOptions={filterOptions}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
           imageWidth={mapWidth}
           genericMarkers={genericMarkers}
           labels={mapLabels}
           markerRangeMap={markerVisibilityMap}
-          selectedFilterTypes={selectedFilterTypes}
-          onFilterChange={setSelectedFilterTypes}
+          onFilterChange={setFilterOptions}
         />
       </NoSSR>
     </>
