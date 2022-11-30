@@ -1,3 +1,4 @@
+import sha1 from 'sha1';
 import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
 import {
   AnimalMarkerOptions,
@@ -48,9 +49,7 @@ export const createMarkerOptions = <TMarkerType extends MarkerType>(
  * @param marker Source marker
  */
 export const getMarkerKey = (marker: MarkerOptions) =>
-  `${marker.type}:${marker.coords[0].toFixed(4)}:${marker.coords[1].toFixed(
-    4,
-  )}`;
+  sha1(`${marker.coords[0].toFixed(4)}:${marker.coords[1]}`).substring(0, 8);
 
 /**
  * Get list of marker types from the specified list of options
