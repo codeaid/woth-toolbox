@@ -1,0 +1,12 @@
+.AnimalEditorAction {
+  display: block;
+  width: 100%;
+}
+
+.AnimalEditorActionReset {
+  background-color: var(--danger);
+}
+
+.AnimalEditorActionSave {
+  background-color: var(--info);
+}
