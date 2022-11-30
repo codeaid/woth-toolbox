@@ -4,7 +4,9 @@ import {
   forwardRef,
   FunctionComponent,
   SVGProps,
+  useCallback,
   useMemo,
+  useRef,
 } from 'react';
 import { isZoneMarker } from 'lib/markers';
 import { NeedZoneMarkerType } from 'types/markers';
@@ -23,7 +25,11 @@ export const Icon = forwardRef(
       title,
       type,
       onClick,
+      onLongPress,
     } = props;
+
+    // Long press timeout handle
+    const longPressHandle = useRef<NodeJS.Timeout>();
 
     // Generate component class name
     const classNames = useMemo(
@@ -60,6 +66,25 @@ export const Icon = forwardRef(
       return <Component height={size} width={size} />;
     }, [size, type]);
 
+    /**
+     * Cancel long press timer if set
+     */
+    const handleTouchEnd = useCallback(
+      () => clearTimeout(longPressHandle.current),
+      [],
+    );
+
+    /**
+     * Start timer to detect long presses on the icon
+     */
+    const handleTouchStart = useCallback(() => {
+      if (!onLongPress) {
+        return;
+      }
+
+      longPressHandle.current = setTimeout(onLongPress, 500);
+    }, [onLongPress]);
+
     return (
       <div
         className={classNames}
@@ -67,6 +92,8 @@ export const Icon = forwardRef(
         style={style}
         title={title}
         onClick={onClick}
+        onTouchEnd={handleTouchEnd}
+        onTouchStart={handleTouchStart}
       >
         {image}
       </div>
@@ -74,4 +101,4 @@ export const Icon = forwardRef(
   },
 );
 
-Icon.displayName = 'Marker';
+Icon.displayName = 'Icon';
