@@ -1,6 +1,7 @@
 export * from './americanBadger';
 export * from './americanBlackBear';
 export * from './bighornSheep';
+export * from './elk';
 export * from './grayWolf';
 export * from './lesserScoup';
 export * from './moose';
