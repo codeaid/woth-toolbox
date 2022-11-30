@@ -1,0 +1,10 @@
+.Label {
+  color: var(--text-secondary);
+  display: block;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 0.25em;
+  margin-left: 0.1em;
+  text-transform: uppercase;
+  user-select: none;
+}
