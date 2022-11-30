@@ -14,7 +14,7 @@ import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { isHighlightedMarker } from 'lib/markers';
+import { getMarkerKey, isHighlightedMarker } from 'lib/markers';
 import { hasListValue } from 'lib/utils';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
@@ -87,9 +87,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // List of animal map marker elements
   const markerListAnimals = useMemo(
     () =>
-      animalMarkers.map((marker, index) => (
+      animalMarkers.map(marker => (
         <HuntingMapAnimal
-          key={index}
+          key={getMarkerKey(marker)}
           mapScale={options.mapScale}
           marker={marker}
           markerRangeMap={markerRangeMap}
@@ -110,10 +110,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // List of generic map marker elements
   const markerListGeneric = useMemo(
     () =>
-      genericMarkers.map((marker, index) => (
+      genericMarkers.map(marker => (
         <HuntingMapMarker
           highlighted={isHighlightedMarker(marker)}
-          key={index}
+          key={getMarkerKey(marker)}
           mapScale={options.mapScale}
           marker={marker}
           markerRangeMap={markerRangeMap}
