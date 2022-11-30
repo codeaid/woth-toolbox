@@ -31,6 +31,12 @@ const config = {
       .find(rule => typeof rule.oneOf === 'object')
       .oneOf.filter(rule => Array.isArray(rule.use));
 
+    // Enable importing SVG images as components
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
     // Don't change names in development mode
     if (dev) {
       return config;

@@ -1,0 +1,9 @@
+.Icon {
+  color: #99e3e4;
+  fill: #000000;
+  transition: color 100ms ease-in-out, fill 100ms ease-in-out;
+}
+
+.IconHighlighted {
+  color: var(--brand);
+}

@@ -116,3 +116,11 @@ export const isMarkerVisibleAtScale = (
   visibilityMap.has(type)
     ? mapScale >= (visibilityMap.get(type) ?? mapScale)
     : true;
+
+/**
+ * Check if the specified marker type represents a feed zone
+ *
+ * @param type Marker type to validate
+ */
+export const isZoneMarker = (type: MarkerType) =>
+  (type as string).startsWith('zone:');

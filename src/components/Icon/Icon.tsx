@@ -1,12 +1,21 @@
-import { ForwardedRef, forwardRef, useMemo } from 'react';
-import { baseUrl } from 'config/app';
-import { iconMap, iconMapHighlighted } from './config';
+import classnames from 'classnames';
+import {
+  ForwardedRef,
+  forwardRef,
+  FunctionComponent,
+  SVGProps,
+  useMemo,
+} from 'react';
+import { isZoneMarker } from 'lib/markers';
+import { NeedZoneMarkerType } from 'types/markers';
+import DefaultIcon from './assets/Default.svg';
+import { iconMap, zoneMap } from './config';
 import { IconProps } from './types';
+import styles from './Icon.module.css';
 
 export const Icon = forwardRef(
-  (props: IconProps, ref: ForwardedRef<HTMLImageElement>) => {
+  (props: IconProps, ref: ForwardedRef<HTMLDivElement>) => {
     const {
-      alt = '',
       className,
       highlighted = false,
       size = 128,
@@ -16,33 +25,51 @@ export const Icon = forwardRef(
       onClick,
     } = props;
 
-    // Retrieve image source file for the current type
-    const imageName = useMemo(
+    // Generate component class name
+    const classNames = useMemo(
       () =>
-        (!highlighted
-          ? iconMap[type]
-          : iconMapHighlighted[type] ?? iconMap[type]) ?? 'default',
-      [highlighted, type],
-    );
-    const imageSrc = useMemo(
-      () => `${baseUrl}/img/markers/${imageName}.png`,
-      [imageName],
+        classnames(
+          styles.Icon,
+          {
+            [styles.IconHighlighted]: highlighted,
+          },
+          className,
+        ),
+      [className, highlighted],
     );
 
+    // Retrieve image source file for the current type
+    const image = useMemo(() => {
+      // Use static image assets
+      if (isZoneMarker(type)) {
+        return (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            alt=""
+            height={size}
+            src={zoneMap[type as NeedZoneMarkerType]}
+            width={size}
+          />
+        );
+      }
+
+      // Use SVG icons when available
+      const Component: FunctionComponent<SVGProps<SVGElement>> =
+        iconMap[type] ?? DefaultIcon;
+
+      return <Component height={size} width={size} />;
+    }, [size, type]);
+
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        alt={alt}
-        className={className}
-        draggable={false}
-        height={size}
+      <div
+        className={classNames}
         ref={ref}
-        src={imageSrc}
         style={style}
         title={title}
-        width={size}
         onClick={onClick}
-      />
+      >
+        {image}
+      </div>
     );
   },
 );
