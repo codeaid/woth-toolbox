@@ -1,0 +1,79 @@
+.SidePanel {
+  background-color: var(--dark-primary);
+  box-shadow: var(--shadow-strong);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  grid-area: sidebar;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+  transition: transform 100ms ease-in-out;
+  width: 20em;
+  z-index: 20;
+}
+
+.SidePanelActions {
+  display: grid;
+  grid-gap: 0.5em;
+  padding: 1em;
+  user-select: none;
+}
+
+.SidePanelContent {
+  flex: 1;
+  line-height: 1.3em;
+  overflow: auto;
+  padding: 1em;
+}
+
+.SidePanelEntering {
+  transform: translateX(100%);
+}
+.SidePanelEntered {
+  transform: translateX(0%);
+}
+
+.SidePanelExiting {
+  transform: translateX(100%);
+}
+
+.SidePanelExited {
+  transform: translateX(100%);
+}
+
+.SidePanelHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  user-select: none;
+}
+
+.SidePanelHeaderAction {
+  background-color: transparent;
+  font-size: 0.7em;
+}
+
+.SidePanelHeaderAction:active,
+.SidePanelHeaderAction:hover {
+  background-color: var(--elevation0);
+}
+
+.SidePanelHeaderTitle {
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+@media (max-width: 576px) {
+  .SidePanel {
+    left: 0;
+    width: 100%;
+  }
+}
