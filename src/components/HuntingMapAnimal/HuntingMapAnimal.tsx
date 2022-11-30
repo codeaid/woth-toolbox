@@ -36,13 +36,12 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
    * Handle clicking on the trigger icon
    */
   const handleDocumentClick = useCallback((event: MouseEvent) => {
+    if (!triggerRef.current) {
+      return;
+    }
+
     // Hide need zones if clicking on another animal icon
-    if (
-      (event.target as HTMLElement).classList.contains(
-        styles.HuntingMapAnimal,
-      ) &&
-      event.target !== triggerRef.current
-    ) {
+    if (!triggerRef.current.contains(event.target as Node)) {
       setZonesVisible(false);
     }
   }, []);
