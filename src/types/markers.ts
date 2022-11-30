@@ -15,6 +15,7 @@ export type NeedZoneMarkerType = NeedZoneIconType;
 
 export interface MarkerOptions<TMarkerType = MarkerType> {
   coords: MarkerPosition;
+  id?: string;
   type: TMarkerType;
 }
 

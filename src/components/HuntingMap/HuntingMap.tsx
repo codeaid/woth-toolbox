@@ -14,8 +14,13 @@ import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { getMarkerKey, isHighlightedMarker } from 'lib/markers';
-import { hasListValue } from 'lib/utils';
+import {
+  getMarkerKey,
+  isHighlightedMarker,
+  isMarkerEqual,
+  isMarkerFiltered,
+} from 'lib/markers';
+import { AnimalMarkerOptions } from 'types/markers';
 import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
@@ -57,6 +62,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
     translateY: 0,
   });
 
+  // Currently active and expanded animal markers (one being edited)
+  const [activeAnimal, setActiveAnimal] = useState<AnimalMarkerOptions>();
+  const [expandedAnimal, setExpandedAnimal] = useState<AnimalMarkerOptions>();
+
   // Flag indicating that the map image has loaded
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -68,66 +77,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     mapTop: 0,
     mapWidth: imageWidth * defaultScale,
   });
-
-  // List of map habitat labels
-  const mapLabels = useMemo(
-    () =>
-      labels.map((label, index) => (
-        <HuntingMapLabel
-          {...label}
-          key={index}
-          mapScale={options.mapScale}
-          maxMapScale={0.6}
-          minMapScale={0.22}
-        />
-      )),
-    [labels, options.mapScale],
-  );
-
-  // List of animal map marker elements
-  const markerListAnimals = useMemo(
-    () =>
-      animalMarkers.map(marker => (
-        <HuntingMapAnimal
-          key={getMarkerKey(marker)}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerRangeMap={markerRangeMap}
-          maxMarkerSize={maxMarkerSize}
-          visible={hasListValue(marker.type, filterOptions.selectedTypes)}
-        />
-      )),
-    [
-      animalMarkers,
-      filterOptions.selectedTypes,
-      markerRangeMap,
-      maxMarkerSize,
-      options.mapScale,
-    ],
-  );
-
-  // List of generic map marker elements
-  const markerListGeneric = useMemo(
-    () =>
-      genericMarkers.map(marker => (
-        <HuntingMapMarker
-          highlighted={isHighlightedMarker(marker)}
-          key={getMarkerKey(marker)}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerRangeMap={markerRangeMap}
-          maxMarkerSize={maxMarkerSize}
-          visible={hasListValue(marker.type, filterOptions.selectedTypes)}
-        />
-      )),
-    [
-      filterOptions.selectedTypes,
-      genericMarkers,
-      markerRangeMap,
-      maxMarkerSize,
-      options.mapScale,
-    ],
-  );
 
   /**
    * Ensure specified coordinates remain within the allowed boundaries
@@ -206,6 +155,18 @@ export const HuntingMap = (props: HuntingMapProps) => {
       ];
     },
     [options],
+  );
+
+  /**
+   * Toggle specified animal's need zones
+   *
+   * @param marker Animal marker to toggle
+   * @param expanded TRUE if the need zones are visible, FALSE otherwise
+   */
+  const handleAnimalToggle = useCallback(
+    (marker: AnimalMarkerOptions, expanded: boolean) =>
+      expanded ? setExpandedAnimal(marker) : setExpandedAnimal(undefined),
+    [],
   );
 
   /**
@@ -557,6 +518,76 @@ export const HuntingMap = (props: HuntingMapProps) => {
     }
   }, [getBoundMapCoords, options]);
 
+  // List of animal map marker elements
+  const renderedAnimals = useMemo(
+    () =>
+      animalMarkers.map(marker => (
+        <HuntingMapAnimal
+          activated={activeAnimal && isMarkerEqual(marker, activeAnimal)}
+          expanded={expandedAnimal && isMarkerEqual(marker, expandedAnimal)}
+          key={getMarkerKey(marker)}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerRangeMap={markerRangeMap}
+          maxMarkerSize={maxMarkerSize}
+          visible={
+            isMarkerFiltered(marker, filterOptions) &&
+            (!activeAnimal || isMarkerEqual(activeAnimal, marker))
+          }
+          onActivate={setActiveAnimal}
+          onToggle={handleAnimalToggle}
+        />
+      )),
+    [
+      animalMarkers,
+      activeAnimal,
+      expandedAnimal,
+      options.mapScale,
+      markerRangeMap,
+      maxMarkerSize,
+      filterOptions,
+      handleAnimalToggle,
+    ],
+  );
+
+  // List of generic map marker elements
+  const renderedGenericMarkers = useMemo(
+    () =>
+      genericMarkers.map(marker => (
+        <HuntingMapMarker
+          highlighted={isHighlightedMarker(marker)}
+          key={getMarkerKey(marker)}
+          mapScale={options.mapScale}
+          marker={marker}
+          markerRangeMap={markerRangeMap}
+          maxMarkerSize={maxMarkerSize}
+          visible={isMarkerFiltered(marker, filterOptions)}
+        />
+      )),
+    [
+      filterOptions,
+      genericMarkers,
+      markerRangeMap,
+      maxMarkerSize,
+      options.mapScale,
+    ],
+  );
+
+  // List of map habitat labels
+  const renderedLabels = useMemo(
+    () =>
+      labels.map((label, index) => (
+        <HuntingMapLabel
+          {...label}
+          key={index}
+          mapScale={options.mapScale}
+          maxMapScale={0.6}
+          minMapScale={0.22}
+        />
+      )),
+    [labels, options.mapScale],
+  );
+
   /**
    * Center map on component being mounted the first time
    */
@@ -587,18 +618,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
       {!imageLoaded && (
         <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
       )}
-      <HuntingMapFilter
-        animalMarkers={animalMarkers}
-        genericMarkers={genericMarkers}
-        options={filterOptions}
-        onChange={onFilterChange}
-      />
-      <HuntingMapToolbar
-        onReset={handleReset}
-        onZoomIn={() => handleMapZoomIn()}
-        onZoomOut={() => handleMapZoomOut()}
-      />
-
       <div
         className={styles.HuntingMap}
         ref={ref}
@@ -611,6 +630,18 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onTouchStart={handleTouchStart}
         onWheel={handleWheel}
       >
+        <HuntingMapFilter
+          animalMarkers={animalMarkers}
+          genericMarkers={genericMarkers}
+          options={filterOptions}
+          onChange={onFilterChange}
+        />
+        <HuntingMapToolbar
+          onReset={handleReset}
+          onZoomIn={() => handleMapZoomIn()}
+          onZoomOut={() => handleMapZoomOut()}
+        />
+
         <div
           className={styles.HuntingMapContainer}
           style={{
@@ -620,9 +651,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
             width: `${options.mapWidth}px`,
           }}
         >
-          {imageLoaded && mapLabels}
-          {imageLoaded && markerListAnimals}
-          {imageLoaded && markerListGeneric}
+          {imageLoaded && renderedAnimals}
+          {imageLoaded && renderedGenericMarkers}
+          {imageLoaded && renderedLabels}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Nez Perez map"

@@ -1,5 +1,7 @@
 import sha1 from 'sha1';
+import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
 import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
+import { hasListValue } from 'lib/utils';
 import {
   AnimalMarkerOptions,
   AnimalMarkerType,
@@ -27,6 +29,7 @@ export const createAnimalMarkerOptions = (
   coords,
   drink: createMarkerOptions('zone:drink', drinkZones),
   eat: createMarkerOptions('zone:eat', eatZones),
+  id: getCoordinateHash(coords),
   sleep: createMarkerOptions('zone:sleep', sleepZones),
   type,
 });
@@ -44,12 +47,21 @@ export const createMarkerOptions = <TMarkerType extends MarkerType>(
   positions.map(coords => ({ coords, type }));
 
 /**
+ * Generate a hash from the specified coordinates
+ *
+ * @param x Marker's X offset
+ * @param y Marker's Y offset
+ */
+export const getCoordinateHash = ([x, y]: MarkerPosition) =>
+  sha1(`${x}:${y}`).substring(0, 8);
+
+/**
  * Generate marker key
  *
  * @param marker Source marker
  */
-export const getMarkerKey = (marker: MarkerOptions) =>
-  sha1(`${marker.coords[0].toFixed(4)}:${marker.coords[1]}`).substring(0, 8);
+export const getMarkerKey = (marker?: MarkerOptions) =>
+  marker?.id ?? marker ? getCoordinateHash(marker.coords) : undefined;
 
 /**
  * Get list of marker types from the specified list of options
@@ -100,6 +112,26 @@ export const isHighlightedMarker = (marker: MarkerOptions) =>
   (['cabin', 'camp', 'lodge', 'shooting range'] as Array<MarkerType>).includes(
     marker.type,
   );
+
+/**
+ * Determine if both markers are the same
+ *
+ * @param a Source marker
+ * @param b Target marker
+ */
+export const isMarkerEqual = (a?: MarkerOptions, b?: MarkerOptions) =>
+  getMarkerKey(a) === getMarkerKey(b);
+
+/**
+ * Check if a marker is included in the specified filter
+ *
+ * @param marker Marker to validate
+ * @param options Target filter options
+ */
+export const isMarkerFiltered = (
+  marker: MarkerOptions,
+  options: HuntingMapFilterOptions,
+) => hasListValue(marker.type, options.selectedTypes);
 
 /**
  * Determine if a marker is visible at the current map scale
