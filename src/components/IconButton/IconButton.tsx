@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { ForwardedRef, forwardRef, useMemo } from 'react';
+import { Button } from 'components/Button';
 import { IconButtonProps } from './types';
 import styles from './IconButton.module.css';
 
@@ -20,7 +21,7 @@ export const IconButton = forwardRef(
       [className, highlighted],
     );
 
-    return <button {...rest} className={classNames} ref={ref} />;
+    return <Button {...rest} className={classNames} ref={ref} />;
   },
 );
 

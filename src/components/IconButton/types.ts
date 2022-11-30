@@ -1,6 +1,5 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonProps } from 'components/Button';
 
-export interface IconButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends ButtonProps {
   highlighted?: boolean;
 }
