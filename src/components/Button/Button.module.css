@@ -5,21 +5,22 @@
   border-radius: 0.25em;
   color: var(--text-primary);
   display: flex;
+  filter: saturate(70%);
   font-family: 'Fira Sans', sans-serif;
   font-weight: 500;
   height: 2.5em;
   justify-content: center;
   padding: 0;
-  transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
+  transition: color 150ms ease-in-out, filter 150ms ease-in-out;
   width: 2.5em;
 }
 
 .Button:hover:not(:disabled) {
-  background-color: var(--elevation6);
+  filter: saturate(100%);
   cursor: pointer;
 }
 
 .Button:disabled {
   color: var(--text-secondary);
-  opacity: 0.5;
+  filter: saturate(50%);
 }
