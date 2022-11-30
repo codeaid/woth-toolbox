@@ -1,0 +1,19 @@
+.Textarea {
+  background-color: var(--elevation1);
+  border: thin solid var(--elevation6);
+  border-radius: 0.25em;
+  color: var(--text-primary);
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 0.95em;
+  line-height: 1.3em;
+  min-height: 5em;
+  outline: none;
+  padding: 0.5em;
+  resize: vertical;
+  transition: background-color 100ms ease-in-out;
+  width: 100%;
+}
+
+.Textarea:focus {
+  border: thin solid var(--highlight);
+}
