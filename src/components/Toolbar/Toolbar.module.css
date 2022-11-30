@@ -1,9 +1,9 @@
 .Toolbar {
   background-color: var(--elevation0);
-  box-shadow: var(--shadow);
+  border-bottom: thin solid var(--elevation1);
   display: flex;
   font-family: 'BenchNine', sans-serif;
   user-select: none;
-  z-index: 1;
+  z-index: 100;
   width: 100%;
 }

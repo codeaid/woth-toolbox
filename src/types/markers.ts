@@ -19,6 +19,12 @@ export interface MarkerOptions<TMarkerType = MarkerType> {
   type: TMarkerType;
 }
 
+export interface AnimalMarkerData {
+  comment?: string;
+  created?: Date;
+  updated?: Date;
+}
+
 export interface AnimalMarkerOptions extends MarkerOptions<AnimalMarkerType> {
   drink: Array<MarkerOptions<'zone:drink'>>;
   eat: Array<MarkerOptions<'zone:eat'>>;

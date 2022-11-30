@@ -6,10 +6,10 @@ import { SidePanel } from 'components/SidePanel';
 import { Textarea } from 'components/Textarea';
 import { animalNameMap } from 'config/names';
 import {
-  clearMarkerData,
-  getMarkerData,
+  clearAnimalMarkerData,
+  getAnimalMarkerData,
   getStorage,
-  setMarkerData,
+  setAnimalMarkerData,
 } from 'lib/storage';
 import { AnimalMarkerData } from 'types/markers';
 import { AnimalEditorProps } from './types';
@@ -59,7 +59,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       return;
     }
 
-    clearMarkerData(storage, animal);
+    clearAnimalMarkerData(storage, animal);
     handleClose();
   }, [animal, handleClose, storage]);
 
@@ -71,7 +71,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       return;
     }
 
-    setMarkerData(storage, animal, data);
+    setAnimalMarkerData(storage, animal, data);
     handleClose();
   }, [animal, data, handleClose, storage]);
 
@@ -121,7 +121,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     }
 
     // Read data from local storage
-    const data = getMarkerData(storage, animal);
+    const data = getAnimalMarkerData(storage, animal);
     setData(data ?? {});
   }, [animal, handleReset, storage]);
 

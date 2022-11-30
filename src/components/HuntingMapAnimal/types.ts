@@ -1,6 +1,6 @@
 import { AnimalMarkerOptions, MarkerType } from 'types/markers';
 
-type HuntingMapAnimalActivateHandler = (marker: AnimalMarkerOptions) => void;
+type HuntingMapAnimalActivateHandler = (marker?: AnimalMarkerOptions) => void;
 type HuntingMapAnimalToggleHandler = (
   marker: AnimalMarkerOptions,
   expanded: boolean,

@@ -1,10 +1,11 @@
-import { MarkerOptions, MarkerType } from 'types/markers';
 import { MouseEvent } from 'react';
+import { MarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapMarkerClickHandler = (
   marker: MarkerOptions,
   event: MouseEvent<EventTarget>,
 ) => void;
+type HuntingMapMarkerLongPressHandler = () => void;
 
 export interface HuntingMapMarkerProps {
   className?: string;
@@ -15,4 +16,5 @@ export interface HuntingMapMarkerProps {
   maxMarkerSize: number;
   visible?: boolean;
   onClick?: HuntingMapMarkerClickHandler;
+  onLongPress?: HuntingMapMarkerLongPressHandler;
 }

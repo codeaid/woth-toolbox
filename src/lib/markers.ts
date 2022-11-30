@@ -61,7 +61,7 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
  * @param marker Source marker
  */
 export const getMarkerKey = (marker?: MarkerOptions) =>
-  marker?.id ?? marker ? getCoordinateHash(marker.coords) : undefined;
+  marker ? marker?.id ?? getCoordinateHash(marker.coords) : undefined;
 
 /**
  * Get list of marker types from the specified list of options

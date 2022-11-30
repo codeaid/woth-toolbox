@@ -25,6 +25,7 @@ export const HuntingMapMarker = forwardRef(
       maxMarkerSize,
       visible = true,
       onClick,
+      onLongPress,
     } = props;
 
     // Extract marker details
@@ -98,6 +99,7 @@ export const HuntingMapMarker = forwardRef(
             title={title}
             type={type}
             onClick={handleClick}
+            onLongPress={onLongPress}
           />
         )}
       </Transition>

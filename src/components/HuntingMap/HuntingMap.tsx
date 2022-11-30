@@ -8,6 +8,7 @@ import {
   useState,
   WheelEvent,
 } from 'react';
+import { AnimalEditor } from 'components/AnimalEditor';
 import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
 import { HuntingMapFilter } from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
@@ -155,6 +156,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
       ];
     },
     [options],
+  );
+
+  /**
+   * Clear currently active animal
+   */
+  const handleAnimalEditorClose = useCallback(
+    () => setActiveAnimal(undefined),
+    [],
   );
 
   /**
@@ -618,6 +627,19 @@ export const HuntingMap = (props: HuntingMapProps) => {
       {!imageLoaded && (
         <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
       )}
+      <HuntingMapFilter
+        animalMarkers={animalMarkers}
+        genericMarkers={genericMarkers}
+        options={filterOptions}
+        onChange={onFilterChange}
+      />
+      <HuntingMapToolbar
+        onReset={handleReset}
+        onZoomIn={() => handleMapZoomIn()}
+        onZoomOut={() => handleMapZoomOut()}
+      />
+      <AnimalEditor animal={activeAnimal} onClose={handleAnimalEditorClose} />
+
       <div
         className={styles.HuntingMap}
         ref={ref}
@@ -630,18 +652,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onTouchStart={handleTouchStart}
         onWheel={handleWheel}
       >
-        <HuntingMapFilter
-          animalMarkers={animalMarkers}
-          genericMarkers={genericMarkers}
-          options={filterOptions}
-          onChange={onFilterChange}
-        />
-        <HuntingMapToolbar
-          onReset={handleReset}
-          onZoomIn={() => handleMapZoomIn()}
-          onZoomOut={() => handleMapZoomOut()}
-        />
-
         <div
           className={styles.HuntingMapContainer}
           style={{

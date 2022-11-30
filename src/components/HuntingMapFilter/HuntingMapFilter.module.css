@@ -3,7 +3,7 @@
   margin-top: 0.5em;
   position: absolute;
   user-select: none;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .HuntingMapFilterMenu {
@@ -20,7 +20,7 @@
   position: absolute;
   top: 0;
   width: 20em;
-  z-index: 100;
+  z-index: 10;
 }
 
 .HuntingMapFilterMenuItem {
@@ -38,13 +38,7 @@
   background-color: var(--elevation4);
 }
 
-.HuntingMapFilterMenuItem img {
-  filter: grayscale(100%);
-  transition: filter 100ms ease-in-out, transform 100ms ease-in-out;
-}
-
-.HuntingMapFilterMenuItemEnabled img {
-  filter: grayscale(0%);
+.HuntingMapFilterMenuItemEnabled svg {
   transform: scale(1.15);
 }
 

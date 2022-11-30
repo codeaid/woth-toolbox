@@ -2,5 +2,9 @@
   margin-top: 0.5em;
   position: absolute;
   right: 0.5em;
-  z-index: 100;
+  z-index: 10;
+}
+
+.HuntingMapToolbar button + button {
+  margin-top: 0.25em;
 }

@@ -45,6 +45,15 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
    */
   const handleTriggerClick = useCallback(
     (marker: MarkerOptions, event: ReactMouseEvent<EventTarget>) => {
+      // Ignore clicks on activated animals
+      if (activated) {
+        // Deactivate animal if it's currently active
+        if (event.shiftKey) {
+          onActivate(undefined);
+        }
+        return;
+      }
+
       const [mouseDownX, mouseDownY] = pageCoords.current;
       const { pageX: mouseUpX, pageY: mouseUpY } = event;
 
@@ -62,7 +71,15 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
         onActivate(marker as AnimalMarkerOptions);
       }
     },
-    [pageCoords, onToggle, expanded, onActivate],
+    [activated, pageCoords, onToggle, expanded, onActivate],
+  );
+
+  /**
+   * Handle long-pressing on the icon to open the editor
+   */
+  const handleTriggerLongPress = useCallback(
+    () => (activated ? onActivate(undefined) : onActivate(marker)),
+    [activated, marker, onActivate],
   );
 
   /**
@@ -121,16 +138,18 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
         ref={triggerRef}
         visible={visible}
         onClick={handleTriggerClick}
+        onLongPress={handleTriggerLongPress}
       />
     ),
     [
-      expanded,
       activated,
+      expanded,
+      handleTriggerClick,
+      handleTriggerLongPress,
       mapScale,
       marker,
       markerRangeMap,
       visible,
-      handleTriggerClick,
     ],
   );
 
