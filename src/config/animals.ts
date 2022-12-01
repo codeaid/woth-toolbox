@@ -1,5 +1,3 @@
-// noinspection SpellCheckingInspection
-
 import { Animal, AnimalActivity } from 'types/animals';
 
 export const animals: Array<Animal> = [
@@ -351,5 +349,98 @@ export const animals: Array<Animal> = [
     slug: 'red-deer',
     tier: 6,
     type: 'animal:red deer',
+  },
+];
+
+export const birds: Array<Animal> = [
+  {
+    description:
+      'The greylag goose is a large, pale grey goose with pink legs and an orange bill. It has a loud cackling call similar to that of the domestic goose: "Aahng-ung-ung", uttered on the ground or in flight.',
+    hitEnergy: [1, 681],
+    latin: 'Anser anser',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 4 },
+      { activity: AnimalActivity.Sleeping, time: 8 },
+      { activity: AnimalActivity.Feeding, time: 12 },
+      { activity: AnimalActivity.Sleeping, time: 16 },
+      { activity: AnimalActivity.Feeding, time: 20 },
+    ],
+    name: 'Greylag Goose',
+    slug: 'greylag-goose',
+    tier: 1,
+    type: 'animal:greylag goose',
+  },
+  {
+    description:
+      'The lesser scaup is a small North American diving duck that migrates south as far as Central America in winter. it is colloquially known as the little bluebill or broadbill because of its distinctive blue bill.',
+    hitEnergy: [1, 174],
+    latin: 'Aythya affinis',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 4 },
+      { activity: AnimalActivity.Sleeping, time: 8 },
+      { activity: AnimalActivity.Feeding, time: 12 },
+      { activity: AnimalActivity.Sleeping, time: 16 },
+      { activity: AnimalActivity.Feeding, time: 20 },
+    ],
+    name: 'Lesser Scaup',
+    slug: 'lesser-scaup',
+    tier: 1,
+    type: 'animal:lesser scaup',
+  },
+  {
+    description:
+      "A well-known gamebird, the common pheasant is one of the world's most hunted. It has been introduced for that purpose to many regions, and is also common on game farms where it is commercially bred. Pheasants are characterized by strong sexual dimorphism, males being highly decorated with bright colors and adornments such as wattles.",
+    hitEnergy: [1, 402],
+    latin: 'Phasianus Colchicus',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 4 },
+      { activity: AnimalActivity.Sleeping, time: 8 },
+      { activity: AnimalActivity.Feeding, time: 12 },
+      { activity: AnimalActivity.Sleeping, time: 16 },
+      { activity: AnimalActivity.Feeding, time: 20 },
+    ],
+    name: 'Pheasant',
+    slug: 'pheasant',
+    tier: 1,
+    type: 'animal:pheasant',
+  },
+  {
+    description:
+      'The mallard is a typical dabbling duck, feeding mainly at the surface rather than by diving, on plants as well as on small animals in the shallows of ponds, marshes, lakes, and rivers.',
+    hitEnergy: [1, 255],
+    latin: 'Anas platyrhynchos',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 4 },
+      { activity: AnimalActivity.Sleeping, time: 8 },
+      { activity: AnimalActivity.Feeding, time: 12 },
+      { activity: AnimalActivity.Sleeping, time: 16 },
+      { activity: AnimalActivity.Feeding, time: 20 },
+    ],
+    name: 'Wild Duck',
+    slug: 'wild-duck',
+    tier: 1,
+    type: 'animal:wild duck',
+  },
+  {
+    description:
+      "Ross's Geese can be identified by their all white plumage with black wingtips and pink legs. They also have a stubby pink bill with a blue-grey base. Once considered extremely rare, their population have been increasing in numbers in recent decades. They are the smallest goose commonly found in North America.",
+    hitEnergy: [1, 279],
+    latin: 'Anser rossii',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 4 },
+      { activity: AnimalActivity.Sleeping, time: 8 },
+      { activity: AnimalActivity.Feeding, time: 12 },
+      { activity: AnimalActivity.Sleeping, time: 16 },
+      { activity: AnimalActivity.Feeding, time: 20 },
+    ],
+    name: "Ross's Goose",
+    slug: 'ross-goose',
+    tier: 1,
+    type: 'animal:ross goose',
   },
 ];
