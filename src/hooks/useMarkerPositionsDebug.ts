@@ -50,9 +50,13 @@ export const useMarkerPositionsDebug = (
 
       // Add marker to the list
       setPositions(current => [...current, position]);
-      consoleLogClean(position, positions.length + 1);
+
+      // Log coordinates to console if enabled
+      if (logToConsole) {
+        consoleLogClean(position, positions.length + 1);
+      }
     },
-    [mapHeight, mapWidth, positions],
+    [logToConsole, mapHeight, mapWidth, positions.length],
   );
 
   // Total target number of coordinates
