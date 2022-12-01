@@ -13,7 +13,7 @@ import {
   getStorage,
   setAnimalMarkerData,
 } from 'lib/storage';
-import { getHexColor } from 'lib/utils';
+import { formatTimestampDistance, getHexColor } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
 import { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
@@ -88,7 +88,11 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     }
 
     // Notify consumer about data having been changed
-    const key = setAnimalMarkerData(storage, animal, data);
+    const key = setAnimalMarkerData(storage, animal, {
+      ...data,
+      created: data.created ?? Date.now(),
+      updated: Date.now(),
+    });
     if (key && onChange) {
       onChange(key, data);
     }
@@ -132,9 +136,36 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     [handleDataClear, handleDataPersist],
   );
 
+  // Creation and last updated date of existing data entries
+  const dates = useMemo(() => {
+    // Ensure both dates are present before continuing
+    if (!data.created || !data.updated) {
+      return;
+    }
+
+    // Format both dates
+    const created = formatTimestampDistance(data.created);
+    const updated = formatTimestampDistance(data.updated);
+
+    return (
+      <div className={styles.AnimalEditorDates}>
+        <div>
+          <Label>Created</Label>
+          <div className={styles.AnimalEditorText}>{created}</div>
+        </div>
+        <div>
+          <Label>Last Updated</Label>
+          <div className={styles.AnimalEditorText}>{updated}</div>
+        </div>
+      </div>
+    );
+  }, [data.created, data.updated]);
+
   // Rendered side panel content
   const renderedContent = animal && (
     <>
+      {dates}
+
       <Label>Comment</Label>
       <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
 

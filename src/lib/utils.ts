@@ -1,4 +1,5 @@
 import colors from 'color';
+import { formatDistanceToNow, fromUnixTime } from 'date-fns';
 import { ColorResult } from 'react-color';
 
 /**
@@ -18,6 +19,21 @@ export const formatNumber = (value: number) =>
   Intl.NumberFormat(undefined, {
     useGrouping: true,
   }).format(value);
+
+/**
+ * Get the distance between the given date and now in words
+ *
+ * @param value Timestamp value to convert
+ */
+export const formatTimestampDistance = (value?: number) => {
+  if (!value) {
+    return;
+  }
+
+  return formatDistanceToNow(fromUnixTime(value / 1000), {
+    addSuffix: true,
+  });
+};
 
 /**
  * Convert a color result to a HEX string

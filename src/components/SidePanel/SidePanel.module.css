@@ -6,6 +6,7 @@
   flex-direction: column;
   grid-area: sidebar;
   height: 100%;
+  min-width: 20em;
   overflow: hidden;
   position: absolute;
   right: 0;
@@ -19,7 +20,7 @@
 .SidePanelActions {
   display: grid;
   grid-gap: 0.5em;
-  padding: 1em;
+  padding: 0 1em 1em;
   user-select: none;
 }
 
@@ -27,7 +28,7 @@
   flex: 1;
   line-height: 1.3em;
   overflow: auto;
-  padding: 1em;
+  padding: 0 1em 1em;
 }
 
 .SidePanelEntering {

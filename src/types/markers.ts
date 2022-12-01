@@ -22,8 +22,8 @@ export interface MarkerOptions<TMarkerType = MarkerType> {
 export interface AnimalMarkerData {
   color?: string;
   comment?: string;
-  created?: Date;
-  updated?: Date;
+  created?: number;
+  updated?: number;
 }
 
 export interface AnimalMarkerOptions extends MarkerOptions<AnimalMarkerType> {
