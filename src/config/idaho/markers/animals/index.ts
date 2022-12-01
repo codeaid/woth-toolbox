@@ -8,6 +8,7 @@ export * from './moose';
 export * from './mountainGoat';
 export * from './muleDeer';
 export * from './pheasant';
+export * from './redFox';
 export * from './rossGoose';
 export * from './showshoeHare';
 export * from './whiteTailedDeer';
