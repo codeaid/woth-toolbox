@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { AnimalActivityGrid } from 'components/AnimalActivityGrid';
 import { PageContent } from 'components/PageContent';
-import { animals } from 'config/animals';
+import { animals, birds } from 'config/animals';
 
 const AnimalLifeCyclesPage = () => (
   <>
@@ -10,7 +10,7 @@ const AnimalLifeCyclesPage = () => (
     </Head>
 
     <PageContent>
-      <AnimalActivityGrid animals={animals} />
+      <AnimalActivityGrid animals={[...animals, ...birds]} />
     </PageContent>
   </>
 );
