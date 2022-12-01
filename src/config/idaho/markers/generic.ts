@@ -30,7 +30,7 @@ export const campMarkers = createMarkerOptions('camp', [
   [0.893798828125, 0.1630859375],
   [0.8994140625, 0.720947265625],
   [0.907470703125, 0.87646484375],
-  [0.917724609375, 0.415771484375],
+  [0.91943359375, 0.419921875],
 ]);
 
 export const echoMarkers = createMarkerOptions('echo', [
