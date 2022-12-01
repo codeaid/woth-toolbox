@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { ColorResult, HuePicker } from 'react-color';
+import { ColorResult, SliderPicker } from 'react-color';
 import { ButtonProps } from 'components/Button';
 import { Icon } from 'components/Icon';
 import { Label } from 'components/Label';
@@ -139,9 +139,8 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
 
       <Label>Icon Color</Label>
-      <HuePicker
+      <SliderPicker
         color={data.color ?? defaultIconColor}
-        width="99%"
         onChange={handleColorChange}
       />
       <div className={styles.AnimalEditorIconPreview}>
