@@ -69,6 +69,18 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   }, []);
 
   /**
+   * Handle pressing keyboard keys
+   */
+  const handleDocumentKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'r') {
+        handleButtonClick();
+      }
+    },
+    [handleButtonClick],
+  );
+
+  /**
    * Handle toggling individual filter types on or off
    */
   const handleToggleType = useCallback(
@@ -174,11 +186,13 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   // Monitor clicks outside the current marker and hide zones when needed
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keypress', handleDocumentKeyPress);
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keypress', handleDocumentKeyPress);
     };
-  }, [handleDocumentClick]);
+  }, [handleDocumentClick, handleDocumentKeyPress]);
 
   return (
     <>

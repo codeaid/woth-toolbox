@@ -1,5 +1,11 @@
 import classnames from 'classnames';
-import { ForwardedRef, forwardRef, useMemo } from 'react';
+import {
+  ForwardedRef,
+  KeyboardEvent,
+  forwardRef,
+  useCallback,
+  useMemo,
+} from 'react';
 import { TextareaProps } from './types';
 import styles from './Textarea.module.css';
 
@@ -13,7 +19,22 @@ export const Textarea = forwardRef(
       [className],
     );
 
-    return <textarea {...rest} className={classNames} ref={ref} />;
+    /**
+     * Prevent key presses from bubbling up
+     */
+    const handleKeyPress = useCallback(
+      (event: KeyboardEvent<EventTarget>) => event.stopPropagation(),
+      [],
+    );
+
+    return (
+      <textarea
+        {...rest}
+        className={classNames}
+        ref={ref}
+        onKeyPress={handleKeyPress}
+      />
+    );
   },
 );
 
