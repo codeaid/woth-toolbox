@@ -11,6 +11,7 @@ import {
   pheasantMarkers,
   rossGooseMarkers,
   snowshoeHareMarkers,
+  whiteTailedDeerMarkers,
   wildDuckMarkers,
 } from 'config/idaho';
 import { AnimalMarkerOptions } from 'types/markers';
@@ -28,5 +29,6 @@ export const animalMarkers: Array<AnimalMarkerOptions> = [
   pheasantMarkers,
   rossGooseMarkers,
   snowshoeHareMarkers,
+  whiteTailedDeerMarkers,
   wildDuckMarkers,
 ].flat();
