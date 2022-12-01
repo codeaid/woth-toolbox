@@ -1,4 +1,3 @@
-import { omit } from 'lodash';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
 import NoSSR from 'react-no-ssr';
@@ -28,7 +27,11 @@ const NezPerceValleyPage = () => {
   const handleMarkerDataChange = useCallback(
     (key: string, data?: AnimalMarkerData) =>
       setAnimalMarkerDataMap(current =>
-        data ? { ...current, [key]: data } : omit(current, key),
+        data
+          ? { ...current, [key]: data }
+          : Object.fromEntries(
+              Object.entries(current).filter(([k]) => k !== key),
+            ),
       ),
     [],
   );
