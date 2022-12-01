@@ -1,3 +1,7 @@
+.IconButton {
+  background-color: var(--elevation0);
+}
+
 .IconButton svg {
   font-size: 1.5em;
   height: 1em;
