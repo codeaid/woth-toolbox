@@ -23,6 +23,7 @@ export const HuntingMapMarker = forwardRef(
       marker,
       markerRangeMap,
       maxMarkerSize,
+      style,
       visible = true,
       onClick,
       onLongPress,
@@ -93,6 +94,7 @@ export const HuntingMapMarker = forwardRef(
             ref={setInnerRef}
             size={size}
             style={{
+              ...style,
               left: `calc(${left * 100}% - ${size / 2}px)`,
               top: `calc(${top * 100}% - ${size / 2}px)`,
             }}

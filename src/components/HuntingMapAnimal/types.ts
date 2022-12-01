@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { AnimalMarkerOptions, MarkerType } from 'types/markers';
 
 type HuntingMapAnimalActivateHandler = (marker?: AnimalMarkerOptions) => void;
@@ -13,6 +14,7 @@ export interface HuntingMapAnimalProps {
   marker: AnimalMarkerOptions;
   markerRangeMap: Map<MarkerType, number>;
   maxMarkerSize: number;
+  style?: CSSProperties;
   visible?: boolean;
   onActivate: HuntingMapAnimalActivateHandler;
   onToggle: HuntingMapAnimalToggleHandler;

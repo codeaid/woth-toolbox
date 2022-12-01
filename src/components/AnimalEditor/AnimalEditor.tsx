@@ -1,6 +1,8 @@
 import classnames from 'classnames';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ColorResult, HuePicker } from 'react-color';
 import { ButtonProps } from 'components/Button';
+import { Icon } from 'components/Icon';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { Textarea } from 'components/Textarea';
@@ -11,18 +13,19 @@ import {
   getStorage,
   setAnimalMarkerData,
 } from 'lib/storage';
+import { getHexColor } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
 import { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
 
 export const AnimalEditor = (props: AnimalEditorProps) => {
-  const { animal, onClose } = props;
+  const { animal, defaultIconColor = '#ffffff', onChange, onClose } = props;
 
   // Animal comment
   const [data, setData] = useState<AnimalMarkerData>({});
 
   // Storage manager
-  const [storage] = useState(getStorage());
+  const [storage] = useState(getStorage);
 
   // Retrieve animal name
   const animalName = useMemo(
@@ -37,6 +40,18 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     setData({});
     onClose();
   }, [onClose]);
+
+  /**
+   * Handle changes to the color
+   */
+  const handleColorChange = useCallback(
+    (color: ColorResult) =>
+      setData(current => ({
+        ...current,
+        color: getHexColor(color),
+      })),
+    [],
+  );
 
   /**
    * Handle changes to the comment text
@@ -60,8 +75,9 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     }
 
     clearAnimalMarkerData(storage, animal);
+    onChange(animal.id, undefined);
     handleClose();
-  }, [animal, handleClose, storage]);
+  }, [animal, handleClose, onChange, storage]);
 
   /**
    * Handle persisting animal data to the storage
@@ -71,9 +87,14 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       return;
     }
 
-    setAnimalMarkerData(storage, animal, data);
+    // Notify consumer about data having been changed
+    const key = setAnimalMarkerData(storage, animal, data);
+    if (key && onChange) {
+      onChange(key, data);
+    }
+
     handleClose();
-  }, [animal, data, handleClose, storage]);
+  }, [animal, data, handleClose, onChange, storage]);
 
   /**
    * Clear existing values
@@ -111,6 +132,30 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     [handleDataClear, handleDataPersist],
   );
 
+  // Rendered side panel content
+  const renderedContent = animal && (
+    <>
+      <Label>Comment</Label>
+      <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
+
+      <Label>Icon Color</Label>
+      <HuePicker
+        color={data.color ?? defaultIconColor}
+        width="100%"
+        onChange={handleColorChange}
+      />
+      <div className={styles.AnimalEditorIconPreview}>
+        <Icon
+          size={80}
+          style={{
+            color: data.color ?? defaultIconColor,
+          }}
+          type={animal?.type!}
+        />
+      </div>
+    </>
+  );
+
   // Load animal details on mount
   useEffect(() => {
     // Clear existing values
@@ -132,8 +177,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       visible={!!animal}
       onClose={handleClose}
     >
-      <Label>Comment</Label>
-      <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
+      {renderedContent}
     </SidePanel>
   );
 };

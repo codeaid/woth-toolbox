@@ -10,3 +10,9 @@
 .AnimalEditorActionSave {
   background-color: var(--info);
 }
+
+.AnimalEditorIconPreview {
+  justify-content: center;
+  display: flex;
+  margin-top: 1em;
+}

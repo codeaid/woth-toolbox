@@ -20,6 +20,7 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
     marker,
     markerRangeMap,
     maxMarkerSize,
+    style,
     visible = true,
     onActivate,
     onToggle,
@@ -136,6 +137,7 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
         markerRangeMap={markerRangeMap}
         maxMarkerSize={70}
         ref={triggerRef}
+        style={style}
         visible={visible}
         onClick={handleTriggerClick}
         onLongPress={handleTriggerLongPress}
@@ -149,6 +151,7 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
       mapScale,
       marker,
       markerRangeMap,
+      style,
       visible,
     ],
   );

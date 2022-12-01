@@ -3,9 +3,18 @@ import {
   HuntingMapFilterOptions,
 } from 'components/HuntingMapFilter';
 import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
-import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
+import {
+  AnimalMarkerData,
+  AnimalMarkerOptions,
+  MarkerOptions,
+  MarkerType,
+} from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
+type HuntingMapMarkerDataRefreshHandler = (
+  key: string,
+  data?: AnimalMarkerData,
+) => void;
 
 export interface HuntingMapOffsets {
   pageX: number;
@@ -24,6 +33,7 @@ export interface HuntingMapOptions {
 
 export interface HuntingMapProps {
   animalMarkers: Array<AnimalMarkerOptions>;
+  animalMarkerDataMap: Record<string, AnimalMarkerData>;
   defaultScale?: number;
   filterOptions: HuntingMapFilterOptions;
   genericMarkers: Array<MarkerOptions>;
@@ -39,4 +49,5 @@ export interface HuntingMapProps {
   scaleIncrement?: number;
   onClick?: HuntingMapClickHandler;
   onFilterChange?: HuntingMapFilterChangeHandler;
+  onMarkerDataChange: HuntingMapMarkerDataRefreshHandler;
 }

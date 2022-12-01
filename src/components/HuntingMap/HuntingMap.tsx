@@ -27,6 +27,7 @@ import styles from './HuntingMap.module.css';
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
+    animalMarkerDataMap,
     animalMarkers,
     defaultScale = 0.25,
     filterOptions,
@@ -43,6 +44,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     scaleIncrement = 0.1,
     onClick,
     onFilterChange,
+    onMarkerDataChange,
   } = props;
 
   // References to internal elements
@@ -539,6 +541,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
           marker={marker}
           markerRangeMap={markerRangeMap}
           maxMarkerSize={maxMarkerSize}
+          style={{
+            color: animalMarkerDataMap[marker.id]?.color,
+          }}
           visible={
             isMarkerFiltered(marker, filterOptions) &&
             (!activeAnimal || isMarkerEqual(activeAnimal, marker))
@@ -548,14 +553,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
         />
       )),
     [
-      animalMarkers,
       activeAnimal,
+      animalMarkerDataMap,
+      animalMarkers,
       expandedAnimal,
-      options.mapScale,
-      markerRangeMap,
-      maxMarkerSize,
       filterOptions,
       handleAnimalToggle,
+      markerRangeMap,
+      maxMarkerSize,
+      options.mapScale,
     ],
   );
 
@@ -638,7 +644,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onZoomIn={() => handleMapZoomIn()}
         onZoomOut={() => handleMapZoomOut()}
       />
-      <AnimalEditor animal={activeAnimal} onClose={handleAnimalEditorClose} />
+      <AnimalEditor
+        animal={activeAnimal}
+        onChange={onMarkerDataChange}
+        onClose={handleAnimalEditorClose}
+      />
 
       <div
         className={styles.HuntingMap}

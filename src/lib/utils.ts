@@ -1,3 +1,6 @@
+import colors from 'color';
+import { ColorResult } from 'react-color';
+
 /**
  * Format hour value
  *
@@ -17,6 +20,14 @@ export const formatNumber = (value: number) =>
   }).format(value);
 
 /**
+ * Convert a color result to a HEX string
+ *
+ * @param color Source color object
+ */
+export const getHexColor = (color: ColorResult) =>
+  colors.rgb(color.rgb.r, color.rgb.g, color.rgb.b).hex().toLowerCase();
+
+/**
  * Check if a list includes the specified value (or is empty)
  *
  * @param value Value to lookup
@@ -24,3 +35,11 @@ export const formatNumber = (value: number) =>
  */
 export const hasListValue = <TValue>(value: TValue, list?: Array<TValue>) =>
   !list || !list.length || list.includes(value);
+
+/**
+ * Determine if the specified value is not empty (not "undefined" or "null")
+ *
+ * @param value Value to check
+ */
+export const isNotEmpty = <TValue>(value: Maybe<TValue>): value is TValue =>
+  value !== null && typeof value !== 'undefined';
