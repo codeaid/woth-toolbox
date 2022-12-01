@@ -15,6 +15,7 @@ import styles from './HuntingMapAnimal.module.css';
 export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
   const {
     activated = false,
+    className,
     expanded = false,
     mapScale,
     marker,
@@ -128,9 +129,13 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
   const trigger = useMemo(
     () => (
       <HuntingMapMarker
-        className={classnames(styles.HuntingMapAnimal, {
-          [styles.HuntingMapAnimalActive]: expanded,
-        })}
+        className={classnames(
+          styles.HuntingMapAnimal,
+          {
+            [styles.HuntingMapAnimalActive]: expanded,
+          },
+          className,
+        )}
         highlighted={activated || expanded}
         mapScale={mapScale}
         marker={marker}
@@ -145,6 +150,7 @@ export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
     ),
     [
       activated,
+      className,
       expanded,
       handleTriggerClick,
       handleTriggerLongPress,

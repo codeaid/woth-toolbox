@@ -1,8 +1,11 @@
+import classnames from 'classnames';
+import { CSSProperties } from 'react';
 import sha1 from 'sha1';
 import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
 import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
 import { hasListValue } from 'lib/utils';
 import {
+  AnimalMarkerData,
   AnimalMarkerOptions,
   AnimalMarkerType,
   MarkerOptions,
@@ -56,6 +59,35 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
   sha1(`${x}:${y}`).substring(0, 8);
 
 /**
+ * Get animal marker's CSS style if it's present in marker data map
+ *
+ * @param marker Animal marker options
+ * @param animalMarkerDataMap Marker data map retrieved from the storage
+ * @param highlightedClass CSS class to apply to markers present in the map
+ */
+export const getAnimalMarkerClassName = (
+  marker: AnimalMarkerOptions,
+  animalMarkerDataMap: Record<string, AnimalMarkerData>,
+  highlightedClass: string,
+) =>
+  classnames({
+    [highlightedClass]: marker.id in animalMarkerDataMap,
+  });
+
+/**
+ * Get animal marker's CSS style if it's present in marker data map
+ *
+ * @param marker Animal marker options
+ * @param animalMarkerDataMap Marker data map retrieved from the storage
+ */
+export const getAnimalMarkerStyle = (
+  marker: AnimalMarkerOptions,
+  animalMarkerDataMap: Record<string, AnimalMarkerData>,
+): CSSProperties => ({
+  color: animalMarkerDataMap[marker.id]?.color,
+});
+
+/**
  * Get marker color class based on its type
  *
  * @param marker Marker options
@@ -63,7 +95,7 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
  * @param landmarkClass Landmark marker CSS class (cabin, camp, shooting range)
  * @param lodgeClass Lodge marker CSS class
  */
-export const getMarkerColorClass = (
+export const getGenericMarkerColorClass = (
   marker: MarkerOptions,
   genericClass: string,
   landmarkClass: string,

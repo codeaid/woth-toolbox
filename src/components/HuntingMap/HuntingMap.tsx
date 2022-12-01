@@ -16,7 +16,9 @@ import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import {
-  getMarkerColorClass,
+  getAnimalMarkerClassName,
+  getAnimalMarkerStyle,
+  getGenericMarkerColorClass,
   getMarkerKey,
   isHighlightedMarker,
   isMarkerEqual,
@@ -536,15 +538,18 @@ export const HuntingMap = (props: HuntingMapProps) => {
       animalMarkers.map(marker => (
         <HuntingMapAnimal
           activated={activeAnimal && isMarkerEqual(marker, activeAnimal)}
+          className={getAnimalMarkerClassName(
+            marker,
+            animalMarkerDataMap,
+            styles.HuntingMapAnimalMarkerHighlighted,
+          )}
           expanded={expandedAnimal && isMarkerEqual(marker, expandedAnimal)}
           key={getMarkerKey(marker)}
           mapScale={options.mapScale}
           marker={marker}
           markerRangeMap={markerRangeMap}
           maxMarkerSize={maxMarkerSize}
-          style={{
-            color: animalMarkerDataMap[marker.id]?.color,
-          }}
+          style={getAnimalMarkerStyle(marker, animalMarkerDataMap)}
           visible={
             isMarkerFiltered(marker, filterOptions) &&
             (!activeAnimal || isMarkerEqual(activeAnimal, marker))
@@ -571,7 +576,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () =>
       genericMarkers.map(marker => (
         <HuntingMapMarker
-          className={getMarkerColorClass(
+          className={getGenericMarkerColorClass(
             marker,
             styles.HuntingMapMarkerGeneric,
             styles.HuntingMapMarkerLandmark,

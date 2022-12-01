@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.HuntingMapAnimalMarkerHighlighted {
+  filter: drop-shadow(0 0 0.4em currentColor);
+}
+
 .HuntingMapContainer {
   left: 0;
   position: absolute;

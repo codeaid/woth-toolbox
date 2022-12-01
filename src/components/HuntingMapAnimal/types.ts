@@ -9,6 +9,7 @@ type HuntingMapAnimalToggleHandler = (
 
 export interface HuntingMapAnimalProps {
   activated?: boolean;
+  className?: string;
   expanded?: boolean;
   mapScale: number;
   marker: AnimalMarkerOptions;
