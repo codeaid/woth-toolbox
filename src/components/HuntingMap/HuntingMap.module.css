@@ -13,6 +13,18 @@
   will-change: left, top;
 }
 
+.HuntingMapMarkerGeneric {
+  color: var(--marker-generic);
+}
+
+.HuntingMapMarkerLandmark {
+  color: var(--marker-landmark);
+}
+
+.HuntingMapMarkerLodge {
+  color: var(--marker-lodge);
+}
+
 .HuntingMapImage {
   backface-visibility: hidden;
   background-color: var(--elevation0);

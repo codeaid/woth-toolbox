@@ -16,6 +16,7 @@ import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import {
+  getMarkerColorClass,
   getMarkerKey,
   isHighlightedMarker,
   isMarkerEqual,
@@ -570,6 +571,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () =>
       genericMarkers.map(marker => (
         <HuntingMapMarker
+          className={getMarkerColorClass(
+            marker,
+            styles.HuntingMapMarkerGeneric,
+            styles.HuntingMapMarkerLandmark,
+            styles.HuntingMapMarkerLodge,
+          )}
           highlighted={isHighlightedMarker(marker)}
           key={getMarkerKey(marker)}
           mapScale={options.mapScale}

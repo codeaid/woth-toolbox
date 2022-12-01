@@ -56,6 +56,32 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
   sha1(`${x}:${y}`).substring(0, 8);
 
 /**
+ * Get marker color class based on its type
+ *
+ * @param marker Marker options
+ * @param genericClass Generic marker CSS class
+ * @param landmarkClass Landmark marker CSS class (cabin, camp, shooting range)
+ * @param lodgeClass Lodge marker CSS class
+ */
+export const getMarkerColorClass = (
+  marker: MarkerOptions,
+  genericClass: string,
+  landmarkClass: string,
+  lodgeClass: string,
+) => {
+  switch (marker.type) {
+    case 'cabin':
+    case 'camp':
+    case 'shooting range':
+      return landmarkClass;
+    case 'lodge':
+      return lodgeClass;
+    default:
+      return genericClass;
+  }
+};
+
+/**
  * Generate marker key
  *
  * @param marker Source marker
