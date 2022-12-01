@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { ColorResult, SliderPicker } from 'react-color';
+import { ChromePicker, ColorResult } from 'react-color';
 import { ButtonProps } from 'components/Button';
 import { Icon } from 'components/Icon';
 import { Label } from 'components/Label';
@@ -170,8 +170,22 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
 
       <Label>Icon Color</Label>
-      <SliderPicker
+      <ChromePicker
         color={data.color ?? defaultIconColor}
+        disableAlpha={true}
+        styles={{
+          default: {
+            picker: {
+              backgroundColor: '#121212',
+              boxShadow: 'unset',
+              userSelect: 'none',
+              width: 'auto',
+            },
+            swatch: {
+              transform: 'scale(1.5)',
+            },
+          },
+        }}
         onChange={handleColorChange}
       />
       <div className={styles.AnimalEditorIconPreview}>
