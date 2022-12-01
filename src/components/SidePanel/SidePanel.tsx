@@ -51,6 +51,7 @@ export const SidePanel = (props: SidePanelProps) => {
             [styles.SidePanelExiting]: state === 'exiting',
             [styles.SidePanelExited]: state === 'exited',
           })}
+          draggable={false}
           ref={ref}
           style={style}
         >

@@ -141,7 +141,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       <Label>Icon Color</Label>
       <HuePicker
         color={data.color ?? defaultIconColor}
-        width="100%"
+        width="99%"
         onChange={handleColorChange}
       />
       <div className={styles.AnimalEditorIconPreview}>

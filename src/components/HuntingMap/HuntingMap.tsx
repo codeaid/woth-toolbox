@@ -685,6 +685,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
           <img
             alt="Nez Perez map"
             className={styles.HuntingMapImage}
+            draggable={false}
             height={options.mapHeight}
             ref={imageRef}
             src={imageSrc}

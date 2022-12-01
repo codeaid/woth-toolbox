@@ -30,5 +30,6 @@
   background-color: var(--elevation0);
   box-shadow: var(--shadow-strong);
   height: 100%;
+  user-select: none;
   width: 100%;
 }
