@@ -10,6 +10,7 @@ export const mapLabels: Array<HuntingMapLabelOptions> = [];
 
 // Map of marker types and their maximum map scale visibility
 export const markerVisibilityMap = new Map<MarkerType, number>([
+  ['animal:golden jackal', 0.65],
   ['cabin', 0.25],
   ['camp', 0.25],
   ['hunting stand', 0.45],
