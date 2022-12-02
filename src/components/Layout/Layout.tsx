@@ -24,6 +24,7 @@ export const Layout = (props: LayoutProps) => {
           <ToolbarAction href="/nez-perce-valley">
             Nez Perce Valley
           </ToolbarAction>
+          <ToolbarAction href="/transylvania">Transylvania</ToolbarAction>
         </ToolbarActions>
       </Toolbar>
 
