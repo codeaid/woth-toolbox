@@ -1,7 +1,7 @@
 :root {
-  --brand: rgb(220, 187, 123);
-  --brand-semi: rgba(220, 187, 123, 0.5);
-  --brand-transparent: rgba(220, 187, 123, 0);
+  --brand: rgb(231, 190, 112);
+  --brand-semi: rgba(231, 190, 112, 0.5);
+  --brand-transparent: rgba(231, 190, 112, 0);
   --danger: #ba181b;
   --dark-primary: #1f1b24;
   --elevation0: #000000;
