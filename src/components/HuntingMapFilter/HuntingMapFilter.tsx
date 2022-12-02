@@ -73,7 +73,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    */
   const handleDocumentKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'r') {
+      if (event.key === 'r' && !event.ctrlKey) {
         handleButtonClick();
       }
     },
