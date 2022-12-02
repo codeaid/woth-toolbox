@@ -14,7 +14,7 @@ export const goldenJackalMarkers = [
     ],
     [
       [0.34619140625, 0.212646484375],
-      [0.328369140625, 0.200439453125],
+      [0.294921875, 0.19287109375],
     ],
   ),
   createAnimalMarkerOptions(
