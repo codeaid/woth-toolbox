@@ -64,7 +64,6 @@ const TransylvaniaPage = () => {
           genericMarkers={genericMarkers}
           labels={mapLabels}
           markerRangeMap={markerVisibilityMap}
-          scaleIncrement={0.02}
           onFilterChange={setFilterOptions}
           onMarkerDataChange={handleMarkerDataChange}
         />
