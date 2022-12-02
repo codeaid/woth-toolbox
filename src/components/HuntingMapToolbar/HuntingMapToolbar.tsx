@@ -41,13 +41,13 @@ export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {
 
   return (
     <div className={styles.HuntingMapToolbar}>
-      <IconButton onClick={onZoomIn}>
+      <IconButton tabIndex={-1} onClick={onZoomIn}>
         <RiZoomInLine />
       </IconButton>
-      <IconButton onClick={onZoomOut}>
+      <IconButton tabIndex={-1} onClick={onZoomOut}>
         <RiZoomOutLine />
       </IconButton>
-      <IconButton onClick={onReset}>
+      <IconButton tabIndex={-1} onClick={onReset}>
         <RiArrowGoBackFill />
       </IconButton>
     </div>
