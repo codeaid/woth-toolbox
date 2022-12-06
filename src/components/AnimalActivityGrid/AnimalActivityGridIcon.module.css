@@ -1,4 +1,14 @@
-.AnimalActivityGridIconIntermediate {
+.AnimalActivityGridIconIntermediate img {
   opacity: 0.8;
-  transform: scale(0.6);
+  transform: scale(0.7);
+}
+
+.AnimalActivityGridIconIntermediate:hover {
+  transform: unset;
+}
+
+@media (max-width: 864px) {
+  .AnimalActivityGridIconIntermediate {
+    transform: scale(0.8);
+  }
 }

@@ -21,7 +21,7 @@
   color: var(--brand);
 }
 
-@media (max-width: 864px) {
+@media (max-width: 1200px) {
   .AnimalNameResponsive {
     align-items: baseline;
     display: flex;
