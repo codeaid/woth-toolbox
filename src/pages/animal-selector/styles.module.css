@@ -1,14 +1,12 @@
 .AnimalSelectorPage {
   display: grid;
-  flex: 1;
-  grid-gap: 0 0;
-  grid-template-areas: "sidebar content";
-  grid-template-columns: 15rem 1fr;
+  grid-template-columns: auto 1fr;
+  width: 100%;
 }
 
 .AnimalSelectorPageNotification {
   margin: 10vh auto 0 auto;
-  max-width: 50em;
+  max-width: 40em;
 }
 
 .AnimalSelectorPageSeparator {
@@ -17,6 +15,7 @@
 
 @media (max-width: 864px) {
   .AnimalSelectorPage {
-    grid-template-columns: 11rem 1fr;
+    display: block;
+    grid-template-columns: unset;
   }
 }

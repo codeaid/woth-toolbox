@@ -1,6 +1,6 @@
 .PageContent {
   color: var(--text-primary);
-  grid-area: content;
+  height: 100%;
   line-height: 1.3em;
   overflow: auto;
   padding: 1.5em;

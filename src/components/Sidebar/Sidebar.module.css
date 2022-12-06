@@ -1,14 +1,55 @@
 .Sidebar {
   background-color: var(--elevation1);
-  grid-area: sidebar;
   height: 100%;
   overflow-y: auto;
   user-select: none;
   width: 100%;
 }
 
+.SidebarButton {
+  background-color: var(--elevation1);
+  border-radius: 0 0 0.5em 0;
+  left: 100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: opacity 150ms linear;
+}
+
+.SidebarButton:hover {
+  opacity: 1;
+}
+
+.SidebarButton svg {
+  font-size: 2em;
+}
+
+.SidebarButton:hover svg {
+  font-size: 2.2em;
+}
+
+.SidebarWrapper {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 150ms linear, transform 150ms linear;
+  width: 15rem;
+  z-index: 100;
+}
+
 @media (max-width: 864px) {
-  .Sidebar {
-    font-size: 0.9em;
+  .SidebarWrapper {
+    bottom: 0;
+    display: block;
+    left: 0;
+    overflow: unset;
+    position: absolute;
+    top: 0;
+    transform: translateX(-100%);
+  }
+
+  .SidebarWrapperExpanded {
+    box-shadow: var(--shadow);
+    transform: translateX(0);
   }
 }
