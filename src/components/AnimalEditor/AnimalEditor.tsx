@@ -2,35 +2,33 @@ import classnames from 'classnames';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { ChromePicker, ColorResult } from 'react-color';
 import { ButtonProps } from 'components/Button';
-import { Icon } from 'components/Icon';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { Textarea } from 'components/Textarea';
 import { animalNameMap } from 'config/names';
-import {
-  clearAnimalMarkerData,
-  getAnimalMarkerData,
-  getStorage,
-  setAnimalMarkerData,
-} from 'lib/storage';
+import { getIconComponent } from 'lib/icons';
 import { formatTimestampDistance, getHexColor } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
 import { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
 
 export const AnimalEditor = (props: AnimalEditorProps) => {
-  const { animal, defaultIconColor = '#ffffff', onChange, onClose } = props;
+  const {
+    defaultIconColor = '#ffffff',
+    marker,
+    onClose,
+    onDataClear,
+    onDataRead,
+    onDataWrite,
+  } = props;
 
-  // Animal comment
+  // Internal animal marker data to edit
   const [data, setData] = useState<AnimalMarkerData>({});
-
-  // Storage manager
-  const [storage] = useState(getStorage);
 
   // Retrieve animal name
   const animalName = useMemo(
-    () => (animal ? animalNameMap.get(animal.type)! : 'Unknown'),
-    [animal],
+    () => (marker ? animalNameMap.get(marker.type)! : 'Unknown'),
+    [marker],
   );
 
   /**
@@ -67,64 +65,47 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   );
 
   /**
-   * Handle clearing animal data from the storage
+   * Handle persisting current marker's data from the storage
    */
   const handleDataClear = useCallback(() => {
-    if (!animal) {
+    // Ensure a valid marker is present before continuing
+    if (!marker) {
       return;
     }
 
-    clearAnimalMarkerData(storage, animal);
-    onChange(animal.id, undefined);
+    // Persist changes and close the editor
+    onDataClear(marker);
     handleClose();
-  }, [animal, handleClose, onChange, storage]);
+  }, [handleClose, marker, onDataClear]);
 
   /**
-   * Handle persisting animal data to the storage
+   * Handle persisting current changes to the storage
    */
-  const handleDataPersist = useCallback(() => {
-    if (!animal) {
+  const handleDataWrite = useCallback(() => {
+    // Ensure a valid marker is present before continuing
+    if (!marker) {
       return;
     }
 
-    // Notify consumer about data having been changed
-    const key = setAnimalMarkerData(storage, animal, {
-      ...data,
-      created: data.created ?? Date.now(),
-      updated: Date.now(),
-    });
-    if (key && onChange) {
-      onChange(key, data);
-    }
-
+    // Persist changes and close the editor
+    onDataWrite(marker, data);
     handleClose();
-  }, [animal, data, handleClose, onChange, storage]);
-
-  /**
-   * Clear existing values
-   */
-  const handleReset = useCallback(() => {
-    if (!animal) {
-      return;
-    }
-
-    setData({});
-  }, [animal]);
+  }, [data, handleClose, marker, onDataWrite]);
 
   // List of sidebar action button properties
   const actions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: 'Save details',
+        children: 'Save',
         className: classnames(
           styles.AnimalEditorAction,
           styles.AnimalEditorActionSave,
         ),
         disabled: false,
-        onClick: handleDataPersist,
+        onClick: handleDataWrite,
       },
       {
-        children: 'Clear',
+        children: 'Delete',
         className: classnames(
           styles.AnimalEditorAction,
           styles.AnimalEditorActionReset,
@@ -133,11 +114,11 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         onClick: handleDataClear,
       },
     ],
-    [handleDataClear, handleDataPersist],
+    [handleDataClear, handleDataWrite],
   );
 
   // Creation and last updated date of existing data entries
-  const dates = useMemo(() => {
+  const renderedDates = useMemo(() => {
     // Ensure both dates are present before continuing
     if (!data.created || !data.updated) {
       return;
@@ -161,10 +142,32 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     );
   }, [data.created, data.updated]);
 
-  // Rendered side panel content
-  const renderedContent = animal && (
-    <>
-      {dates}
+  // Preview icon component
+  const IconComponent = useMemo(
+    () => getIconComponent(marker?.type),
+    [marker?.type],
+  );
+
+  // Load animal details on mount
+  useEffect(() => {
+    // Ensure a valid marker is present before continuing
+    if (!marker) {
+      return;
+    }
+
+    // Read data from the storage and store it locally for editing
+    const data = onDataRead(marker);
+    setData(data ?? {});
+  }, [marker, onDataRead]);
+
+  return (
+    <SidePanel
+      actions={actions}
+      title={animalName}
+      visible={!!marker}
+      onClose={handleClose}
+    >
+      {renderedDates}
 
       <Label>Comment</Label>
       <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
@@ -189,39 +192,13 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         onChange={handleColorChange}
       />
       <div className={styles.AnimalEditorIconPreview}>
-        <Icon
+        <IconComponent
           size={80}
           style={{
             color: data.color ?? defaultIconColor,
           }}
-          type={animal?.type!}
         />
       </div>
-    </>
-  );
-
-  // Load animal details on mount
-  useEffect(() => {
-    // Clear existing values
-    handleReset();
-
-    if (!animal) {
-      return;
-    }
-
-    // Read data from local storage
-    const data = getAnimalMarkerData(storage, animal);
-    setData(data ?? {});
-  }, [animal, handleReset, storage]);
-
-  return (
-    <SidePanel
-      actions={actions}
-      title={animalName}
-      visible={!!animal}
-      onClose={handleClose}
-    >
-      {renderedContent}
     </SidePanel>
   );
 };

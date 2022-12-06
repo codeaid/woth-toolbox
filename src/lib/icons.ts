@@ -7,5 +7,5 @@ import { MarkerType } from 'types/markers';
  *
  * @param type Target marker type
  */
-export const getIconComponent = (type: MarkerType) =>
-  iconComponentMap.get(type) ?? DefaultIcon;
+export const getIconComponent = (type?: MarkerType) =>
+  type ? iconComponentMap.get(type) ?? DefaultIcon : DefaultIcon;
