@@ -1,2 +1,3 @@
-export * from 'hooks/useMarkerPositionsDebug';
+export * from './useForceUpdate';
+export * from './useMarkerPositionsDebug';
 export * from './useRefCallback';
