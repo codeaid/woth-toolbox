@@ -1,9 +1,7 @@
+import { animalDataPrefix } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
 import { AnimalMarkerData, AnimalMarkerOptions } from 'types/markers';
-
-// Key prefix to use when storing animal data
-const animalDataPrefix = 'animal:';
 
 /**
  * Check if the specified storage is both supported and available
@@ -62,13 +60,12 @@ export const getStorage = () => {
  *
  * @param marker Target marker to generate key for
  */
-const getAnimalMarkerDataKey = (marker: AnimalMarkerOptions) => {
-  const hash = getMarkerKey(marker);
-  if (!hash) {
-    return;
-  }
+const getAnimalMarkerDataKey = (
+  marker: AnimalMarkerOptions,
+): [string, string] => {
+  const markerKey = getMarkerKey(marker);
 
-  return `${animalDataPrefix}${hash}`;
+  return [markerKey, `${animalDataPrefix}${markerKey}`];
 };
 
 /**
@@ -89,12 +86,12 @@ export const clearAnimalMarkerData = (
   storage: Storage,
   marker: AnimalMarkerOptions,
 ) => {
-  const key = getAnimalMarkerDataKey(marker);
-  if (!key) {
-    return false;
-  }
+  // Generate marker and storage keys for the current marker
+  const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
 
-  storage.removeItem(key);
+  // Remove item from the storage
+  storage.removeItem(storageKey);
+  return markerKey;
 };
 
 /**
@@ -107,15 +104,12 @@ export const getAnimalMarkerData = (
   storage: Storage,
   marker: AnimalMarkerOptions,
 ): Optional<AnimalMarkerData> => {
-  // Ensure a valid key can be created
-  const key = getAnimalMarkerDataKey(marker);
-  if (!key) {
-    return;
-  }
+  // Generate marker and storage keys for the current marker
+  const [, storageKey] = getAnimalMarkerDataKey(marker);
 
   // Attempt to read and parse data in the storage
   try {
-    const json = storage.getItem(key);
+    const json = storage.getItem(storageKey);
     if (!json) {
       return;
     }
@@ -176,15 +170,12 @@ export const setAnimalMarkerData = (
   marker: AnimalMarkerOptions,
   data: AnimalMarkerData,
 ) => {
-  // Ensure a valid key can be created
-  const key = getAnimalMarkerDataKey(marker);
-  if (!key) {
-    return false;
-  }
+  // Generate marker and storage keys for the current marker
+  const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
 
   try {
-    storage.setItem(key, JSON.stringify(data));
-    return key.substring(animalDataPrefix.length);
+    storage.setItem(storageKey, JSON.stringify(data));
+    return markerKey;
   } catch (e) {
     return;
   }
