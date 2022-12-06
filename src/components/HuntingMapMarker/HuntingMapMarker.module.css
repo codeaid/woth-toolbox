@@ -1,10 +1,10 @@
 .HuntingMapMarker {
-  opacity: 1;
+  display: none;
   position: absolute;
   transition: color 100ms ease-in-out,
     fill 100ms ease-in-out,
     opacity 100ms linear,
-    transform 100ms linear;
+    transform 100ms ease-in-out;
   z-index: 1;
   -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
@@ -15,20 +15,25 @@
 }
 
 .HuntingMapMarkerStateEntering {
+  display: block;
   opacity: 0;
   transform: scale(0);
 }
 
 .HuntingMapMarkerStateEntered {
+  display: block;
   opacity: 1;
   transform: scale(1);
 }
 
 .HuntingMapMarkerStateExiting {
+  display: block;
   opacity: 0;
-  transform: scale(0);
+  transform: scale(1);
 }
 
 .HuntingMapMarkerStateExited {
+  display: block;
   opacity: 0;
+  transform: scale(0);
 }

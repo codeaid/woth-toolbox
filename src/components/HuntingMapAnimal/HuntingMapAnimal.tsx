@@ -1,189 +1,303 @@
 import classnames from 'classnames';
 import {
+  createRef,
+  ForwardedRef,
+  forwardRef,
   MouseEvent as ReactMouseEvent,
+  RefObject,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { getMarkerKey } from 'lib/markers';
-import { AnimalMarkerOptions, MarkerOptions } from 'types/markers';
-import { HuntingMapAnimalProps } from './types';
+import { MapMarkerRef, MapOptions } from 'types/cartography';
+import {
+  AnimalMarkerData,
+  AnimalMarkerOptions,
+  MarkerOptions,
+} from 'types/markers';
+import { HuntingMapAnimalProps, HuntingMapAnimalRef } from './types';
 import styles from './HuntingMapAnimal.module.css';
 
-export const HuntingMapAnimal = (props: HuntingMapAnimalProps) => {
-  const {
-    activated = false,
-    className,
-    expanded = false,
-    mapScale,
-    marker,
-    markerRangeMap,
-    maxMarkerSize,
-    style,
-    visible = true,
-    onActivate,
-    onToggle,
-  } = props;
-
-  // Mouse coordinates that allow detecting if drag occurred while holding
-  // mouse cursor over the animal trigger icon
-  const pageCoords = useRef<[number, number]>([-1, -1]);
-
-  // Reference to the trigger element (animal icon)
-  const triggerRef = useRef<HTMLImageElement>(null);
-
-  /**
-   * Handle mouse down on the document
-   */
-  const handleDocumentMouseDown = useCallback(
-    (event: MouseEvent) => (pageCoords.current = [event.pageX, event.pageY]),
-    [],
-  );
-
-  /**
-   * Handle clicking on the trigger icon
-   */
-  const handleTriggerClick = useCallback(
-    (marker: MarkerOptions, event: ReactMouseEvent<EventTarget>) => {
-      // Ignore clicks on activated animals
-      if (activated) {
-        // Deactivate animal if it's currently active
-        if (event.shiftKey) {
-          onActivate(undefined);
-        }
-        return;
-      }
-
-      const [mouseDownX, mouseDownY] = pageCoords.current;
-      const { pageX: mouseUpX, pageY: mouseUpY } = event;
-
-      // Cancel trigger click if mouse up coordinates aren't the same as down
-      if (mouseUpX !== mouseDownX || mouseUpY !== mouseDownY) {
-        event.stopPropagation();
-        return;
-      }
-
-      // Toggle need zone visibility
-      onToggle(marker as AnimalMarkerOptions, !expanded);
-
-      // Activate animal if Shift key is held down while clicking on it
-      if (event.shiftKey) {
-        onActivate(marker as AnimalMarkerOptions);
-      }
-    },
-    [activated, pageCoords, onToggle, expanded, onActivate],
-  );
-
-  /**
-   * Handle long-pressing on the icon to open the editor
-   */
-  const handleTriggerLongPress = useCallback(
-    () => (activated ? onActivate(undefined) : onActivate(marker)),
-    [activated, marker, onActivate],
-  );
-
-  /**
-   * Render need zones
-   *
-   * @param markers List of need zone markers to render
-   */
-  const renderZones = useCallback(
-    (markers: Array<MarkerOptions>) => (
-      <>
-        {markers.map(marker => (
-          <HuntingMapMarker
-            key={getMarkerKey(marker)}
-            mapScale={mapScale}
-            marker={marker}
-            markerRangeMap={markerRangeMap}
-            maxMarkerSize={maxMarkerSize * 1.2}
-            visible={activated || (visible && expanded)}
-          />
-        ))}
-      </>
-    ),
-    [mapScale, markerRangeMap, maxMarkerSize, visible, expanded, activated],
-  );
-
-  // Drink need zones
-  const drinkZones = useMemo(
-    () => renderZones(marker.drink),
-    [marker.drink, renderZones],
-  );
-
-  // Eat need zones
-  const eatZones = useMemo(
-    () => renderZones(marker.eat),
-    [marker.eat, renderZones],
-  );
-
-  // Sleep need zones
-  const sleepZones = useMemo(
-    () => renderZones(marker.sleep),
-    [marker.sleep, renderZones],
-  );
-
-  // Main animal icon
-  const trigger = useMemo(
-    () => (
-      <HuntingMapMarker
-        className={classnames(
-          styles.HuntingMapAnimal,
-          {
-            [styles.HuntingMapAnimalActive]: expanded,
-          },
-          className,
-        )}
-        highlighted={activated || expanded}
-        mapScale={mapScale}
-        marker={marker}
-        markerRangeMap={markerRangeMap}
-        maxMarkerSize={70}
-        ref={triggerRef}
-        style={style}
-        visible={visible}
-        onClick={handleTriggerClick}
-        onLongPress={handleTriggerLongPress}
-      />
-    ),
-    [
-      activated,
+export const HuntingMapAnimal = forwardRef(
+  (props: HuntingMapAnimalProps, ref: ForwardedRef<HuntingMapAnimalRef>) => {
+    const {
       className,
-      expanded,
-      handleTriggerClick,
-      handleTriggerLongPress,
-      mapScale,
       marker,
-      markerRangeMap,
+      size,
       style,
-      visible,
-    ],
-  );
+      zoneSize = 45,
+      onToggleEditor,
+      onToggleZones,
+    } = props;
 
-  // Hide need zone icons when current animal type is removed through filters
-  useEffect(() => {
-    if (!visible) {
-      onToggle(marker, false);
-    }
-  }, [marker, onToggle, visible]);
+    // Reference to trigger's marker component
+    const [markerRef, setMarkerRef] = useState<Nullable<MapMarkerRef>>(null);
 
-  // Monitor clicks outside the current marker and hide zones when needed
-  useEffect(() => {
-    document.addEventListener('mousedown', handleDocumentMouseDown);
+    // Reference to the most up-to-date map options
+    const currentMapOptions = useRef<MapOptions>();
 
-    return () => {
-      document.removeEventListener('mousedown', handleDocumentMouseDown);
-    };
-  }, [handleDocumentMouseDown]);
+    // Mouse coordinates that allow detecting if drag occurred while holding
+    // mouse cursor over the animal trigger icon
+    const pageCoords = useRef<[number, number]>([-1, -1]);
 
-  return (
-    <>
-      {trigger}
-      {drinkZones}
-      {eatZones}
-      {sleepZones}
-    </>
-  );
-};
+    // References to all need zone icons
+    const zoneRefs = useRef<Array<RefObject<MapMarkerRef>>>([]);
+
+    // Custom data associated with the marker
+    const [data, setData] = useState<AnimalMarkerData>();
+
+    // Flag indicating if the marker editor is currently active
+    const [editorActive, setEditorActive] = useState(false);
+
+    // Flag indicating if the need zones are visible or not
+    const [zonesVisible, setZonesVisible] = useState(false);
+
+    // Custom marker color if data has one specified
+    const color = useMemo(() => {
+      // Revert to default colors if there is no data available or marker is
+      // currently expanded (activated) to show zones
+      if (!data || !data.color || zonesVisible) {
+        return;
+      }
+
+      return data.color;
+    }, [data, zonesVisible]);
+
+    /**
+     * Handle mouse down on the document
+     */
+    const handleDocumentMouseDown = useCallback(
+      (event: MouseEvent) => (pageCoords.current = [event.pageX, event.pageY]),
+      [],
+    );
+
+    /**
+     * Update trigger and zone visibility based on map's filter status
+     */
+    const handleSetHidden = useCallback(
+      (hidden: boolean) => {
+        // Update trigger marker's visibility
+        markerRef?.setHidden(hidden);
+
+        // Hide need zones if trigger gets hidden
+        if (hidden) {
+          setZonesVisible(false);
+        }
+      },
+      [markerRef],
+    );
+
+    /**
+     * Update trigger and zone visibility based on map's filter status
+     */
+    const handleSetVisibleWithFilter = useCallback(
+      (visible: boolean) => {
+        // Update trigger marker's visibility
+        markerRef?.setVisibleWithFilter(visible);
+
+        // Hide need zones and editor if animal marker is removed
+        if (!visible) {
+          setZonesVisible(false);
+          onToggleEditor(marker, false);
+        }
+      },
+      [marker, markerRef, onToggleEditor],
+    );
+
+    /**
+     * Update trigger and zone visibility based on map's zoom
+     */
+    const handleSetVisibleWithZoom = useCallback(
+      (visible: boolean) => {
+        // Update trigger marker's visibility
+        markerRef?.setVisibleWithZoom(visible);
+
+        // Hide need zones and editor if animal marker is removed
+        if (!visible) {
+          setZonesVisible(false);
+          onToggleEditor(marker, false);
+        }
+      },
+      [marker, markerRef, onToggleEditor],
+    );
+
+    /**
+     * Handle clicking on the trigger icon
+     *
+     * @param marker Marker options
+     * @param event Mouse event object
+     */
+    const handleTriggerClick = useCallback(
+      (marker: MarkerOptions, event: ReactMouseEvent<EventTarget>) => {
+        const [mouseDownX, mouseDownY] = pageCoords.current;
+        const { pageX: mouseUpX, pageY: mouseUpY } = event;
+
+        // Cancel trigger click if mouse up coordinates aren't the same as down
+        if (mouseUpX !== mouseDownX || mouseUpY !== mouseDownY) {
+          event.stopPropagation();
+          return;
+        }
+
+        // Single click occurred, ignore editor functionality
+        if (!event.shiftKey) {
+          // Ignore clicks if current animal is being edited
+          if (editorActive) {
+            return;
+          }
+
+          // Toggle visibility of need zone icons
+          setZonesVisible(!zonesVisible);
+
+          // Don't notify marker manager about this animal marker being expanded
+          // if Ctrl key is being held down during the click. This allows having
+          // multiple markers expanded simultaneously.
+          if (!event.ctrlKey) {
+            // Notify marker manager about need zone visibility change
+            onToggleZones(marker as AnimalMarkerOptions);
+          }
+        }
+
+        // Activate marker editor if Shift key was held down during the click
+        if (event.shiftKey) {
+          // Notify marker manager about this marker being edited
+          onToggleEditor(marker as AnimalMarkerOptions, !editorActive);
+        }
+      },
+      [editorActive, onToggleEditor, onToggleZones, zonesVisible],
+    );
+
+    /**
+     * Handle long-pressing on the icon to open the editor
+     */
+    const handleTriggerLongPress = useCallback(
+      () => onToggleEditor(marker, true),
+      [marker, onToggleEditor],
+    );
+
+    /**
+     * Update positions of all need zone markers using the latest map options
+     */
+    const handleUpdateZonePositions = useCallback(() => {
+      // Ensure zones are currently visible and map options are available
+      const mapOptions = currentMapOptions.current;
+      if (!zonesVisible || !mapOptions) {
+        return;
+      }
+
+      // Update each zone's position when they appear
+      zoneRefs.current.forEach(ref => ref.current?.updatePosition(mapOptions));
+    }, [zonesVisible]);
+
+    /**
+     * Handle updating marker's position in relation to the container
+     *
+     * @param mapOptions Source map options
+     */
+    const handleUpdatePositions = useCallback(
+      (mapOptions: MapOptions) => {
+        // Store map options so that need zone markers can be positions when
+        // they appear
+        currentMapOptions.current = mapOptions;
+
+        // Invoke trigger and zone marker position changes
+        markerRef?.updatePosition(mapOptions);
+        handleUpdateZonePositions();
+      },
+      [handleUpdateZonePositions, markerRef],
+    );
+
+    // Render need zones
+    const renderedNeedZoneIcons = useMemo(
+      () =>
+        [marker.drink, marker.eat, marker.sleep]
+          .flat()
+          .map((marker: MarkerOptions) => {
+            // Create a reference to each need zone icon
+            const ref = createRef<MapMarkerRef>();
+            zoneRefs.current.push(ref);
+
+            return (
+              <HuntingMapMarker
+                forceVisible={zonesVisible}
+                key={marker.id ?? getMarkerKey(marker)}
+                marker={marker}
+                mountOnEnter={true}
+                ref={ref}
+                size={zoneSize}
+                style={{ zIndex: 2 }}
+                unmountOnExit={true}
+              />
+            );
+          }),
+      [marker.drink, marker.eat, marker.sleep, zoneSize, zonesVisible],
+    );
+
+    // Expose control functions of the main trigger component as well as
+    // functionality to change zone visibility externally
+    useImperativeHandle<HuntingMapAnimalRef, HuntingMapAnimalRef>(ref, () => ({
+      setData,
+      setEditorActive,
+      setHidden: handleSetHidden,
+      setVisibleWithFilter: handleSetVisibleWithFilter,
+      setVisibleWithZoom: handleSetVisibleWithZoom,
+      setZonesVisible,
+      updatePosition: handleUpdatePositions,
+    }));
+
+    // Update zone positions when they are shown
+    useEffect(() => {
+      if (zonesVisible) {
+        handleUpdateZonePositions();
+      }
+    }, [handleUpdateZonePositions, zonesVisible]);
+
+    // Clear references to zone markers once they get removed
+    useEffect(() => {
+      if (!zonesVisible) {
+        zoneRefs.current = [];
+      }
+    }, [zonesVisible]);
+
+    // Monitor clicks outside the current marker and hide zones when needed
+    useEffect(() => {
+      document.addEventListener('mousedown', handleDocumentMouseDown);
+
+      return () => {
+        document.removeEventListener('mousedown', handleDocumentMouseDown);
+      };
+    }, [handleDocumentMouseDown]);
+
+    return (
+      <>
+        <HuntingMapMarker
+          className={classnames(
+            styles.HuntingMapAnimal,
+            {
+              [styles.HuntingMapAnimalActive]: zonesVisible,
+              [styles.HuntingMapAnimalEdited]: !!data,
+            },
+            className,
+          )}
+          highlighted={editorActive || zonesVisible}
+          marker={marker}
+          ref={setMarkerRef}
+          size={size}
+          style={{
+            ...style,
+            color,
+          }}
+          onClick={handleTriggerClick}
+          onLongPress={handleTriggerLongPress}
+        />
+        {renderedNeedZoneIcons}
+      </>
+    );
+  },
+);
+
+HuntingMapAnimal.displayName = 'HuntingMapAnimal';

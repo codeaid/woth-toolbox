@@ -28,7 +28,8 @@
     "react-no-ssr": "^1.1.0",
     "react-spinners": "^0.13.6",
     "react-transition-group": "^4.4.5",
-    "sha1": "^1.1.1"
+    "sha1": "^1.1.1",
+    "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {
     "@types/node": "18.11.7",

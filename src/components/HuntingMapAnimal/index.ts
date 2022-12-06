@@ -1,4 +1,2 @@
-import { memo } from 'react';
-import { HuntingMapAnimal as BaseHuntingMapAnimal } from './HuntingMapAnimal';
-
-export const HuntingMapAnimal = memo(BaseHuntingMapAnimal);
+export { HuntingMapAnimal } from './HuntingMapAnimal';
+export type { HuntingMapAnimalRef } from './types';

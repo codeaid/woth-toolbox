@@ -6,15 +6,26 @@
   position: relative;
 }
 
-.HuntingMapAnimalMarkerHighlighted {
-  filter: drop-shadow(0 0 0.4em currentColor);
+.HuntingMapDragging {
+  cursor: grabbing;
 }
 
-.HuntingMapContainer {
+.HuntingMapImage {
+  backface-visibility: hidden;
+  background-color: var(--elevation0);
+  box-shadow: var(--shadow-strong);
+  height: 100%;
+  user-select: none;
+  width: 100%;
+  will-change: height, left, top, width;
+}
+
+.HuntingMapImageWrapper {
   left: 0;
   position: absolute;
   top: 0;
-  will-change: left, top;
+  user-select: none;
+  will-change: height, left, top, width;
 }
 
 .HuntingMapMarkerGeneric {
@@ -27,13 +38,4 @@
 
 .HuntingMapMarkerLodge {
   color: var(--marker-lodge);
-}
-
-.HuntingMapImage {
-  backface-visibility: hidden;
-  background-color: var(--elevation0);
-  box-shadow: var(--shadow-strong);
-  height: 100%;
-  user-select: none;
-  width: 100%;
 }

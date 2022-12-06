@@ -4,51 +4,45 @@ import {
   forwardRef,
   MouseEvent,
   useCallback,
+  useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import { Transition } from 'react-transition-group';
-import { Icon } from 'components/Icon';
-import { useRefCallback } from 'hooks';
-import { getMarkerSize, isMarkerVisibleAtScale } from 'lib/markers';
+import { getIconComponent } from 'lib/icons';
+import { getMarkerOffset } from 'lib/markers';
+import { MapMarkerRef, MapOptions } from 'types/cartography';
 import { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
 export const HuntingMapMarker = forwardRef(
-  (props: HuntingMapMarkerProps, ref: ForwardedRef<HTMLImageElement>) => {
+  (props: HuntingMapMarkerProps, ref: ForwardedRef<MapMarkerRef>) => {
     const {
       className,
+      forceVisible = false,
       highlighted,
-      mapScale,
       marker,
-      markerRangeMap,
-      maxMarkerSize,
+      mountOnEnter = false,
+      size = 35,
       style,
-      visible = true,
+      unmountOnExit = false,
       onClick,
       onLongPress,
     } = props;
 
-    // Extract marker details
-    const { coords, type } = marker;
-    const [left, top] = coords;
+    // Reference to marker's icon
+    const iconRef = useRef<HTMLDivElement>(null);
 
-    // Reference to marker's image element
-    const markerRef = useRef<HTMLImageElement>(null);
+    // Visibility flag states
+    const [hidden, setHidden] = useState(false);
+    const [visibleWithFilter, setVisibleWithFilter] = useState(true);
+    const [visibleWithZoom, setVisibleWithZoom] = useState(false);
 
-    // Determine if marker is visible
-    const markerVisibleAtScale = useMemo(
-      () => isMarkerVisibleAtScale(mapScale, marker.type, markerRangeMap),
-      [mapScale, marker.type, markerRangeMap],
-    );
-
-    // Container reference wrapping around outer an inner refs
-    const [, setInnerRef] = useRefCallback<HTMLImageElement>(markerRef, ref);
-
-    // Calculate marker size at the current map scale
-    const size = useMemo(
-      () => getMarkerSize(mapScale, maxMarkerSize),
-      [maxMarkerSize, mapScale],
+    // Icon component to use for the current filter entry
+    const IconComponent = useMemo(
+      () => getIconComponent(marker.type),
+      [marker.type],
     );
 
     // Generate marker's coordinate title in development mode
@@ -64,22 +58,60 @@ export const HuntingMapMarker = forwardRef(
 
     /**
      * Handle clicking on the marker
+     *
+     * @param event Mouse event object
      */
     const handleClick = useCallback(
       (event: MouseEvent<EventTarget>) => onClick && onClick(marker, event),
       [marker, onClick],
     );
 
+    /**
+     * Handle updating markers position in relation to its container
+     *
+     * @param mapOptions Source map options
+     */
+    const handleUpdatePosition = useCallback(
+      (mapOptions: MapOptions) => {
+        // Ensure reference to the icon is available
+        if (!iconRef.current) {
+          return;
+        }
+
+        // Calculate marker position offsets
+        const [offsetX, offsetY] = getMarkerOffset(marker, mapOptions, size);
+
+        // Update marker's position
+        iconRef.current.style.left = `${offsetX}px`;
+        iconRef.current.style.top = `${offsetY}px`;
+      },
+      [marker, size],
+    );
+
+    // Expose internal controller functions allowing to change marker's
+    // visibility and position
+    useImperativeHandle<MapMarkerRef, MapMarkerRef>(
+      ref,
+      () => ({
+        markerElement: iconRef.current,
+        setHidden,
+        setVisibleWithFilter,
+        setVisibleWithZoom,
+        updatePosition: handleUpdatePosition,
+      }),
+      [handleUpdatePosition],
+    );
+
     return (
       <Transition
-        in={visible && markerVisibleAtScale}
-        mountOnEnter={true}
-        nodeRef={markerRef}
+        in={(forceVisible || (visibleWithFilter && visibleWithZoom)) && !hidden}
+        mountOnEnter={mountOnEnter}
+        nodeRef={iconRef}
         timeout={100}
-        unmountOnExit={true}
+        unmountOnExit={unmountOnExit}
       >
         {state => (
-          <Icon
+          <IconComponent
             className={classnames(
               styles.HuntingMapMarker,
               {
@@ -91,15 +123,10 @@ export const HuntingMapMarker = forwardRef(
               className,
             )}
             highlighted={highlighted}
-            ref={setInnerRef}
+            ref={iconRef}
             size={size}
-            style={{
-              ...style,
-              left: `calc(${left * 100}% - ${size / 2}px)`,
-              top: `calc(${top * 100}% - ${size / 2}px)`,
-            }}
+            style={style}
             title={title}
-            type={type}
             onClick={handleClick}
             onLongPress={onLongPress}
           />

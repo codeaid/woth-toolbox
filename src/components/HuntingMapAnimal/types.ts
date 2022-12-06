@@ -1,22 +1,28 @@
 import { CSSProperties } from 'react';
-import { AnimalMarkerOptions, MarkerType } from 'types/markers';
+import { MapMarkerRef } from 'types/cartography';
+import { AnimalMarkerData, AnimalMarkerOptions } from 'types/markers';
 
-type HuntingMapAnimalActivateHandler = (marker?: AnimalMarkerOptions) => void;
-type HuntingMapAnimalToggleHandler = (
+type HuntingMapAnimalToggleEditorHandler = (
   marker: AnimalMarkerOptions,
-  expanded: boolean,
+  visible: boolean,
+) => void;
+type HuntingMapAnimalMarkerToggleZonesHandler = (
+  marker: AnimalMarkerOptions,
 ) => void;
 
 export interface HuntingMapAnimalProps {
   activated?: boolean;
   className?: string;
-  expanded?: boolean;
-  mapScale: number;
   marker: AnimalMarkerOptions;
-  markerRangeMap: Map<MarkerType, number>;
-  maxMarkerSize: number;
+  size?: number;
   style?: CSSProperties;
-  visible?: boolean;
-  onActivate: HuntingMapAnimalActivateHandler;
-  onToggle: HuntingMapAnimalToggleHandler;
+  zoneSize?: number;
+  onToggleEditor: HuntingMapAnimalToggleEditorHandler;
+  onToggleZones: HuntingMapAnimalMarkerToggleZonesHandler;
+}
+
+export interface HuntingMapAnimalRef extends MapMarkerRef {
+  setData: (data?: AnimalMarkerData) => void;
+  setEditorActive: (visible: boolean) => void;
+  setZonesVisible: (visible: boolean) => void;
 }

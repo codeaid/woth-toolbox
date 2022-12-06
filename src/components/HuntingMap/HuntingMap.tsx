@@ -1,4 +1,6 @@
 import {
+  createRef,
+  memo,
   MouseEvent,
   TouchEvent,
   useCallback,
@@ -8,185 +10,219 @@ import {
   useState,
   WheelEvent,
 } from 'react';
+import useResizeObserver, { ObservedSize } from 'use-resize-observer';
 import { AnimalEditor } from 'components/AnimalEditor';
-import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
-import { HuntingMapFilter } from 'components/HuntingMapFilter';
+import {
+  HuntingMapAnimal,
+  HuntingMapAnimalRef,
+} from 'components/HuntingMapAnimal';
+import {
+  HuntingMapFilter,
+  HuntingMapFilterOptions,
+} from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
+import { useForceUpdate } from 'hooks';
 import {
-  getAnimalMarkerClassName,
-  getAnimalMarkerStyle,
+  getCenteredMapOptions,
+  getMapDimensions,
+  getMapSize,
+  getNextMapOptions,
+  getNextZoomOptions,
+  getScreenCenterOffset,
+  updateMapPosition,
+} from 'lib/cartography';
+import {
   getGenericMarkerColorClass,
   getMarkerKey,
   isHighlightedMarker,
-  isMarkerEqual,
-  isMarkerFiltered,
+  updateMarkerPositions,
+  updateMarkerVisibilityWithFilter,
+  updateMarkerVisibilityWithZoom,
 } from 'lib/markers';
+import {
+  MapMarkerOptions,
+  MapMarkerRef,
+  MapOptions,
+  MapZoomOptions,
+} from 'types/cartography';
 import { AnimalMarkerOptions } from 'types/markers';
-import { HuntingMapOffsets, HuntingMapOptions, HuntingMapProps } from './types';
+import { HuntingMapDragOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
+
+const HuntingMapAnimalMemo = memo(HuntingMapAnimal);
+const HuntingMapMarkerMemo = memo(HuntingMapMarker);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkerDataMap,
+    animalMarkerSize = 60,
     animalMarkers,
-    defaultScale = 0.25,
-    filterOptions,
+    defaultZoom = 0.25,
+    genericMarkerSize = 40,
     genericMarkers,
     imageHeight,
     imageSrc,
     imageWidth,
     labels = [],
+    mapBoundary = 100,
     markerRangeMap = new Map(),
-    maxMarkerSize = 38,
-    maxScale = 2.5,
-    minOverflow = 200,
-    minScale = 0.2,
-    scaleIncrement = 0.1,
+    zoomMax = 5,
+    zoomMin = 0.1,
+    zoomSpeed = 1,
+    zoomStep = 0.05,
     onClick,
-    onFilterChange,
-    onMarkerDataChange,
+    onEditorClear,
+    onEditorRead,
+    onEditorWrite,
   } = props;
 
-  // References to internal elements
+  // References to component elements
+  const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const ref = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Variable holding mouse offset on mousedown on the image
-  const imageMouseDownOffset = useRef<[number, number]>([0, 0]);
-
-  // Flag indicating whether the map is currently being dragged
-  const isDragging = useRef(false);
-
-  // Information containing pointer offsets at the start of the drag operation
-  const dragStart = useRef<HuntingMapOffsets>({
+  // Drag start mouse coordinates and current map position offsets
+  const dragCoords = useRef<HuntingMapDragOptions>({
+    mapLeft: 0,
+    mapTop: 0,
     pageX: 0,
     pageY: 0,
-    translateX: 0,
-    translateY: 0,
   });
 
-  // Currently active and expanded animal markers (one being edited)
-  const [activeAnimal, setActiveAnimal] = useState<AnimalMarkerOptions>();
-  const [expandedAnimal, setExpandedAnimal] = useState<AnimalMarkerOptions>();
+  // Map offset values that are used to position the map
+  const mapOptions = useRef<MapOptions>({
+    containerHeight: -1,
+    containerWidth: -1,
+    imageHeight,
+    imageWidth,
+    mapBoundary,
+    mapHeight: getMapSize(imageWidth, defaultZoom),
+    mapLeft: 0,
+    mapTop: 0,
+    mapWidth: getMapSize(imageWidth, defaultZoom),
+  });
+
+  // Zoom values used to scale the map
+  const zoomOptions = useRef<MapZoomOptions>({
+    zoomMax,
+    zoomMin,
+    zoomSpeed,
+    zoomStep,
+    zoomValue: defaultZoom,
+  });
+
+  // Flag indicating whether left mouse button is being held down
+  const isMouseDown = useRef(false);
+
+  // Lists of marker options to be rendered on the page
+  const animalMarkerOptions = useRef<
+    Array<MapMarkerOptions<HuntingMapAnimalRef>>
+  >([]);
+  const genericMarkerOptions = useRef<Array<MapMarkerOptions>>([]);
+  const needZoneMarkerOptions = useRef<Array<MapMarkerOptions>>([]);
+
+  // Currently selected filters
+  const filterOptions = useRef<HuntingMapFilterOptions>({
+    selectedTypes: [],
+  });
+
+  // Variable tracking whether mouse was moved between mousedown and mouseup
+  const mouseMoved = useRef(false);
+
+  // Animal marker that is currently being edited
+  const [editedAnimal, setEditedAnimal] = useState<AnimalMarkerOptions>();
 
   // Flag indicating that the map image has loaded
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Current map offsets and options
-  const [options, setOptions] = useState<HuntingMapOptions>({
-    mapHeight: imageHeight * defaultScale,
-    mapLeft: 0,
-    mapScale: defaultScale,
-    mapTop: 0,
-    mapWidth: imageWidth * defaultScale,
-  });
-
-  /**
-   * Ensure specified coordinates remain within the allowed boundaries
-   *
-   * @param x Horizontal offset
-   * @param y Vertical offset
-   * @param targetWidth Custom map width override
-   * @param targetHeight Custom map height override
-   */
-  const getBoundMapCoords = useCallback(
-    (
-      x: number,
-      y: number,
-      targetWidth?: number,
-      targetHeight?: number,
-    ): [number, number] => {
-      // Ensure container element has been initialized
-      const containerElement = ref.current;
-      if (!containerElement) {
-        return [x, y];
-      }
-
-      // Determine height and width of the container element
-      const { height: containerHeight, width: containerWidth } =
-        containerElement.getBoundingClientRect();
-
-      // Use custom or current map sizes
-      const mapWidth = targetWidth ?? options.mapWidth;
-      const mapHeight = targetHeight ?? options.mapHeight;
-
-      // Ensure map can not be dragged outside the visible horizontal area
-      if (x > containerWidth - minOverflow) {
-        x = containerWidth - minOverflow;
-      } else if (x < -mapWidth + minOverflow) {
-        x = -mapWidth + minOverflow;
-      }
-
-      // Ensure map can not be dragged outside the visible vertical area
-      if (y > containerHeight - minOverflow) {
-        y = containerHeight - minOverflow;
-      } else if (y < -mapHeight + minOverflow) {
-        y = -mapHeight + minOverflow;
-      }
-
-      return [x, y];
-    },
-    [minOverflow, options],
-  );
-
-  /**
-   * Get map offset coordinates for a centered position
-   *
-   * @param targetWidth Custom map width to use when calculating offsets
-   * @param targetHeight Custom map height to use when calculating offsets
-   */
-  const getCenteredMapCoords = useCallback(
-    (targetWidth?: number, targetHeight?: number): [number, number] => {
-      const containerElement = ref.current;
-
-      // Ensure container element is initialised before proceeding
-      if (!containerElement) {
-        return [0, 0];
-      }
-
-      // Determine height and width of the container element
-      const { height: containerHeight, width: containerWidth } =
-        containerElement.getBoundingClientRect();
-
-      // Use custom or current map sizes
-      const imageWidth = targetWidth ?? options.mapWidth;
-      const imageHeight = targetHeight ?? options.mapHeight;
-
-      return [
-        containerWidth / 2 - imageWidth / 2,
-        containerHeight / 2 - imageHeight / 2,
-      ];
-    },
-    [options],
-  );
+  // Update trigger function
+  const [forcedUpdate, setForcedUpdate] = useForceUpdate();
 
   /**
    * Clear currently active animal
    */
   const handleAnimalEditorClose = useCallback(
-    () => setActiveAnimal(undefined),
+    () => setEditedAnimal(undefined),
     [],
   );
 
   /**
-   * Toggle specified animal's need zones
+   * Update all animal markers with custom data entries when they change
+   */
+  const handleUpdateAnimalData = useCallback(() => {
+    animalMarkerOptions.current.forEach(options => {
+      const { marker, ref } = options;
+
+      // Set data associated with the current animal marker
+      const data = animalMarkerDataMap[(marker as AnimalMarkerOptions).id];
+      ref.current?.setData(data);
+    });
+  }, [animalMarkerDataMap]);
+
+  /**
+   * Handle updating positions of all markers
    *
-   * @param marker Animal marker to toggle
-   * @param expanded TRUE if the need zones are visible, FALSE otherwise
+   * @param customMapOptions Custom map option overrides
    */
-  const handleAnimalToggle = useCallback(
-    (marker: AnimalMarkerOptions, expanded: boolean) =>
-      expanded ? setExpandedAnimal(marker) : setExpandedAnimal(undefined),
+  const handleUpdateMarkerPositions = useCallback(
+    (customMapOptions?: MapOptions) =>
+      updateMarkerPositions(
+        customMapOptions ?? mapOptions.current,
+        genericMarkerSize,
+        animalMarkerOptions.current,
+        genericMarkerOptions.current,
+        needZoneMarkerOptions.current,
+      ),
+    [genericMarkerSize],
+  );
+
+  /**
+   * Handle updating marker visibility based on current filters
+   */
+  const handleUpdateMarkerVisibilityFilters = useCallback(
+    () =>
+      updateMarkerVisibilityWithFilter(
+        filterOptions.current,
+        animalMarkerOptions.current,
+        genericMarkerOptions.current,
+        needZoneMarkerOptions.current,
+      ),
     [],
   );
 
   /**
-   * Handle map image having been fully loaded
+   * Handle updating marker visibility based on the current map zoom
    */
-  const handleImageLoaded = useCallback(() => setImageLoaded(true), []);
+  const handleUpdateMarkerVisibilityZoom = useCallback(
+    (customZoomOptions?: MapZoomOptions) =>
+      updateMarkerVisibilityWithZoom(
+        customZoomOptions ?? zoomOptions.current,
+        markerRangeMap,
+        animalMarkerOptions.current,
+        genericMarkerOptions.current,
+        needZoneMarkerOptions.current,
+      ),
+    [markerRangeMap],
+  );
+
+  /**
+   * Update map position in relation to the container
+   *
+   * @param callbacks List of callbacks to execute after updating map position
+   */
+  const handleMapUpdate = useCallback(
+    (...callbacks: Array<() => void>) =>
+      updateMapPosition(
+        imageWrapperRef.current,
+        imageRef.current,
+        mapOptions.current,
+        () => callbacks.forEach(callback => callback()),
+      ),
+    [],
+  );
 
   /**
    * Handle the start of map being dragged
@@ -194,25 +230,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param pageX Current horizontal pointer position in relation to the page
    * @param pageY Current vertical pointer position in relation to the page
    */
-  const handleMapDragStart = useCallback(
-    (pageX: number, pageY: number) => {
-      // Extract current map position offsets
-      const { mapLeft, mapTop } = options;
+  const handleMapDragStart = useCallback((pageX: number, pageY: number) => {
+    // Persist starting mouse and map offsets
+    const { mapLeft, mapTop } = mapOptions.current;
+    dragCoords.current = { mapLeft, mapTop, pageX, pageY };
 
-      // Store the starting pointer position as well as current
-      // map position offsets for use during the drag process
-      dragStart.current = {
-        pageX,
-        pageY,
-        translateX: mapLeft,
-        translateY: mapTop,
-      };
-
-      // Enable drag functionality
-      isDragging.current = true;
-    },
-    [options],
-  );
+    // Update container's class names and enable dragging
+    containerRef.current?.classList.add(styles.HuntingMapDragging);
+    isMouseDown.current = true;
+  }, []);
 
   /**
    * Handle the progress of map being dragged
@@ -222,172 +248,165 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleMapDrag = useCallback(
     (pageX: number, pageY: number) => {
-      // Ensure map is being dragged
-      if (!isDragging.current || (pageX === 0 && pageY === 0)) {
+      // Ensure left mouse button is being held down
+      if (!isMouseDown.current || (pageX === 0 && pageY === 0)) {
         return;
       }
 
       // Calculate differences between initial pointer position and current
-      const deltaX = dragStart.current.pageX - pageX;
-      const deltaY = dragStart.current.pageY - pageY;
+      const deltaX = dragCoords.current.pageX - pageX;
+      const deltaY = dragCoords.current.pageY - pageY;
 
       // Offset map position by the deltas
-      let translateX = dragStart.current.translateX - deltaX;
-      let translateY = dragStart.current.translateY - deltaY;
+      let mapLeft = dragCoords.current.mapLeft - deltaX;
+      let mapTop = dragCoords.current.mapTop - deltaY;
 
-      // Ensure map remains within the boundaries
-      const [mapLeft, mapTop] = getBoundMapCoords(translateX, translateY);
-
-      // Update options to trigger map's position change
-      setOptions(current => ({
-        ...current,
+      // Update map options
+      mapOptions.current = {
+        ...mapOptions.current,
         mapLeft,
         mapTop,
-      }));
+      };
+
+      // Update map's position in relation to the container
+      handleMapUpdate();
     },
-    [getBoundMapCoords],
+    [handleMapUpdate],
   );
 
   /**
-   * Handle the end of map being dragged
+   * Cancel dragging the map
    */
   const handleMapDragCancel = useCallback(() => {
-    // Disable drag functionality
-    isDragging.current = false;
+    // Update container's class names and disable dragging
+    containerRef.current?.classList.remove(styles.HuntingMapDragging);
+    isMouseDown.current = false;
   }, []);
+
+  /**
+   * Center map and reset its size
+   */
+  const handleMapReset = useCallback(() => {
+    // Calculate target image width and height at the default zoom
+    const [mapWidth, mapHeight] = getMapDimensions(
+      imageWidth,
+      imageHeight,
+      defaultZoom,
+    );
+
+    // Update map options to center the map
+    mapOptions.current = getCenteredMapOptions({
+      ...mapOptions.current,
+      mapHeight,
+      mapWidth,
+    });
+
+    // Reset zoom value to the default one
+    zoomOptions.current = {
+      ...zoomOptions.current,
+      zoomValue: defaultZoom,
+    };
+
+    // Update map position in relation to the container
+    handleMapUpdate(
+      handleUpdateAnimalData,
+      handleUpdateMarkerPositions,
+      handleUpdateMarkerVisibilityZoom,
+    );
+  }, [
+    defaultZoom,
+    handleMapUpdate,
+    handleUpdateAnimalData,
+    handleUpdateMarkerPositions,
+    handleUpdateMarkerVisibilityZoom,
+    imageHeight,
+    imageWidth,
+  ]);
 
   /**
    * Handle map being zoomed in
    *
-   * @param offsetX Custom vertical cursor offset to zoom the map into
-   * @param offsetY Custom horizontal cursor offset to zoom the map into
+   * @param delta Scroll delta value
+   * @param pageX Horizontal cursor position relative to the page
+   * @param pageY Vertical cursor position relative to the page
    */
-  const handleMapZoomIn = useCallback(
-    (offsetX?: number, offsetY?: number) =>
-      setOptions(current => {
-        const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
+  const handleMapZoom = useCallback(
+    (delta: number, pageX?: number, pageY?: number) => {
+      const container = containerRef.current;
+      const image = imageRef.current;
 
-        // Calculate next scale after scaling it up
-        const nextScale =
-          Math.round(
-            (Math.min(maxScale, mapScale + scaleIncrement) + Number.EPSILON) *
-              100,
-          ) / 100;
+      // Ensure all required elements are present
+      if (!container || !image) {
+        return;
+      }
 
-        // Calculate map's size at the next scale
-        const nextWidth = imageWidth * nextScale;
-        const nextHeight = imageHeight * nextScale;
+      // Use center of the current page as the zoom target
+      if (!pageX || !pageY) {
+        const [centerX, centerY] = getScreenCenterOffset(document);
+        pageX ??= centerX;
+        pageY ??= centerY;
+      }
 
-        // Calculate difference between the current and next sizes
-        const diffWidth = nextWidth - mapWidth;
-        const diffHeight = nextHeight - mapHeight;
+      zoomOptions.current = getNextZoomOptions(zoomOptions.current, delta);
+      mapOptions.current = getNextMapOptions(
+        pageX,
+        pageY,
+        container,
+        image,
+        mapOptions.current,
+        zoomOptions.current,
+      );
 
-        // Calculate position of the mouse within the map as percentages
-        const percentX = offsetX ? offsetX / mapWidth : 0.5;
-        const percentY = offsetY ? offsetY / mapWidth : 0.5;
-
-        // Ensure map remains within the boundaries when zooming in
-        const [translateX, translateY] = getBoundMapCoords(
-          mapLeft - diffWidth * percentX,
-          mapTop - diffHeight * percentY,
-          nextWidth,
-          nextHeight,
-        );
-
-        return {
-          mapHeight: nextHeight,
-          mapLeft: translateX,
-          mapScale: nextScale,
-          mapTop: translateY,
-          mapWidth: nextWidth,
-        };
-      }),
-    [getBoundMapCoords, imageHeight, imageWidth, maxScale, scaleIncrement],
+      handleMapUpdate(
+        handleUpdateMarkerPositions,
+        handleUpdateMarkerVisibilityZoom,
+        setForcedUpdate,
+      );
+    },
+    [
+      setForcedUpdate,
+      handleMapUpdate,
+      handleUpdateMarkerPositions,
+      handleUpdateMarkerVisibilityZoom,
+    ],
   );
 
   /**
-   * Handle map being zoomed out
+   * Handle pressing left mouse button down
    *
-   * @param offsetX Custom vertical cursor offset to zoom the map out of
-   * @param offsetY Custom horizontal cursor offset to zoom the map out of
+   * @param event Mouse event object
    */
-  const handleMapZoomOut = useCallback(
-    (offsetX?: number, offsetY?: number) =>
-      setOptions(current => {
-        const { mapHeight, mapLeft, mapScale, mapTop, mapWidth } = current;
-
-        // Calculate next scale after scaling it down
-        const nextScale =
-          Math.round(
-            (Math.max(minScale, mapScale - scaleIncrement) + Number.EPSILON) *
-              100,
-          ) / 100;
-
-        // Calculate map's size at the next scale
-        const nextWidth = imageWidth * nextScale;
-        const nextHeight = imageHeight * nextScale;
-
-        // Calculate difference between the current and next sizes
-        const diffWidth = mapWidth - nextWidth;
-        const diffHeight = mapHeight - nextHeight;
-
-        // Calculate position of the mouse within the map as percentages
-        const percentX = offsetX ? offsetX / mapWidth : 0.5;
-        const percentY = offsetY ? offsetY / mapWidth : 0.5;
-
-        // Ensure map remains within the boundaries when zooming out
-        const [translateX, translateY] = getBoundMapCoords(
-          mapLeft + diffWidth * percentX,
-          mapTop + diffHeight * percentY,
-          nextWidth,
-          nextHeight,
-        );
-
-        return {
-          mapLeft: translateX,
-          mapScale: nextScale,
-          mapTop: translateY,
-          mapWidth: nextWidth,
-          mapHeight: nextHeight,
-        };
-      }),
-    [getBoundMapCoords, imageHeight, imageWidth, minScale, scaleIncrement],
-  );
-
-  /**
-   * Handle initiating map being dragged using a mouse
-   *
-   * @param event Mouse event
-   */
-  const handleMouseDown = useCallback(
-    (event: MouseEvent<EventTarget>) => {
+  const handleContainerMouseDown = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
       event.preventDefault();
 
       const { pageX, pageY } = event;
 
-      imageMouseDownOffset.current = [pageX, pageY];
+      mouseMoved.current = false;
       handleMapDragStart(pageX, pageY);
     },
     [handleMapDragStart],
   );
 
   /**
-   * Handle mouse being moved while dragging the map
+   * Handle moving mouse around
    *
-   * @param event Mouse event
+   * @param event Mouse event object
    */
-  const handleMouseMove = useCallback(
-    (event: MouseEvent<EventTarget>) => {
-      const { pageX, pageY } = event;
-      handleMapDrag(pageX, pageY);
+  const handleContainerMouseMove = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      mouseMoved.current = true;
+      handleMapDrag(event.pageX, event.pageY);
     },
     [handleMapDrag],
   );
 
   /**
    * Handle clicking on the map
+   *
+   * @param event Mouse event object
    */
-  const handleMouseUp = useCallback(
+  const handleContainerMouseUp = useCallback(
     (event: MouseEvent<EventTarget>) => {
       event.preventDefault();
 
@@ -398,35 +417,57 @@ export const HuntingMap = (props: HuntingMapProps) => {
         return;
       }
 
-      // Retrieve previous and current cursor offset in relation to the page
-      const { pageX, pageY } = event;
-      const [previousX, previousY] = imageMouseDownOffset.current;
-
       // Only trigger the event if mouse was released at the same offset
       // as it was pressed down (is a click without the map being dragged)
-      if (pageX === previousX && pageY === previousY) {
+      if (!mouseMoved.current) {
         const { offsetX, offsetY } = event.nativeEvent;
-        const { mapScale } = options;
+        const { zoomValue } = zoomOptions.current;
 
-        onClick(Math.round(offsetX / mapScale), Math.round(offsetY / mapScale));
+        onClick(
+          Math.round(offsetX / zoomValue),
+          Math.round(offsetY / zoomValue),
+        );
       }
     },
-    [handleMapDragCancel, onClick, options],
+    [handleMapDragCancel, onClick],
+  );
+
+  /**
+   * Handle changes to the container element and update map size
+   */
+  const handleContainerResize = useCallback(
+    ({ height, width }: ObservedSize) => {
+      // Ensure width and height are present
+      if (!height || !width) {
+        return;
+      }
+
+      // Update map options
+      mapOptions.current = {
+        ...mapOptions.current,
+        containerHeight: height,
+        containerWidth: width,
+      };
+
+      // Update map position in relation to the container
+      handleMapUpdate();
+    },
+    [handleMapUpdate],
   );
 
   /**
    * Handle initiating map being dragged using touch
    *
-   * @param event Touch event
+   * @param event Touch event object
    */
-  const handleTouchStart = useCallback(
+  const handleContainerTouchStart = useCallback(
     (event: TouchEvent<EventTarget>) => {
       // Fix for touch enabled devices that fixes lag on drag start
       event.stopPropagation();
 
       // Determine if taps occurred on map elements
-      const tapOnWrapper = ref.current
-        ? ref.current.contains(event.nativeEvent.target as Node)
+      const tapOnWrapper = containerRef.current
+        ? containerRef.current.contains(event.nativeEvent.target as Node)
         : false;
       const tapOnMap = imageRef.current
         ? imageRef.current.contains(event.nativeEvent.target as Node)
@@ -446,9 +487,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Handle touch being moved while dragging the map
    *
-   * @param event Touch event
+   * @param event Touch event object
    */
-  const handleTouchMove = useCallback(
+  const handleContainerTouchMove = useCallback(
     (event: TouchEvent<EventTarget>) => {
       const { pageX, pageY } = event.touches[0];
       handleMapDrag(pageX, pageY);
@@ -457,147 +498,68 @@ export const HuntingMap = (props: HuntingMapProps) => {
   );
 
   /**
-   * Handle mouse wheel being scrolled
+   * Handle mouse wheel scrolls on the map wrapper
    *
-   * @param event Wheel event
+   * @param event Wheel event object
    */
-  const handleWheel = useCallback(
-    (event: WheelEvent<EventTarget>) => {
-      // Ensure image element is available
-      if (!imageRef.current) {
-        return;
-      }
+  const handleContainerWheel = useCallback(
+    (event: WheelEvent<HTMLElement>) =>
+      handleMapZoom(event.deltaY, event.pageX, event.pageY),
+    [handleMapZoom],
+  );
 
-      // Use map's mouse offset by default
-      let { offsetX, offsetY } = event.nativeEvent;
+  /**
+   * Handle map image having been fully loaded
+   */
+  const handleImageLoaded = useCallback(() => {
+    setImageLoaded(true);
+    handleMapReset();
+  }, [handleMapReset]);
 
-      // Calculate offsets using page and image position if scroll did not occur
-      // over the image
-      if (event.target !== imageRef.current) {
-        // Determine current mouse position in relation to the page
-        const { pageX, pageY } = event.nativeEvent;
+  /**
+   * Handle changes to selected filters
+   *
+   * @param options Selected filter options
+   */
+  const handleFilterChange = useCallback(
+    (options: HuntingMapFilterOptions) => {
+      // Update visibility of map markers depending on the filter values
+      filterOptions.current = options;
+      handleUpdateMarkerVisibilityFilters();
 
-        // Get position of the image in relation to the page
-        const { x, y } = imageRef.current.getBoundingClientRect();
-
-        // Calculate map offset at which the mouse is being scrolled
-        offsetX = Math.round(pageX - x);
-        offsetY = Math.round(pageY - y);
-      }
-
-      // Scroll down = positive delta, scroll up = negative delta
-      Math.sign(event.deltaY) < 0
-        ? handleMapZoomIn(offsetX, offsetY)
-        : handleMapZoomOut(offsetX, offsetY);
+      // Trigger filter component update with new values
+      setForcedUpdate();
     },
-    [handleMapZoomIn, handleMapZoomOut],
+    [setForcedUpdate, handleUpdateMarkerVisibilityFilters],
   );
 
   /**
-   * Center map and reset its size
+   * Handle opening or closing an animal marker editor
    */
-  const handleReset = useCallback(() => {
-    const targetWidth = imageWidth * defaultScale;
-    const targetHeight = imageHeight * defaultScale;
-
-    // Get center position of the map at target size
-    const [mapLeft, mapTop] = getCenteredMapCoords(targetWidth, targetHeight);
-
-    setOptions({
-      mapLeft,
-      mapScale: defaultScale,
-      mapTop,
-      mapWidth: imageWidth * defaultScale,
-      mapHeight: imageHeight * defaultScale,
-    });
-  }, [defaultScale, getCenteredMapCoords, imageHeight, imageWidth]);
-
-  /**
-   * Handle browser window being resized
-   */
-  const handleWindowResize = useCallback(() => {
-    // Get current map coordinates
-    const { mapLeft, mapTop } = options;
-
-    // Get corrected map coordinates if the map is outside boundaries
-    const [translateX, translateY] = getBoundMapCoords(mapLeft, mapTop);
-
-    // Update map options if any of the offsets need adjusting
-    if (translateX != mapLeft || translateY != mapTop) {
-      setOptions(current => ({
-        ...current,
-        mapLeft: translateX,
-        mapTop: translateY,
-      }));
-    }
-  }, [getBoundMapCoords, options]);
-
-  // List of animal map marker elements
-  const renderedAnimals = useMemo(
-    () =>
-      animalMarkers.map(marker => (
-        <HuntingMapAnimal
-          activated={activeAnimal && isMarkerEqual(marker, activeAnimal)}
-          className={getAnimalMarkerClassName(
-            marker,
-            animalMarkerDataMap,
-            styles.HuntingMapAnimalMarkerHighlighted,
-          )}
-          expanded={expandedAnimal && isMarkerEqual(marker, expandedAnimal)}
-          key={getMarkerKey(marker)}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerRangeMap={markerRangeMap}
-          maxMarkerSize={maxMarkerSize}
-          style={getAnimalMarkerStyle(marker, animalMarkerDataMap)}
-          visible={
-            isMarkerFiltered(marker, filterOptions) &&
-            (!activeAnimal || isMarkerEqual(activeAnimal, marker))
-          }
-          onActivate={setActiveAnimal}
-          onToggle={handleAnimalToggle}
-        />
-      )),
-    [
-      activeAnimal,
-      animalMarkerDataMap,
-      animalMarkers,
-      expandedAnimal,
-      filterOptions,
-      handleAnimalToggle,
-      markerRangeMap,
-      maxMarkerSize,
-      options.mapScale,
-    ],
+  const handleToggleAnimalEditor = useCallback(
+    (marker: AnimalMarkerOptions, visible: boolean) =>
+      setEditedAnimal(visible ? marker : undefined),
+    [],
   );
 
-  // List of generic map marker elements
-  const renderedGenericMarkers = useMemo(
-    () =>
-      genericMarkers.map(marker => (
-        <HuntingMapMarker
-          className={getGenericMarkerColorClass(
-            marker,
-            styles.HuntingMapMarkerGeneric,
-            styles.HuntingMapMarkerLandmark,
-            styles.HuntingMapMarkerLodge,
-          )}
-          highlighted={isHighlightedMarker(marker)}
-          key={getMarkerKey(marker)}
-          mapScale={options.mapScale}
-          marker={marker}
-          markerRangeMap={markerRangeMap}
-          maxMarkerSize={maxMarkerSize}
-          visible={isMarkerFiltered(marker, filterOptions)}
-        />
-      )),
-    [
-      filterOptions,
-      genericMarkers,
-      markerRangeMap,
-      maxMarkerSize,
-      options.mapScale,
-    ],
+  /**
+   * Toggle specified animal icon's need zones
+   *
+   * @param marker Animal marker to toggle
+   * @param expanded TRUE if the need zones are visible, FALSE otherwise
+   */
+  const handleToggleAnimalZones = useCallback(
+    (marker: AnimalMarkerOptions) =>
+      animalMarkerOptions.current.forEach(options => {
+        // Detect if the current animal marker is the one being toggled
+        const isCurrentAnimal = options.marker.id === marker.id;
+
+        // Hide zones of all other markers
+        if (!isCurrentAnimal) {
+          options.ref.current?.setZonesVisible(false);
+        }
+      }),
+    [],
   );
 
   // List of map habitat labels
@@ -607,94 +569,187 @@ export const HuntingMap = (props: HuntingMapProps) => {
         <HuntingMapLabel
           {...label}
           key={index}
-          mapScale={options.mapScale}
+          mapScale={zoomOptions.current.zoomValue}
           maxMapScale={0.6}
           minMapScale={0.22}
         />
       )),
-    [labels, options.mapScale],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [labels, forcedUpdate],
   );
 
-  /**
-   * Center map on component being mounted the first time
-   */
-  useEffect(() => {
-    const [mapLeft, mapTop] = getCenteredMapCoords();
+  // Monitor changes to wrapper size and update canvas size accordingly
+  useResizeObserver<HTMLDivElement>({
+    ref: containerRef,
+    onResize: handleContainerResize,
+  });
 
-    setOptions(current => ({
-      ...current,
-      mapLeft,
-      mapTop,
-    }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Initialize container dimensions in map options
+  useEffect(() => {
+    // Ensure canvas has been initialized
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    // Update map options with container dimensions
+    const { height, width } = container.getBoundingClientRect();
+    mapOptions.current.containerHeight = height;
+    mapOptions.current.containerWidth = width;
   }, []);
 
-  /**
-   * Ensure map remains within boundaries during window resize
-   */
+  // Build list of options for all generic markers
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
+    // Build list of options for all generic markers
+    animalMarkerOptions.current = animalMarkers.map(marker => {
+      // Create component key and reference
+      const key = marker.id ?? getMarkerKey(marker);
+      const ref = createRef<HuntingMapAnimalRef>();
 
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
-  }, [getBoundMapCoords, handleWindowResize, options]);
+      // Build marker options object
+      return {
+        element: (
+          <HuntingMapAnimalMemo
+            activated={false}
+            key={key}
+            marker={marker}
+            ref={ref}
+            size={animalMarkerSize}
+            onToggleEditor={handleToggleAnimalEditor}
+            onToggleZones={handleToggleAnimalZones}
+          />
+        ),
+        marker,
+        ref,
+        visible: false,
+      };
+    });
+  }, [
+    animalMarkerSize,
+    animalMarkers,
+    handleToggleAnimalEditor,
+    handleToggleAnimalZones,
+  ]);
+
+  // Build a list of generic marker options
+  useEffect(() => {
+    // Build list of options for all generic markers
+    genericMarkerOptions.current = genericMarkers.map(marker => {
+      // Create component key and reference
+      const key = marker.id ?? getMarkerKey(marker);
+      const ref = createRef<MapMarkerRef>();
+
+      // Build marker options object
+      return {
+        element: (
+          <HuntingMapMarkerMemo
+            className={getGenericMarkerColorClass(
+              marker,
+              styles.HuntingMapMarkerGeneric,
+              styles.HuntingMapMarkerLandmark,
+              styles.HuntingMapMarkerLodge,
+            )}
+            highlighted={isHighlightedMarker(marker)}
+            key={key}
+            marker={marker}
+            ref={ref}
+            size={genericMarkerSize}
+          />
+        ),
+        marker,
+        ref,
+      };
+    });
+  }, [
+    genericMarkerSize,
+    genericMarkers,
+    handleUpdateMarkerPositions,
+    handleUpdateMarkerVisibilityZoom,
+  ]);
+
+  // Update editor and need zone states when edited animal changes
+  useEffect(() => {
+    // Determine if editor is visible
+    const editorVisible = !!editedAnimal;
+
+    animalMarkerOptions.current.forEach(options => {
+      // Detect if the current animal marker is the one being toggled
+      const isCurrentAnimal = options.marker.id === editedAnimal?.id;
+
+      // Disable editor and hide need zones for all other markers
+      options.ref.current?.setEditorActive(editorVisible && isCurrentAnimal);
+      options.ref.current?.setZonesVisible(editorVisible && isCurrentAnimal);
+
+      if (editorVisible && !isCurrentAnimal) {
+        // Hide all other animals when editor is open
+        options.ref.current?.setHidden(true);
+      } else if (!editorVisible) {
+        // Unhide all animals when editor closes
+        options.ref.current?.setHidden(false);
+      }
+    });
+  }, [editedAnimal]);
+
+  // Trigger updates to icon appearance when custom animal data changes
+  useEffect(
+    () => handleUpdateAnimalData(),
+    [animalMarkerDataMap, handleUpdateAnimalData],
+  );
 
   return (
     <>
       {!imageLoaded && (
         <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
       )}
+
+      <HuntingMapToolbar
+        onReset={handleMapReset}
+        onZoomIn={() => handleMapZoom(-50)}
+        onZoomOut={() => handleMapZoom(50)}
+      />
+
       <HuntingMapFilter
         animalMarkers={animalMarkers}
         genericMarkers={genericMarkers}
-        options={filterOptions}
-        onChange={onFilterChange}
+        options={filterOptions.current}
+        onChange={handleFilterChange}
       />
-      <HuntingMapToolbar
-        onReset={handleReset}
-        onZoomIn={() => handleMapZoomIn()}
-        onZoomOut={() => handleMapZoomOut()}
-      />
+
       <AnimalEditor
-        animal={activeAnimal}
-        onChange={onMarkerDataChange}
+        marker={editedAnimal}
         onClose={handleAnimalEditorClose}
+        onDataClear={onEditorClear}
+        onDataRead={onEditorRead}
+        onDataWrite={onEditorWrite}
       />
 
       <div
         className={styles.HuntingMap}
-        ref={ref}
-        onMouseDown={handleMouseDown}
+        ref={containerRef}
+        onMouseDown={handleContainerMouseDown}
         onMouseLeave={handleMapDragCancel}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
+        onMouseMove={handleContainerMouseMove}
+        onMouseUp={handleContainerMouseUp}
         onTouchEnd={handleMapDragCancel}
-        onTouchMove={handleTouchMove}
-        onTouchStart={handleTouchStart}
-        onWheel={handleWheel}
+        onTouchMove={handleContainerTouchMove}
+        onTouchStart={handleContainerTouchStart}
+        onWheel={handleContainerWheel}
       >
-        <div
-          className={styles.HuntingMapContainer}
-          style={{
-            height: `${options.mapHeight}px`,
-            left: `${options.mapLeft}px`,
-            top: `${options.mapTop}px`,
-            width: `${options.mapWidth}px`,
-          }}
-        >
-          {imageLoaded && renderedAnimals}
-          {imageLoaded && renderedGenericMarkers}
-          {imageLoaded && renderedLabels}
+        <div className={styles.HuntingMapImageWrapper} ref={imageWrapperRef}>
+          {genericMarkerOptions.current.map(option => option.element)}
+          {animalMarkerOptions.current.map(option => option.element)}
+          {needZoneMarkerOptions.current.map(option => option.element)}
+          {renderedLabels}
+
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            alt="Nez Perez map"
+            alt=""
             className={styles.HuntingMapImage}
             draggable={false}
-            height={options.mapHeight}
+            height={mapOptions.current.mapHeight}
             ref={imageRef}
             src={imageSrc}
-            width={options.mapWidth}
+            width={mapOptions.current.mapWidth}
             onLoad={handleImageLoaded}
           />
         </div>

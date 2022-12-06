@@ -1,11 +1,14 @@
-import classnames from 'classnames';
-import { CSSProperties } from 'react';
 import sha1 from 'sha1';
 import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
 import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
 import { hasListValue } from 'lib/utils';
 import {
-  AnimalMarkerData,
+  MapMarkerOptions,
+  MapOptions,
+  MapPoint,
+  MapZoomOptions,
+} from 'types/cartography';
+import {
   AnimalMarkerOptions,
   AnimalMarkerType,
   MarkerOptions,
@@ -59,35 +62,6 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
   sha1(`${x}:${y}`).substring(0, 8);
 
 /**
- * Get animal marker's CSS style if it's present in marker data map
- *
- * @param marker Animal marker options
- * @param animalMarkerDataMap Marker data map retrieved from the storage
- * @param highlightedClass CSS class to apply to markers present in the map
- */
-export const getAnimalMarkerClassName = (
-  marker: AnimalMarkerOptions,
-  animalMarkerDataMap: Record<string, AnimalMarkerData>,
-  highlightedClass: string,
-) =>
-  classnames({
-    [highlightedClass]: marker.id in animalMarkerDataMap,
-  });
-
-/**
- * Get animal marker's CSS style if it's present in marker data map
- *
- * @param marker Animal marker options
- * @param animalMarkerDataMap Marker data map retrieved from the storage
- */
-export const getAnimalMarkerStyle = (
-  marker: AnimalMarkerOptions,
-  animalMarkerDataMap: Record<string, AnimalMarkerData>,
-): CSSProperties => ({
-  color: animalMarkerDataMap[marker.id]?.color,
-});
-
-/**
  * Get marker color class based on its type
  *
  * @param marker Marker options
@@ -118,8 +92,29 @@ export const getGenericMarkerColorClass = (
  *
  * @param marker Source marker
  */
-export const getMarkerKey = (marker?: MarkerOptions) =>
-  marker ? marker?.id ?? getCoordinateHash(marker.coords) : undefined;
+export const getMarkerKey = (marker: MarkerOptions) =>
+  marker?.id ?? getCoordinateHash(marker.coords);
+
+/**
+ * Get marker's position relative to the map
+ *
+ * @param marker Marker options
+ * @param mapOptions Map options
+ * @param markerSize Marker size
+ */
+export const getMarkerOffset = (
+  marker: MarkerOptions,
+  mapOptions: MapOptions,
+  markerSize: number,
+): MapPoint => {
+  const { mapHeight, mapWidth } = mapOptions;
+
+  const [centerRatioX, centerRatioY] = marker.coords;
+  const offsetX = mapWidth * centerRatioX - markerSize / 2;
+  const offsetY = mapHeight * centerRatioY - markerSize / 2;
+
+  return [offsetX, offsetY];
+};
 
 /**
  * Get list of marker types from the specified list of options
@@ -133,15 +128,6 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
       new Set(),
     ),
   );
-
-/**
- * Calculate marker size at the current map scale
- *
- * @param mapScale Current map scale (zoom)
- * @param maxMarkerSize Maximum marker size in pixels
- */
-export const getMarkerSize = (mapScale: number, maxMarkerSize: number) =>
-  Math.min(maxMarkerSize, 100 * mapScale);
 
 /**
  * Check if the specified type represents an animal marker type
@@ -172,15 +158,6 @@ export const isHighlightedMarker = (marker: MarkerOptions) =>
   );
 
 /**
- * Determine if both markers are the same
- *
- * @param a Source marker
- * @param b Target marker
- */
-export const isMarkerEqual = (a?: MarkerOptions, b?: MarkerOptions) =>
-  getMarkerKey(a) === getMarkerKey(b);
-
-/**
  * Check if a marker is included in the specified filter
  *
  * @param marker Marker to validate
@@ -208,9 +185,73 @@ export const isMarkerVisibleAtScale = (
     : true;
 
 /**
- * Check if the specified marker type represents a feed zone
+ * Update option marker positions
  *
- * @param type Marker type to validate
+ * @param mapOptions Map options
+ * @param markerSize Target marker size
+ * @param markerOptions List of marker options to process
  */
-export const isZoneMarker = (type: MarkerType) =>
-  (type as string).startsWith('zone:');
+export const updateMarkerPositions = (
+  mapOptions: MapOptions,
+  markerSize: number,
+  ...markerOptions: Array<Array<MapMarkerOptions>>
+) =>
+  markerOptions
+    .flat()
+    .filter(options => !!options.ref.current)
+    .forEach(options => {
+      // Extract marker options
+      const { ref } = options;
+
+      ref.current?.updatePosition(mapOptions);
+    });
+
+/**
+ * Update option marker visibility based on filters
+ *
+ * @param filterOptions Filter options
+ * @param markerOptions List of marker options to process
+ */
+export const updateMarkerVisibilityWithFilter = (
+  filterOptions: HuntingMapFilterOptions,
+  ...markerOptions: Array<Array<MapMarkerOptions>>
+) =>
+  markerOptions
+    .flat()
+    .filter(options => !!options.ref.current)
+    .forEach(options => {
+      const { marker, ref } = options;
+
+      // Determine if marker should be visible with current filters
+      const visible = isMarkerFiltered(marker, filterOptions);
+      ref.current?.setVisibleWithFilter(visible);
+    });
+
+/**
+ * Update option marker visibility based on zoom options
+ *
+ * @param zoomOptions Zoom options
+ * @param zoomVisibilityMap Marker zoom visibility map
+ * @param markerOptions List of marker options to process
+ */
+export const updateMarkerVisibilityWithZoom = (
+  zoomOptions: MapZoomOptions,
+  zoomVisibilityMap: Map<MarkerType, number>,
+  ...markerOptions: Array<Array<MapMarkerOptions>>
+) =>
+  markerOptions
+    .flat()
+    .filter(options => !!options.ref.current)
+    .forEach(options => {
+      const { marker, ref } = options;
+      const { zoomValue } = zoomOptions;
+
+      // Determine if marker should be visible with current map zoom
+      const visible = isMarkerVisibleAtScale(
+        zoomValue,
+        marker.type,
+        zoomVisibilityMap,
+      );
+
+      ref.current?.setVisibleWithZoom(visible);
+    });
