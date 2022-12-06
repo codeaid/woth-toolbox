@@ -107,7 +107,7 @@ export const HuntingMapMarker = forwardRef(
         in={(forceVisible || (visibleWithFilter && visibleWithZoom)) && !hidden}
         mountOnEnter={mountOnEnter}
         nodeRef={iconRef}
-        timeout={100}
+        timeout={75}
         unmountOnExit={unmountOnExit}
       >
         {state => (

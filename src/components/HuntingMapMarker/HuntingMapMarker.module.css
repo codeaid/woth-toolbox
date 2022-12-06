@@ -3,8 +3,8 @@
   position: absolute;
   transition: color 100ms ease-in-out,
     fill 100ms ease-in-out,
-    opacity 100ms linear,
-    transform 100ms ease-in-out;
+    opacity 75ms linear,
+    transform 75ms ease-in-out;
   z-index: 1;
   -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
