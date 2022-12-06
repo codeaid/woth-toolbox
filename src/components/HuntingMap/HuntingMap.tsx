@@ -57,7 +57,7 @@ const HuntingMapMarkerMemo = memo(HuntingMapMarker);
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkerDataMap,
-    animalMarkerSize = 60,
+    animalMarkerSize = 50,
     animalMarkers,
     defaultZoom = 0.25,
     genericMarkerSize = 40,
@@ -72,6 +72,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     zoomMin = 0.1,
     zoomSpeed = 1,
     zoomStep = 0.05,
+    zoneMarkerSize = 35,
     onClick,
     onEditorClear,
     onEditorRead,
@@ -601,6 +602,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
             marker={marker}
             ref={ref}
             size={animalMarkerSize}
+            zoneSize={zoneMarkerSize}
             onToggleEditor={handleToggleAnimalEditor}
             onToggleZones={handleToggleAnimalZones}
           />
@@ -615,6 +617,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     animalMarkers,
     handleToggleAnimalEditor,
     handleToggleAnimalZones,
+    zoneMarkerSize,
   ]);
 
   // Build a list of generic marker options

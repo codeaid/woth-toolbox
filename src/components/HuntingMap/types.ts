@@ -37,6 +37,7 @@ export interface HuntingMapProps {
   zoomMin?: number;
   zoomSpeed?: number;
   zoomStep?: number;
+  zoneMarkerSize?: number;
   onClick?: HuntingMapClickHandler;
   onEditorClear: AnimalEditorDataClearHandler;
   onEditorRead: AnimalEditorDataReadHandler;
