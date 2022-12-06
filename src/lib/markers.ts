@@ -207,34 +207,15 @@ export const updateMarkerPositions = (
     });
 
 /**
- * Update option marker visibility based on filters
+ * Update marker visibility based on filters and zoom
  *
  * @param filterOptions Filter options
- * @param markerOptions List of marker options to process
- */
-export const updateMarkerVisibilityWithFilter = (
-  filterOptions: HuntingMapFilterOptions,
-  ...markerOptions: Array<Array<MapMarkerOptions>>
-) =>
-  markerOptions
-    .flat()
-    .filter(options => !!options.ref.current)
-    .forEach(options => {
-      const { marker, ref } = options;
-
-      // Determine if marker should be visible with current filters
-      const visible = isMarkerFiltered(marker, filterOptions);
-      ref.current?.setVisibleWithFilter(visible);
-    });
-
-/**
- * Update option marker visibility based on zoom options
- *
  * @param zoomOptions Zoom options
  * @param zoomVisibilityMap Marker zoom visibility map
  * @param markerOptions List of marker options to process
  */
-export const updateMarkerVisibilityWithZoom = (
+export const updateMarkerVisibility = (
+  filterOptions: HuntingMapFilterOptions,
   zoomOptions: MapZoomOptions,
   zoomVisibilityMap: Map<MarkerType, number>,
   ...markerOptions: Array<Array<MapMarkerOptions>>
@@ -246,12 +227,27 @@ export const updateMarkerVisibilityWithZoom = (
       const { marker, ref } = options;
       const { zoomValue } = zoomOptions;
 
+      // Determine if marker should be visible with current filters
+      const visibleWithFilter = isMarkerFiltered(marker, filterOptions);
+
+      // Determine if marker matches the only filter type currently selected
+      const visibleWithOnlyFilter =
+        visibleWithFilter && filterOptions.selectedTypes.length === 1;
+
+      // Always show markers if they match the only selected type
+      if (visibleWithOnlyFilter) {
+        ref.current?.setVisibleWithFilter(true);
+        ref.current?.setVisibleWithZoom(true);
+        return;
+      }
+
       // Determine if marker should be visible with current map zoom
-      const visible = isMarkerVisibleAtScale(
+      const visibleWithZoom = isMarkerVisibleAtScale(
         zoomValue,
         marker.type,
         zoomVisibilityMap,
       );
 
-      ref.current?.setVisibleWithZoom(visible);
+      ref.current?.setVisibleWithFilter(visibleWithFilter);
+      ref.current?.setVisibleWithZoom(visibleWithZoom);
     });

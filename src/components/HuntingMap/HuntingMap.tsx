@@ -39,8 +39,7 @@ import {
   getMarkerKey,
   isHighlightedMarker,
   updateMarkerPositions,
-  updateMarkerVisibilityWithFilter,
-  updateMarkerVisibilityWithZoom,
+  updateMarkerVisibility,
 } from 'lib/markers';
 import {
   MapMarkerOptions,
@@ -180,25 +179,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
   );
 
   /**
-   * Handle updating marker visibility based on current filters
+   * Handle updating marker visibility based on current filters and zoom
    */
-  const handleUpdateMarkerVisibilityFilters = useCallback(
-    () =>
-      updateMarkerVisibilityWithFilter(
-        filterOptions.current,
-        animalMarkerOptions.current,
-        genericMarkerOptions.current,
-        needZoneMarkerOptions.current,
-      ),
-    [],
-  );
-
-  /**
-   * Handle updating marker visibility based on the current map zoom
-   */
-  const handleUpdateMarkerVisibilityZoom = useCallback(
+  const handleUpdateMarkerVisibility = useCallback(
     (customZoomOptions?: MapZoomOptions) =>
-      updateMarkerVisibilityWithZoom(
+      updateMarkerVisibility(
+        filterOptions.current,
         customZoomOptions ?? zoomOptions.current,
         markerRangeMap,
         animalMarkerOptions.current,
@@ -311,14 +297,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
     handleMapUpdate(
       handleUpdateAnimalData,
       handleUpdateMarkerPositions,
-      handleUpdateMarkerVisibilityZoom,
+      handleUpdateMarkerVisibility,
     );
   }, [
     defaultZoom,
     handleMapUpdate,
     handleUpdateAnimalData,
     handleUpdateMarkerPositions,
-    handleUpdateMarkerVisibilityZoom,
+    handleUpdateMarkerVisibility,
     imageHeight,
     imageWidth,
   ]);
@@ -359,7 +345,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       handleMapUpdate(
         handleUpdateMarkerPositions,
-        handleUpdateMarkerVisibilityZoom,
+        handleUpdateMarkerVisibility,
         setForcedUpdate,
       );
     },
@@ -367,7 +353,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       setForcedUpdate,
       handleMapUpdate,
       handleUpdateMarkerPositions,
-      handleUpdateMarkerVisibilityZoom,
+      handleUpdateMarkerVisibility,
     ],
   );
 
@@ -525,12 +511,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
     (options: HuntingMapFilterOptions) => {
       // Update visibility of map markers depending on the filter values
       filterOptions.current = options;
-      handleUpdateMarkerVisibilityFilters();
+      handleUpdateMarkerVisibility();
 
       // Trigger filter component update with new values
       setForcedUpdate();
     },
-    [setForcedUpdate, handleUpdateMarkerVisibilityFilters],
+    [setForcedUpdate, handleUpdateMarkerVisibility],
   );
 
   /**
@@ -664,7 +650,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     genericMarkerSize,
     genericMarkers,
     handleUpdateMarkerPositions,
-    handleUpdateMarkerVisibilityZoom,
+    handleUpdateMarkerVisibility,
   ]);
 
   // Update editor and need zone states when edited animal changes
