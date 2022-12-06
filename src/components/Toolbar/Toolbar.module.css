@@ -1,9 +1,139 @@
 .Toolbar {
   background-color: var(--elevation0);
   border-bottom: thin solid var(--elevation1);
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
   font-family: 'BenchNine', sans-serif;
+  height: 3rem;
   user-select: none;
   z-index: 100;
   width: 100%;
+}
+
+.ToolbarAction {
+  align-items: center;
+  color: var(--text-primary);
+  display: flex;
+  font-size: 1.4em;
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+  white-space: nowrap;
+  width: 10rem;
+}
+
+.ToolbarAction:hover {
+  background-color: var(--elevation4);
+}
+
+.ToolbarActionActive {
+  background-color: var(--elevation2);
+  color: var(--brand);
+}
+
+.ToolbarActions {
+  display: flex;
+  overflow: hidden;
+}
+
+.ToolbarHeading {
+  align-items: center;
+  display: flex;
+  font-size: 1.4em;
+  font-weight: bold;
+  justify-content: center;
+  padding: 0;
+  text-transform: uppercase;
+  width: 15rem;
+}
+
+.ToolbarMobileButton {
+  background-color: var(--elevation0);
+  border: none;
+  border-radius: 0;
+  color: var(--text-highlight);
+  cursor: pointer;
+  display: none;
+  margin: 0;
+  padding: 0;
+  transition: color 150ms ease-in-out;
+}
+
+.ToolbarMobileButtonActive {
+  color: var(--brand);
+}
+
+.ToolbarMobileButtonContent {
+  align-items: center;
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+  width: 3rem;
+}
+
+.ToolbarMobileButtonIcon {
+  font-size: 1.5em;
+  transition: transform 100ms ease-in-out;
+}
+
+.ToolbarMobileButton:hover .ToolbarMobileButtonIcon,
+.ToolbarMobileButtonActive .ToolbarMobileButtonIcon {
+  transform: scale(1.2);
+}
+
+.ToolbarMobileMenu {
+  background-color: var(--elevation1);
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.ToolbarMobileMenu .ToolbarAction {
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.5em;
+  padding: 0.75em 1em;
+}
+
+.ToolbarSubtitle {
+  color: var(--brand);
+  line-height: 1em;
+  margin-left: 0.15em;
+}
+
+.ToolbarTitleResponsive,
+.ToolbarTitle {
+  color: var(--text-highlight);
+  line-height: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ToolbarTitleResponsive {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .ToolbarAction {
+    font-size: 1.2em;
+    padding: 0.65em;
+    width: unset;
+  }
+}
+
+@media (max-width: 864px) {
+  .ToolbarActions {
+    display: none;
+  }
+
+  .ToolbarMobileButton {
+    display: block;
+  }
 }

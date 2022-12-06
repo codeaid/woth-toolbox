@@ -1,35 +1,51 @@
+import { useMemo } from 'react';
 import { LayoutBackground } from 'components/LayoutBackground';
-import {
-  Toolbar,
-  ToolbarAction,
-  ToolbarActions,
-  ToolbarTitle,
-} from 'components/Toolbar';
+import { NavLinkProps } from 'components/NavLink';
+import { Toolbar } from 'components/Toolbar';
 import styles from './Layout.module.css';
 import { LayoutProps } from './types';
 
 export const Layout = (props: LayoutProps) => {
   const { children } = props;
 
+  const toolbarActions = useMemo<Array<NavLinkProps>>(
+    () => [
+      {
+        children: 'Weapon Selector',
+        href: '/weapon-selector',
+      },
+      {
+        children: 'Animal Selector',
+        href: '/animal-selector',
+      },
+      {
+        children: 'Animal Life Cycles',
+        href: '/animal-life-cycles',
+      },
+      {
+        children: 'Nez Perce Valley',
+        href: '/nez-perce-valley',
+      },
+      {
+        children: 'Transylvania',
+        href: '/transylvania',
+      },
+    ],
+    [],
+  );
+
   return (
     <div className={styles.Layout}>
-      <Toolbar>
-        <ToolbarTitle>Way Of The Hunter Toolbox</ToolbarTitle>
-        <ToolbarActions>
-          <ToolbarAction href="/weapon-selector">Weapon Selector</ToolbarAction>
-          <ToolbarAction href="/animal-selector">Animal Selector</ToolbarAction>
-          <ToolbarAction href="/animal-life-cycles">
-            Animal Life Cycles
-          </ToolbarAction>
-          <ToolbarAction href="/nez-perce-valley">
-            Nez Perce Valley
-          </ToolbarAction>
-          <ToolbarAction href="/transylvania">Transylvania</ToolbarAction>
-        </ToolbarActions>
-      </Toolbar>
-
+      <Toolbar
+        actions={toolbarActions}
+        responsiveTitle="WOTH"
+        subtitle="Toolbox"
+        title="Way Of The Hunter"
+      />
       <LayoutBackground />
-      <div className={styles.LayoutContent}>{children}</div>
+      <div className={styles.LayoutContent} id="layout-content">
+        {children}
+      </div>
     </div>
   );
 };
