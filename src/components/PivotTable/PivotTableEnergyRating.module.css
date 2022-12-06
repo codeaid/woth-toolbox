@@ -30,3 +30,9 @@
   color: var(--text-highlight);
   opacity: unset;
 }
+
+@media (max-width: 864px) {
+  .PivotTableEnergyRating {
+    min-width: unset;
+  }
+}

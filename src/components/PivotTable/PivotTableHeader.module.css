@@ -24,4 +24,8 @@
   .PivotTableHeader {
     margin-left: 0;
   }
+
+  .PivotTableHeaderDistance {
+    min-width: unset;
+  }
 }
