@@ -1,6 +1,7 @@
 import {
   AnimalMarkerType,
   GenericMarkerType,
+  MarkerType,
   NeedZoneMarkerType,
 } from 'types/markers';
 
@@ -55,3 +56,33 @@ export const needZoneMarkerTypes: Array<NeedZoneMarkerType> = [
   'zone:path',
   'zone:sleep',
 ];
+
+// Map of marker types and their maximum map scale visibility
+export const markerVisibilityMap = new Map<MarkerType, number>([
+  ['animal:american badger', 0.55],
+  ['animal:american black bear', 0.55],
+  ['animal:bighorn sheep', 0.55],
+  ['animal:elk', 0.55],
+  ['animal:gray wolf', 0.55],
+  ['animal:lesser scaup', 0.55],
+  ['animal:moose', 0.55],
+  ['animal:mountain goat', 0.55],
+  ['animal:mule deer', 0.55],
+  ['animal:pheasant', 0.55],
+  ['animal:red fox', 0.55],
+  ['animal:ross goose', 0.55],
+  ['animal:showshoe hare', 0.55],
+  ['animal:white-tailed deer', 0.55],
+  ['animal:wild duck', 0.55],
+  ['cabin', 0.25],
+  ['camp', 0.25],
+  ['echo', 0.35],
+  ['hunting stand', 0.45],
+  ['lodge', 0],
+  ['photo', 0.35],
+  ['shooting range', 0.25],
+  ['view', 0.35],
+  ['zone:drink', 0.65],
+  ['zone:eat', 0.65],
+  ['zone:sleep', 0.65],
+]);

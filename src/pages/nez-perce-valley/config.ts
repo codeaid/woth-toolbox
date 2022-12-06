@@ -1,5 +1,4 @@
 import { MapLabelOptions } from 'types/cartography';
-import { MarkerType } from 'types/markers';
 
 // Map size configuration
 export const mapHeight = 4096;
@@ -88,32 +87,3 @@ export const mapLabels: Array<MapLabelOptions> = [
     name: 'Diamond Drill',
   },
 ];
-
-// Map of marker types and their maximum map scale visibility
-export const markerVisibilityMap = new Map<MarkerType, number>([
-  ['animal:american badger', 0.9],
-  ['animal:american black bear', 0.9],
-  ['animal:bighorn sheep', 0.9],
-  ['animal:elk', 0.9],
-  ['animal:gray wolf', 0.9],
-  ['animal:lesser scaup', 0.9],
-  ['animal:moose', 0.9],
-  ['animal:mountain goat', 0.9],
-  ['animal:mule deer', 0.9],
-  ['animal:pheasant', 0.9],
-  ['animal:red fox', 0.9],
-  ['animal:ross goose', 0.9],
-  ['animal:showshoe hare', 0.9],
-  ['animal:white-tailed deer', 0.9],
-  ['animal:wild duck', 0.9],
-  ['cabin', 0.25],
-  ['camp', 0.25],
-  ['echo', 0.35],
-  ['hunting stand', 0.45],
-  ['lodge', 0],
-  ['shooting range', 0.25],
-  ['view', 0.35],
-  ['zone:drink', 0.65],
-  ['zone:eat', 0.65],
-  ['zone:sleep', 0.65],
-]);
