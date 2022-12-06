@@ -1,6 +1,12 @@
 import { ReactElement, RefObject } from 'react';
 import { MarkerOptions } from 'types/markers';
 
+export interface MapLabelOptions {
+  coords: [number, number];
+  habitat: string;
+  name: string;
+}
+
 export interface MapMarkerOptions<TRef extends MapMarkerRef = MapMarkerRef> {
   element: ReactElement;
   marker: MarkerOptions;

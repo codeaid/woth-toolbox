@@ -1,4 +1,4 @@
-import { HuntingMapLabelOptions } from 'components/HuntingMapLabel';
+import { MapLabelOptions } from 'types/cartography';
 import { MarkerType } from 'types/markers';
 
 // Map size configuration
@@ -6,7 +6,7 @@ export const mapHeight = 4096;
 export const mapWidth = 4096;
 
 // List of label to show on the map
-export const mapLabels: Array<HuntingMapLabelOptions> = [];
+export const mapLabels: Array<MapLabelOptions> = [];
 
 // Map of marker types and their maximum map scale visibility
 export const markerVisibilityMap = new Map<MarkerType, number>([

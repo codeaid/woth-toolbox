@@ -5,8 +5,7 @@ import { HuntingMapLabelProps } from './types';
 import styles from './HuntingMapLabel.module.css';
 
 export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
-  const { name, habitat, left, mapScale, maxMapScale, minMapScale, top } =
-    props;
+  const { coords, name, habitat, mapScale, maxMapScale, minMapScale } = props;
 
   // Reference to the parent label element
   const ref = useRef<HTMLDivElement>(null);
@@ -16,13 +15,14 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
 
   // Generate CSS styles to apply to the parent element
   const style = useMemo<CSSProperties>(() => {
+    const [left, top] = coords;
     const [width, height] = size;
 
     return {
       left: `calc(${left * 100}% - ${width / 2}px)`,
       top: `calc(${top * 100}% - ${height / 2}px)`,
     };
-  }, [left, size, top]);
+  }, [coords, size]);
 
   // Determine if the label is visible at current map scale
   const visible = useMemo(
