@@ -105,12 +105,14 @@
   color: var(--brand);
   line-height: 1em;
   margin-left: 0.15em;
+  margin-top: 0.15em;
 }
 
 .ToolbarTitleResponsive,
 .ToolbarTitle {
   color: var(--text-highlight);
   line-height: 1em;
+  margin-top: 0.15em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
