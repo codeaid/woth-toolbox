@@ -9,7 +9,8 @@ export const AnimalName = (props: AnimalNameProps) => {
     <div
       className={classnames(styles.AnimalName, {
         [styles.AnimalNameHighlighted]: highlighted,
-        [styles.AnimalNameResponsive]: responsive,
+        [styles.AnimalNameResponsiveMobile]: responsive === 'mobile',
+        [styles.AnimalNameResponsiveTablet]: responsive === 'tablet',
       })}
     >
       <div className={styles.AnimalNameTitle}>{animal.name}</div>

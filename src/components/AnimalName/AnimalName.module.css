@@ -21,13 +21,24 @@
   color: var(--brand);
 }
 
-@media (max-width: 1200px) {
-  .AnimalNameResponsive {
+@media (max-width: 864px) {
+  .AnimalNameResponsiveMobile {
     align-items: baseline;
     display: flex;
   }
 
-  .AnimalNameResponsive .AnimalNameLatin {
+  .AnimalNameResponsiveMobile .AnimalNameLatin {
+    margin: 0 0 0 0.5em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .AnimalNameResponsiveTablet {
+    align-items: baseline;
+    display: flex;
+  }
+
+  .AnimalNameResponsiveTablet .AnimalNameLatin {
     margin: 0 0 0 0.5em;
   }
 }

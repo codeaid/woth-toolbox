@@ -24,12 +24,23 @@
 }
 
 @media (max-width: 864px) {
-  .WeaponNameResponsive {
+  .WeaponNameResponsiveMobile {
     align-items: baseline;
     display: flex;
   }
 
-  .WeaponNameResponsive .WeaponNameCalibre {
+  .WeaponNameResponsiveMobile .WeaponNameCalibre {
+    margin: 0 0 0 0.5em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .WeaponNameResponsiveTablet {
+    align-items: baseline;
+    display: flex;
+  }
+
+  .WeaponNameResponsiveTablet .WeaponNameCalibre {
     margin: 0 0 0 0.5em;
   }
 }

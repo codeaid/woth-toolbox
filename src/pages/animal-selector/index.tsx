@@ -40,7 +40,11 @@ const AnimalSelectorPage = () => {
    */
   const handleRenderEntityName = useCallback(
     (animal: Animal, highlighted: boolean) => (
-      <AnimalName animal={animal} highlighted={highlighted} responsive={true} />
+      <AnimalName
+        animal={animal}
+        highlighted={highlighted}
+        responsive="mobile"
+      />
     ),
     [],
   );

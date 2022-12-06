@@ -66,7 +66,11 @@ const WeaponSelectorPage = () => {
    */
   const handleRenderEntityName = useCallback(
     (weapon: Weapon, highlighted: boolean) => (
-      <WeaponName highlighted={highlighted} responsive={true} weapon={weapon} />
+      <WeaponName
+        highlighted={highlighted}
+        responsive="mobile"
+        weapon={weapon}
+      />
     ),
     [],
   );

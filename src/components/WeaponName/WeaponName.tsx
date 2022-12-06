@@ -1,8 +1,8 @@
 import classnames from 'classnames';
+import { useMemo } from 'react';
 import { getWeaponName } from 'lib/weapons';
 import { WeaponNameProps } from './types';
 import styles from './WeaponName.module.css';
-import { useMemo } from 'react';
 
 export const WeaponName = (props: WeaponNameProps) => {
   const { highlighted = false, responsive = false, weapon } = props;
@@ -12,7 +12,8 @@ export const WeaponName = (props: WeaponNameProps) => {
     () =>
       classnames(styles.WeaponName, {
         [styles.WeaponNameHighlighted]: highlighted,
-        [styles.WeaponNameResponsive]: responsive,
+        [styles.WeaponNameResponsiveMobile]: responsive === 'mobile',
+        [styles.WeaponNameResponsiveTablet]: responsive === 'tablet',
       }),
     [highlighted, responsive],
   );

@@ -1,7 +1,9 @@
 import { Weapon } from 'types/weapons';
 
+type WeaponNameResponsiveType = 'mobile' | 'tablet';
+
 export interface WeaponNameProps {
   highlighted?: boolean;
-  responsive?: boolean;
+  responsive?: WeaponNameResponsiveType;
   weapon: Weapon;
 }
