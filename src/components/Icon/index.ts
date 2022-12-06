@@ -1,4 +1,6 @@
-import { memo } from 'react';
-import { Icon as BaseIcon } from './Icon';
+export type { IconProps } from './types';
 
-export const Icon = memo(BaseIcon);
+export * from './animals';
+export * from './generic';
+export * from './ui';
+export * from './zones';

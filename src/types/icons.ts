@@ -20,4 +20,15 @@ export type NeedZoneIconType =
   | 'zone:path'
   | 'zone:sleep';
 
-export type IconType = AnimalIconType | GenericIconType | NeedZoneIconType;
+export type UIIconType =
+  | 'age'
+  | 'sex:female'
+  | 'sex:generic'
+  | 'sex:male'
+  | 'species';
+
+export type IconType =
+  | AnimalIconType
+  | GenericIconType
+  | NeedZoneIconType
+  | UIIconType;

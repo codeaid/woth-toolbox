@@ -2,28 +2,23 @@ import classnames from 'classnames';
 import {
   ForwardedRef,
   forwardRef,
-  FunctionComponent,
-  SVGProps,
+  TouchEvent,
   useCallback,
   useMemo,
   useRef,
 } from 'react';
-import { isZoneMarker } from 'lib/markers';
-import { NeedZoneMarkerType } from 'types/markers';
-import DefaultIcon from './assets/Default.svg';
-import { iconMap, zoneMap } from './config';
-import { IconProps } from './types';
+import { IconComponentProps } from './types';
 import styles from './Icon.module.css';
 
 export const Icon = forwardRef(
-  (props: IconProps, ref: ForwardedRef<HTMLDivElement>) => {
+  (props: IconComponentProps, ref: ForwardedRef<HTMLDivElement>) => {
     const {
+      children,
       className,
-      highlighted = false,
-      size = 128,
+      longPressMs = 500,
+      size = 40,
       style,
       title,
-      type,
       onClick,
       onLongPress,
     } = props;
@@ -32,39 +27,10 @@ export const Icon = forwardRef(
     const longPressHandle = useRef<NodeJS.Timeout>();
 
     // Generate component class name
-    const classNames = useMemo(
-      () =>
-        classnames(
-          styles.Icon,
-          {
-            [styles.IconHighlighted]: highlighted,
-          },
-          className,
-        ),
-      [className, highlighted],
+    const iconClassName = useMemo(
+      () => classnames(styles.Icon, className),
+      [className],
     );
-
-    // Retrieve image source file for the current type
-    const image = useMemo(() => {
-      // Use static image assets
-      if (isZoneMarker(type)) {
-        return (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            alt=""
-            height={size}
-            src={zoneMap[type as NeedZoneMarkerType]}
-            width={size}
-          />
-        );
-      }
-
-      // Use SVG icons when available
-      const Component: FunctionComponent<SVGProps<SVGElement>> =
-        iconMap[type] ?? DefaultIcon;
-
-      return <Component height={size} width={size} />;
-    }, [size, type]);
 
     /**
      * Cancel long press timer if set
@@ -77,25 +43,36 @@ export const Icon = forwardRef(
     /**
      * Start timer to detect long presses on the icon
      */
-    const handleTouchStart = useCallback(() => {
-      if (!onLongPress) {
-        return;
-      }
+    const handleTouchStart = useCallback(
+      (event: TouchEvent<EventTarget>) => {
+        if (!onLongPress) {
+          return;
+        }
 
-      longPressHandle.current = setTimeout(onLongPress, 500);
-    }, [onLongPress]);
+        longPressHandle.current = setTimeout(
+          () => onLongPress(event),
+          longPressMs,
+        );
+      },
+      [longPressMs, onLongPress],
+    );
 
     return (
       <div
-        className={classNames}
+        className={iconClassName}
         ref={ref}
-        style={style}
+        style={{
+          height: `${size}px`,
+          width: `${size}px`,
+          ...style,
+        }}
         title={title}
         onClick={onClick}
         onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchEnd}
         onTouchStart={handleTouchStart}
       >
-        {image}
+        {children}
       </div>
     );
   },
