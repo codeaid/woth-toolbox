@@ -45,7 +45,7 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
       in={visible}
       mountOnEnter={true}
       nodeRef={ref}
-      timeout={150}
+      timeout={100}
       unmountOnExit={true}
     >
       {state => (

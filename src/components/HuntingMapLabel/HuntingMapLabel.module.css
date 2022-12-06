@@ -5,7 +5,7 @@
   overflow: hidden;
   padding: 0.5em 1em;
   position: absolute;
-  transition: opacity 150ms linear, transform 150ms linear;
+  transition: opacity 100ms linear, transform 100ms linear;
   z-index: 2;
 }
 
