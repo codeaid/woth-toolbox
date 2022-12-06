@@ -46,7 +46,7 @@ export const Sidebar = (props: PropsWithChildren) => {
       const [entry] = entries;
 
       // Mark sidebar as floating on mobile devices
-      const isMobile = entry.contentRect.width <= 864;
+      const isMobile = entry.contentRect.width <= 768;
       setSidebarFloating(isMobile);
     });
 

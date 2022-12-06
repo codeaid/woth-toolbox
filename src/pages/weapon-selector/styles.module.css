@@ -13,7 +13,7 @@
   margin: 1em 0;
 }
 
-@media (max-width: 864px) {
+@media (max-width: 768px) {
   .WeaponSelectorPage {
     display: block;
     grid-template-columns: unset;

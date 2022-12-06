@@ -43,7 +43,7 @@
   align-items: center;
   display: flex;
   font-size: 1.4em;
-  font-weight: bold;
+  font-weight: 500;
   justify-content: center;
   padding: 0;
   text-transform: uppercase;
@@ -124,13 +124,18 @@
 
 @media (max-width: 1024px) {
   .ToolbarAction {
-    font-size: 1.2em;
+    flex: 1;
+    font-size: 1.1em;
     padding: 0.65em;
     width: unset;
   }
+
+  .ToolbarHeading {
+    font-size: 1.1em;
+  }
 }
 
-@media (max-width: 864px) {
+@media (max-width: 768px) {
   .ToolbarActions {
     display: none;
   }
