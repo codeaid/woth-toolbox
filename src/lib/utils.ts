@@ -59,3 +59,13 @@ export const hasListValue = <TValue>(value: TValue, list?: Array<TValue>) =>
  */
 export const isNotEmpty = <TValue>(value: Maybe<TValue>): value is TValue =>
   value !== null && typeof value !== 'undefined';
+
+/**
+ * Round number to the specified number of decimal places
+ *
+ * @param value Value to round
+ * @param decimals Number of decimal places
+ */
+export const roundNumber = (value: number, decimals = 2) =>
+  Math.round((value + Number.EPSILON) * Math.pow(10, decimals)) /
+  Math.pow(10, decimals);
