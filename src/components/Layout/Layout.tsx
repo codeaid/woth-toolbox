@@ -38,7 +38,6 @@ export const Layout = (props: LayoutProps) => {
     <div className={styles.Layout}>
       <Toolbar
         actions={toolbarActions}
-        responsiveTitle="WOTH"
         subtitle="Toolbox"
         title="Way Of The Hunter"
       />

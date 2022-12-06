@@ -8,7 +8,7 @@ import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
 export const Toolbar = (props: ToolbarProps) => {
-  const { actions, responsiveTitle, subtitle, title } = props;
+  const { actions, subtitle, title } = props;
 
   // Flag indicating whether the mobile menu is currently visible
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -76,7 +76,6 @@ export const Toolbar = (props: ToolbarProps) => {
         </button>
         <div className={styles.ToolbarHeading}>
           <div className={styles.ToolbarTitle}>{title}</div>
-          <div className={styles.ToolbarTitleResponsive}>{responsiveTitle}</div>
           <div className={styles.ToolbarSubtitle}>{subtitle}</div>
         </div>
         <div className={styles.ToolbarActions}>{children}</div>
