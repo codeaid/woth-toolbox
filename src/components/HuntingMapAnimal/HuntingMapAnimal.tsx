@@ -156,7 +156,7 @@ export const HuntingMapAnimal = forwardRef(
           // Don't notify marker manager about this animal marker being expanded
           // if Ctrl key is being held down during the click. This allows having
           // multiple markers expanded simultaneously.
-          if (!event.ctrlKey) {
+          if (!event.ctrlKey && !event.metaKey) {
             // Notify marker manager about need zone visibility change
             onToggleZones(marker as AnimalMarkerOptions);
           }
