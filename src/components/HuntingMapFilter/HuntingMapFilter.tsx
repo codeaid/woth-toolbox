@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
+import { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { SectionHeader } from 'components/SectionHeader';
 import { SidePanel } from 'components/SidePanel';
@@ -41,6 +42,18 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () => markerTypes.filter(isGenericMarkerType),
     [markerTypes],
   );
+
+  /**
+   * Handle clearing current filters
+   */
+  const handleClearFilters = useCallback(() => {
+    // Clear filters and close the side panel
+    onChange({
+      selectedTypes: [],
+    });
+
+    setMenuVisible(false);
+  }, [onChange]);
 
   /**
    * Handle toggling individual filter types on or off
@@ -139,6 +152,19 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     [markerTypesGeneric, renderOptions],
   );
 
+  // List of sidebar action buttons
+  const sidebarActions = useMemo<Array<ButtonProps>>(
+    () => [
+      {
+        children: 'Clear',
+        className: styles.HuntingMapFilterActionClear,
+        disabled: !options.selectedTypes.length,
+        onClick: handleClearFilters,
+      },
+    ],
+    [handleClearFilters, options.selectedTypes.length],
+  );
+
   // Monitor clicks outside the current marker and hide zones when needed
   useEffect(() => {
     document.addEventListener('keypress', handleDocumentKeyPress);
@@ -160,6 +186,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       </IconButton>
 
       <SidePanel
+        actions={sidebarActions}
         className={styles.HuntingMapFilter}
         side="left"
         visible={menuVisible}

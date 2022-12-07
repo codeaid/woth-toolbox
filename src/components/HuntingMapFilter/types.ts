@@ -16,7 +16,7 @@ export interface HuntingMapFilterProps {
   animalMarkers: Array<AnimalMarkerOptions>;
   genericMarkers: Array<MarkerOptions>;
   options: HuntingMapFilterOptions;
-  onChange?: HuntingMapFilterChangeHandler;
+  onChange: HuntingMapFilterChangeHandler;
 }
 
 export interface HuntingMapFilterItemProps {
