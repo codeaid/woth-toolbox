@@ -1,3 +1,4 @@
+import { AnimalType } from 'types/animals';
 import {
   AnimalMarkerType,
   GenericMarkerType,
@@ -96,4 +97,37 @@ export const markerVisibilityMap = new Map<MarkerType, number>([
   ['zone:drink', 0.65],
   ['zone:eat', 0.65],
   ['zone:sleep', 0.65],
+]);
+
+// Map of animal types and number of their drink, eat and sleep zones
+export const animalMarkerNeedZoneCounts = new Map<
+  AnimalType,
+  [number, number, number]
+>([
+  ['animal:american badger', [2, 2, 2]],
+  ['animal:american black bear', [2, 2, 2]],
+  ['animal:bighorn sheep', [2, 2, 2]],
+  ['animal:brown bear', [2, 2, 2]],
+  ['animal:chamois', [2, 2, 2]],
+  ['animal:elk', [2, 2, 2]],
+  ['animal:eurasian badger', [2, 2, 2]],
+  ['animal:european hare', [0, 2, 2]],
+  ['animal:fallow deer', [2, 2, 2]],
+  ['animal:golden jackal', [2, 2, 2]],
+  ['animal:gray wolf', [2, 2, 2]],
+  ['animal:greylag goose', [0, 6, 3]],
+  ['animal:lesser scaup', [0, 6, 3]],
+  ['animal:moose', [2, 2, 2]],
+  ['animal:mouflon', [2, 2, 2]],
+  ['animal:mountain goat', [2, 2, 2]],
+  ['animal:mule deer', [2, 2, 2]],
+  ['animal:pheasant', [0, 2, 2]],
+  ['animal:red deer', [2, 2, 2]],
+  ['animal:red fox', [2, 2, 2]],
+  ['animal:roe deer', [2, 2, 2]],
+  ['animal:ross goose', [0, 6, 3]],
+  ['animal:showshoe hare', [0, 2, 2]],
+  ['animal:white-tailed deer', [2, 2, 2]],
+  ['animal:wild boar', [2, 2, 2]],
+  ['animal:wild duck', [0, 6, 3]],
 ]);

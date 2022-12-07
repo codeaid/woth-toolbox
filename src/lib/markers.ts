@@ -1,7 +1,12 @@
 import sha1 from 'sha1';
 import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
-import { animalMarkerTypes, genericMarkerTypes } from 'config/markers';
+import {
+  animalMarkerNeedZoneCounts,
+  animalMarkerTypes,
+  genericMarkerTypes,
+} from 'config/markers';
 import { hasListValue } from 'lib/utils';
+import { AnimalType } from 'types/animals';
 import {
   MapMarkerOptions,
   MapOptions,
@@ -128,6 +133,14 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
       new Set(),
     ),
   );
+
+/**
+ * Get number of each need zone for the specified animal type
+ *
+ * @param type Target animal type
+ */
+export const getNeedZoneCounts = (type: AnimalType) =>
+  animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
 
 /**
  * Check if the specified type represents an animal marker type
