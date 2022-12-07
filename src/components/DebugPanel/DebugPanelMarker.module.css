@@ -1,0 +1,52 @@
+.DebugPanelMarker {
+  background-color: var(--elevation4);
+  border: thin dashed var(--brand-semi);
+  border-radius: 0.25em;
+  height: 10rem;
+  overflow: hidden;
+  user-select: none;
+}
+
+.DebugPanelMarkerActionDelete {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: color 100ms ease-in-out, opacity 100ms ease-in-out;
+}
+
+.DebugPanelMarkerActionDelete:hover {
+  color: var(--danger);
+  opacity: 1;
+}
+
+.DebugPanelMarkerCompleted {
+  border-style: solid;
+}
+
+.DebugPanelMarkerHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+.DebugPanelMarkerName {
+  background-color: var(--elevation3);
+  color: var(--brand);
+  font-family: 'BenchNine', sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.DebugPanelMarkerRows {
+  display: grid;
+  grid-gap: 0.3em;
+  padding: 0 0.5em 0.5em;
+}
+
+.DebugPanelMarkerStatus {
+  background-color: var(--elevation1);
+  color: var(--text-secondary);
+  font-size: 0.7em;
+  padding: 0.25em 0.5em;
+  text-align: right;
+}

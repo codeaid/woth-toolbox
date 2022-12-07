@@ -1,0 +1,32 @@
+.DebugPanelActionCopy {
+  background-color: var(--info);
+}
+
+.DebugPanelActionClear {
+  background-color: var(--danger);
+}
+
+.DebugPanelMarkers {
+  display: grid;
+  grid-gap: 0.6em;
+}
+
+.DebugPanelPlaceholder {
+  align-items: center;
+  color: var(--text-highlight);
+  display: flex;
+  font-size: 0.8em;
+  height: 10rem;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  user-select: none;
+  width: 15em;
+}
+
+.DebugPanelToggleButton {
+  bottom: 0.5em;
+  position: absolute;
+  right: 0.5em;
+  z-index: 10;
+}

@@ -7,16 +7,18 @@ export interface MapLabelOptions {
   name: string;
 }
 
-export interface MapMarkerOptions<TRef extends MapMarkerRef = MapMarkerRef> {
+export interface MapMarkerOptions<
+  TRef extends MapMarkerRef = MapMarkerRef,
+  TMarkerOptions extends MarkerOptions = MarkerOptions,
+> {
   element: ReactElement;
-  marker: MarkerOptions;
+  marker: TMarkerOptions;
   ref: RefObject<TRef>;
 }
 
 export interface MapMarkerRef {
   setHidden: (hidden: boolean) => void;
-  setVisibleWithFilter: (visible: boolean) => void;
-  setVisibleWithZoom: (visible: boolean) => void;
+  setVisible: (visible: boolean) => void;
   updatePosition: (mapOptions: MapOptions) => void;
 }
 

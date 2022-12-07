@@ -119,7 +119,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // Lists of marker options to be rendered on the page
   const animalMarkerOptions = useRef<
-    Array<MapMarkerOptions<HuntingMapAnimalRef>>
+    Array<MapMarkerOptions<HuntingMapAnimalRef, AnimalMarkerOptions>>
   >([]);
   const genericMarkerOptions = useRef<Array<MapMarkerOptions>>([]);
   const needZoneMarkerOptions = useRef<Array<MapMarkerOptions>>([]);

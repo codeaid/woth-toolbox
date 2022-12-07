@@ -1,0 +1,17 @@
+.DebugPanelAnimalList {
+  background-color: var(--dark);
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  max-height: 7.2em;
+  overflow: auto;
+}
+
+.DebugPanelAnimalListIcon {
+  cursor: pointer;
+  margin: 0.25em;
+}
+
+.DebugPanelAnimalListIcon:hover {
+  color: var(--brand);
+}
