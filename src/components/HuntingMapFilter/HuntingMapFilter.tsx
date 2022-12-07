@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
-import { SectionHeader } from 'components/SectionHeader';
-import { animalNameMap, genericNameMap } from 'config/names';
 import { IconButton } from 'components/IconButton';
+import { SectionHeader } from 'components/SectionHeader';
+import { SidePanel } from 'components/SidePanel';
+import { animalNameMap, genericNameMap } from 'config/names';
 import {
   getMarkerOptionTypes,
   isAnimalMarkerType,
@@ -42,45 +43,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   );
 
   /**
-   * Handle clicking on the filter button
-   */
-  const handleButtonClick = useCallback(
-    () => setMenuVisible(current => !current),
-    [],
-  );
-
-  /**
-   * Handle clicking on the trigger icon
-   */
-  const handleDocumentClick = useCallback((event: Event) => {
-    const clickOnButton = buttonRef.current
-      ? buttonRef.current.contains(event.target as Node)
-      : false;
-    const clickOnMenu = menuRef.current
-      ? menuRef.current.contains(event.target as Node)
-      : false;
-
-    // Ignore clicks on the filter button and menu elements
-    if (clickOnButton || clickOnMenu) {
-      return;
-    }
-
-    setMenuVisible(false);
-  }, []);
-
-  /**
-   * Handle pressing keyboard keys
-   */
-  const handleDocumentKeyPress = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'r' && !event.ctrlKey) {
-        handleButtonClick();
-      }
-    },
-    [handleButtonClick],
-  );
-
-  /**
    * Handle toggling individual filter types on or off
    */
   const handleToggleType = useCallback(
@@ -100,6 +62,26 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       });
     },
     [options, onChange],
+  );
+
+  /**
+   * Handle toggling filter visibility
+   */
+  const handleToggleVisibility = useCallback(
+    () => setMenuVisible(current => !current),
+    [],
+  );
+
+  /**
+   * Handle pressing keyboard keys
+   */
+  const handleDocumentKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'r' && !event.ctrlKey) {
+        handleToggleVisibility();
+      }
+    },
+    [handleToggleVisibility],
   );
 
   /**
@@ -136,76 +118,59 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   // Render animal options
   const renderedAnimalOptions = useMemo(
     () =>
-      markerTypesAnimals.length && (
+      markerTypesAnimals.length ? (
         <>
           <SectionHeader>Animals</SectionHeader>
           {renderOptions(markerTypesAnimals, animalNameMap, true)}
         </>
-      ),
+      ) : null,
     [markerTypesAnimals, renderOptions],
   );
 
   // Render generic options
   const renderedGenericOptions = useMemo(
     () =>
-      markerTypesGeneric.length && (
+      markerTypesGeneric.length ? (
         <>
           <SectionHeader>General</SectionHeader>
           {renderOptions(markerTypesGeneric, genericNameMap, false)}
         </>
-      ),
+      ) : null,
     [markerTypesGeneric, renderOptions],
   );
 
-  // Filter options list
-  const renderedFilterMenu = useMemo(
-    () =>
-      menuVisible && (
+  // Monitor clicks outside the current marker and hide zones when needed
+  useEffect(() => {
+    document.addEventListener('keypress', handleDocumentKeyPress);
+
+    return () => {
+      document.removeEventListener('keypress', handleDocumentKeyPress);
+    };
+  }, [handleDocumentKeyPress]);
+
+  return (
+    <>
+      <IconButton
+        className={styles.HuntingMapFilterToggle}
+        highlighted={!!options.selectedTypes.length}
+        ref={buttonRef}
+        onClick={handleToggleVisibility}
+      >
+        <BsEyeFill />
+      </IconButton>
+
+      <SidePanel
+        className={styles.HuntingMapFilter}
+        side="left"
+        visible={menuVisible}
+        title="Filters"
+        onClose={handleToggleVisibility}
+      >
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>
           {renderedGenericOptions}
           {renderedAnimalOptions}
         </ul>
-      ),
-    [menuVisible, renderedAnimalOptions, renderedGenericOptions],
-  );
-
-  // Position menu just below the filter button
-  useEffect(() => {
-    const buttonElement = buttonRef.current;
-    const menuElement = menuRef.current;
-
-    // Ensure all required elements are present
-    if (!buttonElement || !menuElement) {
-      return;
-    }
-
-    const { height } = buttonElement.getBoundingClientRect();
-    menuElement.style.top = `calc(${height}px + 1em)`;
-  }, [menuVisible]);
-
-  // Monitor clicks outside the current marker and hide zones when needed
-  useEffect(() => {
-    document.addEventListener('click', handleDocumentClick);
-    document.addEventListener('keypress', handleDocumentKeyPress);
-
-    return () => {
-      document.removeEventListener('click', handleDocumentClick);
-      document.removeEventListener('keypress', handleDocumentKeyPress);
-    };
-  }, [handleDocumentClick, handleDocumentKeyPress]);
-
-  return (
-    <>
-      <div className={styles.HuntingMapFilter}>
-        <IconButton
-          highlighted={!!options.selectedTypes.length}
-          ref={buttonRef}
-          onClick={handleButtonClick}
-        >
-          <BsEyeFill />
-        </IconButton>
-      </div>
-      {renderedFilterMenu}
+      </SidePanel>
     </>
   );
 };

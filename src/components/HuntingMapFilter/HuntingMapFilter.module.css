@@ -1,26 +1,11 @@
 .HuntingMapFilter {
-  left: 0.5em;
-  margin-top: 0.5em;
-  position: absolute;
-  user-select: none;
-  z-index: 10;
+  z-index: 150;
 }
 
 .HuntingMapFilterMenu {
-  background-color: var(--elevation1);
-  border-radius: 0.5em;
-  box-shadow: var(--shadow);
-  bottom: 0.5em;
-  color: var(--text-primary);
-  left: 0.5em;
   list-style-type: none;
   margin: 0;
-  overflow: auto;
   padding: 0;
-  position: absolute;
-  top: 0;
-  width: 20em;
-  z-index: 10;
 }
 
 .HuntingMapFilterMenuItem {
@@ -48,4 +33,11 @@
 
 .HuntingMapFilterMenuItemEnabled .HuntingMapFilterMenuItemLabel {
   color: var(--brand);
+}
+
+.HuntingMapFilterToggle {
+  left: 0.5em;
+  position: absolute;
+  top: 0.5em;
+  z-index: 10;
 }
