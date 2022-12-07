@@ -3,22 +3,26 @@ import { format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { getAnimalName } from 'lib/animals';
+import { isMarkerComplete } from 'lib/debug';
+import { getNeedZoneCounts } from 'lib/markers';
 import { DebugPanelIconRow } from './DebugPanelIconRow';
 import { DebugPanelMarkerProps } from './types';
 import styles from './DebugPanelMarker.module.css';
-import { isMarkerComplete } from 'lib/debug';
 
 export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
   const {
-    drinkZoneCount,
-    eatZoneCount,
     marker,
-    sleepZoneCount,
     onDelete,
     onDrinkZoneRemove,
     onEatZoneRemove,
     onSleepZoneRemove,
   } = props;
+
+  // Get number of drink, eat and sleep zones for the current animal
+  const [drinkZoneCount, eatZoneCount, sleepZoneCount] = useMemo(
+    () => getNeedZoneCounts(marker.type),
+    [marker.type],
+  );
 
   // Flag indicating whether the marker has all need zones defined
   const isCompleted = useMemo(

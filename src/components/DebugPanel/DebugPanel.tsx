@@ -53,26 +53,15 @@ export const DebugPanel = (props: DebugPanelProps) => {
   const renderMarker = useCallback(
     (marker: AnimalMarkerOptions) => (
       <DebugPanelMarker
-        drinkZoneCount={drinkZoneCount}
-        eatZoneCount={eatZoneCount}
         key={marker.id}
         marker={marker}
-        sleepZoneCount={sleepZoneCount}
         onDelete={onMarkerDelete}
         onDrinkZoneRemove={onDrinkZoneRemove}
         onEatZoneRemove={onEatZoneRemove}
         onSleepZoneRemove={onSleepZoneRemove}
       />
     ),
-    [
-      drinkZoneCount,
-      eatZoneCount,
-      onDrinkZoneRemove,
-      onEatZoneRemove,
-      onMarkerDelete,
-      onSleepZoneRemove,
-      sleepZoneCount,
-    ],
+    [onDrinkZoneRemove, onEatZoneRemove, onMarkerDelete, onSleepZoneRemove],
   );
 
   // List of sidebar action button properties
@@ -158,13 +147,13 @@ export const DebugPanel = (props: DebugPanelProps) => {
         <RiCodeSSlashLine />
       </IconButton>
 
-      {open ? (
-        <SidePanel
-          actions={actions}
-          title="Animal Marker Creator"
-          visible={true}
-          onClose={handleToggleOpen}
-        >
+      <SidePanel
+        actions={actions}
+        title="Animal Marker Creator"
+        visible={open}
+        onClose={handleToggleOpen}
+      >
+        <div className={styles.DebugPanelContent}>
           <Label>Animals ({getAnimalName(type)})</Label>
           <DebugPanelAnimalList selected={type} onSelect={setType} />
 
@@ -173,8 +162,8 @@ export const DebugPanel = (props: DebugPanelProps) => {
 
           <Label>Completed Markers ({markers.length})</Label>
           {renderedCompletedMarkers}
-        </SidePanel>
-      ) : null}
+        </div>
+      </SidePanel>
     </>
   );
 };

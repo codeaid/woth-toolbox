@@ -6,6 +6,10 @@
   background-color: var(--danger);
 }
 
+.DebugPanelContent {
+  padding: 0 0.65em;
+}
+
 .DebugPanelMarkers {
   display: grid;
   grid-gap: 0.6em;

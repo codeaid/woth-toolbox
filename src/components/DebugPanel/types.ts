@@ -36,9 +36,6 @@ export interface DebugPanelIconRowProps {
 }
 
 export interface DebugPanelMarkerProps {
-  drinkZoneCount: number;
-  eatZoneCount: number;
-  sleepZoneCount: number;
   marker: AnimalMarkerOptions;
   onDelete: DebugPanelMarkerHandler;
   onDrinkZoneRemove: DebugPanelMarkerZoneHandler;
