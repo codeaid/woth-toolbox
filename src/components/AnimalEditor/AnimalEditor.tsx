@@ -5,7 +5,7 @@ import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { Textarea } from 'components/Textarea';
-import { animalNameMap } from 'config/names';
+import { getAnimalName } from 'lib/animals';
 import { getIconComponent } from 'lib/icons';
 import { formatTimestampDistance, getHexColor } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
@@ -26,10 +26,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const [data, setData] = useState<AnimalMarkerData>({});
 
   // Retrieve animal name
-  const animalName = useMemo(
-    () => (marker ? animalNameMap.get(marker.type)! : 'Unknown'),
-    [marker],
-  );
+  const animalName = useMemo(() => getAnimalName(marker), [marker]);
 
   /**
    * Handle closing the editor

@@ -1,5 +1,7 @@
+import { animalNameMap } from 'config/names';
 import { Animal, AnimalActivityValue } from 'types/animals';
 import { EntityGroup } from 'types/global';
+import { AnimalMarkerOptions } from 'types/markers';
 
 /**
  * Find activity defined for the exact hour
@@ -39,6 +41,17 @@ export const getAnimalGroups = (animals: Array<Animal>) =>
     },
     [],
   );
+
+/**
+ * Get name of animal from a marker
+ *
+ * @param marker Source animal marker options
+ * @param defaultName Default name to use if animal not found
+ */
+export const getAnimalName = (
+  marker?: AnimalMarkerOptions,
+  defaultName = 'Unknown',
+) => (marker ? animalNameMap.get(marker.type) ?? defaultName : defaultName);
 
 /**
  * Find activity occurring at the specified hour
