@@ -1,5 +1,5 @@
 .SidePanel {
-  background-color: var(--dark-primary);
+  background-color: var(--elevation1);
   box-shadow: var(--shadow-strong);
   color: var(--text-primary);
   display: flex;
@@ -14,21 +14,27 @@
   transform: translateX(100%);
   transition: transform 100ms ease-in-out;
   width: 20em;
-  z-index: 20;
+  z-index: 100;
 }
 
 .SidePanelActions {
   display: grid;
   grid-gap: 0.5em;
-  padding: 0 1em 1em;
+  padding: 0.65em;
   user-select: none;
+}
+
+.SidePanelActions button {
+  display: block;
+  font-size: 0.9em;
+  width: 100%;
 }
 
 .SidePanelContent {
   flex: 1;
   line-height: 1.3em;
   overflow: auto;
-  padding: 0 1em 1em;
+  padding: 0 0.65em;
 }
 
 .SidePanelEntering {
@@ -49,7 +55,7 @@
 .SidePanelHeader {
   display: flex;
   justify-content: space-between;
-  padding: 1em;
+  padding: 0.65em;
   user-select: none;
 }
 

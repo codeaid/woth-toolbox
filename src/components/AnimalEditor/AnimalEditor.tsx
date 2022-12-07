@@ -94,20 +94,12 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     () => [
       {
         children: 'Save',
-        className: classnames(
-          styles.AnimalEditorAction,
-          styles.AnimalEditorActionSave,
-        ),
-        disabled: false,
+        className: classnames(styles.AnimalEditorActionSave),
         onClick: handleDataWrite,
       },
       {
         children: 'Delete',
-        className: classnames(
-          styles.AnimalEditorAction,
-          styles.AnimalEditorActionReset,
-        ),
-        disabled: false,
+        className: classnames(styles.AnimalEditorActionReset),
         onClick: handleDataClear,
       },
     ],
