@@ -41,6 +41,24 @@ export const DebugPanel = (props: DebugPanelProps) => {
   );
 
   /**
+   * Handle changing currently selected animal
+   *
+   * @param type New animal type
+   */
+  const handleChangeAnimal = useCallback(
+    (type: AnimalType) => {
+      // Clear current marker data
+      if (currentMarker) {
+        onMarkerDelete(currentMarker);
+      }
+
+      // Update animal type
+      setType(type);
+    },
+    [currentMarker, onMarkerDelete],
+  );
+
+  /**
    * Handle opening or closing the panel
    */
   const handleToggleOpen = useCallback(() => setOpen(current => !current), []);
@@ -155,7 +173,7 @@ export const DebugPanel = (props: DebugPanelProps) => {
       >
         <div className={styles.DebugPanelContent}>
           <Label>Animals ({getAnimalName(type)})</Label>
-          <DebugPanelAnimalList selected={type} onSelect={setType} />
+          <DebugPanelAnimalList selected={type} onSelect={handleChangeAnimal} />
 
           <Label>Current marker</Label>
           {renderedPendingMarker}
