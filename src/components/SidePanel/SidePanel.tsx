@@ -12,6 +12,7 @@ export const SidePanel = (props: SidePanelProps) => {
     actions = [],
     children,
     className,
+    side = 'right',
     style,
     title,
     visible = false,
@@ -49,6 +50,8 @@ export const SidePanel = (props: SidePanelProps) => {
           className={classnames(
             styles.SidePanel,
             {
+              [styles.SidePanelLeft]: side === 'left',
+              [styles.SidePanelRight]: side === 'right',
               [styles.SidePanelEntering]: state === 'entering',
               [styles.SidePanelEntered]: state === 'entered',
               [styles.SidePanelExiting]: state === 'exiting',

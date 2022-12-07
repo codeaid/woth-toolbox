@@ -9,10 +9,8 @@
   min-width: 20em;
   overflow: hidden;
   position: absolute;
-  right: 0;
   top: 0;
-  transform: translateX(100%);
-  transition: transform 100ms ease-in-out;
+  transition: transform 100ms linear;
   width: 20em;
   z-index: 100;
 }
@@ -34,22 +32,6 @@
   flex: 1;
   line-height: 1.3em;
   overflow: auto;
-  padding: 0 0.65em;
-}
-
-.SidePanelEntering {
-  transform: translateX(100%);
-}
-.SidePanelEntered {
-  transform: translateX(0%);
-}
-
-.SidePanelExiting {
-  transform: translateX(100%);
-}
-
-.SidePanelExited {
-  transform: translateX(100%);
 }
 
 .SidePanelHeader {
@@ -70,6 +52,7 @@
 }
 
 .SidePanelHeaderTitle {
+  color: var(--brand);
   font-family: 'BenchNine', sans-serif;
   font-size: 1.5em;
   font-weight: 400;
@@ -77,6 +60,49 @@
   padding: 0;
   text-transform: uppercase;
 }
+
+.SidePanelLeft {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.SidePanelLeft.SidePanelEntering {
+  transform: translateX(0%);
+}
+
+.SidePanelLeft.SidePanelEntered {
+  transform: translateX(0%);
+}
+
+.SidePanelLeft.SidePanelExiting {
+  transform: translateX(-100%);
+}
+
+.SidePanelLeft.SidePanelExited {
+  transform: translateX(-100%);
+}
+
+.SidePanelRight {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.SidePanelRight.SidePanelEntering {
+  transform: translateX(0%);
+}
+
+.SidePanelRight.SidePanelEntered {
+  transform: translateX(0%);
+}
+
+.SidePanelRight.SidePanelExiting {
+  transform: translateX(100%);
+}
+
+.SidePanelRight.SidePanelExited {
+  transform: translateX(100%);
+}
+
 
 @media (max-width: 576px) {
   .SidePanel {
