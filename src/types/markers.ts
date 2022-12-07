@@ -27,8 +27,13 @@ export interface AnimalMarkerData {
 }
 
 export interface AnimalMarkerOptions extends MarkerOptions<AnimalMarkerType> {
+  debug?: AnimalMarkerOptionsDebug;
   drink: Array<MarkerOptions<'zone:drink'>>;
   eat: Array<MarkerOptions<'zone:eat'>>;
   id: string;
   sleep: Array<MarkerOptions<'zone:sleep'>>;
+}
+
+interface AnimalMarkerOptionsDebug {
+  created?: Date;
 }

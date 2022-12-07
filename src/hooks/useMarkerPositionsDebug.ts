@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   consoleLogClean,
   copyTextToClipboard,
-  getMarkerOptionSnippet,
+  createMarkerOptionSnippet,
 } from 'lib/debug';
 import { AnimalType } from 'types/animals';
 import { MarkerPosition } from 'types/markers';
@@ -73,7 +73,7 @@ export const useMarkerPositionsDebug = (
     }
 
     // Generate code snippet
-    const code = getMarkerOptionSnippet(
+    const code = createMarkerOptionSnippet(
       animalType,
       positions,
       drinkZoneCount,
