@@ -93,29 +93,12 @@ export const HuntingMapAnimal = forwardRef(
     );
 
     /**
-     * Update trigger and zone visibility based on map's filter status
+     * Update trigger and zone visibility based on map's filter and zoom status
      */
-    const handleSetVisibleWithFilter = useCallback(
+    const handleSetVisible = useCallback(
       (visible: boolean) => {
         // Update trigger marker's visibility
-        markerRef?.setVisibleWithFilter(visible);
-
-        // Hide need zones and editor if animal marker is removed
-        if (!visible) {
-          setZonesVisible(false);
-          onToggleEditor(marker, false);
-        }
-      },
-      [marker, markerRef, onToggleEditor],
-    );
-
-    /**
-     * Update trigger and zone visibility based on map's zoom
-     */
-    const handleSetVisibleWithZoom = useCallback(
-      (visible: boolean) => {
-        // Update trigger marker's visibility
-        markerRef?.setVisibleWithZoom(visible);
+        markerRef?.setVisible(visible);
 
         // Hide need zones and editor if animal marker is removed
         if (!visible) {
@@ -243,8 +226,7 @@ export const HuntingMapAnimal = forwardRef(
       setData,
       setEditorActive,
       setHidden: handleSetHidden,
-      setVisibleWithFilter: handleSetVisibleWithFilter,
-      setVisibleWithZoom: handleSetVisibleWithZoom,
+      setVisible: handleSetVisible,
       setZonesVisible,
       updatePosition: handleUpdatePositions,
     }));

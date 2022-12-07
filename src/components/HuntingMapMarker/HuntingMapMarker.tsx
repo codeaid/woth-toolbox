@@ -36,8 +36,7 @@ export const HuntingMapMarker = forwardRef(
 
     // Visibility flag states
     const [hidden, setHidden] = useState(false);
-    const [visibleWithFilter, setVisibleWithFilter] = useState(true);
-    const [visibleWithZoom, setVisibleWithZoom] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     // Icon component to use for the current filter entry
     const IconComponent = useMemo(
@@ -95,8 +94,7 @@ export const HuntingMapMarker = forwardRef(
       () => ({
         markerElement: iconRef.current,
         setHidden,
-        setVisibleWithFilter,
-        setVisibleWithZoom,
+        setVisible,
         updatePosition: handleUpdatePosition,
       }),
       [handleUpdatePosition],
@@ -104,7 +102,7 @@ export const HuntingMapMarker = forwardRef(
 
     return (
       <Transition
-        in={(forceVisible || (visibleWithFilter && visibleWithZoom)) && !hidden}
+        in={(forceVisible || visible) && !hidden}
         mountOnEnter={mountOnEnter}
         nodeRef={iconRef}
         timeout={75}

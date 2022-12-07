@@ -236,8 +236,7 @@ export const updateMarkerVisibility = (
 
       // Always show markers if they match the only selected type
       if (visibleWithOnlyFilter) {
-        ref.current?.setVisibleWithFilter(true);
-        ref.current?.setVisibleWithZoom(true);
+        ref.current?.setVisible(true);
         return;
       }
 
@@ -248,6 +247,5 @@ export const updateMarkerVisibility = (
         zoomVisibilityMap,
       );
 
-      ref.current?.setVisibleWithFilter(visibleWithFilter);
-      ref.current?.setVisibleWithZoom(visibleWithZoom);
+      ref.current?.setVisible(visibleWithFilter && visibleWithZoom);
     });
