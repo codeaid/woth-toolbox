@@ -143,6 +143,14 @@ export const getNeedZoneCounts = (type: AnimalType) =>
   animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
 
 /**
+ * Determine if current marker options object is an animal marker
+ *
+ * @param marker Marker to validate
+ */
+const isAnimalMarker = (marker: MarkerOptions): marker is AnimalMarkerOptions =>
+  'drink' in marker || 'eat' in marker || 'sleep' in marker;
+
+/**
  * Check if the specified type represents an animal marker type
  *
  * @param type Target type to check
@@ -239,6 +247,12 @@ export const updateMarkerVisibility = (
     .forEach(options => {
       const { marker, ref } = options;
       const { zoomValue } = zoomOptions;
+
+      // Always show debug markers
+      if (isAnimalMarker(marker) && marker.debug) {
+        ref.current?.setVisible(true);
+        return;
+      }
 
       // Determine if marker should be visible with current filters
       const visibleWithFilter = isMarkerFiltered(marker, filterOptions);

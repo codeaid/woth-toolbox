@@ -587,6 +587,24 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // Build list of options for all generic markers
   useEffect(() => {
+    // Build a list of new marker identifiers
+    const newIds = animalMarkers.map(marker => marker.id);
+    let markersRemoved = false;
+
+    // Hide all existing markers who no longer exist in the new list of markers
+    // as all references to them will be deleted in the loop below
+    animalMarkerOptions.current.forEach(options => {
+      if (!newIds.includes(options.marker.id)) {
+        options.ref.current?.setVisible(false);
+        markersRemoved = true;
+      }
+    });
+
+    // Trigger a re-render if any markers were removed
+    if (markersRemoved) {
+      setForcedUpdate();
+    }
+
     // Build list of options for all generic markers
     animalMarkerOptions.current = animalMarkers.map(marker => {
       // Create component key and reference
@@ -617,6 +635,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     animalMarkers,
     handleToggleAnimalEditor,
     handleToggleAnimalZones,
+    setForcedUpdate,
     zoneMarkerSize,
   ]);
 
@@ -684,6 +703,26 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () => handleUpdateAnimalData(),
     [animalMarkerDataMap, handleUpdateAnimalData],
   );
+
+  // Ensure debug markers are always visible if there are any present
+  useEffect(() => {
+    animalMarkerOptions.current
+      .filter(options => options.marker.debug)
+      .forEach((options, index, list) => {
+        // Update marker visibility once references are available
+        setTimeout(() => {
+          // Update marker's position and visibility
+          options.ref.current?.updatePosition(mapOptions.current);
+          options.ref.current?.setVisible(true);
+
+          // Expand zones of the latest marker
+          options.ref.current?.setZonesVisible(index === list.length - 1);
+        }, 0);
+      });
+
+    // Force markers to be re-rendered
+    setForcedUpdate();
+  }, [animalMarkers, setForcedUpdate]);
 
   return (
     <>
