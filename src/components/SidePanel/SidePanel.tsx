@@ -11,6 +11,7 @@ export const SidePanel = (props: SidePanelProps) => {
   const {
     actions = [],
     children,
+    className,
     style,
     title,
     visible = false,
@@ -45,12 +46,16 @@ export const SidePanel = (props: SidePanelProps) => {
     >
       {state => (
         <div
-          className={classnames(styles.SidePanel, {
-            [styles.SidePanelEntering]: state === 'entering',
-            [styles.SidePanelEntered]: state === 'entered',
-            [styles.SidePanelExiting]: state === 'exiting',
-            [styles.SidePanelExited]: state === 'exited',
-          })}
+          className={classnames(
+            styles.SidePanel,
+            {
+              [styles.SidePanelEntering]: state === 'entering',
+              [styles.SidePanelEntered]: state === 'entered',
+              [styles.SidePanelExiting]: state === 'exiting',
+              [styles.SidePanelExited]: state === 'exited',
+            },
+            className,
+          )}
           draggable={false}
           ref={ref}
           style={style}

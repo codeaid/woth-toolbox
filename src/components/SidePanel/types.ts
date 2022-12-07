@@ -6,6 +6,7 @@ type SidePanelCloseHandler = () => void;
 export interface SidePanelProps {
   actions?: Array<ButtonProps>;
   children?: ReactNode;
+  className?: string;
   style?: CSSProperties;
   title: string;
   visible?: boolean;
