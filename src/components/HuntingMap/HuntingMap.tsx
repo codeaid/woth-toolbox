@@ -41,6 +41,7 @@ import {
   updateMarkerPositions,
   updateMarkerVisibility,
 } from 'lib/markers';
+import { roundNumber } from 'lib/utils';
 import {
   MapMarkerOptions,
   MapMarkerRef,
@@ -411,8 +412,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const { zoomValue } = zoomOptions.current;
 
         onClick(
-          offsetX / zoomValue / imageWidth,
-          offsetY / zoomValue / imageHeight,
+          roundNumber(offsetX / zoomValue / imageWidth, 10),
+          roundNumber(offsetY / zoomValue / imageHeight, 10),
         );
       }
     },
