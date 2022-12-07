@@ -10,6 +10,7 @@ import {
   pushNextMarkerCoords,
   removeMarker,
   replaceMarker,
+  consoleLogClean,
 } from 'lib/debug';
 import { AnimalMarkerOptions } from 'types/markers';
 
@@ -35,6 +36,9 @@ export const useDebugPanel = () => {
       if (!settings || !settings.enabled || !settings.open) {
         return;
       }
+
+      // Log coordinates to console
+      consoleLogClean([x, y]);
 
       // Update current marker with new coordinates
       setCurrentMarker(current =>
