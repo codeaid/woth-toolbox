@@ -26,7 +26,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const [data, setData] = useState<AnimalMarkerData>({});
 
   // Retrieve animal name
-  const animalName = useMemo(() => getAnimalName(marker), [marker]);
+  const animalName = useMemo(() => getAnimalName(marker?.type), [marker]);
 
   /**
    * Handle closing the editor
