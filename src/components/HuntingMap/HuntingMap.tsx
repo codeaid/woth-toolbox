@@ -411,12 +411,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const { zoomValue } = zoomOptions.current;
 
         onClick(
-          Math.round(offsetX / zoomValue),
-          Math.round(offsetY / zoomValue),
+          offsetX / zoomValue / imageWidth,
+          offsetY / zoomValue / imageHeight,
         );
       }
     },
-    [handleMapDragCancel, onClick],
+    [handleMapDragCancel, imageHeight, imageWidth, onClick],
   );
 
   /**
