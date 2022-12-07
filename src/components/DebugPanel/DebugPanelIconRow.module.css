@@ -21,7 +21,7 @@
 
 .DebugPanelIconRowIconAction {
   align-items: center;
-  background-color: var(--elevation3);
+  background-color: var(--elevation4);
   cursor: pointer;
   display: flex;
   font-size: 0.8em;

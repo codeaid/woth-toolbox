@@ -29,7 +29,7 @@
 
 .AnimalActivityGridRow:hover .AnimalActivityGridRowSlot,
 .AnimalActivityGridRowSlotHighlighted {
-  background-color: var(--elevation2);
+  background-color: var(--elevation3);
 }
 
 .AnimalActivityGridRowSlotHighlighted img {

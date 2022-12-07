@@ -1,5 +1,5 @@
 .SidePanel {
-  background-color: var(--elevation1);
+  background-color: var(--elevation2);
   box-shadow: var(--shadow-strong);
   color: var(--text-primary);
   display: flex;

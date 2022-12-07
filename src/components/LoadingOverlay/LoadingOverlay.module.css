@@ -1,6 +1,6 @@
 .LoadingOverlay {
   align-items: center;
-  background-color: var(--elevation2);
+  background-color: var(--elevation3);
   bottom: 0;
   color: var(--text-primary);
   display: flex;

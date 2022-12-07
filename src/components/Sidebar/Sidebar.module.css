@@ -1,5 +1,5 @@
 .Sidebar {
-  background-color: var(--elevation1);
+  background-color: var(--elevation2);
   height: 100%;
   overflow-y: auto;
   user-select: none;
@@ -7,7 +7,7 @@
 }
 
 .SidebarButton {
-  background-color: var(--elevation1);
+  background-color: var(--elevation2);
   border-radius: 0 0 0.5em 0;
   left: 100%;
   opacity: 0.5;

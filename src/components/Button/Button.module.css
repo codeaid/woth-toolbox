@@ -1,6 +1,6 @@
 .Button {
   align-items: center;
-  background-color: var(--elevation1);
+  background-color: var(--elevation2);
   border: none;
   border-radius: 0.25em;
   color: var(--text-primary);

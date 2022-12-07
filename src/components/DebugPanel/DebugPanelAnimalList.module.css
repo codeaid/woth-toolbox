@@ -1,5 +1,5 @@
 .DebugPanelAnimalList {
-  background-color: var(--dark);
+  background-color: var(--elevation1);
   display: flex;
   flex-flow: wrap;
   justify-content: center;

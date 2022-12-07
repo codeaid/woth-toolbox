@@ -10,7 +10,7 @@
 }
 
 .HuntingMapLabelBlur {
-  background-color: var(--elevation1);
+  background-color: var(--elevation2);
   bottom: -1em;
   filter: blur(0.1em);
   left: -1em;
