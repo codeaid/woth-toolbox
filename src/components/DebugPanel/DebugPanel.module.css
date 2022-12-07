@@ -17,15 +17,18 @@
 
 .DebugPanelPlaceholder {
   align-items: center;
+  background-color: var(--elevation1);
+  border-radius: 0.5em;
   color: var(--text-highlight);
   display: flex;
   font-size: 0.8em;
   height: 10rem;
   justify-content: center;
   margin: 0 auto;
+  opacity: 0.3;
+  padding: 0 5em;
   text-align: center;
   user-select: none;
-  width: 15em;
 }
 
 .DebugPanelToggleButton {
