@@ -1,9 +1,10 @@
 import classnames from 'classnames';
-import { useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { Transition } from 'react-transition-group';
 import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton';
+import { Spinner } from 'components/Spinner';
 import { SidePanelProps } from './types';
 import styles from './SidePanel.module.css';
 
@@ -12,6 +13,7 @@ export const SidePanel = (props: SidePanelProps) => {
     actions = [],
     children,
     className,
+    loading = false,
     side = 'right',
     style,
     title,
@@ -42,7 +44,7 @@ export const SidePanel = (props: SidePanelProps) => {
   // Pre-render side panel actions
   const renderedActions = useMemo(() => {
     if (!actions || !actions.length) {
-      return;
+      return null;
     }
 
     return (
@@ -53,6 +55,19 @@ export const SidePanel = (props: SidePanelProps) => {
       </div>
     );
   }, [actions]);
+
+  // Render the loading overlay
+  const renderedLoader = useMemo(() => {
+    if (!loading) {
+      return null;
+    }
+
+    return (
+      <div className={styles.SidePanelLoadingOverlay}>
+        <Spinner />
+      </div>
+    );
+  }, [loading]);
 
   return (
     <Transition
@@ -91,8 +106,12 @@ export const SidePanel = (props: SidePanelProps) => {
               <RiCloseFill />
             </IconButton>
           </div>
-          <div className={styles.SidePanelContent}>{children}</div>
-          {renderedActions}
+
+          <div className={styles.SidePanelContainer}>
+            {renderedLoader}
+            <div className={styles.SidePanelContent}>{children}</div>
+            {renderedActions}
+          </div>
         </div>
       )}
     </Transition>

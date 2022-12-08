@@ -9,6 +9,7 @@ export interface SidePanelProps {
   actions?: Array<ButtonProps>;
   children?: ReactNode;
   className?: string;
+  loading?: boolean;
   side?: SidePanelSide;
   style?: CSSProperties;
   title: string;
