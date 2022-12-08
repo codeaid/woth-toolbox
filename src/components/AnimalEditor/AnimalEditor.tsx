@@ -8,6 +8,7 @@ import { formatTimestampDistance } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
+import { AnimalEditorGroupBuilder } from './AnimalEditorGroupBuilder';
 import { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
 
@@ -129,6 +130,9 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
 
         <Label>Description</Label>
         <AnimalEditorDescription data={data} onChange={setData} />
+
+        <Label>Group Builder</Label>
+        <AnimalEditorGroupBuilder data={data} onChange={setData} />
 
         <Label>Icon Color</Label>
         <AnimalEditorColorPicker

@@ -33,3 +33,8 @@ export interface AnimalEditorProps {
   onDataRead: AnimalEditorDataReadHandler;
   onDataWrite: AnimalEditorDataWriteHandler;
 }
+
+export interface AnimalEditorGroupBuilderProps {
+  data: AnimalMarkerData;
+  onChange: AnimalEditorDataChangeHandler;
+}

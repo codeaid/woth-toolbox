@@ -69,3 +69,14 @@ export const isNotEmpty = <TValue>(value: Maybe<TValue>): value is TValue =>
 export const roundNumber = (value: number, decimals = 2) =>
   Math.round((value + Number.EPSILON) * Math.pow(10, decimals)) /
   Math.pow(10, decimals);
+
+/**
+ * Repeat the specified function N number of times
+ *
+ * @param count Number of times to repeat the callback
+ * @param callback Callback to invoke for each iteration
+ */
+export const times = <TResult>(
+  count: number,
+  callback: (index: number) => TResult,
+) => Array.from(Array(count).keys()).map(callback);

@@ -1,3 +1,4 @@
+import { AnimalSpecimen } from 'types/animals';
 import {
   AnimalIconType,
   GenericIconType,
@@ -23,6 +24,7 @@ export interface AnimalMarkerData {
   color?: string;
   comment?: string;
   created?: number;
+  group?: Array<AnimalSpecimen>;
   updated?: number;
 }
 
