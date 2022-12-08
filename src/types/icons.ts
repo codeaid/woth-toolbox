@@ -23,6 +23,7 @@ export type NeedZoneIconType =
 export type UIIconType =
   | 'age'
   | 'rating'
+  | 'trophy'
   | 'sex:female'
   | 'sex:generic'
   | 'sex:male'
