@@ -1,0 +1,15 @@
+.AnimalRating {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1em);
+}
+
+.AnimalRatingFiller {
+  font-size: 0.35em;
+}
+
+.AnimalRatingIcon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,1 @@
+export { AnimalTrophyRating } from './AnimalTrophyRating';
