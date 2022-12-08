@@ -102,7 +102,7 @@ export const HuntingMapMarker = forwardRef(
 
     return (
       <Transition
-        in={(forceVisible || visible) && !hidden}
+        in={forceVisible || visible}
         mountOnEnter={mountOnEnter}
         nodeRef={iconRef}
         timeout={75}
@@ -117,6 +117,7 @@ export const HuntingMapMarker = forwardRef(
                 [styles.HuntingMapMarkerStateEntered]: state === 'entered',
                 [styles.HuntingMapMarkerStateExiting]: state === 'exiting',
                 [styles.HuntingMapMarkerStateExited]: state === 'exited',
+                [styles.HuntingMapMarkerHidden]: hidden,
               },
               className,
             )}
