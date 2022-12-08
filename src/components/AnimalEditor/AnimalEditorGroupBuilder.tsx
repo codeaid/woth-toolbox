@@ -193,7 +193,7 @@ export const AnimalEditorGroupBuilder = (
         className={styles.AnimalEditorGroupBuilderButtonConfirm}
         onClick={handleConfirm}
       >
-        Confirm
+        Add to group
       </Button>
       {renderedList}
     </div>

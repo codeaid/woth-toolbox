@@ -74,7 +74,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const actions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: 'Save',
+        children: 'Save changes',
         className: classnames(styles.AnimalEditorActionSave),
         onClick: handleDataWrite,
       },

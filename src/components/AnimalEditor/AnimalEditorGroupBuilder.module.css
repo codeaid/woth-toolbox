@@ -81,7 +81,7 @@
 .AnimalEditorGroupBuilderListPlaceholder {
   color: var(--text-secondary);
   font-size: 0.8em;
-  padding: 2em;
+  padding: 1.2em 2em;
   user-select: none;
   text-align: center;
 }
