@@ -1,14 +1,13 @@
 import classnames from 'classnames';
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { ChromePicker, ColorResult } from 'react-color';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
-import { Textarea } from 'components/Textarea';
 import { getAnimalName } from 'lib/animals';
-import { getIconComponent } from 'lib/icons';
-import { formatTimestampDistance, getHexColor } from 'lib/utils';
+import { formatTimestampDistance } from 'lib/utils';
 import { AnimalMarkerData } from 'types/markers';
+import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
+import { AnimalEditorDescription } from './AnimalEditorDescription';
 import { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
 
@@ -35,31 +34,6 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     setData({});
     onClose();
   }, [onClose]);
-
-  /**
-   * Handle changes to the color
-   */
-  const handleColorChange = useCallback(
-    (color: ColorResult) =>
-      setData(current => ({
-        ...current,
-        color: getHexColor(color),
-      })),
-    [],
-  );
-
-  /**
-   * Handle changes to the comment text
-   */
-  const handleCommentChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement>) => {
-      setData(current => ({
-        ...current,
-        comment: event.target.value,
-      }));
-    },
-    [],
-  );
 
   /**
    * Handle persisting current marker's data from the storage
@@ -131,12 +105,6 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     );
   }, [data.created, data.updated]);
 
-  // Preview icon component
-  const IconComponent = useMemo(
-    () => getIconComponent(marker?.type),
-    [marker?.type],
-  );
-
   // Load animal details on mount
   useEffect(() => {
     // Ensure a valid marker is present before continuing
@@ -159,40 +127,16 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       <div className={styles.AnimalEditorContent}>
         {renderedDates}
 
-        <Label>Comment</Label>
-        <Textarea
-          rows={8}
-          value={data.comment}
-          onChange={handleCommentChange}
-        />
+        <Label>Description</Label>
+        <AnimalEditorDescription data={data} onChange={setData} />
 
         <Label>Icon Color</Label>
-        <ChromePicker
-          color={data.color ?? defaultIconColor}
-          disableAlpha={true}
-          styles={{
-            default: {
-              picker: {
-                backgroundColor: '#121212',
-                boxShadow: 'unset',
-                userSelect: 'none',
-                width: 'auto',
-              },
-              swatch: {
-                transform: 'scale(1.5)',
-              },
-            },
-          }}
-          onChange={handleColorChange}
+        <AnimalEditorColorPicker
+          data={data}
+          defaultIconColor={defaultIconColor}
+          marker={marker}
+          onChange={setData}
         />
-        <div className={styles.AnimalEditorIconPreview}>
-          <IconComponent
-            size={50}
-            style={{
-              color: data.color ?? defaultIconColor,
-            }}
-          />
-        </div>
       </div>
     </SidePanel>
   );
