@@ -143,7 +143,7 @@ export const AnimalEditorGroupBuilder = (
         ) : (
           <div className={styles.AnimalEditorGroupBuilderListPlaceholder}>
             Add a specimen to the list by selecting its age and rating and
-            pressing the <strong>Confirm</strong> button below.
+            pressing the <strong>&quot;Add to group&quot;</strong> button below.
           </div>
         )}
       </div>
