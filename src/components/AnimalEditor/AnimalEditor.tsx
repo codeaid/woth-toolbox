@@ -25,6 +25,12 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   // Internal animal marker data to edit
   const [data, setData] = useState<AnimalMarkerData>({});
 
+  // Flag indicating whether side panel's loading overlay should be visible
+  const [loading, setLoading] = useState(true);
+
+  // Flag indicating whether side panel is visible or not
+  const [visible, setVisible] = useState(false);
+
   // Retrieve animal name
   const animalName = useMemo(() => getAnimalName(marker?.type), [marker]);
 
@@ -109,21 +115,41 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   // Load animal details on mount
   useEffect(() => {
     // Ensure a valid marker is present before continuing
-    if (!marker) {
+    if (!marker || !visible) {
       return;
     }
 
     // Read data from the storage and store it locally for editing
     const data = onDataRead(marker);
     setData(data ?? {});
-  }, [marker, onDataRead]);
+  }, [marker, visible, onDataRead]);
+
+  // Hide loading indicator if data gets loaded
+  useEffect(() => setLoading(false), [data]);
+
+  // Hide loading overlay after a certain amount of time
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (visible) {
+      // Hide loading if no data is loaded within half a second
+      timeout = setTimeout(() => setLoading(false), 500);
+    } else {
+      // Show loading as soon as panel disappears
+      timeout = setTimeout(() => setLoading(true), 0);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [visible]);
 
   return (
     <SidePanel
       actions={actions}
+      loading={loading}
       title={animalName}
       visible={!!marker}
       onClose={handleClose}
+      onVisible={setVisible}
     >
       <div className={styles.AnimalEditorContent}>
         {renderedDates}
