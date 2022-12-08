@@ -688,6 +688,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
       // Disable editor and hide need zones for all other markers
       options.ref.current?.setEditorActive(editorVisible && isCurrentAnimal);
       options.ref.current?.setZonesVisible(editorVisible && isCurrentAnimal);
+
+      if (editorVisible && !isCurrentAnimal) {
+        // Hide all other animals when editor is open
+        options.ref.current?.setHidden(true);
+      } else if (!editorVisible) {
+        // Unhide all animals when editor closes
+        options.ref.current?.setHidden(false);
+      }
     });
   }, [editedAnimal]);
 
