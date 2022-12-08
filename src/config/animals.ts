@@ -18,6 +18,22 @@ export const animals: Array<Animal> = [
     tier: 1,
     type: 'animal:european hare',
   },
+  {
+    description:
+      'The snowshoe hare, also called the varying hare, is a species of hare found in North America. It has the name "showshoe" because of the large size of its hind feet, which prevent it from sinking into the snow when it hops and walks. It has fur on the soles of its feet to protect them from freezing temperatures. These animals are nimble and fast: the need to be, as they are a popular target for many predators.',
+    hitEnergy: [56, 628],
+    latin: 'Lepus americanus',
+    lifeCycle: [
+      { activity: AnimalActivity.Feeding, time: 0 },
+      { activity: AnimalActivity.Sleeping, time: 3 },
+      { activity: AnimalActivity.Feeding, time: 9 },
+      { activity: AnimalActivity.Sleeping, time: 17 },
+    ],
+    name: 'Showshoe Hare',
+    slug: 'showshoe-hare',
+    tier: 1,
+    type: 'animal:showshoe hare',
+  },
 
   // Tier 3
   {
@@ -93,6 +109,24 @@ export const animals: Array<Animal> = [
     slug: 'roe-deer',
     tier: 4,
     type: 'animal:roe deer',
+  },
+  {
+    description:
+      'The golden jackal occurs in North and East Africa, Southeastern Europe and South Asia to Burma. Golden jackals prefer dry, open country and arid, short grasslands.',
+    hitEnergy: [350, 2000],
+    latin: 'Canis aureus',
+    lifeCycle: [
+      { activity: AnimalActivity.Sleeping, time: 0 },
+      { activity: AnimalActivity.Feeding, time: 3 },
+      { activity: AnimalActivity.Drinking, time: 7 },
+      { activity: AnimalActivity.Sleeping, time: 10 },
+      { activity: AnimalActivity.Feeding, time: 15 },
+      { activity: AnimalActivity.Drinking, time: 19 },
+    ],
+    name: 'Golden Jackal',
+    slug: 'golden-jackal',
+    tier: 4,
+    type: 'animal:golden jackal',
   },
 
   // Tier 5
