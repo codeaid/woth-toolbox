@@ -20,6 +20,15 @@ export interface AnimalActivityValue {
   time: number;
 }
 
+export type AnimalAge = 'young' | 'adult' | 'mature';
+
+export type AnimalRating = 'F' | 'M1' | 'M2' | 'M3' | 'M4' | 'M5';
+
+export interface AnimalSpecimen {
+  age: AnimalAge;
+  rating: AnimalRating;
+}
+
 export type AnimalType =
   | 'animal:american badger'
   | 'animal:american black bear'

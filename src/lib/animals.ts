@@ -1,5 +1,12 @@
+import { animalAgeNames, animalRatingNames } from 'config/animals';
 import { animalNameMap } from 'config/names';
-import { Animal, AnimalActivityValue, AnimalType } from 'types/animals';
+import {
+  Animal,
+  AnimalActivityValue,
+  AnimalAge,
+  AnimalRating,
+  AnimalType,
+} from 'types/animals';
 import { EntityGroup } from 'types/global';
 
 /**
@@ -12,6 +19,13 @@ export const getActivityByHour = (
   activities: Array<AnimalActivityValue>,
   hour: number,
 ) => activities.find(activity => activity.time === hour);
+
+/**
+ * Get human-readable name of the specified animal age
+ *
+ * @param age Target age
+ */
+export const getAnimalAgeName = (age: AnimalAge) => animalAgeNames.get(age)!;
 
 /**
  * Group animals by their tier
@@ -49,6 +63,36 @@ export const getAnimalGroups = (animals: Array<Animal>) =>
  */
 export const getAnimalName = (type?: AnimalType, defaultName = 'Unknown') =>
   type ? animalNameMap.get(type) ?? defaultName : defaultName;
+
+/**
+ * Get name of the sex of the specified animal rating
+ *
+ * @param rating Animal rating
+ */
+export const getAnimalRatingSexName = (rating: AnimalRating) =>
+  animalRatingNames.get(rating)!;
+
+/**
+ * Get number of stars for the specified animal (trophy) rating
+ *
+ * @param rating Source rating value
+ */
+export const getAnimalRatingTrophy = (rating: AnimalRating) => {
+  switch (rating) {
+    case 'M1':
+      return 1;
+    case 'M2':
+      return 2;
+    case 'M3':
+      return 3;
+    case 'M4':
+      return 4;
+    case 'M5':
+      return 5;
+    default:
+      return 0;
+  }
+};
 
 /**
  * Find activity occurring at the specified hour
@@ -90,3 +134,10 @@ const getSortedAnimals = (animals: Array<Animal>) =>
       : // Next sort by animal name within the tier
         a.name.localeCompare(b.name),
   );
+
+/**
+ * Check if the specified animal sex represents a male
+ *
+ * @param rating Animal rating
+ */
+export const isAnimalSexMale = (rating: AnimalRating) => rating !== 'F';
