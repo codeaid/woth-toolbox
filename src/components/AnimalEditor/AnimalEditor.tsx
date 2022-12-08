@@ -187,7 +187,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         />
         <div className={styles.AnimalEditorIconPreview}>
           <IconComponent
-            size={80}
+            size={50}
             style={{
               color: data.color ?? defaultIconColor,
             }}
