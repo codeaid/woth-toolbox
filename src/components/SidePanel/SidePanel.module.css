@@ -43,7 +43,9 @@
 
 .SidePanelHeaderAction {
   background-color: transparent;
+  border-radius: 100%;
   font-size: 0.7em;
+  padding: 0;
 }
 
 .SidePanelHeaderAction:active,

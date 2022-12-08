@@ -1,9 +1,12 @@
 .IconButton {
   background-color: var(--elevation0);
+  height: 2.5em;
+  padding: 0;
+  width: 2.5em;
 }
 
 .IconButton svg {
-  font-size: 1.5em;
+  font-size: 1.25em;
   height: 1em;
   line-height: 1em;
   transition: transform 100ms ease-in-out;

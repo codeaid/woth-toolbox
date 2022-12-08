@@ -8,13 +8,12 @@
   filter: saturate(70%);
   font-family: 'Fira Sans', sans-serif;
   font-weight: 500;
-  height: 2.5em;
   justify-content: center;
-  padding: 0;
-  transition: color 150ms ease-in-out,
-    filter 150ms ease-in-out,
-    opacity 150ms ease-in-out;
-  width: 2.5em;
+  padding: 0.5em 1em;
+  transition: background-color 100ms ease-in-out,
+    color 100ms ease-in-out,
+    filter 100ms ease-in-out,
+    opacity 100ms ease-in-out;
 }
 
 .Button:hover:not(:disabled) {
