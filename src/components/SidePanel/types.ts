@@ -2,6 +2,7 @@ import { CSSProperties, ReactNode } from 'react';
 import { ButtonProps } from 'components/Button';
 
 type SidePanelCloseHandler = () => void;
+type SidePanelVisibleChangeHandler = (visible: boolean) => void;
 type SidePanelSide = 'left' | 'right';
 
 export interface SidePanelProps {
@@ -13,4 +14,5 @@ export interface SidePanelProps {
   title: string;
   visible?: boolean;
   onClose?: SidePanelCloseHandler;
+  onVisible?: SidePanelVisibleChangeHandler;
 }

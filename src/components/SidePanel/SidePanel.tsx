@@ -17,10 +17,27 @@ export const SidePanel = (props: SidePanelProps) => {
     title,
     visible = false,
     onClose,
+    onVisible,
   } = props;
 
   // Reference to the main side panel element
   const ref = useRef<HTMLDivElement>(null);
+
+  /**
+   * Handle sidebar entering
+   */
+  const handleEntering = useCallback(
+    () => onVisible && onVisible(true),
+    [onVisible],
+  );
+
+  /**
+   * Handle sidebar exited
+   */
+  const handleExited = useCallback(
+    () => onVisible && onVisible(false),
+    [onVisible],
+  );
 
   // Pre-render side panel actions
   const renderedActions = useMemo(() => {
@@ -43,6 +60,8 @@ export const SidePanel = (props: SidePanelProps) => {
       mountOnEnter={true}
       nodeRef={ref}
       timeout={100}
+      onEntering={handleEntering}
+      onExited={handleExited}
       unmountOnExit={true}
     >
       {state => (
