@@ -4,6 +4,7 @@ import {
   getAnimalMarkerData,
   getAnimalMarkerDataMap,
   getStorage,
+  isEmptyAnimalData,
   setAnimalMarkerData,
 } from 'lib/storage';
 import { AnimalMarkerData, AnimalMarkerOptions } from 'types/markers';
@@ -75,12 +76,17 @@ export const useAnimalMarkerData = () => {
         return;
       }
 
+      // Remove empty data objects from the storage
+      if (isEmptyAnimalData(data)) {
+        return handleDataClear(marker);
+      }
+
       setDataMap(current => ({
         ...current,
         [markerKey]: patch,
       }));
     },
-    [storage],
+    [handleDataClear, storage],
   );
 
   // Load initial animal marker data from local storage

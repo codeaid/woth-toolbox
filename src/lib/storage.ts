@@ -159,6 +159,17 @@ export const getAnimalMarkerDataMap = (
 };
 
 /**
+ * Check if specified data object does not contain any values
+ *
+ * @param data Animal data object to validate
+ */
+export const isEmptyAnimalData = (data?: AnimalMarkerData) =>
+  !data ||
+  ((!data.color || data.color === '#ffffff') &&
+    (!data.comment || data.comment.trim() === '') &&
+    (!data.group || !data.group.length));
+
+/**
  * Store marker data in the storage
  *
  * @param storage Marker data storage
