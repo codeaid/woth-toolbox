@@ -6,6 +6,10 @@
   background-color: var(--info);
 }
 
+.AnimalEditorContent {
+  padding: 0 0.65em;
+}
+
 .AnimalEditorDates {
   display: grid;
   grid-gap: 1em;

@@ -156,37 +156,43 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       visible={!!marker}
       onClose={handleClose}
     >
-      {renderedDates}
+      <div className={styles.AnimalEditorContent}>
+        {renderedDates}
 
-      <Label>Comment</Label>
-      <Textarea rows={8} value={data.comment} onChange={handleCommentChange} />
-
-      <Label>Icon Color</Label>
-      <ChromePicker
-        color={data.color ?? defaultIconColor}
-        disableAlpha={true}
-        styles={{
-          default: {
-            picker: {
-              backgroundColor: '#121212',
-              boxShadow: 'unset',
-              userSelect: 'none',
-              width: 'auto',
-            },
-            swatch: {
-              transform: 'scale(1.5)',
-            },
-          },
-        }}
-        onChange={handleColorChange}
-      />
-      <div className={styles.AnimalEditorIconPreview}>
-        <IconComponent
-          size={80}
-          style={{
-            color: data.color ?? defaultIconColor,
-          }}
+        <Label>Comment</Label>
+        <Textarea
+          rows={8}
+          value={data.comment}
+          onChange={handleCommentChange}
         />
+
+        <Label>Icon Color</Label>
+        <ChromePicker
+          color={data.color ?? defaultIconColor}
+          disableAlpha={true}
+          styles={{
+            default: {
+              picker: {
+                backgroundColor: '#121212',
+                boxShadow: 'unset',
+                userSelect: 'none',
+                width: 'auto',
+              },
+              swatch: {
+                transform: 'scale(1.5)',
+              },
+            },
+          }}
+          onChange={handleColorChange}
+        />
+        <div className={styles.AnimalEditorIconPreview}>
+          <IconComponent
+            size={80}
+            style={{
+              color: data.color ?? defaultIconColor,
+            }}
+          />
+        </div>
       </div>
     </SidePanel>
   );
