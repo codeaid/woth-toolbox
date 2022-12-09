@@ -6,7 +6,7 @@ import {
   genericMarkerTypes,
 } from 'config/markers';
 import { hasListValue } from 'lib/utils';
-import { AnimalType } from 'types/animals';
+import { AnimalActivity, AnimalType } from 'types/animals';
 import {
   MapMarkerOptions,
   MapOptions,
@@ -20,6 +20,7 @@ import {
   MarkerPosition,
   MarkerType,
 } from 'types/markers';
+import { getAnimalActivityName, getAnimalName } from 'lib/animals';
 
 /**
  * Create an animal marker from the supplied coordinates
@@ -133,6 +134,42 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
       new Set(),
     ),
   );
+
+/**
+ * Get description of the specified need zone's activity
+ *
+ * @param marker Need zone marker
+ */
+export const getAnimalZoneActivity = (marker: MarkerOptions) => {
+  switch (marker.type) {
+    case 'zone:drink':
+      return getAnimalActivityName(AnimalActivity.Drinking);
+    case 'zone:eat':
+      return getAnimalActivityName(AnimalActivity.Feeding);
+    case 'zone:sleep':
+      return getAnimalActivityName(AnimalActivity.Sleeping);
+  }
+};
+
+/**
+ * Generate tooltip for an animal need zone marker
+ *
+ * @param animalMarker Parent animal marker
+ * @param zoneMarker Need zone marker
+ */
+export const getAnimalZoneMarkerTooltip = (
+  animalMarker: AnimalMarkerOptions,
+  zoneMarker: MarkerOptions,
+) => {
+  // Get name of the animal
+  const animalName = getAnimalName(animalMarker.type);
+  const zoneActivity = getAnimalZoneActivity(zoneMarker);
+
+  return [animalName, zoneActivity]
+    .filter(v => !!v)
+    .join(' : ')
+    .toUpperCase();
+};
 
 /**
  * Get number of each need zone for the specified animal type

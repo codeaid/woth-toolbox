@@ -13,7 +13,7 @@ import {
   useState,
 } from 'react';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
-import { getMarkerKey } from 'lib/markers';
+import { getMarkerKey, getAnimalZoneMarkerTooltip } from 'lib/markers';
 import { MapMarkerRef, MapOptions } from 'types/cartography';
 import {
   AnimalMarkerData,
@@ -27,7 +27,7 @@ export const HuntingMapAnimal = forwardRef(
   (props: HuntingMapAnimalProps, ref: ForwardedRef<HuntingMapAnimalRef>) => {
     const {
       className,
-      marker,
+      marker: animalMarker,
       size,
       style,
       zoneSize = 45,
@@ -103,10 +103,10 @@ export const HuntingMapAnimal = forwardRef(
         // Hide need zones and editor if animal marker is removed
         if (!visible) {
           setZonesVisible(false);
-          onToggleEditor(marker, false);
+          onToggleEditor(animalMarker, false);
         }
       },
-      [marker, markerRef, onToggleEditor],
+      [animalMarker, markerRef, onToggleEditor],
     );
 
     /**
@@ -158,8 +158,8 @@ export const HuntingMapAnimal = forwardRef(
      * Handle long-pressing on the icon to open the editor
      */
     const handleTriggerLongPress = useCallback(
-      () => onToggleEditor(marker, true),
-      [marker, onToggleEditor],
+      () => onToggleEditor(animalMarker, true),
+      [animalMarker, onToggleEditor],
     );
 
     /**
@@ -197,7 +197,7 @@ export const HuntingMapAnimal = forwardRef(
     // Render need zones
     const renderedNeedZoneIcons = useMemo(
       () =>
-        [marker.drink, marker.eat, marker.sleep]
+        [animalMarker.drink, animalMarker.eat, animalMarker.sleep]
           .flat()
           .map((marker: MarkerOptions) => {
             // Create a reference to each need zone icon
@@ -213,11 +213,12 @@ export const HuntingMapAnimal = forwardRef(
                 ref={ref}
                 size={zoneSize}
                 style={{ zIndex: 2 }}
+                title={getAnimalZoneMarkerTooltip(animalMarker, marker)}
                 unmountOnExit={true}
               />
             );
           }),
-      [marker.drink, marker.eat, marker.sleep, zoneSize, zonesVisible],
+      [animalMarker, zoneSize, zonesVisible],
     );
 
     // Expose control functions of the main trigger component as well as
@@ -266,7 +267,7 @@ export const HuntingMapAnimal = forwardRef(
             className,
           )}
           highlighted={editorActive || zonesVisible}
-          marker={marker}
+          marker={animalMarker}
           ref={setMarkerRef}
           size={size}
           style={{
