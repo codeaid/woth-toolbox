@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { StrictMode } from 'react';
 import { Layout } from 'components/Layout';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
@@ -17,7 +18,9 @@ const App = (props: AppProps) => {
         />
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        <StrictMode>
+          <Component {...pageProps} />
+        </StrictMode>
       </Layout>
     </>
   );
