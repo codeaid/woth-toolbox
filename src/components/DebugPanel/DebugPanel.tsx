@@ -8,7 +8,7 @@ import { animalMarkerTypes } from 'config/markers';
 import { getAnimalName } from 'lib/animals';
 import { getNeedZoneCounts } from 'lib/markers';
 import { AnimalType } from 'types/animals';
-import { AnimalMarkerOptions } from 'types/markers';
+import { MarkerOptionsAnimal } from 'types/markers';
 import { DebugPanelAnimalList } from './DebugPanelAnimalList';
 import { DebugPanelMarker } from './DebugPanelMarker';
 import { DebugPanelProps } from './types';
@@ -69,7 +69,7 @@ export const DebugPanel = (props: DebugPanelProps) => {
    * @param marker Source animal marker object
    */
   const renderMarker = useCallback(
-    (marker: AnimalMarkerOptions) => (
+    (marker: MarkerOptionsAnimal) => (
       <DebugPanelMarker
         key={marker.id}
         marker={marker}

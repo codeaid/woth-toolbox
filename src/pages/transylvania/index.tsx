@@ -62,14 +62,14 @@ const TransylvaniaPage = () => {
         />
 
         <HuntingMap
-          animalMarkerDataMap={dataMap}
+          animalMarkerRecords={dataMap}
           animalMarkers={markers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/transylvania.jpeg`}
           imageWidth={mapWidth}
           genericMarkers={genericMarkers}
           labels={mapLabels}
-          markerRangeMap={markerVisibilityMap}
+          zoomMarkerMap={markerVisibilityMap}
           onClick={onDebugCoordinates}
           onEditorClear={onDataClear}
           onEditorRead={onDataRead}

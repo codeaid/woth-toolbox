@@ -1,4 +1,4 @@
-import { Animal, AnimalActivityValue } from 'types/animals';
+import { Animal, AnimalActivityData } from 'types/animals';
 import { EntityGroup } from 'types/global';
 
 export interface AnimalActivityGridProps {
@@ -12,7 +12,7 @@ export interface AnimalActivityGridGroupProps {
 export interface AnimalActivityGridIconProps {
   intermediate?: boolean;
   title?: string;
-  value: AnimalActivityValue;
+  value: AnimalActivityData;
 }
 
 export interface AnimalActivityGridRowProps {

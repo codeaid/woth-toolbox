@@ -5,7 +5,7 @@ import {
   createMarkerOptionSnippet,
 } from 'lib/debug';
 import { AnimalType } from 'types/animals';
-import { MarkerPosition } from 'types/markers';
+import { Point } from 'types/generic';
 
 /**
  * Hook exposing a function allowing to register marker positions and print
@@ -31,7 +31,7 @@ export const useMarkerPositionsDebug = (
   copyToClipboard = true,
 ) => {
   // List of registered positions
-  const [positions, setPositions] = useState<Array<MarkerPosition>>([]);
+  const [positions, setPositions] = useState<Array<Point>>([]);
 
   /**
    * Callback to add a new position to the stack
@@ -46,7 +46,7 @@ export const useMarkerPositionsDebug = (
       const ratioY = y / mapHeight;
 
       // Print position to the console
-      const position: MarkerPosition = [ratioX, ratioY];
+      const position: Point = [ratioX, ratioY];
 
       // Add marker to the list
       setPositions(current => [...current, position]);

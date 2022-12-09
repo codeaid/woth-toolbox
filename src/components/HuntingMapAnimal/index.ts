@@ -1,2 +1,2 @@
+export type { HuntingMapAnimalProps } from './types';
 export { HuntingMapAnimal } from './HuntingMapAnimal';
-export type { HuntingMapAnimalRef } from './types';

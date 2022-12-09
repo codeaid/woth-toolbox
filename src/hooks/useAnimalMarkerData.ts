@@ -7,7 +7,7 @@ import {
   isEmptyAnimalData,
   setAnimalMarkerData,
 } from 'lib/storage';
-import { AnimalMarkerData, AnimalMarkerOptions } from 'types/markers';
+import { MarkerStorageRecordAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 /**
  * Animal marker data management helper hook
@@ -16,13 +16,15 @@ export const useAnimalMarkerData = () => {
   const [storage, setStorage] = useState<Storage>();
 
   // Animal marker data
-  const [dataMap, setDataMap] = useState<Record<string, AnimalMarkerData>>({});
+  const [dataMap, setDataMap] = useState<
+    Record<string, MarkerStorageRecordAnimal>
+  >({});
 
   /**
    * Handle clearing animal data from the storage
    */
   const handleDataClear = useCallback(
-    (marker: AnimalMarkerOptions) => {
+    (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
         return;
@@ -42,7 +44,7 @@ export const useAnimalMarkerData = () => {
    * Handle reading animal data from the storage
    */
   const handleDataRead = useCallback(
-    (marker: AnimalMarkerOptions) => {
+    (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
         return;
@@ -57,14 +59,19 @@ export const useAnimalMarkerData = () => {
    * Handle persisting animal data to the storage
    */
   const handleDataWrite = useCallback(
-    (marker: AnimalMarkerOptions, data: AnimalMarkerData) => {
+    (marker: MarkerOptionsAnimal, data: MarkerStorageRecordAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
         return;
       }
 
+      // Remove empty data objects from the storage
+      if (isEmptyAnimalData(data)) {
+        return handleDataClear(marker);
+      }
+
       // Inject modification dates into custom data object
-      const patch: AnimalMarkerData = {
+      const patch: MarkerStorageRecordAnimal = {
         ...data,
         created: data.created ?? Date.now(),
         updated: Date.now(),
@@ -72,13 +79,8 @@ export const useAnimalMarkerData = () => {
 
       // Update storage with new custom data
       const markerKey = setAnimalMarkerData(storage, marker, patch);
-      if (typeof markerKey !== 'string') {
+      if (!markerKey) {
         return;
-      }
-
-      // Remove empty data objects from the storage
-      if (isEmptyAnimalData(data)) {
-        return handleDataClear(marker);
       }
 
       setDataMap(current => ({

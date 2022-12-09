@@ -1,12 +1,13 @@
 import { roundNumber } from 'lib/utils';
-import { MapOptions, MapPoint, MapZoomOptions } from 'types/cartography';
+import { MapOptions, MapZoomOptions } from 'types/cartography';
+import { Point } from 'types/generic';
 
 /**
  * Get position of an element relative to the page
  *
  * @param element Target element
  */
-const getElementOffset = (element: HTMLElement): MapPoint => {
+const getElementOffset = (element: HTMLElement): Point => {
   const { left: offsetX, top: offsetY } = element.getBoundingClientRect();
   return [offsetX, offsetY];
 };
@@ -22,7 +23,7 @@ const getElementMouseOffset = (
   pageX: number,
   pageY: number,
   element: HTMLElement,
-): MapPoint => {
+): Point => {
   // Get position of the element relative ot the page
   const [elementLeft, elementTop] = getElementOffset(element);
 
@@ -46,7 +47,7 @@ const getMapMouseOffset = (
   image: HTMLElement,
   mapLeft: number,
   mapTop: number,
-): MapPoint => {
+): Point => {
   // Calculate mouse position on the container element
   const [mouseContainerX, mouseContainerY] = getElementMouseOffset(
     pageX,
@@ -82,7 +83,7 @@ const getMapMouseOffsetRatio = (
   mapHeight: number,
   mapLeft: number,
   mapTop: number,
-): MapPoint => {
+): Point => {
   // Get mouse position relative to the map image
   const [mouseImageX, mouseImageY] = getMapMouseOffset(
     pageX,
@@ -107,7 +108,7 @@ export const getMapDimensions = (
   imageWidth: number,
   imageHeight: number,
   zoomValue: number,
-): MapPoint => [
+): Point => [
   getMapSize(imageWidth, zoomValue),
   getMapSize(imageHeight, zoomValue),
 ];
@@ -144,7 +145,7 @@ const getNextMapOffset = (
   nextHeight: number,
   mouseRatioX: number,
   mouseRatioY: number,
-): MapPoint => {
+): Point => {
   // Calculate difference in height and width after zooming in or out
   const shiftLeft = (nextWidth - mapWidth) * mouseRatioX;
   const shiftTop = (nextHeight - mapHeight) * mouseRatioY;
@@ -325,7 +326,7 @@ export const getNextZoomValue = (
  *
  * @param document HTML document element
  */
-export const getScreenCenterOffset = (document: Document): MapPoint => {
+export const getScreenCenterOffset = (document: Document): Point => {
   // Extract current document height and width
   const { height: documentHeight, width: documentWidth } =
     document.body.getBoundingClientRect();

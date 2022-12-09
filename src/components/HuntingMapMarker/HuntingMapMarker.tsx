@@ -3,6 +3,8 @@ import {
   ForwardedRef,
   forwardRef,
   MouseEvent,
+  ReactElement,
+  Ref,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -12,19 +14,23 @@ import {
 import { Transition } from 'react-transition-group';
 import { getIconComponent } from 'lib/icons';
 import { getMarkerOffset } from 'lib/markers';
-import { MapMarkerRef, MapOptions } from 'types/cartography';
+import { MapOptions } from 'types/cartography';
+import { MarkerOptions, MarkerRef } from 'types/markers';
 import { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
 export const HuntingMapMarker = forwardRef(
-  (props: HuntingMapMarkerProps, ref: ForwardedRef<MapMarkerRef>) => {
+  <TMarkerOptions extends MarkerOptions>(
+    props: HuntingMapMarkerProps<TMarkerOptions>,
+    ref: ForwardedRef<MarkerRef>,
+  ) => {
     const {
       className,
       forceVisible = false,
       highlighted,
       marker,
+      markerSize = 35,
       mountOnEnter = false,
-      size = 35,
       style,
       title,
       unmountOnExit = false,
@@ -79,18 +85,23 @@ export const HuntingMapMarker = forwardRef(
         }
 
         // Calculate marker position offsets
-        const [offsetX, offsetY] = getMarkerOffset(marker, mapOptions, size);
+        const [offsetX, offsetY] = getMarkerOffset(
+          marker,
+          mapOptions.mapWidth,
+          mapOptions.mapHeight,
+          markerSize,
+        );
 
         // Update marker's position
         iconRef.current.style.left = `${offsetX}px`;
         iconRef.current.style.top = `${offsetY}px`;
       },
-      [marker, size],
+      [marker, markerSize],
     );
 
     // Expose internal controller functions allowing to change marker's
     // visibility and position
-    useImperativeHandle<MapMarkerRef, MapMarkerRef>(
+    useImperativeHandle<MarkerRef, MarkerRef>(
       ref,
       () => ({
         markerElement: iconRef.current,
@@ -124,7 +135,7 @@ export const HuntingMapMarker = forwardRef(
             )}
             highlighted={highlighted}
             ref={iconRef}
-            size={size}
+            size={markerSize}
             style={style}
             title={tooltip}
             onClick={handleClick}
@@ -134,6 +145,9 @@ export const HuntingMapMarker = forwardRef(
       </Transition>
     );
   },
-);
+) as <TMarkerOptions extends MarkerOptions>(
+  props: HuntingMapMarkerProps<TMarkerOptions> & { ref?: Ref<MarkerRef> },
+) => ReactElement;
 
+// @ts-ignore
 HuntingMapMarker.displayName = 'HuntingMapMarker';

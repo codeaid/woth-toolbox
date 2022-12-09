@@ -1,8 +1,8 @@
 import { AnimalType } from 'types/animals';
 
-export type AnimalIconType = AnimalType;
+export type IconTypeAnimal = AnimalType;
 
-export type GenericIconType =
+export type IconTypeGeneric =
   | 'cabin'
   | 'cabin:undiscovered'
   | 'camp'
@@ -13,14 +13,14 @@ export type GenericIconType =
   | 'shooting range'
   | 'view';
 
-export type NeedZoneIconType =
+export type IconTypeNeedZone =
   | 'zone:drink'
   | 'zone:eat'
   | 'zone:gather'
   | 'zone:path'
   | 'zone:sleep';
 
-export type UIIconType =
+export type IconTypeUI =
   | 'age'
   | 'rating'
   | 'trophy'
@@ -30,7 +30,7 @@ export type UIIconType =
   | 'species';
 
 export type IconType =
-  | AnimalIconType
-  | GenericIconType
-  | NeedZoneIconType
-  | UIIconType;
+  | IconTypeAnimal
+  | IconTypeGeneric
+  | IconTypeNeedZone
+  | IconTypeUI;

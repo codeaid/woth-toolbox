@@ -1,26 +1,27 @@
 import sha1 from 'sha1';
-import { HuntingMapFilterOptions } from 'components/HuntingMapFilter';
 import {
   animalMarkerNeedZoneCounts,
   animalMarkerTypes,
   genericMarkerTypes,
 } from 'config/markers';
+import { getAnimalActivityName, getAnimalName } from 'lib/animals';
 import { hasListValue } from 'lib/utils';
 import { AnimalActivity, AnimalType } from 'types/animals';
 import {
-  MapMarkerOptions,
+  MapFilterOptions,
   MapOptions,
-  MapPoint,
   MapZoomOptions,
 } from 'types/cartography';
+import { Point } from 'types/generic';
 import {
-  AnimalMarkerOptions,
-  AnimalMarkerType,
   MarkerOptions,
-  MarkerPosition,
+  MarkerOptionsAnimal,
+  MarkerOptionsGeneric,
+  MarkerOptionsZone,
+  MarkerReference,
   MarkerType,
+  MarkerTypeAnimal,
 } from 'types/markers';
-import { getAnimalActivityName, getAnimalName } from 'lib/animals';
 
 /**
  * Create an animal marker from the supplied coordinates
@@ -32,12 +33,12 @@ import { getAnimalActivityName, getAnimalName } from 'lib/animals';
  * @param sleepZones List of sleep zone coordinates
  */
 export const createAnimalMarkerOptions = (
-  type: AnimalMarkerType,
-  coords: MarkerPosition,
-  drinkZones: Array<MarkerPosition>,
-  eatZones: Array<MarkerPosition>,
-  sleepZones: Array<MarkerPosition>,
-): AnimalMarkerOptions => ({
+  type: MarkerTypeAnimal,
+  coords: Point,
+  drinkZones: Array<Point>,
+  eatZones: Array<Point>,
+  sleepZones: Array<Point>,
+): MarkerOptionsAnimal => ({
   coords,
   drink: createMarkerOptions('zone:drink', drinkZones),
   eat: createMarkerOptions('zone:eat', eatZones),
@@ -54,9 +55,9 @@ export const createAnimalMarkerOptions = (
  */
 export const createMarkerOptions = <TMarkerType extends MarkerType>(
   type: TMarkerType,
-  positions: Array<MarkerPosition>,
+  positions: Array<Point>,
 ): Array<MarkerOptions<TMarkerType>> =>
-  positions.map(coords => ({ coords, type }));
+  positions.map(coords => ({ coords, id: getCoordinateHash(coords), type }));
 
 /**
  * Generate a hash from the specified coordinates
@@ -64,7 +65,7 @@ export const createMarkerOptions = <TMarkerType extends MarkerType>(
  * @param x Marker's X offset
  * @param y Marker's Y offset
  */
-export const getCoordinateHash = ([x, y]: MarkerPosition) =>
+export const getCoordinateHash = ([x, y]: Point) =>
   sha1(`${x}:${y}`).substring(0, 8);
 
 /**
@@ -76,7 +77,7 @@ export const getCoordinateHash = ([x, y]: MarkerPosition) =>
  * @param lodgeClass Lodge marker CSS class
  */
 export const getGenericMarkerColorClass = (
-  marker: MarkerOptions,
+  marker: MarkerOptionsGeneric,
   genericClass: string,
   landmarkClass: string,
   lodgeClass: string,
@@ -105,16 +106,16 @@ export const getMarkerKey = (marker: MarkerOptions) =>
  * Get marker's position relative to the map
  *
  * @param marker Marker options
- * @param mapOptions Map options
+ * @param mapWidth Map width
+ * @param mapHeight Map height
  * @param markerSize Marker size
  */
 export const getMarkerOffset = (
   marker: MarkerOptions,
-  mapOptions: MapOptions,
+  mapWidth: number,
+  mapHeight: number,
   markerSize: number,
-): MapPoint => {
-  const { mapHeight, mapWidth } = mapOptions;
-
+): Point => {
   const [centerRatioX, centerRatioY] = marker.coords;
   const offsetX = mapWidth * centerRatioX - markerSize / 2;
   const offsetY = mapHeight * centerRatioY - markerSize / 2;
@@ -140,7 +141,7 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
  *
  * @param marker Need zone marker
  */
-export const getAnimalZoneActivity = (marker: MarkerOptions) => {
+const getAnimalZoneActivity = (marker: MarkerOptionsZone) => {
   switch (marker.type) {
     case 'zone:drink':
       return getAnimalActivityName(AnimalActivity.Drinking);
@@ -158,8 +159,8 @@ export const getAnimalZoneActivity = (marker: MarkerOptions) => {
  * @param zoneMarker Need zone marker
  */
 export const getAnimalZoneMarkerTooltip = (
-  animalMarker: AnimalMarkerOptions,
-  zoneMarker: MarkerOptions,
+  animalMarker: MarkerOptionsAnimal,
+  zoneMarker: MarkerOptionsZone,
 ) => {
   // Get name of the animal
   const animalName = getAnimalName(animalMarker.type);
@@ -178,14 +179,6 @@ export const getAnimalZoneMarkerTooltip = (
  */
 export const getNeedZoneCounts = (type: AnimalType) =>
   animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
-
-/**
- * Determine if current marker options object is an animal marker
- *
- * @param marker Marker to validate
- */
-const isAnimalMarker = (marker: MarkerOptions): marker is AnimalMarkerOptions =>
-  'drink' in marker || 'eat' in marker || 'sleep' in marker;
 
 /**
  * Check if the specified type represents an animal marker type
@@ -223,8 +216,8 @@ export const isHighlightedMarker = (marker: MarkerOptions) =>
  */
 export const isMarkerFiltered = (
   marker: MarkerOptions,
-  options: HuntingMapFilterOptions,
-) => hasListValue(marker.type, options.selectedTypes);
+  options: MapFilterOptions,
+) => hasListValue(marker.type, options.types);
 
 /**
  * Determine if a marker is visible at the current map scale
@@ -252,7 +245,7 @@ export const isMarkerVisibleAtScale = (
 export const updateMarkerPositions = (
   mapOptions: MapOptions,
   markerSize: number,
-  ...markerOptions: Array<Array<MapMarkerOptions>>
+  ...markerOptions: Array<Array<MarkerReference>>
 ) =>
   markerOptions
     .flat()
@@ -273,10 +266,10 @@ export const updateMarkerPositions = (
  * @param markerOptions List of marker options to process
  */
 export const updateMarkerVisibility = (
-  filterOptions: HuntingMapFilterOptions,
+  filterOptions: MapFilterOptions,
   zoomOptions: MapZoomOptions,
   zoomVisibilityMap: Map<MarkerType, number>,
-  ...markerOptions: Array<Array<MapMarkerOptions>>
+  ...markerOptions: Array<Array<MarkerReference>>
 ) =>
   markerOptions
     .flat()
@@ -286,7 +279,7 @@ export const updateMarkerVisibility = (
       const { zoomValue } = zoomOptions;
 
       // Always show debug markers
-      if (isAnimalMarker(marker) && marker.debug) {
+      if (marker.meta?.debug) {
         ref.current?.setVisible(true);
         return;
       }
@@ -296,7 +289,7 @@ export const updateMarkerVisibility = (
 
       // Determine if marker matches the only filter type currently selected
       const visibleWithOnlyFilter =
-        visibleWithFilter && filterOptions.selectedTypes.length === 1;
+        visibleWithFilter && filterOptions.types.length === 1;
 
       // Always show markers if they match the only selected type
       if (visibleWithOnlyFilter) {

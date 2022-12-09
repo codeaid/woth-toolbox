@@ -1,13 +1,13 @@
 import { AnimalType } from 'types/animals';
 import {
-  AnimalMarkerType,
-  GenericMarkerType,
   MarkerType,
-  NeedZoneMarkerType,
+  MarkerTypeAnimal,
+  MarkerTypeGeneric,
+  MarkerTypeNeedZone,
 } from 'types/markers';
 
 // List of types representing animal markers
-export const animalMarkerTypes: Array<AnimalMarkerType> = [
+export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:american badger',
   'animal:american black bear',
   'animal:bighorn sheep',
@@ -37,7 +37,7 @@ export const animalMarkerTypes: Array<AnimalMarkerType> = [
 ];
 
 // List of marker types that represent generic markers
-export const genericMarkerTypes: Array<GenericMarkerType> = [
+export const genericMarkerTypes: Array<MarkerTypeGeneric> = [
   'cabin',
   'cabin:undiscovered',
   'camp',
@@ -50,7 +50,7 @@ export const genericMarkerTypes: Array<GenericMarkerType> = [
 ];
 
 // List of marker types that represent need zones
-export const needZoneMarkerTypes: Array<NeedZoneMarkerType> = [
+export const needZoneMarkerTypes: Array<MarkerTypeNeedZone> = [
   'zone:drink',
   'zone:eat',
   'zone:gather',

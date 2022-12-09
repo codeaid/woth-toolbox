@@ -3,9 +3,9 @@ import {
   europeanHareMarkers,
   goldenJackalMarkers,
 } from 'config/transylvania';
-import { AnimalMarkerOptions } from 'types/markers';
+import { MarkerOptionsAnimal } from 'types/markers';
 
-export const animalMarkers: Array<AnimalMarkerOptions> = [
+export const animalMarkers: Array<MarkerOptionsAnimal> = [
   brownBearMarkers,
   europeanHareMarkers,
   goldenJackalMarkers,

@@ -5,7 +5,7 @@ import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { getAnimalName } from 'lib/animals';
 import { formatTimestampDistance } from 'lib/utils';
-import { AnimalMarkerData } from 'types/markers';
+import { MarkerStorageRecordAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
 import { AnimalEditorGroupBuilder } from './AnimalEditorGroupBuilder';
@@ -23,7 +23,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   } = props;
 
   // Internal animal marker data to edit
-  const [data, setData] = useState<AnimalMarkerData>();
+  const [data, setData] = useState<MarkerStorageRecordAnimal>();
 
   // Flag indicating if data existed when the editor was opened
   const [hadData, setHadData] = useState(false);

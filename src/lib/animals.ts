@@ -7,7 +7,7 @@ import {
 import {
   Animal,
   AnimalActivity,
-  AnimalActivityValue,
+  AnimalActivityData,
   AnimalAge,
   AnimalRating,
   AnimalType,
@@ -21,7 +21,7 @@ import { EntityGroup } from 'types/global';
  * @param hour Target hour
  */
 export const getActivityByHour = (
-  activities: Array<AnimalActivityValue>,
+  activities: Array<AnimalActivityData>,
   hour: number,
 ) => activities.find(activity => activity.time === hour);
 
@@ -114,7 +114,7 @@ export const getAnimalRatingTrophy = (rating: AnimalRating) => {
  * @param hour Target hour
  */
 export const getCurrentActivityByHour = (
-  activities: Array<AnimalActivityValue>,
+  activities: Array<AnimalActivityData>,
   hour: number,
 ) => {
   let current;

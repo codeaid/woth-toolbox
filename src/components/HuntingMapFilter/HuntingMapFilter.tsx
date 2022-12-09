@@ -49,7 +49,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const handleClearFilters = useCallback(() => {
     // Clear filters and close the side panel
     onChange({
-      selectedTypes: [],
+      types: [],
     });
 
     setMenuVisible(false);
@@ -66,12 +66,12 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
       // Update list of enabled types
       const types = selected
-        ? [...new Set(options.selectedTypes).add(type)]
-        : options.selectedTypes.filter(marker => marker !== type);
+        ? [...new Set(options.types).add(type)]
+        : options.types.filter(marker => marker !== type);
 
       onChange({
         ...options,
-        selectedTypes: types,
+        types: types,
       });
     },
     [options, onChange],
@@ -116,7 +116,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
             <HuntingMapFilterItem
               key={type}
               large={large}
-              selected={options.selectedTypes.includes(type)}
+              selected={options.types.includes(type)}
               type={type}
               onToggle={handleToggleType}
             >
@@ -158,11 +158,11 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       {
         children: 'Clear',
         className: styles.HuntingMapFilterActionClear,
-        disabled: !options.selectedTypes.length,
+        disabled: !options.types.length,
         onClick: handleClearFilters,
       },
     ],
-    [handleClearFilters, options.selectedTypes.length],
+    [handleClearFilters, options.types.length],
   );
 
   // Monitor clicks outside the current marker and hide zones when needed
@@ -178,7 +178,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     <>
       <IconButton
         className={styles.HuntingMapFilterToggle}
-        highlighted={!!options.selectedTypes.length}
+        highlighted={!!options.types.length}
         ref={buttonRef}
         onClick={handleToggleVisibility}
       >

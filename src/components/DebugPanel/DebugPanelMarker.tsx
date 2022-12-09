@@ -111,8 +111,8 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
       </div>
 
       <div className={styles.DebugPanelMarkerStatus}>
-        {marker.debug?.created
-          ? format(marker.debug.created, 'Pp')
+        {marker.meta?.created
+          ? format(marker.meta.created, 'Pp')
           : 'In progress...'}
       </div>
     </div>

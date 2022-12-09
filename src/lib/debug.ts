@@ -1,6 +1,7 @@
 import { getCoordinateHash } from 'lib/markers';
 import { AnimalType } from 'types/animals';
-import { AnimalMarkerOptions, MarkerPosition } from 'types/markers';
+import { Point } from 'types/generic';
+import { MarkerOptionsAnimal } from 'types/markers';
 
 /**
  * Log to console without printing the file name or line number
@@ -21,7 +22,7 @@ export const consoleLogClean = (...params: Array<any>) =>
  */
 export const createMarkerOptionSnippet = (
   animalType: AnimalType,
-  positions: Array<MarkerPosition>,
+  positions: Array<Point>,
   drinkZoneCount: number,
   eatZoneCount: number,
   sleepZoneCount: number,
@@ -57,7 +58,7 @@ export const copyTextToClipboard = async (text: string) => {
  *
  * @param marker Source animal marker object
  */
-export const getAnimalMarkerCreateCode = (marker: AnimalMarkerOptions) => `
+export const getAnimalMarkerCreateCode = (marker: MarkerOptionsAnimal) => `
 createAnimalMarkerOptions(
   '${marker.type}',
   ${JSON.stringify(marker.coords)},
@@ -72,10 +73,7 @@ createAnimalMarkerOptions(
  * @param marker Source marker
  * @param coords Coordinates to look up
  */
-const hasNeedZoneCoordinates = (
-  marker: AnimalMarkerOptions,
-  coords: MarkerPosition,
-) =>
+const hasNeedZoneCoordinates = (marker: MarkerOptionsAnimal, coords: Point) =>
   [marker.drink, marker.eat, marker.sleep]
     .flat()
     .some(zone => zone.coords[0] == coords[0] && zone.coords[1] == coords[1]);
@@ -89,7 +87,7 @@ const hasNeedZoneCoordinates = (
  * @param sleepZoneCount Expected number of sleep zones
  */
 export const isMarkerComplete = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
   drinkZoneCount: number,
   eatZoneCount: number,
   sleepZoneCount: number,
@@ -106,11 +104,15 @@ export const isMarkerComplete = (
  * @param coords Zone coordinates
  */
 export const pushMarkerDrinkZone = (
-  marker: AnimalMarkerOptions,
-  coords: MarkerPosition,
-): AnimalMarkerOptions => ({
+  marker: MarkerOptionsAnimal,
+  coords: Point,
+): MarkerOptionsAnimal => ({
   ...marker,
-  drink: marker.drink.concat({ coords, type: 'zone:drink' }),
+  drink: marker.drink.concat({
+    coords,
+    id: getCoordinateHash(coords),
+    type: 'zone:drink',
+  }),
 });
 
 /**
@@ -120,11 +122,15 @@ export const pushMarkerDrinkZone = (
  * @param coords Zone coordinates
  */
 export const pushMarkerEatZone = (
-  marker: AnimalMarkerOptions,
-  coords: MarkerPosition,
-): AnimalMarkerOptions => ({
+  marker: MarkerOptionsAnimal,
+  coords: Point,
+): MarkerOptionsAnimal => ({
   ...marker,
-  eat: marker.eat.concat({ coords, type: 'zone:eat' }),
+  eat: marker.eat.concat({
+    coords,
+    id: getCoordinateHash(coords),
+    type: 'zone:eat',
+  }),
 });
 
 /**
@@ -134,11 +140,15 @@ export const pushMarkerEatZone = (
  * @param coords Zone coordinates
  */
 export const pushMarkerSleepZone = (
-  marker: AnimalMarkerOptions,
-  coords: MarkerPosition,
-): AnimalMarkerOptions => ({
+  marker: MarkerOptionsAnimal,
+  coords: Point,
+): MarkerOptionsAnimal => ({
   ...marker,
-  sleep: marker.sleep.concat({ coords, type: 'zone:sleep' }),
+  sleep: marker.sleep.concat({
+    coords,
+    id: getCoordinateHash(coords),
+    type: 'zone:sleep',
+  }),
 });
 
 /**
@@ -152,18 +162,20 @@ export const pushMarkerSleepZone = (
  * @param coords Marker position
  */
 export const pushNextMarkerCoords = (
-  marker: Optional<AnimalMarkerOptions>,
+  marker: Optional<MarkerOptionsAnimal>,
   type: AnimalType,
   drinkZoneCount: number,
   eatZoneCount: number,
   sleepZoneCount: number,
-  coords: MarkerPosition,
-): AnimalMarkerOptions => {
+  coords: Point,
+): MarkerOptionsAnimal => {
   // Create a new marker
   if (!marker) {
     return {
       coords,
-      debug: {},
+      meta: {
+        debug: true,
+      },
       drink: [],
       eat: [],
       id: getCoordinateHash(coords),
@@ -193,8 +205,8 @@ export const pushNextMarkerCoords = (
  * @param marker Marker to remove
  */
 export const removeMarker = (
-  markers: Array<AnimalMarkerOptions>,
-  marker: AnimalMarkerOptions,
+  markers: Array<MarkerOptionsAnimal>,
+  marker: MarkerOptionsAnimal,
 ) => markers.filter(m => m.id !== marker.id);
 
 /**
@@ -204,9 +216,9 @@ export const removeMarker = (
  * @param index Target index to remove
  */
 export const removeMarkerDrinkZone = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
   index: number,
-): AnimalMarkerOptions => ({
+): MarkerOptionsAnimal => ({
   ...marker,
   drink: marker.drink.filter((_, i) => i !== index),
 });
@@ -218,9 +230,9 @@ export const removeMarkerDrinkZone = (
  * @param index Target index to remove
  */
 export const removeMarkerEatZone = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
   index: number,
-): AnimalMarkerOptions => ({
+): MarkerOptionsAnimal => ({
   ...marker,
   eat: marker.eat.filter((_, i) => i !== index),
 });
@@ -232,9 +244,9 @@ export const removeMarkerEatZone = (
  * @param index Target index to remove
  */
 export const removeMarkerSleepZone = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
   index: number,
-): AnimalMarkerOptions => ({
+): MarkerOptionsAnimal => ({
   ...marker,
   sleep: marker.sleep.filter((_, i) => i !== index),
 });
@@ -246,6 +258,6 @@ export const removeMarkerSleepZone = (
  * @param marker Marker to replace
  */
 export const replaceMarker = (
-  markers: Array<AnimalMarkerOptions>,
-  marker: AnimalMarkerOptions,
+  markers: Array<MarkerOptionsAnimal>,
+  marker: MarkerOptionsAnimal,
 ) => markers.map(m => (m.id === marker.id ? marker : m));

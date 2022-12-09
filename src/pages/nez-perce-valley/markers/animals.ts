@@ -15,9 +15,9 @@ import {
   whiteTailedDeerMarkers,
   wildDuckMarkers,
 } from 'config/idaho';
-import { AnimalMarkerOptions } from 'types/markers';
+import { MarkerOptionsAnimal } from 'types/markers';
 
-export const animalMarkers: Array<AnimalMarkerOptions> = [
+export const animalMarkers: Array<MarkerOptionsAnimal> = [
   americanBadgerMarkers,
   americanBlackBearMarkers,
   bighornSheepMarkers,

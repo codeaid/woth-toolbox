@@ -2,7 +2,7 @@ export interface Animal {
   description: string;
   hitEnergy: [number, number];
   latin: string;
-  lifeCycle: Array<AnimalActivityValue>;
+  lifeCycle: Array<AnimalActivityData>;
   name: string;
   slug: string;
   tier: number;
@@ -16,7 +16,7 @@ export enum AnimalActivity {
   Sleeping = 'sleeping',
 }
 
-export interface AnimalActivityValue {
+export interface AnimalActivityData {
   activity: AnimalActivity;
   time: number;
 }

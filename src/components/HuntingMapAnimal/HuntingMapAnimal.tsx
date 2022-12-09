@@ -13,30 +13,32 @@ import {
   useState,
 } from 'react';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
-import { getMarkerKey, getAnimalZoneMarkerTooltip } from 'lib/markers';
-import { MapMarkerRef, MapOptions } from 'types/cartography';
+import { getAnimalZoneMarkerTooltip, getMarkerKey } from 'lib/markers';
+import { MapOptions } from 'types/cartography';
 import {
-  AnimalMarkerData,
-  AnimalMarkerOptions,
-  MarkerOptions,
+  MarkerOptionsAnimal,
+  MarkerOptionsZone,
+  MarkerRef,
+  MarkerRefAnimal,
+  MarkerStorageRecordAnimal,
 } from 'types/markers';
-import { HuntingMapAnimalProps, HuntingMapAnimalRef } from './types';
+import { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
 
 export const HuntingMapAnimal = forwardRef(
-  (props: HuntingMapAnimalProps, ref: ForwardedRef<HuntingMapAnimalRef>) => {
+  (props: HuntingMapAnimalProps, ref: ForwardedRef<MarkerRefAnimal>) => {
     const {
       className,
-      marker: animalMarker,
-      size,
-      style,
-      zoneSize = 45,
+      marker,
+      markerSize,
+      markerSizeZone = 45,
       onToggleEditor,
       onToggleZones,
+      style,
     } = props;
 
     // Reference to trigger's marker component
-    const [markerRef, setMarkerRef] = useState<Nullable<MapMarkerRef>>(null);
+    const [markerRef, setMarkerRef] = useState<Nullable<MarkerRef>>(null);
 
     // Reference to the most up-to-date map options
     const currentMapOptions = useRef<MapOptions>();
@@ -46,10 +48,10 @@ export const HuntingMapAnimal = forwardRef(
     const pageCoords = useRef<[number, number]>([-1, -1]);
 
     // References to all need zone icons
-    const zoneRefs = useRef<Array<RefObject<MapMarkerRef>>>([]);
+    const zoneRefs = useRef<Array<RefObject<MarkerRef>>>([]);
 
     // Custom data associated with the marker
-    const [data, setData] = useState<AnimalMarkerData>();
+    const [data, setData] = useState<MarkerStorageRecordAnimal>();
 
     // Flag indicating if the marker editor is currently active
     const [editorActive, setEditorActive] = useState(false);
@@ -103,10 +105,10 @@ export const HuntingMapAnimal = forwardRef(
         // Hide need zones and editor if animal marker is removed
         if (!visible) {
           setZonesVisible(false);
-          onToggleEditor(animalMarker, false);
+          onToggleEditor(marker, false);
         }
       },
-      [animalMarker, markerRef, onToggleEditor],
+      [marker, markerRef, onToggleEditor],
     );
 
     /**
@@ -116,7 +118,7 @@ export const HuntingMapAnimal = forwardRef(
      * @param event Mouse event object
      */
     const handleTriggerClick = useCallback(
-      (marker: MarkerOptions, event: ReactMouseEvent<EventTarget>) => {
+      (marker: MarkerOptionsAnimal, event: ReactMouseEvent<EventTarget>) => {
         const [mouseDownX, mouseDownY] = pageCoords.current;
         const { pageX: mouseUpX, pageY: mouseUpY } = event;
 
@@ -141,14 +143,14 @@ export const HuntingMapAnimal = forwardRef(
           // multiple markers expanded simultaneously.
           if (!event.ctrlKey && !event.metaKey) {
             // Notify marker manager about need zone visibility change
-            onToggleZones(marker as AnimalMarkerOptions);
+            onToggleZones(marker);
           }
         }
 
         // Activate marker editor if Shift key was held down during the click
         if (event.shiftKey) {
           // Notify marker manager about this marker being edited
-          onToggleEditor(marker as AnimalMarkerOptions, !editorActive);
+          onToggleEditor(marker, !editorActive);
         }
       },
       [editorActive, onToggleEditor, onToggleZones, zonesVisible],
@@ -158,8 +160,8 @@ export const HuntingMapAnimal = forwardRef(
      * Handle long-pressing on the icon to open the editor
      */
     const handleTriggerLongPress = useCallback(
-      () => onToggleEditor(animalMarker, true),
-      [animalMarker, onToggleEditor],
+      () => onToggleEditor(marker, true),
+      [marker, onToggleEditor],
     );
 
     /**
@@ -197,33 +199,33 @@ export const HuntingMapAnimal = forwardRef(
     // Render need zones
     const renderedNeedZoneIcons = useMemo(
       () =>
-        [animalMarker.drink, animalMarker.eat, animalMarker.sleep]
+        [marker.drink, marker.eat, marker.sleep]
           .flat()
-          .map((marker: MarkerOptions) => {
+          .map((zone: MarkerOptionsZone) => {
             // Create a reference to each need zone icon
-            const ref = createRef<MapMarkerRef>();
+            const ref = createRef<MarkerRef>();
             zoneRefs.current.push(ref);
 
             return (
               <HuntingMapMarker
                 forceVisible={zonesVisible}
-                key={marker.id ?? getMarkerKey(marker)}
-                marker={marker}
+                key={zone.id ?? getMarkerKey(zone)}
+                marker={zone}
                 mountOnEnter={true}
                 ref={ref}
-                size={zoneSize}
+                markerSize={markerSizeZone}
                 style={{ zIndex: 2 }}
-                title={getAnimalZoneMarkerTooltip(animalMarker, marker)}
+                title={getAnimalZoneMarkerTooltip(marker, zone)}
                 unmountOnExit={true}
               />
             );
           }),
-      [animalMarker, zoneSize, zonesVisible],
+      [marker, markerSizeZone, zonesVisible],
     );
 
     // Expose control functions of the main trigger component as well as
     // functionality to change zone visibility externally
-    useImperativeHandle<HuntingMapAnimalRef, HuntingMapAnimalRef>(ref, () => ({
+    useImperativeHandle<MarkerRefAnimal, MarkerRefAnimal>(ref, () => ({
       setData,
       setEditorActive,
       setHidden: handleSetHidden,
@@ -257,7 +259,7 @@ export const HuntingMapAnimal = forwardRef(
 
     return (
       <>
-        <HuntingMapMarker
+        <HuntingMapMarker<MarkerOptionsAnimal>
           className={classnames(
             styles.HuntingMapAnimal,
             {
@@ -267,13 +269,10 @@ export const HuntingMapAnimal = forwardRef(
             className,
           )}
           highlighted={editorActive || zonesVisible}
-          marker={animalMarker}
+          marker={marker}
           ref={setMarkerRef}
-          size={size}
-          style={{
-            ...style,
-            color,
-          }}
+          markerSize={markerSize}
+          style={{ ...style, color }}
           onClick={handleTriggerClick}
           onLongPress={handleTriggerLongPress}
         />

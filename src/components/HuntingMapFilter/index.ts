@@ -1,5 +1,2 @@
-export type {
-  HuntingMapFilterChangeHandler,
-  HuntingMapFilterOptions,
-} from './types';
+export type { HuntingMapFilterChangeHandler } from './types';
 export { HuntingMapFilter } from './HuntingMapFilter';

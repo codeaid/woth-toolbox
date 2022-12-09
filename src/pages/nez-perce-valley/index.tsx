@@ -21,14 +21,14 @@ const NezPerceValleyPage = () => {
 
       <NoSSR>
         <HuntingMap
-          animalMarkerDataMap={dataMap}
+          animalMarkerRecords={dataMap}
           animalMarkers={animalMarkers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
           imageWidth={mapWidth}
           genericMarkers={genericMarkers}
           labels={mapLabels}
-          markerRangeMap={markerVisibilityMap}
+          zoomMarkerMap={markerVisibilityMap}
           onEditorClear={onDataClear}
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}

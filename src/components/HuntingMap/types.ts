@@ -5,9 +5,9 @@ import {
 } from 'components/AnimalEditor';
 import { MapLabelOptions } from 'types/cartography';
 import {
-  AnimalMarkerData,
-  AnimalMarkerOptions,
-  MarkerOptions,
+  MarkerOptionsAnimal,
+  MarkerOptionsGeneric,
+  MarkerStorageRecordAnimal,
   MarkerType,
 } from 'types/markers';
 
@@ -21,23 +21,23 @@ export interface HuntingMapDragOptions {
 }
 
 export interface HuntingMapProps {
-  animalMarkerDataMap: Record<string, AnimalMarkerData>;
-  animalMarkerSize?: number;
-  animalMarkers: Array<AnimalMarkerOptions>;
-  defaultZoom?: number;
-  genericMarkerSize?: number;
-  genericMarkers: Array<MarkerOptions>;
+  animalMarkerRecords: Record<string, MarkerStorageRecordAnimal>;
+  animalMarkers: Array<MarkerOptionsAnimal>;
+  defaultZoomValue?: number;
+  genericMarkers: Array<MarkerOptionsGeneric>;
   imageHeight: number;
   imageSrc: string;
   imageWidth: number;
   labels?: Array<MapLabelOptions>;
   mapBoundary?: number;
-  markerRangeMap?: Map<MarkerType, number>;
+  markerSizeAnimal?: number;
+  markerSizeGeneric?: number;
+  markerSizeZone?: number;
+  zoomMarkerMap?: Map<MarkerType, number>;
   zoomMax?: number;
   zoomMin?: number;
   zoomSpeed?: number;
   zoomStep?: number;
-  zoneMarkerSize?: number;
   onClick?: HuntingMapClickHandler;
   onEditorClear: AnimalEditorDataClearHandler;
   onEditorRead: AnimalEditorDataReadHandler;

@@ -12,12 +12,12 @@ import {
   replaceMarker,
   consoleLogClean,
 } from 'lib/debug';
-import { AnimalMarkerOptions } from 'types/markers';
+import { MarkerOptionsAnimal } from 'types/markers';
 
 export const useDebugPanel = () => {
   // Current in-progress marker and all debug marker state
-  const [currentMarker, setCurrentMarker] = useState<AnimalMarkerOptions>();
-  const [debugMarkers, setDebugMarkers] = useState<Array<AnimalMarkerOptions>>(
+  const [currentMarker, setCurrentMarker] = useState<MarkerOptionsAnimal>();
+  const [debugMarkers, setDebugMarkers] = useState<Array<MarkerOptionsAnimal>>(
     [],
   );
 
@@ -78,7 +78,7 @@ export const useDebugPanel = () => {
    * @param index Need zone index to remove
    */
   const handleDrinkZoneRemove = useCallback(
-    (marker: AnimalMarkerOptions, index: number) => {
+    (marker: MarkerOptionsAnimal, index: number) => {
       const patch = removeMarkerDrinkZone(marker, index);
 
       if (patch.id === currentMarker?.id) {
@@ -98,7 +98,7 @@ export const useDebugPanel = () => {
    * @param index Need zone index to remove
    */
   const handleEatZoneRemove = useCallback(
-    (marker: AnimalMarkerOptions, index: number) => {
+    (marker: MarkerOptionsAnimal, index: number) => {
       const patch = removeMarkerEatZone(marker, index);
 
       if (patch.id === currentMarker?.id) {
@@ -117,7 +117,7 @@ export const useDebugPanel = () => {
    * @param marker Target marker to remove
    */
   const handleMarkerDelete = useCallback(
-    (marker: AnimalMarkerOptions) => {
+    (marker: MarkerOptionsAnimal) => {
       // Delete current marker
       if (marker.id === currentMarker?.id) {
         setCurrentMarker(undefined);
@@ -136,7 +136,7 @@ export const useDebugPanel = () => {
    * @param index Need zone index to remove
    */
   const handleSleepZoneRemove = useCallback(
-    (marker: AnimalMarkerOptions, index: number) => {
+    (marker: MarkerOptionsAnimal, index: number) => {
       const patch = removeMarkerSleepZone(marker, index);
 
       if (patch.id === currentMarker?.id) {
@@ -164,7 +164,10 @@ export const useDebugPanel = () => {
       setDebugMarkers(current =>
         current.concat({
           ...currentMarker,
-          debug: { created: new Date() },
+          meta: {
+            created: new Date(),
+            debug: true,
+          },
         }),
       );
       setCurrentMarker(undefined);

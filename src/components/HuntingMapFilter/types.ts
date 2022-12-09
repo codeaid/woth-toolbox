@@ -1,21 +1,20 @@
-import { AnimalMarkerOptions, MarkerOptions, MarkerType } from 'types/markers';
+import { MapFilterOptions } from 'types/cartography';
+import {
+  MarkerOptionsAnimal,
+  MarkerOptionsGeneric,
+  MarkerType,
+} from 'types/markers';
 
-export type HuntingMapFilterChangeHandler = (
-  options: HuntingMapFilterOptions,
-) => void;
+export type HuntingMapFilterChangeHandler = (options: MapFilterOptions) => void;
 type HuntingMapFilterValueChangeHandler = (
   type: MarkerType,
   selected: boolean,
 ) => void;
 
-export interface HuntingMapFilterOptions {
-  selectedTypes: Array<MarkerType>;
-}
-
 export interface HuntingMapFilterProps {
-  animalMarkers: Array<AnimalMarkerOptions>;
-  genericMarkers: Array<MarkerOptions>;
-  options: HuntingMapFilterOptions;
+  animalMarkers: Array<MarkerOptionsAnimal>;
+  genericMarkers: Array<MarkerOptionsGeneric>;
+  options: MapFilterOptions;
   onChange: HuntingMapFilterChangeHandler;
 }
 

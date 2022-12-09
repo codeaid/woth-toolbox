@@ -1,6 +1,6 @@
 import { AnimalType } from 'types/animals';
 import { IconType } from 'types/icons';
-import { AnimalMarkerOptions } from 'types/markers';
+import { MarkerOptionsAnimal } from 'types/markers';
 
 export interface DebugPanelSettings {
   drinkZoneCount: number;
@@ -13,9 +13,9 @@ export interface DebugPanelSettings {
 
 type DebugPanelAnimalListSelectHandler = (type: AnimalType) => void;
 type DebugPanelIndexHandler = (index: number) => void;
-type DebugPanelMarkerHandler = (marker: AnimalMarkerOptions) => void;
+type DebugPanelMarkerHandler = (marker: MarkerOptionsAnimal) => void;
 type DebugPanelMarkerZoneHandler = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
   index: number,
 ) => void;
 type DebugPanelSettingsHandler = (settings: DebugPanelSettings) => void;
@@ -36,7 +36,7 @@ export interface DebugPanelIconRowProps {
 }
 
 export interface DebugPanelMarkerProps {
-  marker: AnimalMarkerOptions;
+  marker: MarkerOptionsAnimal;
   onDelete: DebugPanelMarkerHandler;
   onDrinkZoneRemove: DebugPanelMarkerZoneHandler;
   onEatZoneRemove: DebugPanelMarkerZoneHandler;
@@ -44,9 +44,9 @@ export interface DebugPanelMarkerProps {
 }
 
 export interface DebugPanelProps {
-  currentMarker?: AnimalMarkerOptions;
+  currentMarker?: MarkerOptionsAnimal;
   enabled?: boolean;
-  markers: Array<AnimalMarkerOptions>;
+  markers: Array<MarkerOptionsAnimal>;
   onClear: DebugPanelVoidHandler;
   onCopy: DebugPanelVoidHandler;
   onDrinkZoneRemove: DebugPanelMarkerZoneHandler;

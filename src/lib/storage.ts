@@ -1,7 +1,7 @@
 import { animalDataPrefix } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
-import { AnimalMarkerData, AnimalMarkerOptions } from 'types/markers';
+import { MarkerStorageRecordAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 /**
  * Check if the specified storage is both supported and available
@@ -61,7 +61,7 @@ export const getStorage = () => {
  * @param marker Target marker to generate key for
  */
 const getAnimalMarkerDataKey = (
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
 ): [string, string] => {
   const markerKey = getMarkerKey(marker);
 
@@ -74,7 +74,7 @@ const getAnimalMarkerDataKey = (
  * @param key Key to validate
  */
 const isAnimalMarkerDataKey = (key: any): key is string =>
-  key?.startsWith('animal:');
+  key?.startsWith(animalDataPrefix);
 
 /**
  * Clear marker data from the storage
@@ -84,7 +84,7 @@ const isAnimalMarkerDataKey = (key: any): key is string =>
  */
 export const clearAnimalMarkerData = (
   storage: Storage,
-  marker: AnimalMarkerOptions,
+  marker: MarkerOptionsAnimal,
 ) => {
   // Generate marker and storage keys for the current marker
   const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
@@ -102,8 +102,8 @@ export const clearAnimalMarkerData = (
  */
 export const getAnimalMarkerData = (
   storage: Storage,
-  marker: AnimalMarkerOptions,
-): Optional<AnimalMarkerData> => {
+  marker: MarkerOptionsAnimal,
+): Optional<MarkerStorageRecordAnimal> => {
   // Generate marker and storage keys for the current marker
   const [, storageKey] = getAnimalMarkerDataKey(marker);
 
@@ -122,10 +122,12 @@ export const getAnimalMarkerData = (
  * Load all stored animal marker data entries
  *
  * @param storage Marker data storage
+ * @param stripPrefixes TRUE to remove animal marker key prefixes
  */
 export const getAnimalMarkerDataMap = (
   storage: Storage,
-): Record<string, AnimalMarkerData> => {
+  stripPrefixes = true,
+): Record<string, MarkerStorageRecordAnimal> => {
   try {
     return (
       [...Array(storage.length).keys()]
@@ -134,16 +136,16 @@ export const getAnimalMarkerDataMap = (
         // Remove keys that are not related to animal markers
         .filter(isAnimalMarkerDataKey)
         // Fetch actual animal marker data strings
-        .map(key => [key, storage.getItem(key)] as [string, string])
+        .map(key => [key, storage.getItem(key)] as [string, string | null])
         // Remove empty values
         .filter(([, json]) => isNotEmpty(json))
         // Convert JSON data values to data objects
         .map(
           ([key, json]) =>
-            [key.substring(animalDataPrefix.length), JSON.parse(json!)] as [
-              string,
-              AnimalMarkerData,
-            ],
+            [
+              stripPrefixes ? key.substring(animalDataPrefix.length) : key,
+              JSON.parse(json as string),
+            ] as [string, MarkerStorageRecordAnimal],
         )
         .reduce(
           (acc, [key, data]) => ({
@@ -163,7 +165,7 @@ export const getAnimalMarkerDataMap = (
  *
  * @param data Animal data object to validate
  */
-export const isEmptyAnimalData = (data?: AnimalMarkerData) =>
+export const isEmptyAnimalData = (data?: MarkerStorageRecordAnimal) =>
   !data ||
   ((!data.color || data.color === '#ffffff') &&
     (!data.comment || data.comment.trim() === '') &&
@@ -178,8 +180,8 @@ export const isEmptyAnimalData = (data?: AnimalMarkerData) =>
  */
 export const setAnimalMarkerData = (
   storage: Storage,
-  marker: AnimalMarkerOptions,
-  data: AnimalMarkerData,
+  marker: MarkerOptionsAnimal,
+  data: MarkerStorageRecordAnimal,
 ) => {
   // Generate marker and storage keys for the current marker
   const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
