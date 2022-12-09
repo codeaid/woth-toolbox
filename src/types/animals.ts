@@ -12,6 +12,7 @@ export interface Animal {
 export enum AnimalActivity {
   Drinking = 'drinking',
   Feeding = 'feeding',
+  Gathering = 'gathering',
   Sleeping = 'sleeping',
 }
 

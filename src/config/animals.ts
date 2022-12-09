@@ -1,4 +1,4 @@
-import { Animal, AnimalActivity, AnimalAge, AnimalRating } from 'types/animals';
+import { Animal, AnimalActivity } from 'types/animals';
 
 export const animals: Array<Animal> = [
   // Tier 1
@@ -478,20 +478,3 @@ export const birds: Array<Animal> = [
     type: 'animal:ross goose',
   },
 ];
-
-// List of animal ages and their names
-export const animalAgeNames = new Map<AnimalAge, string>([
-  ['young', 'Young'],
-  ['adult', 'Adult'],
-  ['mature', 'Mature'],
-]);
-
-// Names of animal rating values
-export const animalRatingNames = new Map<AnimalRating, string>([
-  ['F', 'Female'],
-  ['M1', 'Male'],
-  ['M2', 'Male'],
-  ['M3', 'Male'],
-  ['M4', 'Male'],
-  ['M5', 'Male'],
-]);

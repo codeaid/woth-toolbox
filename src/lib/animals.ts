@@ -1,5 +1,9 @@
-import { animalAgeNames, animalRatingNames } from 'config/animals';
-import { animalActivityNameMap, animalNameMap } from 'config/names';
+import {
+  animalActivityNameMap,
+  animalAgeNames,
+  animalNameMap,
+  animalRatingNames,
+} from 'config/names';
 import {
   Animal,
   AnimalActivity,

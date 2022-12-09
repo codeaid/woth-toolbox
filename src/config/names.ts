@@ -1,11 +1,24 @@
-import { AnimalActivity, AnimalType } from 'types/animals';
+import {
+  AnimalActivity,
+  AnimalAge,
+  AnimalRating,
+  AnimalType,
+} from 'types/animals';
 import { GenericIconType } from 'types/icons';
 
 // List of animal activity types and their human-readable representations
 export const animalActivityNameMap = new Map<AnimalActivity, string>([
   [AnimalActivity.Drinking, 'Drinking'],
   [AnimalActivity.Feeding, 'Feeding'],
-  [AnimalActivity.Sleeping, 'Sleeping'],
+  [AnimalActivity.Gathering, 'Gathering'],
+  [AnimalActivity.Sleeping, 'Resting'],
+]);
+
+// List of animal ages and their names
+export const animalAgeNames = new Map<AnimalAge, string>([
+  ['young', 'Young'],
+  ['adult', 'Adult'],
+  ['mature', 'Mature'],
 ]);
 
 // List of animal types and their names
@@ -36,6 +49,16 @@ export const animalNameMap = new Map<AnimalType, string>([
   ['animal:white-tailed deer', 'White-tailed deer'],
   ['animal:wild boar', 'Wild boar'],
   ['animal:wild duck', 'Wild duck'],
+]);
+
+// Names of animal rating values
+export const animalRatingNames = new Map<AnimalRating, string>([
+  ['F', 'Female'],
+  ['M1', 'Male'],
+  ['M2', 'Male'],
+  ['M3', 'Male'],
+  ['M4', 'Male'],
+  ['M5', 'Male'],
 ]);
 
 // List of generic marker types and their names
