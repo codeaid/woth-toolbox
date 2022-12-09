@@ -21,6 +21,6 @@ export const AnimalEditorDescription = (
   );
 
   return (
-    <Textarea rows={3} value={data.comment ?? ''} onChange={handleChange} />
+    <Textarea rows={3} value={data?.comment ?? ''} onChange={handleChange} />
   );
 };

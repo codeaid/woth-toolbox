@@ -23,7 +23,10 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   } = props;
 
   // Internal animal marker data to edit
-  const [data, setData] = useState<AnimalMarkerData>({});
+  const [data, setData] = useState<AnimalMarkerData>();
+
+  // Flag indicating if data existed when the editor was opened
+  const [hadData, setHadData] = useState(false);
 
   // Flag indicating whether side panel's loading overlay should be visible
   const [loading, setLoading] = useState(true);
@@ -61,7 +64,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
    */
   const handleDataWrite = useCallback(() => {
     // Ensure a valid marker is present before continuing
-    if (!marker) {
+    if (!marker || !data) {
       return;
     }
 
@@ -76,21 +79,23 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       {
         children: 'Save changes',
         className: classnames(styles.AnimalEditorActionSave),
+        disabled: !data,
         onClick: handleDataWrite,
       },
       {
         children: 'Delete',
         className: classnames(styles.AnimalEditorActionReset),
+        disabled: !hadData,
         onClick: handleDataClear,
       },
     ],
-    [handleDataClear, handleDataWrite],
+    [data, hadData, handleDataClear, handleDataWrite],
   );
 
   // Creation and last updated date of existing data entries
   const renderedDates = useMemo(() => {
     // Ensure both dates are present before continuing
-    if (!data.created || !data.updated) {
+    if (!data?.created || !data?.updated) {
       return;
     }
 
@@ -110,7 +115,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         </div>
       </div>
     );
-  }, [data.created, data.updated]);
+  }, [data]);
 
   // Load animal details on mount
   useEffect(() => {
@@ -121,7 +126,8 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
 
     // Read data from the storage and store it locally for editing
     const data = onDataRead(marker);
-    setData(data ?? {});
+    setData(data);
+    setHadData(!!data);
   }, [marker, visible, onDataRead]);
 
   // Hide loading indicator if data gets loaded

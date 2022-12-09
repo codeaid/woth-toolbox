@@ -14,14 +14,14 @@ export type AnimalEditorDataWriteHandler = (
 ) => void;
 
 export interface AnimalEditorColorPickerProps {
-  data: AnimalMarkerData;
+  data?: AnimalMarkerData;
   defaultIconColor?: string;
   marker?: AnimalMarkerOptions;
   onChange: AnimalEditorDataChangeHandler;
 }
 
 export interface AnimalEditorDescriptionProps {
-  data: AnimalMarkerData;
+  data?: AnimalMarkerData;
   onChange: AnimalEditorDataChangeHandler;
 }
 
@@ -35,6 +35,6 @@ export interface AnimalEditorProps {
 }
 
 export interface AnimalEditorGroupBuilderProps {
-  data: AnimalMarkerData;
+  data?: AnimalMarkerData;
   onChange: AnimalEditorDataChangeHandler;
 }

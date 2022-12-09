@@ -25,7 +25,7 @@ export const AnimalEditorGroupBuilder = (
   const { data, onChange } = props;
 
   // List of specimen entries
-  const group = useMemo(() => data.group ?? [], [data.group]);
+  const group = useMemo(() => data?.group ?? [], [data]);
 
   // Currently selected age and rating values
   const [selectedAge, setSelectedAge] = useState<AnimalAge>('young');

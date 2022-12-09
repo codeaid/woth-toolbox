@@ -31,7 +31,7 @@ export const AnimalEditorColorPicker = (
   return (
     <>
       <ChromePicker
-        color={data.color ?? defaultIconColor}
+        color={data?.color ?? defaultIconColor}
         disableAlpha={true}
         styles={{
           default: {
@@ -53,7 +53,7 @@ export const AnimalEditorColorPicker = (
         <IconComponent
           size={50}
           style={{
-            color: data.color ?? defaultIconColor,
+            color: data?.color ?? defaultIconColor,
           }}
         />
       </div>
