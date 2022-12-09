@@ -193,3 +193,41 @@ export const setAnimalMarkerData = (
     return;
   }
 };
+
+/**
+ * Serialize current storage contents for migration
+ *
+ * @param storage Source storage manager
+ */
+export const serializeStorageData = (storage: Storage) => {
+  // Serialize local storage data
+  const json = JSON.stringify(getAnimalMarkerDataMap(storage, false));
+
+  // Base64 encode the output
+  return window.btoa(json);
+};
+
+/**
+ * Deserialize encoded storage data string and update storage values
+ *
+ * @param storage Target storage manager
+ * @param value Encoded storage data
+ */
+export const unserializeStorageData = (storage: Storage, value: string) => {
+  try {
+    // Decode the base64 encoded string
+    const json = window.atob(value);
+
+    // Attempt to parse decoded data
+    const data = JSON.parse(json);
+
+    // Iterate through all the entries in decoded data and store values in storage
+    Object.entries(data as Record<string, unknown>).forEach(([key, value]) =>
+      storage.setItem(key, JSON.stringify(value)),
+    );
+
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
