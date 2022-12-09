@@ -26,6 +26,7 @@ export const HuntingMapMarker = forwardRef(
       mountOnEnter = false,
       size = 35,
       style,
+      title,
       unmountOnExit = false,
       onClick,
       onLongPress,
@@ -45,15 +46,15 @@ export const HuntingMapMarker = forwardRef(
     );
 
     // Generate marker's coordinate title in development mode
-    const title = useMemo(() => {
+    const tooltip = useMemo(() => {
       // Disable marker titles in production mode
       if (process.env.NODE_ENV !== 'development') {
-        return;
+        return title;
       }
 
       const [x, y] = marker.coords;
-      return `${x} ... ${y}`;
-    }, [marker.coords]);
+      return title ? `${title} (${x} ... ${y})` : `${x} ... ${y}`;
+    }, [marker.coords, title]);
 
     /**
      * Handle clicking on the marker
@@ -125,7 +126,7 @@ export const HuntingMapMarker = forwardRef(
             ref={iconRef}
             size={size}
             style={style}
-            title={title}
+            title={tooltip}
             onClick={handleClick}
             onLongPress={onLongPress}
           />

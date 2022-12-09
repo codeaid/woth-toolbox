@@ -15,6 +15,7 @@ export interface HuntingMapMarkerProps {
   mountOnEnter?: boolean;
   size?: number;
   style?: CSSProperties;
+  title?: string;
   unmountOnExit?: boolean;
   onClick?: HuntingMapMarkerClickHandler;
   onLongPress?: HuntingMapMarkerLongPressHandler;
