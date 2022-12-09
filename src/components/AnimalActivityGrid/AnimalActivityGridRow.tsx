@@ -1,7 +1,10 @@
 import { MouseEvent, useCallback } from 'react';
 import { AnimalName } from 'components/AnimalName';
-import { animalActivityNameMap } from 'config/names';
-import { getActivityByHour, getCurrentActivityByHour } from 'lib/animals';
+import {
+  getActivityByHour,
+  getAnimalActivityName,
+  getCurrentActivityByHour,
+} from 'lib/animals';
 import { formatHour } from 'lib/utils';
 import { AnimalActivityGridIcon } from './AnimalActivityGridIcon';
 import { AnimalActivityGridRowProps } from './types';
@@ -61,7 +64,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
           <AnimalActivityGridIcon
             intermediate={true}
             key={`${animal.type}:${hour}:icon`}
-            title={`${formatHour(hour)} - ${animalActivityNameMap.get(
+            title={`${formatHour(hour)} - ${getAnimalActivityName(
               currentActivity.activity,
             )}`}
             value={currentActivity}
@@ -75,7 +78,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
     return (
       <AnimalActivityGridIcon
         key={`${animal.type}:${hour}:icon`}
-        title={`${formatHour(hour)} - ${animalActivityNameMap.get(
+        title={`${formatHour(hour)} - ${getAnimalActivityName(
           hourActivity.activity,
         )}`}
         value={hourActivity}

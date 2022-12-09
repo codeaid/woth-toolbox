@@ -1,7 +1,8 @@
 import { animalAgeNames, animalRatingNames } from 'config/animals';
-import { animalNameMap } from 'config/names';
+import { animalActivityNameMap, animalNameMap } from 'config/names';
 import {
   Animal,
+  AnimalActivity,
   AnimalActivityValue,
   AnimalAge,
   AnimalRating,
@@ -19,6 +20,14 @@ export const getActivityByHour = (
   activities: Array<AnimalActivityValue>,
   hour: number,
 ) => activities.find(activity => activity.time === hour);
+
+/**
+ * Get animal activity name
+ *
+ * @param activity Type of activity
+ */
+export const getAnimalActivityName = (activity: AnimalActivity) =>
+  animalActivityNameMap.get(activity);
 
 /**
  * Get human-readable name of the specified animal age
