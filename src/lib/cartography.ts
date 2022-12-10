@@ -365,8 +365,7 @@ export const updateMapPosition = (
 
   // Update image wrapper style to reposition the map
   imageWrapper.style.height = `${mapHeight}px`;
-  imageWrapper.style.left = `${mapLeft}px`;
-  imageWrapper.style.top = `${mapTop}px`;
+  imageWrapper.style.transform = `translate3d(${mapLeft}px, ${mapTop}px, 0)`;
   imageWrapper.style.width = `${mapWidth}px`;
 
   callback && callback();
