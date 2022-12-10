@@ -2,11 +2,16 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { StrictMode } from 'react';
 import { Layout } from 'components/Layout';
+import { ApplicationSettingsProvider } from 'contexts';
+import { useApplicationSettingsStorage } from 'hooks';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
+
+  // Retrieve application settings storage
+  const settings = useApplicationSettingsStorage();
 
   return (
     <>
@@ -17,11 +22,13 @@ const App = (props: AppProps) => {
           content="initial-scale=1, maximum-scale=1.0, minimum-scale=1.0 user-scalable=no, width=device-width"
         />
       </Head>
-      <Layout>
-        <StrictMode>
-          <Component {...pageProps} />
-        </StrictMode>
-      </Layout>
+      <StrictMode>
+        <ApplicationSettingsProvider value={settings}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ApplicationSettingsProvider>
+      </StrictMode>
     </>
   );
 };
