@@ -36,7 +36,7 @@ export const campMarkers = createMarkerOptions('camp', [
 ]);
 
 export const huntingStandMarkers = createMarkerOptions('hunting stand', [
-  [0.0380859375, 0.2666015625],
+  [0.0374922369, 0.2722598027],
   [0.11767578125, 0.649169921875],
   [0.12109375, 0.55419921875],
   [0.23583984375, 0.46875],
