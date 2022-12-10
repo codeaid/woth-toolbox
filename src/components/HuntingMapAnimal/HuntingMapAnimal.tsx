@@ -172,13 +172,13 @@ export const HuntingMapAnimal = forwardRef(
 
             return (
               <HuntingMapMarker
+                className={styles.HuntingMapAnimalZone}
                 forceVisible={zonesVisible}
                 key={zone.id ?? getMarkerKey(zone)}
                 marker={zone}
                 mountOnEnter={true}
                 ref={ref}
                 markerSize={markerSizeZone}
-                style={{ zIndex: 2 }}
                 title={getAnimalZoneMarkerTooltip(marker, zone)}
                 unmountOnExit={true}
               />

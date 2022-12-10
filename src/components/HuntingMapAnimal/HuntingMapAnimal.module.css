@@ -1,5 +1,10 @@
 .HuntingMapAnimal {
   cursor: pointer;
+  z-index: 1;
+}
+
+.HuntingMapAnimalActive {
+  z-index: 3;
 }
 
 .HuntingMapAnimalActive img,
@@ -9,4 +14,8 @@
 
 .HuntingMapAnimalEdited {
   filter: drop-shadow(0 0 0.4em currentColor);
+}
+
+.HuntingMapAnimalZone {
+  z-index: 4;
 }
