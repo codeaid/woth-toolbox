@@ -6,6 +6,7 @@ import {
   ReactElement,
   Ref,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -40,6 +41,9 @@ export const HuntingMapMarker = forwardRef(
 
     // Reference to marker's icon
     const iconRef = useRef<HTMLDivElement>(null);
+
+    // Map options for cases when position needs to be changed without having access to new options
+    const mapOptionsCache = useRef<MapOptions>();
 
     // Visibility flag states
     const [hidden, setHidden] = useState(false);
@@ -84,6 +88,9 @@ export const HuntingMapMarker = forwardRef(
           return;
         }
 
+        // Store options for later use
+        mapOptionsCache.current = mapOptions;
+
         // Calculate marker position offsets
         const [offsetX, offsetY] = getMarkerOffset(
           marker,
@@ -111,6 +118,13 @@ export const HuntingMapMarker = forwardRef(
       }),
       [handleUpdatePosition],
     );
+
+    // Reposition marker on changes to its size
+    useEffect(() => {
+      if (mapOptionsCache.current) {
+        handleUpdatePosition(mapOptionsCache.current);
+      }
+    }, [handleUpdatePosition, markerSize]);
 
     return (
       <Transition
