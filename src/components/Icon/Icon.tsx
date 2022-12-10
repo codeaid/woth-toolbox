@@ -18,9 +18,9 @@ export const Icon = forwardRef(
       longPressMs = 500,
       size = 40,
       style,
-      title,
       onClick,
       onLongPress,
+      ...rest
     } = props;
 
     // Long press timeout handle
@@ -66,11 +66,11 @@ export const Icon = forwardRef(
           width: `${size}px`,
           ...style,
         }}
-        title={title}
         onClick={onClick}
         onTouchEnd={handleTouchEnd}
         onTouchMove={handleTouchEnd}
         onTouchStart={handleTouchStart}
+        {...rest}
       >
         {children}
       </div>

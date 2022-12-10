@@ -1,6 +1,7 @@
 import {
-  CSSProperties,
+  DetailedHTMLProps,
   FunctionComponent,
+  HTMLAttributes,
   MouseEvent,
   ReactNode,
   SVGProps,
@@ -10,13 +11,11 @@ import {
 type IconClickHandler = (event: MouseEvent<EventTarget>) => void;
 type IconLongPressHandler = (event: TouchEvent<EventTarget>) => void;
 
-export interface IconProps {
-  className?: string;
+export interface IconProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   highlighted?: boolean;
   longPressMs?: number;
   size?: number;
-  style?: CSSProperties;
-  title?: string;
   onClick?: IconClickHandler;
   onLongPress?: IconLongPressHandler;
 }
