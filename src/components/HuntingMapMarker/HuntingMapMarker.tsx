@@ -6,6 +6,7 @@ import {
   ReactElement,
   Ref,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -100,6 +101,11 @@ export const HuntingMapMarker = forwardRef(
       }),
       [],
     );
+
+    // Reposition marker on changes to the options (fixes debug zones having invalid positions)
+    useEffect(() => {
+      handleUpdatePosition();
+    }, [handleUpdatePosition, marker]);
 
     return (
       <Transition
