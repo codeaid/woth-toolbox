@@ -1,6 +1,7 @@
-import { animalDataPrefix } from 'config/storage';
+import { animalDataPrefix, settingsKey } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
+import { ApplicationSettings } from 'types/global';
 import { MarkerStorageRecordAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 /**
@@ -95,6 +96,14 @@ export const clearAnimalMarkerData = (
 };
 
 /**
+ * Remove application settings from the storage
+ *
+ * @param storage Target storage
+ */
+export const clearApplicationSettings = (storage: Storage) =>
+  storage.removeItem(settingsKey);
+
+/**
  * Retrieve marker data from the storage
  *
  * @param storage Marker data storage
@@ -161,6 +170,23 @@ export const getAnimalMarkerDataMap = (
 };
 
 /**
+ * Retrieve application settings from the storage
+ *
+ * @param storage Target storage
+ */
+export const getApplicationSettings = (storage: Storage) => {
+  try {
+    // Read settings value from the storage
+    const json = storage.getItem(settingsKey);
+    if (!json) {
+      return;
+    }
+
+    return JSON.parse(json) as ApplicationSettings;
+  } catch (e) {}
+};
+
+/**
  * Check if specified data object does not contain any values
  *
  * @param data Animal data object to validate
@@ -193,6 +219,17 @@ export const setAnimalMarkerData = (
     return;
   }
 };
+
+/**
+ * Store application settings in the storage
+ *
+ * @param storage Target storage
+ * @param settings Settings object to persist
+ */
+export const setApplicationSettings = (
+  storage: Storage,
+  settings: ApplicationSettings,
+) => storage.setItem(settingsKey, JSON.stringify(settings));
 
 /**
  * Serialize current storage contents for migration
