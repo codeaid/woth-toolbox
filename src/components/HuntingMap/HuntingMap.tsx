@@ -38,7 +38,6 @@ import {
 import {
   getGenericMarkerColorClass,
   isHighlightedMarker,
-  updateMarkerPositions,
   updateMarkerVisibility,
 } from 'lib/markers';
 import { roundNumber } from 'lib/utils';
@@ -175,22 +174,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
   }, [animalMarkerRecords]);
 
   /**
-   * Handle updating positions of all markers
-   *
-   * @param customMapOptions Custom map option overrides
-   */
-  const handleUpdateMarkerPositions = useCallback(
-    (customMapOptions?: MapOptions) =>
-      updateMarkerPositions(
-        customMapOptions ?? mapOptions.current,
-        markerSizeGeneric,
-        animalMarkerRefs.current,
-        genericMarkerRefs.current,
-      ),
-    [markerSizeGeneric],
-  );
-
-  /**
    * Handle updating marker visibility based on current filters and zoom
    */
   const handleUpdateMarkerVisibility = useCallback(
@@ -305,16 +288,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
     };
 
     // Update map position in relation to the container
-    handleMapUpdate(
-      handleUpdateAnimalData,
-      handleUpdateMarkerPositions,
-      handleUpdateMarkerVisibility,
-    );
+    handleMapUpdate(handleUpdateAnimalData, handleUpdateMarkerVisibility);
   }, [
     defaultZoomValue,
     handleMapUpdate,
     handleUpdateAnimalData,
-    handleUpdateMarkerPositions,
     handleUpdateMarkerVisibility,
     imageHeight,
     imageWidth,
@@ -354,18 +332,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
         zoomOptions.current,
       );
 
-      handleMapUpdate(
-        handleUpdateMarkerPositions,
-        handleUpdateMarkerVisibility,
-        setForcedUpdate,
-      );
+      handleMapUpdate(handleUpdateMarkerVisibility, setForcedUpdate);
     },
-    [
-      handleMapUpdate,
-      handleUpdateMarkerPositions,
-      handleUpdateMarkerVisibility,
-      setForcedUpdate,
-    ],
+    [handleMapUpdate, handleUpdateMarkerVisibility, setForcedUpdate],
   );
 
   /**
@@ -719,11 +688,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
       .forEach((options, index, list) => {
         // Update marker visibility once references are available
         setTimeout(() => {
-          // Update marker's position and visibility
-          options.ref.current?.updatePosition(mapOptions.current);
+          // Update marker and zone visibility
           options.ref.current?.setVisible(true);
-
-          // Expand zones of the latest marker
           options.ref.current?.setZonesVisible(index === list.length - 1);
         }, 0);
       });

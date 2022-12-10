@@ -14,8 +14,6 @@ import {
 } from 'react';
 import { Transition } from 'react-transition-group';
 import { getIconComponent } from 'lib/icons';
-import { getMarkerOffset } from 'lib/markers';
-import { MapOptions } from 'types/cartography';
 import { MarkerOptions, MarkerRef } from 'types/markers';
 import { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
@@ -31,19 +29,16 @@ export const HuntingMapMarker = forwardRef(
       highlighted,
       marker,
       markerSize = 35,
-      mountOnEnter = false,
+      mountOnEnter = true,
       style,
       title,
-      unmountOnExit = false,
+      unmountOnExit = true,
       onClick,
       onLongPress,
     } = props;
 
     // Reference to marker's icon
     const iconRef = useRef<HTMLDivElement>(null);
-
-    // Map options for cases when position needs to be changed without having access to new options
-    const mapOptionsCache = useRef<MapOptions>();
 
     // Visibility flag states
     const [hidden, setHidden] = useState(false);
@@ -81,30 +76,23 @@ export const HuntingMapMarker = forwardRef(
      *
      * @param mapOptions Source map options
      */
-    const handleUpdatePosition = useCallback(
-      (mapOptions: MapOptions) => {
-        // Ensure reference to the icon is available
-        if (!iconRef.current) {
-          return;
-        }
+    const handleUpdatePosition = useCallback(() => {
+      // Ensure reference to the icon is available
+      if (!iconRef.current) {
+        return;
+      }
 
-        // Store options for later use
-        mapOptionsCache.current = mapOptions;
+      // Extract marker's position offsets
+      const [ratioX, ratioY] = marker.coords;
 
-        // Calculate marker position offsets
-        const [offsetX, offsetY] = getMarkerOffset(
-          marker,
-          mapOptions.mapWidth,
-          mapOptions.mapHeight,
-          markerSize,
-        );
-
-        // Update marker's position
-        iconRef.current.style.left = `${offsetX}px`;
-        iconRef.current.style.top = `${offsetY}px`;
-      },
-      [marker, markerSize],
-    );
+      // Update marker's position
+      iconRef.current.style.left = `calc(${ratioX * 100}% - ${
+        markerSize / 2
+      }px)`;
+      iconRef.current.style.top = `calc(${ratioY * 100}% - ${
+        markerSize / 2
+      }px)`;
+    }, [marker, markerSize]);
 
     // Expose internal controller functions allowing to change marker's
     // visibility and position
@@ -114,16 +102,13 @@ export const HuntingMapMarker = forwardRef(
         markerElement: iconRef.current,
         setHidden,
         setVisible,
-        updatePosition: handleUpdatePosition,
       }),
-      [handleUpdatePosition],
+      [],
     );
 
     // Reposition marker on changes to its size
     useEffect(() => {
-      if (mapOptionsCache.current) {
-        handleUpdatePosition(mapOptionsCache.current);
-      }
+      handleUpdatePosition();
     }, [handleUpdatePosition, markerSize]);
 
     return (
@@ -133,6 +118,7 @@ export const HuntingMapMarker = forwardRef(
         nodeRef={iconRef}
         timeout={75}
         unmountOnExit={unmountOnExit}
+        onEntering={handleUpdatePosition}
       >
         {state => (
           <IconComponent

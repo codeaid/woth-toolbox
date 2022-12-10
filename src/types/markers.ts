@@ -1,6 +1,5 @@
 import { RefObject } from 'react';
 import { AnimalSpecimen } from 'types/animals';
-import { MapOptions } from 'types/cartography';
 import { Point } from 'types/generic';
 import {
   IconType,
@@ -49,7 +48,6 @@ export type MarkerOptionsZoneSleep = MarkerOptions<'zone:sleep'>;
 export interface MarkerRef {
   setHidden: (hidden: boolean) => void;
   setVisible: (visible: boolean) => void;
-  updatePosition: (mapOptions: MapOptions) => void;
 }
 
 // Type describing a marker reference object exposed by HuntingMapAnimal component

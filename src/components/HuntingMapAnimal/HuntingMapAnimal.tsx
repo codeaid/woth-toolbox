@@ -14,7 +14,6 @@ import {
 } from 'react';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { getAnimalZoneMarkerTooltip, getMarkerKey } from 'lib/markers';
-import { MapOptions } from 'types/cartography';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsZone,
@@ -39,9 +38,6 @@ export const HuntingMapAnimal = forwardRef(
 
     // Reference to trigger's marker component
     const [markerRef, setMarkerRef] = useState<Nullable<MarkerRef>>(null);
-
-    // Reference to the most up-to-date map options
-    const currentMapOptions = useRef<MapOptions>();
 
     // Mouse coordinates that allow detecting if drag occurred while holding
     // mouse cursor over the animal trigger icon
@@ -164,38 +160,6 @@ export const HuntingMapAnimal = forwardRef(
       [marker, onToggleEditor],
     );
 
-    /**
-     * Update positions of all need zone markers using the latest map options
-     */
-    const handleUpdateZonePositions = useCallback(() => {
-      // Ensure zones are currently visible and map options are available
-      const mapOptions = currentMapOptions.current;
-      if (!zonesVisible || !mapOptions) {
-        return;
-      }
-
-      // Update each zone's position when they appear
-      zoneRefs.current.forEach(ref => ref.current?.updatePosition(mapOptions));
-    }, [zonesVisible]);
-
-    /**
-     * Handle updating marker's position in relation to the container
-     *
-     * @param mapOptions Source map options
-     */
-    const handleUpdatePositions = useCallback(
-      (mapOptions: MapOptions) => {
-        // Store map options so that need zone markers can be positions when
-        // they appear
-        currentMapOptions.current = mapOptions;
-
-        // Invoke trigger and zone marker position changes
-        markerRef?.updatePosition(mapOptions);
-        handleUpdateZonePositions();
-      },
-      [handleUpdateZonePositions, markerRef],
-    );
-
     // Render need zones
     const renderedNeedZoneIcons = useMemo(
       () =>
@@ -231,15 +195,7 @@ export const HuntingMapAnimal = forwardRef(
       setHidden: handleSetHidden,
       setVisible: handleSetVisible,
       setZonesVisible,
-      updatePosition: handleUpdatePositions,
     }));
-
-    // Update zone positions when they are shown
-    useEffect(() => {
-      if (zonesVisible) {
-        handleUpdateZonePositions();
-      }
-    }, [handleUpdateZonePositions, zonesVisible]);
 
     // Clear references to zone markers once they get removed
     useEffect(() => {

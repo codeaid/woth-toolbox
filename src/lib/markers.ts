@@ -7,11 +7,7 @@ import {
 import { getAnimalActivityName, getAnimalName } from 'lib/animals';
 import { hasListValue } from 'lib/utils';
 import { AnimalActivity, AnimalType } from 'types/animals';
-import {
-  MapFilterOptions,
-  MapOptions,
-  MapZoomOptions,
-} from 'types/cartography';
+import { MapFilterOptions, MapZoomOptions } from 'types/cartography';
 import { Point } from 'types/generic';
 import {
   MarkerOptions,
@@ -101,27 +97,6 @@ export const getGenericMarkerColorClass = (
  */
 export const getMarkerKey = (marker: MarkerOptions) =>
   marker?.id ?? getCoordinateHash(marker.coords);
-
-/**
- * Get marker's position relative to the map
- *
- * @param marker Marker options
- * @param mapWidth Map width
- * @param mapHeight Map height
- * @param markerSize Marker size
- */
-export const getMarkerOffset = (
-  marker: MarkerOptions,
-  mapWidth: number,
-  mapHeight: number,
-  markerSize: number,
-): Point => {
-  const [centerRatioX, centerRatioY] = marker.coords;
-  const offsetX = mapWidth * centerRatioX - markerSize / 2;
-  const offsetY = mapHeight * centerRatioY - markerSize / 2;
-
-  return [offsetX, offsetY];
-};
 
 /**
  * Get list of marker types from the specified list of options
@@ -234,28 +209,6 @@ export const isMarkerVisibleAtScale = (
   visibilityMap.has(type)
     ? mapScale >= (visibilityMap.get(type) ?? mapScale)
     : true;
-
-/**
- * Update option marker positions
- *
- * @param mapOptions Map options
- * @param markerSize Target marker size
- * @param markerOptions List of marker options to process
- */
-export const updateMarkerPositions = (
-  mapOptions: MapOptions,
-  markerSize: number,
-  ...markerOptions: Array<Array<MarkerReference>>
-) =>
-  markerOptions
-    .flat()
-    .filter(options => !!options.ref.current)
-    .forEach(options => {
-      // Extract marker options
-      const { ref } = options;
-
-      ref.current?.updatePosition(mapOptions);
-    });
 
 /**
  * Update marker visibility based on filters and zoom
