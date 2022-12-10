@@ -93,7 +93,7 @@ export const useAnimalMarkerData = () => {
 
   // Load initial animal marker data from local storage
   useEffect(() => {
-    const storage = getStorage();
+    // Ensure storage is available before proceeding
     if (!storage) {
       return;
     }
@@ -101,7 +101,7 @@ export const useAnimalMarkerData = () => {
     // Read entries from the storage and persist them
     const entries = getAnimalMarkerDataMap(storage);
     setDataMap(entries);
-  }, []);
+  }, [storage]);
 
   // Create storage manager on load
   useEffect(() => setStorage(getStorage()), []);
