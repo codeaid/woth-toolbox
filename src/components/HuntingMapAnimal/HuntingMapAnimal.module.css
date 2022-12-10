@@ -2,8 +2,9 @@
   cursor: pointer;
 }
 
-.HuntingMapAnimalActive {
-  transform: scale(1.2) !important;
+.HuntingMapAnimalActive img,
+.HuntingMapAnimalActive svg {
+  transform: scale(1.2)  !important;
 }
 
 .HuntingMapAnimalEdited {

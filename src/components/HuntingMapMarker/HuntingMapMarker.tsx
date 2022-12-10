@@ -6,7 +6,6 @@ import {
   ReactElement,
   Ref,
   useCallback,
-  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -86,13 +85,9 @@ export const HuntingMapMarker = forwardRef(
       const [ratioX, ratioY] = marker.coords;
 
       // Update marker's position
-      iconRef.current.style.left = `calc(${ratioX * 100}% - ${
-        markerSize / 2
-      }px)`;
-      iconRef.current.style.top = `calc(${ratioY * 100}% - ${
-        markerSize / 2
-      }px)`;
-    }, [marker, markerSize]);
+      iconRef.current.style.left = `${ratioX * 100}%`;
+      iconRef.current.style.top = `${ratioY * 100}%`;
+    }, [marker]);
 
     // Expose internal controller functions allowing to change marker's
     // visibility and position
@@ -105,11 +100,6 @@ export const HuntingMapMarker = forwardRef(
       }),
       [],
     );
-
-    // Reposition marker on changes to its size
-    useEffect(() => {
-      handleUpdatePosition();
-    }, [handleUpdatePosition, markerSize]);
 
     return (
       <Transition
