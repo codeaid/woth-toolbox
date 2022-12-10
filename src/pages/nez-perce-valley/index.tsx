@@ -3,7 +3,7 @@ import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import { useAnimalMarkerData } from 'hooks';
+import { useAnimalMarkerData, useApplicationSettings } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
@@ -12,6 +12,9 @@ const NezPerceValleyPage = () => {
   // Custom animal data manager values
   const { dataMap, onDataClear, onDataRead, onDataWrite } =
     useAnimalMarkerData();
+
+  // Retrieve application settings
+  const { settings } = useApplicationSettings();
 
   return (
     <>
@@ -28,6 +31,9 @@ const NezPerceValleyPage = () => {
           imageWidth={mapWidth}
           genericMarkers={genericMarkers}
           labels={mapLabels}
+          markerSizeAnimal={settings.animalMarkerSize}
+          markerSizeGeneric={settings.genericMarkerSize}
+          markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
           onEditorClear={onDataClear}
           onEditorRead={onDataRead}

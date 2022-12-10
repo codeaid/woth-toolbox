@@ -6,7 +6,11 @@ import { DebugPanel } from 'components/DebugPanel';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import { useAnimalMarkerData, useDebugPanel } from 'hooks';
+import {
+  useAnimalMarkerData,
+  useApplicationSettings,
+  useDebugPanel,
+} from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
@@ -15,6 +19,9 @@ const TransylvaniaPage = () => {
   // Custom animal data manager values
   const { dataMap, onDataClear, onDataRead, onDataWrite } =
     useAnimalMarkerData();
+
+  // Retrieve application settings
+  const { settings } = useApplicationSettings();
 
   // Detect if application is running in debug mode
   const { query } = useRouter();
@@ -69,6 +76,9 @@ const TransylvaniaPage = () => {
           imageWidth={mapWidth}
           genericMarkers={genericMarkers}
           labels={mapLabels}
+          markerSizeAnimal={settings.animalMarkerSize}
+          markerSizeGeneric={settings.genericMarkerSize}
+          markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
           onClick={onDebugCoordinates}
           onEditorClear={onDataClear}
