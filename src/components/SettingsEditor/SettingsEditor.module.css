@@ -3,11 +3,14 @@
     flex-direction: column;
     overflow: auto;
     padding: 0.65em;
-    z-index: 200;
 }
 
 .SettingsEditorResetButton {
     background-color: var(--variance-suboptimal);
+}
+
+.SettingsEditorSidePanel {
+    z-index: 200;
 }
 
 .SettingsEditorSlider {
