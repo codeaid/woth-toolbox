@@ -566,24 +566,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // Build list of options for all generic markers
   useEffect(() => {
-    // Build a list of new marker identifiers
-    const newIds = animalMarkers.map(marker => marker.id);
-    let markersRemoved = false;
-
-    // Hide all existing markers who no longer exist in the new list of markers
-    // as all references to them will be deleted in the loop below
-    animalMarkerRefs.current.forEach(options => {
-      if (!newIds.includes(options.marker.id)) {
-        options.ref.current?.setVisible(false);
-        markersRemoved = true;
-      }
-    });
-
-    // Trigger a re-render if any markers were removed
-    if (markersRemoved) {
-      setForcedUpdate();
-    }
-
     // Clear current list of references before continuing
     animalMarkerRefs.current = [];
 
@@ -644,8 +626,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
             highlighted={isHighlightedMarker(marker)}
             key={marker.id}
             marker={marker}
-            ref={ref}
             markerSize={markerSizeGeneric}
+            ref={ref}
           />
         );
       }),
