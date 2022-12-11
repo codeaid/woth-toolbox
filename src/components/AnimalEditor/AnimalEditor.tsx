@@ -25,6 +25,10 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   // Internal animal marker data to edit
   const [data, setData] = useState<MarkerStorageRecordAnimal>();
 
+  // Formatted created and updated date/times
+  const [dateCreated, setDateCreated] = useState<string>();
+  const [dateUpdated, setDateUpdated] = useState<string>();
+
   // Flag indicating if data existed when the editor was opened
   const [hadData, setHadData] = useState(false);
 
@@ -73,6 +77,21 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     handleClose();
   }, [data, handleClose, marker, onDataWrite]);
 
+  /**
+   * Refresh created and update date strings
+   */
+  const handleRefreshDates = useCallback(() => {
+    // Update formatted creation date
+    if (data && data.created) {
+      setDateCreated(formatTimestampDistance(data.created));
+    }
+
+    // Update formatted update date
+    if (data && data.updated) {
+      setDateUpdated(formatTimestampDistance(data.updated));
+    }
+  }, [data]);
+
   // List of sidebar action button properties
   const actions = useMemo<Array<ButtonProps>>(
     () => [
@@ -99,23 +118,19 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       return;
     }
 
-    // Format both dates
-    const created = formatTimestampDistance(data.created);
-    const updated = formatTimestampDistance(data.updated);
-
     return (
       <div className={styles.AnimalEditorDates}>
         <div>
           <Label>Created</Label>
-          <div className={styles.AnimalEditorText}>{created}</div>
+          <div className={styles.AnimalEditorText}>{dateCreated}</div>
         </div>
         <div>
           <Label>Last Updated</Label>
-          <div className={styles.AnimalEditorText}>{updated}</div>
+          <div className={styles.AnimalEditorText}>{dateUpdated}</div>
         </div>
       </div>
     );
-  }, [data]);
+  }, [data?.created, data?.updated, dateCreated, dateUpdated]);
 
   // Load animal details on mount
   useEffect(() => {
@@ -131,7 +146,14 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   }, [marker, visible, onDataRead]);
 
   // Hide loading indicator if data gets loaded
-  useEffect(() => setLoading(false), [data]);
+  useEffect(() => {
+    setLoading(false);
+  }, [data]);
+
+  // Refresh dates when data changes
+  useEffect(() => {
+    handleRefreshDates();
+  }, [data, handleRefreshDates]);
 
   // Hide loading overlay after a certain amount of time
   useEffect(() => {
@@ -147,6 +169,13 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
 
     return () => clearTimeout(timeout);
   }, [visible]);
+
+  // Schedule constantly updating created and updated dates strings
+  useEffect(() => {
+    const interval = setInterval(handleRefreshDates, 1000);
+
+    return () => clearInterval(interval);
+  }, [handleRefreshDates]);
 
   return (
     <SidePanel
