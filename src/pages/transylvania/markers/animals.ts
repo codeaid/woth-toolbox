@@ -4,6 +4,7 @@ import {
   europeanHareMarkers,
   goldenJackalMarkers,
   redDeerMarkers,
+  redFoxMarkers,
   wildDuckMarkers,
 } from 'config/transylvania';
 import { MarkerOptionsAnimal } from 'types/markers';
@@ -14,5 +15,6 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   europeanHareMarkers,
   goldenJackalMarkers,
   redDeerMarkers,
+  redFoxMarkers,
   wildDuckMarkers,
 ].flat();
