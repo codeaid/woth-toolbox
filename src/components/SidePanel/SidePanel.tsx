@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { Transition } from 'react-transition-group';
 import { Button } from 'components/Button';
@@ -13,6 +13,7 @@ export const SidePanel = (props: SidePanelProps) => {
     actions = [],
     children,
     className,
+    closeOnOutsideClick = false,
     loading = false,
     side = 'right',
     style,
@@ -24,6 +25,24 @@ export const SidePanel = (props: SidePanelProps) => {
 
   // Reference to the main side panel element
   const ref = useRef<HTMLDivElement>(null);
+
+  /**
+   * Handle clicks anywhere on the document
+   */
+  const handleDocumentClick = useCallback(
+    (event: MouseEvent) => {
+      // Check if the click occurred inside the panel component
+      const clickOnSidePanel = ref.current
+        ? ref.current.contains(event.target as Node)
+        : false;
+
+      // Close the panel if clicked outside the component
+      if (!clickOnSidePanel && onClose) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   /**
    * Handle sidebar entering
@@ -68,6 +87,17 @@ export const SidePanel = (props: SidePanelProps) => {
       </div>
     );
   }, [loading]);
+
+  // Register event handlers to handle closing side panel on outside clicks
+  useEffect(() => {
+    // Do not register event listeners if panel shouldn't be closed on outside clicks
+    if (!closeOnOutsideClick) {
+      return;
+    }
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
+  }, [closeOnOutsideClick, handleDocumentClick]);
 
   return (
     <Transition
