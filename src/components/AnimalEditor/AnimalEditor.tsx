@@ -192,7 +192,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         <Label>Description</Label>
         <AnimalEditorDescription data={data} onChange={setData} />
 
-        <Label>Group Builder</Label>
+        <Label>Noteworthy Specimens</Label>
         <AnimalEditorGroupBuilder data={data} onChange={setData} />
 
         <Label>Icon Color</Label>
