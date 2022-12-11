@@ -10,6 +10,7 @@ import {
   AnimalActivityData,
   AnimalAge,
   AnimalRating,
+  AnimalSpecimen,
   AnimalType,
 } from 'types/animals';
 import { EntityGroup } from 'types/global';
@@ -147,6 +148,27 @@ const getSortedAnimals = (animals: Array<Animal>) =>
       : // Next sort by animal name within the tier
         a.name.localeCompare(b.name),
   );
+
+/**
+ * Sort list of specimens by sex, then by maturity and then by trophy rating
+ *
+ * @param specimens List of specimens to sort
+ */
+export const getSortedAnimalSpecimens = (specimens: Array<AnimalSpecimen>) => {
+  // Map of age sort values
+  const map: Record<AnimalAge, number> = {
+    young: 1,
+    adult: 2,
+    mature: 3,
+  };
+
+  // Sort males to the top (by star ratings
+  return specimens.sort((a, b) => {
+    const patternA = `${a.rating[0]}:${map[a.age]}:${a.rating[1]}`;
+    const patternB = `${b.rating[0]}:${map[b.age]}:${b.rating[1]}`;
+    return patternB.localeCompare(patternA);
+  });
+};
 
 /**
  * Check if the specified animal sex represents a male

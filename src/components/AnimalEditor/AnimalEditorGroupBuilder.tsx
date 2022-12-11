@@ -13,6 +13,7 @@ import {
   getAnimalAgeName,
   getAnimalRatingSexName,
   getAnimalRatingTrophy,
+  getSortedAnimalSpecimens,
   isAnimalSexMale,
 } from 'lib/animals';
 import { AnimalAge, AnimalRating, AnimalSpecimen } from 'types/animals';
@@ -47,11 +48,15 @@ export const AnimalEditorGroupBuilder = (
   /**
    * Handle adding a new temporary entry
    */
-  const handleConfirm = useCallback(
-    () =>
-      handleChange([...group, { age: selectedAge, rating: selectedRating }]),
-    [group, handleChange, selectedAge, selectedRating],
-  );
+  const handleConfirm = useCallback(() => {
+    // Sort specimens by sex, maturity and finally by trophy rating
+    const patch = getSortedAnimalSpecimens([
+      ...group,
+      { age: selectedAge, rating: selectedRating },
+    ]);
+
+    handleChange(patch);
+  }, [group, handleChange, selectedAge, selectedRating]);
 
   /**
    * Handle removing a specimen
