@@ -168,7 +168,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       const { marker, ref } = options;
 
       // Set data associated with the current animal marker
-      const data = animalMarkerRecords[(marker as MarkerOptionsAnimal).id];
+      const data = animalMarkerRecords[marker.id];
       ref.current?.setData(data);
     });
   }, [animalMarkerRecords]);
