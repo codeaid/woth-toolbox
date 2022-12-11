@@ -3,6 +3,7 @@ export * from './chamois';
 export * from './eurasianBadger';
 export * from './europeanHare';
 export * from './goldenJackal';
+export * from './grayWolf';
 export * from './greylagGoose';
 export * from './redDeer';
 export * from './redFox';
