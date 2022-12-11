@@ -10,6 +10,7 @@ export interface SidePanelProps {
   children?: ReactNode;
   className?: string;
   loading?: boolean;
+  closeOnEscape?: boolean;
   closeOnOutsideClick?: boolean;
   side?: SidePanelSide;
   style?: CSSProperties;

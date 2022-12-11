@@ -13,6 +13,7 @@ export const SidePanel = (props: SidePanelProps) => {
     actions = [],
     children,
     className,
+    closeOnEscape = true,
     closeOnOutsideClick = false,
     loading = false,
     side = 'right',
@@ -31,17 +32,38 @@ export const SidePanel = (props: SidePanelProps) => {
    */
   const handleDocumentClick = useCallback(
     (event: MouseEvent) => {
+      if (!closeOnOutsideClick || !onClose) {
+        return;
+      }
+
       // Check if the click occurred inside the panel component
-      const clickOnSidePanel = ref.current
+      const clickedOnSidePanel = ref.current
         ? ref.current.contains(event.target as Node)
         : false;
 
       // Close the panel if clicked outside the component
-      if (!clickOnSidePanel && onClose) {
+      if (!clickedOnSidePanel) {
         onClose();
       }
     },
-    [onClose],
+    [closeOnOutsideClick, onClose],
+  );
+
+  /**
+   * Handle pressing keyboard keys
+   */
+  const handleDocumentKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!closeOnEscape || !onClose) {
+        return;
+      }
+
+      // Close side panel on Escape key
+      if (event.key === 'Esc' || event.key === 'Escape') {
+        onClose();
+      }
+    },
+    [closeOnEscape, onClose],
   );
 
   /**
@@ -90,14 +112,14 @@ export const SidePanel = (props: SidePanelProps) => {
 
   // Register event handlers to handle closing side panel on outside clicks
   useEffect(() => {
-    // Do not register event listeners if panel shouldn't be closed on outside clicks
-    if (!closeOnOutsideClick) {
-      return;
-    }
-
     document.addEventListener('click', handleDocumentClick);
-    return () => document.removeEventListener('click', handleDocumentClick);
-  }, [closeOnOutsideClick, handleDocumentClick]);
+    document.addEventListener('keydown', handleDocumentKeyDown);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keydown', handleDocumentKeyDown);
+    };
+  }, [handleDocumentClick, handleDocumentKeyDown]);
 
   return (
     <Transition
