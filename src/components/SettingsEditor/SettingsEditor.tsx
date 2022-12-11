@@ -98,6 +98,7 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
   return (
     <SidePanel
       actions={actions}
+      closeOnOutsideClick={true}
       title="Settings"
       visible={visible}
       onClose={onClose}

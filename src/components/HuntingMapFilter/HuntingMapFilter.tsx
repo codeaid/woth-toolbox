@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
@@ -66,6 +73,11 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
     setMenuVisible(false);
   }, [onChange]);
+
+  /**
+   * Handle hiding filter visibility
+   */
+  const handleClose = useCallback(() => setMenuVisible(false), []);
 
   /**
    * Enable or disable all animal options at once
@@ -139,7 +151,10 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * Handle toggling filter visibility
    */
   const handleToggleVisibility = useCallback(
-    () => setMenuVisible(current => !current),
+    (event?: MouseEvent<EventTarget>) => {
+      event?.stopPropagation();
+      setMenuVisible(current => !current);
+    },
     [],
   );
 
@@ -256,10 +271,11 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       <SidePanel
         actions={sidebarActions}
         className={styles.HuntingMapFilter}
+        closeOnOutsideClick={true}
         side="left"
         visible={menuVisible}
         title="Filters"
-        onClose={handleToggleVisibility}
+        onClose={handleClose}
       >
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>
           {renderedGenericOptions}

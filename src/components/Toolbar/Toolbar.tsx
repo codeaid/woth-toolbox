@@ -66,10 +66,10 @@ export const Toolbar = (props: ToolbarProps) => {
   /**
    * Handle toggling settings
    */
-  const handleToggleSettings = useCallback(
-    () => setSettingsVisible(current => !current),
-    [],
-  );
+  const handleToggleSettings = useCallback((event: MouseEvent<EventTarget>) => {
+    event.stopPropagation();
+    setSettingsVisible(current => !current);
+  }, []);
 
   /**
    * Handle showing or hiding mobile menu
