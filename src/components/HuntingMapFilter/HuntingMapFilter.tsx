@@ -43,6 +43,18 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     [markerTypes],
   );
 
+  // Extract list of selected animal types
+  const selectedTypesAnimals = useMemo(
+    () => options.types.filter(isAnimalMarkerType),
+    [options.types],
+  );
+
+  // Extract list of selected generic types
+  const selectedTypesGeneric = useMemo(
+    () => options.types.filter(isGenericMarkerType),
+    [options.types],
+  );
+
   /**
    * Handle clearing current filters
    */
@@ -54,6 +66,52 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
     setMenuVisible(false);
   }, [onChange]);
+
+  /**
+   * Enable or disable all animal options at once
+   */
+  const handleToggleAnimalOptions = useCallback(
+    () =>
+      selectedTypesAnimals.length > 0
+        ? onChange({
+            ...options,
+            types: selectedTypesGeneric,
+          })
+        : onChange({
+            ...options,
+            types: [...selectedTypesGeneric, ...markerTypesAnimals],
+          }),
+    [
+      markerTypesAnimals,
+      onChange,
+      options,
+      selectedTypesAnimals.length,
+      selectedTypesGeneric,
+    ],
+  );
+
+  /**
+   * Enable or disable all generic options at once
+   */
+  const handleToggleGenericOptions = useCallback(
+    () =>
+      selectedTypesGeneric.length > 0
+        ? onChange({
+            ...options,
+            types: selectedTypesAnimals,
+          })
+        : onChange({
+            ...options,
+            types: [...selectedTypesAnimals, ...markerTypesGeneric],
+          }),
+    [
+      markerTypesGeneric,
+      onChange,
+      options,
+      selectedTypesAnimals,
+      selectedTypesGeneric.length,
+    ],
+  );
 
   /**
    * Handle toggling individual filter types on or off
@@ -133,11 +191,16 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () =>
       markerTypesAnimals.length ? (
         <>
-          <SectionHeader>Animals</SectionHeader>
+          <SectionHeader
+            className={styles.HuntingMapFilterSectionHeader}
+            onClick={handleToggleAnimalOptions}
+          >
+            Animals
+          </SectionHeader>
           {renderOptions(markerTypesAnimals, animalNameMap, true)}
         </>
       ) : null,
-    [markerTypesAnimals, renderOptions],
+    [handleToggleAnimalOptions, markerTypesAnimals, renderOptions],
   );
 
   // Render generic options
@@ -145,11 +208,16 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () =>
       markerTypesGeneric.length ? (
         <>
-          <SectionHeader>General</SectionHeader>
+          <SectionHeader
+            className={styles.HuntingMapFilterSectionHeader}
+            onClick={handleToggleGenericOptions}
+          >
+            General
+          </SectionHeader>
           {renderOptions(markerTypesGeneric, genericNameMap, false)}
         </>
       ) : null,
-    [markerTypesGeneric, renderOptions],
+    [handleToggleGenericOptions, markerTypesGeneric, renderOptions],
   );
 
   // List of sidebar action buttons

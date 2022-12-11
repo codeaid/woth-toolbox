@@ -39,6 +39,14 @@
   color: var(--brand);
 }
 
+.HuntingMapFilterSectionHeader {
+  cursor: pointer;
+}
+
+.HuntingMapFilterSectionHeader:hover {
+  background: var(--elevation5);
+}
+
 .HuntingMapFilterToggle {
   left: 0.5em;
   position: absolute;
