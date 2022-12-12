@@ -37,6 +37,43 @@ export const formatTimestampDistance = (value?: number) => {
 };
 
 /**
+ * Round a number down to the nearest base 10 value
+ *
+ * @param value Value to round down
+ */
+export const floorNearestFloor10 = (value: number) =>
+  Math.min(1000, Math.pow(10, Math.floor(Math.log10(value))));
+
+/**
+ * Get map scale's step for the current distance
+ *
+ * @param value Target distance
+ * @param mapStep10000m Map step at 10,000 metres and more
+ * @param mapStep1000m Map step at 1,000 metres and more
+ * @param mapStep100m Map step at 100 metres and more
+ * @param mapStep10m Map step at 10 metres and more
+ */
+export const getMapScaleStep = (
+  value: number,
+  mapStep10000m: number,
+  mapStep1000m: number,
+  mapStep100m: number,
+  mapStep10m: number,
+) => {
+  if (value > 10000) {
+    return mapStep10000m;
+  } else if (value > 1000) {
+    return mapStep1000m;
+  } else if (value > 100) {
+    return mapStep100m;
+  } else if (value > 10) {
+    return mapStep10m;
+  }
+
+  return 1;
+};
+
+/**
  * Convert a color result to a HEX string
  *
  * @param color Source color object

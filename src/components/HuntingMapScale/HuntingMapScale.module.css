@@ -1,0 +1,64 @@
+.HuntingMapScale {
+  border: thin solid var(--map-scale-on);
+  box-sizing: content-box;
+  bottom: 0.5rem;
+  height: 0.35em;
+  opacity: 0.6;
+  position: absolute;
+  transition: opacity 150ms linear, width 50ms linear;
+  right: 0.5rem;
+  z-index: 10;
+}
+
+.HuntingMapScale:hover {
+  opacity: 1;
+}
+
+.HuntingMapScaleBars {
+  background-color: var(--map-scale-off);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.HuntingMapScaleBars::before,
+.HuntingMapScaleBars::after {
+  background-color: var(--map-scale-on);
+  content: '';
+  height: 100%;
+  position: absolute;
+  transition: left 100ms linear, width 100ms linear;
+}
+
+.HuntingMapScaleBarsTriple::before {
+  left: 0;
+  width: 33.3%;
+}
+
+.HuntingMapScaleBarsTriple::after {
+  left: 66.7%;
+  width: 34%;
+}
+
+.HuntingMapScaleBarsQuad::before {
+  left: 0;
+  width: 25%;
+}
+
+.HuntingMapScaleBarsQuad::after {
+  left: 50%;
+  width: 25%;
+}
+
+.HuntingMapScaleText {
+  color: var(--map-scale-text);
+  font-size: 0.9em;
+  font-weight: bold;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: -1.5em;
+  width: 100%;
+}
