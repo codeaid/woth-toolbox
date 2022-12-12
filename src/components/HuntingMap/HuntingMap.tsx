@@ -673,7 +673,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
           // Update marker and zone visibility
           options.ref.current?.setVisible(true);
           options.ref.current?.setZonesVisible(index === list.length - 1);
-        }, 0);
+        }, 100);
       });
 
     // Force markers to be re-rendered
