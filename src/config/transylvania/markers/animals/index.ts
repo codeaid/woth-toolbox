@@ -2,6 +2,7 @@ export * from './brownBear';
 export * from './chamois';
 export * from './eurasianBadger';
 export * from './europeanHare';
+export * from './fallowDeer';
 export * from './goldenJackal';
 export * from './grayWolf';
 export * from './greylagGoose';
