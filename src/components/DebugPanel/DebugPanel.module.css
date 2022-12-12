@@ -32,7 +32,7 @@
 }
 
 .DebugPanelToggleButton {
-  bottom: 0.5em;
+  bottom: 2em;
   position: absolute;
   right: 0.5em;
   z-index: 10;
