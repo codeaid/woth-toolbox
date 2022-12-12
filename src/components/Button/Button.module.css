@@ -9,6 +9,7 @@
   font-family: 'Fira Sans', sans-serif;
   font-weight: 500;
   justify-content: center;
+  outline: none;
   padding: 0.5em 1em;
   transition: background-color 100ms ease-in-out,
     color 100ms ease-in-out,
