@@ -1,0 +1,23 @@
+.HuntingMapCoords {
+  align-items: center;
+  background-color: var(--elevation2);
+  border-radius: 0.5em;
+  bottom: 0.5rem;
+  color: var(--text-primary);
+  display: flex;
+  font-size: 0.9em;
+  left: 0.5rem;
+  line-height: 1em;
+  opacity: 0.6;
+  padding: 0.35em 0.55em;
+  position: absolute;
+  transition: opacity 150ms linear;
+}
+
+.HuntingMapCoords:hover {
+  opacity: 1;
+}
+
+.HuntingMapCoordsIcon {
+  margin-right: 0.4em;
+}
