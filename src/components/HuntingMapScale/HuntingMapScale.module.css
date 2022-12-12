@@ -2,8 +2,8 @@
   border: thin solid var(--map-scale-on);
   box-sizing: content-box;
   bottom: 0.5rem;
-  height: 0.35em;
-  opacity: 0.6;
+  height: 0.3em;
+  opacity: 0.5;
   position: absolute;
   transition: opacity 150ms linear, width 50ms linear;
   right: 0.5rem;
@@ -54,11 +54,11 @@
 
 .HuntingMapScaleText {
   color: var(--map-scale-text);
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: bold;
   left: 0;
   position: absolute;
   text-align: center;
-  top: -1.5em;
+  top: -1.2em;
   width: 100%;
 }
