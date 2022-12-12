@@ -23,6 +23,7 @@ import {
   HuntingMapMarker,
   HuntingMapMarkerProps,
 } from 'components/HuntingMapMarker';
+import { HuntingMapScale } from 'components/HuntingMapScale';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { useForceUpdate } from 'hooks';
@@ -288,7 +289,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
     };
 
     // Update map position in relation to the container
-    handleMapUpdate(handleUpdateAnimalData, handleUpdateMarkerVisibility);
+    handleMapUpdate(
+      handleUpdateAnimalData,
+      handleUpdateMarkerVisibility,
+      setForcedUpdate,
+    );
   }, [
     defaultZoomValue,
     handleMapUpdate,
@@ -296,6 +301,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     handleUpdateMarkerVisibility,
     imageHeight,
     imageWidth,
+    setForcedUpdate,
   ]);
 
   /**
@@ -736,6 +742,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
             onLoad={handleImageLoaded}
           />
         </div>
+
+        <HuntingMapScale
+          imageWidth={imageWidth}
+          mapWidth={mapOptions.current.mapWidth}
+          metersPerPixel={3}
+        />
       </div>
     </>
   );
