@@ -17,6 +17,10 @@ import {
   HuntingMapAnimal,
   HuntingMapAnimalProps,
 } from 'components/HuntingMapAnimal';
+import {
+  HuntingMapCoords,
+  HuntingMapCoordsRef,
+} from 'components/HuntingMapCoords';
 import { HuntingMapFilter } from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
 import {
@@ -30,6 +34,7 @@ import { useForceUpdate } from 'hooks';
 import {
   getCenteredMapOptions,
   getMapDimensions,
+  getMapMouseOffsetRatio,
   getMapSize,
   getNextMapOptions,
   getNextZoomOptions,
@@ -88,6 +93,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // References to component elements
   const containerRef = useRef<HTMLDivElement>(null);
+  const coordsRef = useRef<HuntingMapCoordsRef>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -367,6 +373,23 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleContainerMouseMove = useCallback(
     (event: MouseEvent<HTMLElement>) => {
+      const container = containerRef.current;
+      const image = imageRef.current;
+
+      // Update mouse coordinates as the mouse moves
+      if (container && image) {
+        // Get mouse position relative to the map image as a percentage
+        const [mouseRatioX, mouseRatioY] = getMapMouseOffsetRatio(
+          event.pageX,
+          event.pageY,
+          containerRef.current,
+          imageRef.current,
+          mapOptions.current,
+        );
+
+        coordsRef.current?.setCoords([mouseRatioX, mouseRatioY]);
+      }
+
       mouseMoved.current = true;
       handleMapDrag(event.pageX, event.pageY);
     },
@@ -742,6 +765,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
             onLoad={handleImageLoaded}
           />
         </div>
+
+        <HuntingMapCoords ref={coordsRef} />
 
         <HuntingMapScale
           imageWidth={imageWidth}

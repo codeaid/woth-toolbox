@@ -69,21 +69,17 @@ const getMapMouseOffset = (
  * @param pageY Vertical mouse position in relation to the page
  * @param container Map container element
  * @param image Map image element
- * @param mapWidth Map width
- * @param mapHeight Map height
- * @param mapLeft Current left offset of the map in relation to the container
- * @param mapTop Current top offset of the map in relation to the container
+ * @param mapOptions Map options
  */
-const getMapMouseOffsetRatio = (
+export const getMapMouseOffsetRatio = (
   pageX: number,
   pageY: number,
   container: HTMLElement,
   image: HTMLElement,
-  mapWidth: number,
-  mapHeight: number,
-  mapLeft: number,
-  mapTop: number,
+  mapOptions: MapOptions,
 ): Point => {
+  const { mapHeight, mapLeft, mapTop, mapWidth } = mapOptions;
+
   // Get mouse position relative to the map image
   const [mouseImageX, mouseImageY] = getMapMouseOffset(
     pageX,
@@ -252,10 +248,7 @@ export const getNextMapOptions = (
     pageY,
     container,
     image,
-    mapWidth,
-    mapHeight,
-    mapLeft,
-    mapTop,
+    currentMapOptions,
   );
 
   // Calculate updated map dimensions
