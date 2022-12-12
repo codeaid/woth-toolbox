@@ -296,8 +296,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
     // Update map position in relation to the container
     handleMapUpdate(
-      handleUpdateAnimalData,
-      handleUpdateMarkerVisibility,
+      () =>
+        requestAnimationFrame(() => {
+          handleUpdateMarkerVisibility();
+          handleUpdateAnimalData();
+        }),
       setForcedUpdate,
     );
   }, [
