@@ -59,6 +59,11 @@ export const DebugPanel = (props: DebugPanelProps) => {
   );
 
   /**
+   * Handle closing the panel
+   */
+  const handleClose = useCallback(() => setOpen(false), []);
+
+  /**
    * Handle opening or closing the panel
    */
   const handleToggleOpen = useCallback(() => setOpen(current => !current), []);
@@ -167,9 +172,10 @@ export const DebugPanel = (props: DebugPanelProps) => {
 
       <SidePanel
         actions={actions}
+        closeOnEscape={false}
         title="Animal Marker Creator"
         visible={open}
-        onClose={handleToggleOpen}
+        onClose={handleClose}
       >
         <div className={styles.DebugPanelContent}>
           <Label>Animals ({getAnimalName(type)})</Label>
