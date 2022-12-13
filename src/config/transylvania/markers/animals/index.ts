@@ -8,4 +8,5 @@ export * from './grayWolf';
 export * from './greylagGoose';
 export * from './redDeer';
 export * from './redFox';
+export * from './roeDeer';
 export * from './wildDuck';
