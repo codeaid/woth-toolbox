@@ -1,26 +1,35 @@
 import { Animal } from 'types/animals';
 import { EntityGroup } from 'types/global';
-import { Brand, Weapon, WeaponDistance } from 'types/weapons';
+import { Translator } from 'types/i18n';
+import { Weapon, WeaponDistance } from 'types/weapons';
 
 /**
  * Sort a list of weapons by their tier and name
  *
  * @param weapons List of weapons to sort
+ * @param translator Translator
  */
-export const getSortedWeapons = (weapons: Array<Weapon>) =>
+export const getSortedWeapons = (
+  weapons: Array<Weapon>,
+  translator: Translator,
+) =>
   [...weapons].sort((a, b) =>
     a.tier !== b.tier
       ? a.tier - b.tier
-      : getWeaponName(a).localeCompare(getWeaponName(b)),
+      : translator(a.heading).localeCompare(translator(b.heading)),
   );
 
 /**
  * Group weapons by their tier
  *
  * @param weapons List of weapons to group
+ * @param translator Translator
  */
-export const getWeaponGroups = (weapons: Array<Weapon>) =>
-  getSortedWeapons(weapons).reduce<Array<EntityGroup<Weapon>>>(
+export const getWeaponGroups = (
+  weapons: Array<Weapon>,
+  translator: Translator,
+) =>
+  getSortedWeapons(weapons, translator).reduce<Array<EntityGroup<Weapon>>>(
     (groups, weapon) => {
       // Attempt to find the existing group for the current tier
       const group = groups.find(g => g.tier === weapon.tier);
@@ -42,32 +51,6 @@ export const getWeaponGroups = (weapons: Array<Weapon>) =>
   );
 
 /**
- * Get weapon brand name
- *
- * @param brand Source weapon brand
- */
-export const getBrandName = (brand: Brand) => {
-  switch (brand) {
-    case Brand.Remington:
-      return 'Remington';
-    case Brand.Stinger:
-      return 'Stinger';
-    case Brand.Steyr:
-      return 'Steyr';
-    case Brand.Unknown:
-      return '';
-  }
-};
-
-/**
- * Get full weapon name
- *
- * @param weapon Source weapon
- */
-export const getWeaponName = (weapon: Weapon) =>
-  [getBrandName(weapon.brand), weapon.model].filter(value => !!value).join(' ');
-
-/**
  * Determine if the specified value is within a range
  *
  * @param value Source value
@@ -75,7 +58,7 @@ export const getWeaponName = (weapon: Weapon) =>
  * @param to Upper end of the range
  */
 const isWithinRange = (value: number, from: number, to: number) =>
-  value >= from && value <= to;
+  value > 0 && value >= from && value <= to;
 
 /**
  * Get weapon energy for the specified distance

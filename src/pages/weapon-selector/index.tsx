@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
@@ -10,6 +12,7 @@ import { Sidebar } from 'components/Sidebar';
 import { WeaponName } from 'components/WeaponName';
 import { animals } from 'config/animals';
 import { weapons } from 'config/weapons';
+import { useTranslator } from 'hooks';
 import { getWeaponGroups, isOptimal, isSuboptimal } from 'lib/weapons';
 import { Animal } from 'types/animals';
 import { Weapon, WeaponDistance } from 'types/weapons';
@@ -19,6 +22,9 @@ const WeaponSelectorPage = () => {
   // Extract route parameters
   const router = useRouter();
   const { animal: animalId } = router.query;
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Find animal specified in the URL parameter
   const selectedAnimal = useMemo(
@@ -33,6 +39,14 @@ const WeaponSelectorPage = () => {
     (animal: Animal) =>
       router.push(`/weapon-selector?animal=${encodeURIComponent(animal.slug)}`),
     [router],
+  );
+
+  /**
+   * Handle building entity groups
+   */
+  const handleGetEntityGroups = useCallback(
+    (entities: Array<Weapon>) => getWeaponGroups(entities, translate),
+    [translate],
   );
 
   /**
@@ -90,7 +104,7 @@ const WeaponSelectorPage = () => {
     if (!selectedAnimal) {
       return (
         <div className={styles.WeaponSelectorPageNotification}>
-          <Card>Please select an animal to begin</Card>
+          <Card>{translate('TOOLBOX:SELECT_ANIMAL')}</Card>
         </div>
       );
     }
@@ -102,7 +116,7 @@ const WeaponSelectorPage = () => {
         <PivotTable
           entities={weapons}
           pivot={selectedAnimal}
-          onGetEntityGroups={getWeaponGroups}
+          onGetEntityGroups={handleGetEntityGroups}
           onGetWeaponHitEnergy={handleGetWeaponHitEnergy}
           onGetWeaponOptimal={handleGetWeaponOptimal}
           onGetWeaponSuboptimal={handleGetWeaponSuboptimal}
@@ -131,5 +145,11 @@ const WeaponSelectorPage = () => {
     </>
   );
 };
+
+export const getStaticProps: GetServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string)),
+  },
+});
 
 export default WeaponSelectorPage;

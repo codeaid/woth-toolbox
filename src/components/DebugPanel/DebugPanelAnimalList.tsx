@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { animalMarkerTypes } from 'config/markers';
-import { getAnimalName } from 'lib/animals';
+import { useTranslator } from 'hooks';
+import { getAnimalTypeKey } from 'lib/i18n';
 import { getIconComponent } from 'lib/icons';
 import { DebugPanelAnimalListProps } from './types';
 import styles from './DebugPanelAnimalList.module.css';
@@ -8,12 +9,15 @@ import styles from './DebugPanelAnimalList.module.css';
 export const DebugPanelAnimalList = (props: DebugPanelAnimalListProps) => {
   const { selected, onSelect } = props;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   // List of animal buttons to render
   const renderedButtons = useMemo(
     () =>
       animalMarkerTypes.map(type => {
         const IconComponent = getIconComponent(type);
-        const title = getAnimalName(type);
+        const title = translate(getAnimalTypeKey(type));
 
         return (
           <IconComponent
@@ -26,7 +30,7 @@ export const DebugPanelAnimalList = (props: DebugPanelAnimalListProps) => {
           />
         );
       }),
-    [onSelect, selected],
+    [onSelect, selected, translate],
   );
 
   return <div className={styles.DebugPanelAnimalList}>{renderedButtons}</div>;

@@ -2,8 +2,10 @@ import classnames from 'classnames';
 import { format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { getAnimalName } from 'lib/animals';
+import { zeroWidthSpace } from 'config/html';
+import { useTranslator } from 'hooks';
 import { isMarkerComplete } from 'lib/debug';
+import { getAnimalTypeKey } from 'lib/i18n';
 import { getNeedZoneCounts } from 'lib/markers';
 import { DebugPanelIconRow } from './DebugPanelIconRow';
 import { DebugPanelMarkerProps } from './types';
@@ -17,6 +19,9 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
     onEatZoneRemove,
     onSleepZoneRemove,
   } = props;
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Get number of drink, eat and sleep zones for the current animal
   const [drinkZoneCount, eatZoneCount, sleepZoneCount] = useMemo(
@@ -75,7 +80,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
     >
       <div className={styles.DebugPanelMarkerHeader}>
         <div className={styles.DebugPanelMarkerName}>
-          {getAnimalName(marker.type)}
+          {translate(getAnimalTypeKey(marker.type))}
         </div>
         <RiDeleteBin6Line
           className={styles.DebugPanelMarkerActionDelete}
@@ -85,7 +90,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
 
       <div className={styles.DebugPanelMarkerRows}>
         <DebugPanelIconRow
-          caption="Drink zones"
+          caption={translate('ANIMAL:NEED_ZONE_DRINKING_01')}
           completedCount={marker.drink.length}
           disabled={isCompleted}
           iconType="zone:drink"
@@ -93,7 +98,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
           onZoneRemove={handleDrinkZoneRemove}
         />
         <DebugPanelIconRow
-          caption="Feed zones"
+          caption={translate('ANIMAL:NEED_ZONE_EATING_01')}
           completedCount={marker.eat.length}
           disabled={isCompleted}
           iconType="zone:eat"
@@ -101,7 +106,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
           onZoneRemove={handleEatZoneRemove}
         />
         <DebugPanelIconRow
-          caption="Sleep zones"
+          caption={translate('ANIMAL:NEED_ZONE_RESTING_01')}
           completedCount={marker.sleep.length}
           disabled={isCompleted}
           iconType="zone:sleep"
@@ -113,7 +118,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
       <div className={styles.DebugPanelMarkerStatus}>
         {marker.meta?.created
           ? format(marker.meta.created, 'Pp')
-          : 'In progress...'}
+          : zeroWidthSpace}
       </div>
     </div>
   );

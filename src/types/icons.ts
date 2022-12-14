@@ -13,12 +13,7 @@ export type IconTypeGeneric =
   | 'shooting range'
   | 'view';
 
-export type IconTypeNeedZone =
-  | 'zone:drink'
-  | 'zone:eat'
-  | 'zone:gather'
-  | 'zone:path'
-  | 'zone:sleep';
+export type IconTypeNeedZone = 'zone:drink' | 'zone:eat' | 'zone:sleep';
 
 export type IconTypeUI =
   | 'age'

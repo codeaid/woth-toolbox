@@ -9,13 +9,13 @@ import {
   AnimalSexMaleIcon,
   AnimalTrophyIcon,
 } from 'components/Icon';
+import { useTranslator } from 'hooks';
 import {
-  getAnimalAgeName,
-  getAnimalRatingSexName,
   getAnimalRatingTrophy,
   getSortedAnimalSpecimens,
   isAnimalSexMale,
 } from 'lib/animals';
+import { getAnimalAgeKey, getAnimalRatingGenderKey } from 'lib/i18n';
 import { AnimalAge, AnimalRating, AnimalSpecimen } from 'types/animals';
 import { AnimalEditorGroupBuilderProps } from './types';
 import styles from './AnimalEditorGroupBuilder.module.css';
@@ -31,6 +31,9 @@ export const AnimalEditorGroupBuilder = (
   // Currently selected age and rating values
   const [selectedAge, setSelectedAge] = useState<AnimalAge>('young');
   const [selectedRating, setSelectedRating] = useState<AnimalRating>('M1');
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   /**
    * Handle changes to notable specimens
@@ -76,7 +79,9 @@ export const AnimalEditorGroupBuilder = (
   const renderedAge = useMemo(
     () => (
       <div className={styles.AnimalEditorGroupBuilderSection}>
-        <div className={styles.AnimalEditorGroupBuilderLabel}>Age</div>
+        <div className={styles.AnimalEditorGroupBuilderLabel}>
+          {translate('ANIMAL:AGE')}
+        </div>
         <div
           className={classnames(
             styles.AnimalEditorGroupBuilderButtons,
@@ -95,13 +100,13 @@ export const AnimalEditorGroupBuilder = (
               key={age}
               onClick={() => setSelectedAge(age)}
             >
-              {getAnimalAgeName(age)}
+              {translate(getAnimalAgeKey(age))}
             </Button>
           ))}
         </div>
       </div>
     ),
-    [selectedAge],
+    [selectedAge, translate],
   );
 
   // Rendered list of animals added to the herd
@@ -118,7 +123,7 @@ export const AnimalEditorGroupBuilder = (
 
           <AnimalAgeIcon size={18} />
           <div className={styles.AnimalEditorGroupBuilderListEntryValue}>
-            {getAnimalAgeName(entry.age)}
+            {translate(getAnimalAgeKey(entry.age))}
           </div>
 
           {isAnimalSexMale(entry.rating) ? (
@@ -127,7 +132,7 @@ export const AnimalEditorGroupBuilder = (
             <AnimalSexFemaleIcon size={18} />
           )}
           <div className={styles.AnimalEditorGroupBuilderListEntryValue}>
-            {getAnimalRatingSexName(entry.rating)}
+            {translate(getAnimalRatingGenderKey(entry.rating))}
           </div>
 
           <AnimalTrophyIcon size={18} />
@@ -136,21 +141,14 @@ export const AnimalEditorGroupBuilder = (
           </div>
         </div>
       )),
-    [group, handleRemove],
+    [group, handleRemove, translate],
   );
 
   // Rendered list of animals added to the herd
   const renderedList = useMemo(
     () => (
       <div className={styles.AnimalEditorGroupBuilderList}>
-        {group.length ? (
-          renderedListContent
-        ) : (
-          <div className={styles.AnimalEditorGroupBuilderListPlaceholder}>
-            Add a specimen to the list by selecting its age and rating and
-            pressing the <strong>&quot;Add to group&quot;</strong> button above.
-          </div>
-        )}
+        {group.length ? renderedListContent : null}
       </div>
     ),
     [group.length, renderedListContent],
@@ -160,7 +158,9 @@ export const AnimalEditorGroupBuilder = (
   const renderedRating = useMemo(
     () => (
       <div className={styles.AnimalEditorGroupBuilderSection}>
-        <div className={styles.AnimalEditorGroupBuilderLabel}>Rating</div>
+        <div className={styles.AnimalEditorGroupBuilderLabel}>
+          {translate('ANIMAL:ANIMAL_TROPHY_RATING')}
+        </div>
         <div
           className={classnames(
             styles.AnimalEditorGroupBuilderButtons,
@@ -187,7 +187,7 @@ export const AnimalEditorGroupBuilder = (
         </div>
       </div>
     ),
-    [selectedRating],
+    [selectedRating, translate],
   );
 
   return (
@@ -198,7 +198,7 @@ export const AnimalEditorGroupBuilder = (
         className={styles.AnimalEditorGroupBuilderButtonConfirm}
         onClick={handleConfirm}
       >
-        Add to group
+        {translate('TOOLBOX:ADD')}
       </Button>
       {renderedList}
     </div>

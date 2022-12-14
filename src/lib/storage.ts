@@ -2,7 +2,7 @@ import { animalDataPrefix, settingsKey } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
 import { ApplicationSettings } from 'types/global';
-import { MarkerStorageRecordAnimal, MarkerOptionsAnimal } from 'types/markers';
+import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
 
 /**
  * Check if the specified storage is both supported and available

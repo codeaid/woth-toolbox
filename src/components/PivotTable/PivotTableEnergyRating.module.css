@@ -14,8 +14,8 @@
   padding: 0.5em;
   text-align: center;
   transition: background-color 500ms ease-in-out,
-    color 500ms ease-in-out,
-    opacity 500ms ease-in-out;
+  color 500ms ease-in-out,
+  opacity 500ms ease-in-out;
   width: 100%;
 }
 

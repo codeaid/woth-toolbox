@@ -1,4 +1,6 @@
 import { SectionHeader } from 'components/SectionHeader';
+import { useTranslator } from 'hooks';
+import { getTierKey } from 'lib/i18n';
 import { PivotTableRows } from './PivotTableRows';
 import { Entity, EntityPivot, PivotTableGroupProps } from './types';
 
@@ -17,9 +19,12 @@ export const PivotTableGroup = <
     onRenderEntityName,
   } = props;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   return (
     <>
-      <SectionHeader>{`Tier ${group.tier}`}</SectionHeader>
+      <SectionHeader>{translate(getTierKey(group.tier))}</SectionHeader>
       <PivotTableRows<TEntity, TPivot>
         entities={group.entities}
         pivot={pivot}

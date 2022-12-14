@@ -7,6 +7,7 @@
   text-transform: uppercase;
   user-select: none;
 }
+
 .Label:not(:first-child) {
   margin-top: 1.5em;
 }

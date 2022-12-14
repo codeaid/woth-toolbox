@@ -9,7 +9,7 @@
 
 .HuntingMapAnimalActive img,
 .HuntingMapAnimalActive svg {
-  transform: scale(1.2)  !important;
+  transform: scale(1.2) !important;
 }
 
 .HuntingMapAnimalEdited {

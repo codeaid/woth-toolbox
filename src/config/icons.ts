@@ -20,7 +20,6 @@ import {
   EurasianBadgerIcon,
   EuropeanHareIcon,
   FallowDeerIcon,
-  GatherZoneIcon,
   GoldenJackalIcon,
   GrayWolfIcon,
   GreylagGooseIcon,
@@ -32,7 +31,6 @@ import {
   MouflonIcon,
   MountainGoatIcon,
   MuleDeerIcon,
-  PathZoneIcon,
   PheasantIcon,
   PhotoIcon,
   RatingIcon,
@@ -98,7 +96,5 @@ export const iconComponentMap = new Map<
   ['view', ViewIcon],
   ['zone:drink', DrinkZoneIcon],
   ['zone:eat', EatZoneIcon],
-  ['zone:gather', GatherZoneIcon],
-  ['zone:path', PathZoneIcon],
   ['zone:sleep', SleepZoneIcon],
 ]);

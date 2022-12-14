@@ -1,14 +1,19 @@
 import { SectionHeader } from 'components/SectionHeader';
+import { useTranslator } from 'hooks';
+import { getTierKey } from 'lib/i18n';
 import { WeaponListItem } from './WeaponListItem';
 import { WeaponListGroupProps } from './types';
 
 export const WeaponListGroup = (props: WeaponListGroupProps) => {
   const { group, selected, onWeaponClick } = props;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   return (
     <>
       <li>
-        <SectionHeader>Tier {group.tier}</SectionHeader>
+        <SectionHeader>{translate(getTierKey(group.tier))}</SectionHeader>
       </li>
 
       {group.entities.map(weapon => (

@@ -5,7 +5,8 @@ import { IconButton } from 'components/IconButton';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { animalMarkerTypes } from 'config/markers';
-import { getAnimalName } from 'lib/animals';
+import { useTranslator } from 'hooks';
+import { getAnimalTypeKey } from 'lib/i18n';
 import { getNeedZoneCounts } from 'lib/markers';
 import { AnimalType } from 'types/animals';
 import { MarkerOptionsAnimal } from 'types/markers';
@@ -33,6 +34,9 @@ export const DebugPanel = (props: DebugPanelProps) => {
 
   // Currently selected animal type
   const [type, setType] = useState<AnimalType>(animalMarkerTypes[0]);
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Get number of drink, eat and sleep zones for the current animal
   const [drinkZoneCount, eatZoneCount, sleepZoneCount] = useMemo(
@@ -92,18 +96,18 @@ export const DebugPanel = (props: DebugPanelProps) => {
     () => [
       {
         className: styles.DebugPanelActionCopy,
-        children: 'Copy',
+        children: translate('TOOLBOX:COPY'),
         disabled: !markers.length,
         onClick: onCopy,
       },
       {
         className: styles.DebugPanelActionClear,
-        children: 'Clear',
+        children: translate('UI:CLEAR'),
         disabled: !markers.length && !currentMarker,
         onClick: onClear,
       },
     ],
-    [currentMarker, markers.length, onClear, onCopy],
+    [currentMarker, markers.length, onClear, onCopy, translate],
   );
 
   // List of completed marker components
@@ -115,10 +119,10 @@ export const DebugPanel = (props: DebugPanelProps) => {
         </div>
       ) : (
         <div className={styles.DebugPanelPlaceholder}>
-          No completed markers available
+          {translate('TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT')}
         </div>
       ),
-    [markers, renderMarker],
+    [markers, renderMarker, translate],
   );
 
   // Marker entry that is currently being created
@@ -128,10 +132,10 @@ export const DebugPanel = (props: DebugPanelProps) => {
         renderMarker(currentMarker)
       ) : (
         <div className={styles.DebugPanelPlaceholder}>
-          Click anywhere on the map to create a new marker
+          {translate('TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT')}
         </div>
       ),
-    [currentMarker, renderMarker],
+    [currentMarker, renderMarker, translate],
   );
 
   // Notify consumers about settings changes
@@ -173,18 +177,23 @@ export const DebugPanel = (props: DebugPanelProps) => {
       <SidePanel
         actions={actions}
         closeOnEscape={false}
-        title="Animal Marker Creator"
+        title={translate('TOOLBOX:MARKER_CREATOR')}
         visible={open}
         onClose={handleClose}
       >
         <div className={styles.DebugPanelContent}>
-          <Label>Animals ({getAnimalName(type)})</Label>
+          <Label>
+            {translate('UI:SECTION_ANIMALS')} (
+            {translate(getAnimalTypeKey(type))})
+          </Label>
           <DebugPanelAnimalList selected={type} onSelect={handleChangeAnimal} />
 
-          <Label>Current marker</Label>
+          <Label>{translate('UI:OBJECTIVE_ACTIVE')}</Label>
           {renderedPendingMarker}
 
-          <Label>Completed Markers ({markers.length})</Label>
+          <Label>
+            {translate('UI:OBJECTIVE_COMPLETED')} ({markers.length})
+          </Label>
           {renderedCompletedMarkers}
         </div>
       </SidePanel>

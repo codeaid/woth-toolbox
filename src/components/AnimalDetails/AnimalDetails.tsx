@@ -1,3 +1,4 @@
+import { useTranslator } from 'hooks';
 import { formatNumber } from 'lib/utils';
 import styles from './AnimalDetails.module.css';
 import { AnimalDetailsProps } from './types';
@@ -9,21 +10,32 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
   const { hitEnergy } = animal;
   const [energyFrom, energyTo] = hitEnergy;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   return (
     <div className={styles.AnimalDetails}>
-      <div className={styles.AnimalName}>{animal.name}</div>
-      <div className={styles.AnimalNameLatin}>{animal.latin}</div>
+      <div className={styles.AnimalDetailsName}>
+        {translate(animal.heading)}
+      </div>
+      <div className={styles.AnimalDetailsNameLatin}>
+        {translate(animal.latin)}
+      </div>
       <hr />
-      <div className={styles.AnimalDescription} key={animal.name}>
-        {animal.description}
+      <div className={styles.AnimalDetailsDescription} key={animal.heading}>
+        {translate(animal.description)}
       </div>
-      <div className={styles.AnimalStat}>
-        <div className={styles.AnimalStatName}>Hunting Tier</div>
-        <div className={styles.AnimalStatValue}>{animal.tier}</div>
+      <div className={styles.AnimalDetailsStat}>
+        <div className={styles.AnimalDetailsStatName}>
+          {translate('UI:TIER')}
+        </div>
+        <div className={styles.AnimalDetailsStatValue}>{animal.tier}</div>
       </div>
-      <div className={styles.AnimalStat}>
-        <div className={styles.AnimalStatName}>Recommended Hit Energy</div>
-        <div className={styles.AnimalStatValue}>{`${formatNumber(
+      <div className={styles.AnimalDetailsStat}>
+        <div className={styles.AnimalDetailsStatName}>
+          {translate('UI:OPTIMAL_ENERGY')}
+        </div>
+        <div className={styles.AnimalDetailsStatValue}>{`${formatNumber(
           energyFrom,
         )} - ${formatNumber(energyTo)} J`}</div>
       </div>

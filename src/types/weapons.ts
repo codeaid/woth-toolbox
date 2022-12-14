@@ -1,17 +1,12 @@
-export enum Brand {
-  Remington = 'remington',
-  Steyr = 'steyr',
-  Stinger = 'stinger',
-  Unknown = 'unknown',
-}
+import { TranslationKey } from 'types/i18n';
 
 export interface Weapon {
-  brand: Brand;
-  calibre: string;
-  description: string;
+  action: TranslationKey;
+  caliber: TranslationKey;
+  description: TranslationKey;
+  heading: TranslationKey;
   hitEnergy: [number, number, number, number, number]; // 50m, 100m, 150m, 200m, 300m
   slug: string;
-  model: string;
   tier: number;
 }
 

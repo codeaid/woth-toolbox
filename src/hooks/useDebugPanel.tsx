@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DebugPanelSettings } from 'components/DebugPanel';
 import {
+  consoleLogClean,
   copyTextToClipboard,
   getAnimalMarkerCreateCode,
   isMarkerComplete,
+  pushNextMarkerCoords,
+  removeMarker,
   removeMarkerDrinkZone,
   removeMarkerEatZone,
   removeMarkerSleepZone,
-  pushNextMarkerCoords,
-  removeMarker,
   replaceMarker,
-  consoleLogClean,
 } from 'lib/debug';
 import { MarkerOptionsAnimal } from 'types/markers';
 

@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
@@ -43,5 +45,11 @@ const NezPerceValleyPage = () => {
     </>
   );
 };
+
+export const getStaticProps: GetServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string)),
+  },
+});
 
 export default NezPerceValleyPage;

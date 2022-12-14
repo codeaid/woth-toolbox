@@ -13,7 +13,9 @@ import {
   useState,
 } from 'react';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
-import { getAnimalZoneMarkerTooltip, getMarkerKey } from 'lib/markers';
+import { useTranslator } from 'hooks';
+import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
+import { getMarkerKey } from 'lib/markers';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsZone,
@@ -54,6 +56,9 @@ export const HuntingMapAnimal = forwardRef(
 
     // Flag indicating if the need zones are visible or not
     const [zonesVisible, setZonesVisible] = useState(false);
+
+    // Retrieve application translator
+    const translate = useTranslator();
 
     // Custom marker color if data has one specified
     const color = useMemo(() => {
@@ -170,6 +175,14 @@ export const HuntingMapAnimal = forwardRef(
             const ref = createRef<MarkerRef>();
             zoneRefs.current.push(ref);
 
+            // Get animal and need zone names
+            const animalName = translate(
+              getAnimalTypeKey(marker.type),
+            ).toLocaleUpperCase();
+            const zoneName = translate(
+              getAnimalZoneKey(zone.type),
+            ).toLocaleUpperCase();
+
             return (
               <HuntingMapMarker
                 className={styles.HuntingMapAnimalZone}
@@ -179,12 +192,20 @@ export const HuntingMapAnimal = forwardRef(
                 mountOnEnter={true}
                 ref={ref}
                 markerSize={markerSizeZone}
-                title={getAnimalZoneMarkerTooltip(marker, zone)}
+                title={`${animalName} : ${zoneName}`}
                 unmountOnExit={true}
               />
             );
           }),
-      [marker, markerSizeZone, zonesVisible],
+      [
+        marker.drink,
+        marker.eat,
+        marker.sleep,
+        marker.type,
+        markerSizeZone,
+        translate,
+        zonesVisible,
+      ],
     );
 
     // Expose control functions of the main trigger component as well as

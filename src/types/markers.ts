@@ -1,12 +1,7 @@
 import { RefObject } from 'react';
 import { AnimalSpecimen } from 'types/animals';
 import { Point } from 'types/generic';
-import {
-  IconType,
-  IconTypeAnimal,
-  IconTypeGeneric,
-  IconTypeNeedZone,
-} from 'types/icons';
+import { IconType, IconTypeAnimal, IconTypeGeneric, IconTypeNeedZone } from 'types/icons';
 
 // Base type describing a map marker object
 export type MarkerOptions<TMarkerType extends MarkerType = MarkerType> = {

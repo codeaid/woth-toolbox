@@ -1,9 +1,13 @@
 import classnames from 'classnames';
+import { useTranslator } from 'hooks';
 import { AnimalNameProps } from './types';
 import styles from './AnimalName.module.css';
 
 export const AnimalName = (props: AnimalNameProps) => {
   const { animal, highlighted = false, responsive = false } = props;
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   return (
     <div
@@ -13,8 +17,8 @@ export const AnimalName = (props: AnimalNameProps) => {
         [styles.AnimalNameResponsiveTablet]: responsive === 'tablet',
       })}
     >
-      <div className={styles.AnimalNameTitle}>{animal.name}</div>
-      <div className={styles.AnimalNameLatin}>{animal.latin}</div>
+      <div className={styles.AnimalNameTitle}>{translate(animal.heading)}</div>
+      <div className={styles.AnimalNameLatin}>{translate(animal.latin)}</div>
     </div>
   );
 };

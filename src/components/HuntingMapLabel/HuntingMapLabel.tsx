@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
+import { useTranslator } from 'hooks';
 import { HuntingMapLabelProps } from './types';
 import styles from './HuntingMapLabel.module.css';
 
@@ -12,6 +13,9 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
 
   // Tuple storing label's width and height once it becomes available
   const [size, setSize] = useState<[number, number]>([0, 0]);
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Generate CSS styles to apply to the parent element
   const style = useMemo<CSSProperties>(() => {
@@ -59,9 +63,11 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
           ref={ref}
           style={style}
         >
-          <div className={styles.HuntingMapLabelTitle}>{name}</div>
+          <div className={styles.HuntingMapLabelTitle}>{translate(name)}</div>
           <hr className={styles.HuntingMapLabelSeparator} />
-          <div className={styles.HuntingMapLabelSubtitle}>{habitat}</div>
+          <div className={styles.HuntingMapLabelSubtitle}>
+            {translate(habitat)}
+          </div>
           <div className={styles.HuntingMapLabelBlur}>&#8203;</div>
         </div>
       )}

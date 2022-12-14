@@ -11,13 +11,16 @@ import { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { SectionHeader } from 'components/SectionHeader';
 import { SidePanel } from 'components/SidePanel';
-import { animalNameMap, genericNameMap } from 'config/names';
+import { genericNameMap } from 'config/names';
+import { useTranslator } from 'hooks';
+import { getAnimalTypeKey } from 'lib/i18n';
 import {
   getMarkerOptionTypes,
   isAnimalMarkerType,
   isGenericMarkerType,
 } from 'lib/markers';
-import { MarkerType } from 'types/markers';
+import { AnimalType } from 'types/animals';
+import { MarkerType, MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterProps } from './types';
 import styles from './HuntingMapFilter.module.css';
@@ -32,6 +35,9 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   // Extract list of types available in the options
   const markerTypes = useMemo(
     () => getMarkerOptionTypes(...animalMarkers, ...genericMarkers),
@@ -40,25 +46,25 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
   // Extract list of types available in the options
   const markerTypesAnimals = useMemo(
-    () => markerTypes.filter(isAnimalMarkerType),
+    () => markerTypes.filter(isAnimalMarkerType) as Array<MarkerTypeAnimal>,
     [markerTypes],
   );
 
   // Extract list of types available in the options
   const markerTypesGeneric = useMemo(
-    () => markerTypes.filter(isGenericMarkerType),
+    () => markerTypes.filter(isGenericMarkerType) as Array<MarkerTypeGeneric>,
     [markerTypes],
   );
 
   // Extract list of selected animal types
   const selectedTypesAnimals = useMemo(
-    () => options.types.filter(isAnimalMarkerType),
+    () => options.types.filter(isAnimalMarkerType) as Array<MarkerTypeAnimal>,
     [options.types],
   );
 
   // Extract list of selected generic types
   const selectedTypesGeneric = useMemo(
-    () => options.types.filter(isGenericMarkerType),
+    () => options.types.filter(isGenericMarkerType) as Array<MarkerTypeGeneric>,
     [options.types],
   );
 
@@ -176,14 +182,18 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * @param options Map of option types and names to render
    */
   const renderOptions = useCallback(
-    (
-      types: Array<MarkerType>,
-      nameMap: Map<MarkerType, string>,
-      large: boolean,
-    ) => (
+    (types: Array<MarkerType>, large: boolean) => (
       <>
         {types
-          .map(type => ({ name: nameMap.get(type) ?? '', type }))
+          .map(type => ({
+            name:
+              (isAnimalMarkerType(type)
+                ? translate(getAnimalTypeKey(type as AnimalType))
+                : isGenericMarkerType(type)
+                ? genericNameMap.get(type)
+                : type) ?? type,
+            type,
+          }))
           .sort((a, b) => a.name.localeCompare(b.name))
           .map(({ name, type }) => (
             <HuntingMapFilterItem
@@ -198,7 +208,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           ))}
       </>
     ),
-    [handleToggleType, options],
+    [handleToggleType, options.types, translate],
   );
 
   // Render animal options
@@ -210,12 +220,12 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
             className={styles.HuntingMapFilterSectionHeader}
             onClick={handleToggleAnimalOptions}
           >
-            Animals
+            {translate('UI:SECTION_ANIMALS')}
           </SectionHeader>
-          {renderOptions(markerTypesAnimals, animalNameMap, true)}
+          {renderOptions(markerTypesAnimals, true)}
         </>
       ) : null,
-    [handleToggleAnimalOptions, markerTypesAnimals, renderOptions],
+    [handleToggleAnimalOptions, markerTypesAnimals, renderOptions, translate],
   );
 
   // Render generic options
@@ -227,25 +237,25 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
             className={styles.HuntingMapFilterSectionHeader}
             onClick={handleToggleGenericOptions}
           >
-            General
+            {translate('UI:GENERAL')}
           </SectionHeader>
-          {renderOptions(markerTypesGeneric, genericNameMap, false)}
+          {renderOptions(markerTypesGeneric, false)}
         </>
       ) : null,
-    [handleToggleGenericOptions, markerTypesGeneric, renderOptions],
+    [handleToggleGenericOptions, markerTypesGeneric, renderOptions, translate],
   );
 
   // List of sidebar action buttons
   const sidebarActions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: 'Clear',
+        children: translate('UI:CLEAR'),
         className: styles.HuntingMapFilterActionClear,
         disabled: !options.types.length,
         onClick: handleClearFilters,
       },
     ],
-    [handleClearFilters, options.types.length],
+    [handleClearFilters, options.types.length, translate],
   );
 
   // Monitor clicks outside the current marker and hide zones when needed
@@ -274,7 +284,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         closeOnOutsideClick={true}
         side="left"
         visible={menuVisible}
-        title="Filters"
+        title={translate('UI:TOGGLE_FILTERS')}
         onClose={handleClose}
       >
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>

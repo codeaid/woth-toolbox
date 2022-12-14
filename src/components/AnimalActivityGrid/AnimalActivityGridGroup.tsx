@@ -1,5 +1,7 @@
 import { memo } from 'react';
 import { SectionHeader } from 'components/SectionHeader';
+import { useTranslator } from 'hooks';
+import { getTierKey } from 'lib/i18n';
 import { AnimalActivityGridHeader } from './AnimalActivityGridHeader';
 import { AnimalActivityGridRows } from './AnimalActivityGridRows';
 import { AnimalActivityGridGroupProps } from './types';
@@ -11,9 +13,12 @@ export const AnimalActivityGridGroup = (
 ) => {
   const { group } = props;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   return (
     <>
-      <SectionHeader>Tier {group.tier}</SectionHeader>
+      <SectionHeader>{translate(getTierKey(group.tier))}</SectionHeader>
       <AnimalActivityGridHeaderMemo />
       <AnimalActivityGridRows animals={group.entities} />
     </>

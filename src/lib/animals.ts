@@ -1,19 +1,12 @@
 import {
-  animalActivityNameMap,
-  animalAgeNames,
-  animalNameMap,
-  animalRatingNames,
-} from 'config/names';
-import {
   Animal,
-  AnimalActivity,
   AnimalActivityData,
   AnimalAge,
   AnimalRating,
   AnimalSpecimen,
-  AnimalType,
 } from 'types/animals';
 import { EntityGroup } from 'types/global';
+import { Translator } from 'types/i18n';
 
 /**
  * Find activity defined for the exact hour
@@ -27,27 +20,16 @@ export const getActivityByHour = (
 ) => activities.find(activity => activity.time === hour);
 
 /**
- * Get animal activity name
- *
- * @param activity Type of activity
- */
-export const getAnimalActivityName = (activity: AnimalActivity) =>
-  animalActivityNameMap.get(activity);
-
-/**
- * Get human-readable name of the specified animal age
- *
- * @param age Target age
- */
-export const getAnimalAgeName = (age: AnimalAge) => animalAgeNames.get(age)!;
-
-/**
  * Group animals by their tier
  *
  * @param animals List of animals to group
+ * @param translator Translator
  */
-export const getAnimalGroups = (animals: Array<Animal>) =>
-  getSortedAnimals(animals).reduce<Array<EntityGroup<Animal>>>(
+export const getAnimalGroups = (
+  animals: Array<Animal>,
+  translator: Translator,
+) =>
+  getSortedAnimals(animals, translator).reduce<Array<EntityGroup<Animal>>>(
     (groups, animal) => {
       // Attempt to find the existing group for the current tier
       const group = groups.find(g => g.tier === animal.tier);
@@ -68,23 +50,6 @@ export const getAnimalGroups = (animals: Array<Animal>) =>
     },
     [],
   );
-
-/**
- * Get name of animal from a marker
- *
- * @param type Source animal type
- * @param defaultName Default name to use if animal not found
- */
-export const getAnimalName = (type?: AnimalType, defaultName = 'Unknown') =>
-  type ? animalNameMap.get(type) ?? defaultName : defaultName;
-
-/**
- * Get name of the sex of the specified animal rating
- *
- * @param rating Animal rating
- */
-export const getAnimalRatingSexName = (rating: AnimalRating) =>
-  animalRatingNames.get(rating)!;
 
 /**
  * Get number of stars for the specified animal (trophy) rating
@@ -139,14 +104,15 @@ export const getCurrentActivityByHour = (
  * Sort animals first by tier and then by name
  *
  * @param animals List of animals to sort
+ * @param translator Translator
  */
-const getSortedAnimals = (animals: Array<Animal>) =>
+const getSortedAnimals = (animals: Array<Animal>, translator: Translator) =>
   [...animals].sort((a, b) =>
     a.tier !== b.tier
       ? // First sort by tier
         a.tier - b.tier
       : // Next sort by animal name within the tier
-        a.name.localeCompare(b.name),
+        translator(a.heading).localeCompare(translator(b.heading)),
   );
 
 /**

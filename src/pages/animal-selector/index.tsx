@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
@@ -10,6 +12,7 @@ import { WeaponDetails } from 'components/WeaponDetails';
 import { WeaponList } from 'components/WeaponList';
 import { animals } from 'config/animals';
 import { weapons } from 'config/weapons';
+import { useTranslator } from 'hooks';
 import { getAnimalGroups } from 'lib/animals';
 import { isOptimal, isSuboptimal } from 'lib/weapons';
 import { Animal } from 'types/animals';
@@ -21,10 +24,21 @@ const AnimalSelectorPage = () => {
   const router = useRouter();
   const { weapon: weaponId } = router.query;
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   // Find weapon specified in the URL parameter
   const selectedWeapon = useMemo(
     () => weapons.find(w => w.slug === weaponId),
     [weaponId],
+  );
+
+  /**
+   * Handle building entity groups
+   */
+  const handleGetEntityGroups = useCallback(
+    (entities: Array<Animal>) => getAnimalGroups(entities, translate),
+    [translate],
   );
 
   /**
@@ -73,7 +87,7 @@ const AnimalSelectorPage = () => {
     if (!selectedWeapon) {
       return (
         <div className={styles.AnimalSelectorPageNotification}>
-          <Card>Please select a weapon to begin</Card>
+          <Card>{translate('TOOLBOX:SELECT_WEAPON')}</Card>
         </div>
       );
     }
@@ -85,7 +99,7 @@ const AnimalSelectorPage = () => {
         <PivotTable
           entities={animals}
           pivot={selectedWeapon}
-          onGetEntityGroups={getAnimalGroups}
+          onGetEntityGroups={handleGetEntityGroups}
           onGetWeaponHitEnergy={handleGetWeaponHitEnergy}
           onGetWeaponOptimal={isOptimal}
           onGetWeaponSuboptimal={isSuboptimal}
@@ -115,5 +129,11 @@ const AnimalSelectorPage = () => {
     </>
   );
 };
+
+export const getStaticProps: GetServerSideProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string)),
+  },
+});
 
 export default AnimalSelectorPage;

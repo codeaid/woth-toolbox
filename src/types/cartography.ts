@@ -1,4 +1,5 @@
 import { Point } from 'types/generic';
+import { TranslationKey } from 'types/i18n';
 import { MarkerType } from 'types/markers';
 
 export interface MapFilterOptions {
@@ -7,8 +8,8 @@ export interface MapFilterOptions {
 
 export interface MapLabelOptions {
   coords: Point;
-  habitat: string;
-  name: string;
+  habitat: TranslationKey;
+  name: TranslationKey;
 }
 
 export interface MapOptions {

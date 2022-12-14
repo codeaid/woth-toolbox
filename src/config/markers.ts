@@ -1,10 +1,5 @@
 import { AnimalType } from 'types/animals';
-import {
-  MarkerType,
-  MarkerTypeAnimal,
-  MarkerTypeGeneric,
-  MarkerTypeNeedZone,
-} from 'types/markers';
+import { MarkerType, MarkerTypeAnimal, MarkerTypeGeneric, MarkerTypeNeedZone } from 'types/markers';
 
 // List of types representing animal markers
 export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
@@ -53,8 +48,6 @@ export const genericMarkerTypes: Array<MarkerTypeGeneric> = [
 export const needZoneMarkerTypes: Array<MarkerTypeNeedZone> = [
   'zone:drink',
   'zone:eat',
-  'zone:gather',
-  'zone:path',
   'zone:sleep',
 ];
 

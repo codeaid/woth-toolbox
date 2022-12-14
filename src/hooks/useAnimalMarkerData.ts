@@ -7,7 +7,7 @@ import {
   isEmptyAnimalData,
   setAnimalMarkerData,
 } from 'lib/storage';
-import { MarkerStorageRecordAnimal, MarkerOptionsAnimal } from 'types/markers';
+import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
 
 /**
  * Animal marker data management helper hook

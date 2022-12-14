@@ -1,9 +1,11 @@
+import { TranslationKey } from 'types/i18n';
+
 export interface Animal {
-  description: string;
+  description: TranslationKey;
+  heading: TranslationKey;
   hitEnergy: [number, number];
-  latin: string;
+  latin: TranslationKey;
   lifeCycle: Array<AnimalActivityData>;
-  name: string;
   slug: string;
   tier: number;
   type: AnimalType;
@@ -12,7 +14,6 @@ export interface Animal {
 export enum AnimalActivity {
   Drinking = 'drinking',
   Feeding = 'feeding',
-  Gathering = 'gathering',
   Sleeping = 'sleeping',
 }
 

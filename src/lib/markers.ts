@@ -1,22 +1,17 @@
 import sha1 from 'sha1';
-import {
-  animalMarkerNeedZoneCounts,
-  animalMarkerTypes,
-  genericMarkerTypes,
-} from 'config/markers';
-import { getAnimalActivityName, getAnimalName } from 'lib/animals';
+import { animalMarkerNeedZoneCounts, animalMarkerTypes, genericMarkerTypes } from 'config/markers';
 import { hasListValue } from 'lib/utils';
-import { AnimalActivity, AnimalType } from 'types/animals';
+import { AnimalType } from 'types/animals';
 import { MapFilterOptions, MapZoomOptions } from 'types/cartography';
 import { Point } from 'types/generic';
 import {
   MarkerOptions,
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
-  MarkerOptionsZone,
   MarkerReference,
   MarkerType,
   MarkerTypeAnimal,
+  MarkerTypeGeneric,
 } from 'types/markers';
 
 /**
@@ -112,42 +107,6 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
   );
 
 /**
- * Get description of the specified need zone's activity
- *
- * @param marker Need zone marker
- */
-const getAnimalZoneActivity = (marker: MarkerOptionsZone) => {
-  switch (marker.type) {
-    case 'zone:drink':
-      return getAnimalActivityName(AnimalActivity.Drinking);
-    case 'zone:eat':
-      return getAnimalActivityName(AnimalActivity.Feeding);
-    case 'zone:sleep':
-      return getAnimalActivityName(AnimalActivity.Sleeping);
-  }
-};
-
-/**
- * Generate tooltip for an animal need zone marker
- *
- * @param animalMarker Parent animal marker
- * @param zoneMarker Need zone marker
- */
-export const getAnimalZoneMarkerTooltip = (
-  animalMarker: MarkerOptionsAnimal,
-  zoneMarker: MarkerOptionsZone,
-) => {
-  // Get name of the animal
-  const animalName = getAnimalName(animalMarker.type);
-  const zoneActivity = getAnimalZoneActivity(zoneMarker);
-
-  return [animalName, zoneActivity]
-    .filter(v => !!v)
-    .join(' : ')
-    .toUpperCase();
-};
-
-/**
  * Get number of each need zone for the specified animal type
  *
  * @param type Target animal type
@@ -160,18 +119,18 @@ export const getNeedZoneCounts = (type: AnimalType) =>
  *
  * @param type Target type to check
  */
-export const isAnimalMarkerType = <TMarkerType extends MarkerType>(
-  type: TMarkerType,
-) => animalMarkerTypes.includes(type as any);
+export const isAnimalMarkerType = (
+  type: MarkerType,
+): type is MarkerTypeAnimal => animalMarkerTypes.includes(type as any);
 
 /**
  * Check if the specified type represents a generic marker type
  *
  * @param type Target type to check
  */
-export const isGenericMarkerType = <TMarkerType extends MarkerType>(
-  type: TMarkerType,
-) => genericMarkerTypes.includes(type as any);
+export const isGenericMarkerType = (
+  type: MarkerType,
+): type is MarkerTypeGeneric => genericMarkerTypes.includes(type as any);
 
 /**
  * Determine if marker should always be represented in its highlighted form

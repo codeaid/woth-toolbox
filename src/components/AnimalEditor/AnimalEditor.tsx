@@ -3,7 +3,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
-import { getAnimalName } from 'lib/animals';
+import { useTranslator } from 'hooks';
+import { getAnimalTypeKey } from 'lib/i18n';
 import { formatTimestampDistance } from 'lib/utils';
 import { MarkerStorageRecordAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
@@ -38,8 +39,14 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   // Flag indicating whether side panel is visible or not
   const [visible, setVisible] = useState(false);
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   // Retrieve animal name
-  const animalName = useMemo(() => getAnimalName(marker?.type), [marker]);
+  const animalName = useMemo(
+    () => (marker ? translate(getAnimalTypeKey(marker.type)) : ''),
+    [marker, translate],
+  );
 
   /**
    * Handle closing the editor
@@ -96,19 +103,19 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const actions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: 'Save changes',
+        children: translate('UI:CONFIRM'),
         className: classnames(styles.AnimalEditorActionSave),
         disabled: !data,
         onClick: handleDataWrite,
       },
       {
-        children: 'Delete',
+        children: translate('UI:CLEAR'),
         className: classnames(styles.AnimalEditorActionReset),
         disabled: !hadData,
         onClick: handleDataClear,
       },
     ],
-    [data, hadData, handleDataClear, handleDataWrite],
+    [data, hadData, handleDataClear, handleDataWrite, translate],
   );
 
   // Creation and last updated date of existing data entries
@@ -121,16 +128,16 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     return (
       <div className={styles.AnimalEditorDates}>
         <div>
-          <Label>Created</Label>
+          <Label>{translate('TOOLBOX:CREATED')}</Label>
           <div className={styles.AnimalEditorText}>{dateCreated}</div>
         </div>
         <div>
-          <Label>Last Updated</Label>
+          <Label>{translate('TOOLBOX:LAST_MODIFIED')}</Label>
           <div className={styles.AnimalEditorText}>{dateUpdated}</div>
         </div>
       </div>
     );
-  }, [data?.created, data?.updated, dateCreated, dateUpdated]);
+  }, [data?.created, data?.updated, dateCreated, dateUpdated, translate]);
 
   // Load animal details on mount
   useEffect(() => {
@@ -189,13 +196,13 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       <div className={styles.AnimalEditorContent}>
         {renderedDates}
 
-        <Label>Description</Label>
+        <Label>{translate('UI:DESCRIPTION')}</Label>
         <AnimalEditorDescription data={data} onChange={setData} />
 
-        <Label>Noteworthy Specimens</Label>
+        <Label>{translate('UI:SECTION_ANIMALS')}</Label>
         <AnimalEditorGroupBuilder data={data} onChange={setData} />
 
-        <Label>Icon Color</Label>
+        <Label>{translate('UI:HL_COLOR')}</Label>
         <AnimalEditorColorPicker
           data={data}
           defaultIconColor={defaultIconColor}

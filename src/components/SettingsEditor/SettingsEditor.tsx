@@ -3,11 +3,15 @@ import Slider from 'react-slider';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
+import { useTranslator } from 'hooks';
 import { SettingsEditorProps } from './types';
 import styles from './SettingsEditor.module.css';
 
 export const SettingsEditor = (props: SettingsEditorProps) => {
   const { settings, visible = false, onChange, onClose } = props;
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Destructure settings
   const { animalMarkerSize, genericMarkerSize, zoneMarkerSize } = useMemo(
@@ -69,12 +73,12 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
   const actions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: 'Reset',
+        children: translate('UI:RESET'),
         className: styles.SettingsEditorResetButton,
         onClick: handleReset,
       },
     ],
-    [handleReset],
+    [handleReset, translate],
   );
 
   // Rendered animal marker size slider
@@ -100,18 +104,26 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
       actions={actions}
       className={styles.SettingsEditorSidePanel}
       closeOnOutsideClick={true}
-      title="Settings"
+      title={translate('UI:SETTINGS')}
       visible={visible}
       onClose={onClose}
     >
       <div className={styles.SettingsEditor}>
-        <Label>Generic marker size ({genericMarkerSize})</Label>
+        <Label>
+          {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} (
+          {genericMarkerSize})
+        </Label>
         {renderedGenericMarkerSize}
 
-        <Label>Animal marker size ({animalMarkerSize})</Label>
+        <Label>
+          {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS')} (
+          {animalMarkerSize})
+        </Label>
         {renderedAnimalMarkerSize}
 
-        <Label>Need zone marker size ({zoneMarkerSize})</Label>
+        <Label>
+          {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ZONES')} ({zoneMarkerSize})
+        </Label>
         {renderedZoneMarkerSize}
       </div>
     </SidePanel>

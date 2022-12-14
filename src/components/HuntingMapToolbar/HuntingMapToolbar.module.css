@@ -1,4 +1,6 @@
 .HuntingMapToolbar {
+  display: flex;
+  flex-direction: column;
   margin-top: 0.5em;
   position: absolute;
   right: 0.5em;

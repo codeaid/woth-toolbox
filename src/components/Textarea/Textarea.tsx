@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import {
   ForwardedRef,
-  KeyboardEvent,
   forwardRef,
+  KeyboardEvent,
   useCallback,
   useMemo,
 } from 'react';
@@ -27,6 +27,7 @@ export const Textarea = forwardRef(
       [],
     );
 
+    // noinspection XmlDeprecatedElement
     return (
       <textarea
         {...rest}

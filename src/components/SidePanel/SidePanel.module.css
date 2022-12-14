@@ -126,7 +126,6 @@
   transform: translateX(100%);
 }
 
-
 @media (max-width: 576px) {
   .SidePanel {
     left: 0;

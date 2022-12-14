@@ -3,10 +3,10 @@
   position: absolute;
   transform: scale(0) translate(-50%, -50%);
   transition: color 100ms ease-in-out,
-    fill 100ms ease-in-out,
-    opacity 75ms linear;
+  fill 100ms ease-in-out,
+  opacity 75ms linear;
   z-index: 2;
-  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 .HuntingMapMarker:hover {
