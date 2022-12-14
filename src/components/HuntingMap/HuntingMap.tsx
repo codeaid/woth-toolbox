@@ -714,9 +714,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   return (
     <>
-      {!imageLoaded && (
-        <LoadingOverlay>Please wait. Loading map...</LoadingOverlay>
-      )}
+      {!imageLoaded && <LoadingOverlay />}
 
       <HuntingMapToolbar
         onReset={handleMapReset}

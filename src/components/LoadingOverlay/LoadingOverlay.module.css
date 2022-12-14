@@ -14,9 +14,3 @@
   user-select: none;
   z-index: 1000;
 }
-
-.LoadingOverlayContent {
-  font-size: 0.9em;
-  font-weight: 500;
-  margin-top: 1.5em;
-}
