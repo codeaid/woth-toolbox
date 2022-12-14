@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
 import { StrictMode } from 'react';
 import { Layout } from 'components/Layout';
 import { ApplicationSettingsProvider } from 'contexts';
@@ -33,4 +34,4 @@ const App = (props: AppProps) => {
   );
 };
 
-export default App;
+export default appWithTranslation(App);
