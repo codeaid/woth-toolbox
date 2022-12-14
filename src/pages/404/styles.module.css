@@ -1,0 +1,12 @@
+.NotFoundPageContent {
+  margin: 10vh auto 0 auto;
+  max-width: 40em;
+  user-select: none;
+}
+
+.NotFoundPageHeading {
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-size: 7em;
+  font-weight: 300;
+  text-align: center;
+}
