@@ -112,7 +112,9 @@ const AnimalSelectorPage = () => {
   return (
     <>
       <Head>
-        <title>{translate('UI:SECTION_FIREARMS')} - Way Of The Hunter</title>
+        <title>
+          {translate('UI:SECTION_FIREARMS')} - {translate('UI:GAME_TITLE')}
+        </title>
       </Head>
 
       <div className={styles.AnimalSelectorPage}>

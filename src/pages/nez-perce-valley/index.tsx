@@ -5,7 +5,11 @@ import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import { useAnimalMarkerData, useApplicationSettings } from 'hooks';
+import {
+  useAnimalMarkerData,
+  useApplicationSettings,
+  useTranslator,
+} from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
@@ -18,10 +22,15 @@ const NezPerceValleyPage = () => {
   // Retrieve application settings
   const { settings } = useApplicationSettings();
 
+  // Retrieve application translator
+  const translate = useTranslator();
+
   return (
     <>
       <Head>
-        <title>Nez Perce Valley - Way Of The Hunter</title>
+        <title>
+          {translate('POI:MAP_NAME_IDAHO')} - {translate('UI:GAME_TITLE')}
+        </title>
       </Head>
 
       <NoSSR>

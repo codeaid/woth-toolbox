@@ -129,7 +129,9 @@ const WeaponSelectorPage = () => {
   return (
     <>
       <Head>
-        <title>{translate('UI:SECTION_ANIMALS')} - Way Of The Hunter</title>
+        <title>
+          {translate('UI:SECTION_ANIMALS')} - {translate('UI:GAME_TITLE')}
+        </title>
       </Head>
 
       <div className={styles.WeaponSelectorPage}>

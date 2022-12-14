@@ -13,7 +13,9 @@ const AnimalLifeCyclesPage = () => {
   return (
     <>
       <Head>
-        <title>{translate('UI:LIFE_CYCLE')} - Way Of The Hunter</title>
+        <title>
+          {translate('UI:LIFE_CYCLE')} - {translate('UI:GAME_TITLE')}
+        </title>
       </Head>
 
       <PageContent>

@@ -12,6 +12,7 @@ import {
   useAnimalMarkerData,
   useApplicationSettings,
   useDebugPanel,
+  useTranslator,
 } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
@@ -24,6 +25,9 @@ const TransylvaniaPage = () => {
 
   // Retrieve application settings
   const { settings } = useApplicationSettings();
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   // Detect if application is running in debug mode
   const { query } = useRouter();
@@ -53,7 +57,10 @@ const TransylvaniaPage = () => {
   return (
     <>
       <Head>
-        <title>Transylvania - Way Of The Hunter</title>
+        <title>
+          {translate('POI:MAP_NAME_TRANSYLVANIA')} -{' '}
+          {translate('UI:GAME_TITLE')}
+        </title>
       </Head>
 
       <NoSSR>
