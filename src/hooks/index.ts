@@ -4,3 +4,4 @@ export * from './useApplicationSettingsStorage';
 export * from './useDebugPanel';
 export * from './useForceUpdate';
 export * from './useRefCallback';
+export * from './useTranslator';
