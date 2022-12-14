@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'react';
 import { AnimalDetails } from 'components/AnimalDetails';
 import { AnimalList } from 'components/AnimalList';
 import { Card } from 'components/Card';
+import { Error } from 'components/Error';
 import { PageContent } from 'components/PageContent';
 import { PivotTable } from 'components/PivotTable';
 import { Sidebar } from 'components/Sidebar';
@@ -94,11 +95,7 @@ const WeaponSelectorPage = () => {
    */
   const renderDetails = () => {
     if (animalId && !selectedAnimal) {
-      return (
-        <div className={styles.WeaponSelectorPageNotification}>
-          <Card>Invalid animal identifier</Card>
-        </div>
-      );
+      return <Error status={404} />;
     }
 
     if (!selectedAnimal) {

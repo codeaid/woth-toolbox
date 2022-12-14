@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { Card } from 'components/Card';
+import { Error } from 'components/Error';
 import { PageContent } from 'components/PageContent';
 import { PivotTable } from 'components/PivotTable';
 import { Sidebar } from 'components/Sidebar';
@@ -77,11 +78,7 @@ const AnimalSelectorPage = () => {
    */
   const renderDetails = () => {
     if (weaponId && !selectedWeapon) {
-      return (
-        <div className={styles.AnimalSelectorPageNotification}>
-          <Card>Invalid weapon identifier</Card>
-        </div>
-      );
+      return <Error status={404} />;
     }
 
     if (!selectedWeapon) {
