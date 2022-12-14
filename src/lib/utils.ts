@@ -1,5 +1,5 @@
 import colors from 'color';
-import { formatDistanceToNow, fromUnixTime } from 'date-fns';
+import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns';
 import { ColorResult } from 'react-color';
 
 /**
@@ -30,9 +30,8 @@ export const formatTimestampDistance = (value?: number) => {
     return;
   }
 
-  return formatDistanceToNow(fromUnixTime(value / 1000), {
+  return formatDistanceToNowStrict(fromUnixTime(value / 1000), {
     addSuffix: true,
-    includeSeconds: true,
   });
 };
 
