@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
-import { useTranslator } from 'hooks';
+import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { formatTimestampDistance } from 'lib/utils';
 import { MarkerStorageRecordAnimal } from 'types/markers';
@@ -39,7 +39,8 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   // Flag indicating whether side panel is visible or not
   const [visible, setVisible] = useState(false);
 
-  // Retrieve application translator
+  // Retrieve application locale and translator
+  const locale = useLocale();
   const translate = useTranslator();
 
   // Retrieve animal name
@@ -90,14 +91,14 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const handleRefreshDates = useCallback(() => {
     // Update formatted creation date
     if (data && data.created) {
-      setDateCreated(formatTimestampDistance(data.created));
+      setDateCreated(formatTimestampDistance(data.created, locale));
     }
 
     // Update formatted update date
     if (data && data.updated) {
-      setDateUpdated(formatTimestampDistance(data.updated));
+      setDateUpdated(formatTimestampDistance(data.updated, locale));
     }
-  }, [data]);
+  }, [data, locale]);
 
   // List of sidebar action button properties
   const actions = useMemo<Array<ButtonProps>>(

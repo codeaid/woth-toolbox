@@ -1,6 +1,7 @@
 import colors from 'color';
 import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns';
 import { ColorResult } from 'react-color';
+import { dateLocaleMap } from 'config/date';
 
 /**
  * Format hour value
@@ -14,9 +15,13 @@ export const formatHour = (hour: number) =>
  * Format a number according to the current locale
  *
  * @param value Value to format
+ * @param locale Locale to use when formatting the number
  */
-export const formatNumber = (value: number) =>
-  Intl.NumberFormat(undefined, {
+export const formatNumber = (
+  value: number,
+  locale: Optional<string> = undefined,
+) =>
+  Intl.NumberFormat(locale, {
     useGrouping: true,
   }).format(value);
 
@@ -24,14 +29,22 @@ export const formatNumber = (value: number) =>
  * Get the distance between the given date and now in words
  *
  * @param value Timestamp value to convert
+ * @param locale Locale to use when formatting the date
  */
-export const formatTimestampDistance = (value?: number) => {
+export const formatTimestampDistance = (
+  value?: number,
+  locale: Optional<string> = undefined,
+) => {
   if (!value) {
     return;
   }
 
+  // Pick date locale configuration object
+  const dateLocale = locale ? dateLocaleMap.get(locale) : undefined;
+
   return formatDistanceToNowStrict(fromUnixTime(value / 1000), {
     addSuffix: true,
+    locale: dateLocale,
   });
 };
 

@@ -1,4 +1,4 @@
-import { useTranslator } from 'hooks';
+import { useLocale, useTranslator } from 'hooks';
 import { formatNumber } from 'lib/utils';
 import styles from './AnimalDetails.module.css';
 import { AnimalDetailsProps } from './types';
@@ -10,7 +10,8 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
   const { hitEnergy } = animal;
   const [energyFrom, energyTo] = hitEnergy;
 
-  // Retrieve application translator
+  // Retrieve application locale and translator
+  const locale = useLocale();
   const translate = useTranslator();
 
   return (
@@ -37,7 +38,8 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
         </div>
         <div className={styles.AnimalDetailsStatValue}>{`${formatNumber(
           energyFrom,
-        )} - ${formatNumber(energyTo)} J`}</div>
+          locale,
+        )} - ${formatNumber(energyTo, locale)} J`}</div>
       </div>
     </div>
   );

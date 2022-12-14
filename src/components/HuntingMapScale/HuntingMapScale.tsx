@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
-import { useTranslator } from 'hooks';
+import { useLocale, useTranslator } from 'hooks';
 import { floorNearestFloor10, formatNumber, getMapScaleStep } from 'lib/utils';
 import { HuntingMapScaleProps } from './types';
 import styles from './HuntingMapScale.module.css';
@@ -17,7 +17,8 @@ export const HuntingMapScale = (props: HuntingMapScaleProps) => {
     metersPerPixel,
   } = props;
 
-  // Retrieve application translator
+  // Retrieve application locale and translator
+  const locale = useLocale();
   const translate = useTranslator();
 
   // Current scale bar width
@@ -115,7 +116,7 @@ export const HuntingMapScale = (props: HuntingMapScaleProps) => {
         })}
       ></div>
       <div className={styles.HuntingMapScaleText}>
-        {formatNumber(value)}
+        {formatNumber(value, locale)}
         {translate('UNITS:METRIC_METERS')}
       </div>
     </div>
