@@ -1,14 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Error } from 'components/Error';
 import { PageContent } from 'components/PageContent';
-import styles from './styles.module.css';
 
 const NotFoundPage = () => (
   <>
     <PageContent>
-      <div className={styles.NotFoundPageContent}>
-        <h1 className={styles.NotFoundPageHeading}>404</h1>
-      </div>
+      <Error status={404} />
     </PageContent>
   </>
 );
