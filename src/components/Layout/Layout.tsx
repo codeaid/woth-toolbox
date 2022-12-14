@@ -25,7 +25,7 @@ export const Layout = (props: LayoutProps) => {
       },
       {
         children: translate('UI:LIFE_CYCLE'),
-        href: '/animal-life-cycles',
+        href: '/life-cycle',
       },
       {
         children: translate('POI:MAP_NAME_IDAHO'),
