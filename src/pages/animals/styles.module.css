@@ -7,6 +7,7 @@
 .WeaponSelectorPageNotification {
   margin: 10vh auto 0 auto;
   max-width: 40em;
+  width: 100%;
 }
 
 .WeaponSelectorPageSeparator {
