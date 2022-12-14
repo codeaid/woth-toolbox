@@ -1,5 +1,4 @@
 .WeaponDetails {
-  font-size: 1.1em;
   user-select: none;
 }
 
@@ -26,6 +25,7 @@
 .WeaponDetailsStat {
   align-items: baseline;
   display: flex;
+  font-size: 1.1em;
   margin-top: 0.5em;
 }
 

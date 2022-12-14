@@ -1,5 +1,4 @@
 .AnimalDetails {
-  font-size: 1.1em;
   user-select: none;
 }
 
@@ -18,7 +17,7 @@
 
 .AnimalDetailsDescription {
   font-weight: 300;
-  height: calc(1.3em * 4);
+  height: calc(1.3em * 3);
   overflow: auto;
   padding-right: 1em;
 }
@@ -26,6 +25,7 @@
 .AnimalDetailsStat {
   align-items: baseline;
   display: flex;
+  font-size: 1.1em;
   margin-top: 0.5em;
 }
 
