@@ -1,6 +1,62 @@
 import { Weapon } from 'types/weapons';
 
 export const weapons: Array<Weapon> = [
+  // Tier 1
+  {
+    action: 'WEAPON:SHOTGUN_BREAK01_ACTION',
+    caliber: 'WEAPON:SHOTGUN_BREAK01_CALIBER',
+    description: 'WEAPON:SHOTGUN_BREAK01_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_BREAK01_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'bonser-klein-standard',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:SHOTGUN_BREAK02_ACTION',
+    caliber: 'WEAPON:SHOTGUN_BREAK02_CALIBER',
+    description: 'WEAPON:SHOTGUN_BREAK02_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_BREAK02_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'hol-den-the-jack',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:SHOTGUN_BREAK03_ACTION',
+    caliber: 'WEAPON:SHOTGUN_BREAK03_CALIBER',
+    description: 'WEAPON:SHOTGUN_BREAK03_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_BREAK03_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'cinnamonsky-the-jack',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:SHOTGUN_PUMP01_ACTION',
+    caliber: 'WEAPON:SHOTGUN_PUMP01_CALIBER',
+    description: 'WEAPON:SHOTGUN_PUMP01_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_PUMP01_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'remington-870-wingmaster',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:SHOTGUN_SEMI01_ACTION',
+    caliber: 'WEAPON:SHOTGUN_SEMI01_CALIBER',
+    description: 'WEAPON:SHOTGUN_SEMI01_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_SEMI01_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'morning-silence',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:SHOTGUN_SEMI02_ACTION',
+    caliber: 'WEAPON:SHOTGUN_SEMI02_CALIBER',
+    description: 'WEAPON:SHOTGUN_SEMI02_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_SEMI02_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'remington-v3-Waterfowl-pro',
+    tier: 1,
+  },
+
   // Tier 2
   {
     action: 'WEAPON:BOLT08_ACTION',
