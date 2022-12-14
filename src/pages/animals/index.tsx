@@ -21,7 +21,7 @@ import styles from './styles.module.css';
 const WeaponSelectorPage = () => {
   // Extract route parameters
   const router = useRouter();
-  const { animal: animalId } = router.query;
+  const { q: animalId } = router.query;
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -37,7 +37,7 @@ const WeaponSelectorPage = () => {
    */
   const handleAnimalClick = useCallback(
     (animal: Animal) =>
-      router.push(`/animals?animal=${encodeURIComponent(animal.slug)}`),
+      router.push(`/animals?q=${encodeURIComponent(animal.slug)}`),
     [router],
   );
 
