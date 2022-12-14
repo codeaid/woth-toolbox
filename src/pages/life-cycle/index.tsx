@@ -14,7 +14,7 @@ const AnimalLifeCyclesPage = () => {
     <>
       <Head>
         <title>
-          {translate('UI:LIFE_CYCLE')} - {translate('UI:GAME_TITLE')}
+          {`${translate('UI:LIFE_CYCLE')} - ${translate('UI:GAME_TITLE')}`}
         </title>
       </Head>
 

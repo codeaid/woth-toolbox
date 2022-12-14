@@ -58,8 +58,9 @@ const TransylvaniaPage = () => {
     <>
       <Head>
         <title>
-          {translate('POI:MAP_NAME_TRANSYLVANIA')} -{' '}
-          {translate('UI:GAME_TITLE')}
+          {`${translate('POI:MAP_NAME_TRANSYLVANIA')} - ${translate(
+            'UI:GAME_TITLE',
+          )}`}
         </title>
       </Head>
 

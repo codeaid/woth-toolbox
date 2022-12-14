@@ -113,7 +113,9 @@ const AnimalSelectorPage = () => {
     <>
       <Head>
         <title>
-          {translate('UI:SECTION_FIREARMS')} - {translate('UI:GAME_TITLE')}
+          {`${translate('UI:SECTION_FIREARMS')} - ${translate(
+            'UI:GAME_TITLE',
+          )}`}
         </title>
       </Head>
 

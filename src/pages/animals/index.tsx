@@ -130,7 +130,7 @@ const WeaponSelectorPage = () => {
     <>
       <Head>
         <title>
-          {translate('UI:SECTION_ANIMALS')} - {translate('UI:GAME_TITLE')}
+          {`${translate('UI:SECTION_ANIMALS')} - ${translate('UI:GAME_TITLE')}`}
         </title>
       </Head>
 
