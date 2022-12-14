@@ -37,7 +37,7 @@ const WeaponSelectorPage = () => {
    */
   const handleAnimalClick = useCallback(
     (animal: Animal) =>
-      router.push(`/weapon-selector?animal=${encodeURIComponent(animal.slug)}`),
+      router.push(`/animals?animal=${encodeURIComponent(animal.slug)}`),
     [router],
   );
 
@@ -129,7 +129,7 @@ const WeaponSelectorPage = () => {
   return (
     <>
       <Head>
-        <title>Weapon Selector - Way Of The Hunter</title>
+        <title>{translate('UI:SECTION_ANIMALS')} - Way Of The Hunter</title>
       </Head>
 
       <div className={styles.WeaponSelectorPage}>

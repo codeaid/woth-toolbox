@@ -17,7 +17,7 @@ export const Layout = (props: LayoutProps) => {
     () => [
       {
         children: translate('UI:SECTION_ANIMALS'),
-        href: '/weapon-selector',
+        href: '/animals',
       },
       {
         children: translate('UI:SECTION_FIREARMS'),

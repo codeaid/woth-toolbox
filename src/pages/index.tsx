@@ -6,7 +6,7 @@ const HomePage = () => {
 
   useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
-    router.push('/weapon-selector');
+    router.push('/animals');
   }, [router]);
 
   return null;
