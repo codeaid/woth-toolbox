@@ -1,21 +1,21 @@
 .WeaponName {
-  font-weight: 500;
 }
 
 .WeaponNameCalibre {
   color: var(--text-secondary);
   font-size: 0.85em;
   font-style: italic;
-  font-weight: normal;
   line-height: 1em;
-  margin-top: 0.5em;
+  margin-top: 0.3em;
 }
 
 .WeaponNameTitle {
   color: var(--text-primary);
+  font-family: 'Fira Sans Condensed', sans-serif;
   line-height: 1em;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 125ms ease-in-out;
   white-space: nowrap;
 }
 

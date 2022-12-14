@@ -1,6 +1,6 @@
 .AnimalEditorGroupBuilder {
   display: grid;
-  grid-gap: 0.75em;
+  grid-gap: 0.5em;
 }
 
 .AnimalEditorGroupBuilderAgeButtons {
@@ -37,6 +37,7 @@
   grid-gap: 0.25em;
   min-height: 6.4rem;
   padding: 0.25em;
+  position: relative;
   user-select: none;
 }
 
@@ -44,7 +45,7 @@
   align-items: center;
   background-color: var(--elevation2);
   display: grid;
-  grid-template-columns: 1.6em 3.3em 1.6em 3.3em 1.6em 1fr;
+  grid-template-columns: 1.6em 4.5em 1.6em 3.5em 1.6em 1fr;
   padding: 0.25em;
   position: relative;
 }
@@ -74,16 +75,13 @@
 
 .AnimalEditorGroupBuilderListEntryValue {
   color: var(--text-primary);
-  font-style: italic;
+  font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 0.8em;
-}
-
-.AnimalEditorGroupBuilderListPlaceholder {
-  color: var(--text-secondary);
-  font-size: 0.8em;
-  padding: 1.2em 2em;
-  user-select: none;
-  text-align: center;
+  font-weight: 400;
+  margin-right: 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .AnimalEditorGroupBuilderRatingButtons {
@@ -91,15 +89,16 @@
 }
 
 .AnimalEditorGroupBuilderSection {
-  align-items: center;
-  display: flex;
-  flex: 1;
+  display: grid;
+  grid-gap: 0.2em;
 }
 
 .AnimalEditorGroupBuilderButtonToggle {
   background-color: var(--elevation5);
+  font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 0.9em;
-  padding: 0.55em 0;
+  font-weight: 400;
+  padding: 0.5em 0.25em;
 }
 
 .AnimalEditorGroupBuilderButtonToggle:hover {

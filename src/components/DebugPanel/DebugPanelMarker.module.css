@@ -2,7 +2,7 @@
   background-color: var(--elevation5);
   border: thin dashed var(--brand-semi);
   border-radius: 0.25em;
-  height: 10rem;
+  height: 9.7rem;
   overflow: hidden;
   user-select: none;
 }
@@ -31,9 +31,8 @@
 .DebugPanelMarkerName {
   background-color: var(--elevation4);
   color: var(--brand);
-  font-family: 'BenchNine', sans-serif;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
   font-size: 1.2em;
-  font-weight: 500;
   text-transform: uppercase;
 }
 

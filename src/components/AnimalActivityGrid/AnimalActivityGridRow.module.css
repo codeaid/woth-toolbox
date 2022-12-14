@@ -4,7 +4,8 @@
 }
 
 .AnimalActivityGridRowName {
-  padding: 0.25em 0.5em;
+  line-height: 1em;
+  padding: 0.25em 0.5em 0.25em 0;
   width: 13rem;
 }
 
@@ -44,15 +45,15 @@
   }
 
   .AnimalActivityGridRowName {
-    margin-bottom: 0.5em;
-    padding: 0;
+    line-height: unset;
+    padding: 0 0 0 0.25em;
     width: 100%;
   }
 }
 
 @media (max-width: 960px) {
   .AnimalActivityGridRowSlots {
-    grid-gap: 0.5em;
+    grid-gap: 0.25em;
     grid-template-columns: repeat(12, 1fr);
   }
 }

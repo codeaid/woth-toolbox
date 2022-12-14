@@ -63,7 +63,7 @@
 
 .SidePanelHeaderTitle {
   color: var(--brand);
-  font-family: 'BenchNine', sans-serif;
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   font-size: 1.5em;
   font-weight: 400;
   margin: 0;

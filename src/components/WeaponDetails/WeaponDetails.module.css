@@ -3,45 +3,43 @@
   user-select: none;
 }
 
-.WeaponName {
-  font-family: 'BenchNine', sans-serif;
-  font-size: 1.4em;
-  letter-spacing: 0.12em;
+.WeaponDetailsName {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-.WeaponNameLatin {
+.WeaponDetailsNameCaliber {
   color: var(--text-secondary);
   font-style: italic;
   margin-top: 0.25em;
 }
 
-.WeaponDescription {
+.WeaponDetailsDescription {
+  font-weight: 300;
   height: calc(1.3em * 3);
-  line-height: 1.3em;
   overflow: auto;
   padding-right: 1em;
 }
 
-.WeaponStat {
+.WeaponDetailsStat {
   align-items: baseline;
   display: flex;
-  line-height: 1.4em;
   margin-top: 0.5em;
+}
+
+.WeaponDetailsStatName {
+  color: var(--text-secondary);
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.WeaponStatName {
-  color: var(--text-secondary);
-  font-family: 'BenchNine', sans-serif;
-  font-size: 1.2em;
-  letter-spacing: 0.1em;
-}
-
-.WeaponStatValue {
+.WeaponDetailsStatValue {
   color: var(--text-primary);
-  font-size: 1.1em;
   letter-spacing: unset;
+  line-height: 1em;
   margin-left: 0.8em;
 }
 

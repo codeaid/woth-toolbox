@@ -2,7 +2,8 @@
   background-color: var(--elevation0);
   display: grid;
   grid-template-columns: auto 1fr auto;
-  font-family: 'BenchNine', sans-serif;
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  line-height: 1em;
   user-select: none;
   z-index: 100;
   width: 100%;
@@ -12,11 +13,11 @@
   align-items: center;
   color: var(--text-primary);
   display: inline-flex;
-  font-size: 1.4em;
-  font-weight: 500;
+  font-size: 1.2em;
   justify-content: center;
   line-height: 1em;
-  padding: 0.65em;
+  min-width: 6em;
+  padding: 0.65rem;
   text-decoration: none;
   text-transform: uppercase;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
@@ -39,10 +40,9 @@
 .ToolbarHeading {
   align-items: center;
   display: flex;
-  font-size: 1.4em;
+  font-size: 1.2em;
   justify-content: center;
-  line-height: 1em;
-  padding: 0.65em;
+  padding: 0.65rem;
   text-transform: uppercase;
   width: 15rem;
 }
@@ -86,6 +86,7 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   left: 0;
   overflow: auto;
   position: absolute;
@@ -96,7 +97,6 @@
 
 .ToolbarMobileMenu .ToolbarAction {
   flex: unset;
-  font-family: 'BenchNine', sans-serif;
   font-size: 1.5em;
   padding: 0.75em 1em;
 }
@@ -110,13 +110,11 @@
 
 .ToolbarSubtitle {
   color: var(--brand);
-  line-height: 1em;
   margin-left: 0.15em;
 }
 
 .ToolbarTitle {
   color: var(--text-highlight);
-  line-height: 1em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -125,11 +123,7 @@
 @media (max-width: 1024px) {
   .ToolbarAction {
     flex: 1;
-    font-size: 1em;
-  }
-
-  .ToolbarHeading {
-    font-size: 1.1em;
+    min-width: unset;
   }
 }
 

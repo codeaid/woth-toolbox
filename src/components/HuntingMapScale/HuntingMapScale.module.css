@@ -55,7 +55,7 @@
 .HuntingMapScaleText {
   color: var(--map-scale-text);
   font-size: 0.8em;
-  font-weight: bold;
+  font-weight: 500;
   left: 0;
   position: absolute;
   text-align: center;

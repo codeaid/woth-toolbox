@@ -1,20 +1,20 @@
 .AnimalName {
-  font-weight: 500;
 }
 
 .AnimalNameLatin {
   color: var(--text-secondary);
   font-size: 0.85em;
   font-style: italic;
-  font-weight: normal;
-  line-height: 1em;
   margin-top: 0.3em;
 }
 
 .AnimalNameTitle {
   color: var(--text-primary);
-  line-height: 1em;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: color 125ms ease-in-out;
+  white-space: nowrap;
 }
 
 .AnimalNameHighlighted .AnimalNameTitle {

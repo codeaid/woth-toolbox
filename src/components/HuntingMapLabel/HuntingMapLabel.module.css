@@ -51,16 +51,16 @@
 
 .HuntingMapLabelSubtitle {
   color: var(--text-secondary);
-  font-size: 0.8em;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-size: 0.9em;
   text-align: center;
   z-index: 1;
 }
 
 .HuntingMapLabelTitle {
   display: flex;
-  font-family: 'BenchNine', sans-serif;
+  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   font-size: 1.1em;
-  font-weight: 500;
   justify-content: center;
   letter-spacing: 0.14em;
   text-transform: uppercase;
