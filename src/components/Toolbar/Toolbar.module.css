@@ -10,15 +10,16 @@
 }
 
 .ToolbarAction {
-  align-items: center;
   color: var(--text-primary);
-  display: inline-flex;
+  display: block;
   font-size: 1.2em;
-  justify-content: center;
-  line-height: 1em;
-  min-width: 6em;
+  line-height: 1.2em;
+  min-width: 6.5em;
+  overflow: hidden;
   padding: 0.65rem;
+  text-align: center;
   text-decoration: none;
+  text-overflow: ellipsis;
   text-transform: uppercase;
   transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
   white-space: nowrap;
@@ -35,6 +36,7 @@
 
 .ToolbarActions {
   display: flex;
+  overflow: hidden;
 }
 
 .ToolbarHeading {
@@ -42,7 +44,9 @@
   display: flex;
   font-size: 1.2em;
   justify-content: center;
-  padding: 0.65rem;
+  line-height: 1em;
+  overflow: hidden;
+  padding: 0 0.65rem;
   text-transform: uppercase;
   width: 15rem;
 }
@@ -122,8 +126,7 @@
 
 @media (max-width: 1024px) {
   .ToolbarAction {
-    flex: 1;
-    min-width: unset;
+    min-width: 5em;
   }
 }
 
