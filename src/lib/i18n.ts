@@ -6,7 +6,7 @@ import {
   AnimalType,
 } from 'types/animals';
 import { TranslationKey } from 'types/i18n';
-import { MarkerTypeNeedZone } from 'types/markers';
+import { MarkerTypeGeneric, MarkerTypeNeedZone } from 'types/markers';
 
 /**
  * Get animal's activity translation key
@@ -99,6 +99,36 @@ export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey => {
       return 'ANIMAL:NEED_ZONE_RESTING';
     default:
       throw new Error(`Invalid need zone type specified: ${type}`);
+  }
+};
+
+/**
+ * Get generic marker type translation key
+ *
+ * @param type Target marker type
+ */
+export const getGenericMarkerKey = (
+  type: MarkerTypeGeneric,
+): TranslationKey => {
+  switch (type) {
+    case 'cabin':
+      return 'TOOLBOX:MARKER_CABIN';
+    case 'camp':
+      return 'UI:MARKER_CAMPSITE';
+    case 'echo':
+      return 'UI:MARKER_ECHO';
+    case 'hunting stand':
+      return 'UI:MARKER_HUNTING_STAND';
+    case 'lodge':
+      return 'TOOLBOX:MARKER_LODGE';
+    case 'photo':
+      return 'UI:MARKER_PHOTO';
+    case 'shooting range':
+      return 'TOOLBOX:MARKER_SHOOTING_RANGE';
+    case 'view':
+      return 'UI:MARKER_VIEW';
+    default:
+      throw new Error(`Invalid generic marker type specified: ${type}`);
   }
 };
 

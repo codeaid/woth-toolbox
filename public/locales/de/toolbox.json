@@ -6,10 +6,13 @@
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Keine fertigen Markierungen verfügbar",
   "TOOLBOX:LAST_MODIFIED": "Zuletzt bearbeitet",
   "TOOLBOX:MARKER_CREATOR": "Tiermarker-Ersteller",
+  "TOOLBOX:MARKER_CABIN": "Hütte",
+  "TOOLBOX:MARKER_LODGE": "Jagdhaus",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Schießstand",
   "TOOLBOX:SELECT_ANIMAL": "Bitte wählen Sie ein Tier aus",
   "TOOLBOX:SELECT_WEAPON": "Bitte wählen Sie eine Waffe aus",
   "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Größe der Tiersymbole",
   "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Generische Symbolgröße",
-  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Größe des Zonensymbols erforderlich",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Größe des Zonensymbols",
   "TOOLBOX:TITLE": "Toolbox"
 }

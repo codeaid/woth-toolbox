@@ -11,15 +11,13 @@ import { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { SectionHeader } from 'components/SectionHeader';
 import { SidePanel } from 'components/SidePanel';
-import { genericNameMap } from 'config/names';
 import { useTranslator } from 'hooks';
-import { getAnimalTypeKey } from 'lib/i18n';
+import { getAnimalTypeKey, getGenericMarkerKey } from 'lib/i18n';
 import {
   getMarkerOptionTypes,
   isAnimalMarkerType,
   isGenericMarkerType,
 } from 'lib/markers';
-import { AnimalType } from 'types/animals';
 import { MarkerType, MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterProps } from './types';
@@ -188,9 +186,9 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
           .map(type => ({
             name:
               (isAnimalMarkerType(type)
-                ? translate(getAnimalTypeKey(type as AnimalType))
+                ? translate(getAnimalTypeKey(type))
                 : isGenericMarkerType(type)
-                ? genericNameMap.get(type)
+                ? translate(getGenericMarkerKey(type))
                 : type) ?? type,
             type,
           }))
