@@ -1,12 +1,15 @@
-import { useTranslation } from 'next-i18next';
-import { Translator } from 'types/i18n';
+import { useCallback } from 'react';
+import { useIntl } from 'react-intl';
+import { TranslationKey, Translator } from 'types/i18n';
 
 /**
- * Create an instance of application translator
+ * Create an instance of a function retrieving internationalized strings
  */
-export const useTranslator = () => {
-  // Retrieve original translator function
-  const { t } = useTranslation<'woth' | 'toolbox'>();
+export const useTranslator = (): Translator => {
+  const { formatMessage } = useIntl();
 
-  return t as Translator;
+  return useCallback(
+    (id: TranslationKey) => formatMessage({ id }),
+    [formatMessage],
+  );
 };

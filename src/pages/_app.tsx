@@ -1,15 +1,20 @@
+import { getUserLocale } from 'get-user-locale';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { appWithTranslation } from 'next-i18next';
-import { StrictMode } from 'react';
+import { StrictMode, useState } from 'react';
+import { IntlProvider } from 'react-intl';
 import { Layout } from 'components/Layout';
 import { ApplicationSettingsProvider } from 'contexts';
-import { useApplicationSettingsStorage } from 'hooks';
+import { useApplicationSettingsStorage, useLocaleResource } from 'hooks';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
+
+  // Current user's locale and translation messages
+  const [locale] = useState(() => getUserLocale());
+  const messages = useLocaleResource(locale);
 
   // Retrieve application settings storage
   const settings = useApplicationSettingsStorage();
@@ -24,14 +29,16 @@ const App = (props: AppProps) => {
         />
       </Head>
       <StrictMode>
-        <ApplicationSettingsProvider value={settings}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ApplicationSettingsProvider>
+        <IntlProvider locale={locale} messages={messages}>
+          <ApplicationSettingsProvider value={settings}>
+            <Layout ready={!!messages}>
+              <Component {...pageProps} />
+            </Layout>
+          </ApplicationSettingsProvider>
+        </IntlProvider>
       </StrictMode>
     </>
   );
 };
 
-export default appWithTranslation(App);
+export default App;

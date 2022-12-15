@@ -1,5 +1,3 @@
-import { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { AnimalActivityGrid } from 'components/AnimalActivityGrid';
 import { PageContent } from 'components/PageContent';
@@ -24,11 +22,5 @@ const AnimalLifeCyclesPage = () => {
     </>
   );
 };
-
-export const getStaticProps: GetServerSideProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale as string)),
-  },
-});
 
 export default AnimalLifeCyclesPage;

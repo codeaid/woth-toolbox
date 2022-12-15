@@ -1,5 +1,3 @@
-import { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
@@ -130,11 +128,5 @@ const AnimalSelectorPage = () => {
     </>
   );
 };
-
-export const getStaticProps: GetServerSideProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale as string)),
-  },
-});
 
 export default AnimalSelectorPage;
