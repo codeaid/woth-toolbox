@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { LayoutBackground } from 'components/LayoutBackground';
+import { LoadingOverlay } from 'components/LoadingOverlay';
 import { NavLinkProps } from 'components/NavLink';
 import { Toolbar } from 'components/Toolbar';
 import { useTranslator } from 'hooks';
@@ -7,7 +8,7 @@ import styles from './Layout.module.css';
 import { LayoutProps } from './types';
 
 export const Layout = (props: LayoutProps) => {
-  const { children } = props;
+  const { children, ready = false } = props;
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -38,6 +39,11 @@ export const Layout = (props: LayoutProps) => {
     ],
     [translate],
   );
+
+  // Ensure application is ready before rendering its content
+  if (!ready) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <div className={styles.Layout}>
