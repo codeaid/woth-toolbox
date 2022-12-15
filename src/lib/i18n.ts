@@ -1,11 +1,16 @@
 import { animals, birds } from 'config/animals';
 import {
+  defaultLocale,
+  defaultResource,
+  languageDirectoryMap,
+} from 'config/i18n';
+import {
   AnimalActivity,
   AnimalAge,
   AnimalRating,
   AnimalType,
 } from 'types/animals';
-import { TranslationKey } from 'types/i18n';
+import { TranslationKey, TranslationResource } from 'types/i18n';
 import { MarkerTypeGeneric, MarkerTypeNeedZone } from 'types/markers';
 
 /**
@@ -154,4 +159,47 @@ export const getTierKey = (tier: number): TranslationKey => {
     default:
       throw new Error(`Invalid tier specified: ${tier}`);
   }
+};
+
+/**
+ * Get name of directory used to store specified locale's resource files
+ *
+ * @param locale Target locale
+ */
+const getLocaleDirectory = (locale: string) => {
+  // Check if a directory map exists for the specified locale and return it if it does
+  const directory = languageDirectoryMap.get(locale);
+  if (directory) {
+    return directory;
+  }
+
+  // Name of the directory to use when none of the locales are supported
+  const defaultDirectory = languageDirectoryMap.get(defaultLocale);
+  if (!defaultDirectory) {
+    throw new Error(
+      `Default locale has no resource directory mapped: ${defaultLocale}`,
+    );
+  }
+
+  return defaultDirectory;
+};
+
+/**
+ * Dynamically load translation messages associated with the specified locale
+ *
+ * @param locale Target locale
+ */
+export const getLocaleMessagesAsync = async (locale: string) => {
+  // Determine which directory contains resources files associated with the locale
+  const directory = getLocaleDirectory(locale);
+
+  // Load resource module and merge its contents with the default language
+  const resourceModule = await import(
+    /* webpackChunkName: 'resource' */ `locales/${directory}`
+  );
+
+  return {
+    ...defaultResource,
+    ...resourceModule.default,
+  } as TranslationResource;
 };
