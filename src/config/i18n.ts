@@ -1,25 +1,28 @@
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import toolboxResources from '../../public/locales/en/toolbox.json';
-import wothResources from '../../public/locales/en/woth.json';
+import en_US from 'locales';
 
-// Default internationalization namespace
-export const defaultNS = 'woth';
+// Fallback application locale
+export const defaultLocale = 'en';
 
-// List of default internationalization resources
-export const resources = {
-  en: {
-    toolbox: toolboxResources,
-    woth: wothResources,
-  },
-} as const;
+// Alias to the default language resource
+export const defaultResource = en_US;
 
-// Initialize internationalization options
-i18next.use(initReactI18next).init({
-  defaultNS,
-  nsSeparator: false,
-  keySeparator: false,
-  resources,
-});
-
-export { wothResources, toolboxResources };
+// Map of language codes and their respective locale directories
+export const languageDirectoryMap = new Map<string, string>([
+  ['cs', 'cs-CZ'],
+  ['de', 'de-DE'],
+  ['en', 'en-US'],
+  ['es', 'es-ES'],
+  ['fr', 'fr-FR'],
+  ['hi', 'hi-IN'],
+  ['id', 'id-ID'],
+  ['it', 'it-IT'],
+  ['ja', 'ja-JP'],
+  ['pl', 'pl-PL'],
+  ['ru', 'ru-RU'],
+  ['sk', 'sk-SK'],
+  ['tr', 'tr-TR'],
+  ['zh', 'zh-Hans'],
+  ['zh-CN', 'zh-Hans'],
+  ['zh-HK', 'zh-Hant'],
+  ['zh-TW', 'zh-Hant'],
+]);
