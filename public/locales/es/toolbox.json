@@ -1,0 +1,17 @@
+{
+  "TOOLBOX:COPY": "Copiar",
+  "TOOLBOX:CREATED": "Creado",
+  "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Haga clic en cualquier parte del mapa para crear un nuevo marcador",
+  "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "No hay marcadores completados disponibles",
+  "TOOLBOX:LAST_MODIFIED": "Última modificación",
+  "TOOLBOX:MARKER_CREATOR": "Creador de marcadores",
+  "TOOLBOX:MARKER_CABIN": "Cabañas",
+  "TOOLBOX:MARKER_LODGE": "Cabaña",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Campo de tiro",
+  "TOOLBOX:SELECT_ANIMAL": "Por favor seleccione un animal",
+  "TOOLBOX:SELECT_WEAPON": "Por favor selecciona un arma de fuego",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Tamaño de los marcadores de animales",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Tamaño de los marcadores genéricos",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Tamaño de los marcadores de zona de necesidad",
+  "TOOLBOX:TITLE": "Toolbox"
+}

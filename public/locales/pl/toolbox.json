@@ -1,0 +1,17 @@
+{
+  "TOOLBOX:COPY": "Kopiuj",
+  "TOOLBOX:CREATED": "Utworzony",
+  "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Kliknij dowolne miejsce na mapie, aby utworzyć nowy znacznik",
+  "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Brak dostępnych ukończonych znaczników",
+  "TOOLBOX:LAST_MODIFIED": "Zmodyfikowany",
+  "TOOLBOX:MARKER_CREATOR": "Kreator znaczników zwierząt",
+  "TOOLBOX:MARKER_CABIN": "Domek",
+  "TOOLBOX:MARKER_LODGE": "Chata",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Zasięg strzału",
+  "TOOLBOX:SELECT_ANIMAL": "Proszę wybrać zwierzę",
+  "TOOLBOX:SELECT_WEAPON": "Proszę wybrać broń palną",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Rozmiar znacznika zwierząt",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Rozmiar znaczników mapy",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Rozmiar znaczników stref potrzeb",
+  "TOOLBOX:TITLE": "Przybornik"
+}

@@ -1,0 +1,17 @@
+{
+  "TOOLBOX:COPY": "Kopyala",
+  "TOOLBOX:CREATED": "Oluşturuldu",
+  "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Yeni bir işaretçi oluşturmak için haritada herhangi bir yeri tıklayın",
+  "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Tamamlanmış işaretçi yok",
+  "TOOLBOX:LAST_MODIFIED": "Değiştirilmiş",
+  "TOOLBOX:MARKER_CREATOR": "Hayvan İşaretleyici Oluşturucu",
+  "TOOLBOX:MARKER_CABIN": "Kulübe",
+  "TOOLBOX:MARKER_LODGE": "Av köşkü",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Atış menzili",
+  "TOOLBOX:SELECT_ANIMAL": "Lütfen bir hayvan seçin",
+  "TOOLBOX:SELECT_WEAPON": "Lütfen bir ateşli silah seçin",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Hayvan belirteçlerinin boyutu",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Genel işaretçilerin boyutu",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "İhtiyaç bölgesi işaretçilerinin boyutu",
+  "TOOLBOX:TITLE": "Toolbox"
+}

@@ -1,0 +1,17 @@
+{
+  "TOOLBOX:COPY": "Kopírovať",
+  "TOOLBOX:CREATED": "Vytvorené",
+  "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Kliknutím kdekoľvek na mape vytvoríte novú značku",
+  "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Nie sú k dispozícii žiadne dokončené značky",
+  "TOOLBOX:LAST_MODIFIED": "Upravené",
+  "TOOLBOX:MARKER_CREATOR": "Animal Marker Creator",
+  "TOOLBOX:MARKER_CABIN": "Chata",
+  "TOOLBOX:MARKER_LODGE": "Chatka",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Strelnica",
+  "TOOLBOX:SELECT_ANIMAL": "Vyberte zviera",
+  "TOOLBOX:SELECT_WEAPON": "Vyberte strelnú zbraň",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Veľkosť zvieracej značky",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Veľkosť generických markerov",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Veľkosť značiek zón potreby",
+  "TOOLBOX:TITLE": "Toolbox"
+}

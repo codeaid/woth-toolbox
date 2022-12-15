@@ -341,6 +341,7 @@
   "UI:MARKER_VIEW": "View",
   "UI:OBJECTIVE_ACTIVE": "Active",
   "UI:OBJECTIVE_COMPLETED": "Completed",
+  "UI:OK": "Ok",
   "UI:OPTIMAL_ENERGY": "Recommended hit energy",
   "UI:REMOVE_ALL": "Remove all",
   "UI:RESET": "Reset",

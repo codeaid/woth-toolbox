@@ -104,7 +104,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const actions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: translate('UI:CONFIRM'),
+        children: translate('UI:OK'),
         className: classnames(styles.AnimalEditorActionSave),
         disabled: !data,
         onClick: handleDataWrite,

@@ -5,7 +5,23 @@ module.exports = {
   fallbackNS: ['toolbox', 'woth'],
   i18n: {
     defaultLocale: 'en',
-    locales: ['de', 'en', 'ru'],
+    locales: [
+      'cs',
+      'de',
+      'en',
+      'es',
+      'fr',
+      'hi',
+      'id',
+      'it',
+      'ja',
+      'pl',
+      'ru',
+      'sk',
+      'tr',
+      'zh',
+      'zh-hant',
+    ],
     localeDetection: true,
   },
   keySeparator: false,
@@ -13,6 +29,7 @@ module.exports = {
     typeof window === 'undefined'
       ? require('path').resolve('./public/locales')
       : '/locales',
+  lowerCaseLng: true,
   ns: ['toolbox', 'woth'],
   nsSeparator: false,
   react: {

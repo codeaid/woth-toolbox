@@ -1,0 +1,17 @@
+{
+  "TOOLBOX:COPY": "Copia",
+  "TOOLBOX:CREATED": "Creato",
+  "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Fai clic in un punto qualsiasi della mappa per creare un nuovo indicatore",
+  "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Nessun marcatore completato disponibile",
+  "TOOLBOX:LAST_MODIFIED": "Ultima modifica",
+  "TOOLBOX:MARKER_CREATOR": "Creatore di marcatori",
+  "TOOLBOX:MARKER_CABIN": "Capanno",
+  "TOOLBOX:MARKER_LODGE": "Chalet",
+  "TOOLBOX:MARKER_SHOOTING_RANGE": "Poligono di tiro",
+  "TOOLBOX:SELECT_ANIMAL": "Seleziona un animale",
+  "TOOLBOX:SELECT_WEAPON": "Seleziona un'arma da fuoco",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Dimensione dell'indicatore animale",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Dimensione del marcatore generico",
+  "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Dimensioni dei marcatori della zona di necessità",
+  "TOOLBOX:TITLE": "Toolbox"
+}

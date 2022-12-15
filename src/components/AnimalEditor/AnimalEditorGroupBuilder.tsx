@@ -198,7 +198,7 @@ export const AnimalEditorGroupBuilder = (
         className={styles.AnimalEditorGroupBuilderButtonConfirm}
         onClick={handleConfirm}
       >
-        {translate('TOOLBOX:ADD')}
+        {translate('UI:CONFIRM')}
       </Button>
       {renderedList}
     </div>

@@ -1,5 +1,4 @@
 {
-  "TOOLBOX:ADD": "Add",
   "TOOLBOX:COPY": "Copy",
   "TOOLBOX:CREATED": "Created",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Click anywhere on the map to create a new marker",
@@ -10,7 +9,7 @@
   "TOOLBOX:MARKER_LODGE": "Lodge",
   "TOOLBOX:MARKER_SHOOTING_RANGE": "Shooting Range",
   "TOOLBOX:SELECT_ANIMAL": "Please select an animal",
-  "TOOLBOX:SELECT_WEAPON": "Please select a weapon",
+  "TOOLBOX:SELECT_WEAPON": "Please select a firearm",
   "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Animal marker size",
   "TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC": "Generic marker size",
   "TOOLBOX:SETTINGS_MARKER_SIZE_ZONES": "Need zone marker size",
