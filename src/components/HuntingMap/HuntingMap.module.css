@@ -1,9 +1,6 @@
 .HuntingMap {
   background-color: var(--elevation2);
   flex: 1;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
 }
 
 .HuntingMapDragging {
@@ -20,9 +17,6 @@
 }
 
 .HuntingMapImageWrapper {
-  left: 0;
-  position: absolute;
-  top: 0;
   user-select: none;
   will-change: height, translate, width;
 }
