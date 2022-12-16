@@ -219,6 +219,11 @@ export const getLocaleMessagesAsync = async (locale: string) => {
   // Determine which directory contains resources files associated with the locale
   const directory = getLocaleDirectory(locale);
 
+  // Avoid loading default language resource file as it's already compiled
+  if (locale === defaultLocale) {
+    return defaultResource;
+  }
+
   // Load resource module and merge its contents with the default language
   const resourceModule = await import(
     /* webpackChunkName: 'resource' */ `locales/${directory}`

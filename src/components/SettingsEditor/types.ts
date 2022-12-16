@@ -1,13 +1,10 @@
-import { ApplicationSettings } from 'types/global';
+import { Settings, SettingsChangeHandler } from 'types/app';
 
-export type SettingsEditorChangeHandler = (
-  settings?: ApplicationSettings,
-) => void;
 type SettingsEditorCloseHandler = () => void;
 
 export interface SettingsEditorProps {
-  settings: ApplicationSettings;
+  settings: Required<Settings>;
   visible?: boolean;
-  onChange: SettingsEditorChangeHandler;
+  onChange: SettingsChangeHandler;
   onClose: SettingsEditorCloseHandler;
 }

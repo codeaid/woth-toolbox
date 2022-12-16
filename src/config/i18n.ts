@@ -22,6 +22,7 @@ export const localeDirectoryMap = new Map<string, string>([
   ['sk', 'sk'],
   ['tr', 'tr'],
   ['zh', 'zh'],
+  ['zh-Hant', 'zh-Hant'],
   ['zh-HK', 'zh-Hant'],
   ['zh-TW', 'zh-Hant'],
 ]);

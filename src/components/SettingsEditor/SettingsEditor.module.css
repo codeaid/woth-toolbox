@@ -1,7 +1,7 @@
 .SettingsEditor {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  min-height: 100%;
   padding: 0.65em;
 }
 
