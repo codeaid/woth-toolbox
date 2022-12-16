@@ -1,26 +1,15 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { StrictMode } from 'react';
-import { IntlProvider } from 'react-intl';
-import { Layout } from 'components/Layout';
-import { ApplicationSettingsProvider } from 'contexts';
-import {
-  useApplicationSettingsStorage,
-  useLocale,
-  useLocaleResource,
-} from 'hooks';
+import { App as Toolbox } from 'components/App';
+import { SettingsManagerProvider } from 'contexts';
+import { useSettingsManager } from 'hooks';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
-  const { Component, pageProps } = props;
-
-  // Current user's locale and translation messages
-  const locale = useLocale();
-  const messages = useLocaleResource(locale);
-
-  // Retrieve application settings storage
-  const settings = useApplicationSettingsStorage();
+  // Retrieve application settings manager
+  const manager = useSettingsManager();
 
   return (
     <>
@@ -32,13 +21,9 @@ const App = (props: AppProps) => {
         />
       </Head>
       <StrictMode>
-        <IntlProvider locale={locale} messages={messages}>
-          <ApplicationSettingsProvider value={settings}>
-            <Layout ready={!!messages}>
-              <Component {...pageProps} />
-            </Layout>
-          </ApplicationSettingsProvider>
-        </IntlProvider>
+        <SettingsManagerProvider value={manager}>
+          <Toolbox {...props} />
+        </SettingsManagerProvider>
       </StrictMode>
     </>
   );

@@ -8,8 +8,8 @@ import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
-  useApplicationSettings,
   useDebugPanel,
+  useSettings,
   useTranslator,
 } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
@@ -22,7 +22,7 @@ const TransylvaniaPage = () => {
     useAnimalMarkerData();
 
   // Retrieve application settings
-  const { settings } = useApplicationSettings();
+  const { settings } = useSettings();
 
   // Retrieve application translator
   const translate = useTranslator();

@@ -1,1 +1,1 @@
-export * from './ApplicationSettingsContext';
+export * from './SettingsManagerContext';

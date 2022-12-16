@@ -6,7 +6,7 @@ import { RiMenuLine, RiSettings2Line } from 'react-icons/ri';
 import { IconButton } from 'components/IconButton';
 import { NavLink } from 'components/NavLink';
 import { SettingsEditor } from 'components/SettingsEditor';
-import { useApplicationSettings } from 'hooks';
+import { useSettings } from 'hooks';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
@@ -19,11 +19,11 @@ export const Toolbar = (props: ToolbarProps) => {
   // Flag indicating whether the settings panel is visible
   const [settingsVisible, setSettingsVisible] = useState(false);
 
-  // Extract current application settings and their updater
-  const { settings, onSettingsChange } = useApplicationSettings();
-
   // Retrieve current application path
   const { asPath } = useRouter();
+
+  // Retrieve application settings and their updater
+  const { settings, onSettingsChange } = useSettings();
 
   // Build list of links to render
   const children = useMemo(

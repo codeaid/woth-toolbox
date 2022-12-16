@@ -1,7 +1,7 @@
 import { animalDataPrefix, settingsKey } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
-import { ApplicationSettings } from 'types/global';
+import { Settings } from 'types/app';
 import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
 
 /**
@@ -182,7 +182,7 @@ export const getApplicationSettings = (storage: Storage) => {
       return;
     }
 
-    return JSON.parse(json) as ApplicationSettings;
+    return JSON.parse(json) as Partial<Settings>;
   } catch (e) {}
 };
 
@@ -228,7 +228,7 @@ export const setAnimalMarkerData = (
  */
 export const setApplicationSettings = (
   storage: Storage,
-  settings: ApplicationSettings,
+  settings: Partial<Settings>,
 ) => storage.setItem(settingsKey, JSON.stringify(settings));
 
 /**

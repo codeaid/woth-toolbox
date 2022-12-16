@@ -7,12 +7,17 @@ import { TranslationResource } from 'types/i18n';
  *
  * @param locale Target locale
  */
-export const useLocaleResource = (locale: string) => {
+export const useLocaleResource = (locale?: string) => {
   // Locale and its resource messages
   const [messages, setMessages] = useState<TranslationResource>();
 
   // Load new message data on initial load and locale change
   useEffect(() => {
+    // Ensure locale is present before fetching resources
+    if (!locale) {
+      return;
+    }
+
     getLocaleMessagesAsync(locale).then(setMessages);
   }, [locale]);
 

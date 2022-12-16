@@ -3,11 +3,7 @@ import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import {
-  useAnimalMarkerData,
-  useApplicationSettings,
-  useTranslator,
-} from 'hooks';
+import { useAnimalMarkerData, useSettings, useTranslator } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
@@ -18,7 +14,7 @@ const NezPerceValleyPage = () => {
     useAnimalMarkerData();
 
   // Retrieve application settings
-  const { settings } = useApplicationSettings();
+  const { settings } = useSettings();
 
   // Retrieve application translator
   const translate = useTranslator();
