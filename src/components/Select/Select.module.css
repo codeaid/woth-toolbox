@@ -1,0 +1,89 @@
+.Select {
+  position: relative;
+  width: 100%;
+}
+
+.SelectDisabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.SelectExpanded {
+  z-index: 10;
+}
+
+.SelectInput {
+  align-items: center;
+  background-color: var(--elevation5);
+  border: thin solid var(--elevation6);
+  border-radius: 0.25em;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  padding: 0.5em;
+  position: relative;
+  transition: border-color 150ms ease-in-out;
+  user-select: none;
+  z-index: 2;
+}
+
+.SelectInput:disabled {
+  opacity: 0.5;
+}
+
+.SelectInputExpanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left-color: var(--highlight);
+  border-right-color: var(--highlight);
+  border-top-color: var(--highlight);
+}
+
+.SelectInputIcon {
+  transform: scale(1.5);
+  transition: transform 150ms ease-in-out;
+}
+
+.SelectExpanded .SelectInputIcon {
+  transform: rotateX(180deg) scale(1.5);
+}
+
+.SelectInputText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.SelectOptionItem {
+  border-bottom: thin solid var(--elevation5);
+  cursor: pointer;
+  padding: 0.5em;
+  transition: background-color 100ms ease-in-out;
+}
+.SelectOptionItem:hover {
+  background-color: var(--elevation2);
+}
+
+.SelectOptionList {
+  background-color: var(--elevation3);
+  border: thin solid var(--highlight);
+  border-top: none;
+  border-bottom-left-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  box-shadow: var(--shadow);
+  color: var(--text-primary);
+  max-height: 14.3em;
+  outline: none;
+  overflow-y: auto;
+  position: absolute;
+  user-select: none;
+  width: 100%;
+  z-index: 1;
+}
+
+.SelectPlaceholder {
+  color: var(--text-secondary);
+  flex: 1;
+}
