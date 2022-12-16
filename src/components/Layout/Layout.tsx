@@ -15,29 +15,32 @@ export const Layout = (props: LayoutProps) => {
 
   // Build list of toolbar action items
   const toolbarActions = useMemo<Array<NavLinkProps>>(
-    () => [
-      {
-        children: translate('UI:SECTION_ANIMALS'),
-        href: '/animals',
-      },
-      {
-        children: translate('UI:SECTION_FIREARMS'),
-        href: '/firearms',
-      },
-      {
-        children: translate('UI:LIFE_CYCLE'),
-        href: '/life-cycle',
-      },
-      {
-        children: translate('POI:MAP_NAME_IDAHO'),
-        href: '/nez-perce-valley',
-      },
-      {
-        children: translate('POI:MAP_NAME_TRANSYLVANIA'),
-        href: '/transylvania',
-      },
-    ],
-    [translate],
+    () =>
+      ready
+        ? [
+            {
+              children: translate('UI:SECTION_ANIMALS'),
+              href: '/animals',
+            },
+            {
+              children: translate('UI:SECTION_FIREARMS'),
+              href: '/firearms',
+            },
+            {
+              children: translate('UI:LIFE_CYCLE'),
+              href: '/life-cycle',
+            },
+            {
+              children: translate('POI:MAP_NAME_IDAHO'),
+              href: '/nez-perce-valley',
+            },
+            {
+              children: translate('POI:MAP_NAME_TRANSYLVANIA'),
+              href: '/transylvania',
+            },
+          ]
+        : [],
+    [ready, translate],
   );
 
   // Ensure application is ready before rendering its content
