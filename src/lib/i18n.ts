@@ -1,8 +1,9 @@
+import { getUserLocales } from 'get-user-locale';
 import { animals, birds } from 'config/animals';
 import {
   defaultLocale,
   defaultResource,
-  languageDirectoryMap,
+  localeDirectoryMap,
 } from 'config/i18n';
 import {
   AnimalActivity,
@@ -162,19 +163,44 @@ export const getTierKey = (tier: number): TranslationKey => {
 };
 
 /**
+ * Get application locale corresponding to current browser's locale
+ */
+export const getBrowserLocale = () => {
+  // Get detected locale code
+  const locales = getUserLocales();
+
+  // Iterate through all user locales and attempt to find one that has resources
+  for (const locale of locales) {
+    // Check if detected locale has a direct map to a resource directory
+    if (localeDirectoryMap.has(locale)) {
+      return locale;
+    }
+
+    // Check if locale's language has a resource map and use it if it does
+    const language = new Intl.Locale(locale).language;
+    if (localeDirectoryMap.has(language)) {
+      return language;
+    }
+  }
+
+  // None of the user locales is supported, use default locale
+  return defaultLocale;
+};
+
+/**
  * Get name of directory used to store specified locale's resource files
  *
  * @param locale Target locale
  */
 const getLocaleDirectory = (locale: string) => {
   // Check if a directory map exists for the specified locale and return it if it does
-  const directory = languageDirectoryMap.get(locale);
+  const directory = localeDirectoryMap.get(locale);
   if (directory) {
     return directory;
   }
 
   // Name of the directory to use when none of the locales are supported
-  const defaultDirectory = languageDirectoryMap.get(defaultLocale);
+  const defaultDirectory = localeDirectoryMap.get(defaultLocale);
   if (!defaultDirectory) {
     throw new Error(
       `Default locale has no resource directory mapped: ${defaultLocale}`,

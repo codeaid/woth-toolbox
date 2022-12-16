@@ -1,3 +1,3 @@
-import en_US from 'locales/en-US';
+import en_US from './en';
 
 export default en_US;

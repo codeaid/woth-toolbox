@@ -7,22 +7,21 @@ export const defaultLocale = 'en';
 export const defaultResource = en_US;
 
 // Map of language codes and their respective locale directories
-export const languageDirectoryMap = new Map<string, string>([
-  ['cs', 'cs-CZ'],
-  ['de', 'de-DE'],
-  ['en', 'en-US'],
-  ['es', 'es-ES'],
-  ['fr', 'fr-FR'],
-  ['hi', 'hi-IN'],
-  ['id', 'id-ID'],
-  ['it', 'it-IT'],
-  ['ja', 'ja-JP'],
-  ['pl', 'pl-PL'],
-  ['ru', 'ru-RU'],
-  ['sk', 'sk-SK'],
-  ['tr', 'tr-TR'],
-  ['zh', 'zh-Hans'],
-  ['zh-CN', 'zh-Hans'],
+export const localeDirectoryMap = new Map<string, string>([
+  ['cs', 'cs'],
+  ['de', 'de'],
+  ['en', 'en'],
+  ['es', 'es'],
+  ['fr', 'fr'],
+  ['hi', 'hi'],
+  ['id', 'id'],
+  ['it', 'it'],
+  ['ja', 'ja'],
+  ['pl', 'pl'],
+  ['ru', 'ru'],
+  ['sk', 'sk'],
+  ['tr', 'tr'],
+  ['zh', 'zh'],
   ['zh-HK', 'zh-Hant'],
   ['zh-TW', 'zh-Hant'],
 ]);
