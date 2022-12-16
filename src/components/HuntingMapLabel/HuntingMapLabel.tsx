@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
+import { CSSProperties, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useTranslator } from 'hooks';
 import { HuntingMapLabelProps } from './types';
@@ -11,38 +11,24 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
   // Reference to the parent label element
   const ref = useRef<HTMLDivElement>(null);
 
-  // Tuple storing label's width and height once it becomes available
-  const [size, setSize] = useState<[number, number]>([0, 0]);
-
   // Retrieve application translator
   const translate = useTranslator();
 
   // Generate CSS styles to apply to the parent element
   const style = useMemo<CSSProperties>(() => {
     const [left, top] = coords;
-    const [width, height] = size;
 
     return {
-      left: `calc(${left * 100}% - ${width / 2}px)`,
-      top: `calc(${top * 100}% - ${height / 2}px)`,
+      left: `${left * 100}%`,
+      top: `${top * 100}%`,
     };
-  }, [coords, size]);
+  }, [coords]);
 
   // Determine if the label is visible at current map scale
   const visible = useMemo(
     () => mapScale >= minMapScale && mapScale <= maxMapScale,
     [mapScale, maxMapScale, minMapScale],
   );
-
-  // Store parent element's height and width once the component mounts
-  useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-
-    const { height, width } = ref.current.getBoundingClientRect();
-    setSize([width, height]);
-  }, []);
 
   return (
     <Transition

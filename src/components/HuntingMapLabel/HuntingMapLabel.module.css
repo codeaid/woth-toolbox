@@ -3,18 +3,19 @@
   color: var(--text-primary);
   opacity: 0;
   overflow: hidden;
-  padding: 0.5em 1em;
+  padding: 0.4em 1em;
   position: absolute;
+  transform: translate(-50%, -50%);
   transition: opacity 100ms linear, transform 100ms linear;
   z-index: 2;
 }
 
 .HuntingMapLabelBlur {
-  background-color: var(--elevation2);
+  background-color: var(--elevation0);
   bottom: -1em;
   filter: blur(0.1em);
   left: -1em;
-  opacity: 0.55;
+  opacity: 0.5;
   position: absolute;
   right: -1em;
   top: -1em;
@@ -30,7 +31,7 @@
       rgba(235, 221, 210, 0.1) 100%);
   box-shadow: var(--shadow);
   height: 1px;
-  margin: 0.1em 0 0.5em;
+  margin: 0.1em 0 0.25em;
 }
 
 .HuntingMapLabelStateEntering {
@@ -50,10 +51,10 @@
 }
 
 .HuntingMapLabelSubtitle {
-  color: var(--text-secondary);
-  font-family: 'Fira Sans Condensed', sans-serif;
-  font-size: 0.9em;
+  font-size: 0.8em;
+  opacity: 0.55;
   text-align: center;
+  white-space: nowrap;
   z-index: 1;
 }
 
@@ -62,7 +63,8 @@
   font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   font-size: 1.1em;
   justify-content: center;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  white-space: nowrap;
   z-index: 1;
 }
