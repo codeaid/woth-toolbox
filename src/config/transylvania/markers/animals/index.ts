@@ -11,4 +11,5 @@ export * from './pheasant';
 export * from './redDeer';
 export * from './redFox';
 export * from './roeDeer';
+export * from './wildBoar';
 export * from './wildDuck';

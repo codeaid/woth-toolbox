@@ -12,6 +12,7 @@ import {
   redDeerMarkers,
   redFoxMarkers,
   roeDeerMarkers,
+  wildBoarMarkers,
   wildDuckMarkers,
 } from 'config/transylvania';
 import { MarkerOptionsAnimal } from 'types/markers';
@@ -30,5 +31,6 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   redDeerMarkers,
   redFoxMarkers,
   roeDeerMarkers,
+  wildBoarMarkers,
   wildDuckMarkers,
 ].flat();
