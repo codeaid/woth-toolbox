@@ -1,11 +1,14 @@
-import { getUserLocale } from 'get-user-locale';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { StrictMode, useState } from 'react';
+import { StrictMode } from 'react';
 import { IntlProvider } from 'react-intl';
 import { Layout } from 'components/Layout';
 import { ApplicationSettingsProvider } from 'contexts';
-import { useApplicationSettingsStorage, useLocaleResource } from 'hooks';
+import {
+  useApplicationSettingsStorage,
+  useLocale,
+  useLocaleResource,
+} from 'hooks';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
@@ -13,7 +16,7 @@ const App = (props: AppProps) => {
   const { Component, pageProps } = props;
 
   // Current user's locale and translation messages
-  const [locale] = useState(() => getUserLocale());
+  const locale = useLocale();
   const messages = useLocaleResource(locale);
 
   // Retrieve application settings storage
