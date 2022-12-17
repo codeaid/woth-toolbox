@@ -80,6 +80,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
     markerSizeAnimal = 50,
     markerSizeGeneric = 40,
     markerSizeZone = 35,
+    zoomLabelMax = 0.549,
+    zoomLabelMin = 0.2,
     zoomMarkerMap = new Map(),
     zoomMax = 5,
     zoomMin = 0.1,
@@ -568,12 +570,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
           {...label}
           key={index}
           mapScale={zoomOptions.current.zoomValue}
-          maxMapScale={0.6}
-          minMapScale={0.22}
+          maxMapScale={zoomLabelMax}
+          minMapScale={zoomLabelMin}
         />
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [labels, forcedUpdate],
+    [forcedUpdate, labels, zoomLabelMax, zoomLabelMin],
   );
 
   // Monitor changes to wrapper size and update canvas size accordingly

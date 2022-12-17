@@ -33,6 +33,8 @@ export interface HuntingMapProps {
   markerSizeAnimal?: number;
   markerSizeGeneric?: number;
   markerSizeZone?: number;
+  zoomLabelMax?: number;
+  zoomLabelMin?: number;
   zoomMarkerMap?: Map<MarkerType, number>;
   zoomMax?: number;
   zoomMin?: number;
