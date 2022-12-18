@@ -90,7 +90,10 @@ export const getMapMouseOffsetRatio = (
     mapTop,
   );
 
-  return [mouseImageX / mapWidth, mouseImageY / mapHeight];
+  return [
+    roundNumber(mouseImageX / mapWidth, 10),
+    roundNumber(mouseImageY / mapHeight, 10),
+  ];
 };
 
 /**
