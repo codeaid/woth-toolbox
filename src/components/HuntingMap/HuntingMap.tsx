@@ -182,27 +182,30 @@ export const HuntingMap = (props: HuntingMapProps) => {
   /**
    * Handle removing tracking or exploration markers
    *
-   *
    * @param marker Target marker to remove
    * @param event Source keyboard event
    */
   const handleCustomMarkerKeyDown = useCallback(
     (marker: MarkerOptionsCustom, event: KeyboardEvent) => {
-      // Standardize the key value
+      // Standardize keyboard key value and retrieve marker type
       const key = event.key.toLowerCase();
 
+      // Determine if the marker under the mouse cursor should be removed
+      const removeCurrentMarker =
+        key === ' ' || (key === 'f' && marker.type === 'marker:exploration');
+
       // Remove marker under the mouse cursor
-      if (key === ' ' && onCustomMarkerRemove) {
-        onCustomMarkerRemove(marker);
+      if (removeCurrentMarker && onCustomMarkerRemove) {
+        return onCustomMarkerRemove(marker);
       }
 
+      // Determine if all tracking markers should be removed
+      const removeTrackingMarkers =
+        key === 't' && marker.type === 'marker:tracking';
+
       // Remove all tracking markers
-      if (
-        key === 't' &&
-        marker.type === 'marker:tracking' &&
-        onCustomMarkersClear
-      ) {
-        onCustomMarkersClear('marker:tracking');
+      if (removeTrackingMarkers && onCustomMarkersClear) {
+        return onCustomMarkersClear('marker:tracking');
       }
     },
     [onCustomMarkerRemove, onCustomMarkersClear],

@@ -86,6 +86,7 @@ export const HuntingMapMarker = forwardRef(
         }
 
         onKeyDown && onKeyDown(marker, event);
+        event.stopPropagation();
       },
       [marker, onKeyDown],
     );
@@ -147,9 +148,13 @@ export const HuntingMapMarker = forwardRef(
         return;
       }
 
-      document.addEventListener('keydown', handleDocumentKeyDown);
+      document.addEventListener('keydown', handleDocumentKeyDown, {
+        capture: true,
+      });
       return () =>
-        document.removeEventListener('keydown', handleDocumentKeyDown);
+        document.removeEventListener('keydown', handleDocumentKeyDown, {
+          capture: true,
+        });
     }, [handleDocumentKeyDown, marker, onKeyDown]);
 
     return (
