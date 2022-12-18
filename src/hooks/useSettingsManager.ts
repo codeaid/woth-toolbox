@@ -3,10 +3,10 @@ import { SettingsManagerContextValue } from 'contexts';
 import {
   clearApplicationSettings,
   getApplicationSettings,
-  getStorage,
   setApplicationSettings,
 } from 'lib/storage';
 import { Settings } from 'types/app';
+import { useStorage } from './useStorage';
 
 /**
  * Application setting storage manager
@@ -21,7 +21,7 @@ export const useSettingsManager = (flushDelayMs = 500) => {
   const [settings, setSettings] = useState<Settings>();
 
   // Browser storage manager
-  const [storage, setStorage] = useState<Storage>();
+  const storage = useStorage();
 
   // Settings update handle reference
   const timeout = useRef(0);
@@ -63,9 +63,6 @@ export const useSettingsManager = (flushDelayMs = 500) => {
     },
     [flushDelayMs, settings, storage],
   );
-
-  // Create storage manager on load
-  useEffect(() => setStorage(getStorage()), []);
 
   // Load initial application settings
   useEffect(() => {

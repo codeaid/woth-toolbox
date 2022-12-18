@@ -3,17 +3,18 @@ import {
   clearAnimalMarkerData,
   getAnimalMarkerData,
   getAnimalMarkerDataMap,
-  getStorage,
   isEmptyAnimalData,
   setAnimalMarkerData,
 } from 'lib/storage';
 import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
+import { useStorage } from './useStorage';
 
 /**
  * Animal marker data management helper hook
  */
 export const useAnimalMarkerData = () => {
-  const [storage, setStorage] = useState<Storage>();
+  // Browser storage manager
+  const storage = useStorage();
 
   // Animal marker data
   const [dataMap, setDataMap] = useState<
@@ -102,9 +103,6 @@ export const useAnimalMarkerData = () => {
     const entries = getAnimalMarkerDataMap(storage);
     setDataMap(entries);
   }, [storage]);
-
-  // Create storage manager on load
-  useEffect(() => setStorage(getStorage()), []);
 
   return useMemo(
     () => ({
