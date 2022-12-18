@@ -1,7 +1,13 @@
 import { RefObject } from 'react';
 import { AnimalSpecimen } from 'types/animals';
 import { Point } from 'types/generic';
-import { IconType, IconTypeAnimal, IconTypeGeneric, IconTypeNeedZone } from 'types/icons';
+import {
+  IconType,
+  IconTypeAnimal,
+  IconTypeGeneric,
+  IconTypeMarker,
+  IconTypeNeedZone,
+} from 'types/icons';
 
 // Base type describing a map marker object
 export type MarkerOptions<TMarkerType extends MarkerType = MarkerType> = {
@@ -24,6 +30,9 @@ export type MarkerOptionsAnimal = MarkerOptions<MarkerTypeAnimal> & {
   id: string;
   sleep: Array<MarkerOptionsZoneSleep>;
 };
+
+// Type describing a custom map marker object
+export type MarkerOptionsCustom = MarkerOptions<MarkerTypeCustom>;
 
 // Type describing a generic map marker object
 export type MarkerOptionsGeneric = MarkerOptions<MarkerTypeGeneric>;
@@ -94,5 +103,6 @@ export type MarkerStorageRecordAnimal = MarkerStorageRecord & {
 // Alias types to abstract icon names away from marker types
 export type MarkerType = IconType;
 export type MarkerTypeAnimal = IconTypeAnimal;
+export type MarkerTypeCustom = IconTypeMarker;
 export type MarkerTypeGeneric = IconTypeGeneric;
 export type MarkerTypeNeedZone = IconTypeNeedZone;
