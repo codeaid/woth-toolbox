@@ -1,13 +1,13 @@
-import { createMarkerOptions } from 'lib/markers';
+import { createMarkerOptionsList } from 'lib/markers';
 
-export const cabinMarkers = createMarkerOptions('cabin', [
+export const cabinMarkers = createMarkerOptionsList('cabin', [
   [0.208984375, 0.6845703125],
   [0.248046875, 0.3203125],
   [0.7568359375, 0.8310546875],
   [0.7939453125, 0.242919921875],
 ]);
 
-export const campMarkers = createMarkerOptions('camp', [
+export const campMarkers = createMarkerOptionsList('camp', [
   [0.0888671875, 0.565673828125],
   [0.121826171875, 0.328125],
   [0.152099609375, 0.85107421875],
@@ -33,7 +33,7 @@ export const campMarkers = createMarkerOptions('camp', [
   [0.91943359375, 0.419921875],
 ]);
 
-export const echoMarkers = createMarkerOptions('echo', [
+export const echoMarkers = createMarkerOptionsList('echo', [
   [0.123291015625, 0.640625],
   [0.285888671875, 0.74169921875],
   [0.320068359375, 0.425537109375],
@@ -43,7 +43,7 @@ export const echoMarkers = createMarkerOptions('echo', [
   [0.787353515625, 0.735595703125],
 ]);
 
-export const huntingStandMarkers = createMarkerOptions('hunting stand', [
+export const huntingStandMarkers = createMarkerOptionsList('hunting stand', [
   [0.07568359375, 0.572509765625],
   [0.11474609375, 0.8056640625],
   [0.1416015625, 0.43798828125],
@@ -89,15 +89,15 @@ export const huntingStandMarkers = createMarkerOptions('hunting stand', [
   [0.895263671875, 0.117919921875],
 ]);
 
-export const lodgeMarkers = createMarkerOptions('lodge', [
+export const lodgeMarkers = createMarkerOptionsList('lodge', [
   [0.66796875, 0.47509765625],
 ]);
 
-export const shootingRangeMarkers = createMarkerOptions('shooting range', [
+export const shootingRangeMarkers = createMarkerOptionsList('shooting range', [
   [0.650634765625, 0.48193359375],
 ]);
 
-export const viewMarkers = createMarkerOptions('view', [
+export const viewMarkers = createMarkerOptionsList('view', [
   [0.037841796875, 0.831298828125],
   [0.102783203125, 0.745849609375],
   [0.107421875, 0.485107421875],

@@ -1,5 +1,9 @@
 import sha1 from 'sha1';
-import { animalMarkerNeedZoneCounts, animalMarkerTypes, genericMarkerTypes } from 'config/markers';
+import {
+  animalMarkerNeedZoneCounts,
+  animalMarkerTypes,
+  genericMarkerTypes,
+} from 'config/markers';
 import { hasListValue } from 'lib/utils';
 import { AnimalType } from 'types/animals';
 import { MapFilterOptions, MapZoomOptions } from 'types/cartography';
@@ -31,10 +35,25 @@ export const createAnimalMarkerOptions = (
   sleepZones: Array<Point>,
 ): MarkerOptionsAnimal => ({
   coords,
-  drink: createMarkerOptions('zone:drink', drinkZones),
-  eat: createMarkerOptions('zone:eat', eatZones),
+  drink: createMarkerOptionsList('zone:drink', drinkZones),
+  eat: createMarkerOptionsList('zone:eat', eatZones),
   id: getCoordinateHash(coords),
-  sleep: createMarkerOptions('zone:sleep', sleepZones),
+  sleep: createMarkerOptionsList('zone:sleep', sleepZones),
+  type,
+});
+
+/**
+ * Create new custom marker options
+ *
+ * @param type Target marker type
+ * @param coords Marker coordinates
+ */
+export const createMarkerOptions = <TMarkerType extends MarkerType>(
+  type: TMarkerType,
+  coords: Point,
+) => ({
+  coords,
+  id: getCoordinateHash(coords),
   type,
 });
 
@@ -44,11 +63,11 @@ export const createAnimalMarkerOptions = (
  * @param type Target marker type
  * @param positions Source list of marker positions
  */
-export const createMarkerOptions = <TMarkerType extends MarkerType>(
+export const createMarkerOptionsList = <TMarkerType extends MarkerType>(
   type: TMarkerType,
   positions: Array<Point>,
 ): Array<MarkerOptions<TMarkerType>> =>
-  positions.map(coords => ({ coords, id: getCoordinateHash(coords), type }));
+  positions.map(coords => createMarkerOptions(type, coords));
 
 /**
  * Generate a hash from the specified coordinates
