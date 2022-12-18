@@ -34,11 +34,15 @@ export const HuntingMapMarker = forwardRef(
       title,
       unmountOnExit = true,
       onClick,
+      onKeyDown,
       onLongPress,
     } = props;
 
     // Reference to marker's icon
     const iconRef = useRef<HTMLDivElement>(null);
+
+    // Flag indicating whether the mouse cursor is currently over the marker
+    const mouseOver = useRef(false);
 
     // Visibility flag states
     const [hidden, setHidden] = useState(false);
@@ -70,6 +74,35 @@ export const HuntingMapMarker = forwardRef(
       (event: MouseEvent<EventTarget>) => onClick && onClick(marker, event),
       [marker, onClick],
     );
+
+    /**
+     * Handle global key presses
+     */
+    const handleDocumentKeyDown = useCallback(
+      (event: KeyboardEvent) => {
+        // Ignore event if
+        if (!mouseOver.current) {
+          return;
+        }
+
+        onKeyDown && onKeyDown(marker, event);
+      },
+      [marker, onKeyDown],
+    );
+
+    /**
+     * Handle mouse cursor entering the marker
+     *
+     * @param event Mouse event object
+     */
+    const handleMouseEnter = useCallback(() => (mouseOver.current = true), []);
+
+    /**
+     * Handle mouse cursor entering the marker
+     *
+     * @param event Mouse event object
+     */
+    const handleMouseLeave = useCallback(() => (mouseOver.current = false), []);
 
     /**
      * Handle updating markers position in relation to its container
@@ -107,6 +140,18 @@ export const HuntingMapMarker = forwardRef(
       handleUpdatePosition();
     }, [handleUpdatePosition, marker]);
 
+    // Listen to document key presses
+    useEffect(() => {
+      // Ensure a listener is specified before proceeding
+      if (!onKeyDown) {
+        return;
+      }
+
+      document.addEventListener('keydown', handleDocumentKeyDown);
+      return () =>
+        document.removeEventListener('keydown', handleDocumentKeyDown);
+    }, [handleDocumentKeyDown, marker, onKeyDown]);
+
     return (
       <Transition
         in={forceVisible || visible}
@@ -136,6 +181,8 @@ export const HuntingMapMarker = forwardRef(
             title={tooltip}
             onClick={handleClick}
             onLongPress={onLongPress}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
         )}
       </Transition>
