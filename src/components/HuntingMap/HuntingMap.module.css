@@ -21,6 +21,10 @@
   will-change: height, translate, width;
 }
 
+.HuntingMapMarkerCustom {
+  z-index: 6;
+}
+
 .HuntingMapMarkerGeneric {
   color: var(--marker-generic);
 }

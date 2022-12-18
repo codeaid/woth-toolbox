@@ -644,6 +644,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () =>
       customMarkers.map(marker => (
         <HuntingMapMarker<MarkerOptionsCustom>
+          className={styles.HuntingMapMarkerCustom}
           forceVisible={true}
           key={marker.id}
           marker={marker}
