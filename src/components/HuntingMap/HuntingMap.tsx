@@ -469,7 +469,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         mouseRatio.current = [mouseRatioX, mouseRatioY];
 
         // Update map coordinate component values
-        coordsRef.current?.setCoords(mouseCoords.current);
+        coordsRef.current?.setCoords(mouseRatio.current);
       }
 
       mouseMoved.current = true;
