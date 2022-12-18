@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 40 40">
+  <filter id="brighter">
+    <feComponentTransfer>
+      <feFuncR amplitude="1.5" type="gamma"/>
+      <feFuncG amplitude="1.5" type="gamma"/>
+      <feFuncB amplitude="1.5" type="gamma"/>
+    </feComponentTransfer>
+  </filter>
+  <filter id="darker">
+    <feComponentTransfer>
+      <feFuncR amplitude=".65" type="gamma"/>
+      <feFuncG amplitude=".65" type="gamma"/>
+      <feFuncB amplitude=".65" type="gamma"/>
+    </feComponentTransfer>
+  </filter>
+  <path fill="currentColor" d="M20 1.75 4 7.5l16 7 16-7z"/>
+  <path fill="currentColor" d="m4 7.25 16 31V14.483Z" filter="url(#darker)"/>
+  <path fill="currentColor" d="m36 7.25-16.1 7.233V38.25l16.1-31" filter="url(#brighter)"/>
+  <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 1.75 4 7.25l16 31 16-31z"/>
+</svg>
