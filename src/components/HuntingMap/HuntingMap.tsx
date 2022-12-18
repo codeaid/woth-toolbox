@@ -643,9 +643,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
           marker={marker}
           markerSize={65}
           onKeyDown={handleCustomMarkerKeyDown}
+          onLongPress={onCustomMarkerRemove}
         />
       )),
-    [customMarkers, handleCustomMarkerKeyDown],
+    [customMarkers, handleCustomMarkerKeyDown, onCustomMarkerRemove],
   );
 
   // List of map habitat labels

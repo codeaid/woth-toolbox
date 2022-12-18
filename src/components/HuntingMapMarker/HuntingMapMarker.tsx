@@ -106,6 +106,14 @@ export const HuntingMapMarker = forwardRef(
     const handleMouseLeave = useCallback(() => (mouseOver.current = false), []);
 
     /**
+     * Handle long pressing on the marker icon
+     */
+    const handleLongPress = useCallback(
+      () => onLongPress && onLongPress(marker),
+      [marker, onLongPress],
+    );
+
+    /**
      * Handle updating markers position in relation to its container
      *
      * @param mapOptions Source map options
@@ -185,7 +193,7 @@ export const HuntingMapMarker = forwardRef(
             style={style}
             title={tooltip}
             onClick={handleClick}
-            onLongPress={onLongPress}
+            onLongPress={handleLongPress}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />

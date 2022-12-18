@@ -8,7 +8,9 @@ type HuntingMapMarkerClickHandler<TMarkerOptions extends MarkerOptions> = (
 type HuntingMapMarkerKeyboardEventHandler<
   TMarkerOptions extends MarkerOptions,
 > = (marker: TMarkerOptions, event: KeyboardEvent) => void;
-type HuntingMapMarkerLongPressHandler = () => void;
+type HuntingMapMarkerLongPressHandler<TMarkerOptions extends MarkerOptions> = (
+  marker: TMarkerOptions,
+) => void;
 
 export interface HuntingMapMarkerProps<TMarkerOptions extends MarkerOptions> {
   className?: string;
@@ -22,5 +24,5 @@ export interface HuntingMapMarkerProps<TMarkerOptions extends MarkerOptions> {
   unmountOnExit?: boolean;
   onClick?: HuntingMapMarkerClickHandler<TMarkerOptions>;
   onKeyDown?: HuntingMapMarkerKeyboardEventHandler<TMarkerOptions>;
-  onLongPress?: HuntingMapMarkerLongPressHandler;
+  onLongPress?: HuntingMapMarkerLongPressHandler<TMarkerOptions>;
 }
