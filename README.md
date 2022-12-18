@@ -1,34 +1,36 @@
 # Way Of The Hunter Toolbox
 
 This interactive web application contains a suite of tools that can be used
-while playing Way Of The Hunter. It allows you to:
+while playing [Way Of The Hunter](https://store.steampowered.com/app/1288320).
+It allows you to:
 
-- Choose the most appropriate weapons for each animal
-- See which animals you can hunt with each individual weapon
-- View activity times of all animals and birds (drinking, feeding and sleeping)
-- Find locations of all animal herds and bird flocks as well as their need zones
-  on Nez Perce Valley
+- Choose the most appropriate weapons to hunt every animal in the game.
+- See which animals you can hunt with each individual weapon.
+- View life cycles of all animals and birds (drinking, feeding and sleeping).
+- Discover locations of all animals birds as well as their need zones on both
+  in-game maps.
 
 Toolbox can be accessed by visiting https://codeaid.github.io/woth-toolbox/.
 
-## Weapon Selector: Usage
+## Animals: Usage
 
-![Weapon Selector](docs/woth-toolbox-weapon-selector.jpg)
+![Animals](docs/woth-toolbox-page-animals.jpg)
 
 To start choose an animal that you are planning to hunt from the sidebar on the
 left. Once an animal is selected the right side of the page will be populated
 with information about the animal such as its English and Latin names, a short
-description, its tier and the recommended hit energy (RHE) in
-[joules](https://steamcommunity.com/linkfilter/?url=https://en.wikipedia.org/wiki/Joule)
+description, its tier and the recommended hit energy (RHE)
+in [joules](https://steamcommunity.com/linkfilter/?url=https://en.wikipedia.org/wiki/Joule)
 that should be used when hunting it.
 
-Under this information you will find a table listing all available rifles and
+Under this information you will find a table listing all available weapons and
 their hit energy ratings at various distances in meters (50, 100, 150, 200 and
 300).
 
-_Refer to the instructions below on how to read values displayed in this table._
+_Shotguns have no hit energy values associated with them and are only included
+for the sake of having all in-game weapons listed._
 
-## Weapon Selector: Reading results
+## Animals: Reading results
 
 Values highlighted in **green** indicate the most optimal (ethical) hit energy
 values for the currently selected animal at the respective distance.
@@ -59,9 +61,9 @@ indicate that they are not ethical for the current animal at those distances.
 _Names of weapons that are ethical at ALL listed distances will be highlighted
 to make it easier to find them at a glance._
 
-## Weapon Selector: Usage example
+## Animals: Usage example
 
-Let's take fallow deer as an example.
+Let's use fallow deer as an example.
 
 To find weapons that are the most ethical when hunting these animals up to 300
 meters first select "Fallow Deer" from the sidebar on the left. Once done so,
@@ -107,81 +109,123 @@ fallow deer as their hit energy values far exceed the recommended ones.
 Remington 673 Guide Rifle could be used at 300 meters but is unethical at
 anything less than that, which makes it a bad choice.
 
-## Animal Selector
+## Firearms
 
-![Animal Selector](docs/woth-toolbox-animal-selector.jpg)
+![Firearms](docs/woth-toolbox-page-firearms.jpg)
 
-Animal selector page is identical in its logic to the Weapon Selector page,
-except instead of seeing which weapons are applicable to each animal it shows
-which animals you can hunt with each individual weapon.
+Firearms page is identical in its logic to the Animals page, except instead of
+seeing which firearms are applicable to each animal it shows which animals you
+can hunt with each individual firearm.
 
-## Animal Life Cycles
+Likewise, energy rating symbolic remains the same as on the Animals page -
+optimal hit energy values are highlighted in green, whilst suboptimal values are
+highlighted in orange. Greyed out values mean that it is not ethical to use the
+currently selected weapon for that animal at the indicated range.
 
-![Animal Life Cycles](docs/woth-toolbox-animal-life-cycles.jpg)
+## Life Cycle
 
-This page displays activity of every animal species on every hour of the day (
-00-23). You can see when animals drink, feed or sleep thus making choosing need
-zones that you should be targeting that much easier.
+![Life Cycle](docs/woth-toolbox-page-life-cycle.jpg)
+
+This page displays activity of every species at each hour of the day (00-23).
+You can see when animals and birds drink, feed or sleep thus making targeting
+correct need zones that much easier.
 
 When hovering over individual life cycle activities (or alternatively tapping on
-mobile devices) activities of all other species falling within the currently
-selected hour will also be highlighted making it easy to see what other animals
-are doing at that time.
+mobile devices) activities of all other species will also be highlighted at the
+same hour making it easy to see what other animals are doing at the same time.
 
-## Nez Perce Valley map
+## Maps
 
-This page displays an interactive map of Nez Perce Valley. Just like all the
-other online maps you have used before it can be panned by dragging it with your
-mouse or zoomed in and out by scrolling your mouse wheel up and down. It
-currently does not support pinch-zooming on touch devices so please use the +/-
-buttons available in the top right corner instead.
+Just like all the other online maps you have used before maps can be panned by
+dragging them with your mouse or zoomed in and out by scrolling your mouse wheel
+up and down. They currently do not support pinch-zooming on touch devices so
+please use the +/- buttons available in the top right corner instead.
 
-The map displays generic markers like lodges, shooting ranges, camps, hunting
-stands, views and echoes as well as locations of all animal herds (or bird
-flocks) and their need zones:
+Maps display generic markers like lodges, shooting ranges, camps, hunting
+stands, views and echoes as well as locations and need zones of all animals and
+birds.
 
-![Need Zones](docs/woth-toolbox-map-need-zones.jpg)
+![Need Zones](docs/woth-toolbox-map-overview.jpg)
+
+### Displaying need zones
+
+To show all need zones of an animal (or bird) group simply click or tap on the
+animal marker.
+
+By default, when need zones of one animal are expanded zones of all other
+animals are hidden to avoid cluttering the map with irrelevant information. To
+override this behavior and expand multiple animal need zones at once hold Ctrl
+button (or Cmd on MacOS) on your keyboard while clicking on markers:
+
+![Multi-markers](docs/woth-toolbox-map-marker-multi.jpg)
 
 ### Filtering
 
-In order to be able to find animals you're looking for easier the map supports
-showing or hiding individual marker types by using the filter. Simply click on
-the "eye" icon in the top left of the page and click on filter rows to show or
-hide markers of that type (when no filters are selected all markers are shown on
-the map).
+Maps support showing or hiding individual marker types to make it easier to find
+animals you're looking for.
 
-![Filtering](docs/woth-toolbox-map-filter.jpg)
+To access the filter simply click on the "eye" icon in the top left of the page.
+Next, click on individual filter options to show or hide markers of that type (
+when no filters are selected all markers are shown on the map). Alternatively
+click on group headers (General or Animals) to toggle all markers in that group
+on or off.
 
-### Herd management
+![Filtering](docs/woth-toolbox-map-filters.jpg)
+
+_Note: if only one type of markers is selected they will be visible even when
+the map is fully zoomed out. This can be useful if you want to see all locations
+of one specific animal at once without having to pan the map._
+
+### Tracking and management
 
 For those of you who like to keep track of individual herds - you can now do so!
-The animal editor can be opened by _Shift_-clicking on an animal icon, which
-will slide out a panel on the right side of the page. If you're on a
-touch-enabled device like a tablet or phone simply long-press on the icon
-instead (as there is no _Shift_ key):
+The marker editor can be opened by Shift-clicking on an animal marker, after
+which a panel will slide out from the right side of the page.
 
-![Animal Editor](docs/woth-toolbox-map-animal-editor.jpg)
+If you're on a touch-enabled device like tablet or phone simply press and hold
+on the icon instead (as there is no Shift key available).
 
-In this panel you will be able to do two things - enter a custom comment in the
-topmost text area as well as assign a custom color to the animal icon associated
-with this herd. To pick a custom color first choose the hue by dragging your
-mouse cursor over the colored bar and then drag your mouse around the larger
-area above it.
+![Marker Editor](docs/woth-toolbox-map-marker-editor.jpg)
 
-Once you are happy with the changes click the _"Save details"_ button at the
-bottom and the editor will automatically close. To open it again simply click on
-the same animal icon on the map while holding your _Shift_ button.
+In this panel you will be able to do the following:
 
-To remove comments and custom colors from a herd open the animal editor and
-click on the _"Clear"_ button. All data associated with this herd will be
-deleted.
+- Add custom comments
+- Change marker's color
+- Manage noteworthy specimens
 
-To close the animal editor without applying any changes simply click on the X
-button in the top right.
+**Choosing custom marker color**  
+To pick a color first choose the desired hue by dragging your mouse cursor over
+the colored bar above the color code and then drag your mouse around the larger
+area above it to pick a specific tone.
+
+**Managing specimens**  
+This section allows you to build a list of noteworthy specimen for easier
+tracking.
+
+To add a new animal to the list first select its age by clicking on one of the
+three buttons at the top (Young, Adult or Mature) followed by choosing its
+trophy rating and sex from the row below. Buttons M1 to M5 denote 1-5 star
+males, whilst F denotes females. Finish by clicking the "Confirm" button.
+
+Animals in the list will first be sorted by sex, followed by their trophy
+ratings. Females will be displayed at the end of the list whilst also sorted by
+their age.
+
+**Saving changes**  
+Once you are done click the "Ok" button at the bottom of the panel to save your
+changes and close the editor. To open it again simply click on the same animal
+icon on the map while holding Shift.
+
+To close the editor without applying any changes simply click on the X button in
+the top right.
+
+**Deleting marker data**  
+To remove custom data from a marker open the editor and click on the "Clear"
+button at the bottom of the panel.
 
 As you can see from the screenshot below each herd can be colored individually:
 
-![Animal Colors](docs/woth-toolbox-map-animal-colors.jpg)
+![Animal Colors](docs/woth-toolbox-map-marker-colors.jpg)
 
 ### Where is animal data stored?
 
@@ -194,17 +238,69 @@ PC or tablet) you will not see any notes or custom colors if they were added on
 a different device so keep that in mind when starting out mass documenting your
 animal herds!
 
+## Settings
+
+Application is available in the following languages:
+
+- Chinese Simplified
+- Chinese Traditional
+- Czech
+- English
+- French
+- German
+- Hindi
+- Indonesian
+- Italian
+- Japanese
+- Polish
+- Russian
+- Slovak
+- Spanish
+- Turkish
+
+If your native language is in the list and you have configured it as the primary
+language in your browser the application will automatically be displayed in said
+language when you visit it. To choose a different language access the settings
+by clicking on the cog icon in the top right corner of the page and change it by
+selecting another language from the list in the panel that opens.
+
+In this panel you will also be able to adjust marker sizes for all maps:
+
+![Settings](docs/woth-toolbox-settings.jpg)
+
+## Nez Perce Valley map
+
+Contains locations of all animals, birds as well as their need zones on the Nez
+Perce Valley map. Please see the "Maps" section for more information on map
+features and usage.
+
+![Nez Perce Valley](docs/woth-toolbox-page-idaho.jpg)
+
+## Transylvania map
+
+Contains locations of all animals, birds as well as their need zones on the
+Transylvania map. Please see the "Maps" section for more information on map
+features and usage.
+
+![Transylvania](docs/woth-toolbox-page-transylvania.jpg)
+
 ## Notes
 
-This application was primarily designed to be used on desktop browsers. It is,
-however, a responsive web application, which means that the layout and page
-elements are dynamically adapted and resized to fit on all screens. As a result
-the application also works perfectly well on tablets, which is my personal
-choice when using it.
+This application was primarily designed to be used on desktop browsers, however,
+it is a responsive web application, which means that the layout and page
+elements are dynamically adjusted to fit on all screen sizes. As a result the
+application also works perfectly well on tablets and mobile devices.
 
 It is an open-source application so anyone willing to contribute new features is
-more than welcome to do so on GitHub. Those that are more technically inclined
-will know how to find the repository by just looking at the project URL.
+more than welcome to do so
+on [GitHub](https://steamcommunity.com/linkfilter/?url=https://github.com/codeaid/woth-toolbox).
 
 Hope you enjoy using the application and please share your thoughts and ideas
-below in the comments!
+[on Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=2882064749)!
+
+## Version History
+
+Due to it growing in size application's version history has been moved to
+project's wiki page and can be found here:
+
+https://github.com/codeaid/woth-toolbox/wiki/Changelog
