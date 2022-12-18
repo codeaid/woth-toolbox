@@ -3,7 +3,12 @@ import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import { useAnimalMarkerData, useSettings, useTranslator } from 'hooks';
+import {
+  useAnimalMarkerData,
+  useCustomMarkers,
+  useSettings,
+  useTranslator,
+} from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
@@ -12,6 +17,14 @@ const NezPerceValleyPage = () => {
   // Custom animal data manager values
   const { dataMap, onDataClear, onDataRead, onDataWrite } =
     useAnimalMarkerData();
+
+  // Retrieve custom marker functionality
+  const {
+    customMarkers,
+    onCustomMarkerCreate,
+    onCustomMarkerRemove,
+    onCustomMarkersClear,
+  } = useCustomMarkers('idaho');
 
   // Retrieve application settings
   const { settings } = useSettings();
@@ -31,6 +44,7 @@ const NezPerceValleyPage = () => {
         <HuntingMap
           animalMarkerRecords={dataMap}
           animalMarkers={animalMarkers}
+          customMarkers={customMarkers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
           imageWidth={mapWidth}
@@ -40,6 +54,9 @@ const NezPerceValleyPage = () => {
           markerSizeGeneric={settings.genericMarkerSize}
           markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
+          onCustomMarkerCreate={onCustomMarkerCreate}
+          onCustomMarkerRemove={onCustomMarkerRemove}
+          onCustomMarkersClear={onCustomMarkersClear}
           onEditorClear={onDataClear}
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}

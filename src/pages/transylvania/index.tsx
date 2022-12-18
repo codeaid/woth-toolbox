@@ -8,6 +8,7 @@ import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
+  useCustomMarkers,
   useDebugPanel,
   useSettings,
   useTranslator,
@@ -20,6 +21,14 @@ const TransylvaniaPage = () => {
   // Custom animal data manager values
   const { dataMap, onDataClear, onDataRead, onDataWrite } =
     useAnimalMarkerData();
+
+  // Retrieve custom marker functionality
+  const {
+    customMarkers,
+    onCustomMarkerCreate,
+    onCustomMarkerRemove,
+    onCustomMarkersClear,
+  } = useCustomMarkers('transylvania');
 
   // Retrieve application settings
   const { settings } = useSettings();
@@ -79,6 +88,7 @@ const TransylvaniaPage = () => {
         <HuntingMap
           animalMarkerRecords={dataMap}
           animalMarkers={markers}
+          customMarkers={customMarkers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/transylvania.jpeg`}
           imageWidth={mapWidth}
@@ -89,6 +99,9 @@ const TransylvaniaPage = () => {
           markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
           onClick={onDebugCoordinates}
+          onCustomMarkerCreate={onCustomMarkerCreate}
+          onCustomMarkerRemove={onCustomMarkerRemove}
+          onCustomMarkersClear={onCustomMarkersClear}
           onEditorClear={onDataClear}
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}
