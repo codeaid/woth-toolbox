@@ -134,6 +134,15 @@ export const getNeedZoneCounts = (type: AnimalType) =>
   animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
 
 /**
+ * Check if both markers have the same coordinates
+ *
+ * @param marker Source marker
+ * @param coords Target coordinates
+ */
+export const hasSameCoordinates = (marker: MarkerOptions, coords: Point) =>
+  marker.coords[0] === coords[0] && marker.coords[1] === coords[1];
+
+/**
  * Check if the specified type represents an animal marker type
  *
  * @param type Target type to check
