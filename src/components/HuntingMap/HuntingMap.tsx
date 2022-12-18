@@ -52,8 +52,10 @@ import {
   MapOptions,
   MapZoomOptions,
 } from 'types/cartography';
+import { Point } from 'types/generic';
 import {
   MarkerOptionsAnimal,
+  MarkerOptionsCustom,
   MarkerOptionsGeneric,
   MarkerRef,
   MarkerRefAnimal,
@@ -70,6 +72,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkerRecords,
     animalMarkers,
+    customMarkers = [],
     defaultZoomValue = 0.25,
     genericMarkers,
     imageHeight,
@@ -88,6 +91,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
     zoomSpeed = 1,
     zoomStep = 0.05,
     onClick,
+    onCustomMarkerCreate,
+    onCustomMarkerRemove,
+    onCustomMarkersClear,
     onEditorClear,
     onEditorRead,
     onEditorWrite,
@@ -149,6 +155,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
     types: [],
   });
 
+  // Store current mouse cursor coordinates and offset ratio
+  const mouseCoords = useRef<Point>([-1, -1]);
+  const mouseRatio = useRef<Point>([-1, -1]);
+
   // Variable tracking whether mouse was moved between mousedown and mouseup
   const mouseMoved = useRef(false);
 
@@ -167,6 +177,59 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const handleAnimalEditorClose = useCallback(
     () => setEditedAnimal(undefined),
     [],
+  );
+
+  /**
+   * Handle removing tracking or exploration markers
+   *
+   *
+   * @param marker Target marker to remove
+   * @param event Source keyboard event
+   */
+  const handleCustomMarkerKeyDown = useCallback(
+    (marker: MarkerOptionsCustom, event: KeyboardEvent) => {
+      // Standardize the key value
+      const key = event.key.toLowerCase();
+
+      // Remove marker under the mouse cursor
+      if (key === ' ' && onCustomMarkerRemove) {
+        onCustomMarkerRemove(marker);
+      }
+
+      // Remove all tracking markers
+      if (
+        key === 't' &&
+        marker.type === 'marker:tracking' &&
+        onCustomMarkersClear
+      ) {
+        onCustomMarkersClear('marker:tracking');
+      }
+    },
+    [onCustomMarkerRemove, onCustomMarkersClear],
+  );
+
+  /**
+   * Handle global key presses
+   */
+  const handleDocumentKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      // Ensure custom marker creator is enabled
+      if (!onCustomMarkerCreate) {
+        return;
+      }
+
+      // Standardize the key value
+      const key = event.key.toLowerCase();
+
+      if (key === 'f') {
+        // Create a new exploration marker
+        onCustomMarkerCreate('marker:exploration', mouseRatio.current);
+      } else if (key === 'c') {
+        // Create a new tracking marker
+        onCustomMarkerCreate('marker:tracking', mouseRatio.current);
+      }
+    },
+    [onCustomMarkerCreate],
   );
 
   /**
@@ -392,7 +455,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
           mapOptions.current,
         );
 
-        coordsRef.current?.setCoords([mouseRatioX, mouseRatioY]);
+        // Update current mouse coordinates and offset ratios
+        mouseCoords.current = [event.pageX, event.pageY];
+        mouseRatio.current = [mouseRatioX, mouseRatioY];
+
+        // Update map coordinate component values
+        coordsRef.current?.setCoords(mouseCoords.current);
       }
 
       mouseMoved.current = true;
@@ -562,6 +630,21 @@ export const HuntingMap = (props: HuntingMapProps) => {
     [],
   );
 
+  // List of custom markers to display on the map
+  const renderedCustomMarkers = useMemo(
+    () =>
+      customMarkers.map(marker => (
+        <HuntingMapMarker<MarkerOptionsCustom>
+          forceVisible={true}
+          key={marker.id}
+          marker={marker}
+          markerSize={65}
+          onKeyDown={handleCustomMarkerKeyDown}
+        />
+      )),
+    [customMarkers, handleCustomMarkerKeyDown],
+  );
+
   // List of map habitat labels
   const renderedLabels = useMemo(
     () =>
@@ -714,6 +797,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
     setForcedUpdate();
   }, [animalMarkers, setForcedUpdate]);
 
+  // Enable custom marker creation functionality
+  useEffect(() => {
+    document.addEventListener('keydown', handleDocumentKeyDown);
+    return () => document.removeEventListener('keydown', handleDocumentKeyDown);
+  }, [handleDocumentKeyDown]);
+
   return (
     <>
       {!imageLoaded && <LoadingOverlay />}
@@ -755,6 +844,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
           {animalMarkerElements}
           {genericMarkerElements}
           {renderedLabels}
+          {renderedCustomMarkers}
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
