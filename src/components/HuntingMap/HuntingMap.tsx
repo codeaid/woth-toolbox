@@ -221,6 +221,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
         return;
       }
 
+      // Ensure mouse is over the map
+      const [offsetX, offsetY] = mouseRatio.current;
+      if (offsetX < 0 || offsetY < 0 || offsetX > 1 || offsetY > 1) {
+        return;
+      }
+
       // Standardize the key value
       const key = event.key.toLowerCase();
 
