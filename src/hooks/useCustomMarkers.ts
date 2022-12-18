@@ -14,8 +14,9 @@ import { useStorage } from './useStorage';
  * Retrieve custom marker management functionality
  *
  * @param map Target map type
+ * @param maxTrackingMarkers Maximum number of tracking markers
  */
-export const useCustomMarkers = (map: MapType) => {
+export const useCustomMarkers = (map: MapType, maxTrackingMarkers = 100) => {
   // Custom marker storage
   const [customMarkers, setCustomMarkers] = useState<
     Array<MarkerOptionsCustom>
@@ -61,9 +62,10 @@ export const useCustomMarkers = (map: MapType) => {
       setCustomMarkers(current =>
         current
           .filter(marker => !hasSameCoordinates(marker, coords))
-          .concat(createMarkerOptions('marker:tracking', coords)),
+          .concat(createMarkerOptions('marker:tracking', coords))
+          .slice(-maxTrackingMarkers),
       ),
-    [],
+    [maxTrackingMarkers],
   );
 
   /**
