@@ -641,7 +641,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
           forceVisible={true}
           key={marker.id}
           marker={marker}
-          markerSize={65}
+          markerSize={marker.type === 'marker:exploration' ? 35 : 20}
           onKeyDown={handleCustomMarkerKeyDown}
           onLongPress={onCustomMarkerRemove}
         />
