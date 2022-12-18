@@ -1,2 +1,2 @@
-export * from './MarkerExploration';
+export * from './MarkerExplorationIcon';
 export * from './MarkerTracking';
