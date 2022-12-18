@@ -6,4 +6,5 @@ export * from './useLocaleResource';
 export * from './useRefCallback';
 export * from './useSettings';
 export * from './useSettingsManager';
+export * from './useStorage';
 export * from './useTranslator';
