@@ -2,6 +2,7 @@ import { animalDataPrefix, customMarkerKey, settingsKey } from 'config/storage';
 import { getMarkerKey } from 'lib/markers';
 import { isNotEmpty } from 'lib/utils';
 import { Settings } from 'types/app';
+import { MapType } from 'types/cartography';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsCustom,
@@ -111,9 +112,10 @@ export const clearApplicationSettings = (storage: Storage) =>
  * Remove custom markers from the storage
  *
  * @param storage Target storage
+ * @param map Target map type
  */
-export const clearCustomMarkerStore = (storage: Storage) =>
-  storage.removeItem(customMarkerKey);
+export const clearCustomMarkerStore = (storage: Storage, map: MapType) =>
+  storage.removeItem(getCustomMarkerStoreKey(map));
 
 /**
  * Retrieve marker data from the storage
@@ -185,11 +187,12 @@ export const getAnimalMarkerDataMap = (
  * Read custom marker data from the storage
  *
  * @param storage Target storage
+ * @param map Source map type
  */
-export const getCustomMarkerStore = (storage: Storage) => {
+export const getCustomMarkerStore = (storage: Storage, map: MapType) => {
   try {
     // Read custom marker data from the storage
-    const json = storage.getItem(customMarkerKey);
+    const json = storage.getItem(getCustomMarkerStoreKey(map));
     if (!json) {
       return;
     }
@@ -197,6 +200,13 @@ export const getCustomMarkerStore = (storage: Storage) => {
     return JSON.parse(json) as Array<MarkerOptionsCustom>;
   } catch (e) {}
 };
+
+/**
+ * Get custom marker store key for the specified map
+ *
+ * @param map Target map type
+ */
+const getCustomMarkerStoreKey = (map: MapType) => `${customMarkerKey}:${map}`;
 
 /**
  * Retrieve application settings from the storage
@@ -262,15 +272,17 @@ export const setApplicationSettings = (
  * Persist custom markers to the storage
  *
  * @param storage Target storage
+ * @param map Target map type
  * @param customMarkers List of markers to persist
  */
 export const setCustomMarkerStore = (
   storage: Storage,
+  map: MapType,
   customMarkers: Array<MarkerOptionsCustom>,
 ) => {
   try {
     const json = JSON.stringify(customMarkers);
-    storage.setItem(customMarkerKey, json);
+    storage.setItem(getCustomMarkerStoreKey(map), json);
   } catch (e) {}
 };
 

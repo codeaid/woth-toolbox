@@ -5,11 +5,17 @@ import {
   getCustomMarkerStore,
   setCustomMarkerStore,
 } from 'lib/storage';
+import { MapType } from 'types/cartography';
 import { Point } from 'types/generic';
 import { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
 import { useStorage } from './useStorage';
 
-export const useCustomMarkers = () => {
+/**
+ * Retrieve custom marker management functionality
+ *
+ * @param map Target map type
+ */
+export const useCustomMarkers = (map: MapType) => {
   // Custom marker storage
   const [customMarkers, setCustomMarkers] = useState<
     Array<MarkerOptionsCustom>
@@ -143,9 +149,9 @@ export const useCustomMarkers = () => {
     }
 
     // Load marker data and store it locally
-    const markers = getCustomMarkerStore(storage);
+    const markers = getCustomMarkerStore(storage, map);
     setCustomMarkers(markers ?? []);
-  }, [storage]);
+  }, [map, storage]);
 
   // Persist changes to custom marker data to storage
   useEffect(() => {
@@ -155,11 +161,11 @@ export const useCustomMarkers = () => {
 
     // Clear store if no markers available or persist the ones that have been added
     if (!customMarkers || !customMarkers.length) {
-      clearCustomMarkerStore(storage);
+      clearCustomMarkerStore(storage, map);
     } else {
-      setCustomMarkerStore(storage, customMarkers);
+      setCustomMarkerStore(storage, map, customMarkers);
     }
-  }, [customMarkers, storage]);
+  }, [customMarkers, map, storage]);
 
   return useMemo(
     () => ({
