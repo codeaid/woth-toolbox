@@ -1,6 +1,7 @@
 {
   "TOOLBOX:COPY": "Kopyala",
   "TOOLBOX:CREATED": "Oluşturuldu",
+  "TOOLBOX:DATA_MIGRATION": "Veri göçü",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Yeni bir işaretçi oluşturmak için haritada herhangi bir yeri tıklayın",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Tamamlanmış işaretçi yok",
   "TOOLBOX:LAST_MODIFIED": "Değiştirilmiş",
@@ -8,6 +9,7 @@
   "TOOLBOX:MARKER_CABIN": "Kulübe",
   "TOOLBOX:MARKER_LODGE": "Av köşkü",
   "TOOLBOX:MARKER_SHOOTING_RANGE": "Atış menzili",
+  "TOOLBOX:PASTE": "Yapıştır",
   "TOOLBOX:SELECT_ANIMAL": "Lütfen bir hayvan seçin",
   "TOOLBOX:SELECT_WEAPON": "Lütfen bir ateşli silah seçin",
   "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Hayvan belirteçlerinin boyutu",

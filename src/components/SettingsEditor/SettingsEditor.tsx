@@ -5,6 +5,7 @@ import { SidePanel } from 'components/SidePanel';
 import { useTranslator } from 'hooks';
 import { SettingsEditorLanguage } from './SettingsEditorLanguage';
 import { SettingsEditorMarkers } from './SettingsEditorMarkers';
+import { SettingsEditorMigration } from './SettingsEditorMigration';
 import { SettingsEditorProps } from './types';
 import styles from './SettingsEditor.module.css';
 
@@ -46,6 +47,9 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
 
         <Heading size={5}>{translate('UI:MARKERS')}</Heading>
         <SettingsEditorMarkers settings={settings} onChange={onChange} />
+
+        <Heading size={5}>{translate('TOOLBOX:DATA_MIGRATION')}</Heading>
+        <SettingsEditorMigration />
       </div>
     </SidePanel>
   );

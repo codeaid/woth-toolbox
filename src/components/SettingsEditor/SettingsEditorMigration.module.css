@@ -1,0 +1,14 @@
+.SettingsEditorMigration {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-rows: 1fr 1fr;
+}
+
+.SettingsEditorMigrationCopy {
+  background-color: var(--highlight);
+}
+
+.SettingsEditorMigrationPaste {
+  background-color: var(--danger);
+
+}

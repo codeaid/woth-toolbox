@@ -1,6 +1,7 @@
 {
   "TOOLBOX:COPY": "Copie",
   "TOOLBOX:CREATED": "Établi",
+  "TOOLBOX:DATA_MIGRATION": "Migration de données",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Cliquez n'importe où sur la carte pour créer un nouveau marqueur",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Aucun marqueur terminé disponible",
   "TOOLBOX:LAST_MODIFIED": "Modifié",

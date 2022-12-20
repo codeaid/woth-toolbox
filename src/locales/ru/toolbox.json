@@ -1,6 +1,7 @@
 {
   "TOOLBOX:COPY": "Скопировать",
   "TOOLBOX:CREATED": "Создано",
+  "TOOLBOX:DATA_MIGRATION": "Перенос данных",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Кликните в любом месте чтобы создать новый маркер",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Нету созданных маркеров",
   "TOOLBOX:LAST_MODIFIED": "Изменено",
@@ -8,6 +9,7 @@
   "TOOLBOX:MARKER_CABIN": "Домик",
   "TOOLBOX:MARKER_LODGE": "Хижина",
   "TOOLBOX:MARKER_SHOOTING_RANGE": "Стрельбище",
+  "TOOLBOX:PASTE": "Вставить",
   "TOOLBOX:SELECT_ANIMAL": "Пожалуйста выберите животное",
   "TOOLBOX:SELECT_WEAPON": "Пожалуйста выберите оружие",
   "TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS": "Размер маркеров животных",

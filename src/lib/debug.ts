@@ -17,8 +17,13 @@ export const consoleLogClean = (...params: Array<any>) =>
  * @param text Text to copy
  */
 export const copyTextToClipboard = async (text: string) => {
+  // Ensure copying and pasting text to/from clipboard is supported
+  if (!isClipboardAvailable()) {
+    return;
+  }
+
   try {
-    await navigator.clipboard.writeText(text);
+    return await navigator.clipboard.writeText(text);
   } catch (e) {}
 };
 
@@ -37,6 +42,19 @@ createAnimalMarkerOptions(
 ),`;
 
 /**
+ * Retrieve text from clipboard
+ */
+export const getTextFromClipboard = async () => {
+  // Ensure copying and pasting text to/from clipboard is supported
+  if (!isClipboardAvailable()) {
+    return;
+  }
+
+  try {
+    return await navigator.clipboard.readText();
+  } catch (e) {}
+};
+/**
  * Check if an animal marker contains the specified coordinates
  *
  * @param marker Source marker
@@ -46,6 +64,14 @@ const hasNeedZoneCoordinates = (marker: MarkerOptionsAnimal, coords: Point) =>
   [marker.drink, marker.eat, marker.sleep]
     .flat()
     .some(zone => zone.coords[0] == coords[0] && zone.coords[1] == coords[1]);
+
+/**
+ * Check if copying and pasting text is supported
+ */
+export const isClipboardAvailable = () =>
+  typeof window !== 'undefined' &&
+  window.isSecureContext &&
+  navigator.clipboard;
 
 /**
  * Check if all marker's need zones have been populated
