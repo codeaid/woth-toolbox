@@ -152,7 +152,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // The currently selected filters
   const filterOptions = useRef<MapFilterOptions>({
+    exploration: true,
     labels: true,
+    tracking: true,
     types: [],
   });
 
@@ -646,7 +648,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
       customMarkers.map(marker => (
         <HuntingMapMarker<MarkerOptionsCustom>
           className={styles.HuntingMapMarkerCustom}
-          forceVisible={true}
+          forceVisible={
+            marker.type === 'marker:exploration'
+              ? filterOptions.current.exploration
+              : filterOptions.current.tracking
+          }
           key={marker.id}
           marker={marker}
           markerSize={marker.type === 'marker:exploration' ? 35 : 20}
@@ -654,7 +660,13 @@ export const HuntingMap = (props: HuntingMapProps) => {
           onLongPress={onCustomMarkerRemove}
         />
       )),
-    [customMarkers, handleCustomMarkerKeyDown, onCustomMarkerRemove],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      customMarkers,
+      forcedUpdate,
+      handleCustomMarkerKeyDown,
+      onCustomMarkerRemove,
+    ],
   );
 
   // List of map habitat labels

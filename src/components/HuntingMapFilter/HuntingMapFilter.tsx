@@ -73,7 +73,9 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const handleClearFilters = useCallback(() => {
     // Clear filters and close the side panel
     onChange({
+      exploration: true,
       labels: true,
+      tracking: true,
       types: [],
     });
 
@@ -88,7 +90,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   /**
    * Enable or disable all animal options at once
    */
-  const handleToggleAnimalOptions = useCallback(
+  const handleToggleAnimalMarkers = useCallback(
     () =>
       selectedTypesAnimals.length > 0
         ? onChange({
@@ -109,9 +111,17 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   );
 
   /**
+   * Handle toggling exploration markers on or off
+   */
+  const handleToggleExplorationMarkers = useCallback(
+    (exploration: boolean) => onChange({ ...options, exploration }),
+    [options, onChange],
+  );
+
+  /**
    * Enable or disable all generic options at once
    */
-  const handleToggleGenericOptions = useCallback(
+  const handleToggleGenericMarkers = useCallback(
     () =>
       selectedTypesGeneric.length > 0
         ? onChange({
@@ -134,8 +144,16 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   /**
    * Handle toggling labels on or off
    */
-  const handleLabelsChange = useCallback(
+  const handleToggleLabels = useCallback(
     (labels: boolean) => onChange({ ...options, labels }),
+    [options, onChange],
+  );
+
+  /**
+   * Handle toggling tracking markers on or off
+   */
+  const handleToggleTrackingMarkers = useCallback(
+    (tracking: boolean) => onChange({ ...options, tracking }),
     [options, onChange],
   );
 
@@ -217,14 +235,14 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         <>
           <SectionHeader
             className={styles.HuntingMapFilterSectionHeader}
-            onClick={handleToggleAnimalOptions}
+            onClick={handleToggleAnimalMarkers}
           >
             {translate('UI:SECTION_ANIMALS')}
           </SectionHeader>
           {renderOptions(markerTypesAnimals, true)}
         </>
       ) : null,
-    [handleToggleAnimalOptions, markerTypesAnimals, renderOptions, translate],
+    [handleToggleAnimalMarkers, markerTypesAnimals, renderOptions, translate],
   );
 
   // Render generic options
@@ -234,14 +252,14 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         <>
           <SectionHeader
             className={styles.HuntingMapFilterSectionHeader}
-            onClick={handleToggleGenericOptions}
+            onClick={handleToggleGenericMarkers}
           >
             {translate('UI:GENERAL')}
           </SectionHeader>
           {renderOptions(markerTypesGeneric, false)}
         </>
       ) : null,
-    [handleToggleGenericOptions, markerTypesGeneric, renderOptions, translate],
+    [handleToggleGenericMarkers, markerTypesGeneric, renderOptions, translate],
   );
 
   // Render generic options
@@ -253,13 +271,33 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         </SectionHeader>
         <HuntingMapFilterOption
           checked={options.labels}
-          onChange={handleLabelsChange}
+          onChange={handleToggleLabels}
         >
           {translate('UI:MARKER_LABELS')}
         </HuntingMapFilterOption>
+        <HuntingMapFilterOption
+          checked={options.exploration}
+          onChange={handleToggleExplorationMarkers}
+        >
+          {translate('UI:MARKER_EXPLORATION')}
+        </HuntingMapFilterOption>
+        <HuntingMapFilterOption
+          checked={options.tracking}
+          onChange={handleToggleTrackingMarkers}
+        >
+          {translate('UI:MARKER_TRACKING')}
+        </HuntingMapFilterOption>
       </>
     ),
-    [handleLabelsChange, options.labels, translate],
+    [
+      handleToggleExplorationMarkers,
+      handleToggleLabels,
+      handleToggleTrackingMarkers,
+      options.exploration,
+      options.labels,
+      options.tracking,
+      translate,
+    ],
   );
 
   // List of sidebar action buttons

@@ -3,7 +3,9 @@ import { TranslationKey } from 'types/i18n';
 import { MarkerType } from 'types/markers';
 
 export interface MapFilterOptions {
+  exploration: boolean;
   labels: boolean;
+  tracking: boolean;
   types: Array<MarkerType>;
 }
 
