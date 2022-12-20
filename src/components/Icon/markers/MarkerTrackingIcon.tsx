@@ -7,18 +7,26 @@ import styles from './MarkerTrackingIcon.module.css';
 
 export const MarkerTrackingIcon = forwardRef(
   (props: IconProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { className, ...rest } = props;
+    const { className, highlighted, ...rest } = props;
 
     // Generate vector icon's class name
     const vectorIconClass = useMemo(
-      () => classnames(styles.MarkerTracking, className),
-      [className],
+      () =>
+        classnames(
+          styles.MarkerTracking,
+          {
+            [styles.MarkerTrackingColorless]: highlighted === false,
+          },
+          className,
+        ),
+      [className, highlighted],
     );
 
     return (
       <VectorIcon
         className={vectorIconClass}
         component={MarkerTrackingSvg}
+        highlighted={highlighted}
         {...rest}
         ref={ref}
       />

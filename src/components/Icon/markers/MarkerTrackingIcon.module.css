@@ -1,3 +1,7 @@
 .MarkerTracking {
   color: var(--marker-tracking);
 }
+
+.MarkerTrackingColorless {
+  color: #ffffff;
+}

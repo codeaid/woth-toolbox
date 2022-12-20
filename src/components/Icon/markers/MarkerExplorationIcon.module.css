@@ -1,3 +1,7 @@
 .MarkerExploration {
   color: var(--marker-exploration);
 }
+
+.MarkerExplorationColorless {
+  color: #ffffff;
+}
