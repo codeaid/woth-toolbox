@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { ButtonProps } from 'components/Button';
-import { Label } from 'components/Label';
+import { Heading } from 'components/Heading';
 import { SidePanel } from 'components/SidePanel';
 import { useTranslator } from 'hooks';
 import { SettingsEditorLanguage } from './SettingsEditorLanguage';
@@ -41,9 +41,10 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
       onClose={onClose}
     >
       <div className={styles.SettingsEditor}>
-        <Label>{translate('UI:LANGUAGE')}</Label>
+        <Heading size={5}>{translate('UI:LANGUAGE')}</Heading>
         <SettingsEditorLanguage settings={settings} onChange={onChange} />
 
+        <Heading size={5}>{translate('UI:MARKERS')}</Heading>
         <SettingsEditorMarkers settings={settings} onChange={onChange} />
       </div>
     </SidePanel>

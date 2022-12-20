@@ -75,7 +75,7 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
   );
 
   return (
-    <>
+    <div>
       <Label>
         {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} (
         {settings.genericMarkerSize})
@@ -93,6 +93,6 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
         {settings.zoneMarkerSize})
       </Label>
       {renderedZoneMarkerSize}
-    </>
+    </div>
   );
 };
