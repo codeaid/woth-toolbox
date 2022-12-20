@@ -1,0 +1,37 @@
+.Checkbox {
+  background-color: var(--elevation8);
+  border-radius: 0.25em;
+  cursor: pointer;
+  height: 1em;
+  margin: 0.5em;
+  position: relative;
+  width: 1em;
+}
+
+.CheckboxInput {
+  cursor: inherit;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.CheckboxTick {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TRZGKQzOoOASsThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OjkpukiJ/2sKLWI8OO7Hu3uPu3eAUCsx3e4YB3TDsZLxmJTOrEpdrwhBRBgDGFaYbc7JcgK+4+seAb7eRXmW/7k/R6+WtRkQkIhnmWk5xBvE05uOyXmfWGQFRSM+Jx6z6ILEj1xXPX7jnG+wwDNFK5WcJxaJpXwbq23MCpZOPEUc0XSD8oW0xxrnLc56qcKa9+QvDGWNlWWu0xxCHItYggwJKiooogQHUVoNUmwkaT/m4x9s+GVyqeQqgpFjAWXoUBp+8D/43a2dm5zwkkIxoPPFdT9GgK5doF513e9j162fAMFn4Mpo+cs1YOaT9GpLixwBfdvAxXVLU/eAyx2g/8lULKUhBWkKuRzwfkbflAHCt0DPmtdbcx+nD0CKukrcAAeHwGiestd93t3d3tu/Z5r9/QCEtnKuTSX4hAAAAWNJREFUWMPll69LBEEUx2dEODBcEw7E5o9oENuhwXKX7YpWT/+Gw6rlRLBZRBC7NsFwxaLF4lbFplgt+7Hs4bHMzM7Oj10OvzBhYd/7fOftvje7QvwnAQvAdp3wBEhrMQHc8afqTAASuEStzSoMHGng30ArNnwXvQ5jw9vAjwY+jA2fBz4Mu1+rE34SE94A7g3wd2AmpoErzNpSxcncCt1uabZuAWk0AJwCPQf4jmHXIwOLug2O4N2xoEdgpUS7UWDgwFRhmY3LRBF8DDQM8CXgs8DAa1Z6/SMG+oYECdBRxMwBTxRrw6aMPYtEg1yMDfy8zIvUt0iYAOvAjcW9X8Bs2bf5jHDad+nlKeA6APwBmPaZaL4mVn1HahN4doQPQs11FxNvXqVXmGhpBpRq1KZAN+bnNK6HTSgTzodNKBMd18MmtIk0Z+Cl6j+cvbGyA7R98pVuGSnlBSCEEMvZ9VBMsn4BA8gaGBDtkt8AAAAASUVORK5CYII=);
+  background-size: contain;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity 50ms ease-in-out;
+  width: 100%;
+  z-index: 2;
+}
+
+.CheckboxInput:checked + .CheckboxTick {
+  opacity: 1;
+}
