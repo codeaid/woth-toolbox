@@ -3,7 +3,7 @@ import { TranslationKey } from 'types/i18n';
 import { MarkerType } from 'types/markers';
 
 export interface MapFilterOptions {
-  hideUnchanged: boolean;
+  hideUnedited: boolean;
   showExplorationMarkers: boolean;
   showLabels: boolean;
   showTrackingMarkers: boolean;

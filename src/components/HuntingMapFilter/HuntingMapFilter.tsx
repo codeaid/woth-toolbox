@@ -79,7 +79,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const handleClearFilters = useCallback(() => {
     // Clear filters and close the side panel
     onChange({
-      hideUnchanged: false,
+      hideUnedited: false,
       showExplorationMarkers: true,
       showLabels: true,
       showTrackingMarkers: true,
@@ -172,7 +172,8 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * @param hideUnchanged TRUE to hide unedited markers
    */
   const handleToggleUneditedMarkers = useCallback(
-    (hideUnchanged: boolean) => onChange({ ...options, hideUnchanged }),
+    (hideUnchanged: boolean) =>
+      onChange({ ...options, hideUnedited: hideUnchanged }),
     [options, onChange],
   );
 
@@ -274,14 +275,14 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       <>
         <SectionHeader>{translate('UI:CUSTOM')}</SectionHeader>
         <HuntingMapFilterOption
-          checked={options.hideUnchanged}
+          checked={options.hideUnedited}
           onChange={handleToggleUneditedMarkers}
         >
           {translate('TOOLBOX:HIDE_UNEDITED')}
         </HuntingMapFilterOption>
       </>
     ),
-    [handleToggleUneditedMarkers, options.hideUnchanged, translate],
+    [handleToggleUneditedMarkers, options.hideUnedited, translate],
   );
 
   // Render generic options
@@ -347,7 +348,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const sidebarActions = useMemo<Array<ButtonProps>>(
     () => [
       {
-        children: translate('UI:CLEAR'),
+        children: translate('UI:RESET'),
         className: styles.HuntingMapFilterActionClear,
         disabled: !hasSelectedFilters(options),
         onClick: handleClearFilters,

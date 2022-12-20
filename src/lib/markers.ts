@@ -245,9 +245,9 @@ export const updateMarkerVisibility = (
       const visibleWithFilter = isMarkerFiltered(marker, filterOptions);
 
       // Only show animal markers containing custom data
-      if (filterOptions.hideUnchanged) {
+      if (filterOptions.hideUnedited) {
         ref.current?.setVisible(
-          visibleWithFilter && !!animalMarkerRecords[marker.id],
+          visibleWithFilter && marker.id in animalMarkerRecords,
         );
         return;
       }

@@ -25,7 +25,9 @@ export const HuntingMapFilterOption = (props: HuntingMapFilterOptionProps) => {
 
   return (
     <li
-      className={classnames(styles.HuntingMapFilterMenuItem)}
+      className={classnames(styles.HuntingMapFilterMenuItem, {
+        [styles.HuntingMapFilterMenuItemEnabled]: checked,
+      })}
       onClick={handleClick}
     >
       <span className={styles.HuntingMapFilterMenuItemLabel}>{children}</span>

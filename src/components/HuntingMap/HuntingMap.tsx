@@ -162,7 +162,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // The currently selected filters
   const [filterOptions, setFilterOptions] = useState<MapFilterOptions>({
-    hideUnchanged: false,
+    hideUnedited: false,
     showExplorationMarkers: true,
     showLabels: true,
     showTrackingMarkers: true,

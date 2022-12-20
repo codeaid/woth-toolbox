@@ -6,4 +6,8 @@ import { MapFilterOptions } from 'types/cartography';
  * @param options Option to validate
  */
 export const hasSelectedFilters = (options: MapFilterOptions) =>
-  options.types.length > 0 || options.hideUnchanged;
+  options.types.length > 0 ||
+  options.hideUnedited ||
+  !options.showExplorationMarkers ||
+  !options.showLabels ||
+  !options.showTrackingMarkers;
