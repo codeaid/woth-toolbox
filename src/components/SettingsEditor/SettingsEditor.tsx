@@ -2,9 +2,9 @@ import { useCallback, useMemo } from 'react';
 import Slider from 'react-slider';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
-import { Select, SelectOption } from 'components/Select';
 import { SidePanel } from 'components/SidePanel';
 import { useTranslator } from 'hooks';
+import { SettingsEditorLanguage } from './SettingsEditorLanguage';
 import { SettingsEditorProps } from './types';
 import styles from './SettingsEditor.module.css';
 
@@ -27,14 +27,6 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
    */
   const handleGenericSizeChange = useCallback(
     (genericMarkerSize: number) => onChange({ genericMarkerSize }),
-    [onChange],
-  );
-
-  /**
-   * Handle changes to application language
-   */
-  const handleLanguageChange = useCallback(
-    (locale?: string) => onChange({ locale }),
     [onChange],
   );
 
@@ -84,29 +76,6 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
     [handleReset, translate],
   );
 
-  // List of language options
-  const languageOptions = useMemo<Array<SelectOption<string>>>(
-    () =>
-      [
-        { content: translate('UI:LANGUAGE_CS_CZ'), value: 'cs' },
-        { content: translate('UI:LANGUAGE_DE_DE'), value: 'de' },
-        { content: translate('UI:LANGUAGE_EN_US'), value: 'en' },
-        { content: translate('UI:LANGUAGE_ES_ES'), value: 'es' },
-        { content: translate('UI:LANGUAGE_FR_FR'), value: 'fr' },
-        { content: translate('UI:LANGUAGE_HI_IN'), value: 'hi' },
-        { content: translate('UI:LANGUAGE_ID_ID'), value: 'id' },
-        { content: translate('UI:LANGUAGE_IT_IT'), value: 'it' },
-        { content: translate('UI:LANGUAGE_JA_JP'), value: 'ja' },
-        { content: translate('UI:LANGUAGE_PL_PL'), value: 'pl' },
-        { content: translate('UI:LANGUAGE_RU_RU'), value: 'ru' },
-        { content: translate('UI:LANGUAGE_SK_SK'), value: 'sk' },
-        { content: translate('UI:LANGUAGE_TR_TR'), value: 'tr' },
-        { content: translate('UI:LANGUAGE_ZH_HANS'), value: 'zh' },
-        { content: translate('UI:LANGUAGE_ZH_HANT'), value: 'zh-Hant' },
-      ].sort((a, b) => a.content.localeCompare(b.content)),
-    [translate],
-  );
-
   // Rendered animal marker size slider
   const renderedAnimalMarkerSize = useMemo(
     () => renderSlider(settings.animalMarkerSize, handleAnimalSizeChange),
@@ -136,11 +105,7 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
     >
       <div className={styles.SettingsEditor}>
         <Label>{translate('UI:LANGUAGE')}</Label>
-        <Select
-          options={languageOptions}
-          value={settings.locale}
-          onChange={handleLanguageChange}
-        />
+        <SettingsEditorLanguage settings={settings} onChange={onChange} />
 
         <Label>
           {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} (
