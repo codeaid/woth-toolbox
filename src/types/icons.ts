@@ -13,7 +13,10 @@ export type IconTypeGeneric =
   | 'shooting range'
   | 'view';
 
-export type IconTypeMarker = 'marker:exploration' | 'marker:tracking';
+export type IconTypeMarker =
+  | 'marker:exploration'
+  | 'marker:level area'
+  | 'marker:tracking';
 
 export type IconTypeNeedZone = 'zone:drink' | 'zone:eat' | 'zone:sleep';
 
