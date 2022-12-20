@@ -1,15 +1,30 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import { App as Toolbox } from 'components/App';
 import { SettingsManagerProvider } from 'contexts';
-import { useSettingsManager } from 'hooks';
+import { useSettingsManager, useStorage } from 'hooks';
+import { remapAnimalMarkerStore } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
   // Retrieve application settings manager
   const manager = useSettingsManager();
+
+  // Retrieve application storage manager
+  const storage = useStorage();
+
+  // Convert legacy animal marker keys to the latest format
+  useEffect(() => {
+    // Ensure storage is available before continuing
+    if (!storage) {
+      return;
+    }
+
+    // Prefix keys with "woth:"
+    remapAnimalMarkerStore(storage);
+  }, [storage]);
 
   return (
     <>
