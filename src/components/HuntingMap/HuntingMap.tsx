@@ -135,8 +135,19 @@ export const HuntingMap = (props: HuntingMapProps) => {
     zoomValue: defaultZoomValue,
   });
 
+  // Lists of marker options to be rendered on the page
+  const animalMarkerRefs = useRef<Array<MarkerReferenceAnimal>>([]);
+  const genericMarkerRefs = useRef<Array<MarkerReferenceGeneric>>([]);
+
   // Flag indicating whether left mouse button is being held down
   const isMouseDown = useRef(false);
+
+  // Store current mouse cursor coordinates and offset ratio
+  const mouseCoords = useRef<Point>([-1, -1]);
+  const mouseRatio = useRef<Point>([-1, -1]);
+
+  // Variable tracking whether mouse was moved between mousedown and mouseup
+  const mouseMoved = useRef(false);
 
   // Lists of animal and generic marker elements to render
   const [animalMarkerElements, setAnimalMarkerElements] =
@@ -146,27 +157,17 @@ export const HuntingMap = (props: HuntingMapProps) => {
       Array<ReactElement<HuntingMapMarkerProps<MarkerOptionsGeneric>>>
     >();
 
-  // Lists of marker options to be rendered on the page
-  const animalMarkerRefs = useRef<Array<MarkerReferenceAnimal>>([]);
-  const genericMarkerRefs = useRef<Array<MarkerReferenceGeneric>>([]);
-
-  // The currently selected filters
-  const filterOptions = useRef<MapFilterOptions>({
-    exploration: true,
-    labels: true,
-    tracking: true,
-    types: [],
-  });
-
-  // Store current mouse cursor coordinates and offset ratio
-  const mouseCoords = useRef<Point>([-1, -1]);
-  const mouseRatio = useRef<Point>([-1, -1]);
-
-  // Variable tracking whether mouse was moved between mousedown and mouseup
-  const mouseMoved = useRef(false);
-
   // Animal marker that is currently being edited
   const [editedAnimal, setEditedAnimal] = useState<MarkerOptionsAnimal>();
+
+  // The currently selected filters
+  const [filterOptions, setFilterOptions] = useState<MapFilterOptions>({
+    hideUnchanged: false,
+    showExplorationMarkers: true,
+    showLabels: true,
+    showTrackingMarkers: true,
+    types: [],
+  });
 
   // Flag indicating that the map image has loaded
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -263,13 +264,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const handleUpdateMarkerVisibility = useCallback(
     (customZoomOptions?: MapZoomOptions) =>
       updateMarkerVisibility(
-        filterOptions.current,
+        filterOptions,
         customZoomOptions ?? zoomOptions.current,
         zoomMarkerMap,
+        animalMarkerRecords,
         animalMarkerRefs.current,
         genericMarkerRefs.current,
       ),
-    [zoomMarkerMap],
+    [animalMarkerRecords, filterOptions, zoomMarkerMap],
   );
 
   /**
@@ -597,23 +599,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
   }, [handleMapReset]);
 
   /**
-   * Handle changes to selected filters
-   *
-   * @param options Selected filter options
-   */
-  const handleFilterChange = useCallback(
-    (options: MapFilterOptions) => {
-      // Update visibility of map markers depending on the filter values
-      filterOptions.current = options;
-      handleUpdateMarkerVisibility();
-
-      // Trigger filter component update with new values
-      setForcedUpdate();
-    },
-    [setForcedUpdate, handleUpdateMarkerVisibility],
-  );
-
-  /**
    * Handle opening or closing an animal marker editor
    */
   const handleToggleAnimalEditor = useCallback(
@@ -650,8 +635,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
           className={styles.HuntingMapMarkerCustom}
           forceVisible={
             marker.type === 'marker:exploration'
-              ? filterOptions.current.exploration
-              : filterOptions.current.tracking
+              ? filterOptions.showExplorationMarkers
+              : filterOptions.showTrackingMarkers
           }
           key={marker.id}
           marker={marker}
@@ -663,7 +648,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       customMarkers,
-      forcedUpdate,
+      filterOptions,
       handleCustomMarkerKeyDown,
       onCustomMarkerRemove,
     ],
@@ -679,11 +664,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
           mapScale={zoomOptions.current.zoomValue}
           maxMapScale={zoomLabelMax}
           minMapScale={zoomLabelMin}
-          visible={filterOptions.current.labels}
+          visible={filterOptions.showLabels}
         />
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [forcedUpdate, labels, zoomLabelMax, zoomLabelMin],
+    [filterOptions, forcedUpdate, labels, zoomLabelMax, zoomLabelMin],
   );
 
   // Monitor changes to wrapper size and update canvas size accordingly
@@ -805,6 +790,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
     [animalMarkerRecords, handleUpdateAnimalData],
   );
 
+  // Update marker visibility whenever any of function dependencies change
+  useEffect(
+    () => handleUpdateMarkerVisibility(),
+    [handleUpdateMarkerVisibility],
+  );
+
   // Ensure debug markers are always visible if there are any present
   useEffect(() => {
     animalMarkerRefs.current
@@ -841,8 +832,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
       <HuntingMapFilter
         animalMarkers={animalMarkers}
         genericMarkers={genericMarkers}
-        options={filterOptions.current}
-        onChange={handleFilterChange}
+        options={filterOptions}
+        onChange={setFilterOptions}
       />
 
       <AnimalEditor

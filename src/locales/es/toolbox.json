@@ -4,6 +4,7 @@
   "TOOLBOX:DATA_MIGRATION": "Migración de datos",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Haga clic en cualquier parte del mapa para crear un nuevo marcador",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "No hay marcadores completados disponibles",
+  "TOOLBOX:HIDE_UNEDITED": "Ocultar marcadores sin editar",
   "TOOLBOX:LAST_MODIFIED": "Última modificación",
   "TOOLBOX:MARKER_CREATOR": "Creador de marcadores",
   "TOOLBOX:MARKER_CABIN": "Cabañas",

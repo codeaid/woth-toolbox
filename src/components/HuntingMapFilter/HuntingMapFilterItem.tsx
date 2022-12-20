@@ -5,7 +5,7 @@ import { HuntingMapFilterItemProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
-  const { children, large = false, selected, type, onChange } = props;
+  const { children, iconSize, selected, type, onChange } = props;
 
   // Retrieve icon component associated with current filter item
   const IconComponent = useMemo(() => getIconComponent(type), [type]);
@@ -13,9 +13,10 @@ export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
   /**
    * Handle clicking on the filter item
    */
-  const handleClick = useCallback(() => {
-    onChange(type, !selected);
-  }, [onChange, selected, type]);
+  const handleClick = useCallback(
+    () => onChange(!selected, type),
+    [onChange, selected, type],
+  );
 
   return (
     <li
@@ -24,8 +25,12 @@ export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
       })}
       onClick={handleClick}
     >
-      <span className={styles.HuntingMapFilterMenuItemLabel}>{children}</span>
-      <IconComponent highlighted={selected} size={large ? 38 : 28} />
+      <span className={styles.HuntingMapFilterMenuItemLabel} title={children}>
+        {children}
+      </span>
+      <div className={styles.HuntingMapFilterMenuItemIcon}>
+        <IconComponent highlighted={selected} size={iconSize} />
+      </div>
     </li>
   );
 };

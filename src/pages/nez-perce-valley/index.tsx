@@ -6,12 +6,15 @@ import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
   useCustomMarkers,
+  useDebugPanel,
   useSettings,
   useTranslator,
 } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
 import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
+import { useMemo } from 'react';
+import { DebugPanel } from 'components/DebugPanel';
 
 const NezPerceValleyPage = () => {
   // Custom animal data manager values
@@ -32,6 +35,27 @@ const NezPerceValleyPage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
+  // Extract debug panel controls
+  const {
+    currentDebugMarker,
+    debugMarkers,
+    debugMarkersWithCurrent,
+    onDebugClear,
+    onDebugCoordinates,
+    onDebugCopy,
+    onDebugDrinkZoneRemove,
+    onDebugEatZoneRemove,
+    onDebugMarkerDelete,
+    onDebugSettingsChange,
+    onDebugSleepZoneRemove,
+  } = useDebugPanel();
+
+  // Merge current animal markers with debug data
+  const markers = useMemo(
+    () => animalMarkers.concat(debugMarkersWithCurrent),
+    [debugMarkersWithCurrent],
+  );
+
   return (
     <>
       <Head>
@@ -41,9 +65,22 @@ const NezPerceValleyPage = () => {
       </Head>
 
       <NoSSR>
+        <DebugPanel
+          currentMarker={currentDebugMarker}
+          enabled={true}
+          markers={debugMarkers}
+          onClear={onDebugClear}
+          onCopy={onDebugCopy}
+          onDrinkZoneRemove={onDebugDrinkZoneRemove}
+          onEatZoneRemove={onDebugEatZoneRemove}
+          onMarkerDelete={onDebugMarkerDelete}
+          onSettingsChange={onDebugSettingsChange}
+          onSleepZoneRemove={onDebugSleepZoneRemove}
+        />
+
         <HuntingMap
           animalMarkerRecords={dataMap}
-          animalMarkers={animalMarkers}
+          animalMarkers={markers}
           customMarkers={customMarkers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
@@ -54,6 +91,7 @@ const NezPerceValleyPage = () => {
           markerSizeGeneric={settings.genericMarkerSize}
           markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
+          onClick={onDebugCoordinates}
           onCustomMarkerCreate={onCustomMarkerCreate}
           onCustomMarkerRemove={onCustomMarkerRemove}
           onCustomMarkersClear={onCustomMarkersClear}

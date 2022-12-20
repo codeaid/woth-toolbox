@@ -31,8 +31,21 @@
   transform: scale(1.15);
 }
 
+.HuntingMapFilterMenuItemIcon,
+.HuntingMapFilterMenuOptionCheckbox {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 2.5em;
+}
+
 .HuntingMapFilterMenuItemLabel {
+  flex: 1;
   font-size: 1.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .HuntingMapFilterMenuItemEnabled .HuntingMapFilterMenuItemLabel {

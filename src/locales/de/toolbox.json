@@ -4,6 +4,7 @@
   "TOOLBOX:DATA_MIGRATION": "Datenmigration",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Klicken Sie auf eine beliebige Stelle auf der Karte, um eine neue Markierung zu erstellen",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Keine fertigen Markierungen verfügbar",
+  "TOOLBOX:HIDE_UNEDITED": "Unbearbeitet ausblenden",
   "TOOLBOX:LAST_MODIFIED": "Zuletzt bearbeitet",
   "TOOLBOX:MARKER_CREATOR": "Tiermarker-Ersteller",
   "TOOLBOX:MARKER_CABIN": "Hütte",

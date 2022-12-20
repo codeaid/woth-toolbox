@@ -4,6 +4,7 @@
   "TOOLBOX:DATA_MIGRATION": "Перенос данных",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Кликните в любом месте чтобы создать новый маркер",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Нету созданных маркеров",
+  "TOOLBOX:HIDE_UNEDITED": "Скрыть неотредактированные",
   "TOOLBOX:LAST_MODIFIED": "Изменено",
   "TOOLBOX:MARKER_CREATOR": "Создатель Маркеров",
   "TOOLBOX:MARKER_CABIN": "Домик",

@@ -29,7 +29,9 @@ export const HuntingMapFilterOption = (props: HuntingMapFilterOptionProps) => {
       onClick={handleClick}
     >
       <span className={styles.HuntingMapFilterMenuItemLabel}>{children}</span>
-      <Checkbox checked={checked} onChange={handleCheckboxChange} />
+      <div className={styles.HuntingMapFilterMenuOptionCheckbox}>
+        <Checkbox checked={checked} onChange={handleCheckboxChange} />
+      </div>
     </li>
   );
 };

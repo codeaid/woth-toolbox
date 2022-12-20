@@ -15,6 +15,7 @@ import {
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
   MarkerReference,
+  MarkerStorageRecordAnimal,
   MarkerType,
   MarkerTypeAnimal,
   MarkerTypeCustom,
@@ -217,12 +218,14 @@ export const isNeedZoneMarkerType = (
  * @param filterOptions Filter options
  * @param zoomOptions Zoom options
  * @param zoomVisibilityMap Marker zoom visibility map
+ * @param animalMarkerRecords Animal marker data records
  * @param markerOptions List of marker options to process
  */
 export const updateMarkerVisibility = (
   filterOptions: MapFilterOptions,
   zoomOptions: MapZoomOptions,
   zoomVisibilityMap: Map<MarkerType, number>,
+  animalMarkerRecords: Record<string, MarkerStorageRecordAnimal>,
   ...markerOptions: Array<Array<MarkerReference>>
 ) =>
   markerOptions
@@ -240,6 +243,14 @@ export const updateMarkerVisibility = (
 
       // Determine if marker should be visible with current filters
       const visibleWithFilter = isMarkerFiltered(marker, filterOptions);
+
+      // Only show animal markers containing custom data
+      if (filterOptions.hideUnchanged) {
+        ref.current?.setVisible(
+          visibleWithFilter && !!animalMarkerRecords[marker.id],
+        );
+        return;
+      }
 
       // Determine if marker matches the only filter type currently selected
       const visibleWithOnlyFilter =

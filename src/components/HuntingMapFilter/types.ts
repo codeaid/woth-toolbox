@@ -8,8 +8,8 @@ import {
 export type HuntingMapFilterChangeHandler = (options: MapFilterOptions) => void;
 type HuntingMapFilterOptionChangeHandler = (checked: boolean) => void;
 type HuntingMapFilterValueChangeHandler = (
-  type: MarkerType,
   selected: boolean,
+  type: MarkerType,
 ) => void;
 
 export interface HuntingMapFilterProps {
@@ -21,7 +21,7 @@ export interface HuntingMapFilterProps {
 
 export interface HuntingMapFilterItemProps {
   children: string;
-  large?: boolean;
+  iconSize: number;
   selected: boolean;
   type: MarkerType;
   onChange: HuntingMapFilterValueChangeHandler;

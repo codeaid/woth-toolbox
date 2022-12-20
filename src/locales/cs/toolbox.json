@@ -4,6 +4,7 @@
   "TOOLBOX:DATA_MIGRATION": "Migrace dat",
   "TOOLBOX:DEBUG_EDITOR_ACTIVE_HINT": "Kliknutím kamkoli na mapu vytvoříte novou značku",
   "TOOLBOX:DEBUG_EDITOR_COMPLETED_HINT": "Nejsou k dispozici žádné dokončené značky",
+  "TOOLBOX:HIDE_UNEDITED": "Skrýt neupravené značky",
   "TOOLBOX:LAST_MODIFIED": "Naposledy změněno",
   "TOOLBOX:MARKER_CREATOR": "Animal Marker Creator",
   "TOOLBOX:MARKER_CABIN": "Chata",
