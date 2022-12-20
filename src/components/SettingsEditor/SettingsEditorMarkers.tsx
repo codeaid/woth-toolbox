@@ -1,9 +1,8 @@
-import { useCallback, useMemo } from 'react';
-import Slider from 'react-slider';
+import { useCallback } from 'react';
 import { Label } from 'components/Label';
+import { Slider } from 'components/Slider';
 import { useTranslator } from 'hooks';
 import { SettingsEditorMarkersProps } from './types';
-import styles from './SettingsEditorMarkers.module.css';
 
 export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
   const { settings, onChange } = props;
@@ -35,64 +34,37 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
     [onChange],
   );
 
-  /**
-   * Render a value slider
-   *
-   * @param value Slider value
-   * @param onChange Value change handler
-   */
-  const renderSlider = useCallback(
-    (value: number, onChange: (value: number) => void) => (
-      <Slider
-        className={styles.SettingsEditorMarkersSlider}
-        max={100}
-        min={15}
-        thumbClassName={styles.SettingsEditorMarkersSliderThumb}
-        trackClassName={styles.SettingsEditorMarkersSliderTrack}
-        value={value}
-        onChange={onChange}
-      />
-    ),
-    [],
-  );
-
-  // Rendered animal marker size slider
-  const renderedAnimalMarkerSize = useMemo(
-    () => renderSlider(settings.animalMarkerSize, handleAnimalSizeChange),
-    [handleAnimalSizeChange, renderSlider, settings.animalMarkerSize],
-  );
-
-  // Rendered generic marker size slider
-  const renderedGenericMarkerSize = useMemo(
-    () => renderSlider(settings.genericMarkerSize, handleGenericSizeChange),
-    [handleGenericSizeChange, renderSlider, settings.genericMarkerSize],
-  );
-
-  // Rendered animal need zone marker size slider
-  const renderedZoneMarkerSize = useMemo(
-    () => renderSlider(settings.zoneMarkerSize, handleZoneSizeChange),
-    [handleZoneSizeChange, renderSlider, settings.zoneMarkerSize],
-  );
-
   return (
     <div>
       <Label>
         {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} (
         {settings.genericMarkerSize})
       </Label>
-      {renderedGenericMarkerSize}
+      <Slider
+        min={15}
+        value={settings.genericMarkerSize}
+        onChange={handleGenericSizeChange}
+      />
 
       <Label>
         {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS')} (
         {settings.animalMarkerSize})
       </Label>
-      {renderedAnimalMarkerSize}
+      <Slider
+        min={15}
+        value={settings.animalMarkerSize}
+        onChange={handleAnimalSizeChange}
+      />
 
       <Label>
         {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ZONES')} (
         {settings.zoneMarkerSize})
       </Label>
-      {renderedZoneMarkerSize}
+      <Slider
+        min={15}
+        value={settings.zoneMarkerSize}
+        onChange={handleZoneSizeChange}
+      />
     </div>
   );
 };
