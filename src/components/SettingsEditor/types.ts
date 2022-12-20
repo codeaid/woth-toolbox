@@ -7,6 +7,11 @@ export interface SettingsEditorLanguageProps {
   onChange: SettingsChangeHandler;
 }
 
+export interface SettingsEditorMarkersProps {
+  settings: Required<Settings>;
+  onChange: SettingsChangeHandler;
+}
+
 export interface SettingsEditorProps {
   settings: Required<Settings>;
   visible?: boolean;
