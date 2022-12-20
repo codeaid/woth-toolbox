@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  clearAnimalMarkerData,
-  getAnimalMarkerData,
-  getAnimalMarkerDataMap,
-  isEmptyAnimalData,
-  setAnimalMarkerData,
+  clearAnimalMarkerStore,
+  isEmptyAnimalMarker,
+  readAnimalMarkerMap,
+  readAnimalMarkerStore,
+  writeAnimalMarkerStore,
 } from 'lib/storage';
 import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
 import { useStorage } from './useStorage';
@@ -31,7 +31,7 @@ export const useAnimalMarkerData = () => {
         return;
       }
 
-      const markerKey = clearAnimalMarkerData(storage, marker);
+      const markerKey = clearAnimalMarkerStore(storage, marker);
       setDataMap(current =>
         Object.fromEntries(
           Object.entries(current).filter(([key]) => key !== markerKey),
@@ -51,7 +51,7 @@ export const useAnimalMarkerData = () => {
         return;
       }
 
-      return getAnimalMarkerData(storage, marker);
+      return readAnimalMarkerStore(storage, marker);
     },
     [storage],
   );
@@ -67,7 +67,7 @@ export const useAnimalMarkerData = () => {
       }
 
       // Remove empty data objects from the storage
-      if (isEmptyAnimalData(data)) {
+      if (isEmptyAnimalMarker(data)) {
         return handleDataClear(marker);
       }
 
@@ -79,7 +79,7 @@ export const useAnimalMarkerData = () => {
       };
 
       // Update storage with new custom data
-      const markerKey = setAnimalMarkerData(storage, marker, patch);
+      const markerKey = writeAnimalMarkerStore(storage, marker, patch);
       if (!markerKey) {
         return;
       }
@@ -100,7 +100,7 @@ export const useAnimalMarkerData = () => {
     }
 
     // Read entries from the storage and persist them
-    const entries = getAnimalMarkerDataMap(storage);
+    const entries = readAnimalMarkerMap(storage);
     setDataMap(entries);
   }, [storage]);
 

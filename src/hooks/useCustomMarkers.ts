@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createMarkerOptions, hasSameCoordinates } from 'lib/markers';
 import {
   clearCustomMarkerStore,
-  getCustomMarkerStore,
-  setCustomMarkerStore,
+  readCustomMarkerStore,
+  writeCustomMarkerStore,
 } from 'lib/storage';
 import { MapType } from 'types/cartography';
 import { Point } from 'types/generic';
@@ -151,7 +151,7 @@ export const useCustomMarkers = (map: MapType, maxTrackingMarkers = 100) => {
     }
 
     // Load marker data and store it locally
-    const markers = getCustomMarkerStore(storage, map);
+    const markers = readCustomMarkerStore(storage, map);
     setCustomMarkers(markers ?? []);
   }, [map, storage]);
 
@@ -165,7 +165,7 @@ export const useCustomMarkers = (map: MapType, maxTrackingMarkers = 100) => {
     if (!customMarkers || !customMarkers.length) {
       clearCustomMarkerStore(storage, map);
     } else {
-      setCustomMarkerStore(storage, map, customMarkers);
+      writeCustomMarkerStore(storage, map, customMarkers);
     }
   }, [customMarkers, map, storage]);
 

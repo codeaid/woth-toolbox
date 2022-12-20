@@ -15,7 +15,6 @@ import {
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { useTranslator } from 'hooks';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
-import { getMarkerKey } from 'lib/markers';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsZone,
@@ -187,7 +186,7 @@ export const HuntingMapAnimal = forwardRef(
               <HuntingMapMarker
                 className={styles.HuntingMapAnimalZone}
                 forceVisible={zonesVisible}
-                key={zone.id ?? getMarkerKey(zone)}
+                key={zone.id}
                 marker={zone}
                 mountOnEnter={true}
                 ref={ref}

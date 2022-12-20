@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { SettingsManagerContextValue } from 'contexts';
 import {
-  clearApplicationSettings,
-  getApplicationSettings,
-  setApplicationSettings,
+  clearSettingsStore,
+  readSettingsStore,
+  writeSettingsStore,
 } from 'lib/storage';
 import { Settings } from 'types/app';
 import { useStorage } from './useStorage';
@@ -38,7 +38,7 @@ export const useSettingsManager = (flushDelayMs = 500) => {
 
       // Clear settings storage
       if (!patch) {
-        clearApplicationSettings(storage);
+        clearSettingsStore(storage);
         setSettings(undefined);
         return;
       }
@@ -58,7 +58,7 @@ export const useSettingsManager = (flushDelayMs = 500) => {
       // Schedule storage update
       timeout.current = window.setTimeout(() => {
         // Persist application settings to storage
-        setApplicationSettings(storage, replacement);
+        writeSettingsStore(storage, replacement);
       }, flushDelayMs);
     },
     [flushDelayMs, settings, storage],
@@ -72,7 +72,7 @@ export const useSettingsManager = (flushDelayMs = 500) => {
     }
 
     // Read application settings from the storage
-    const settings = getApplicationSettings(storage);
+    const settings = readSettingsStore(storage);
     setSettings(settings);
     setInitialized(true);
   }, [storage]);

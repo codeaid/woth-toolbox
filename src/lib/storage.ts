@@ -1,5 +1,9 @@
-import { animalDataPrefix, customMarkerKey, settingsKey } from 'config/storage';
-import { getMarkerKey } from 'lib/markers';
+import {
+  animalDataPrefix,
+  animalDataPrefixLegacy,
+  customMarkerKey,
+  settingsKey,
+} from 'config/storage';
 import { isNotEmpty } from 'lib/utils';
 import { Settings } from 'types/app';
 import { MapType } from 'types/cartography';
@@ -62,51 +66,22 @@ export const getStorage = () => {
 };
 
 /**
- * Generate marker storage key
- *
- * @param marker Target marker to generate key for
- */
-const getAnimalMarkerDataKey = (
-  marker: MarkerOptionsAnimal,
-): [string, string] => {
-  const markerKey = getMarkerKey(marker);
-
-  return [markerKey, `${animalDataPrefix}${markerKey}`];
-};
-
-/**
- * Check if the specified value is an animal marker data key
- *
- * @param key Key to validate
- */
-const isAnimalMarkerDataKey = (key: any): key is string =>
-  key?.startsWith(animalDataPrefix);
-
-/**
  * Clear marker data from the storage
  *
  * @param storage Marker data storage
  * @param marker Marker object
  */
-export const clearAnimalMarkerData = (
+export const clearAnimalMarkerStore = (
   storage: Storage,
   marker: MarkerOptionsAnimal,
 ) => {
   // Generate marker and storage keys for the current marker
-  const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
+  const storageKey = getAnimalMarkerStoreKey(marker.id);
 
   // Remove item from the storage
   storage.removeItem(storageKey);
-  return markerKey;
+  return marker.id;
 };
-
-/**
- * Remove application settings from the storage
- *
- * @param storage Target storage
- */
-export const clearApplicationSettings = (storage: Storage) =>
-  storage.removeItem(settingsKey);
 
 /**
  * Remove custom markers from the storage
@@ -114,8 +89,85 @@ export const clearApplicationSettings = (storage: Storage) =>
  * @param storage Target storage
  * @param map Target map type
  */
-export const clearCustomMarkerStore = (storage: Storage, map: MapType) =>
-  storage.removeItem(getCustomMarkerStoreKey(map));
+export const clearCustomMarkerStore = (storage: Storage, map: MapType) => {
+  const storageKey = getCustomMarkerStoreKey(map);
+  storage.removeItem(storageKey);
+};
+
+/**
+ * Remove application settings from the storage
+ *
+ * @param storage Target storage
+ */
+export const clearSettingsStore = (storage: Storage) =>
+  storage.removeItem(settingsKey);
+
+/**
+ * Get custom marker store key for the specified map
+ *
+ * @param id Target marker identifier
+ */
+const getAnimalMarkerStoreKey = (id: string) => `${animalDataPrefix}:${id}`;
+
+/**
+ * Get custom marker store key for the specified map
+ *
+ * @param map Target map type
+ */
+const getCustomMarkerStoreKey = (map: MapType) => `${customMarkerKey}:${map}`;
+
+/**
+ * Check if specified data object does not contain any values
+ *
+ * @param data Animal data object to validate
+ */
+export const isEmptyAnimalMarker = (data?: MarkerStorageRecordAnimal) =>
+  !data ||
+  ((!data.color || data.color === '#ffffff') &&
+    (!data.comment || data.comment.trim() === '') &&
+    (!data.group || !data.group.length));
+
+/**
+ * Load all stored animal marker data entries
+ *
+ * @param storage Marker data storage
+ * @param stripPrefixes TRUE to remove animal marker key prefixes
+ */
+export const readAnimalMarkerMap = (
+  storage: Storage,
+  stripPrefixes = true,
+): Record<string, MarkerStorageRecordAnimal> =>
+  [...Array(storage.length).keys()]
+    // Read all available storage keys
+    .map(i => storage.key(i))
+
+    // Remove empty keys
+    .filter(isNotEmpty)
+
+    // Remove keys that are not related to animal markers
+    .filter(key => key.startsWith(animalDataPrefix))
+
+    // Convert all records read from the storage to a map
+    .reduce((acc, key) => {
+      // Ensure valid data exists in the storage
+      const value = storage.getItem(key);
+      if (!value) {
+        return acc;
+      }
+
+      // Generate target key for the current record
+      const recordKey = stripPrefixes
+        ? key.substring(animalDataPrefix.length + 1)
+        : key;
+
+      try {
+        // Attempt to parse data stored in the storage
+        const record = JSON.parse(value);
+        return { ...acc, [recordKey]: record };
+      } catch (e) {
+        return acc;
+      }
+    }, {});
 
 /**
  * Retrieve marker data from the storage
@@ -123,12 +175,12 @@ export const clearCustomMarkerStore = (storage: Storage, map: MapType) =>
  * @param storage Marker data storage
  * @param marker Marker object
  */
-export const getAnimalMarkerData = (
+export const readAnimalMarkerStore = (
   storage: Storage,
   marker: MarkerOptionsAnimal,
 ): Optional<MarkerStorageRecordAnimal> => {
   // Generate marker and storage keys for the current marker
-  const [, storageKey] = getAnimalMarkerDataKey(marker);
+  const storageKey = `${animalDataPrefix}:${marker.id}`;
 
   // Attempt to read and parse data in the storage
   try {
@@ -142,54 +194,12 @@ export const getAnimalMarkerData = (
 };
 
 /**
- * Load all stored animal marker data entries
- *
- * @param storage Marker data storage
- * @param stripPrefixes TRUE to remove animal marker key prefixes
- */
-export const getAnimalMarkerDataMap = (
-  storage: Storage,
-  stripPrefixes = true,
-): Record<string, MarkerStorageRecordAnimal> => {
-  try {
-    return (
-      [...Array(storage.length).keys()]
-        // Read all available storage keys
-        .map(i => storage.key(i))
-        // Remove keys that are not related to animal markers
-        .filter(isAnimalMarkerDataKey)
-        // Fetch actual animal marker data strings
-        .map(key => [key, storage.getItem(key)] as [string, string | null])
-        // Remove empty values
-        .filter(([, json]) => isNotEmpty(json))
-        // Convert JSON data values to data objects
-        .map(
-          ([key, json]) =>
-            [
-              stripPrefixes ? key.substring(animalDataPrefix.length) : key,
-              JSON.parse(json as string),
-            ] as [string, MarkerStorageRecordAnimal],
-        )
-        .reduce(
-          (acc, [key, data]) => ({
-            ...acc,
-            [key]: data,
-          }),
-          {},
-        )
-    );
-  } catch (e) {
-    return {};
-  }
-};
-
-/**
  * Read custom marker data from the storage
  *
  * @param storage Target storage
  * @param map Source map type
  */
-export const getCustomMarkerStore = (storage: Storage, map: MapType) => {
+export const readCustomMarkerStore = (storage: Storage, map: MapType) => {
   try {
     // Read custom marker data from the storage
     const json = storage.getItem(getCustomMarkerStoreKey(map));
@@ -202,18 +212,45 @@ export const getCustomMarkerStore = (storage: Storage, map: MapType) => {
 };
 
 /**
- * Get custom marker store key for the specified map
+ * Serialize current storage contents for migration
  *
- * @param map Target map type
+ * @param storage Source storage manager
  */
-const getCustomMarkerStoreKey = (map: MapType) => `${customMarkerKey}:${map}`;
+export const readSerializeStore = (storage: Storage) => {
+  // Read data to serialize
+  const animalMarkers = readAnimalMarkerMap(storage, false);
+
+  // Read custom marker data
+  const customMarkers = {
+    [getCustomMarkerStoreKey('idaho')]: readCustomMarkerStore(storage, 'idaho'),
+    [getCustomMarkerStoreKey('transylvania')]: readCustomMarkerStore(
+      storage,
+      'transylvania',
+    ),
+  };
+
+  // Read application settings
+  const settings = {
+    [settingsKey]: readSettingsStore(storage),
+  };
+
+  // Serialize local storage data
+  const json = JSON.stringify({
+    ...animalMarkers,
+    ...customMarkers,
+    ...settings,
+  });
+
+  // Base64 encode the output
+  return window.btoa(json);
+};
 
 /**
  * Retrieve application settings from the storage
  *
  * @param storage Target storage
  */
-export const getApplicationSettings = (storage: Storage) => {
+export const readSettingsStore = (storage: Storage) => {
   try {
     // Read settings value from the storage
     const json = storage.getItem(settingsKey);
@@ -226,15 +263,31 @@ export const getApplicationSettings = (storage: Storage) => {
 };
 
 /**
- * Check if specified data object does not contain any values
+ * Remap animal marker keys from legacy format to the standardized format
  *
- * @param data Animal data object to validate
+ * @param storage Target storage
  */
-export const isEmptyAnimalData = (data?: MarkerStorageRecordAnimal) =>
-  !data ||
-  ((!data.color || data.color === '#ffffff') &&
-    (!data.comment || data.comment.trim() === '') &&
-    (!data.group || !data.group.length));
+export const remapAnimalMarkerStore = (storage: Storage) =>
+  [...Array(storage.length).keys()]
+    // Read all available storage keys
+    .map(i => storage.key(i))
+    .filter(isNotEmpty)
+    .filter(key => key.startsWith(animalDataPrefixLegacy))
+    .forEach(key => {
+      // Read marker data and ignore empty values
+      const value = storage.getItem(key);
+      if (!value) {
+        return;
+      }
+
+      // Extract marker identifier and generate replacement key
+      const id = key.substring(animalDataPrefixLegacy.length + 1);
+      const nextKey = getAnimalMarkerStoreKey(id);
+
+      // Move record to a new key
+      storage.setItem(nextKey, value);
+      storage.removeItem(key);
+    });
 
 /**
  * Store marker data in the storage
@@ -243,30 +296,19 @@ export const isEmptyAnimalData = (data?: MarkerStorageRecordAnimal) =>
  * @param marker Marker object
  * @param data Marker data to store
  */
-export const setAnimalMarkerData = (
+export const writeAnimalMarkerStore = (
   storage: Storage,
   marker: MarkerOptionsAnimal,
   data: MarkerStorageRecordAnimal,
 ) => {
   // Generate marker and storage keys for the current marker
-  const [markerKey, storageKey] = getAnimalMarkerDataKey(marker);
+  const storageKey = getAnimalMarkerStoreKey(marker.id);
 
   try {
     storage.setItem(storageKey, JSON.stringify(data));
-    return markerKey;
+    return marker.id;
   } catch (e) {}
 };
-
-/**
- * Store application settings in the storage
- *
- * @param storage Target storage
- * @param settings Settings object to persist
- */
-export const setApplicationSettings = (
-  storage: Storage,
-  settings: Partial<Settings>,
-) => storage.setItem(settingsKey, JSON.stringify(settings));
 
 /**
  * Persist custom markers to the storage
@@ -275,7 +317,7 @@ export const setApplicationSettings = (
  * @param map Target map type
  * @param customMarkers List of markers to persist
  */
-export const setCustomMarkerStore = (
+export const writeCustomMarkerStore = (
   storage: Storage,
   map: MapType,
   customMarkers: Array<MarkerOptionsCustom>,
@@ -287,25 +329,12 @@ export const setCustomMarkerStore = (
 };
 
 /**
- * Serialize current storage contents for migration
- *
- * @param storage Source storage manager
- */
-export const serializeStorageData = (storage: Storage) => {
-  // Serialize local storage data
-  const json = JSON.stringify(getAnimalMarkerDataMap(storage, false));
-
-  // Base64 encode the output
-  return window.btoa(json);
-};
-
-/**
  * Deserialize encoded storage data string and update storage values
  *
  * @param storage Target storage manager
  * @param value Encoded storage data
  */
-export const unserializeStorageData = (storage: Storage, value: string) => {
+export const writeSerializedStore = (storage: Storage, value: string) => {
   try {
     // Decode the base64 encoded string
     const json = window.atob(value);
@@ -323,3 +352,14 @@ export const unserializeStorageData = (storage: Storage, value: string) => {
     return false;
   }
 };
+
+/**
+ * Store application settings in the storage
+ *
+ * @param storage Target storage
+ * @param settings Settings object to persist
+ */
+export const writeSettingsStore = (
+  storage: Storage,
+  settings: Partial<Settings>,
+) => storage.setItem(settingsKey, JSON.stringify(settings));

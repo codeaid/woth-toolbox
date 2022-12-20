@@ -105,14 +105,6 @@ export const getGenericMarkerColorClass = (
 };
 
 /**
- * Generate marker key
- *
- * @param marker Source marker
- */
-export const getMarkerKey = (marker: MarkerOptions) =>
-  marker?.id ?? getCoordinateHash(marker.coords);
-
-/**
  * Get list of marker types from the specified list of options
  *
  * @param markers Source list of markers
