@@ -6,6 +6,7 @@ import {
 } from 'types/markers';
 
 export type HuntingMapFilterChangeHandler = (options: MapFilterOptions) => void;
+type HuntingMapFilterOptionChangeHandler = (checked: boolean) => void;
 type HuntingMapFilterValueChangeHandler = (
   type: MarkerType,
   selected: boolean,
@@ -24,4 +25,10 @@ export interface HuntingMapFilterItemProps {
   selected: boolean;
   type: MarkerType;
   onToggle: HuntingMapFilterValueChangeHandler;
+}
+
+export interface HuntingMapFilterOptionProps {
+  checked: boolean;
+  children: string;
+  onChange: HuntingMapFilterOptionChangeHandler;
 }
