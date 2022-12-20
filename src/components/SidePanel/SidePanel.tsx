@@ -30,7 +30,7 @@ export const SidePanel = (props: SidePanelProps) => {
   /**
    * Handle clicks anywhere on the document
    */
-  const handleDocumentClick = useCallback(
+  const handleDocumentMouseDown = useCallback(
     (event: MouseEvent) => {
       if (!closeOnOutsideClick || !onClose) {
         return;
@@ -112,14 +112,14 @@ export const SidePanel = (props: SidePanelProps) => {
 
   // Register event handlers to handle closing side panel on outside clicks
   useEffect(() => {
-    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('mousedown', handleDocumentMouseDown);
     document.addEventListener('keydown', handleDocumentKeyDown);
 
     return () => {
-      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('mousedown', handleDocumentMouseDown);
       document.removeEventListener('keydown', handleDocumentKeyDown);
     };
-  }, [handleDocumentClick, handleDocumentKeyDown]);
+  }, [handleDocumentMouseDown, handleDocumentKeyDown]);
 
   return (
     <Transition

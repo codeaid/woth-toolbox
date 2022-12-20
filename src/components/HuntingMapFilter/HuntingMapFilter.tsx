@@ -266,9 +266,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const renderedOtherOptions = useMemo(
     () => (
       <>
-        <SectionHeader className={styles.HuntingMapFilterSectionHeader}>
-          {translate('UI:OTHER')}
-        </SectionHeader>
+        <SectionHeader>{translate('UI:OTHER')}</SectionHeader>
         <HuntingMapFilterOption
           checked={options.labels}
           onChange={handleToggleLabels}
