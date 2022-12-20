@@ -2,6 +2,7 @@ import sha1 from 'sha1';
 import {
   animalMarkerNeedZoneCounts,
   animalMarkerTypes,
+  customMarkerTypes,
   genericMarkerTypes,
   needZoneMarkerTypes,
 } from 'config/markers';
@@ -16,6 +17,7 @@ import {
   MarkerReference,
   MarkerType,
   MarkerTypeAnimal,
+  MarkerTypeCustom,
   MarkerTypeGeneric,
   MarkerTypeNeedZone,
 } from 'types/markers';
@@ -144,6 +146,15 @@ export const hasSameCoordinates = (marker: MarkerOptions, coords: Point) =>
 export const isAnimalMarkerType = (
   type?: MarkerType,
 ): type is MarkerTypeAnimal => animalMarkerTypes.includes(type as any);
+
+/**
+ * Check if the specified type represents a custom marker type
+ *
+ * @param type Target type to check
+ */
+export const isCustomMarkerType = (
+  type?: MarkerType,
+): type is MarkerTypeCustom => customMarkerTypes.includes(type as any);
 
 /**
  * Check if the specified type represents a generic marker type

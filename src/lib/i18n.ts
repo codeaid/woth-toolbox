@@ -14,11 +14,13 @@ import {
 import { TranslationKey, TranslationResource } from 'types/i18n';
 import {
   MarkerType,
+  MarkerTypeCustom,
   MarkerTypeGeneric,
   MarkerTypeNeedZone,
 } from 'types/markers';
 import {
   isAnimalMarkerType,
+  isCustomMarkerType,
   isGenericMarkerType,
   isNeedZoneMarkerType,
 } from 'lib/markers';
@@ -118,6 +120,24 @@ export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey => {
 };
 
 /**
+ * Get custom marker type translation key
+ *
+ * @param type Target zone type
+ */
+export const getCustomMarkerKey = (type?: MarkerTypeCustom): TranslationKey => {
+  switch (type) {
+    case 'marker:exploration':
+      return 'UI:MARKER_EXPLORATION';
+    case 'marker:level area':
+      return 'UI:MARKER_LABELS';
+    case 'marker:tracking':
+      return 'UI:MARKER_TRACKING';
+    default:
+      throw new Error(`Invalid need zone type specified: ${type}`);
+  }
+};
+
+/**
  * Get generic marker type translation key
  *
  * @param type Target marker type
@@ -155,6 +175,8 @@ export const getGenericMarkerKey = (
 export const getMarkerKey = (type?: MarkerType) => {
   if (isAnimalMarkerType(type)) {
     return getAnimalTypeKey(type);
+  } else if (isCustomMarkerType(type)) {
+    return getCustomMarkerKey(type);
   } else if (isGenericMarkerType(type)) {
     return getGenericMarkerKey(type);
   } else if (isNeedZoneMarkerType(type)) {

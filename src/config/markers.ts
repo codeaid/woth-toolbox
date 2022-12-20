@@ -1,5 +1,11 @@
 import { AnimalType } from 'types/animals';
-import { MarkerType, MarkerTypeAnimal, MarkerTypeGeneric, MarkerTypeNeedZone } from 'types/markers';
+import {
+  MarkerType,
+  MarkerTypeAnimal,
+  MarkerTypeCustom,
+  MarkerTypeGeneric,
+  MarkerTypeNeedZone,
+} from 'types/markers';
 
 // List of types representing animal markers
 export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
@@ -29,6 +35,13 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:white-tailed deer',
   'animal:wild boar',
   'animal:wild duck',
+];
+
+// List of marker types that represent custom markers
+export const customMarkerTypes: Array<MarkerTypeCustom> = [
+  'marker:exploration',
+  'marker:level area',
+  'marker:tracking',
 ];
 
 // List of marker types that represent generic markers
