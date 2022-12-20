@@ -20,6 +20,7 @@ import {
 } from 'lib/markers';
 import { MarkerType, MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
+import { HuntingMapFilterOption } from './HuntingMapFilterOption';
 import { HuntingMapFilterProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
@@ -72,6 +73,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   const handleClearFilters = useCallback(() => {
     // Clear filters and close the side panel
     onChange({
+      labels: true,
       types: [],
     });
 
@@ -130,14 +132,18 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   );
 
   /**
+   * Handle toggling labels on or off
+   */
+  const handleLabelsChange = useCallback(
+    (labels: boolean) => onChange({ ...options, labels }),
+    [options, onChange],
+  );
+
+  /**
    * Handle toggling individual filter types on or off
    */
-  const handleToggleType = useCallback(
+  const handleTypeChange = useCallback(
     (type: MarkerType, selected: boolean) => {
-      if (!onChange) {
-        return;
-      }
-
       // Update list of enabled types
       const types = selected
         ? [...new Set(options.types).add(type)]
@@ -180,7 +186,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    * @param options Map of option types and names to render
    */
   const renderOptions = useCallback(
-    (types: Array<MarkerType>, large: boolean) => (
+    (types: Array<MarkerTypeAnimal | MarkerTypeGeneric>, large: boolean) => (
       <>
         {types
           .map(type => ({
@@ -194,14 +200,14 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
               large={large}
               selected={options.types.includes(type)}
               type={type}
-              onToggle={handleToggleType}
+              onChange={handleTypeChange}
             >
               {name}
             </HuntingMapFilterItem>
           ))}
       </>
     ),
-    [handleToggleType, options.types, translate],
+    [handleTypeChange, options.types, translate],
   );
 
   // Render animal options
@@ -236,6 +242,24 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         </>
       ) : null,
     [handleToggleGenericOptions, markerTypesGeneric, renderOptions, translate],
+  );
+
+  // Render generic options
+  const renderedOtherOptions = useMemo(
+    () => (
+      <>
+        <SectionHeader className={styles.HuntingMapFilterSectionHeader}>
+          {translate('UI:OTHER')}
+        </SectionHeader>
+        <HuntingMapFilterOption
+          checked={options.labels}
+          onChange={handleLabelsChange}
+        >
+          {translate('UI:MARKER_LABELS')}
+        </HuntingMapFilterOption>
+      </>
+    ),
+    [handleLabelsChange, options.labels, translate],
   );
 
   // List of sidebar action buttons
@@ -283,6 +307,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>
           {renderedGenericOptions}
           {renderedAnimalOptions}
+          {renderedOtherOptions}
         </ul>
       </SidePanel>
     </>

@@ -152,6 +152,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // The currently selected filters
   const filterOptions = useRef<MapFilterOptions>({
+    labels: true,
     types: [],
   });
 
@@ -666,6 +667,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
           mapScale={zoomOptions.current.zoomValue}
           maxMapScale={zoomLabelMax}
           minMapScale={zoomLabelMin}
+          visible={filterOptions.current.labels}
         />
       )),
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -5,7 +5,7 @@ import { HuntingMapFilterItemProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
-  const { children, large = false, selected, type, onToggle } = props;
+  const { children, large = false, selected, type, onChange } = props;
 
   // Retrieve icon component associated with current filter item
   const IconComponent = useMemo(() => getIconComponent(type), [type]);
@@ -14,8 +14,8 @@ export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
    * Handle clicking on the filter item
    */
   const handleClick = useCallback(() => {
-    onToggle(type, !selected);
-  }, [onToggle, selected, type]);
+    onChange(type, !selected);
+  }, [onChange, selected, type]);
 
   return (
     <li
