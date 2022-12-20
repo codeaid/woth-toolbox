@@ -3,6 +3,7 @@ import {
   animalMarkerNeedZoneCounts,
   animalMarkerTypes,
   genericMarkerTypes,
+  needZoneMarkerTypes,
 } from 'config/markers';
 import { hasListValue } from 'lib/utils';
 import { AnimalType } from 'types/animals';
@@ -16,6 +17,7 @@ import {
   MarkerType,
   MarkerTypeAnimal,
   MarkerTypeGeneric,
+  MarkerTypeNeedZone,
 } from 'types/markers';
 
 /**
@@ -140,7 +142,7 @@ export const hasSameCoordinates = (marker: MarkerOptions, coords: Point) =>
  * @param type Target type to check
  */
 export const isAnimalMarkerType = (
-  type: MarkerType,
+  type?: MarkerType,
 ): type is MarkerTypeAnimal => animalMarkerTypes.includes(type as any);
 
 /**
@@ -149,7 +151,7 @@ export const isAnimalMarkerType = (
  * @param type Target type to check
  */
 export const isGenericMarkerType = (
-  type: MarkerType,
+  type?: MarkerType,
 ): type is MarkerTypeGeneric => genericMarkerTypes.includes(type as any);
 
 /**
@@ -188,6 +190,15 @@ export const isMarkerVisibleAtScale = (
   visibilityMap.has(type)
     ? mapScale >= (visibilityMap.get(type) ?? mapScale)
     : true;
+
+/**
+ * Check if the specified type represents a need zone marker type
+ *
+ * @param type Target type to check
+ */
+export const isNeedZoneMarkerType = (
+  type?: MarkerType,
+): type is MarkerTypeNeedZone => needZoneMarkerTypes.includes(type as any);
 
 /**
  * Update marker visibility based on filters and zoom

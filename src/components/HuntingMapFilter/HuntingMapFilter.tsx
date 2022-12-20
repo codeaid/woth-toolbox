@@ -12,7 +12,7 @@ import { IconButton } from 'components/IconButton';
 import { SectionHeader } from 'components/SectionHeader';
 import { SidePanel } from 'components/SidePanel';
 import { useTranslator } from 'hooks';
-import { getAnimalTypeKey, getGenericMarkerKey } from 'lib/i18n';
+import { getMarkerKey } from 'lib/i18n';
 import {
   getMarkerOptionTypes,
   isAnimalMarkerType,
@@ -184,12 +184,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       <>
         {types
           .map(type => ({
-            name:
-              (isAnimalMarkerType(type)
-                ? translate(getAnimalTypeKey(type))
-                : isGenericMarkerType(type)
-                ? translate(getGenericMarkerKey(type))
-                : type) ?? type,
+            name: translate(getMarkerKey(type)),
             type,
           }))
           .sort((a, b) => a.name.localeCompare(b.name))

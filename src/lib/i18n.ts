@@ -12,7 +12,16 @@ import {
   AnimalType,
 } from 'types/animals';
 import { TranslationKey, TranslationResource } from 'types/i18n';
-import { MarkerTypeGeneric, MarkerTypeNeedZone } from 'types/markers';
+import {
+  MarkerType,
+  MarkerTypeGeneric,
+  MarkerTypeNeedZone,
+} from 'types/markers';
+import {
+  isAnimalMarkerType,
+  isGenericMarkerType,
+  isNeedZoneMarkerType,
+} from 'lib/markers';
 
 /**
  * Get animal's activity translation key
@@ -136,6 +145,25 @@ export const getGenericMarkerKey = (
     default:
       throw new Error(`Invalid generic marker type specified: ${type}`);
   }
+};
+
+/**
+ * Get marker type translation key
+ *
+ * @param type Target marker type
+ */
+export const getMarkerKey = (type?: MarkerType) => {
+  if (isAnimalMarkerType(type)) {
+    return getAnimalTypeKey(type);
+  } else if (isGenericMarkerType(type)) {
+    return getGenericMarkerKey(type);
+  } else if (isNeedZoneMarkerType(type)) {
+    return getAnimalZoneKey(type);
+  }
+
+  throw new Error(
+    `Specified marker type does not have associated translations: ${type}`,
+  );
 };
 
 /**
