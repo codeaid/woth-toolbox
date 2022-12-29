@@ -1,0 +1,145 @@
+.Modal {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    user-select: none;
+    width: 100%;
+}
+
+.ModalAction {
+    background-color: var(--elevation6);
+    min-width: 6em;
+}
+
+.ModalAction + .ModalAction {
+    margin-left: 0.5em;
+}
+
+.ModalActions {
+    background-color: var(--elevation2);
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem;
+}
+
+.ModalBody {
+    color: var(--text-primary);
+    flex: 1;
+    line-height: 1.5em;
+    overflow: auto;
+    padding: 1rem;
+}
+
+.ModalClose {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+.ModalDialog {
+    background-color: var(--elevation4);
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    max-height: 60vh;
+    max-width: 1000px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.ModalDialogContainer {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow: hidden;
+    padding: 3rem;
+    position: absolute;
+    top: 0;
+    transition: opacity 200ms linear;
+    width: 100%;
+    z-index: 101;
+}
+
+.ModalEntering .ModalDialogContainer {
+    opacity: 0;
+}
+
+.ModalEntered .ModalDialogContainer {
+    opacity: 1;
+}
+
+.ModalExiting .ModalDialogContainer {
+    opacity: 0;
+}
+
+.ModalExited .ModalDialogContainer {
+    opacity: 0;
+}
+
+.ModalHeader {
+    align-items: center;
+    background-color: var(--elevation1);
+    color: var(--brand);
+    display: flex;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    justify-content: space-between;
+    padding: 0.75rem;
+    text-transform: uppercase;
+}
+
+.ModalOverlay {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: backdrop-filter 200ms linear;
+    width: 100%;
+    z-index: 100;
+}
+
+.ModalEntering .ModalOverlay {
+    backdrop-filter: blur(0);
+}
+
+.ModalEntered .ModalOverlay {
+    backdrop-filter: blur(0.5em);
+}
+
+.ModalExiting .ModalOverlay {
+    backdrop-filter: blur(0);
+}
+
+.ModalExited .ModalOverlay {
+    backdrop-filter: blur(0);
+}
+
+@media (max-width: 500px) {
+    .ModalDialogContainer {
+        padding: 0.5rem;
+    }
+
+    .ModalAction {
+        width: 100%;
+    }
+
+    .ModalAction + .ModalAction {
+        margin: 0.5em 0 0 0;
+    }
+
+    .ModalActions {
+        flex-direction: column;
+    }
+
+    .ModalBody {
+        min-height: unset;
+    }
+
+    .ModalDialog {
+        height: 100%;
+        max-height: unset;
+        max-width: unset;
+        width: 100%;
+    }
+}
