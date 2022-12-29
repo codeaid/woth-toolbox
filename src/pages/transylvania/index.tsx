@@ -1,15 +1,11 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useMemo } from 'react';
 import NoSSR from 'react-no-ssr';
-import { DebugPanel } from 'components/DebugPanel';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
   useCustomMarkers,
-  useDebugPanel,
   useSettings,
   useTranslator,
 } from 'hooks';
@@ -36,31 +32,6 @@ const TransylvaniaPage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
-  // Detect if application is running in debug mode
-  const { query } = useRouter();
-  const creator = !!query.creator;
-
-  // Extract debug panel controls
-  const {
-    currentDebugMarker,
-    debugMarkers,
-    debugMarkersWithCurrent,
-    onDebugClear,
-    onDebugCoordinates,
-    onDebugCopy,
-    onDebugDrinkZoneRemove,
-    onDebugEatZoneRemove,
-    onDebugMarkerDelete,
-    onDebugSettingsChange,
-    onDebugSleepZoneRemove,
-  } = useDebugPanel();
-
-  // Merge current animal markers with debug data
-  const markers = useMemo(
-    () => animalMarkers.concat(debugMarkersWithCurrent),
-    [debugMarkersWithCurrent],
-  );
-
   return (
     <>
       <Head>
@@ -72,22 +43,9 @@ const TransylvaniaPage = () => {
       </Head>
 
       <NoSSR>
-        <DebugPanel
-          currentMarker={currentDebugMarker}
-          enabled={creator}
-          markers={debugMarkers}
-          onClear={onDebugClear}
-          onCopy={onDebugCopy}
-          onDrinkZoneRemove={onDebugDrinkZoneRemove}
-          onEatZoneRemove={onDebugEatZoneRemove}
-          onMarkerDelete={onDebugMarkerDelete}
-          onSettingsChange={onDebugSettingsChange}
-          onSleepZoneRemove={onDebugSleepZoneRemove}
-        />
-
         <HuntingMap
           animalMarkerRecords={dataMap}
-          animalMarkers={markers}
+          animalMarkers={animalMarkers}
           customMarkers={customMarkers}
           imageHeight={mapHeight}
           imageSrc={`${baseUrl}/img/maps/transylvania.jpeg`}
@@ -98,7 +56,6 @@ const TransylvaniaPage = () => {
           markerSizeGeneric={settings.genericMarkerSize}
           markerSizeZone={settings.zoneMarkerSize}
           zoomMarkerMap={markerVisibilityMap}
-          onClick={onDebugCoordinates}
           onCustomMarkerCreate={onCustomMarkerCreate}
           onCustomMarkerRemove={onCustomMarkerRemove}
           onCustomMarkersClear={onCustomMarkersClear}
