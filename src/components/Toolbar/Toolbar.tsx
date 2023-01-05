@@ -125,7 +125,7 @@ export const Toolbar = (props: ToolbarProps) => {
         </div>
         <div className={styles.ToolbarActions}>{children}</div>
         <div className={styles.ToolbarSettingsButton}>
-          <IconButton onClick={handleToggleSettings}>
+          <IconButton onMouseDown={handleToggleSettings}>
             <RiSettings2Line />
           </IconButton>
         </div>
