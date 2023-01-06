@@ -46,7 +46,7 @@
 }
 
 .SelectExpanded .SelectInputIcon {
-  transform: rotateX(180deg) scale(1.5);
+  transform: rotate(180deg) scale(1.5);
 }
 
 .SelectInputText {
