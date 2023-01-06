@@ -86,7 +86,9 @@ export const Select = <TValue extends string | number>(
   const renderOptionItem = useCallback(
     (option: SelectOption<TValue>, index: number) => (
       <div
-        className={styles.SelectOptionItem}
+        className={classnames(styles.SelectOptionItem, {
+          [styles.SelectOptionItemSelected]: option.value === value,
+        })}
         key={option.value ?? `idx:${index}`}
         onClick={event => {
           event.preventDefault();
@@ -97,7 +99,7 @@ export const Select = <TValue extends string | number>(
         {option.content || '\u200b'}
       </div>
     ),
-    [handleOptionSelect],
+    [handleOptionSelect, value],
   );
 
   /**

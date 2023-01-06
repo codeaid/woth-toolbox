@@ -62,8 +62,13 @@
   padding: 0.5em;
   transition: background-color 100ms ease-in-out;
 }
+
 .SelectOptionItem:hover {
   background-color: var(--elevation2);
+}
+
+.SelectOptionItemSelected {
+  color: var(--brand);
 }
 
 .SelectOptionList {
