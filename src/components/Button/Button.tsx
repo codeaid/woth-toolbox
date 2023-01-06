@@ -5,7 +5,7 @@ import styles from './Button.module.css';
 
 export const Button = forwardRef(
   (props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
-    const { children, className, ...rest } = props;
+    const { children, className, tabIndex = -1, ...rest } = props;
 
     // Generate component class names
     const classNames = useMemo(
@@ -14,7 +14,7 @@ export const Button = forwardRef(
     );
 
     return (
-      <button {...rest} className={classNames} ref={ref}>
+      <button {...rest} className={classNames} ref={ref} tabIndex={tabIndex}>
         <div className={styles.ButtonContent}>{children}</div>
       </button>
     );
