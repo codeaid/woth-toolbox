@@ -15,6 +15,7 @@ export const Icon = forwardRef(
     const {
       children,
       className,
+      highlighted,
       longPressMs = 500,
       size = 40,
       style,
