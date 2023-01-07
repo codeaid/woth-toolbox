@@ -274,39 +274,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () => (
       <>
         <SectionHeader>{translate('UI:CUSTOM')}</SectionHeader>
-        <HuntingMapFilterOption
-          checked={options.hideUnedited}
-          onChange={handleToggleUneditedMarkers}
-        >
-          {translate('TOOLBOX:HIDE_UNEDITED')}
-        </HuntingMapFilterOption>
-      </>
-    ),
-    [handleToggleUneditedMarkers, options.hideUnedited, translate],
-  );
-
-  // Render generic options
-  const renderedGenericOptions = useMemo(
-    () =>
-      markerTypesGeneric.length ? (
-        <>
-          <SectionHeader
-            className={styles.HuntingMapFilterSectionHeader}
-            onClick={handleToggleGenericMarkers}
-          >
-            {translate('UI:GENERAL')}
-          </SectionHeader>
-          {renderOptions(markerTypesGeneric, 28)}
-        </>
-      ) : null,
-    [handleToggleGenericMarkers, markerTypesGeneric, renderOptions, translate],
-  );
-
-  // Render other options
-  const renderedOtherOptions = useMemo(
-    () => (
-      <>
-        <SectionHeader>{translate('UI:OTHER')}</SectionHeader>
         <HuntingMapFilterItem
           iconSize={20}
           type="marker:level area"
@@ -342,6 +309,39 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       options.showTrackingMarkers,
       translate,
     ],
+  );
+
+  // Render generic options
+  const renderedGenericOptions = useMemo(
+    () =>
+      markerTypesGeneric.length ? (
+        <>
+          <SectionHeader
+            className={styles.HuntingMapFilterSectionHeader}
+            onClick={handleToggleGenericMarkers}
+          >
+            {translate('UI:GENERAL')}
+          </SectionHeader>
+          {renderOptions(markerTypesGeneric, 28)}
+        </>
+      ) : null,
+    [handleToggleGenericMarkers, markerTypesGeneric, renderOptions, translate],
+  );
+
+  // Render other options
+  const renderedOtherOptions = useMemo(
+    () => (
+      <>
+        <SectionHeader>{translate('UI:OTHER')}</SectionHeader>
+        <HuntingMapFilterOption
+          checked={options.hideUnedited}
+          onChange={handleToggleUneditedMarkers}
+        >
+          {translate('TOOLBOX:HIDE_UNEDITED')}
+        </HuntingMapFilterOption>
+      </>
+    ),
+    [handleToggleUneditedMarkers, options.hideUnedited, translate],
   );
 
   // List of sidebar action buttons
@@ -389,8 +389,8 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>
           {renderedGenericOptions}
           {renderedAnimalOptions}
-          {renderedOtherOptions}
           {renderedCustomOptions}
+          {renderedOtherOptions}
         </ul>
       </SidePanel>
     </>
