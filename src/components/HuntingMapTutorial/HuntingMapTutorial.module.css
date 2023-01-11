@@ -1,0 +1,17 @@
+.HuntingMapTutorial {
+    min-height: 20rem;
+}
+
+.HuntingMapTutorialHighlight {
+    color: var(--brand);
+}
+
+.HuntingMapTutorialInfo {
+    color: var(--info-light);
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+.HuntingMapTutorialNext {
+    background-color: var(--highlight);
+}

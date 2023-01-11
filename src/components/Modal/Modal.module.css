@@ -1,9 +1,9 @@
 .Modal {
+    cursor: default;
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    user-select: none;
     width: 100%;
 }
 

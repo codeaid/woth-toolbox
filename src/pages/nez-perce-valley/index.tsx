@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import NoSSR from 'react-no-ssr';
 import { HuntingMap } from 'components/HuntingMap';
+import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
@@ -61,6 +62,8 @@ const NezPerceValleyPage = () => {
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}
         />
+
+        <HuntingMapTutorial />
       </NoSSR>
     </>
   );

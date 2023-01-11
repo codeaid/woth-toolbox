@@ -24,6 +24,7 @@ import {
 } from 'types/markers';
 import { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
+import { getAnimalRatingTrophy } from 'lib/animals';
 
 export const HuntingMapAnimal = forwardRef(
   (props: HuntingMapAnimalProps, ref: ForwardedRef<MarkerRefAnimal>) => {
@@ -69,6 +70,14 @@ export const HuntingMapAnimal = forwardRef(
 
       return data.color;
     }, [data, zonesVisible]);
+
+    const highestTrophy = useMemo(
+      () =>
+        data?.group
+          ?.map(animal => getAnimalRatingTrophy(animal.rating))
+          .reduce<number>((acc, current) => Math.max(acc, current), 0),
+      [data?.group],
+    );
 
     /**
      * Handle mouse down on the document
