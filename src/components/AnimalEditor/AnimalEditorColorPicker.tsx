@@ -31,6 +31,7 @@ export const AnimalEditorColorPicker = (
   return (
     <>
       <ChromePicker
+        className={styles.AnimalEditorColorPicker}
         color={data?.color ?? defaultIconColor}
         disableAlpha={true}
         styles={{

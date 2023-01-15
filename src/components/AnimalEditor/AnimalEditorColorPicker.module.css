@@ -1,3 +1,7 @@
+.AnimalEditorColorPicker div {
+  cursor: inherit !important;
+}
+
 .AnimalEditorColorPickerIcon {
   justify-content: center;
   display: flex;
