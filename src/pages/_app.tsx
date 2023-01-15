@@ -32,7 +32,7 @@ const App = (props: AppProps) => {
         <title>Way Of The Hunter Toolbox</title>
         <meta
           name="viewport"
-          content="initial-scale=1, maximum-scale=1.0, minimum-scale=1.0 user-scalable=no, width=device-width"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no, shrink-to-fit=no"
         />
       </Head>
       <StrictMode>
