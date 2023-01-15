@@ -131,7 +131,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .Toolbar {
     grid-template-columns: auto 1fr auto;
   }
