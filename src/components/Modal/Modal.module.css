@@ -1,9 +1,9 @@
 .Modal {
+    cursor: default;
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    user-select: none;
     width: 100%;
 }
 
@@ -39,6 +39,7 @@
 .ModalDialog {
     background-color: var(--elevation4);
     border-radius: 0.5em;
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     max-height: 60vh;
@@ -87,6 +88,7 @@
     justify-content: space-between;
     padding: 0.75rem;
     text-transform: uppercase;
+    user-select: none;
 }
 
 .ModalOverlay {
