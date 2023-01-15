@@ -3,6 +3,7 @@ import { useTranslator } from 'hooks';
 import { getTierKey } from 'lib/i18n';
 import { WeaponListItem } from './WeaponListItem';
 import { WeaponListGroupProps } from './types';
+import styles from './WeaponListGroup.module.css';
 
 export const WeaponListGroup = (props: WeaponListGroupProps) => {
   const { group, selected, onWeaponClick } = props;
@@ -12,7 +13,7 @@ export const WeaponListGroup = (props: WeaponListGroupProps) => {
 
   return (
     <>
-      <li>
+      <li className={styles.WeaponListGroupHeader}>
         <SectionHeader>{translate(getTierKey(group.tier))}</SectionHeader>
       </li>
 

@@ -33,20 +33,28 @@
 }
 
 html {
-  font-size: 15px;
-}
-
-html, body {
   font-family: 'Fira Sans', sans-serif;
+  font-size: 15px;
   font-weight: 400;
-  height: 100vh;
-  overflow: hidden;
-  width: 100vw;
-}
-
-#__next {
   height: 100%;
   width: 100%;
+}
+
+body,
+#__next {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+code {
+  background-color: var(--text-primary);
+  border-radius: 0.25em;
+  color: var(--elevation0);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 0.2em 0.5em;
 }
 
 hr {
@@ -58,6 +66,45 @@ hr {
 }
 
 hr:last-child {
+  margin-bottom: 0;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0 0 0 1.8em;
+}
+
+ol:not(:first-child),
+ul:not(:first-child) {
+  margin-top: 0.5em;
+}
+
+ol:not(:last-child),
+ul:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+li {
+  line-height: 1.6em;
+  margin: 0;
+  padding-left: 0.4em;
+}
+
+li::marker {
+  color: var(--text-secondary);
+}
+
+p {
+  line-height: 1.6em;
+  margin: 0;
+}
+
+p + p {
+  margin-top: 0.7em;
+}
+
+p:last-of-type {
   margin-bottom: 0;
 }
 

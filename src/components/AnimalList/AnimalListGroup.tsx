@@ -3,6 +3,7 @@ import { useTranslator } from 'hooks';
 import { getTierKey } from 'lib/i18n';
 import { AnimalListItem } from './AnimalListItem';
 import { AnimalListGroupProps } from './types';
+import styles from './AnimalListGroup.module.css';
 
 export const AnimalListGroup = (props: AnimalListGroupProps) => {
   const { group, selected, onAnimalClick } = props;
@@ -12,7 +13,7 @@ export const AnimalListGroup = (props: AnimalListGroupProps) => {
 
   return (
     <>
-      <li>
+      <li className={styles.AnimalListGroupHeader}>
         <SectionHeader>{translate(getTierKey(group.tier))}</SectionHeader>
       </li>
 
