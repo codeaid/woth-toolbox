@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { Transition } from 'react-transition-group';
 import { Button } from 'components/Button';
@@ -18,7 +18,8 @@ export const Modal = (props: ModalProps) => {
     onClose,
   } = props;
 
-  // Reference to the main modal wrapper element
+  // Reference to the main modal wrapper element and its body
+  const bodyRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   // Pre-render modal actions
@@ -39,6 +40,13 @@ export const Modal = (props: ModalProps) => {
       </div>
     );
   }, [actions]);
+
+  // Scroll body contents back up to top on change
+  useEffect(() => {
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = 0;
+    }
+  }, [children]);
 
   return (
     <Transition
@@ -67,7 +75,9 @@ export const Modal = (props: ModalProps) => {
                   <RiCloseFill />
                 </IconButton>
               </div>
-              <div className={styles.ModalBody}>{children}</div>
+              <div className={styles.ModalBody} ref={bodyRef}>
+                {children}
+              </div>
               {renderedActions}
             </div>
           </div>
