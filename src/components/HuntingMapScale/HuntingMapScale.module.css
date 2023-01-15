@@ -62,3 +62,12 @@
   top: -1.3em;
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .HuntingMapScale {
+    bottom: calc(env(safe-area-inset-bottom) + 0.5em);
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
