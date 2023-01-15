@@ -64,7 +64,7 @@
 }
 
 .ModalEntering .ModalDialogContainer {
-    opacity: 0;
+    opacity: 1;
 }
 
 .ModalEntered .ModalDialogContainer {
@@ -102,7 +102,7 @@
 }
 
 .ModalEntering .ModalOverlay {
-    backdrop-filter: blur(0);
+    backdrop-filter: blur(0.5em);
 }
 
 .ModalEntered .ModalOverlay {
