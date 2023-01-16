@@ -3,7 +3,7 @@ import {
   memo,
   MouseEvent,
   ReactElement,
-  TouchEvent,
+  TouchEvent as ReactTouchEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -548,7 +548,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param event Touch event object
    */
   const handleContainerTouchStart = useCallback(
-    (event: TouchEvent<EventTarget>) => {
+    (event: ReactTouchEvent<EventTarget>) => {
       // Fix for touch enabled devices reducing lag on drag start
       event.stopPropagation();
 
@@ -577,7 +577,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param event Touch event object
    */
   const handleContainerTouchMove = useCallback(
-    (event: TouchEvent<EventTarget>) => {
+    (event: TouchEvent) => {
+      // Prevent application zooming in on mobile devices
+      event.preventDefault();
+
       const { pageX, pageY } = event.touches[0];
       handleMapDrag(pageX, pageY);
     },
@@ -817,11 +820,19 @@ export const HuntingMap = (props: HuntingMapProps) => {
     setForcedUpdate();
   }, [animalMarkers, setForcedUpdate]);
 
-  // Enable custom marker creation functionality
+  // Enable custom marker creation functionality and disable viewport zoom
   useEffect(() => {
+    // Store container reference to ensure events are detached correctly
+    const container = containerRef.current;
+
+    container?.addEventListener('touchmove', handleContainerTouchMove);
     document.addEventListener('keydown', handleDocumentKeyDown);
-    return () => document.removeEventListener('keydown', handleDocumentKeyDown);
-  }, [handleDocumentKeyDown]);
+
+    return () => {
+      container?.removeEventListener('touchmove', handleContainerTouchMove);
+      document.removeEventListener('keydown', handleDocumentKeyDown);
+    };
+  }, [handleContainerTouchMove, handleDocumentKeyDown]);
 
   return (
     <>
@@ -856,7 +867,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onMouseMove={handleContainerMouseMove}
         onMouseUp={handleContainerMouseUp}
         onTouchEnd={handleMapDragCancel}
-        onTouchMove={handleContainerTouchMove}
         onTouchStart={handleContainerTouchStart}
         onWheel={handleContainerWheel}
       >
