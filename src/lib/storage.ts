@@ -2,6 +2,7 @@ import {
   animalDataPrefix,
   animalDataPrefixLegacy,
   customMarkerKey,
+  mapTutorialKey,
   settingsKey,
 } from 'config/storage';
 import { isNotEmpty } from 'lib/utils';
@@ -126,6 +127,14 @@ export const isEmptyAnimalMarker = (data?: MarkerStorageRecordAnimal) =>
   ((!data.color || data.color === '#ffffff') &&
     (!data.comment || data.comment.trim() === '') &&
     (!data.group || !data.group.length));
+
+/**
+ * Check if map tutorial has previously been completed
+ *
+ * @param storage Target storage
+ */
+export const isMapTutorialCompleted = (storage: Storage) =>
+  !!storage.getItem(mapTutorialKey);
 
 /**
  * Load all stored animal marker data entries
@@ -363,3 +372,11 @@ export const writeSettingsStore = (
   storage: Storage,
   settings: Partial<Settings>,
 ) => storage.setItem(settingsKey, JSON.stringify(settings));
+
+/**
+ * Mark map tutorial as completed
+ *
+ * @param storage Target storage
+ */
+export const writeMapTutorialCompleted = (storage: Storage) =>
+  storage.setItem(mapTutorialKey, JSON.stringify(true));
