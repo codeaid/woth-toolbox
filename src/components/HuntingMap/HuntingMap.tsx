@@ -438,6 +438,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleContainerMouseDown = useCallback(
     (event: MouseEvent<HTMLElement>) => {
+      // Ignore right mouse or mouse wheel clicks
+      if (event.button !== 0) {
+        return;
+      }
+
       event.preventDefault();
 
       const { pageX, pageY } = event;
