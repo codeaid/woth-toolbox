@@ -10,7 +10,6 @@ type HuntingMapAnimalMarkerToggleZonesHandler = (
 ) => void;
 
 export interface HuntingMapAnimalProps {
-  activated?: boolean;
   className?: string;
   marker: MarkerOptionsAnimal;
   markerSize?: number;

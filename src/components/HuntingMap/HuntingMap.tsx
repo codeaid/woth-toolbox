@@ -712,7 +712,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
         return (
           <HuntingMapAnimalMemo
-            activated={false}
             key={marker.id}
             marker={marker}
             ref={ref}
