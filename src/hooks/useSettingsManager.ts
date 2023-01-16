@@ -5,6 +5,7 @@ import {
   readSettingsStore,
   writeSettingsStore,
 } from 'lib/storage';
+import { sendGoogleEvent } from 'lib/tracking';
 import { Settings } from 'types/app';
 import { useStorage } from './useStorage';
 
@@ -40,6 +41,9 @@ export const useSettingsManager = (flushDelayMs = 500) => {
       if (!patch) {
         clearSettingsStore(storage);
         setSettings(undefined);
+
+        // Send custom Google Analytics event
+        sendGoogleEvent('settings_reset');
         return;
       }
 
@@ -59,6 +63,20 @@ export const useSettingsManager = (flushDelayMs = 500) => {
       timeout.current = window.setTimeout(() => {
         // Persist application settings to storage
         writeSettingsStore(storage, replacement);
+
+        // Send custom Google Analytics events
+        Object.entries(patch).forEach(([key, value]) => {
+          switch (key as keyof Settings) {
+            case 'animalMarkerSize':
+              return sendGoogleEvent('settings_markers_animal', { value });
+            case 'genericMarkerSize':
+              return sendGoogleEvent('settings_markers_general', { value });
+            case 'locale':
+              return sendGoogleEvent('settings_language', { value });
+            case 'zoneMarkerSize':
+              return sendGoogleEvent('settings_markers_need_zone', { value });
+          }
+        });
       }, flushDelayMs);
     },
     [flushDelayMs, settings, storage],

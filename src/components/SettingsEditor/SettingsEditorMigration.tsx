@@ -4,6 +4,7 @@ import { Button } from 'components/Button';
 import { useStorage, useTranslator } from 'hooks';
 import { copyTextToClipboard, getTextFromClipboard } from 'lib/debug';
 import { readSerializeStore, writeSerializedStore } from 'lib/storage';
+import { sendGoogleEvent } from 'lib/tracking';
 import styles from './SettingsEditorMigration.module.css';
 
 export const SettingsEditorMigration = () => {
@@ -27,6 +28,9 @@ export const SettingsEditorMigration = () => {
 
     const data = readSerializeStore(storage);
     await copyTextToClipboard(data);
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('settings_migrate_copy');
   }, [storage]);
 
   /**
@@ -43,6 +47,9 @@ export const SettingsEditorMigration = () => {
     if (!value) {
       return;
     }
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('settings_migrate_paste');
 
     writeSerializedStore(storage, value);
     router.reload();

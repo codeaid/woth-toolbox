@@ -5,6 +5,7 @@ import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
+import { sendGoogleEvent } from 'lib/tracking';
 import { formatTimestampDistance } from 'lib/utils';
 import { MarkerStorageRecordAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
@@ -66,6 +67,9 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       return;
     }
 
+    // Send custom Google Analytics event
+    sendGoogleEvent('marker_reset', { id: marker.id });
+
     // Persist changes and close the editor
     onDataClear(marker);
     handleClose();
@@ -79,6 +83,9 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     if (!marker || !data) {
       return;
     }
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('marker_save', { id: marker.id });
 
     // Persist changes and close the editor
     onDataWrite(marker, data);

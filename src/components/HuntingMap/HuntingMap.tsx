@@ -46,6 +46,7 @@ import {
   isHighlightedMarker,
   updateMarkerVisibility,
 } from 'lib/markers';
+import { sendGoogleEvent } from 'lib/tracking';
 import { roundNumber } from 'lib/utils';
 import {
   MapFilterOptions,
@@ -610,8 +611,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Handle opening or closing an animal marker editor
    */
   const handleToggleAnimalEditor = useCallback(
-    (marker: MarkerOptionsAnimal, visible: boolean) =>
-      setEditedAnimal(visible ? marker : undefined),
+    (marker: MarkerOptionsAnimal, visible: boolean) => {
+      setEditedAnimal(visible ? marker : undefined);
+
+      if (visible) {
+        // Send custom Google Analytics event
+        sendGoogleEvent('marker_edit', { id: marker.id });
+      }
+    },
     [],
   );
 

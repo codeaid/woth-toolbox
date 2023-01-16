@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { HuntingMapTutorialContextValue } from 'contexts';
 import { isMapTutorialCompleted, writeMapTutorialCompleted } from 'lib/storage';
+import { sendGoogleEvent } from 'lib/tracking';
 import { useStorage } from './useStorage';
 
 /**
@@ -22,7 +23,12 @@ export const useHuntingMapTutorialManager = () => {
   /**
    * Handle closing tutorial halfway through
    */
-  const handleTutorialClose = useCallback(() => setVisible(false), []);
+  const handleTutorialClose = useCallback(() => {
+    setVisible(false);
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('help_close');
+  }, []);
 
   /**
    * Handle completing tutorial
@@ -30,6 +36,9 @@ export const useHuntingMapTutorialManager = () => {
   const handleTutorialComplete = useCallback(() => {
     setCompleted(true);
     setVisible(false);
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('help_complete');
 
     if (storage) {
       writeMapTutorialCompleted(storage);
@@ -46,6 +55,9 @@ export const useHuntingMapTutorialManager = () => {
     }
 
     setVisible(true);
+
+    // Send custom Google Analytics event
+    sendGoogleEvent('help_open');
   }, [enabled]);
 
   // Set tutorial completion state

@@ -1,5 +1,6 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 import { baseUrl, googleAnalyticsId } from 'config/app';
+import { isDevelopmentMode } from 'lib/utils';
 
 const Document = () => {
   /**
@@ -16,7 +17,9 @@ const Document = () => {
       `window.dataLayer = window.dataLayer || [];`,
       `function gtag() { dataLayer.push(arguments); }`,
       `gtag('js', new Date());`,
-      `gtag('config', '${googleAnalyticsId}');`,
+      isDevelopmentMode()
+        ? `gtag('config', '${googleAnalyticsId}', { 'debug_mode': true });`
+        : `gtag('config', '${googleAnalyticsId}');`,
     ];
 
     return (
