@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import { MdOutlineMyLocation } from 'react-icons/md';
+import { getCoordinateRatio } from 'lib/markers';
 import { Point } from 'types/generic';
 import { HuntingMapCoordsProps, HuntingMapCoordsRef } from './types';
 import styles from './HuntingMapCoords.module.css';
@@ -18,7 +19,7 @@ export const HuntingMapCoords = forwardRef(
     const [coords, setCoords] = useState<Point>([-1, -1]);
 
     // Format values to display
-    const [valueX, valueY] = useMemo<[unknown, unknown]>(() => {
+    const [valueX, valueY] = useMemo<[number | string, number | string]>(() => {
       const [x, y] = coords;
 
       // Ensure coordinates are within map's boundaries
@@ -26,7 +27,7 @@ export const HuntingMapCoords = forwardRef(
         return [placeholder, placeholder];
       }
 
-      return [Math.round(x * multiplier), Math.round(y * multiplier)];
+      return getCoordinateRatio(coords, multiplier);
     }, [coords, multiplier, placeholder]);
 
     // Expose coordinate setter

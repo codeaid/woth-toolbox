@@ -84,6 +84,18 @@ export const getCoordinateHash = ([x, y]: Point) =>
   sha1(`${x}:${y}`).substring(0, 8);
 
 /**
+ * Generate a hash from the specified coordinates
+ *
+ * @param x Marker's X offset
+ * @param y Marker's Y offset
+ * @param multiplier Base multiplier
+ */
+export const getCoordinateRatio = (
+  [x, y]: Point,
+  multiplier: number,
+): [number, number] => [Math.round(x * multiplier), Math.round(y * multiplier)];
+
+/**
  * Get marker color class based on its type
  *
  * @param marker Marker options
