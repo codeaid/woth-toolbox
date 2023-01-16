@@ -18,8 +18,8 @@ const pages = [
   <HuntingMapTutorialMarkers key="markers" />,
   <HuntingMapTutorialFilters key="filters" />,
   <HuntingMapTutorialEditor key="editor" />,
-  <HuntingMapTutorialOther key="other" />,
   <HuntingMapTutorialSettings key="settings" />,
+  <HuntingMapTutorialOther key="other" />,
 ];
 
 export const HuntingMapTutorial = (props: HuntingMapTutorialProps) => {
