@@ -6,6 +6,7 @@ import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
   useCustomMarkers,
+  useHuntingMapTutorial,
   useSettings,
   useTranslator,
 } from 'hooks';
@@ -25,6 +26,9 @@ const TransylvaniaPage = () => {
     onCustomMarkerRemove,
     onCustomMarkersClear,
   } = useCustomMarkers('transylvania');
+
+  // Render map tutorial dialog
+  const { component: tutorial } = useHuntingMapTutorial(true);
 
   // Retrieve application settings
   const { settings } = useSettings();
@@ -63,6 +67,8 @@ const TransylvaniaPage = () => {
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}
         />
+
+        {tutorial}
       </NoSSR>
     </>
   );

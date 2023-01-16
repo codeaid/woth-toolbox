@@ -2,15 +2,20 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { StrictMode, useEffect } from 'react';
 import { App as Toolbox } from 'components/App';
-import { SettingsManagerProvider } from 'contexts';
-import { useSettingsManager, useStorage } from 'hooks';
+import { HuntingMapTutorialProvider, SettingsManagerProvider } from 'contexts';
+import {
+  useHuntingMapTutorialManager,
+  useSettingsManager,
+  useStorage,
+} from 'hooks';
 import { remapAnimalMarkerStore } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
-  // Retrieve application settings manager
-  const manager = useSettingsManager();
+  // Retrieve application settings and tutorial managers
+  const settings = useSettingsManager();
+  const tutorial = useHuntingMapTutorialManager();
 
   // Retrieve application storage manager
   const storage = useStorage();
@@ -36,8 +41,10 @@ const App = (props: AppProps) => {
         />
       </Head>
       <StrictMode>
-        <SettingsManagerProvider value={manager}>
-          <Toolbox {...props} />
+        <SettingsManagerProvider value={settings}>
+          <HuntingMapTutorialProvider value={tutorial}>
+            <Toolbox {...props} />
+          </HuntingMapTutorialProvider>
         </SettingsManagerProvider>
       </StrictMode>
     </>

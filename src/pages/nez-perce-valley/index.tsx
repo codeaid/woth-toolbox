@@ -6,6 +6,7 @@ import { markerVisibilityMap } from 'config/markers';
 import {
   useAnimalMarkerData,
   useCustomMarkers,
+  useHuntingMapTutorial,
   useSettings,
   useTranslator,
 } from 'hooks';
@@ -25,6 +26,9 @@ const NezPerceValleyPage = () => {
     onCustomMarkerRemove,
     onCustomMarkersClear,
   } = useCustomMarkers('idaho');
+
+  // Render map tutorial dialog
+  const { component: tutorial } = useHuntingMapTutorial(true);
 
   // Retrieve application settings
   const { settings } = useSettings();
@@ -61,6 +65,8 @@ const NezPerceValleyPage = () => {
           onEditorRead={onDataRead}
           onEditorWrite={onDataWrite}
         />
+
+        {tutorial}
       </NoSSR>
     </>
   );

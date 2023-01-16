@@ -2,11 +2,11 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { RiMenuLine, RiSettings2Line } from 'react-icons/ri';
+import { RiMenuLine, RiQuestionLine, RiSettings2Line } from 'react-icons/ri';
 import { IconButton } from 'components/IconButton';
 import { NavLink } from 'components/NavLink';
 import { SettingsEditor } from 'components/SettingsEditor';
-import { useSettings } from 'hooks';
+import { useHuntingMapTutorial, useSettings } from 'hooks';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
@@ -24,6 +24,9 @@ export const Toolbar = (props: ToolbarProps) => {
 
   // Retrieve application settings and their updater
   const { settings, onSettingsChange } = useSettings();
+
+  // Retrieve map tutorial state and open functionality
+  const { enabled: tutorialEnabled, onTutorialOpen } = useHuntingMapTutorial();
 
   // Build list of links to render
   const children = useMemo(
@@ -125,6 +128,11 @@ export const Toolbar = (props: ToolbarProps) => {
         </div>
         <div className={styles.ToolbarActions}>{children}</div>
         <div className={styles.ToolbarSettingsButton}>
+          {tutorialEnabled && (
+            <IconButton>
+              <RiQuestionLine onMouseDown={onTutorialOpen} />
+            </IconButton>
+          )}
           <IconButton onMouseDown={handleToggleSettings}>
             <RiSettings2Line />
           </IconButton>
