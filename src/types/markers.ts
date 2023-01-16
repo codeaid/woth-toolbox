@@ -50,6 +50,7 @@ export type MarkerOptionsZoneSleep = MarkerOptions<'zone:sleep'>;
 
 // Type describing a marker reference object exposed by HuntingMapMarker component
 export interface MarkerRef {
+  element?: Nullable<HTMLElement>;
   setHidden: (hidden: boolean) => void;
   setVisible: (visible: boolean) => void;
 }

@@ -210,6 +210,7 @@ export const HuntingMapAnimal = forwardRef(
     // Expose control functions of the main trigger component as well as
     // functionality to change zone visibility externally
     useImperativeHandle<MarkerRefAnimal, MarkerRefAnimal>(ref, () => ({
+      element: markerRef?.element,
       setData,
       setEditorActive,
       setHidden: handleSetHidden,

@@ -13,6 +13,7 @@ import {
   useState,
 } from 'react';
 import { Transition } from 'react-transition-group';
+import { useRefCallback } from 'hooks';
 import { getIconComponent } from 'lib/icons';
 import { MarkerOptions, MarkerRef } from 'types/markers';
 import { HuntingMapMarkerProps } from './types';
@@ -38,15 +39,16 @@ export const HuntingMapMarker = forwardRef(
       onLongPress,
     } = props;
 
-    // Reference to marker's icon
-    const iconRef = useRef<HTMLDivElement>(null);
-
     // Flag indicating whether the mouse cursor is currently over the marker
     const mouseOver = useRef(false);
 
     // Visibility flag states
     const [hidden, setHidden] = useState(false);
     const [visible, setVisible] = useState(false);
+
+    // Create a shared reference to the marker icon component
+    const nodeRef = useRef<HTMLDivElement>(null);
+    const [markerRef, setMarkerRef] = useRefCallback(nodeRef);
 
     // Icon component to use for the current filter entry
     const IconComponent = useMemo(
@@ -120,7 +122,7 @@ export const HuntingMapMarker = forwardRef(
      */
     const handleUpdatePosition = useCallback(() => {
       // Ensure reference to the icon is available
-      if (!iconRef.current) {
+      if (!markerRef) {
         return;
       }
 
@@ -128,20 +130,20 @@ export const HuntingMapMarker = forwardRef(
       const [ratioX, ratioY] = marker.coords;
 
       // Update marker's position
-      iconRef.current.style.left = `${ratioX * 100}%`;
-      iconRef.current.style.top = `${ratioY * 100}%`;
-    }, [marker]);
+      markerRef.style.left = `${ratioX * 100}%`;
+      markerRef.style.top = `${ratioY * 100}%`;
+    }, [markerRef, marker]);
 
     // Expose internal controller functions allowing to change marker's
     // visibility and position
     useImperativeHandle<MarkerRef, MarkerRef>(
       ref,
       () => ({
-        markerElement: iconRef.current,
+        element: markerRef,
         setHidden,
         setVisible,
       }),
-      [],
+      [markerRef],
     );
 
     // Reposition marker on changes to the options (fixes debug zones having invalid positions)
@@ -169,7 +171,7 @@ export const HuntingMapMarker = forwardRef(
       <Transition
         in={forceVisible || visible}
         mountOnEnter={mountOnEnter}
-        nodeRef={iconRef}
+        nodeRef={nodeRef}
         timeout={75}
         unmountOnExit={unmountOnExit}
         onEntering={handleUpdatePosition}
@@ -188,7 +190,7 @@ export const HuntingMapMarker = forwardRef(
               className,
             )}
             highlighted={highlighted}
-            ref={iconRef}
+            ref={setMarkerRef}
             size={markerSize}
             style={style}
             title={tooltip}
