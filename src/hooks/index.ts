@@ -2,6 +2,7 @@ export * from './useAnimalMarkerData';
 export * from './useCustomMarkers';
 export * from './useDebugPanel';
 export * from './useForceUpdate';
+export * from './useHuntingMapTutorial';
 export * from './useHuntingMapTutorialManager';
 export * from './useLocale';
 export * from './useLocaleResource';
