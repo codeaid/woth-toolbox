@@ -12,6 +12,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { HuntingMapAnimalContext } from 'components/HuntingMapAnimalContext';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { useTranslator } from 'hooks';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
@@ -254,6 +255,14 @@ export const HuntingMapAnimal = forwardRef(
           onLongPress={handleTriggerLongPress}
         />
         {renderedNeedZoneIcons}
+
+        <HuntingMapAnimalContext
+          enabled={!editorActive}
+          marker={marker}
+          markerData={data}
+          markerElement={markerRef?.element}
+          onToggleEditor={onToggleEditor}
+        />
       </>
     );
   },
