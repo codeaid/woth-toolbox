@@ -1,6 +1,7 @@
 .HuntingMap {
   background-color: var(--elevation2);
   flex: 1;
+  overflow: hidden;
 }
 
 .HuntingMapDragging {
