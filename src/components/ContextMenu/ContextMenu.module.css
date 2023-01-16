@@ -1,0 +1,36 @@
+.ContextMenu {
+  background-color: var(--elevation3);
+  border: thin solid var(--elevation0);
+  border-radius: 0.25em;
+  box-shadow: var(--shadow-strong);
+  list-style-type: none;
+  margin: 0;
+  min-width: 13em;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0.25em 0;
+  position: absolute;
+  transform-origin: top;
+  transition: opacity 75ms ease-in-out, transform 75ms ease-in-out;
+  user-select: none;
+}
+
+.ContextMenuStateEntering {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ContextMenuStateEntered {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ContextMenuStateExiting {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.ContextMenuStateExited {
+  opacity: 0;
+  transform: scale(0.5);
+}

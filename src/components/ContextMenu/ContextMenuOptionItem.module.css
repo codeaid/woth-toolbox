@@ -1,0 +1,34 @@
+.ContextMenuOptionItem {
+  align-items: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  line-height: 1em;
+  padding: 0.7em 1em;
+  transition: background-color 100ms linear, color 100ms linear;
+}
+
+.ContextMenuOptionItem:not(.ContextMenuOptionItemDisabled):hover {
+  background-color: var(--elevation0);
+  color: var(--brand);
+}
+
+.ContextMenuOptionItemDisabled {
+  color: var(--text-secondary);
+  cursor: inherit;
+}
+
+.ContextMenuOptionItemIcon {
+  height: 1em;
+  margin-right: 1em;
+  transform: scale(1.2);
+  width: 1em;
+}
+
+.ContextMenuOptionItemSeparator {
+  padding: 0.35em 0.8em;
+}
+
+.ContextMenuOptionItemSeparator hr {
+  margin: 0;
+}
