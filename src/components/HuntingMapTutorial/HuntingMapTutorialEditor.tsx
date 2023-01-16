@@ -90,7 +90,7 @@ export const HuntingMapTutorialEditor = () => (
         <Emphasis>M3</Emphasis> for 3-star males
       </li>
       <li>
-        <Emphasis>M6</Emphasis> for 4-star males
+        <Emphasis>M4</Emphasis> for 4-star males
       </li>
       <li>
         <Emphasis>M5</Emphasis> for 5-star males
