@@ -4,6 +4,7 @@ import { HuntingMapTutorialImage } from './HuntingMapTutorialImage';
 import imgEditorActions from './assets/editor-actions.jpg';
 import imgEditorAnimals from './assets/editor-animals.gif';
 import imgEditorColors from './assets/editor-colors.gif';
+import imgEditorContext from './assets/editor-context.jpg';
 import imgEditorDescription from './assets/editor-description.jpg';
 import imgEditorMarkers from './assets/editor-markers.jpg';
 
@@ -11,7 +12,7 @@ export const HuntingMapTutorialEditor = () => (
   <>
     <Heading size={2}>Marker editor</Heading>
     <p>
-      In addition to revealing need zones of specific animal groups, animal
+      In addition to revealing need zones of individual animal groups, animal
       markers can also be customized to contain personal notes, lists of
       noteworthy specimens, or have a different appearance on the map by
       assigning them custom colors.
@@ -30,9 +31,21 @@ export const HuntingMapTutorialEditor = () => (
 
     <p>
       To access the editor, press and hold the <code>Shift</code> key on your
-      keyboard while clicking on the animal marker you want to customize. This
-      will open a panel on the right side of the page that contains all the
-      necessary tools for editing the marker.
+      keyboard while left-clicking on the animal marker you want to customize.
+      Alternatively, right-click on the marker and choosing the{' '}
+      <Emphasis>Edit Marker</Emphasis> option from the contextual menu:
+    </p>
+    <HuntingMapTutorialImage
+      alt="Context menu"
+      height={imgEditorContext.height}
+      src={imgEditorContext.src}
+      width={imgEditorContext.width}
+    />
+
+    <p>
+      On touch-enabled devices, such as phones or tablets, simply{' '}
+      <Emphasis>press and hold</Emphasis> your finger on the animal marker you
+      wish to customize.
     </p>
 
     <Heading size={4}>Description</Heading>
@@ -48,6 +61,7 @@ export const HuntingMapTutorialEditor = () => (
       src={imgEditorDescription.src}
       width={imgEditorDescription.width}
     />
+
     <p>
       Input field can be resized vertically by dragging its bottom-right corner
       up or down using your mouse.
