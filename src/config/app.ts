@@ -14,3 +14,8 @@ export const defaultSettings: Required<Settings> = {
 
 // Google Analytics tracking ID
 export const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
+
+// External URLs
+export const urlDiscord = 'https://discord.gg/wayofthehunter';
+export const urlSteam =
+  'https://steamcommunity.com/sharedfiles/filedetails/?id=2882064749';
