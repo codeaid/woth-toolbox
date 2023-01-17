@@ -23,8 +23,8 @@ export const HuntingMapTutorialOther = () => (
     />
 
     <p>
-      Map scale indicator is not shown on devices where primary input mechanism
-      does not include an accurate pointing device.
+      Coordinates not shown on devices where primary input mechanism does not
+      include an accurate pointing device (e.g. a mouse).
     </p>
 
     <Heading size={4}>Map scale</Heading>
