@@ -9,7 +9,7 @@ import { PivotTable } from 'components/PivotTable';
 import { Sidebar } from 'components/Sidebar';
 import { WeaponDetails } from 'components/WeaponDetails';
 import { WeaponList } from 'components/WeaponList';
-import { animals } from 'config/animals';
+import { fauna } from 'config/animals';
 import { weapons } from 'config/weapons';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups } from 'lib/animals';
@@ -92,7 +92,7 @@ const AnimalSelectorPage = () => {
         <WeaponDetails weapon={selectedWeapon} />
         <hr className={styles.AnimalSelectorPageSeparator} />
         <PivotTable
-          entities={animals}
+          entities={fauna}
           pivot={selectedWeapon}
           onGetEntityGroups={handleGetEntityGroups}
           onGetWeaponHitEnergy={handleGetWeaponHitEnergy}

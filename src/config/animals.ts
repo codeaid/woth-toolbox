@@ -452,3 +452,6 @@ export const birds: Array<Animal> = [
     type: 'animal:ross goose',
   },
 ];
+
+// List of all animals and birds
+export const fauna = [...animals, ...birds];

@@ -9,7 +9,7 @@ import { PageContent } from 'components/PageContent';
 import { PivotTable } from 'components/PivotTable';
 import { Sidebar } from 'components/Sidebar';
 import { WeaponName } from 'components/WeaponName';
-import { animals } from 'config/animals';
+import { fauna } from 'config/animals';
 import { weapons } from 'config/weapons';
 import { useTranslator } from 'hooks';
 import { getWeaponGroups, isOptimal, isSuboptimal } from 'lib/weapons';
@@ -27,7 +27,7 @@ const WeaponSelectorPage = () => {
 
   // Find animal specified in the URL parameter
   const selectedAnimal = useMemo(
-    () => animals.find(a => a.slug === animalId),
+    () => fauna.find(a => a.slug === animalId),
     [animalId],
   );
 
@@ -132,7 +132,7 @@ const WeaponSelectorPage = () => {
       <div className={styles.WeaponSelectorPage}>
         <Sidebar>
           <AnimalList
-            animals={animals}
+            animals={fauna}
             selected={selectedAnimal}
             onAnimalClick={handleAnimalClick}
           />
