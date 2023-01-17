@@ -116,7 +116,8 @@ export const HuntingMapTutorialMarkers = () => (
 
     <p>
       The number of tracking markers that can be placed on the map at once is
-      limited to <Emphasis>100</Emphasis>.
+      limited to <Emphasis>100</Emphasis>. Once the 101st marker is placed, the
+      earliest placed marker will be automatically removed from the map.
     </p>
   </>
 );

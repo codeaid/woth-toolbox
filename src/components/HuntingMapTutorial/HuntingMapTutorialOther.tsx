@@ -23,8 +23,8 @@ export const HuntingMapTutorialOther = () => (
     />
 
     <p>
-      Coordinates not shown on devices where primary input mechanism does not
-      include an accurate pointing device (e.g. a mouse).
+      Coordinates are not shown on devices where primary input mechanism does
+      not include an accurate pointing device (e.g. a mouse).
     </p>
 
     <Heading size={4}>Map scale</Heading>
