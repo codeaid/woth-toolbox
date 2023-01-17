@@ -611,12 +611,12 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Handle opening or closing an animal marker editor
    */
   const handleToggleAnimalEditor = useCallback(
-    (marker: MarkerOptionsAnimal, visible: boolean) => {
+    (marker: MarkerOptionsAnimal, visible: boolean, source: string) => {
       setEditedAnimal(visible ? marker : undefined);
 
       if (visible) {
         // Send custom Google Analytics event
-        sendGoogleEvent('marker_edit', { id: marker.id });
+        sendGoogleEvent('marker_edit', { id: marker.id, source });
       }
     },
     [],

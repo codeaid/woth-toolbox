@@ -3,6 +3,7 @@ import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
 type HuntingMapAnimalContextToggleEditorHandler = (
   marker: MarkerOptionsAnimal,
   visible: boolean,
+  source: string,
 ) => void;
 
 export interface HuntingMapAnimalContextProps {

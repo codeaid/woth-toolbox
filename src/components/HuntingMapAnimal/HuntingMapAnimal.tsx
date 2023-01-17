@@ -16,6 +16,7 @@ import { HuntingMapAnimalContext } from 'components/HuntingMapAnimalContext';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { useTranslator } from 'hooks';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
+import { sendGoogleEvent } from 'lib/tracking';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsZone,
@@ -106,7 +107,7 @@ export const HuntingMapAnimal = forwardRef(
         // Hide need zones and editor if animal marker is removed
         if (!visible) {
           setZonesVisible(false);
-          onToggleEditor(marker, false);
+          onToggleEditor(marker, false, 'shift');
         }
       },
       [marker, markerRef, onToggleEditor],
@@ -137,7 +138,15 @@ export const HuntingMapAnimal = forwardRef(
           }
 
           // Toggle visibility of need zone icons
-          setZonesVisible(!zonesVisible);
+          const newZonesVisible = !zonesVisible;
+          setZonesVisible(newZonesVisible);
+
+          // Send custom Google Analytics events
+          if (newZonesVisible) {
+            sendGoogleEvent('marker_zones_show', { id: marker.id });
+          } else {
+            sendGoogleEvent('marker_zones_hide', { id: marker.id });
+          }
 
           // Don't notify marker manager about this animal marker being expanded
           // if Ctrl key is being held down during the click. This allows having
@@ -151,7 +160,7 @@ export const HuntingMapAnimal = forwardRef(
         // Activate marker editor if Shift key was held down during the click
         if (event.shiftKey) {
           // Notify marker manager about this marker being edited
-          onToggleEditor(marker, !editorActive);
+          onToggleEditor(marker, !editorActive, 'shift');
         }
       },
       [editorActive, onToggleEditor, onToggleZones, zonesVisible],
@@ -161,7 +170,7 @@ export const HuntingMapAnimal = forwardRef(
      * Handle long-pressing on the icon to open the editor
      */
     const handleTriggerLongPress = useCallback(
-      () => onToggleEditor(marker, true),
+      () => onToggleEditor(marker, true, 'shift'),
       [marker, onToggleEditor],
     );
 

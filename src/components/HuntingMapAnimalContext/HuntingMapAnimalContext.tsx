@@ -5,6 +5,7 @@ import { ContextMenu, ContextMenuOption } from 'components/ContextMenu';
 import { useTranslator } from 'hooks';
 import { copyTextToClipboard } from 'lib/debug';
 import { getCoordinateRatio } from 'lib/markers';
+import { sendGoogleEvent } from 'lib/tracking';
 import { HuntingMapAnimalContextProps } from './types';
 
 export const HuntingMapAnimalContext = (
@@ -21,14 +22,17 @@ export const HuntingMapAnimalContext = (
       {
         icon: RiEdit2Fill,
         label: translate('TOOLBOX:MARKER_CONTEXT_EDIT'),
-        onClick: () => onToggleEditor(marker, true),
+        onClick: () => onToggleEditor(marker, true, 'context'),
       },
       {
         disabled: !markerData?.color,
         icon: RiPaletteLine,
         label: translate('TOOLBOX:MARKER_CONTEXT_COLOR'),
         separator: true,
-        onClick: async () => await copyTextToClipboard(markerData?.color ?? ''),
+        onClick: async () => {
+          await copyTextToClipboard(markerData?.color ?? '');
+          sendGoogleEvent('marker_context_color');
+        },
       },
       {
         icon: MdOutlineMyLocation,
@@ -36,14 +40,17 @@ export const HuntingMapAnimalContext = (
         onClick: async () => {
           const [valueX, valueY] = getCoordinateRatio(marker.coords, 1000);
           await copyTextToClipboard(`${valueX},${valueY}`);
+          sendGoogleEvent('marker_context_coords');
         },
       },
       {
         disabled: !markerData?.comment,
         icon: RiChat4Line,
         label: translate('TOOLBOX:MARKER_CONTEXT_DESCRIPTION'),
-        onClick: async () =>
-          await copyTextToClipboard(markerData?.comment ?? ''),
+        onClick: async () => {
+          await copyTextToClipboard(markerData?.comment ?? '');
+          sendGoogleEvent('marker_context_desc');
+        },
       },
     ],
     [translate, markerData?.color, markerData?.comment, onToggleEditor, marker],

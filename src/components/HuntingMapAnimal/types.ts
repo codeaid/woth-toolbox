@@ -4,6 +4,7 @@ import { MarkerOptionsAnimal } from 'types/markers';
 type HuntingMapAnimalToggleEditorHandler = (
   marker: MarkerOptionsAnimal,
   visible: boolean,
+  source: string,
 ) => void;
 type HuntingMapAnimalMarkerToggleZonesHandler = (
   marker: MarkerOptionsAnimal,
