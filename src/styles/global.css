@@ -32,7 +32,8 @@
   --variance-suboptimal: #f35b04;
 }
 
-html {
+html,
+body {
   font-family: 'Fira Sans', sans-serif;
   font-size: 15px;
   font-weight: 400;
@@ -42,8 +43,11 @@ html {
 
 body,
 #__next {
-  height: 100%;
   overflow: hidden;
+}
+
+#__next {
+  height: 100%;
   width: 100%;
 }
 
