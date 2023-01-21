@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useMemo } from 'react';
 import { RiCheckboxBlankCircleFill, RiStarSFill } from 'react-icons/ri';
 import { times } from 'lib/utils';
@@ -5,7 +6,13 @@ import { AnimalTrophyRatingProps } from './types';
 import styles from './AnimalTrophyRating.module.css';
 
 export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
-  const { rating } = props;
+  const { className, rating } = props;
+
+  // Combine default and custom class names
+  const classNames = useMemo(
+    () => classnames(styles.AnimalRating, className),
+    [className],
+  );
 
   // Determine number of stars to render
   const starCount = useMemo(() => Math.max(0, Math.min(5, rating)), [rating]);
@@ -36,7 +43,7 @@ export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
   );
 
   return (
-    <div className={styles.AnimalRating}>
+    <div className={classNames}>
       {renderedStars}
       {renderedFillers}
     </div>
