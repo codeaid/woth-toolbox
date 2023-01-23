@@ -1,3 +1,5 @@
+@value Icon from '../Icon/Icon.module.css';
+
 .HuntingMapAnimal {
   cursor: pointer;
   z-index: 1;
@@ -7,8 +9,7 @@
   z-index: 3;
 }
 
-.HuntingMapAnimalActive img,
-.HuntingMapAnimalActive svg {
+.HuntingMapAnimalActive .Icon {
   transform: scale(1.2) !important;
 }
 
