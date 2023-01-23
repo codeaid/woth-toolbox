@@ -56,7 +56,7 @@ export const getAnimalGroups = (
  *
  * @param rating Source rating value
  */
-export const getAnimalRatingTrophy = (rating: AnimalRating) => {
+export const getAnimalRatingValue = (rating: AnimalRating) => {
   switch (rating) {
     case 'M1':
       return 1;

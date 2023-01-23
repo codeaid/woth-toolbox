@@ -12,11 +12,13 @@ import {
   useRef,
   useState,
 } from 'react';
+import { AnimalTrophyRating } from 'components/AnimalTrophyRating';
 import { HuntingMapAnimalContext } from 'components/HuntingMapAnimalContext';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { useTranslator } from 'hooks';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
+import { getAnimalRatingValue } from 'lib/animals';
 import {
   MarkerOptionsAnimal,
   MarkerOptionsZone,
@@ -72,6 +74,15 @@ export const HuntingMapAnimal = forwardRef(
       return data.color;
     }, [data, zonesVisible]);
 
+    // Retrieve the highest trophy rating of all animals
+    const highestTrophyRating = useMemo(
+      () =>
+        data?.group
+          ?.map(animal => getAnimalRatingValue(animal.rating))
+          .reduce<number>((acc, current) => Math.max(acc, current), 0),
+      [data?.group],
+    );
+
     /**
      * Handle mouse down on the document
      */
@@ -107,7 +118,7 @@ export const HuntingMapAnimal = forwardRef(
         // Hide need zones and editor if animal marker is removed
         if (!visible) {
           setZonesVisible(false);
-          onToggleEditor(marker, false, 'shift');
+          onToggleEditor(marker, false, 'auto');
         }
       },
       [marker, markerRef, onToggleEditor],
@@ -217,6 +228,19 @@ export const HuntingMapAnimal = forwardRef(
       ],
     );
 
+    // Render trophy rating of the highest rated animal
+    const renderedTrophyRating = useMemo(
+      () =>
+        highestTrophyRating ? (
+          <AnimalTrophyRating
+            className={styles.HuntingMapAnimalRating}
+            placeholders={false}
+            rating={highestTrophyRating}
+          />
+        ) : null,
+      [highestTrophyRating],
+    );
+
     // Expose control functions of the main trigger component as well as
     // functionality to change zone visibility externally
     useImperativeHandle<MarkerRefAnimal, MarkerRefAnimal>(ref, () => ({
@@ -262,7 +286,9 @@ export const HuntingMapAnimal = forwardRef(
           style={{ ...style, color }}
           onClick={handleTriggerClick}
           onLongPress={handleTriggerLongPress}
-        />
+        >
+          {renderedTrophyRating}
+        </HuntingMapMarker>
         {renderedNeedZoneIcons}
 
         <HuntingMapAnimalContext

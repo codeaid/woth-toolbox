@@ -11,7 +11,7 @@ import {
 } from 'components/Icon';
 import { useTranslator } from 'hooks';
 import {
-  getAnimalRatingTrophy,
+  getAnimalRatingValue,
   getSortedAnimalSpecimens,
   isAnimalSexMale,
 } from 'lib/animals';
@@ -137,7 +137,7 @@ export const AnimalEditorGroupBuilder = (
 
           <AnimalTrophyIcon size={18} />
           <div className={styles.AnimalEditorGroupBuilderListEntryRating}>
-            <AnimalTrophyRating rating={getAnimalRatingTrophy(entry.rating)} />
+            <AnimalTrophyRating rating={getAnimalRatingValue(entry.rating)} />
           </div>
         </div>
       )),
