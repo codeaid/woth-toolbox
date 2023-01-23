@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent } from 'react';
+import { CSSProperties, MouseEvent, ReactNode } from 'react';
 import { MarkerOptions } from 'types/markers';
 
 type HuntingMapMarkerClickHandler<TMarkerOptions extends MarkerOptions> = (
@@ -13,6 +13,7 @@ type HuntingMapMarkerLongPressHandler<TMarkerOptions extends MarkerOptions> = (
 ) => void;
 
 export interface HuntingMapMarkerProps<TMarkerOptions extends MarkerOptions> {
+  children?: ReactNode;
   className?: string;
   forceVisible?: boolean;
   highlighted?: boolean;

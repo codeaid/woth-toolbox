@@ -14,6 +14,7 @@ import {
 } from 'react';
 import { Transition } from 'react-transition-group';
 import { useRefCallback } from 'hooks';
+import { getTransitionClassName } from 'lib/dom';
 import { getIconComponent } from 'lib/icons';
 import { MarkerOptions, MarkerRef } from 'types/markers';
 import { HuntingMapMarkerProps } from './types';
@@ -25,6 +26,7 @@ export const HuntingMapMarker = forwardRef(
     ref: ForwardedRef<MarkerRef>,
   ) => {
     const {
+      children,
       className,
       forceVisible = false,
       highlighted,
@@ -177,28 +179,33 @@ export const HuntingMapMarker = forwardRef(
         onEntering={handleUpdatePosition}
       >
         {state => (
-          <IconComponent
+          <div
             className={classnames(
               styles.HuntingMapMarker,
-              {
-                [styles.HuntingMapMarkerStateEntering]: state === 'entering',
-                [styles.HuntingMapMarkerStateEntered]: state === 'entered',
-                [styles.HuntingMapMarkerStateExiting]: state === 'exiting',
-                [styles.HuntingMapMarkerStateExited]: state === 'exited',
-                [styles.HuntingMapMarkerHidden]: hidden,
-              },
+              getTransitionClassName(
+                state,
+                styles.HuntingMapMarkerStateEntering,
+                styles.HuntingMapMarkerStateEntered,
+                styles.HuntingMapMarkerStateExiting,
+                styles.HuntingMapMarkerStateExited,
+              ),
+              { [styles.HuntingMapMarkerHidden]: hidden },
               className,
             )}
-            highlighted={highlighted}
             ref={setMarkerRef}
-            size={markerSize}
             style={style}
-            title={tooltip}
-            onClick={handleClick}
-            onLongPress={handleLongPress}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          />
+          >
+            <IconComponent
+              highlighted={highlighted}
+              size={markerSize}
+              title={tooltip}
+              onClick={handleClick}
+              onLongPress={handleLongPress}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
+            {children}
+          </div>
         )}
       </Transition>
     );
