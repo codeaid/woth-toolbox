@@ -6,7 +6,7 @@ import { AnimalTrophyRatingProps } from './types';
 import styles from './AnimalTrophyRating.module.css';
 
 export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
-  const { className, rating } = props;
+  const { className, placeholders = true, rating, style } = props;
 
   // Combine default and custom class names
   const classNames = useMemo(
@@ -17,18 +17,23 @@ export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
   // Determine number of stars to render
   const starCount = useMemo(() => Math.max(0, Math.min(5, rating)), [rating]);
 
-  // Number of remaining dots to fill the slots
-  const dotCount = useMemo(() => Math.max(0, 5 - starCount), [starCount]);
+  // Number of remaining placeholders to fill the slots
+  const placeholderCount = useMemo(
+    () => (placeholders ? Math.max(0, 5 - starCount) : 0),
+    [placeholders, starCount],
+  );
 
-  // Render list of dots to fill the remaining spaces
-  const renderedFillers = useMemo(
+  // Render list of placeholders to fill the remaining spaces
+  const renderedPlaceholders = useMemo(
     () =>
-      times(dotCount, index => (
+      times(placeholderCount, index => (
         <div className={styles.AnimalRatingIcon} key={`d:${index}`}>
-          <RiCheckboxBlankCircleFill className={styles.AnimalRatingFiller} />
+          <RiCheckboxBlankCircleFill
+            className={styles.AnimalRatingPlaceholder}
+          />
         </div>
       )),
-    [dotCount],
+    [placeholderCount],
   );
 
   // Render list of trophy rating stars
@@ -43,9 +48,9 @@ export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
   );
 
   return (
-    <div className={classNames}>
+    <div className={classNames} style={style}>
       {renderedStars}
-      {renderedFillers}
+      {renderedPlaceholders}
     </div>
   );
 };

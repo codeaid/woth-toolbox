@@ -35,7 +35,7 @@
   display: grid;
   grid-auto-rows: min-content;
   grid-gap: 0.25em;
-  min-height: 6.4rem;
+  min-height: 6.5rem;
   padding: 0.25em;
   position: relative;
   user-select: none;
@@ -70,7 +70,9 @@
 }
 
 .AnimalEditorGroupBuilderListEntryRating {
+  align-items: center;
   color: var(--light-primary);
+  display: flex;
 }
 
 .AnimalEditorGroupBuilderListEntryValue {
