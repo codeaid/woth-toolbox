@@ -7,7 +7,7 @@ import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
 import { formatTimestampDistance } from 'lib/utils';
-import { MarkerStorageRecordAnimal } from 'types/markers';
+import { MarkerDataAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
 import { AnimalEditorGroupBuilder } from './AnimalEditorGroupBuilder';
@@ -25,7 +25,7 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   } = props;
 
   // Internal animal marker data to edit
-  const [data, setData] = useState<MarkerStorageRecordAnimal>();
+  const [data, setData] = useState<MarkerDataAnimal>();
 
   // Formatted created and updated date/times
   const [dateCreated, setDateCreated] = useState<string>();

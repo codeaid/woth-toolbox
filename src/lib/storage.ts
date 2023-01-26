@@ -9,9 +9,9 @@ import { isNotEmpty } from 'lib/utils';
 import { Settings } from 'types/app';
 import { MapType } from 'types/cartography';
 import {
+  MarkerDataAnimal,
   MarkerOptionsAnimal,
   MarkerOptionsCustom,
-  MarkerStorageRecordAnimal,
 } from 'types/markers';
 
 /**
@@ -122,7 +122,7 @@ const getCustomMarkerStoreKey = (map: MapType) => `${customMarkerKey}:${map}`;
  *
  * @param data Animal data object to validate
  */
-export const isEmptyAnimalMarker = (data?: MarkerStorageRecordAnimal) =>
+export const isEmptyAnimalMarker = (data?: MarkerDataAnimal) =>
   !data ||
   ((!data.color || data.color === '#ffffff') &&
     (!data.comment || data.comment.trim() === '') &&
@@ -145,7 +145,7 @@ export const isMapTutorialCompleted = (storage: Storage) =>
 export const readAnimalMarkerMap = (
   storage: Storage,
   stripPrefixes = true,
-): Record<string, MarkerStorageRecordAnimal> =>
+): Record<string, MarkerDataAnimal> =>
   [...Array(storage.length).keys()]
     // Read all available storage keys
     .map(i => storage.key(i))
@@ -187,7 +187,7 @@ export const readAnimalMarkerMap = (
 export const readAnimalMarkerStore = (
   storage: Storage,
   marker: MarkerOptionsAnimal,
-): Optional<MarkerStorageRecordAnimal> => {
+): Optional<MarkerDataAnimal> => {
   // Generate marker and storage keys for the current marker
   const storageKey = `${animalDataPrefix}:${marker.id}`;
 
@@ -308,7 +308,7 @@ export const remapAnimalMarkerStore = (storage: Storage) =>
 export const writeAnimalMarkerStore = (
   storage: Storage,
   marker: MarkerOptionsAnimal,
-  data: MarkerStorageRecordAnimal,
+  data: MarkerDataAnimal,
 ) => {
   // Generate marker and storage keys for the current marker
   const storageKey = getAnimalMarkerStoreKey(marker.id);

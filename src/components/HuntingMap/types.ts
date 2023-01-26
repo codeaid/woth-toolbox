@@ -6,10 +6,10 @@ import {
 import { MapLabelOptions } from 'types/cartography';
 import { Point } from 'types/generic';
 import {
+  MarkerDataAnimal,
   MarkerOptionsAnimal,
   MarkerOptionsCustom,
   MarkerOptionsGeneric,
-  MarkerStorageRecordAnimal,
   MarkerType,
   MarkerTypeCustom,
 } from 'types/markers';
@@ -32,7 +32,7 @@ export interface HuntingMapDragOptions {
 }
 
 export interface HuntingMapProps {
-  animalMarkerRecords: Record<string, MarkerStorageRecordAnimal>;
+  animalMarkerRecords: Record<string, MarkerDataAnimal>;
   animalMarkers: Array<MarkerOptionsAnimal>;
   customMarkers?: Array<MarkerOptionsCustom>;
   defaultZoomValue?: number;

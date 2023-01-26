@@ -20,11 +20,11 @@ import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
 import { getAnimalRatingValue } from 'lib/animals';
 import {
+  MarkerDataAnimal,
   MarkerOptionsAnimal,
   MarkerOptionsZone,
   MarkerRef,
   MarkerRefAnimal,
-  MarkerStorageRecordAnimal,
 } from 'types/markers';
 import { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
@@ -52,7 +52,7 @@ export const HuntingMapAnimal = forwardRef(
     const zoneRefs = useRef<Array<RefObject<MarkerRef>>>([]);
 
     // Custom data associated with the marker
-    const [data, setData] = useState<MarkerStorageRecordAnimal>();
+    const [data, setData] = useState<MarkerDataAnimal>();
 
     // Flag indicating if the marker editor is currently active
     const [editorActive, setEditorActive] = useState(false);

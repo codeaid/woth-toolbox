@@ -11,11 +11,11 @@ import { AnimalType } from 'types/animals';
 import { MapFilterOptions, MapZoomOptions } from 'types/cartography';
 import { Point } from 'types/generic';
 import {
+  MarkerDataAnimal,
   MarkerOptions,
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
   MarkerReference,
-  MarkerStorageRecordAnimal,
   MarkerType,
   MarkerTypeAnimal,
   MarkerTypeCustom,
@@ -237,7 +237,7 @@ export const updateMarkerVisibility = (
   filterOptions: MapFilterOptions,
   zoomOptions: MapZoomOptions,
   zoomVisibilityMap: Map<MarkerType, number>,
-  animalMarkerRecords: Record<string, MarkerStorageRecordAnimal>,
+  animalMarkerRecords: Record<string, MarkerDataAnimal>,
   ...markerOptions: Array<Array<MarkerReference>>
 ) =>
   markerOptions

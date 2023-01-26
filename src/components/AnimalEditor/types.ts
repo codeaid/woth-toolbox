@@ -1,27 +1,27 @@
-import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
+import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 export type AnimalEditorCloseHandler = () => void;
 export type AnimalEditorDataClearHandler = (
   marker: MarkerOptionsAnimal,
 ) => void;
-type AnimalEditorDataChangeHandler = (data: MarkerStorageRecordAnimal) => void;
+type AnimalEditorDataChangeHandler = (data: MarkerDataAnimal) => void;
 export type AnimalEditorDataReadHandler = (
   marker: MarkerOptionsAnimal,
-) => Optional<MarkerStorageRecordAnimal>;
+) => Optional<MarkerDataAnimal>;
 export type AnimalEditorDataWriteHandler = (
   marker: MarkerOptionsAnimal,
-  data: MarkerStorageRecordAnimal,
+  data: MarkerDataAnimal,
 ) => void;
 
 export interface AnimalEditorColorPickerProps {
-  data?: MarkerStorageRecordAnimal;
+  data?: MarkerDataAnimal;
   defaultIconColor?: string;
   marker?: MarkerOptionsAnimal;
   onChange: AnimalEditorDataChangeHandler;
 }
 
 export interface AnimalEditorDescriptionProps {
-  data?: MarkerStorageRecordAnimal;
+  data?: MarkerDataAnimal;
   onChange: AnimalEditorDataChangeHandler;
 }
 
@@ -35,6 +35,6 @@ export interface AnimalEditorProps {
 }
 
 export interface AnimalEditorGroupBuilderProps {
-  data?: MarkerStorageRecordAnimal;
+  data?: MarkerDataAnimal;
   onChange: AnimalEditorDataChangeHandler;
 }

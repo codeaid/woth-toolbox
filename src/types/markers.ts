@@ -9,6 +9,19 @@ import {
   IconTypeNeedZone,
 } from 'types/icons';
 
+// Type describing a storage record containing custom information about an  animal map marker
+export type MarkerData = {
+  color?: string;
+  comment?: string;
+  created?: number;
+  updated?: number;
+};
+
+// Type describing a storage record containing custom information about an animal map marker
+export type MarkerDataAnimal = MarkerData & {
+  group?: Array<AnimalSpecimen>;
+};
+
 // Base type describing a map marker object
 export type MarkerOptions<TMarkerType extends MarkerType = MarkerType> = {
   coords: Point;
@@ -57,7 +70,7 @@ export interface MarkerRef {
 
 // Type describing a marker reference object exposed by HuntingMapAnimal component
 export type MarkerRefAnimal = MarkerRef & {
-  setData: (data?: MarkerStorageRecordAnimal) => void;
+  setData: (data?: MarkerDataAnimal) => void;
   setEditorActive: (visible: boolean) => void;
   setZonesVisible: (visible: boolean) => void;
 };
@@ -87,19 +100,6 @@ export type MarkerReferenceGeneric = MarkerReference<
   MarkerTypeGeneric,
   MarkerOptionsGeneric
 >;
-
-// Type describing a storage record containing custom information about an  animal map marker
-export type MarkerStorageRecord = {
-  color?: string;
-  comment?: string;
-  created?: number;
-  updated?: number;
-};
-
-// Type describing a storage record containing custom information about an animal map marker
-export type MarkerStorageRecordAnimal = MarkerStorageRecord & {
-  group?: Array<AnimalSpecimen>;
-};
 
 // Alias types to abstract icon names away from marker types
 export type MarkerType = IconType;

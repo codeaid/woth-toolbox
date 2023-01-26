@@ -6,7 +6,7 @@ import {
   readAnimalMarkerStore,
   writeAnimalMarkerStore,
 } from 'lib/storage';
-import { MarkerOptionsAnimal, MarkerStorageRecordAnimal } from 'types/markers';
+import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 import { useStorage } from './useStorage';
 
 /**
@@ -17,9 +17,7 @@ export const useAnimalMarkerData = () => {
   const storage = useStorage();
 
   // Animal marker data
-  const [dataMap, setDataMap] = useState<
-    Record<string, MarkerStorageRecordAnimal>
-  >({});
+  const [dataMap, setDataMap] = useState<Record<string, MarkerDataAnimal>>({});
 
   /**
    * Handle clearing animal data from the storage
@@ -60,7 +58,7 @@ export const useAnimalMarkerData = () => {
    * Handle persisting animal data to the storage
    */
   const handleDataWrite = useCallback(
-    (marker: MarkerOptionsAnimal, data: MarkerStorageRecordAnimal) => {
+    (marker: MarkerOptionsAnimal, data: MarkerDataAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
         return;
@@ -72,7 +70,7 @@ export const useAnimalMarkerData = () => {
       }
 
       // Inject modification dates into custom data object
-      const patch: MarkerStorageRecordAnimal = {
+      const patch: MarkerDataAnimal = {
         ...data,
         created: data.created ?? Date.now(),
         updated: Date.now(),
