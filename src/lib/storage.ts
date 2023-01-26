@@ -241,6 +241,7 @@ export const readSerializeStore = (storage: Storage) => {
   // Read application settings
   const settings = {
     [settingsKey]: readSettingsStore(storage),
+    [mapTutorialKey]: isMapTutorialCompleted(storage),
   };
 
   // Serialize local storage data
