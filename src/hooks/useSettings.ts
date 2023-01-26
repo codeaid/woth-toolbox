@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import { SettingsManagerContext, SettingsManagerContextValue } from 'contexts';
+import { SettingsContext, SettingsContextValue } from 'contexts';
 import { defaultSettings } from 'config/app';
 import { getBrowserLocale } from 'lib/i18n';
 import { Settings } from 'types/app';
@@ -7,30 +7,21 @@ import { Settings } from 'types/app';
 /**
  * Retrieve current application settings
  */
-export const useSettings = () => {
+export const useSettings = (): Required<
+  SettingsContextValue<Required<Settings>>
+> => {
   // Retrieve current application settings manager state
-  const {
-    initialized,
-    settings: storageSettings,
-    onSettingsChange,
-  } = useContext(SettingsManagerContext);
+  const { settings, ...rest } = useContext(SettingsContext);
 
   // Ensure all settings keys are present
-  const settings = useMemo<Required<Settings>>(
+  const mergedSettings = useMemo<Required<Settings>>(
     () => ({
       ...defaultSettings,
-      locale: storageSettings?.locale ?? getBrowserLocale(),
-      ...storageSettings,
+      locale: settings?.locale ?? getBrowserLocale(),
+      ...settings,
     }),
-    [storageSettings],
+    [settings],
   );
 
-  return useMemo<Required<SettingsManagerContextValue<Required<Settings>>>>(
-    () => ({
-      initialized,
-      settings,
-      onSettingsChange,
-    }),
-    [initialized, onSettingsChange, settings],
-  );
+  return { settings: mergedSettings, ...rest };
 };

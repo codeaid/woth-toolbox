@@ -30,7 +30,7 @@ export const Toolbar = (props: ToolbarProps) => {
   const { asPath } = useRouter();
 
   // Retrieve application settings and their updater
-  const { settings, onSettingsChange } = useSettings();
+  const { settings, onChange: onSettingsChange } = useSettings();
 
   // Retrieve map tutorial state and open functionality
   const { enabled: tutorialEnabled, onTutorialOpen } = useHuntingMapTutorial();

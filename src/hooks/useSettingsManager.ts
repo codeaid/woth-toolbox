@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { SettingsManagerContextValue } from 'contexts';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { SettingsContextValue } from 'contexts';
 import {
   clearSettingsStore,
   readSettingsStore,
@@ -14,7 +14,9 @@ import { useStorage } from './useStorage';
  *
  * @param flushDelayMs Flush delay in milliseconds
  */
-export const useSettingsManager = (flushDelayMs = 500) => {
+export const useSettingsManager = (
+  flushDelayMs = 500,
+): SettingsContextValue => {
   // Flag indicating whether settings have been fully initialized
   const [initialized, setInitialized] = useState(false);
 
@@ -30,7 +32,7 @@ export const useSettingsManager = (flushDelayMs = 500) => {
   /**
    * Handle settings being changed
    */
-  const handleSettingsChange = useCallback(
+  const handleChange = useCallback(
     (patch?: Settings) => {
       // Ensure storage is available before proceeding
       if (!storage) {
@@ -82,8 +84,10 @@ export const useSettingsManager = (flushDelayMs = 500) => {
     [flushDelayMs, settings, storage],
   );
 
-  // Load initial application settings
-  useEffect(() => {
+  /**
+   * Reload settings from the storage
+   */
+  const handleReload = useCallback(() => {
     // Ensure storage is available before proceeding
     if (!storage) {
       return;
@@ -95,12 +99,13 @@ export const useSettingsManager = (flushDelayMs = 500) => {
     setInitialized(true);
   }, [storage]);
 
-  return useMemo<SettingsManagerContextValue>(
-    () => ({
-      initialized,
-      settings,
-      onSettingsChange: handleSettingsChange,
-    }),
-    [handleSettingsChange, initialized, settings],
-  );
+  // Load initial application settings
+  useEffect(() => handleReload(), [handleReload]);
+
+  return {
+    initialized,
+    settings,
+    onChange: handleChange,
+    onReload: handleReload,
+  };
 };
