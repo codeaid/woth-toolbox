@@ -40,7 +40,6 @@ type MarkerOptionsMeta = {
 export type MarkerOptionsAnimal = MarkerOptions<MarkerTypeAnimal> & {
   drink: Array<MarkerOptionsZoneDrink>;
   eat: Array<MarkerOptionsZoneEat>;
-  id: string;
   sleep: Array<MarkerOptionsZoneSleep>;
 };
 
