@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import NoSSR from 'react-no-ssr';
+import { useEffect } from 'react';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
-  useAnimalMarkerData,
   useCustomMarkers,
   useHuntingMapTutorial,
   useSettings,
@@ -15,17 +14,8 @@ import { animalMarkers } from './markers/animals';
 import { genericMarkers } from './markers/generic';
 
 const NezPerceValleyPage = () => {
-  // Custom animal data manager values
-  const { dataMap, onDataClear, onDataRead, onDataWrite } =
-    useAnimalMarkerData();
-
-  // Retrieve custom marker functionality
-  const {
-    customMarkers,
-    onCustomMarkerCreate,
-    onCustomMarkerRemove,
-    onCustomMarkersClear,
-  } = useCustomMarkers('idaho');
+  // Retrieve custom marker map switcher
+  const { onSetCurrentMap } = useCustomMarkers();
 
   // Render map tutorial dialog
   const { component: tutorial } = useHuntingMapTutorial(true);
@@ -36,6 +26,12 @@ const NezPerceValleyPage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
+  // Enable and disable custom marker functionality on mount and unmount
+  useEffect(() => {
+    onSetCurrentMap('idaho');
+    return () => onSetCurrentMap();
+  }, [onSetCurrentMap]);
+
   return (
     <>
       <Head>
@@ -44,30 +40,20 @@ const NezPerceValleyPage = () => {
         </title>
       </Head>
 
-      <NoSSR>
-        <HuntingMap
-          animalMarkerRecords={dataMap}
-          animalMarkers={animalMarkers}
-          customMarkers={customMarkers}
-          imageHeight={mapHeight}
-          imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
-          imageWidth={mapWidth}
-          genericMarkers={genericMarkers}
-          labels={mapLabels}
-          markerSizeAnimal={settings.animalMarkerSize}
-          markerSizeGeneric={settings.genericMarkerSize}
-          markerSizeZone={settings.zoneMarkerSize}
-          zoomMarkerMap={markerVisibilityMap}
-          onCustomMarkerCreate={onCustomMarkerCreate}
-          onCustomMarkerRemove={onCustomMarkerRemove}
-          onCustomMarkersClear={onCustomMarkersClear}
-          onEditorClear={onDataClear}
-          onEditorRead={onDataRead}
-          onEditorWrite={onDataWrite}
-        />
+      <HuntingMap
+        animalMarkers={animalMarkers}
+        imageHeight={mapHeight}
+        imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
+        imageWidth={mapWidth}
+        genericMarkers={genericMarkers}
+        labels={mapLabels}
+        markerSizeAnimal={settings.animalMarkerSize}
+        markerSizeGeneric={settings.genericMarkerSize}
+        markerSizeZone={settings.zoneMarkerSize}
+        zoomMarkerMap={markerVisibilityMap}
+      />
 
-        {tutorial}
-      </NoSSR>
+      {tutorial}
     </>
   );
 };

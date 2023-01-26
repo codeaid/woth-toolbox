@@ -2,8 +2,15 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { StrictMode, useEffect } from 'react';
 import { App as Toolbox } from 'components/App';
-import { HuntingMapTutorialProvider, SettingsManagerProvider } from 'contexts';
 import {
+  AnimalMarkerProvider,
+  CustomMarkerProvider,
+  HuntingMapTutorialProvider,
+  SettingsManagerProvider,
+} from 'contexts';
+import {
+  useAnimalMarkerManager,
+  useCustomMarkerManager,
   useHuntingMapTutorialManager,
   useSettingsManager,
   useStorage,
@@ -14,8 +21,10 @@ import 'styles/global.css';
 
 const App = (props: AppProps) => {
   // Retrieve application settings and tutorial managers
-  const settings = useSettingsManager();
-  const tutorial = useHuntingMapTutorialManager();
+  const animalManager = useAnimalMarkerManager();
+  const customManager = useCustomMarkerManager();
+  const settingsManager = useSettingsManager();
+  const tutorialManager = useHuntingMapTutorialManager();
 
   // Retrieve application storage manager
   const storage = useStorage();
@@ -41,11 +50,15 @@ const App = (props: AppProps) => {
         />
       </Head>
       <StrictMode>
-        <SettingsManagerProvider value={settings}>
-          <HuntingMapTutorialProvider value={tutorial}>
-            <Toolbox {...props} />
-          </HuntingMapTutorialProvider>
-        </SettingsManagerProvider>
+        <AnimalMarkerProvider value={animalManager}>
+          <CustomMarkerProvider value={customManager}>
+            <SettingsManagerProvider value={settingsManager}>
+              <HuntingMapTutorialProvider value={tutorialManager}>
+                <Toolbox {...props} />
+              </HuntingMapTutorialProvider>
+            </SettingsManagerProvider>
+          </CustomMarkerProvider>
+        </AnimalMarkerProvider>
       </StrictMode>
     </>
   );

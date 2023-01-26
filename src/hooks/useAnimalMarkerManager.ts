@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { AnimalMarkerContextValue } from 'contexts/AnimalMarkerContext';
 import {
   clearAnimalMarkerStore,
   isEmptyAnimalMarker,
@@ -12,25 +13,28 @@ import { useStorage } from './useStorage';
 /**
  * Animal marker data management helper hook
  */
-export const useAnimalMarkerData = () => {
+export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
   // Browser storage manager
   const storage = useStorage();
 
-  // Animal marker data
-  const [dataMap, setDataMap] = useState<Record<string, MarkerDataAnimal>>({});
+  // Animal marker data map
+  const [markers, setMarkers] = useState<Record<string, MarkerDataAnimal>>({});
 
   /**
    * Handle clearing animal data from the storage
    */
-  const handleDataClear = useCallback(
+  const handleDeleteData = useCallback(
     (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
         return;
       }
 
+      // Remove marker entry in the storage
       const markerKey = clearAnimalMarkerStore(storage, marker);
-      setDataMap(current =>
+
+      // Remove marker from the local cache
+      setMarkers(current =>
         Object.fromEntries(
           Object.entries(current).filter(([key]) => key !== markerKey),
         ),
@@ -42,7 +46,7 @@ export const useAnimalMarkerData = () => {
   /**
    * Handle reading animal data from the storage
    */
-  const handleDataRead = useCallback(
+  const handleReadData = useCallback(
     (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
@@ -55,9 +59,23 @@ export const useAnimalMarkerData = () => {
   );
 
   /**
+   * Reload state from the storage
+   */
+  const handleReload = useCallback(() => {
+    // Ensure storage is available before proceeding
+    if (!storage) {
+      return;
+    }
+
+    // Read entries from the storage and persist them
+    const entries = readAnimalMarkerMap(storage);
+    setMarkers(entries);
+  }, [storage]);
+
+  /**
    * Handle persisting animal data to the storage
    */
-  const handleDataWrite = useCallback(
+  const handleCreateData = useCallback(
     (marker: MarkerOptionsAnimal, data: MarkerDataAnimal) => {
       // Ensure storage is present before continuing
       if (!storage) {
@@ -66,7 +84,7 @@ export const useAnimalMarkerData = () => {
 
       // Remove empty data objects from the storage
       if (isEmptyAnimalMarker(data)) {
-        return handleDataClear(marker);
+        return handleDeleteData(marker);
       }
 
       // Inject modification dates into custom data object
@@ -82,33 +100,22 @@ export const useAnimalMarkerData = () => {
         return;
       }
 
-      setDataMap(current => ({
+      setMarkers(current => ({
         ...current,
         [markerKey]: patch,
       }));
     },
-    [handleDataClear, storage],
+    [handleDeleteData, storage],
   );
 
   // Load initial animal marker data from local storage
-  useEffect(() => {
-    // Ensure storage is available before proceeding
-    if (!storage) {
-      return;
-    }
+  useEffect(() => handleReload(), [handleReload]);
 
-    // Read entries from the storage and persist them
-    const entries = readAnimalMarkerMap(storage);
-    setDataMap(entries);
-  }, [storage]);
-
-  return useMemo(
-    () => ({
-      dataMap,
-      onDataClear: handleDataClear,
-      onDataRead: handleDataRead,
-      onDataWrite: handleDataWrite,
-    }),
-    [dataMap, handleDataClear, handleDataRead, handleDataWrite],
-  );
+  return {
+    markers,
+    onCreateData: handleCreateData,
+    onDeleteData: handleDeleteData,
+    onReadData: handleReadData,
+    onReload: handleReload,
+  };
 };

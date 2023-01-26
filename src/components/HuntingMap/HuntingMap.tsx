@@ -30,7 +30,7 @@ import {
 import { HuntingMapScale } from 'components/HuntingMapScale';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { useForceUpdate } from 'hooks';
+import { useAnimalMarkers, useCustomMarkers, useForceUpdate } from 'hooks';
 import {
   getCenteredMapOptions,
   getMapDimensions,
@@ -71,9 +71,7 @@ const HuntingMapMarkerMemo = memo(HuntingMapMarker);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
-    animalMarkerRecords,
     animalMarkers,
-    customMarkers = [],
     defaultZoomValue = 0.25,
     genericMarkers,
     imageHeight,
@@ -92,12 +90,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     zoomSpeed = 1,
     zoomStep = 0.05,
     onClick,
-    onCustomMarkerCreate,
-    onCustomMarkerRemove,
-    onCustomMarkersClear,
-    onEditorClear,
-    onEditorRead,
-    onEditorWrite,
   } = props;
 
   // References to component elements
@@ -173,6 +165,22 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // Flag indicating that the map image has loaded
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  // Extract animal marker functionality
+  const {
+    markers: animalMarkerRecords,
+    onCreateData: onUpdateAnimalMarker,
+    onDeleteData: onClearAnimalMarker,
+    onReadData: onLoadAnimalMarker,
+  } = useAnimalMarkers();
+
+  // Extract custom marker functionality
+  const {
+    markers: customMarkers,
+    onClear: onClearCustomMarkers,
+    onCreate: onCreateCustomMarker,
+    onDelete: onDeleteCustomMarker,
+  } = useCustomMarkers();
+
   // Update trigger function
   const [forcedUpdate, setForcedUpdate] = useForceUpdate();
 
@@ -195,25 +203,26 @@ export const HuntingMap = (props: HuntingMapProps) => {
       // Standardize keyboard key value and retrieve marker type
       const key = event.key.toLowerCase();
 
-      // Determine if the marker under the mouse cursor should be removed
-      const removeCurrentMarker =
-        key === ' ' || (key === 'f' && marker.type === 'marker:exploration');
-
-      // Remove marker under the mouse cursor
-      if (removeCurrentMarker && onCustomMarkerRemove) {
-        return onCustomMarkerRemove(marker);
+      // Handle key presses on exploration markers
+      if (marker.type === 'marker:exploration') {
+        switch (key) {
+          case ' ':
+          case 'f':
+            return onDeleteCustomMarker(marker);
+        }
       }
 
-      // Determine if all tracking markers should be removed
-      const removeTrackingMarkers =
-        key === 't' && marker.type === 'marker:tracking';
-
-      // Remove all tracking markers
-      if (removeTrackingMarkers && onCustomMarkersClear) {
-        return onCustomMarkersClear('marker:tracking');
+      // Handle key presses on tracking markers
+      if (marker.type === 'marker:tracking') {
+        switch (key) {
+          case ' ':
+            return onDeleteCustomMarker(marker);
+          case 't':
+            return onClearCustomMarkers('marker:tracking');
+        }
       }
     },
-    [onCustomMarkerRemove, onCustomMarkersClear],
+    [onClearCustomMarkers, onDeleteCustomMarker],
   );
 
   /**
@@ -221,11 +230,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleDocumentKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      // Ensure custom marker creator is enabled
-      if (!onCustomMarkerCreate) {
-        return;
-      }
-
       // Ensure mouse is over the map
       const [offsetX, offsetY] = mouseRatio.current;
       if (offsetX < 0 || offsetY < 0 || offsetX > 1 || offsetY > 1) {
@@ -237,27 +241,29 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       if (key === 'f') {
         // Create a new exploration marker
-        onCustomMarkerCreate('marker:exploration', mouseRatio.current);
+        onCreateCustomMarker('marker:exploration', mouseRatio.current);
       } else if (key === 'c') {
         // Create a new tracking marker
-        onCustomMarkerCreate('marker:tracking', mouseRatio.current);
+        onCreateCustomMarker('marker:tracking', mouseRatio.current);
       }
     },
-    [onCustomMarkerCreate],
+    [onCreateCustomMarker],
   );
 
   /**
    * Update all animal markers with custom data entries when they change
    */
-  const handleUpdateAnimalData = useCallback(() => {
-    animalMarkerRefs.current.forEach(options => {
-      const { marker, ref } = options;
+  const handleUpdateAnimalData = useCallback(
+    () =>
+      animalMarkerRefs.current.forEach(options => {
+        const { marker, ref } = options;
 
-      // Set data associated with the current animal marker
-      const data = animalMarkerRecords[marker.id];
-      ref.current?.setData(data);
-    });
-  }, [animalMarkerRecords]);
+        // Set data associated with the current animal marker
+        const data = animalMarkerRecords[marker.id];
+        ref.current?.setData(data);
+      }),
+    [animalMarkerRecords],
+  );
 
   /**
    * Handle updating marker visibility based on current filters and zoom
@@ -375,18 +381,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
     };
 
     // Update map position in relation to the container
-    handleMapUpdate(
-      () =>
-        requestAnimationFrame(() => {
-          handleUpdateMarkerVisibility();
-          handleUpdateAnimalData();
-        }),
-      setForcedUpdate,
-    );
+    handleMapUpdate(handleUpdateMarkerVisibility, setForcedUpdate);
   }, [
     defaultZoomValue,
     handleMapUpdate,
-    handleUpdateAnimalData,
     handleUpdateMarkerVisibility,
     imageHeight,
     imageWidth,
@@ -657,15 +655,14 @@ export const HuntingMap = (props: HuntingMapProps) => {
           marker={marker}
           markerSize={marker.type === 'marker:exploration' ? 35 : 20}
           onKeyDown={handleCustomMarkerKeyDown}
-          onLongPress={onCustomMarkerRemove}
+          onLongPress={onDeleteCustomMarker}
         />
       )),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       customMarkers,
       filterOptions,
       handleCustomMarkerKeyDown,
-      onCustomMarkerRemove,
+      onDeleteCustomMarker,
     ],
   );
 
@@ -801,13 +798,13 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // Trigger updates to icon appearance when custom animal data changes
   useEffect(
     () => handleUpdateAnimalData(),
-    [animalMarkerRecords, handleUpdateAnimalData],
+    [animalMarkerElements, animalMarkerRecords, handleUpdateAnimalData],
   );
 
   // Update marker visibility whenever any of function dependencies change
   useEffect(
     () => handleUpdateMarkerVisibility(),
-    [handleUpdateMarkerVisibility],
+    [animalMarkerElements, genericMarkerElements, handleUpdateMarkerVisibility],
   );
 
   // Ensure debug markers are always visible if there are any present
@@ -861,9 +858,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
       <AnimalEditor
         marker={editedAnimal}
         onClose={handleAnimalEditorClose}
-        onDataClear={onEditorClear}
-        onDataRead={onEditorRead}
-        onDataWrite={onEditorWrite}
+        onDataClear={onClearAnimalMarker}
+        onDataRead={onLoadAnimalMarker}
+        onDataWrite={onUpdateAnimalMarker}
       />
 
       <div
