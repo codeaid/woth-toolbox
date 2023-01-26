@@ -1,4 +1,5 @@
 export * from './useAnimalMarkerData';
+export * from './useCustomMarkerManager';
 export * from './useCustomMarkers';
 export * from './useDebugPanel';
 export * from './useForceUpdate';

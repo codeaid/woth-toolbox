@@ -137,3 +137,6 @@ export const animalMarkerNeedZoneCounts = new Map<
   ['animal:wild boar', [2, 2, 2]],
   ['animal:wild duck', [0, 6, 3]],
 ]);
+
+// Maximum number of tracking markers that can exist on the map
+export const maxTrackingMarkerCount = 100;
