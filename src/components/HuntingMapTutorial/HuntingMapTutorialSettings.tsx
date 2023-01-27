@@ -100,13 +100,19 @@ export const HuntingMapTutorialSettings = () => (
         Access the <Emphasis>Settings</Emphasis> menu.
       </li>
       <li>
-        Click on the <Emphasis>Copy</Emphasis> button to generate a block of
-        text, known as code, which will be automatically copied to your
-        device&apos;s clipboard.
+        Click on the <Emphasis>Open</Emphasis> button under the{' '}
+        <Emphasis>Data migration</Emphasis> section to open the modal window
+        containing the export and import functionality.
       </li>
       <li>
-        Paste the code into an email, instant message or document, and send it
-        to the target device.
+        The left side of the window shows a block of text, known as code, which
+        represents the current state of your application and can be copied to
+        your device&apos;s clipboard by clicking on the{' '}
+        <Emphasis>Copy</Emphasis> button.
+      </li>
+      <li>
+        Once that is done paste the code into an email, instant message or
+        document, and send it to the target device.
       </li>
       <li>
         On the target device, open the received message, document or email and
@@ -115,26 +121,25 @@ export const HuntingMapTutorialSettings = () => (
       <li>
         Open the <Emphasis>Toolbox</Emphasis>, expand the{' '}
         <Emphasis>Settings</Emphasis> panel, and click on the{' '}
-        <Emphasis>Paste</Emphasis> button.
+        <Emphasis>Open</Emphasis> button.
       </li>
       <li>
-        After you paste the code the page will automatically reload and you
-        should see all your customizations applied.
+        Paste the code into the text box on the right side of the window and
+        click the <Emphasis>Apply</Emphasis> button.
+      </li>
+      <li>
+        After you paste the code the changes will be automatically applied and
+        you should see all the imported customizations on the map.
       </li>
     </ol>
 
     <p>
-      Please note that existing marker data will be overwritten. However, if you
+      Please note that existing marker data will be overwritten, however, if you
       had customized markers on the target device that you had not customized on
       your source device, those markers will not be affected, and your
       customizations will be preserved.
     </p>
-
-    <p>
-      Also be aware that there are currently no confirmations indicating that
-      the data has been successfully applied, however, if the code has been
-      copied correctly, everything should function as intended.
-    </p>
+    <p>Tracking and exploration markers will be replaced.</p>
 
     <Heading size={4}>Reverting settings</Heading>
     <p>
