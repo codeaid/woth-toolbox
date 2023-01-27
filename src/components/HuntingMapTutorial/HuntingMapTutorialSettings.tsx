@@ -54,7 +54,8 @@ export const HuntingMapTutorialSettings = () => (
       the selected language and some parts may remain in English.
     </p>
 
-    <Heading size={4}>Marker size</Heading>
+    <Heading size={4}>Markers</Heading>
+    <Heading size={6}>Size</Heading>
     <p>
       The application allows users to customize the size of general, animal, and
       need zone markers by adjusting the corresponding sliders in the settings
@@ -88,6 +89,13 @@ export const HuntingMapTutorialSettings = () => (
         and continue using the map as usual.
       </li>
     </ol>
+
+    <Heading size={6}>Trophy rating</Heading>
+    <p>
+      Enabling or disabling this option allows you to control whether or not
+      trophy ratings of highest-rated specimens are displayed below animal
+      markers.
+    </p>
 
     <Heading size={4}>Exporting and Importing Data</Heading>
     <p>

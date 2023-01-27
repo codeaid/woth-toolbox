@@ -7,6 +7,7 @@ import imgEditorColors from './assets/editor-colors.gif';
 import imgEditorContext from './assets/editor-context.jpg';
 import imgEditorDescription from './assets/editor-description.jpg';
 import imgEditorMarkers from './assets/editor-markers.jpg';
+import imgSettingsMarkersRatings from 'components/HuntingMapTutorial/assets/editor-markers-ratings.jpg';
 
 export const HuntingMapTutorialEditor = () => (
   <>
@@ -112,6 +113,23 @@ export const HuntingMapTutorialEditor = () => (
       src={imgEditorAnimals.src}
       width={imgEditorAnimals.width}
     />
+
+    <p>
+      If you add any male specimens to the marker using the method outlined
+      above, after saving the changes, the trophy rating of the highest-rated
+      animal will be displayed as a number of stars below the marker:
+    </p>
+    <HuntingMapTutorialImage
+      alt="Trophy ratings"
+      height={imgSettingsMarkersRatings.height}
+      src={imgSettingsMarkersRatings.src}
+      width={imgSettingsMarkersRatings.width}
+    />
+
+    <p>
+      Please see the <Emphasis>Settings</Emphasis> section for more information
+      on how to disable this feature.
+    </p>
 
     <Heading size={4}>Highlighting color</Heading>
     <p>
