@@ -1,6 +1,6 @@
 import { Settings, SettingsChangeHandler } from 'types/app';
 
-type SettingsEditorCloseHandler = () => void;
+type SettingsEditorVoidHandler = () => void;
 
 export interface SettingsEditorLanguageProps {
   settings: Required<Settings>;
@@ -12,9 +12,14 @@ export interface SettingsEditorMarkersProps {
   onChange: SettingsChangeHandler;
 }
 
+export interface SettingsEditorMigrationModalProps {
+  visible: boolean;
+  onClose: SettingsEditorVoidHandler;
+}
+
 export interface SettingsEditorProps {
   settings: Required<Settings>;
   visible?: boolean;
   onChange: SettingsChangeHandler;
-  onClose: SettingsEditorCloseHandler;
+  onClose: SettingsEditorVoidHandler;
 }

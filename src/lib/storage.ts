@@ -134,7 +134,7 @@ export const isEmptyAnimalMarker = (data?: MarkerDataAnimal) =>
  * @param storage Target storage
  */
 export const isMapTutorialCompleted = (storage: Storage) =>
-  !!storage.getItem(mapTutorialKey);
+  !!readMapTutorialCompleted(storage);
 
 /**
  * Load all stored animal marker data entries
@@ -221,11 +221,27 @@ export const readCustomMarkerStore = (storage: Storage, map: MapType) => {
 };
 
 /**
+ * Read tutorial completion status from the storage
+ *
+ * @param storage Target storage
+ */
+const readMapTutorialCompleted = (storage: Storage) => {
+  try {
+    const json = storage.getItem(mapTutorialKey);
+    if (!json) {
+      return;
+    }
+
+    return JSON.parse(json) as boolean;
+  } catch (e) {}
+};
+
+/**
  * Serialize current storage contents for migration
  *
  * @param storage Source storage manager
  */
-export const readSerializeStore = (storage: Storage) => {
+export const readSerializedStore = (storage: Storage) => {
   // Read data to serialize
   const animalMarkers = readAnimalMarkerMap(storage, false);
 
@@ -238,17 +254,17 @@ export const readSerializeStore = (storage: Storage) => {
     ),
   };
 
-  // Read application settings
-  const settings = {
+  // Read other values
+  const other = {
+    [mapTutorialKey]: readMapTutorialCompleted(storage),
     [settingsKey]: readSettingsStore(storage),
-    [mapTutorialKey]: isMapTutorialCompleted(storage),
   };
 
   // Serialize local storage data
   const json = JSON.stringify({
     ...animalMarkers,
     ...customMarkers,
-    ...settings,
+    ...other,
   });
 
   // Base64 encode the output
@@ -345,22 +361,19 @@ export const writeCustomMarkerStore = (
  * @param value Encoded storage data
  */
 export const writeSerializedStore = (storage: Storage, value: string) => {
-  try {
-    // Decode the base64 encoded string
-    const json = window.atob(value);
+  // Trim value before processing
+  value = value.trim();
 
-    // Attempt to parse decoded data
-    const data = JSON.parse(json);
+  // Decode the base64 encoded string
+  const json = window.atob(value);
 
-    // Iterate through all the entries in decoded data and store values in storage
-    Object.entries(data as Record<string, unknown>).forEach(([key, value]) =>
-      storage.setItem(key, JSON.stringify(value)),
-    );
+  // Attempt to parse decoded data
+  const data = JSON.parse(json);
 
-    return true;
-  } catch (e) {
-    return false;
-  }
+  // Iterate through all the entries in decoded data and store values in storage
+  Object.entries(data as Record<string, unknown>).forEach(([key, value]) =>
+    storage.setItem(key, JSON.stringify(value)),
+  );
 };
 
 /**

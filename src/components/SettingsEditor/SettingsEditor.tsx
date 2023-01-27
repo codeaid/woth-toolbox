@@ -36,7 +36,6 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
     <SidePanel
       actions={actions}
       className={styles.SettingsEditorSidePanel}
-      closeOnOutsideClick={true}
       title={translate('UI:SETTINGS')}
       visible={visible}
       onClose={onClose}
