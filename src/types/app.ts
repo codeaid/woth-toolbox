@@ -1,4 +1,5 @@
 export type Settings = {
+  animalMarkerRatings?: boolean;
   animalMarkerSize?: number;
   genericMarkerSize?: number;
   locale?: string;

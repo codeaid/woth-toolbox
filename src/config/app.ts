@@ -6,6 +6,7 @@ export const baseUrl = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 // Default application settings values
 export const defaultSettings: Required<Settings> = {
+  animalMarkerRatings: true,
   animalMarkerSize: 50,
   genericMarkerSize: 40,
   locale: defaultLocale,

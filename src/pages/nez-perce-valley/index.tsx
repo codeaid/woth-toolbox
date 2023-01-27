@@ -50,6 +50,7 @@ const NezPerceValleyPage = () => {
         markerSizeAnimal={settings.animalMarkerSize}
         markerSizeGeneric={settings.genericMarkerSize}
         markerSizeZone={settings.zoneMarkerSize}
+        markerTrophyRating={settings.animalMarkerRatings}
         zoomMarkerMap={markerVisibilityMap}
       />
 

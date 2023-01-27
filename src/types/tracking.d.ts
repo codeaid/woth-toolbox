@@ -12,6 +12,7 @@ type GoogleEventName =
   | 'marker_zones_show'
   | 'settings_language'
   | 'settings_markers_animal'
+  | 'settings_markers_animal_rating'
   | 'settings_markers_general'
   | 'settings_markers_need_zone'
   | 'settings_migrate_copy'

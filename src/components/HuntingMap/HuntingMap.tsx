@@ -82,6 +82,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     markerSizeAnimal = 50,
     markerSizeGeneric = 40,
     markerSizeZone = 35,
+    markerTrophyRating,
     zoomLabelMax = 0.549,
     zoomLabelMin = 0.2,
     zoomMarkerMap = new Map(),
@@ -724,6 +725,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
             ref={ref}
             markerSize={markerSizeAnimal}
             markerSizeZone={markerSizeZone}
+            markerTrophyRating={markerTrophyRating}
             onToggleEditor={handleToggleAnimalEditor}
             onToggleZones={handleToggleAnimalZones}
           />
@@ -737,6 +739,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     markerSizeAnimal,
     markerSizeZone,
     setForcedUpdate,
+    markerTrophyRating,
   ]);
 
   // Build a list of generic marker options

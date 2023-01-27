@@ -15,6 +15,7 @@ export interface HuntingMapAnimalProps {
   marker: MarkerOptionsAnimal;
   markerSize?: number;
   markerSizeZone?: number;
+  markerTrophyRating?: boolean;
   style?: CSSProperties;
   onToggleEditor: HuntingMapAnimalToggleEditorHandler;
   onToggleZones: HuntingMapAnimalMarkerToggleZonesHandler;

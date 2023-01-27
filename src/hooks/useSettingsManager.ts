@@ -69,6 +69,10 @@ export const useSettingsManager = (
         // Send custom Google Analytics events
         Object.entries(patch).forEach(([key, value]) => {
           switch (key as keyof Settings) {
+            case 'animalMarkerRatings':
+              return sendGoogleEvent('settings_markers_animal_rating', {
+                value,
+              });
             case 'animalMarkerSize':
               return sendGoogleEvent('settings_markers_animal', { value });
             case 'genericMarkerSize':

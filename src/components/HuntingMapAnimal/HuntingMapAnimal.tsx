@@ -36,6 +36,7 @@ export const HuntingMapAnimal = forwardRef(
       marker,
       markerSize,
       markerSizeZone = 45,
+      markerTrophyRating = true,
       onToggleEditor,
       onToggleZones,
       style,
@@ -77,10 +78,12 @@ export const HuntingMapAnimal = forwardRef(
     // Retrieve the highest trophy rating of all animals
     const highestTrophyRating = useMemo(
       () =>
-        data?.group
-          ?.map(animal => getAnimalRatingValue(animal.rating))
-          .reduce<number>((acc, current) => Math.max(acc, current), 0),
-      [data?.group],
+        markerTrophyRating
+          ? data?.group
+              ?.map(animal => getAnimalRatingValue(animal.rating))
+              .reduce<number>((acc, current) => Math.max(acc, current), 0)
+          : undefined,
+      [data?.group, markerTrophyRating],
     );
 
     /**

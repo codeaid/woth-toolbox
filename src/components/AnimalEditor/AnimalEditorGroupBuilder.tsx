@@ -159,7 +159,7 @@ export const AnimalEditorGroupBuilder = (
     () => (
       <div className={styles.AnimalEditorGroupBuilderSection}>
         <div className={styles.AnimalEditorGroupBuilderLabel}>
-          {translate('ANIMAL:ANIMAL_TROPHY_RATING')}
+          {translate('UI:TROPHY_RATING')}
         </div>
         <div
           className={classnames(

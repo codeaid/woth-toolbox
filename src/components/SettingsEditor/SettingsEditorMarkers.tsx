@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
+import { Checkbox } from 'components/Checkbox';
 import { Label } from 'components/Label';
 import { Slider } from 'components/Slider';
 import { useTranslator } from 'hooks';
@@ -9,6 +10,15 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
 
   // Retrieve application translator
   const translate = useTranslator();
+
+  /**
+   * Handle changing checkbox value
+   */
+  const handleAnimalRatingChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) =>
+      onChange({ animalMarkerRatings: event.target.checked }),
+    [onChange],
+  );
 
   /**
    * Handle changes to animal marker size
@@ -64,6 +74,12 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
         min={15}
         value={settings.zoneMarkerSize}
         onChange={handleZoneSizeChange}
+      />
+
+      <Label>{translate('UI:TROPHY_RATING')}</Label>
+      <Checkbox
+        checked={settings.animalMarkerRatings}
+        onChange={handleAnimalRatingChange}
       />
     </div>
   );
