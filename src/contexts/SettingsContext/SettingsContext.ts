@@ -8,4 +8,4 @@ export const SettingsContext = createContext<SettingsContextValue>({
   onReload: () => undefined,
 });
 
-export const { Provider: SettingsManagerProvider } = SettingsContext;
+export const { Provider: SettingsProvider } = SettingsContext;

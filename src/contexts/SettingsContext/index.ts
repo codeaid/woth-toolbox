@@ -1,2 +1,2 @@
-export { SettingsContext, SettingsManagerProvider } from './SettingsContext';
+export { SettingsContext, SettingsProvider } from './SettingsContext';
 export type { SettingsContextValue } from './types';

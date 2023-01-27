@@ -6,15 +6,15 @@ import { Notifications } from 'components/Notifications';
 import {
   AnimalMarkerProvider,
   CustomMarkerProvider,
+  SettingsProvider,
   TutorialProvider,
-  SettingsManagerProvider,
 } from 'contexts';
 import {
   useAnimalMarkerManager,
   useCustomMarkerManager,
-  useTutorialManager,
   useSettingsManager,
   useStorage,
+  useTutorialManager,
 } from 'hooks';
 import { remapAnimalMarkerStore } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
@@ -54,12 +54,12 @@ const App = (props: AppProps) => {
       <StrictMode>
         <AnimalMarkerProvider value={animalManager}>
           <CustomMarkerProvider value={customManager}>
-            <SettingsManagerProvider value={settingsManager}>
+            <SettingsProvider value={settingsManager}>
               <TutorialProvider value={tutorialManager}>
                 <Notifications />
                 <Toolbox {...props} />
               </TutorialProvider>
-            </SettingsManagerProvider>
+            </SettingsProvider>
           </CustomMarkerProvider>
         </AnimalMarkerProvider>
       </StrictMode>
