@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
 import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
@@ -56,7 +57,7 @@ const TransylvaniaPage = () => {
         zoomMarkerMap={markerVisibilityMap}
       />
 
-      {tutorial}
+      {createPortal(tutorial, document.body)}
     </>
   );
 };
