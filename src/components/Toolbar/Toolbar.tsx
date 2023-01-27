@@ -93,6 +93,14 @@ export const Toolbar = (props: ToolbarProps) => {
   );
 
   /**
+   * Handle opening tutorial
+   */
+  const handleOpenTutorial = useCallback(
+    () => onTutorialOpen(1),
+    [onTutorialOpen],
+  );
+
+  /**
    * Handle toggling settings
    */
   const handleToggleSettings = useCallback((event: MouseEvent<EventTarget>) => {
@@ -157,7 +165,7 @@ export const Toolbar = (props: ToolbarProps) => {
           {tutorialEnabled && (
             <IconButton
               title={translate('UI:TUTORIAL')}
-              onClick={onTutorialOpen}
+              onClick={handleOpenTutorial}
             >
               <RiQuestionLine />
             </IconButton>

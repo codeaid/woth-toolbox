@@ -23,10 +23,10 @@ const pages = [
 ];
 
 export const HuntingMapTutorial = (props: HuntingMapTutorialProps) => {
-  const { visible = false, onClose, onComplete } = props;
+  const { defaultPageIndex = 0, visible = false, onClose, onComplete } = props;
 
   // Index of the currently active page
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(defaultPageIndex);
 
   /**
    * Handle displaying the next page
@@ -73,6 +73,9 @@ export const HuntingMapTutorial = (props: HuntingMapTutorialProps) => {
       setPageIndex(0);
     }
   }, [visible]);
+
+  // Change current page index if required
+  useEffect(() => setPageIndex(defaultPageIndex), [defaultPageIndex]);
 
   return (
     <Modal

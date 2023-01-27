@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect } from 'react';
 import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
 import { TutorialContext } from 'contexts';
 
@@ -10,6 +10,7 @@ import { TutorialContext } from 'contexts';
 export const useTutorial = (enable = false) => {
   const {
     completed,
+    defaultPageIndex,
     enabled,
     visible,
     onTutorialClose,
@@ -32,19 +33,17 @@ export const useTutorial = (enable = false) => {
     !completed && onTutorialOpen();
   }, [completed, onTutorialOpen]);
 
-  return useMemo(
-    () => ({
-      component: (
-        <HuntingMapTutorial
-          key="woth:tutorial"
-          visible={visible}
-          onClose={onTutorialClose}
-          onComplete={onTutorialComplete}
-        />
-      ),
-      enabled,
-      onTutorialOpen,
-    }),
-    [enabled, onTutorialClose, onTutorialComplete, onTutorialOpen, visible],
-  );
+  return {
+    component: (
+      <HuntingMapTutorial
+        defaultPageIndex={defaultPageIndex}
+        key="woth:tutorial"
+        visible={visible}
+        onClose={onTutorialClose}
+        onComplete={onTutorialComplete}
+      />
+    ),
+    enabled,
+    onTutorialOpen,
+  };
 };

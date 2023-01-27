@@ -11,6 +11,9 @@ export const useTutorialManager = (): TutorialContextValue => {
   // Flag indicating whether tutorial has been previously completed
   const [completed, setCompleted] = useState(false);
 
+  // Index of the page that is activated by default
+  const [defaultPageIndex, setDefaultPageIndex] = useState(0);
+
   // Flag indicating whether tutorial functionality is enabled
   const [enabled, setEnabled] = useState(false);
 
@@ -24,6 +27,7 @@ export const useTutorialManager = (): TutorialContextValue => {
    * Handle closing tutorial halfway through
    */
   const handleTutorialClose = useCallback(() => {
+    setDefaultPageIndex(0);
     setVisible(false);
 
     // Send custom Google Analytics event
@@ -47,18 +51,24 @@ export const useTutorialManager = (): TutorialContextValue => {
 
   /**
    * Handle showing tutorial
+   *
+   * @param defaultPageIndex Default page index to activate
    */
-  const handleTutorialOpen = useCallback(() => {
-    // Ignore request if tutorial functionality is disabled
-    if (!enabled) {
-      return;
-    }
+  const handleTutorialOpen = useCallback(
+    (defaultPageIndex = 0) => {
+      // Ignore request if tutorial functionality is disabled
+      if (!enabled) {
+        return;
+      }
 
-    setVisible(true);
+      setVisible(true);
+      setDefaultPageIndex(defaultPageIndex);
 
-    // Send custom Google Analytics event
-    sendGoogleEvent('help_open');
-  }, [enabled]);
+      // Send custom Google Analytics event
+      sendGoogleEvent('help_open');
+    },
+    [enabled],
+  );
 
   // Set tutorial completion state
   useEffect(() => {
@@ -71,8 +81,9 @@ export const useTutorialManager = (): TutorialContextValue => {
   }, [storage]);
 
   return {
-    enabled,
     completed,
+    defaultPageIndex,
+    enabled,
     visible,
     onTutorialClose: handleTutorialClose,
     onTutorialComplete: handleTutorialComplete,

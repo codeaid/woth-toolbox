@@ -3,6 +3,7 @@ import { TutorialContextValue } from './types';
 
 export const TutorialContext = createContext<TutorialContextValue>({
   completed: false,
+  defaultPageIndex: 0,
   enabled: false,
   visible: false,
   onTutorialClose: () => undefined,
