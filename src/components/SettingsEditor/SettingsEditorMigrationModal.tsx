@@ -121,7 +121,15 @@ export const SettingsEditorMigrationModal = (
       return;
     }
 
-    exportRef.current.value = readSerializedStore(storage);
+    try {
+      exportRef.current.value = readSerializedStore(storage);
+    } catch (e) {
+      if (e instanceof Error) {
+        exportRef.current.value = e.message;
+      } else {
+        exportRef.current.value = 'Unknown error';
+      }
+    }
   }, [storage, visible]);
 
   return createPortal(
@@ -163,6 +171,6 @@ export const SettingsEditorMigrationModal = (
         </div>
       </div>
     </Modal>,
-    document.body,
+    document.body ?? document.getElementById('layout-content'),
   );
 };
