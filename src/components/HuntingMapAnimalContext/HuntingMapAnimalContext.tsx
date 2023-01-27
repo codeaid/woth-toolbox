@@ -3,9 +3,10 @@ import { MdOutlineMyLocation } from 'react-icons/md';
 import { RiChat4Line, RiEdit2Fill, RiPaletteLine } from 'react-icons/ri';
 import { ContextMenu, ContextMenuOption } from 'components/ContextMenu';
 import { useTranslator } from 'hooks';
-import { copyTextToClipboard } from 'lib/debug';
+import { setClipboardValue } from 'lib/clipboard';
 import { getCoordinateRatio } from 'lib/markers';
 import { sendGoogleEvent } from 'lib/tracking';
+import { showNotification } from 'lib/utils';
 import { HuntingMapAnimalContextProps } from './types';
 
 export const HuntingMapAnimalContext = (
@@ -30,8 +31,14 @@ export const HuntingMapAnimalContext = (
         label: translate('TOOLBOX:MARKER_CONTEXT_COLOR'),
         separator: true,
         onClick: async () => {
-          await copyTextToClipboard(markerData?.color ?? '');
-          sendGoogleEvent('marker_context_color');
+          const success = await setClipboardValue(markerData?.color ?? '');
+
+          if (success) {
+            showNotification(translate('TOOLBOX:COPY_SUCCESS'), 'info');
+            sendGoogleEvent('marker_context_color');
+          } else {
+            showNotification(translate('TOOLBOX:COPY_ERROR'), 'error');
+          }
         },
       },
       {
@@ -39,8 +46,14 @@ export const HuntingMapAnimalContext = (
         label: translate('TOOLBOX:MARKER_CONTEXT_COORDS'),
         onClick: async () => {
           const [valueX, valueY] = getCoordinateRatio(marker.coords, 1000);
-          await copyTextToClipboard(`${valueX},${valueY}`);
-          sendGoogleEvent('marker_context_coords');
+          const success = await setClipboardValue(`${valueX},${valueY}`);
+
+          if (success) {
+            showNotification(translate('TOOLBOX:COPY_SUCCESS'), 'info');
+            sendGoogleEvent('marker_context_coords');
+          } else {
+            showNotification(translate('TOOLBOX:COPY_ERROR'), 'error');
+          }
         },
       },
       {
@@ -48,12 +61,18 @@ export const HuntingMapAnimalContext = (
         icon: RiChat4Line,
         label: translate('TOOLBOX:MARKER_CONTEXT_DESCRIPTION'),
         onClick: async () => {
-          await copyTextToClipboard(markerData?.comment ?? '');
-          sendGoogleEvent('marker_context_desc');
+          const success = await setClipboardValue(markerData?.comment ?? '');
+
+          if (success) {
+            showNotification(translate('TOOLBOX:COPY_SUCCESS'), 'info');
+            sendGoogleEvent('marker_context_desc');
+          } else {
+            showNotification(translate('TOOLBOX:COPY_ERROR'), 'error');
+          }
         },
       },
     ],
-    [translate, markerData?.color, markerData?.comment, onToggleEditor, marker],
+    [marker, markerData?.color, markerData?.comment, onToggleEditor, translate],
   );
 
   return (
