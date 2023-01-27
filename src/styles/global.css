@@ -31,6 +31,11 @@
   --trophy-rating: #ffffff;
   --variance-optimal: #208b3a;
   --variance-suboptimal: #f35b04;
+
+  --toastify-color-dark: var(--elevation0);
+  --toastify-text-color-dark: var(--text-primary);
+  --toastify-toast-min-height: 3em;
+  --toastify-toast-width: 20em;
 }
 
 html,

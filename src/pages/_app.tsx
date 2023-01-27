@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { StrictMode, useEffect } from 'react';
 import { App as Toolbox } from 'components/App';
+import { Notifications } from 'components/Notifications';
 import {
   AnimalMarkerProvider,
   CustomMarkerProvider,
@@ -17,6 +18,7 @@ import {
 } from 'hooks';
 import { remapAnimalMarkerStore } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
+import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
@@ -54,6 +56,7 @@ const App = (props: AppProps) => {
           <CustomMarkerProvider value={customManager}>
             <SettingsManagerProvider value={settingsManager}>
               <HuntingMapTutorialProvider value={tutorialManager}>
+                <Notifications />
                 <Toolbox {...props} />
               </HuntingMapTutorialProvider>
             </SettingsManagerProvider>

@@ -1,0 +1,11 @@
+.NotificationsBody {
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.NotificationsToast {
+    box-shadow: var(--shadow) !important;
+    font-size: 0.9em;
+    margin-bottom: 0.5em !important;
+    padding: 0.25em !important;
+}

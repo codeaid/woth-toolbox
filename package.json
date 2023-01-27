@@ -31,6 +31,7 @@
     "react-no-ssr": "^1.1.0",
     "react-slider": "^2.0.4",
     "react-spinners": "^0.13.6",
+    "react-toastify": "^9.1.1",
     "react-transition-group": "^4.4.5",
     "sha1": "^1.1.1",
     "use-resize-observer": "^9.1.0"

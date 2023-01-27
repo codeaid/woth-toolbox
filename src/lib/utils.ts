@@ -1,6 +1,8 @@
 import colors from 'color';
 import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns';
 import { ColorResult } from 'react-color';
+import { TypeOptions as ToastType } from 'react-toastify';
+import { toast, ToastContent, ToastOptions } from 'components/Notifications';
 import { dateLocaleMap } from 'config/date';
 
 /**
@@ -124,6 +126,19 @@ export const isNotEmpty = <TValue>(value: Maybe<TValue>): value is TValue =>
 export const roundNumber = (value: number, decimals = 2) =>
   Math.round((value + Number.EPSILON) * Math.pow(10, decimals)) /
   Math.pow(10, decimals);
+
+/**
+ * Show a notification
+ *
+ * @param content Notification content
+ * @param type Toast type
+ * @param options Notification options
+ */
+export const showNotification = <TData>(
+  content: ToastContent<TData>,
+  type?: ToastType,
+  options?: ToastOptions | undefined,
+) => toast(content, { type, ...options });
 
 /**
  * Repeat the specified function N number of times
