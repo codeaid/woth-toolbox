@@ -6,7 +6,7 @@ import { SidePanel } from 'components/SidePanel';
 import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
-import { formatTimestampDistance } from 'lib/utils';
+import { formatTimestampDistance, showNotification } from 'lib/utils';
 import { MarkerDataAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
@@ -73,7 +73,10 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     // Persist changes and close the editor
     onDataClear(marker);
     handleClose();
-  }, [handleClose, marker, onDataClear]);
+
+    // Show notification about a successful operation
+    showNotification(translate('TOOLBOX:DATA_CLEARED'), 'info');
+  }, [handleClose, marker, onDataClear, translate]);
 
   /**
    * Handle persisting current changes to the storage
@@ -90,7 +93,10 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     // Persist changes and close the editor
     onDataWrite(marker, data);
     handleClose();
-  }, [data, handleClose, marker, onDataWrite]);
+
+    // Show notification about a successful operation
+    showNotification(translate('TOOLBOX:DATA_SAVED'), 'info');
+  }, [data, handleClose, marker, onDataWrite, translate]);
 
   /**
    * Refresh created and update date strings
