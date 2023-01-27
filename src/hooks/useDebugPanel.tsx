@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DebugPanelSettings } from 'components/DebugPanel';
+import { useTranslator } from 'hooks';
+import { setClipboardValue } from 'lib/clipboard';
 import {
   consoleLogClean,
-  copyTextToClipboard,
   getAnimalMarkerCreateCode,
   isMarkerComplete,
   pushNextMarkerCoords,
@@ -12,6 +13,7 @@ import {
   removeMarkerSleepZone,
   replaceMarker,
 } from 'lib/debug';
+import { showNotification } from 'lib/utils';
 import { MarkerOptionsAnimal } from 'types/markers';
 
 export const useDebugPanel = () => {
@@ -23,6 +25,9 @@ export const useDebugPanel = () => {
 
   // Current debut panel settings
   const [settings, setSettings] = useState<DebugPanelSettings>();
+
+  // Retrieve application translator
+  const translate = useTranslator();
 
   /**
    * Handle adding new coordinates to the list
@@ -68,8 +73,12 @@ export const useDebugPanel = () => {
    */
   const handleCopy = useCallback(async () => {
     const code = debugMarkers.map(getAnimalMarkerCreateCode).join('');
-    await copyTextToClipboard(code);
-  }, [debugMarkers]);
+    const success = await setClipboardValue(code);
+
+    if (success) {
+      showNotification(translate('TOOLBOX:COPY_SUCCESS'), 'info');
+    }
+  }, [debugMarkers, translate]);
 
   /**
    * Handle removing the last drink zone from the specified marker
@@ -174,32 +183,19 @@ export const useDebugPanel = () => {
     }
   }, [currentMarker, settings]);
 
-  return useMemo(
-    () => ({
-      currentDebugMarker: currentMarker,
-      debugMarkers,
-      debugMarkersWithCurrent: currentMarker
-        ? debugMarkers.concat(currentMarker)
-        : debugMarkers,
-      onDebugClear: handleClear,
-      onDebugCoordinates: handleCoordinatesAdd,
-      onDebugCopy: handleCopy,
-      onDebugDrinkZoneRemove: handleDrinkZoneRemove,
-      onDebugEatZoneRemove: handleEatZoneRemove,
-      onDebugMarkerDelete: handleMarkerDelete,
-      onDebugSettingsChange: setSettings,
-      onDebugSleepZoneRemove: handleSleepZoneRemove,
-    }),
-    [
-      currentMarker,
-      debugMarkers,
-      handleClear,
-      handleCoordinatesAdd,
-      handleCopy,
-      handleDrinkZoneRemove,
-      handleEatZoneRemove,
-      handleMarkerDelete,
-      handleSleepZoneRemove,
-    ],
-  );
+  return {
+    currentDebugMarker: currentMarker,
+    debugMarkers,
+    debugMarkersWithCurrent: currentMarker
+      ? debugMarkers.concat(currentMarker)
+      : debugMarkers,
+    onDebugClear: handleClear,
+    onDebugCoordinates: handleCoordinatesAdd,
+    onDebugCopy: handleCopy,
+    onDebugDrinkZoneRemove: handleDrinkZoneRemove,
+    onDebugEatZoneRemove: handleEatZoneRemove,
+    onDebugMarkerDelete: handleMarkerDelete,
+    onDebugSettingsChange: setSettings,
+    onDebugSleepZoneRemove: handleSleepZoneRemove,
+  };
 };
