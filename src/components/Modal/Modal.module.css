@@ -60,7 +60,7 @@
     top: 0;
     transition: opacity 200ms linear;
     width: 100%;
-    z-index: 101;
+    z-index: 301;
 }
 
 .ModalEntering .ModalDialogContainer {
@@ -98,7 +98,7 @@
     top: 0;
     transition: backdrop-filter 200ms linear;
     width: 100%;
-    z-index: 100;
+    z-index: 300;
 }
 
 .ModalEntering .ModalOverlay {
