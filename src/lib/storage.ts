@@ -5,7 +5,7 @@ import {
   mapTutorialKey,
   settingsKey,
 } from 'config/storage';
-import { isNotEmpty } from 'lib/utils';
+import { base64Decode, base64Encode, isNotEmpty } from 'lib/utils';
 import { Settings } from 'types/app';
 import { MapType } from 'types/cartography';
 import {
@@ -268,7 +268,7 @@ export const readSerializedStore = (storage: Storage) => {
   });
 
   // Base64 encode the output
-  return window.btoa(json);
+  return base64Encode(json);
 };
 
 /**
@@ -365,7 +365,7 @@ export const writeSerializedStore = (storage: Storage, value: string) => {
   value = value.trim();
 
   // Decode the base64 encoded string
-  const json = window.atob(value);
+  const json = base64Decode(value);
 
   // Attempt to parse decoded data
   const data = JSON.parse(json);

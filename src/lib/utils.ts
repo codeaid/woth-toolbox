@@ -6,6 +6,22 @@ import { toast, ToastContent, ToastOptions } from 'components/Notifications';
 import { dateLocaleMap } from 'config/date';
 
 /**
+ * Decode a base64 encoded string
+ *
+ * @param value Value to decode
+ */
+export const base64Decode = (value: string) =>
+  decodeURIComponent(window.atob(value));
+
+/**
+ * Encode a string using base64 format
+ *
+ * @param value Value to encode
+ */
+export const base64Encode = (value: string) =>
+  window.btoa(encodeURIComponent(value));
+
+/**
  * Format hour value
  *
  * @param hour Value to format
