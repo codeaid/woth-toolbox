@@ -1,13 +1,13 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
-import { HuntingMapTutorialContext } from 'contexts';
+import { TutorialContext } from 'contexts';
 
 /**
  * Hook exposing the map tutorial component and its associated functionality
  *
  * @param enable Forces tutorial functionality to be enabled
  */
-export const useHuntingMapTutorial = (enable = false) => {
+export const useTutorial = (enable = false) => {
   const {
     completed,
     enabled,
@@ -16,7 +16,7 @@ export const useHuntingMapTutorial = (enable = false) => {
     onTutorialComplete,
     onTutorialEnable,
     onTutorialOpen,
-  } = useContext(HuntingMapTutorialContext);
+  } = useContext(TutorialContext);
 
   // Enable tutorial if required and disable it on unmount
   useEffect(() => {

@@ -1,7 +1,7 @@
 type HuntingMapTutorialContextFlagHandler = (enabled: boolean) => void;
 type HuntingMapTutorialContextVoidHandler = () => void;
 
-export interface HuntingMapTutorialContextValue {
+export interface TutorialContextValue {
   completed: boolean;
   enabled: boolean;
   visible: boolean;

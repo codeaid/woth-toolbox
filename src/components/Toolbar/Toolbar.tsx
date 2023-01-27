@@ -13,7 +13,7 @@ import { IconButton } from 'components/IconButton';
 import { NavLink } from 'components/NavLink';
 import { SettingsEditor } from 'components/SettingsEditor';
 import { urlDiscord, urlSteam } from 'config/app';
-import { useHuntingMapTutorial, useSettings, useTranslator } from 'hooks';
+import { useTutorial, useSettings, useTranslator } from 'hooks';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
@@ -33,7 +33,7 @@ export const Toolbar = (props: ToolbarProps) => {
   const { settings, onChange: onSettingsChange } = useSettings();
 
   // Retrieve map tutorial state and open functionality
-  const { enabled: tutorialEnabled, onTutorialOpen } = useHuntingMapTutorial();
+  const { enabled: tutorialEnabled, onTutorialOpen } = useTutorial();
 
   // Retrieve application translator
   const translate = useTranslator();

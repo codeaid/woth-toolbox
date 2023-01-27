@@ -5,7 +5,7 @@ import { baseUrl } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useCustomMarkers,
-  useHuntingMapTutorial,
+  useTutorial,
   useSettings,
   useTranslator,
 } from 'hooks';
@@ -18,7 +18,7 @@ const TransylvaniaPage = () => {
   const { onSetCurrentMap } = useCustomMarkers();
 
   // Render map tutorial dialog
-  const { component: tutorial } = useHuntingMapTutorial(true);
+  const { component: tutorial } = useTutorial(true);
 
   // Retrieve application settings
   const { settings } = useSettings();

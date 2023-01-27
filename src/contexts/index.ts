@@ -1,4 +1,4 @@
 export * from './AnimalMarkerContext';
 export * from './CustomMarkerContext';
-export * from './HuntingMapTutorialContext';
 export * from './SettingsContext';
+export * from './TutorialContext';

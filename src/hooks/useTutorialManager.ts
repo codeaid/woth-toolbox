@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { HuntingMapTutorialContextValue } from 'contexts';
+import { useCallback, useEffect, useState } from 'react';
+import { TutorialContextValue } from 'contexts';
 import { isMapTutorialCompleted, writeMapTutorialCompleted } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { useStorage } from './useStorage';
@@ -7,7 +7,7 @@ import { useStorage } from './useStorage';
 /**
  * Hook exposing map tutorial states and functionality
  */
-export const useHuntingMapTutorialManager = () => {
+export const useTutorialManager = (): TutorialContextValue => {
   // Flag indicating whether tutorial has been previously completed
   const [completed, setCompleted] = useState(false);
 
@@ -70,23 +70,13 @@ export const useHuntingMapTutorialManager = () => {
     setCompleted(isMapTutorialCompleted(storage));
   }, [storage]);
 
-  return useMemo<HuntingMapTutorialContextValue>(
-    () => ({
-      enabled,
-      completed,
-      visible,
-      onTutorialClose: handleTutorialClose,
-      onTutorialComplete: handleTutorialComplete,
-      onTutorialEnable: setEnabled,
-      onTutorialOpen: handleTutorialOpen,
-    }),
-    [
-      completed,
-      enabled,
-      handleTutorialClose,
-      handleTutorialComplete,
-      handleTutorialOpen,
-      visible,
-    ],
-  );
+  return {
+    enabled,
+    completed,
+    visible,
+    onTutorialClose: handleTutorialClose,
+    onTutorialComplete: handleTutorialComplete,
+    onTutorialEnable: setEnabled,
+    onTutorialOpen: handleTutorialOpen,
+  };
 };

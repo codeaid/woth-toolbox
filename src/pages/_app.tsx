@@ -6,13 +6,13 @@ import { Notifications } from 'components/Notifications';
 import {
   AnimalMarkerProvider,
   CustomMarkerProvider,
-  HuntingMapTutorialProvider,
+  TutorialProvider,
   SettingsManagerProvider,
 } from 'contexts';
 import {
   useAnimalMarkerManager,
   useCustomMarkerManager,
-  useHuntingMapTutorialManager,
+  useTutorialManager,
   useSettingsManager,
   useStorage,
 } from 'hooks';
@@ -26,7 +26,7 @@ const App = (props: AppProps) => {
   const animalManager = useAnimalMarkerManager();
   const customManager = useCustomMarkerManager();
   const settingsManager = useSettingsManager();
-  const tutorialManager = useHuntingMapTutorialManager();
+  const tutorialManager = useTutorialManager();
 
   // Retrieve application storage manager
   const storage = useStorage();
@@ -55,10 +55,10 @@ const App = (props: AppProps) => {
         <AnimalMarkerProvider value={animalManager}>
           <CustomMarkerProvider value={customManager}>
             <SettingsManagerProvider value={settingsManager}>
-              <HuntingMapTutorialProvider value={tutorialManager}>
+              <TutorialProvider value={tutorialManager}>
                 <Notifications />
                 <Toolbox {...props} />
-              </HuntingMapTutorialProvider>
+              </TutorialProvider>
             </SettingsManagerProvider>
           </CustomMarkerProvider>
         </AnimalMarkerProvider>
