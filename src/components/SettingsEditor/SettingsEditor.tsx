@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { ButtonProps } from 'components/Button';
 import { Heading } from 'components/Heading';
 import { SidePanel } from 'components/SidePanel';
@@ -11,6 +11,9 @@ import styles from './SettingsEditor.module.css';
 
 export const SettingsEditor = (props: SettingsEditorProps) => {
   const { settings, visible = false, onChange, onClose } = props;
+
+  // Flag indicating whether migration modal is currently visible
+  const [migrationVisible, setMigrationVisible] = useState(false);
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -36,6 +39,7 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
     <SidePanel
       actions={actions}
       className={styles.SettingsEditorSidePanel}
+      closeOnOutsideClick={!migrationVisible}
       closeOnEscape={true}
       title={translate('UI:SETTINGS')}
       visible={visible}
@@ -49,7 +53,10 @@ export const SettingsEditor = (props: SettingsEditorProps) => {
         <SettingsEditorMarkers settings={settings} onChange={onChange} />
 
         <Heading size={5}>{translate('TOOLBOX:DATA_MIGRATION')}</Heading>
-        <SettingsEditorMigration />
+        <SettingsEditorMigration
+          visible={migrationVisible}
+          onToggle={setMigrationVisible}
+        />
       </div>
     </SidePanel>
   );
