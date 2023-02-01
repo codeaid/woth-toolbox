@@ -1,5 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document';
-import { baseUrl, googleAnalyticsId } from 'config/app';
+import { basePath, baseURL, googleAnalyticsId } from 'config/app';
 import { isDevelopmentMode } from 'lib/utils';
 
 const Document = () => {
@@ -42,26 +42,26 @@ const Document = () => {
           href="https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400&family=Fira+Sans+Condensed&family=Fira+Sans+Extra+Condensed&family=Fira+Sans:wght@300;400;500&family=Share+Tech+Mono&display=swap"
           rel="stylesheet"
         />
-        <link rel="shortcut icon" href={`${baseUrl}/img/favicon.png`} />
+        <link rel="shortcut icon" href={`${basePath}/img/favicon.png`} />
         <style
           dangerouslySetInnerHTML={{
-            __html: `html { cursor: url("${baseUrl}/img/mouse.png"), auto; }`,
+            __html: `html { cursor: url("${basePath}/img/mouse.png"), auto; }`,
           }}
         ></style>
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content={`https://codeaid.github.io${baseUrl}`}
-        />
+        <meta property="og:url" content={`${baseURL}${basePath}`} />
         <meta property="og:title" content="Way Of The Hunter Toolbox" />
         <meta
           property="og:description"
           content="Unleash your inner hunter with the ultimate resource for weapons, animals and locations, featuring interactive maps and species life cycles."
         />
-        <meta property="og:image" content={`${baseUrl}/img/og.jpg`} />
+        <meta
+          property="og:image"
+          content={`${baseURL}${basePath}/img/og.jpg`}
+        />
         <meta
           property="og:image:secure_url"
-          content={`${baseUrl}/img/og.jpg`}
+          content={`${baseURL}${basePath}/img/og.jpg`}
         />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />

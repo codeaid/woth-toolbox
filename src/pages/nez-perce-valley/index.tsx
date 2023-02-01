@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
-import { baseUrl } from 'config/app';
+import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useCustomMarkers,
@@ -44,7 +44,7 @@ const NezPerceValleyPage = () => {
       <HuntingMap
         animalMarkers={animalMarkers}
         imageHeight={mapHeight}
-        imageSrc={`${baseUrl}/img/maps/nez_perce.jpeg`}
+        imageSrc={`${basePath}/img/maps/nez_perce.jpeg`}
         imageWidth={mapWidth}
         genericMarkers={genericMarkers}
         labels={mapLabels}
