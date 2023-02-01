@@ -48,6 +48,24 @@ const Document = () => {
             __html: `html { cursor: url("${baseUrl}/img/mouse.png"), auto; }`,
           }}
         ></style>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://codeaid.github.io${baseUrl}`}
+        />
+        <meta property="og:title" content="Way Of The Hunter Toolbox" />
+        <meta
+          property="og:description"
+          content="Unleash your inner hunter with the ultimate resource for weapons, animals and locations, featuring interactive maps and species life cycles."
+        />
+        <meta property="og:image" content={`${baseUrl}/img/og.jpg`} />
+        <meta
+          property="og:image:secure_url"
+          content={`${baseUrl}/img/og.jpg`}
+        />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="627" />
         {renderGoogleAnalytics()}
       </Head>
       <body>
