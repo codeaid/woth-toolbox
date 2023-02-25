@@ -32,8 +32,10 @@ export interface AnimalSpecimen {
 }
 
 export type AnimalType =
+  | 'animal:alaska moose'
   | 'animal:american badger'
   | 'animal:american black bear'
+  | 'animal:barren-ground caribou'
   | 'animal:bighorn sheep'
   | 'animal:brown bear'
   | 'animal:chamois'
@@ -44,6 +46,7 @@ export type AnimalType =
   | 'animal:golden jackal'
   | 'animal:gray wolf'
   | 'animal:greylag goose'
+  | 'animal:kodiak bear'
   | 'animal:lesser scaup'
   | 'animal:moose'
   | 'animal:mouflon'
@@ -53,8 +56,12 @@ export type AnimalType =
   | 'animal:red deer'
   | 'animal:red fox'
   | 'animal:roe deer'
+  | 'animal:roosevelt elk'
   | 'animal:ross goose'
   | 'animal:showshoe hare'
+  | 'animal:sitka deer'
+  | 'animal:surf scoter'
   | 'animal:white-tailed deer'
   | 'animal:wild boar'
-  | 'animal:wild duck';
+  | 'animal:wild duck'
+  | 'animal:wood bison';
