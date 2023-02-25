@@ -3,6 +3,24 @@ import { Weapon } from 'types/weapons';
 export const weapons: Array<Weapon> = [
   // Tier 1
   {
+    action: 'WEAPON:CROSSBOW03_ACTION',
+    caliber: 'WEAPON:CROSSBOW03_CALIBER',
+    description: 'WEAPON:CROSSBOW03_DESCRIPTION',
+    heading: 'WEAPON:CROSSBOW03_HEADING',
+    hitEnergy: [96, 72, 53, 41, 0],
+    slug: 'harpe-wonderhit',
+    tier: 1,
+  },
+  {
+    action: 'WEAPON:CROSSBOW04_ACTION',
+    caliber: 'WEAPON:CROSSBOW04_CALIBER',
+    description: 'WEAPON:CROSSBOW04_DESCRIPTION',
+    heading: 'WEAPON:CROSSBOW04_HEADING',
+    hitEnergy: [215, 171, 132, 104, 0],
+    slug: 'buffden-apex-predator',
+    tier: 1,
+  },
+  {
     action: 'WEAPON:SHOTGUN_BREAK01_ACTION',
     caliber: 'WEAPON:SHOTGUN_BREAK01_CALIBER',
     description: 'WEAPON:SHOTGUN_BREAK01_DESCRIPTION',
