@@ -9,8 +9,10 @@ import {
 
 // List of types representing animal markers
 export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
+  'animal:alaska moose',
   'animal:american badger',
   'animal:american black bear',
+  'animal:barren-ground caribou',
   'animal:bighorn sheep',
   'animal:brown bear',
   'animal:chamois',
@@ -21,6 +23,7 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:golden jackal',
   'animal:gray wolf',
   'animal:greylag goose',
+  'animal:kodiak bear',
   'animal:lesser scaup',
   'animal:moose',
   'animal:mouflon',
@@ -30,11 +33,15 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:red deer',
   'animal:red fox',
   'animal:roe deer',
+  'animal:roosevelt elk',
   'animal:ross goose',
   'animal:showshoe hare',
+  'animal:sitka deer',
+  'animal:surf scoter',
   'animal:white-tailed deer',
   'animal:wild boar',
   'animal:wild duck',
+  'animal:wood bison',
 ];
 
 // List of marker types that represent custom markers
@@ -113,8 +120,10 @@ export const animalMarkerNeedZoneCounts = new Map<
   AnimalType,
   [number, number, number]
 >([
+  ['animal:alaska moose', [2, 2, 2]],
   ['animal:american badger', [2, 2, 2]],
   ['animal:american black bear', [2, 2, 2]],
+  ['animal:barren-ground caribou', [2, 2, 2]],
   ['animal:bighorn sheep', [2, 2, 2]],
   ['animal:brown bear', [2, 2, 2]],
   ['animal:chamois', [2, 2, 2]],
@@ -125,6 +134,7 @@ export const animalMarkerNeedZoneCounts = new Map<
   ['animal:golden jackal', [2, 2, 2]],
   ['animal:gray wolf', [2, 2, 2]],
   ['animal:greylag goose', [0, 6, 3]],
+  ['animal:kodiak bear', [2, 2, 2]],
   ['animal:lesser scaup', [0, 6, 3]],
   ['animal:moose', [2, 2, 2]],
   ['animal:mouflon', [2, 2, 2]],
@@ -134,11 +144,15 @@ export const animalMarkerNeedZoneCounts = new Map<
   ['animal:red deer', [2, 2, 2]],
   ['animal:red fox', [2, 2, 2]],
   ['animal:roe deer', [2, 2, 2]],
+  ['animal:roosevelt elk', [2, 2, 2]],
   ['animal:ross goose', [0, 6, 3]],
   ['animal:showshoe hare', [0, 2, 2]],
+  ['animal:sitka deer', [2, 2, 2]],
+  ['animal:surf scoter', [0, 6, 3]],
   ['animal:white-tailed deer', [2, 2, 2]],
   ['animal:wild boar', [2, 2, 2]],
   ['animal:wild duck', [0, 6, 3]],
+  ['animal:wood bison', [2, 2, 2]],
 ]);
 
 // Maximum number of tracking markers that can exist on the map
