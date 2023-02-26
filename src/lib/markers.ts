@@ -184,9 +184,9 @@ export const isGenericMarkerType = (
  * @param marker Marker to validate
  */
 export const isHighlightedMarker = (marker: MarkerOptions) =>
-  (['cabin', 'camp', 'lodge', 'shooting range'] as Array<MarkerType>).includes(
-    marker.type,
-  );
+  (
+    ['cabin', 'camp', 'lodge', 'racing', 'shooting range'] as Array<MarkerType>
+  ).includes(marker.type);
 
 /**
  * Check if a marker is included in the specified filter
