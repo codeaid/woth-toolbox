@@ -56,7 +56,9 @@ const AlaskaPage = () => {
     <>
       <Head>
         <title>
-          {`${translate('POI:MAP_NAME_IDAHO')} - ${translate('UI:GAME_TITLE')}`}
+          {`${translate('POI:MAP_NAME_ALASKA')} - ${translate(
+            'UI:GAME_TITLE',
+          )}`}
         </title>
       </Head>
 
