@@ -50,6 +50,7 @@ export const genericMarkerTypes: Array<MarkerTypeGeneric> = [
   'cabin:undiscovered',
   'camp',
   'echo',
+  'flower',
   'hunting stand',
   'lodge',
   'photo',

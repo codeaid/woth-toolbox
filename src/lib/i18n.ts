@@ -152,6 +152,8 @@ export const getGenericMarkerKey = (
       return 'UI:MARKER_CAMPSITE';
     case 'echo':
       return 'UI:MARKER_ECHO';
+    case 'flower':
+      return 'UI:MARKER_FLOWER';
     case 'hunting stand':
       return 'UI:MARKER_HUNTING_STAND';
     case 'lodge':
