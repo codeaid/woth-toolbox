@@ -11,6 +11,7 @@ import {
   useTutorial,
 } from 'hooks';
 import { mapHeight, mapLabels, mapWidth } from './config';
+import { genericMarkers } from './markers/generic';
 
 const AlaskaPage = () => {
   // Retrieve custom marker map switcher
@@ -44,7 +45,7 @@ const AlaskaPage = () => {
         imageHeight={mapHeight}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
         imageWidth={mapWidth}
-        genericMarkers={[]}
+        genericMarkers={genericMarkers}
         labels={mapLabels}
         markerSizeAnimal={settings.animalMarkerSize}
         markerSizeGeneric={settings.genericMarkerSize}

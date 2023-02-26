@@ -7,9 +7,11 @@ export type IconTypeGeneric =
   | 'cabin:undiscovered'
   | 'camp'
   | 'echo'
+  | 'flower'
   | 'hunting stand'
   | 'lodge'
   | 'photo'
+  | 'racing'
   | 'shooting range'
   | 'view';
 

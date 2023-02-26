@@ -95,6 +95,7 @@ export const markerVisibilityMap = new Map<MarkerType, number>([
   ['cabin', 0.25],
   ['camp', 0.25],
   ['echo', 0.35],
+  ['flower', 0.35],
   ['hunting stand', 0.45],
   ['lodge', 0],
   ['photo', 0.35],
