@@ -1,18 +1,24 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { DebugPanel } from 'components/DebugPanel';
 import { HuntingMap } from 'components/HuntingMap';
 import { genericMarkers, mapHeight, mapLabels, mapWidth } from 'config/alaska';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useCustomMarkers,
+  useDebugPanel,
   useSettings,
   useTranslator,
   useTutorial,
 } from 'hooks';
 
 const AlaskaPage = () => {
+  const { query } = useRouter();
+  const { debug } = query;
+
   // Retrieve custom marker map switcher
   const { onSetCurrentMap } = useCustomMarkers();
 
@@ -31,6 +37,21 @@ const AlaskaPage = () => {
     return () => onSetCurrentMap();
   }, [onSetCurrentMap]);
 
+  // Enable debug functionality
+  const {
+    currentDebugMarker,
+    debugMarkersWithCurrent,
+    onDebugMarkerDelete,
+    debugMarkers,
+    onDebugCoordinates,
+    onDebugCopy,
+    onDebugDrinkZoneRemove,
+    onDebugEatZoneRemove,
+    onDebugSleepZoneRemove,
+    onDebugSettingsChange,
+    onDebugClear,
+  } = useDebugPanel();
+
   return (
     <>
       <Head>
@@ -40,7 +61,7 @@ const AlaskaPage = () => {
       </Head>
 
       <HuntingMap
-        animalMarkers={[]}
+        animalMarkers={debugMarkersWithCurrent}
         imageHeight={mapHeight}
         imageScale={2}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
@@ -52,6 +73,20 @@ const AlaskaPage = () => {
         markerSizeZone={settings.zoneMarkerSize}
         markerTrophyRating={settings.animalMarkerRatings}
         zoomMarkerMap={markerVisibilityMap}
+        onClick={onDebugCoordinates}
+      />
+
+      <DebugPanel
+        currentMarker={currentDebugMarker}
+        enabled={!!debug}
+        markers={debugMarkers}
+        onClear={onDebugClear}
+        onCopy={onDebugCopy}
+        onDrinkZoneRemove={onDebugDrinkZoneRemove}
+        onEatZoneRemove={onDebugEatZoneRemove}
+        onMarkerDelete={onDebugMarkerDelete}
+        onSettingsChange={onDebugSettingsChange}
+        onSleepZoneRemove={onDebugSleepZoneRemove}
       />
 
       {createPortal(tutorial, document.body)}
