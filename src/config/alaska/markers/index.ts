@@ -1,3 +1,4 @@
+import { MarkerOptionsGeneric } from 'types/markers';
 import {
   cabinMarkers,
   campMarkers,
@@ -6,8 +7,7 @@ import {
   lodgeMarkers,
   racingMarkers,
   viewMarkers,
-} from 'config/alaska';
-import { MarkerOptionsGeneric } from 'types/markers';
+} from './generic';
 
 // List of generic markers to show on the Alaska map
 export const genericMarkers: Array<MarkerOptionsGeneric> = [

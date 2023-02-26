@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
+import { genericMarkers, mapHeight, mapLabels, mapWidth } from 'config/alaska';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
@@ -10,8 +11,6 @@ import {
   useTranslator,
   useTutorial,
 } from 'hooks';
-import { mapHeight, mapLabels, mapWidth } from './config';
-import { genericMarkers } from './markers/generic';
 
 const AlaskaPage = () => {
   // Retrieve custom marker map switcher
