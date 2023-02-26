@@ -3,16 +3,20 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
+import {
+  animalMarkers,
+  genericMarkers,
+  mapHeight,
+  mapLabels,
+  mapWidth,
+} from 'config/idaho';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useCustomMarkers,
-  useTutorial,
   useSettings,
   useTranslator,
+  useTutorial,
 } from 'hooks';
-import { mapHeight, mapLabels, mapWidth } from './config';
-import { animalMarkers } from './markers/animals';
-import { genericMarkers } from './markers/generic';
 
 const NezPerceValleyPage = () => {
   // Retrieve custom marker map switcher

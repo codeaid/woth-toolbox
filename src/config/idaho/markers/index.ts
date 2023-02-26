@@ -1,3 +1,4 @@
+import { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
 import {
   americanBadgerMarkers,
   americanBlackBearMarkers,
@@ -14,9 +15,18 @@ import {
   snowshoeHareMarkers,
   whiteTailedDeerMarkers,
   wildDuckMarkers,
-} from 'config/idaho';
-import { MarkerOptionsAnimal } from 'types/markers';
+} from './animals';
+import {
+  cabinMarkers,
+  campMarkers,
+  echoMarkers,
+  huntingStandMarkers,
+  lodgeMarkers,
+  shootingRangeMarkers,
+  viewMarkers,
+} from './generic';
 
+// List of animal markers to show on the Nex Perce map
 export const animalMarkers: Array<MarkerOptionsAnimal> = [
   americanBadgerMarkers,
   americanBlackBearMarkers,
@@ -33,4 +43,15 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   snowshoeHareMarkers,
   whiteTailedDeerMarkers,
   wildDuckMarkers,
+].flat();
+
+// List of generic markers to show on the Nex Perce map
+export const genericMarkers: Array<MarkerOptionsGeneric> = [
+  cabinMarkers,
+  campMarkers,
+  echoMarkers,
+  huntingStandMarkers,
+  lodgeMarkers,
+  shootingRangeMarkers,
+  viewMarkers,
 ].flat();
