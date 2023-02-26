@@ -38,6 +38,10 @@ export const Layout = (props: LayoutProps) => {
               children: translate('POI:MAP_NAME_TRANSYLVANIA'),
               href: '/transylvania',
             },
+            {
+              children: translate('POI:MAP_NAME_ALASKA'),
+              href: '/alaska',
+            },
           ]
         : [],
     [ready, translate],

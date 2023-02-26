@@ -28,7 +28,7 @@ export interface MapOptions {
   mapWidth: number;
 }
 
-export type MapType = 'idaho' | 'transylvania';
+export type MapType = 'alaska' | 'idaho' | 'transylvania';
 
 export interface MapZoomOptions {
   zoomMax: number;
