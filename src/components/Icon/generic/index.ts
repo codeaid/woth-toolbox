@@ -2,6 +2,7 @@ export * from './CabinIcon';
 export * from './CampIcon';
 export * from './DefaultIcon';
 export * from './EchoIcon';
+export * from './FlowerIcon';
 export * from './HuntingStandIcon';
 export * from './LodgeIcon';
 export * from './PhotoIcon';
