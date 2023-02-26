@@ -1,3 +1,4 @@
+import { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
 import {
   brownBearMarkers,
   chamoisMarkers,
@@ -14,9 +15,18 @@ import {
   roeDeerMarkers,
   wildBoarMarkers,
   wildDuckMarkers,
-} from 'config/transylvania';
-import { MarkerOptionsAnimal } from 'types/markers';
+} from './animals';
+import {
+  cabinMarkers,
+  campMarkers,
+  huntingStandMarkers,
+  lodgeMarkers,
+  photoMarkers,
+  shootingRangeMarkers,
+  viewMarkers,
+} from './generic';
 
+// List of animal markers to show on the Transylvania map
 export const animalMarkers: Array<MarkerOptionsAnimal> = [
   brownBearMarkers,
   chamoisMarkers,
@@ -33,4 +43,15 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   roeDeerMarkers,
   wildBoarMarkers,
   wildDuckMarkers,
+].flat();
+
+// List of generic markers to show on the Transylvania map
+export const genericMarkers: Array<MarkerOptionsGeneric> = [
+  cabinMarkers,
+  campMarkers,
+  huntingStandMarkers,
+  lodgeMarkers,
+  photoMarkers,
+  shootingRangeMarkers,
+  viewMarkers,
 ].flat();

@@ -5,14 +5,18 @@ import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
+  animalMarkers,
+  genericMarkers,
+  mapHeight,
+  mapLabels,
+  mapWidth,
+} from 'config/transylvania';
+import {
   useCustomMarkers,
   useTutorial,
   useSettings,
   useTranslator,
 } from 'hooks';
-import { mapHeight, mapLabels, mapWidth } from './config';
-import { animalMarkers } from './markers/animals';
-import { genericMarkers } from './markers/generic';
 
 const TransylvaniaPage = () => {
   // Retrieve custom marker map switcher
