@@ -19,6 +19,7 @@ export interface HuntingMapProps {
   defaultZoomValue?: number;
   genericMarkers: Array<MarkerOptionsGeneric>;
   imageHeight: number;
+  imageScale?: number;
   imageSrc: string;
   imageWidth: number;
   labels?: Array<MapLabelOptions>;

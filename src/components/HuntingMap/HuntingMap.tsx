@@ -75,6 +75,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     defaultZoomValue = 0.25,
     genericMarkers,
     imageHeight,
+    imageScale = 3,
     imageSrc,
     imageWidth,
     labels = [],
@@ -899,9 +900,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
         <HuntingMapCoords ref={coordsRef} />
 
         <HuntingMapScale
+          imageScale={imageScale}
           imageWidth={imageWidth}
           mapWidth={mapOptions.current.mapWidth}
-          metersPerPixel={3}
         />
       </div>
     </>

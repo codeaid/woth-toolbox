@@ -43,6 +43,7 @@ const AlaskaPage = () => {
       <HuntingMap
         animalMarkers={[]}
         imageHeight={mapHeight}
+        imageScale={2}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
         imageWidth={mapWidth}
         genericMarkers={genericMarkers}

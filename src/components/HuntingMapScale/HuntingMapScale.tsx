@@ -8,13 +8,13 @@ import styles from './HuntingMapScale.module.css';
 export const HuntingMapScale = (props: HuntingMapScaleProps) => {
   const {
     defaultWidth = 250,
+    imageScale,
     imageWidth,
     mapStep10m = 10,
     mapStep100m = 100,
     mapStep1000m = 500,
     mapStep10000m = 1000,
     mapWidth,
-    metersPerPixel,
   } = props;
 
   // Retrieve application locale and translator
@@ -37,7 +37,7 @@ export const HuntingMapScale = (props: HuntingMapScaleProps) => {
     const pixelRatio = imageWidth / mapWidth;
 
     // Calculate size of each screen pixel in meters at current zoom
-    const pixelMeters = metersPerPixel * pixelRatio;
+    const pixelMeters = imageScale * pixelRatio;
 
     // Calculate how many meters the scale bar at its default width represents.
     // If map scale is 1:1, the world is 10000m wide and map image width is
@@ -99,7 +99,7 @@ export const HuntingMapScale = (props: HuntingMapScaleProps) => {
     mapStep100m,
     mapStep10m,
     mapWidth,
-    metersPerPixel,
+    imageScale,
   ]);
 
   return (
