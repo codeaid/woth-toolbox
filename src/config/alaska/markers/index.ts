@@ -1,5 +1,5 @@
 import { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
-import { alaskaMooseMarkers } from './animals';
+import { alaskaMooseMarkers, americanBlackBearMarkers } from './animals';
 import {
   cabinMarkers,
   campMarkers,
@@ -13,6 +13,7 @@ import {
 // List of animal markers to show on the Alaska map
 export const animalMarkers: Array<MarkerOptionsAnimal> = [
   alaskaMooseMarkers,
+  americanBlackBearMarkers,
 ].flat();
 
 // List of generic markers to show on the Alaska map
