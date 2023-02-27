@@ -5,6 +5,7 @@ import {
   barrenGroundCaribouMarkers,
   kodiakBearMarkers,
   rooseveltElkMarkers,
+  sitkaDeerMarkers,
 } from './animals';
 import {
   cabinMarkers,
@@ -23,6 +24,7 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   barrenGroundCaribouMarkers,
   kodiakBearMarkers,
   rooseveltElkMarkers,
+  sitkaDeerMarkers,
 ].flat();
 
 // List of generic markers to show on the Alaska map
