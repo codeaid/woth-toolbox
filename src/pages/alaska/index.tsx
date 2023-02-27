@@ -4,7 +4,13 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { DebugPanel } from 'components/DebugPanel';
 import { HuntingMap } from 'components/HuntingMap';
-import { genericMarkers, mapHeight, mapLabels, mapWidth } from 'config/alaska';
+import {
+  animalMarkers,
+  genericMarkers,
+  mapHeight,
+  mapLabels,
+  mapWidth,
+} from 'config/alaska';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
@@ -63,7 +69,7 @@ const AlaskaPage = () => {
       </Head>
 
       <HuntingMap
-        animalMarkers={debugMarkersWithCurrent}
+        animalMarkers={[...animalMarkers, ...debugMarkersWithCurrent]}
         imageHeight={mapHeight}
         imageScale={2}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
