@@ -10,4 +10,5 @@ export * from './rooseveltElk';
 export * from './sitkaDeer';
 export * from './snowshoeHare';
 export * from './surfScoter';
+export * from './wildDuck';
 export * from './woodBison';
