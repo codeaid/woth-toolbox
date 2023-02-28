@@ -8,5 +8,6 @@ export * from './mountainGoat';
 export * from './redFox';
 export * from './rooseveltElk';
 export * from './sitkaDeer';
+export * from './snowshoeHare';
 export * from './surfScoter';
 export * from './woodBison';

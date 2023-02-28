@@ -10,6 +10,7 @@ import {
   redFoxMarkers,
   rooseveltElkMarkers,
   sitkaDeerMarkers,
+  showshoeHareMarkers,
   surfScoterMarkers,
   woodBisonMarkers,
 } from './animals';
@@ -35,6 +36,7 @@ export const animalMarkers: Array<MarkerOptionsAnimal> = [
   redFoxMarkers,
   rooseveltElkMarkers,
   sitkaDeerMarkers,
+  showshoeHareMarkers,
   surfScoterMarkers,
   woodBisonMarkers,
 ].flat();
