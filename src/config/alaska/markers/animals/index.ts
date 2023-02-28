@@ -4,6 +4,7 @@ export * from './barrenGroundCaribou';
 export * from './greyWolf';
 export * from './kodiakBear';
 export * from './lesserScaup';
+export * from './mountainGoat';
 export * from './rooseveltElk';
 export * from './sitkaDeer';
 export * from './surfScoter';
