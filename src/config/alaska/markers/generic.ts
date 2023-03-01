@@ -1,7 +1,6 @@
 import { createMarkerOptionsList } from 'lib/markers';
 
 export const cabinMarkers = createMarkerOptionsList('cabin', [
-  [0.0924804688, 0.258203125],
   [0.2283203125, 0.5614746094],
   [0.5514160156, 0.1584960938],
   [0.6351074219, 0.8711914063],
@@ -10,6 +9,7 @@ export const cabinMarkers = createMarkerOptionsList('cabin', [
 export const campMarkers = createMarkerOptionsList('camp', [
   [0.024609375, 0.4848632813],
   [0.0791015625, 0.8107421875],
+  [0.0924804688, 0.258203125],
   [0.2233398438, 0.6724609375],
   [0.3275878906, 0.4025878906],
   [0.3362304688, 0.2223144531],
