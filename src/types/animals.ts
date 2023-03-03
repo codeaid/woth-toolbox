@@ -2,6 +2,8 @@ import { TranslationKey } from 'types/i18n';
 
 export interface Animal {
   description: TranslationKey;
+  habitatPrimary: Array<TranslationKey>;
+  habitatSecondary?: TranslationKey;
   heading: TranslationKey;
   hitEnergy: [number, number];
   latin: TranslationKey;

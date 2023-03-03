@@ -22,17 +22,41 @@
   padding-right: 1em;
 }
 
+.AnimalDetailsStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1em;
+  grid-row-gap: 0.5em;
+  margin-top: 1em;
+}
+
 .AnimalDetailsStat {
   align-items: baseline;
   display: flex;
   font-size: 1.1em;
-  margin-top: 0.5em;
+}
+
+.AnimalDetailsStat1 {
+  order: 1;
+}
+
+.AnimalDetailsStat2 {
+  order: 3;
+}
+
+.AnimalDetailsStat3 {
+  order: 2;
+}
+
+.AnimalDetailsStat4 {
+  order: 4;
 }
 
 .AnimalDetailsStatName {
   color: var(--text-secondary);
   font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   letter-spacing: 0.1em;
+  line-height: 1em;
   text-transform: uppercase;
 }
 
@@ -46,5 +70,17 @@
 @media (max-width: 864px) {
   .AnimalDetails {
     font-size: unset;
+  }
+
+  .AnimalDetailsStats {
+    grid-template-columns: 1fr;
+  }
+
+  .AnimalDetailsStat2 {
+    order: 2;
+  }
+
+  .AnimalDetailsStat3 {
+    order: 3;
   }
 }

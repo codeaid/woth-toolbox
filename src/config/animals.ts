@@ -4,6 +4,7 @@ export const animals: Array<Animal> = [
   // Tier 1
   {
     description: 'ANIMAL:LEPUS_EUROPAEUS_DESCRIPTION',
+    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_02'],
     heading: 'ANIMAL:LEPUS_EUROPAEUS_HEADING',
     hitEnergy: [356, 1068],
     latin: 'ANIMAL:LEPUS_EUROPAEUS_LATIN',
@@ -19,6 +20,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:LEPUS_AMERICANUS_DESCRIPTION',
+    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_04'],
     heading: 'ANIMAL:LEPUS_AMERICANUS_HEADING',
     hitEnergy: [56, 628],
     latin: 'ANIMAL:LEPUS_AMERICANUS_LATIN',
@@ -36,6 +38,8 @@ export const animals: Array<Animal> = [
   // Tier 3
   {
     description: 'ANIMAL:TAXIDEA_TAXUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT03', 'POI:IDAHO_HABITAT02'],
+    habitatSecondary: 'POI:IDAHO_HABITAT04',
     heading: 'ANIMAL:TAXIDEA_TAXUS_HEADING',
     hitEnergy: [612, 1836],
     latin: 'ANIMAL:TAXIDEA_TAXUS_LATIN',
@@ -53,6 +57,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:MELES_MELES_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
+    habitatSecondary: 'POI:IDAHO_HABITAT03',
     heading: 'ANIMAL:MELES_MELES_HEADING',
     hitEnergy: [700, 2100],
     latin: 'ANIMAL:MELES_MELES_LATIN',
@@ -70,6 +76,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:VULPES_VULPES_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT04',
     heading: 'ANIMAL:VULPES_VULPES_HEADING',
     hitEnergy: [612, 1836],
     latin: 'ANIMAL:VULPES_VULPES_LATIN',
@@ -89,6 +97,8 @@ export const animals: Array<Animal> = [
   // Tier 4
   {
     description: 'ANIMAL:CANIS_AUREUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT02',
     heading: 'ANIMAL:CANIS_AUREUS_HEADING',
     hitEnergy: [350, 2000],
     latin: 'ANIMAL:CANIS_AUREUS_LATIN',
@@ -106,6 +116,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:CAPREOLUS_CAPREOLUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT03'],
     heading: 'ANIMAL:CAPREOLUS_CAPREOLUS_HEADING',
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:CAPREOLUS_CAPREOLUS_LATIN',
@@ -125,6 +136,7 @@ export const animals: Array<Animal> = [
   // Tier 5
   {
     description: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04', 'POI:IDAHO_HABITAT05'],
     heading: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_HEADING',
     hitEnergy: [1576, 3783],
     latin: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_LATIN',
@@ -142,6 +154,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:OVIS_CANADENSIS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT05'],
     heading: 'ANIMAL:OVIS_CANADENSIS_HEADING',
     hitEnergy: [1669, 4005],
     latin: 'ANIMAL:OVIS_CANADENSIS_LATIN',
@@ -159,6 +172,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:RUPICAPRA_RUPICAPRA_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT05'],
     heading: 'ANIMAL:RUPICAPRA_RUPICAPRA_HEADING',
     hitEnergy: [1323, 3439],
     latin: 'ANIMAL:RUPICAPRA_RUPICAPRA_LATIN',
@@ -176,6 +190,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:DAMA_DAMA_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT02',
     heading: 'ANIMAL:DAMA_DAMA_HEADING',
     hitEnergy: [1462, 3510],
     latin: 'ANIMAL:DAMA_DAMA_LATIN',
@@ -193,6 +209,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:CANIS_LUPUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04', 'POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT05',
     heading: 'ANIMAL:CANIS_LUPUS_HEADING',
     hitEnergy: [1165, 3029],
     latin: 'ANIMAL:CANIS_LUPUS_LATIN',
@@ -210,6 +228,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:OVIS_MUSIMON_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
+    habitatSecondary: 'POI:IDAHO_HABITAT05',
     heading: 'ANIMAL:OVIS_MUSIMON_HEADING',
     hitEnergy: [1345, 3498],
     latin: 'ANIMAL:OVIS_MUSIMON_LATIN',
@@ -227,6 +247,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:OREAMNOS_AMERICANUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT05'],
     heading: 'ANIMAL:OREAMNOS_AMERICANUS_HEADING',
     hitEnergy: [1515, 3636],
     latin: 'ANIMAL:OREAMNOS_AMERICANUS_LATIN',
@@ -244,6 +265,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT04',
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_HEADING',
     hitEnergy: [1576, 3783],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_LATIN',
@@ -261,6 +284,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_DESCRIPTION',
+    habitatPrimary: ['POI:ALASKA_HABITAT_01'],
+    habitatSecondary: 'POI:IDAHO_HABITAT04',
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_HEADING',
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_LATIN',
@@ -278,6 +303,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:IDAHO_HABITAT04',
     heading: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_HEADING',
     hitEnergy: [1543, 3705],
     latin: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_LATIN',
@@ -295,6 +322,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:SUS_SCROFA_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT03'],
+    habitatSecondary: 'POI:TRANSYLVANIA_HABITAT_01',
     heading: 'ANIMAL:SUS_SCROFA_HEADING',
     hitEnergy: [1625, 3900],
     latin: 'ANIMAL:SUS_SCROFA_LATIN',
@@ -314,6 +343,7 @@ export const animals: Array<Animal> = [
   // Tier 6
   {
     description: 'ANIMAL:ALCES_AMERICANUS_GIGAS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02', 'POI:IDAHO_HABITAT04'],
     heading: 'ANIMAL:ALCES_AMERICANUS_GIGAS_HEADING',
     hitEnergy: [3088, 5867],
     latin: 'ANIMAL:ALCES_AMERICANUS_GIGAS_LATIN',
@@ -331,6 +361,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:URSUS_AMERICANUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
     heading: 'ANIMAL:URSUS_AMERICANUS_HEADING',
     hitEnergy: [2889, 4911],
     latin: 'ANIMAL:URSUS_AMERICANUS_LATIN',
@@ -348,6 +379,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:URSUS_ARCTOS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
     heading: 'ANIMAL:URSUS_ARCTOS_HEADING',
     hitEnergy: [2835, 5386],
     latin: 'ANIMAL:URSUS_ARCTOS_LATIN',
@@ -365,6 +397,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:CERVUS_CANADENSIS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
+    habitatSecondary: 'POI:IDAHO_HABITAT03',
     heading: 'ANIMAL:CERVUS_CANADENSIS_HEADING',
     hitEnergy: [2912, 5532],
     latin: 'ANIMAL:CERVUS_CANADENSIS_LATIN',
@@ -382,6 +416,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_DESCRIPTION',
+    habitatPrimary: ['POI:ALASKA_HABITAT_01'],
     heading: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_HEADING',
     hitEnergy: [2835, 4911],
     latin: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_LATIN',
@@ -399,6 +434,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ALCES_AMERICANUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT01'],
     heading: 'ANIMAL:ALCES_AMERICANUS_HEADING',
     hitEnergy: [3088, 5867],
     latin: 'ANIMAL:ALCES_AMERICANUS_LATIN',
@@ -416,6 +452,8 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:CERVUS_ELAPHUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT03', 'POI:IDAHO_HABITAT04'],
+    habitatSecondary: 'POI:IDAHO_HABITAT02',
     heading: 'ANIMAL:CERVUS_ELAPHUS_HEADING',
     hitEnergy: [2693, 4579],
     latin: 'ANIMAL:CERVUS_ELAPHUS_LATIN',
@@ -433,6 +471,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04', 'POI:ALASKA_HABITAT_01'],
     heading: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_HEADING',
     hitEnergy: [2912, 5532],
     latin: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_LATIN',
@@ -450,6 +489,7 @@ export const animals: Array<Animal> = [
   },
   {
     description: 'ANIMAL:BISON_BISON_ATHABASCAE_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT04'],
     heading: 'ANIMAL:BISON_BISON_ATHABASCAE_HEADING',
     hitEnergy: [2889, 5386],
     latin: 'ANIMAL:BISON_BISON_ATHABASCAE_LATIN',
@@ -470,6 +510,7 @@ export const animals: Array<Animal> = [
 export const birds: Array<Animal> = [
   {
     description: 'ANIMAL:ANSER_ANSER_DESCRIPTION',
+    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_01'],
     heading: 'ANIMAL:ANSER_ANSER_HEADING',
     hitEnergy: [1, 681],
     latin: 'ANIMAL:ANSER_ANSER_LATIN',
@@ -487,6 +528,7 @@ export const birds: Array<Animal> = [
   },
   {
     description: 'ANIMAL:AYTHYA_AFFINIS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT01'],
     heading: 'ANIMAL:AYTHYA_AFFINIS_HEADING',
     hitEnergy: [1, 174],
     latin: 'ANIMAL:AYTHYA_AFFINIS_LATIN',
@@ -504,6 +546,7 @@ export const birds: Array<Animal> = [
   },
   {
     description: 'ANIMAL:PHASIANUS_COLCHICUS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02'],
     heading: 'ANIMAL:PHASIANUS_COLCHICUS_HEADING',
     hitEnergy: [1, 402],
     latin: 'ANIMAL:PHASIANUS_COLCHICUS_LATIN',
@@ -521,6 +564,7 @@ export const birds: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ANSER_ROSSII_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT01'],
     heading: 'ANIMAL:ANSER_ROSSII_HEADING',
     hitEnergy: [1, 279],
     latin: 'ANIMAL:ANSER_ROSSII_LATIN',
@@ -538,6 +582,7 @@ export const birds: Array<Animal> = [
   },
   {
     description: 'ANIMAL:MELANITTA_PERSPICILLATA_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT02'],
     heading: 'ANIMAL:MELANITTA_PERSPICILLATA_HEADING',
     hitEnergy: [1, 174],
     latin: 'ANIMAL:MELANITTA_PERSPICILLATA_LATIN',
@@ -556,6 +601,7 @@ export const birds: Array<Animal> = [
   },
   {
     description: 'ANIMAL:ANAS_PLATYRHYNCHOS_DESCRIPTION',
+    habitatPrimary: ['POI:IDAHO_HABITAT01'],
     heading: 'ANIMAL:ANAS_PLATYRHYNCHOS_HEADING',
     hitEnergy: [1, 255],
     latin: 'ANIMAL:ANAS_PLATYRHYNCHOS_LATIN',
