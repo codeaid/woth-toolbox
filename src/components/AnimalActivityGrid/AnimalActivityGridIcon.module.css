@@ -1,7 +1,7 @@
 .AnimalActivityGridIconIntermediate img {
   opacity: 0.8;
   transition: transform 75ms linear;
-  transform: scale(0.7);
+  transform: scale(0.8);
 }
 
 .AnimalActivityGridIconIntermediate:hover {
