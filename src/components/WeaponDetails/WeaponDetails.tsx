@@ -20,19 +20,21 @@ export const WeaponDetails = (props: WeaponDetailsProps) => {
       <div className={styles.WeaponDetailsDescription} key={weapon.heading}>
         {translate(weapon.description)}
       </div>
-      <div className={styles.WeaponDetailsStat}>
-        <div className={styles.WeaponDetailsStatName}>
-          {translate('WEAPON:ACTION')}
+      <div className={styles.WeaponDetailsStats}>
+        <div className={styles.WeaponDetailsStat}>
+          <div className={styles.WeaponDetailsStatName}>
+            {translate('WEAPON:ACTION')}
+          </div>
+          <div className={styles.WeaponDetailsStatValue}>
+            {translate(weapon.action)}
+          </div>
         </div>
-        <div className={styles.WeaponDetailsStatValue}>
-          {translate(weapon.action)}
+        <div className={styles.WeaponDetailsStat}>
+          <div className={styles.WeaponDetailsStatName}>
+            {translate('UI:TIER')}
+          </div>
+          <div className={styles.WeaponDetailsStatValue}>{weapon.tier}</div>
         </div>
-      </div>
-      <div className={styles.WeaponDetailsStat}>
-        <div className={styles.WeaponDetailsStatName}>
-          {translate('UI:TIER')}
-        </div>
-        <div className={styles.WeaponDetailsStatValue}>{weapon.tier}</div>
       </div>
     </div>
   );

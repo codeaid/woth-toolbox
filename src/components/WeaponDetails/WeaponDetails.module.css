@@ -22,6 +22,14 @@
   padding-right: 1em;
 }
 
+.WeaponDetailsStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1em;
+  grid-row-gap: 0.25em;
+  margin-top: 0.5em;
+}
+
 .WeaponDetailsStat {
   align-items: baseline;
   display: flex;
@@ -33,6 +41,7 @@
   color: var(--text-secondary);
   font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   letter-spacing: 0.1em;
+  line-height: 1em;
   text-transform: uppercase;
 }
 
@@ -46,5 +55,9 @@
 @media (max-width: 864px) {
   .WeaponDetails {
     font-size: unset;
+  }
+
+  .WeaponDetailsStats {
+    grid-template-columns: 1fr;
   }
 }
