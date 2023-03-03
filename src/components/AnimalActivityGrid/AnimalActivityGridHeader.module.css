@@ -9,7 +9,7 @@
 .AnimalActivityGridHeaderCells {
   display: grid;
   grid-gap: 0.25em;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(24, minmax(2.3rem, 1fr));
   width: 100%;
 }
 
@@ -22,7 +22,6 @@
   font-weight: 500;
   justify-content: center;
   line-height: 1em;
-  min-width: 2.3rem;
   padding: 0.5em 0.25em;
 }
 
@@ -35,7 +34,7 @@
 
 @media (max-width: 960px) {
   .AnimalActivityGridHeaderCells {
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12, minmax(2.3rem, 1fr));
   }
 
   .AnimalActivityGridHeaderPlaceholder {
@@ -45,6 +44,6 @@
 
 @media (max-width: 600px) {
   .AnimalActivityGridHeaderCells {
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(8, minmax(2.3rem, 1fr));
   }
 }
