@@ -1,4 +1,5 @@
-import { MouseEvent, useCallback } from 'react';
+import classnames from 'classnames';
+import { MouseEvent, useCallback, useState } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { useTranslator } from 'hooks';
 import { getActivityByHour, getCurrentActivityByHour } from 'lib/animals';
@@ -10,6 +11,9 @@ import styles from './AnimalActivityGridRow.module.css';
 
 export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
   const { animal } = props;
+
+  // Flag indicating if row has been activated
+  const [active, setActive] = useState(false);
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -46,6 +50,14 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
         element.classList.remove(styles.AnimalActivityGridRowSlotHighlighted),
       );
   }, []);
+
+  /**
+   * Handle clicks on slot rows
+   */
+  const handleSlotsClick = useCallback(
+    () => setActive(current => !current),
+    [],
+  );
 
   /**
    * Render hour activity icon
@@ -110,7 +122,12 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
         <AnimalName animal={animal} responsive="tablet" />
       </div>
 
-      <div className={styles.AnimalActivityGridRowSlots}>
+      <div
+        className={classnames(styles.AnimalActivityGridRowSlots, {
+          [styles.AnimalActivityGridRowSlotsActive]: active,
+        })}
+        onClick={handleSlotsClick}
+      >
         {Array.from(Array(24).keys()).map(renderHour)}
       </div>
     </div>

@@ -6,10 +6,10 @@
 .AnimalActivityGridRowName {
   line-height: 1em;
   padding: 0.25em 0.5em 0.25em 0;
-  width: 13rem;
 }
 
 .AnimalActivityGridRowSlots {
+  cursor: pointer;
   display: grid;
   grid-gap: 0.25em;
   grid-template-columns: repeat(24, 1fr);
@@ -28,11 +28,16 @@
   width: 100%;
 }
 
-.AnimalActivityGridRow:hover .AnimalActivityGridRowSlot,
+.AnimalActivityGridRowSlots:not(.AnimalActivityGridRowSlotsActive):hover .AnimalActivityGridRowSlot,
 .AnimalActivityGridRowSlotHighlighted {
   background-color: var(--elevation3);
 }
 
+.AnimalActivityGridRowSlotsActive .AnimalActivityGridRowSlot {
+  background-color: var(--elevation0);
+}
+
+.AnimalActivityGridRowSlotsActive .AnimalActivityGridRowSlot img,
 .AnimalActivityGridRowSlotHighlighted img {
   opacity: 1;
   transform: scale(1) !important;
@@ -40,6 +45,7 @@
 
 @media (max-width: 1200px) {
   .AnimalActivityGridRow {
+    grid-row-gap: 0.3em;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }
@@ -52,6 +58,10 @@
 }
 
 @media (max-width: 960px) {
+  .AnimalActivityGridRow {
+    grid-row-gap: 0.3em;
+  }
+
   .AnimalActivityGridRowSlots {
     grid-gap: 0.25em;
     grid-template-columns: repeat(12, 1fr);
