@@ -6,8 +6,11 @@
   color: var(--text-secondary);
   font-size: 0.85em;
   font-style: italic;
-  line-height: 1em;
+  line-height: 1.2em;
   margin-top: 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .WeaponNameTitle {
