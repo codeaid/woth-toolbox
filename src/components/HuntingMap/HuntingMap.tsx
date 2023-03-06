@@ -43,7 +43,6 @@ import {
 } from 'lib/cartography';
 import {
   getGenericMarkerColorClass,
-  isHighlightedMarker,
   updateMarkerVisibility,
 } from 'lib/markers';
 import { sendGoogleEvent } from 'lib/tracking';
@@ -765,7 +764,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
               styles.HuntingMapMarkerLandmark,
               styles.HuntingMapMarkerLodge,
             )}
-            highlighted={isHighlightedMarker(marker)}
             key={marker.id}
             marker={marker}
             markerSize={markerSizeGeneric}

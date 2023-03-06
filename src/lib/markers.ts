@@ -179,16 +179,6 @@ export const isGenericMarkerType = (
 ): type is MarkerTypeGeneric => genericMarkerTypes.includes(type as any);
 
 /**
- * Determine if marker should always be represented in its highlighted form
- *
- * @param marker Marker to validate
- */
-export const isHighlightedMarker = (marker: MarkerOptions) =>
-  (
-    ['cabin', 'camp', 'lodge', 'racing', 'shooting range'] as Array<MarkerType>
-  ).includes(marker.type);
-
-/**
  * Check if a marker is included in the specified filter
  *
  * @param marker Marker to validate
