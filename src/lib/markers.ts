@@ -112,6 +112,7 @@ export const getGenericMarkerColorClass = (
   switch (marker.type) {
     case 'cabin':
     case 'camp':
+    case 'parking':
     case 'shooting range':
       return landmarkClass;
     case 'lodge':

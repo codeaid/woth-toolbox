@@ -5,6 +5,7 @@ export * from './EchoIcon';
 export * from './FlowerIcon';
 export * from './HuntingStandIcon';
 export * from './LodgeIcon';
+export * from './ParkingIcon';
 export * from './PhotoIcon';
 export * from './RacingIcon';
 export * from './ShootingRangeIcon';

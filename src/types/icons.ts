@@ -10,6 +10,7 @@ export type IconTypeGeneric =
   | 'flower'
   | 'hunting stand'
   | 'lodge'
+  | 'parking'
   | 'photo'
   | 'racing'
   | 'shooting range'
