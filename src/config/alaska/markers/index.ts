@@ -21,6 +21,7 @@ import {
   flowerMarkers,
   huntingStandMarkers,
   lodgeMarkers,
+  parkingMarkers,
   racingMarkers,
   viewMarkers,
 } from './generic';
@@ -50,6 +51,7 @@ export const genericMarkers: Array<MarkerOptionsGeneric> = [
   flowerMarkers,
   huntingStandMarkers,
   lodgeMarkers,
+  parkingMarkers,
   racingMarkers,
   viewMarkers,
 ].flat();

@@ -158,6 +158,8 @@ export const getGenericMarkerKey = (
       return 'UI:MARKER_HUNTING_STAND';
     case 'lodge':
       return 'TOOLBOX:MARKER_LODGE';
+    case 'parking':
+      return 'TOOLBOX:MARKER_PARKING';
     case 'photo':
       return 'UI:MARKER_PHOTO';
     case 'shooting range':
