@@ -2,7 +2,7 @@ import { createAnimalMarkerOptions } from 'lib/markers';
 
 export const showshoeHareMarkers = [
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.6659141205, 0.3215238614],
     [],
     [
@@ -15,7 +15,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.8420132692, 0.2893157035],
     [],
     [
@@ -28,7 +28,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.8917071368, 0.3549936655],
     [],
     [
@@ -41,7 +41,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.6010545666, 0.4542678502],
     [],
     [
@@ -54,7 +54,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2007973894, 0.2611626957],
     [],
     [
@@ -67,7 +67,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.3208705357, 0.311075228],
     [],
     [
@@ -80,7 +80,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.4639589697, 0.3951223273],
     [],
     [
@@ -93,7 +93,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.4630411478, 0.4045300018],
     [],
     [
@@ -106,7 +106,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.3015427362, 0.4034133185],
     [],
     [
@@ -119,7 +119,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2360026042, 0.3813244048],
     [],
     [
@@ -132,7 +132,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1416887556, 0.3739129929],
     [],
     [
@@ -145,7 +145,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.0591717776, 0.4242418711],
     [],
     [
@@ -158,7 +158,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.208455634, 0.5200710483],
     [],
     [
@@ -171,7 +171,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2638678911, 0.4973281491],
     [],
     [
@@ -184,7 +184,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.319531451, 0.4850143142],
     [],
     [
@@ -197,7 +197,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.5609077458, 0.4750878554],
     [],
     [
@@ -210,7 +210,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.919516775, 0.5699546449],
     [],
     [
@@ -223,7 +223,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.6307699112, 0.7098046272],
     [],
     [
@@ -236,7 +236,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.5284896906, 0.6119222047],
     [],
     [
@@ -249,7 +249,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.476595672, 0.6581619113],
     [],
     [
@@ -262,7 +262,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.3844932128, 0.6019957459],
     [],
     [
@@ -275,7 +275,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2521823131, 0.6322777277],
     [],
     [
@@ -288,7 +288,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1948852853, 0.6531358563],
     [],
     [
@@ -301,7 +301,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1600615832, 0.6730475393],
     [],
     [
@@ -314,7 +314,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.0255052672, 0.626588163],
     [],
     [
@@ -327,7 +327,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.0343137874, 0.6769413452],
     [],
     [
@@ -340,7 +340,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.033919376, 0.7453059791],
     [],
     [
@@ -353,7 +353,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.0414649543, 0.7730072697],
     [],
     [
@@ -366,7 +366,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1235153033, 0.8055509763],
     [],
     [
@@ -379,7 +379,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1569385695, 0.8036662056],
     [],
     [
@@ -392,7 +392,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2475332122, 0.735437508],
     [],
     [
@@ -405,7 +405,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2794486619, 0.7393327007],
     [],
     [
@@ -418,7 +418,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.2631139829, 0.8110796368],
     [],
     [
@@ -431,7 +431,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.3412691392, 0.8250269397],
     [],
     [
@@ -444,7 +444,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1486930786, 0.9176637386],
     [],
     [
@@ -457,7 +457,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1485616081, 0.9560531099],
     [],
     [
@@ -470,7 +470,7 @@ export const showshoeHareMarkers = [
     ],
   ),
   createAnimalMarkerOptions(
-    'animal:showshoe hare',
+    'animal:snowshoe hare',
     [0.1713059959, 0.9676225094],
     [],
     [

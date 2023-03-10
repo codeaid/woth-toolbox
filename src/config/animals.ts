@@ -32,7 +32,7 @@ export const animals: Array<Animal> = [
     ],
     slug: 'showshoe-hare',
     tier: 1,
-    type: 'animal:showshoe hare',
+    type: 'animal:snowshoe hare',
   },
 
   // Tier 3

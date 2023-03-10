@@ -60,7 +60,7 @@ export type AnimalType =
   | 'animal:roe deer'
   | 'animal:roosevelt elk'
   | 'animal:ross goose'
-  | 'animal:showshoe hare'
+  | 'animal:snowshoe hare'
   | 'animal:sitka deer'
   | 'animal:surf scoter'
   | 'animal:white-tailed deer'

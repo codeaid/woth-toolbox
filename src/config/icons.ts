@@ -93,7 +93,7 @@ export const iconComponentMap = new Map<
   ['animal:roe deer', RoeDeerIcon],
   ['animal:roosevelt elk', RoosveltElkIcon],
   ['animal:ross goose', RossGooseIcon],
-  ['animal:showshoe hare', ShowshoeHareIcon],
+  ['animal:snowshoe hare', ShowshoeHareIcon],
   ['animal:sitka deer', SitkaDeerIcon],
   ['animal:surf scoter', SurfScoterIcon],
   ['animal:white-tailed deer', WhiteTailedDeerIcon],
