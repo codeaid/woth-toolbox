@@ -34,6 +34,7 @@ export type MarkerOptions<TMarkerType extends MarkerType = MarkerType> = {
 type MarkerOptionsMeta = {
   created?: Date;
   debug?: boolean;
+  [key: string]: any;
 };
 
 // Type describing an animal map marker object

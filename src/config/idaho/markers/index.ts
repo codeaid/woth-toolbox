@@ -1,21 +1,5 @@
 import { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
-import {
-  americanBadgerMarkers,
-  americanBlackBearMarkers,
-  bighornSheepMarkers,
-  elkMarkers,
-  grayWolfMarkers,
-  lesserScoupMarkers,
-  mooseMarkers,
-  mountainGoatMarkers,
-  muleDeerMarkers,
-  pheasantMarkers,
-  redFoxMarkers,
-  rossGooseMarkers,
-  snowshoeHareMarkers,
-  whiteTailedDeerMarkers,
-  wildDuckMarkers,
-} from './animals';
+import animals from './animals.json';
 import {
   cabinMarkers,
   campMarkers,
@@ -27,23 +11,7 @@ import {
 } from './generic';
 
 // List of animal markers to show on the Nex Perce map
-export const animalMarkers: Array<MarkerOptionsAnimal> = [
-  americanBadgerMarkers,
-  americanBlackBearMarkers,
-  bighornSheepMarkers,
-  elkMarkers,
-  grayWolfMarkers,
-  lesserScoupMarkers,
-  mooseMarkers,
-  mountainGoatMarkers,
-  muleDeerMarkers,
-  pheasantMarkers,
-  redFoxMarkers,
-  rossGooseMarkers,
-  snowshoeHareMarkers,
-  whiteTailedDeerMarkers,
-  wildDuckMarkers,
-].flat();
+export const animalMarkers = animals as Array<MarkerOptionsAnimal>;
 
 // List of generic markers to show on the Nex Perce map
 export const genericMarkers: Array<MarkerOptionsGeneric> = [

@@ -1,20 +1,5 @@
 import { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
-import {
-  alaskaMooseMarkers,
-  americanBlackBearMarkers,
-  barrenGroundCaribouMarkers,
-  greyWolfMarkers,
-  kodiakBearMarkers,
-  lesserScaupMarkers,
-  mountainGoatMarkers,
-  redFoxMarkers,
-  rooseveltElkMarkers,
-  sitkaDeerMarkers,
-  showshoeHareMarkers,
-  surfScoterMarkers,
-  wildDuckMarkers,
-  woodBisonMarkers,
-} from './animals';
+import animals from './animals.json';
 import {
   cabinMarkers,
   campMarkers,
@@ -27,22 +12,7 @@ import {
 } from './generic';
 
 // List of animal markers to show on the Alaska map
-export const animalMarkers: Array<MarkerOptionsAnimal> = [
-  alaskaMooseMarkers,
-  americanBlackBearMarkers,
-  barrenGroundCaribouMarkers,
-  greyWolfMarkers,
-  kodiakBearMarkers,
-  lesserScaupMarkers,
-  mountainGoatMarkers,
-  redFoxMarkers,
-  rooseveltElkMarkers,
-  sitkaDeerMarkers,
-  showshoeHareMarkers,
-  surfScoterMarkers,
-  wildDuckMarkers,
-  woodBisonMarkers,
-].flat();
+export const animalMarkers = animals as Array<MarkerOptionsAnimal>;
 
 // List of generic markers to show on the Alaska map
 export const genericMarkers: Array<MarkerOptionsGeneric> = [
