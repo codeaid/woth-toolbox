@@ -9,7 +9,11 @@ export const useStorage = () => {
   const [storage, setStorage] = useState<Storage>();
 
   // Create storage manager on load
-  useEffect(() => setStorage(getStorage()), []);
+  useEffect(() => {
+    try {
+      setStorage(getStorage());
+    } catch (e) {}
+  }, []);
 
   return storage;
 };
