@@ -6,12 +6,14 @@ import { Notifications } from 'components/Notifications';
 import {
   AnimalMarkerProvider,
   CustomMarkerProvider,
+  HuntingMapTypeProvider,
   SettingsProvider,
   TutorialProvider,
 } from 'contexts';
 import {
   useAnimalMarkerManager,
   useCustomMarkerManager,
+  useHuntingMapTypeManager,
   useSettingsManager,
   useTutorialManager,
 } from 'hooks';
@@ -23,6 +25,7 @@ const App = (props: AppProps) => {
   // Retrieve application settings and tutorial managers
   const animalManager = useAnimalMarkerManager();
   const customManager = useCustomMarkerManager();
+  const mapTypeManager = useHuntingMapTypeManager();
   const settingsManager = useSettingsManager();
   const tutorialManager = useTutorialManager();
 
@@ -37,16 +40,18 @@ const App = (props: AppProps) => {
           />
         </Head>
 
-        <AnimalMarkerProvider value={animalManager}>
-          <CustomMarkerProvider value={customManager}>
-            <SettingsProvider value={settingsManager}>
-              <TutorialProvider value={tutorialManager}>
-                <Notifications />
-                <Toolbox {...props} />
-              </TutorialProvider>
-            </SettingsProvider>
-          </CustomMarkerProvider>
-        </AnimalMarkerProvider>
+        <HuntingMapTypeProvider value={mapTypeManager}>
+          <AnimalMarkerProvider value={animalManager}>
+            <CustomMarkerProvider value={customManager}>
+              <SettingsProvider value={settingsManager}>
+                <TutorialProvider value={tutorialManager}>
+                  <Notifications />
+                  <Toolbox {...props} />
+                </TutorialProvider>
+              </SettingsProvider>
+            </CustomMarkerProvider>
+          </AnimalMarkerProvider>
+        </HuntingMapTypeProvider>
       </StrictMode>
     </>
   );
