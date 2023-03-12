@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -73,7 +73,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
 
   return (
     <div
-      className={classnames(styles.DebugPanelMarker, {
+      className={clsx(styles.DebugPanelMarker, {
         [styles.DebugPanelMarkerCompleted]: isCompleted,
       })}
       key={marker.id}

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useLocale, useTranslator } from 'hooks';
 import { formatNumber } from 'lib/utils';
 import styles from './AnimalDetails.module.css';
@@ -30,10 +30,7 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
 
       <div className={styles.AnimalDetailsStats}>
         <div
-          className={classnames(
-            styles.AnimalDetailsStat,
-            styles.AnimalDetailsStat1,
-          )}
+          className={clsx(styles.AnimalDetailsStat, styles.AnimalDetailsStat1)}
         >
           <div className={styles.AnimalDetailsStatName}>
             {translate('UI:TIER')}
@@ -41,10 +38,7 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
           <div className={styles.AnimalDetailsStatValue}>{animal.tier}</div>
         </div>
         <div
-          className={classnames(
-            styles.AnimalDetailsStat,
-            styles.AnimalDetailsStat2,
-          )}
+          className={clsx(styles.AnimalDetailsStat, styles.AnimalDetailsStat2)}
         >
           <div className={styles.AnimalDetailsStatName}>
             {translate('UI:OPTIMAL_ENERGY')}
@@ -55,10 +49,7 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
           )} - ${formatNumber(energyTo, locale)} J`}</div>
         </div>
         <div
-          className={classnames(
-            styles.AnimalDetailsStat,
-            styles.AnimalDetailsStat3,
-          )}
+          className={clsx(styles.AnimalDetailsStat, styles.AnimalDetailsStat3)}
         >
           <div className={styles.AnimalDetailsStatName}>
             {translate('ANIMAL:ANIMAL_HABITAT_PRIMARY')}
@@ -68,10 +59,7 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
           </div>
         </div>
         <div
-          className={classnames(
-            styles.AnimalDetailsStat,
-            styles.AnimalDetailsStat4,
-          )}
+          className={clsx(styles.AnimalDetailsStat, styles.AnimalDetailsStat4)}
         >
           <div className={styles.AnimalDetailsStatName}>
             {translate('ANIMAL:ANIMAL_HABITAT_SECONDARY')}

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -146,7 +146,7 @@ export const Toolbar = (props: ToolbarProps) => {
     <>
       <div className={styles.Toolbar}>
         <button
-          className={classnames(styles.ToolbarMobileButton, {
+          className={clsx(styles.ToolbarMobileButton, {
             [styles.ToolbarMobileButtonActive]: mobileMenuVisible,
           })}
           tabIndex={-1}

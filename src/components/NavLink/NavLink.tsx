@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
@@ -44,7 +44,7 @@ export const NavLink = (props: NavLinkProps) => {
   // Generate component's class name
   const componentClassName = useMemo(
     () =>
-      classnames(className, {
+      clsx(className, {
         [activeClassName]: active || hasPathMatch,
       }),
     [active, activeClassName, className, hasPathMatch],

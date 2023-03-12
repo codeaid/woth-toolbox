@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback } from 'react';
 import { ContextMenuOptionItemProps } from './types';
 import styles from './ContextMenuOptionItem.module.css';
@@ -37,7 +37,7 @@ export const ContextMenuOptionItem = (props: ContextMenuOptionItemProps) => {
     <>
       {renderedSeparator}
       <li
-        className={classnames(styles.ContextMenuOptionItem, {
+        className={clsx(styles.ContextMenuOptionItem, {
           [styles.ContextMenuOptionItemDisabled]: disabled,
         })}
         onClick={handleClick}

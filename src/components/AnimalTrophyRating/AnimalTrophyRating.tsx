@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import { RiCheckboxBlankCircleFill, RiStarSFill } from 'react-icons/ri';
 import { times } from 'lib/utils';
@@ -10,7 +10,7 @@ export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {
 
   // Combine default and custom class names
   const classNames = useMemo(
-    () => classnames(styles.AnimalRating, className),
+    () => clsx(styles.AnimalRating, className),
     [className],
   );
 

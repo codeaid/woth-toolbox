@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { WeaponName } from 'components/WeaponName';
 import { WeaponListItemProps } from './types';
@@ -10,7 +10,7 @@ export const WeaponListItem = (props: WeaponListItemProps) => {
   // Generate item class name
   const className = useMemo(
     () =>
-      classnames(styles.WeaponListItem, {
+      clsx(styles.WeaponListItem, {
         [styles.WeaponListItemActive]: active,
       }),
     [active],

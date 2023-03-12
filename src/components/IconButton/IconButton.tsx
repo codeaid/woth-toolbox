@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { ForwardedRef, forwardRef, useMemo } from 'react';
 import { Button } from 'components/Button';
 import { IconButtonProps } from './types';
@@ -11,7 +11,7 @@ export const IconButton = forwardRef(
     // Generate component class names
     const classNames = useMemo(
       () =>
-        classnames(
+        clsx(
           styles.IconButton,
           {
             [styles.IconButtonHighlighted]: highlighted,

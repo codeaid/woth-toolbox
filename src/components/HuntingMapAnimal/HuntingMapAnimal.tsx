@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import {
   createRef,
   ForwardedRef,
@@ -274,7 +274,7 @@ export const HuntingMapAnimal = forwardRef(
     return (
       <>
         <HuntingMapMarker<MarkerOptionsAnimal>
-          className={classnames(
+          className={clsx(
             styles.HuntingMapAnimal,
             {
               [styles.HuntingMapAnimalActive]: zonesVisible,

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { AnimalTrophyRating } from 'components/AnimalTrophyRating';
@@ -83,20 +83,17 @@ export const AnimalEditorGroupBuilder = (
           {translate('ANIMAL:AGE')}
         </div>
         <div
-          className={classnames(
+          className={clsx(
             styles.AnimalEditorGroupBuilderButtons,
             styles.AnimalEditorGroupBuilderAgeButtons,
           )}
         >
           {(['young', 'adult', 'mature'] as Array<AnimalAge>).map(age => (
             <Button
-              className={classnames(
-                styles.AnimalEditorGroupBuilderButtonToggle,
-                {
-                  [styles.AnimalEditorGroupBuilderButtonToggleActive]:
-                    selectedAge === age,
-                },
-              )}
+              className={clsx(styles.AnimalEditorGroupBuilderButtonToggle, {
+                [styles.AnimalEditorGroupBuilderButtonToggleActive]:
+                  selectedAge === age,
+              })}
               key={age}
               onClick={() => setSelectedAge(age)}
             >
@@ -162,7 +159,7 @@ export const AnimalEditorGroupBuilder = (
           {translate('UI:TROPHY_RATING')}
         </div>
         <div
-          className={classnames(
+          className={clsx(
             styles.AnimalEditorGroupBuilderButtons,
             styles.AnimalEditorGroupBuilderRatingButtons,
           )}
@@ -170,13 +167,10 @@ export const AnimalEditorGroupBuilder = (
           {(['M1', 'M2', 'M3', 'M4', 'M5', 'F'] as Array<AnimalRating>).map(
             rating => (
               <Button
-                className={classnames(
-                  styles.AnimalEditorGroupBuilderButtonToggle,
-                  {
-                    [styles.AnimalEditorGroupBuilderButtonToggleActive]:
-                      selectedRating === rating,
-                  },
-                )}
+                className={clsx(styles.AnimalEditorGroupBuilderButtonToggle, {
+                  [styles.AnimalEditorGroupBuilderButtonToggleActive]:
+                    selectedRating === rating,
+                })}
                 key={rating}
                 onClick={() => setSelectedRating(rating)}
               >

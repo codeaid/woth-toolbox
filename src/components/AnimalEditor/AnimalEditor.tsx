@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
@@ -118,13 +118,13 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
     () => [
       {
         children: translate('UI:OK'),
-        className: classnames(styles.AnimalEditorActionSave),
+        className: clsx(styles.AnimalEditorActionSave),
         disabled: !data,
         onClick: handleDataWrite,
       },
       {
         children: translate('UI:CLEAR'),
-        className: classnames(styles.AnimalEditorActionReset),
+        className: clsx(styles.AnimalEditorActionReset),
         disabled: !hadData,
         onClick: handleDataClear,
       },

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 import { zeroWidthSpace } from 'config/html';
@@ -86,7 +86,7 @@ export const Select = <TValue extends string | number>(
   const renderOptionItem = useCallback(
     (option: SelectOption<TValue>, index: number) => (
       <div
-        className={classnames(styles.SelectOptionItem, {
+        className={clsx(styles.SelectOptionItem, {
           [styles.SelectOptionItemSelected]: option.value === value,
         })}
         key={option.value ?? `idx:${index}`}
@@ -127,12 +127,12 @@ export const Select = <TValue extends string | number>(
 
   return (
     <div
-      className={classnames(styles.Select, {
+      className={clsx(styles.Select, {
         [styles.SelectExpanded]: expanded,
       })}
     >
       <div
-        className={classnames(styles.SelectInput, {
+        className={clsx(styles.SelectInput, {
           [styles.SelectDisabled]: disabled,
           [styles.SelectInputExpanded]: expanded,
         })}

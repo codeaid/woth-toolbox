@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { ForwardedRef, forwardRef, useMemo } from 'react';
 import { VectorIcon } from '../VectorIcon';
 import { IconProps } from '../types';
@@ -12,7 +12,7 @@ export const MarkerTrackingIcon = forwardRef(
     // Generate vector icon's class name
     const vectorIconClass = useMemo(
       () =>
-        classnames(
+        clsx(
           styles.MarkerTracking,
           {
             [styles.MarkerTrackingColorless]: highlighted === false,

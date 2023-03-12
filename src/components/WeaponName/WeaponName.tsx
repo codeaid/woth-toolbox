@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import { useTranslator } from 'hooks';
 import { WeaponNameProps } from './types';
@@ -13,7 +13,7 @@ export const WeaponName = (props: WeaponNameProps) => {
   // Generate component's class name
   const className = useMemo(
     () =>
-      classnames(styles.WeaponName, {
+      clsx(styles.WeaponName, {
         [styles.WeaponNameHighlighted]: highlighted,
         [styles.WeaponNameResponsiveMobile]: responsive === 'mobile',
         [styles.WeaponNameResponsiveTablet]: responsive === 'tablet',

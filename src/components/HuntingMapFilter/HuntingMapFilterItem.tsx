@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { getIconComponent } from 'lib/icons';
 import { HuntingMapFilterItemProps } from './types';
@@ -20,7 +20,7 @@ export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {
 
   return (
     <li
-      className={classnames(styles.HuntingMapFilterMenuItem, {
+      className={clsx(styles.HuntingMapFilterMenuItem, {
         [styles.HuntingMapFilterMenuItemEnabled]: selected,
       })}
       onClick={handleClick}

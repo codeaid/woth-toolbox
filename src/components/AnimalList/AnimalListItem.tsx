@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { AnimalListItemProps } from './types';
@@ -10,7 +10,7 @@ export const AnimalListItem = (props: AnimalListItemProps) => {
   // Generate item class name
   const className = useMemo(
     () =>
-      classnames(styles.AnimalListItem, {
+      clsx(styles.AnimalListItem, {
         [styles.AnimalListItemActive]: active,
       }),
     [active],

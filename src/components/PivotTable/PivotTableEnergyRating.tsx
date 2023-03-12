@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import { useLocale } from 'hooks';
 import { formatNumber } from 'lib/utils';
@@ -14,7 +14,7 @@ export const PivotTableEnergyRating = (props: PivotTableEnergyRatingProps) => {
   // Generate component's class name
   const className = useMemo(
     () =>
-      classnames(styles.PivotTableEnergyRating, {
+      clsx(styles.PivotTableEnergyRating, {
         [styles.PivotTableEnergyRatingOptimal]: optimal,
         [styles.PivotTableEnergyRatingSuboptimal]: suboptimal,
       }),

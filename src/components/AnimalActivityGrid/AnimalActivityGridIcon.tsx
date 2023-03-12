@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { DrinkZoneIcon, EatZoneIcon, SleepZoneIcon } from 'components/Icon';
 import { AnimalActivity } from 'types/animals';
 import { AnimalActivityGridIconProps } from './types';
@@ -11,7 +11,7 @@ export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
   const { activity } = value;
 
   const imgProps = {
-    className: classnames({
+    className: clsx({
       [styles.AnimalActivityGridIconIntermediate]: intermediate,
     }),
     size: 24,

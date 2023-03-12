@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslator } from 'hooks';
 import { floorNearestFloor10, formatNumber, getMapScaleStep } from 'lib/utils';
@@ -110,7 +110,7 @@ export const HuntingMapScale = (props: HuntingMapScaleProps) => {
       }}
     >
       <div
-        className={classnames(styles.HuntingMapScaleBars, {
+        className={clsx(styles.HuntingMapScaleBars, {
           [styles.HuntingMapScaleBarsTriple]: threeSections,
           [styles.HuntingMapScaleBarsQuad]: !threeSections,
         })}

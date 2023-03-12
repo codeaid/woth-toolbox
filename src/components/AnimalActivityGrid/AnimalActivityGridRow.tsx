@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { MouseEvent, useCallback, useState } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { useTranslator } from 'hooks';
@@ -123,7 +123,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
       </div>
 
       <div
-        className={classnames(styles.AnimalActivityGridRowSlots, {
+        className={clsx(styles.AnimalActivityGridRowSlots, {
           [styles.AnimalActivityGridRowSlotsActive]: active,
         })}
         onClick={handleSlotsClick}

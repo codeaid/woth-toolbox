@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import {
   ForwardedRef,
   forwardRef,
@@ -15,7 +15,7 @@ export const Textarea = forwardRef(
 
     // Generate component class names
     const classNames = useMemo(
-      () => classnames(styles.Textarea, className),
+      () => clsx(styles.Textarea, className),
       [className],
     );
 

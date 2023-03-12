@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { Transition } from 'react-transition-group';
@@ -133,7 +133,7 @@ export const SidePanel = (props: SidePanelProps) => {
     >
       {state => (
         <div
-          className={classnames(
+          className={clsx(
             styles.SidePanel,
             {
               [styles.SidePanelLeft]: side === 'left',

@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import { Transition } from 'react-transition-group';
@@ -33,7 +33,7 @@ export const Modal = (props: ModalProps) => {
         {actions.map((action, index) => (
           <Button
             {...action}
-            className={classnames(styles.ModalAction, action.className)}
+            className={clsx(styles.ModalAction, action.className)}
             key={index}
           />
         ))}
@@ -58,7 +58,7 @@ export const Modal = (props: ModalProps) => {
     >
       {state => (
         <div
-          className={classnames(styles.Modal, {
+          className={clsx(styles.Modal, {
             [styles.ModalEntering]: state === 'entering',
             [styles.ModalEntered]: state === 'entered',
             [styles.ModalExiting]: state === 'exiting',
@@ -68,7 +68,7 @@ export const Modal = (props: ModalProps) => {
         >
           <div className={styles.ModalOverlay} />
           <div className={styles.ModalDialogContainer}>
-            <div className={classnames(styles.ModalDialog, className)}>
+            <div className={clsx(styles.ModalDialog, className)}>
               <div className={styles.ModalHeader}>
                 <TextEllipsis>{header}</TextEllipsis>
                 <IconButton className={styles.ModalClose} onClick={onClose}>

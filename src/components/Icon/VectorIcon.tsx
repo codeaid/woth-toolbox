@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { ForwardedRef, forwardRef, useMemo } from 'react';
 import { Icon } from './Icon';
 import { VectorIconProps } from './types';
@@ -17,7 +17,7 @@ export const VectorIcon = forwardRef(
     // Generate icon's class name
     const vectorIconClass = useMemo(
       () =>
-        classnames(
+        clsx(
           styles.VectorIcon,
           {
             [styles.VectorIconHighlighted]: highlighted,

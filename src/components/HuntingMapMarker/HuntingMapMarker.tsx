@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import {
   ForwardedRef,
   forwardRef,
@@ -180,7 +180,7 @@ export const HuntingMapMarker = forwardRef(
       >
         {state => (
           <div
-            className={classnames(
+            className={clsx(
               styles.HuntingMapMarker,
               getTransitionClassName(
                 state,

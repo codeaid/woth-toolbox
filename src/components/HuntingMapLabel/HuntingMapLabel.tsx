@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { CSSProperties, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useTranslator } from 'hooks';
@@ -48,7 +48,7 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
     >
       {state => (
         <div
-          className={classnames(styles.HuntingMapLabel, {
+          className={clsx(styles.HuntingMapLabel, {
             [styles.HuntingMapLabelStateEntering]: state === 'entering',
             [styles.HuntingMapLabelStateEntered]: state === 'entered',
             [styles.HuntingMapLabelStateExiting]: state === 'exiting',

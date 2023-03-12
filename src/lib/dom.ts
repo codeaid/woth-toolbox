@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import type { Reference } from 'types/dom';
 import { TransitionState } from 'types/dom';
 
@@ -22,7 +22,7 @@ export const getTransitionClassName = (
   prepend: Array<string> = [],
   append: Array<string> = [],
 ) =>
-  classnames(
+  clsx(
     ...prepend,
     {
       [classEntering]: state === 'entering',

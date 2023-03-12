@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useTranslator } from 'hooks';
 import { AnimalNameProps } from './types';
 import styles from './AnimalName.module.css';
@@ -11,7 +11,7 @@ export const AnimalName = (props: AnimalNameProps) => {
 
   return (
     <div
-      className={classnames(styles.AnimalName, {
+      className={clsx(styles.AnimalName, {
         [styles.AnimalNameHighlighted]: highlighted,
         [styles.AnimalNameResponsiveMobile]: responsive === 'mobile',
         [styles.AnimalNameResponsiveTablet]: responsive === 'tablet',

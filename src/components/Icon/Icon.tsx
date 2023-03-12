@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import {
   ForwardedRef,
   forwardRef,
@@ -29,7 +29,7 @@ export const Icon = forwardRef(
 
     // Generate component class name
     const iconClassName = useMemo(
-      () => classnames(styles.Icon, className),
+      () => clsx(styles.Icon, className),
       [className],
     );
 

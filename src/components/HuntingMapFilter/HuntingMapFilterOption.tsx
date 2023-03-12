@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { ChangeEvent, useCallback } from 'react';
 import { Checkbox } from 'components/Checkbox';
 import { HuntingMapFilterOptionProps } from './types';
@@ -25,7 +25,7 @@ export const HuntingMapFilterOption = (props: HuntingMapFilterOptionProps) => {
 
   return (
     <li
-      className={classnames(styles.HuntingMapFilterMenuItem, {
+      className={clsx(styles.HuntingMapFilterMenuItem, {
         [styles.HuntingMapFilterMenuItemEnabled]: checked,
       })}
       onClick={handleClick}

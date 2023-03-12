@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import {
   PropsWithChildren,
   useCallback,
@@ -64,7 +64,7 @@ export const Sidebar = (props: PropsWithChildren) => {
 
   return (
     <div
-      className={classnames(styles.SidebarWrapper, {
+      className={clsx(styles.SidebarWrapper, {
         [styles.SidebarWrapperExpanded]: sidebarExpanded,
       })}
     >
