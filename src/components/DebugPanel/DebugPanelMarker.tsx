@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { format } from 'date-fns';
 import { useCallback, useMemo } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { zeroWidthSpace } from 'config/html';
@@ -7,6 +6,7 @@ import { useTranslator } from 'hooks';
 import { isMarkerComplete } from 'lib/debug';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { getNeedZoneCounts } from 'lib/markers';
+import { formatDateTime } from 'lib/utils';
 import { DebugPanelIconRow } from './DebugPanelIconRow';
 import { DebugPanelMarkerProps } from './types';
 import styles from './DebugPanelMarker.module.css';
@@ -117,7 +117,7 @@ export const DebugPanelMarker = (props: DebugPanelMarkerProps) => {
 
       <div className={styles.DebugPanelMarkerStatus}>
         {marker.meta?.created
-          ? format(marker.meta.created, 'Pp')
+          ? formatDateTime(marker.meta.created)
           : zeroWidthSpace}
       </div>
     </div>

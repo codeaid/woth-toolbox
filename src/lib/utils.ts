@@ -1,9 +1,7 @@
 import colors from 'color';
-import { formatDistanceToNowStrict, fromUnixTime } from 'date-fns';
 import { ColorResult } from 'react-color';
 import { TypeOptions as ToastType } from 'react-toastify';
 import { toast, ToastContent, ToastOptions } from 'components/Notifications';
-import { dateLocaleMap } from 'config/date';
 
 /**
  * Decode a base64 encoded string
@@ -20,6 +18,29 @@ export const base64Decode = (value: string) =>
  */
 export const base64Encode = (value: string) =>
   window.btoa(encodeURIComponent(value));
+
+/**
+ * Get the distance between the given date and now in words
+ *
+ * @param value Timestamp value to convert
+ * @param locale Locale to use when formatting the date
+ */
+export const formatDateTime = (value?: Date | number, locale?: string) => {
+  if (!value) {
+    return;
+  }
+
+  if (typeof value === 'number') {
+    value = new Date(value);
+  }
+
+  locale ??= getBrowserLocale();
+
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(value);
+};
 
 /**
  * Format hour value
@@ -44,35 +65,18 @@ export const formatNumber = (
   }).format(value);
 
 /**
- * Get the distance between the given date and now in words
- *
- * @param value Timestamp value to convert
- * @param locale Locale to use when formatting the date
- */
-export const formatTimestampDistance = (
-  value?: number,
-  locale: Optional<string> = undefined,
-) => {
-  if (!value) {
-    return;
-  }
-
-  // Pick date locale configuration object
-  const dateLocale = locale ? dateLocaleMap.get(locale) : undefined;
-
-  return formatDistanceToNowStrict(fromUnixTime(value / 1000), {
-    addSuffix: true,
-    locale: dateLocale,
-  });
-};
-
-/**
  * Round a number down to the nearest base 10 value
  *
  * @param value Value to round down
  */
 export const floorNearestFloor10 = (value: number) =>
   Math.min(1000, Math.pow(10, Math.floor(Math.log10(value))));
+
+/**
+ * Detect current locale used by the browser
+ */
+const getBrowserLocale = () =>
+  new Intl.DateTimeFormat().resolvedOptions().locale;
 
 /**
  * Get map scale's step for the current distance

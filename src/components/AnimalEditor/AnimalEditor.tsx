@@ -6,7 +6,7 @@ import { SidePanel } from 'components/SidePanel';
 import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
-import { formatTimestampDistance, showNotification } from 'lib/utils';
+import { formatDateTime, showNotification } from 'lib/utils';
 import { MarkerDataAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
@@ -104,12 +104,12 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const handleRefreshDates = useCallback(() => {
     // Update formatted creation date
     if (data && data.created) {
-      setDateCreated(formatTimestampDistance(data.created, locale));
+      setDateCreated(formatDateTime(data.created, locale));
     }
 
     // Update formatted update date
     if (data && data.updated) {
-      setDateUpdated(formatTimestampDistance(data.updated, locale));
+      setDateUpdated(formatDateTime(data.updated, locale));
     }
   }, [data, locale]);
 
@@ -190,13 +190,6 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
 
     return () => clearTimeout(timeout);
   }, [visible]);
-
-  // Schedule constantly updating created and updated dates strings
-  useEffect(() => {
-    const interval = setInterval(handleRefreshDates, 1000);
-
-    return () => clearInterval(interval);
-  }, [handleRefreshDates]);
 
   return (
     <SidePanel
