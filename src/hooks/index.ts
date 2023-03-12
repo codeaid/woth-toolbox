@@ -4,6 +4,7 @@ export * from './useCustomMarkerManager';
 export * from './useCustomMarkers';
 export * from './useDebugPanel';
 export * from './useForceUpdate';
+export * from './useHuntingMapTypeManager';
 export * from './useLocale';
 export * from './useLocaleResource';
 export * from './useRefCallback';
