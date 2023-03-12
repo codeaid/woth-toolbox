@@ -22,10 +22,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
 
 const App = (props: AppProps) => {
-  // Retrieve application settings and tutorial managers
-  const animalManager = useAnimalMarkerManager();
-  const customManager = useCustomMarkerManager();
+  // Retrieve map type switching context and the currently active map type
   const mapTypeManager = useHuntingMapTypeManager();
+  const { mapType } = mapTypeManager;
+
+  // Retrieve application settings and tutorial managers
+  const animalManager = useAnimalMarkerManager(mapType);
+  const customManager = useCustomMarkerManager(mapType);
   const settingsManager = useSettingsManager();
   const tutorialManager = useTutorialManager();
 

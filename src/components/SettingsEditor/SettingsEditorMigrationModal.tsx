@@ -11,7 +11,7 @@ import {
   useTranslator,
 } from 'hooks';
 import { setClipboardValue } from 'lib/clipboard';
-import { readSerializedStore, writeSerializedStore } from 'lib/storage';
+import { readSerializedStore, writeSerializedStorage } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { showNotification } from 'lib/utils';
 import { SettingsEditorMigrationModalProps } from './types';
@@ -70,7 +70,7 @@ export const SettingsEditorMigrationModal = (
     try {
       // Ensure text exists on system clipboard
       const data = importRef.current.value;
-      writeSerializedStore(storage, data);
+      writeSerializedStorage(storage, data);
 
       // Reload custom animal data and settings to force the map to update
       onReloadAnimalMarkers();

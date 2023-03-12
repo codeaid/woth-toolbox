@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AnimalMarkerContextValue } from 'contexts/AnimalMarkerContext';
+import { AnimalMarkerContextValue } from 'contexts';
+import { MapType } from 'types/cartography';
 import {
-  clearAnimalMarkerStore,
+  clearAnimalMarkerStorageItem,
   isEmptyAnimalMarker,
-  readAnimalMarkerMap,
-  readAnimalMarkerStore,
-  writeAnimalMarkerStore,
+  readAnimalMarkerStorage,
+  readAnimalMarkerStorageItem,
+  writeAnimalMarkerStorageItem,
 } from 'lib/storage';
 import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 import { useStorage } from './useStorage';
@@ -13,7 +14,9 @@ import { useStorage } from './useStorage';
 /**
  * Animal marker data management helper hook
  */
-export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
+export const useAnimalMarkerManager = (
+  mapType?: MapType,
+): AnimalMarkerContextValue => {
   // Browser storage manager
   const storage = useStorage();
 
@@ -26,21 +29,21 @@ export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
   const handleDeleteData = useCallback(
     (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
-      if (!storage) {
+      if (!storage || !mapType) {
         return;
       }
 
       // Remove marker entry in the storage
-      const markerKey = clearAnimalMarkerStore(storage, marker);
+      clearAnimalMarkerStorageItem(storage, mapType, marker.id);
 
       // Remove marker from the local cache
       setMarkers(current =>
         Object.fromEntries(
-          Object.entries(current).filter(([key]) => key !== markerKey),
+          Object.entries(current).filter(([key]) => key !== marker.id),
         ),
       );
     },
-    [storage],
+    [mapType, storage],
   );
 
   /**
@@ -49,13 +52,13 @@ export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
   const handleReadData = useCallback(
     (marker: MarkerOptionsAnimal) => {
       // Ensure storage is present before continuing
-      if (!storage) {
+      if (!storage || !mapType) {
         return;
       }
 
-      return readAnimalMarkerStore(storage, marker);
+      return readAnimalMarkerStorageItem(storage, mapType, marker.id);
     },
-    [storage],
+    [mapType, storage],
   );
 
   /**
@@ -67,10 +70,15 @@ export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
       return;
     }
 
-    // Read entries from the storage and persist them
-    const entries = readAnimalMarkerMap(storage);
-    setMarkers(entries);
-  }, [storage]);
+    if (mapType) {
+      // Read entries from the storage and persist them
+      const entries = readAnimalMarkerStorage(storage, mapType);
+      setMarkers(Object.fromEntries(entries));
+    } else {
+      // Clear local markers when navigating away from map pages
+      setMarkers({});
+    }
+  }, [mapType, storage]);
 
   /**
    * Handle persisting animal data to the storage
@@ -78,7 +86,7 @@ export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
   const handleCreateData = useCallback(
     (marker: MarkerOptionsAnimal, data: MarkerDataAnimal) => {
       // Ensure storage is present before continuing
-      if (!storage) {
+      if (!storage || !mapType) {
         return;
       }
 
@@ -95,17 +103,23 @@ export const useAnimalMarkerManager = (): AnimalMarkerContextValue => {
       };
 
       // Update storage with new custom data
-      const markerKey = writeAnimalMarkerStore(storage, marker, patch);
-      if (!markerKey) {
+      const success = writeAnimalMarkerStorageItem(
+        storage,
+        mapType,
+        marker.id,
+        patch,
+      );
+
+      if (!success) {
         return;
       }
 
       setMarkers(current => ({
         ...current,
-        [markerKey]: patch,
+        [marker.id]: patch,
       }));
     },
-    [handleDeleteData, storage],
+    [mapType, handleDeleteData, storage],
   );
 
   // Load initial animal marker data from local storage

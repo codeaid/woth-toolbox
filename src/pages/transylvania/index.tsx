@@ -12,15 +12,15 @@ import {
   mapWidth,
 } from 'config/transylvania';
 import {
-  useCustomMarkers,
-  useTutorial,
+  useHuntingMapType,
   useSettings,
   useTranslator,
+  useTutorial,
 } from 'hooks';
 
 const TransylvaniaPage = () => {
-  // Retrieve custom marker map switcher
-  const { onSetCurrentMap } = useCustomMarkers();
+  // Retrieve map type switcher
+  const { onSetMapType } = useHuntingMapType();
 
   // Render map tutorial dialog
   const { component: tutorial } = useTutorial(true);
@@ -31,11 +31,11 @@ const TransylvaniaPage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
-  // Enable and disable custom marker functionality on mount and unmount
+  // Toggle currently active map type on page load and unload
   useEffect(() => {
-    onSetCurrentMap('transylvania');
-    return () => onSetCurrentMap();
-  }, [onSetCurrentMap]);
+    onSetMapType('transylvania');
+    return () => onSetMapType();
+  }, [onSetMapType]);
 
   return (
     <>

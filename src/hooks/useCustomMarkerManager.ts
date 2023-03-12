@@ -1,13 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { maxTrackingMarkerCount } from 'config/markers';
 import { CustomMarkerContextValue } from 'contexts';
-import { useHuntingMapType } from 'hooks';
 import { createMarkerOptions, hasSameCoordinates } from 'lib/markers';
-import {
-  clearCustomMarkerStore,
-  readCustomMarkerStore,
-  writeCustomMarkerStore,
-} from 'lib/storage';
+import { readCustomMarkerStorage, writeCustomMarkerStorage } from 'lib/storage';
+import { MapType } from 'types/cartography';
 import { Point } from 'types/generic';
 import { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
 import { useStorage } from './useStorage';
@@ -15,10 +11,9 @@ import { useStorage } from './useStorage';
 /**
  * Custom marker data management helper hook
  */
-export const useCustomMarkerManager = (): CustomMarkerContextValue => {
-  // Retrieve the currently active map type
-  const { mapType: currentMap } = useHuntingMapType();
-
+export const useCustomMarkerManager = (
+  mapType?: MapType,
+): CustomMarkerContextValue => {
   // Custom marker storage
   const [markers, setMarkers] = useState<Array<MarkerOptionsCustom>>([]);
 
@@ -102,31 +97,27 @@ export const useCustomMarkerManager = (): CustomMarkerContextValue => {
    */
   const handleReload = useCallback(() => {
     // Ensure storage is available before proceeding
-    if (!storage || !currentMap) {
+    if (!storage || !mapType) {
       return;
     }
 
     // Load marker data and store it locally
-    const markers = readCustomMarkerStore(storage, currentMap);
+    const markers = readCustomMarkerStorage(storage, mapType);
     setMarkers(markers ?? []);
-  }, [currentMap, storage]);
+  }, [mapType, storage]);
 
   // Retrieve custom marker data from storage when first loading in
   useEffect(() => handleReload(), [handleReload]);
 
   // Persist changes to custom marker data to storage
   useEffect(() => {
-    if (!storage || !currentMap) {
+    if (!storage || !mapType) {
       return;
     }
 
-    // Clear store if no markers available or persist the ones that have been added
-    if (!markers || !markers.length) {
-      clearCustomMarkerStore(storage, currentMap);
-    } else {
-      writeCustomMarkerStore(storage, currentMap, markers);
-    }
-  }, [currentMap, markers, storage]);
+    // Persist current list of custom markers for the specified map
+    writeCustomMarkerStorage(storage, mapType, markers);
+  }, [mapType, markers, storage]);
 
   return {
     markers,

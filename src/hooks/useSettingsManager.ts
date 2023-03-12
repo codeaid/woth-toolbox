@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SettingsContextValue } from 'contexts';
 import {
-  clearSettingsStore,
-  readSettingsStore,
-  writeSettingsStore,
+  clearSettingsStorage,
+  readSettingsStorage,
+  writeSettingsStorage,
 } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { Settings } from 'types/app';
@@ -41,7 +41,7 @@ export const useSettingsManager = (
 
       // Clear settings storage
       if (!patch) {
-        clearSettingsStore(storage);
+        clearSettingsStorage(storage);
         setSettings(undefined);
 
         // Send custom Google Analytics event
@@ -64,7 +64,7 @@ export const useSettingsManager = (
       // Schedule storage update
       timeout.current = window.setTimeout(() => {
         // Persist application settings to storage
-        writeSettingsStore(storage, replacement);
+        writeSettingsStorage(storage, replacement);
 
         // Send custom Google Analytics events
         Object.entries(patch).forEach(([key, value]) => {
@@ -98,7 +98,7 @@ export const useSettingsManager = (
     }
 
     // Read application settings from the storage
-    const settings = readSettingsStore(storage);
+    const settings = readSettingsStorage(storage);
     setSettings(settings);
     setInitialized(true);
   }, [storage]);

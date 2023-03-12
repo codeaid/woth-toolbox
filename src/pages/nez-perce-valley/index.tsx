@@ -12,15 +12,15 @@ import {
 } from 'config/idaho';
 import { markerVisibilityMap } from 'config/markers';
 import {
-  useCustomMarkers,
+  useHuntingMapType,
   useSettings,
   useTranslator,
   useTutorial,
 } from 'hooks';
 
 const NezPerceValleyPage = () => {
-  // Retrieve custom marker map switcher
-  const { onSetCurrentMap } = useCustomMarkers();
+  // Retrieve map type switcher
+  const { onSetMapType } = useHuntingMapType();
 
   // Render map tutorial dialog
   const { component: tutorial } = useTutorial(true);
@@ -31,11 +31,11 @@ const NezPerceValleyPage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
-  // Enable and disable custom marker functionality on mount and unmount
+  // Toggle currently active map type on page load and unload
   useEffect(() => {
-    onSetCurrentMap('idaho');
-    return () => onSetCurrentMap();
-  }, [onSetCurrentMap]);
+    onSetMapType('idaho');
+    return () => onSetMapType();
+  }, [onSetMapType]);
 
   return (
     <>
