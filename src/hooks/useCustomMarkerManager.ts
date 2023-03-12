@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { maxTrackingMarkerCount } from 'config/markers';
 import { CustomMarkerContextValue } from 'contexts';
+import { useHuntingMapType } from 'hooks';
 import { createMarkerOptions, hasSameCoordinates } from 'lib/markers';
 import {
   clearCustomMarkerStore,
   readCustomMarkerStore,
   writeCustomMarkerStore,
 } from 'lib/storage';
-import { MapType } from 'types/cartography';
 import { Point } from 'types/generic';
 import { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
 import { useStorage } from './useStorage';
@@ -16,8 +16,8 @@ import { useStorage } from './useStorage';
  * Custom marker data management helper hook
  */
 export const useCustomMarkerManager = (): CustomMarkerContextValue => {
-  // Name of the current map that is being managed
-  const [currentMap, setCurrentMap] = useState<MapType>();
+  // Retrieve the currently active map type
+  const { mapType: currentMap } = useHuntingMapType();
 
   // Custom marker storage
   const [markers, setMarkers] = useState<Array<MarkerOptionsCustom>>([]);
@@ -134,6 +134,5 @@ export const useCustomMarkerManager = (): CustomMarkerContextValue => {
     onCreate: handleCreate,
     onDelete: handleDelete,
     onReload: handleReload,
-    onSetCurrentMap: setCurrentMap,
   };
 };

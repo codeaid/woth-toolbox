@@ -7,7 +7,6 @@ export const CustomMarkerContext = createContext<CustomMarkerContextValue>({
   onCreate: () => undefined,
   onDelete: () => undefined,
   onReload: () => undefined,
-  onSetCurrentMap: () => undefined,
 });
 
 export const { Provider: CustomMarkerProvider } = CustomMarkerContext;
