@@ -113,6 +113,7 @@ export const getGenericMarkerColorClass = (
     case 'cabin':
     case 'camp':
     case 'parking':
+    case 'racing':
     case 'shooting range':
       return landmarkClass;
     case 'lodge':
