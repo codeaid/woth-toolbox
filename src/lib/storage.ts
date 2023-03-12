@@ -1,6 +1,5 @@
 import {
   animalDataPrefix,
-  animalDataPrefixLegacy,
   customMarkerKey,
   mapTutorialKey,
   settingsKey,
@@ -291,33 +290,6 @@ export const readSettingsStore = (storage: Storage) => {
     return JSON.parse(json) as Partial<Settings>;
   } catch (e) {}
 };
-
-/**
- * Remap animal marker keys from legacy format to the standardized format
- *
- * @param storage Target storage
- */
-export const remapAnimalMarkerStore = (storage: Storage) =>
-  [...Array(storage.length).keys()]
-    // Read all available storage keys
-    .map(i => storage.key(i))
-    .filter(isNotEmpty)
-    .filter(key => key.startsWith(animalDataPrefixLegacy))
-    .forEach(key => {
-      // Read marker data and ignore empty values
-      const value = storage.getItem(key);
-      if (!value) {
-        return;
-      }
-
-      // Extract marker identifier and generate replacement key
-      const id = key.substring(animalDataPrefixLegacy.length + 1);
-      const nextKey = getAnimalMarkerStoreKey(id);
-
-      // Move record to a new key
-      storage.setItem(nextKey, value);
-      storage.removeItem(key);
-    });
 
 /**
  * Store marker data in the storage

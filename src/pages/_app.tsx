@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { StrictMode, useEffect } from 'react';
+import { StrictMode } from 'react';
 import { App as Toolbox } from 'components/App';
 import { Notifications } from 'components/Notifications';
 import {
@@ -13,10 +13,8 @@ import {
   useAnimalMarkerManager,
   useCustomMarkerManager,
   useSettingsManager,
-  useStorage,
   useTutorialManager,
 } from 'hooks';
-import { remapAnimalMarkerStore } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
@@ -27,20 +25,6 @@ const App = (props: AppProps) => {
   const customManager = useCustomMarkerManager();
   const settingsManager = useSettingsManager();
   const tutorialManager = useTutorialManager();
-
-  // Retrieve application storage manager
-  const storage = useStorage();
-
-  // Convert legacy animal marker keys to the latest format
-  useEffect(() => {
-    // Ensure storage is available before continuing
-    if (!storage) {
-      return;
-    }
-
-    // Prefix keys with "woth:"
-    remapAnimalMarkerStore(storage);
-  }, [storage]);
 
   return (
     <>
