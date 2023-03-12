@@ -247,6 +247,10 @@ export const readSerializedStore = (storage: Storage) => {
 
   // Read custom marker data
   const customMarkers = {
+    [getCustomMarkerStoreKey('alaska')]: readCustomMarkerStore(
+      storage,
+      'alaska',
+    ),
     [getCustomMarkerStoreKey('idaho')]: readCustomMarkerStore(storage, 'idaho'),
     [getCustomMarkerStoreKey('transylvania')]: readCustomMarkerStore(
       storage,
