@@ -22,11 +22,7 @@
 }
 
 .SettingsEditorMigrationModalTextarea {
-  background-color: var(--elevation3);
-  font-family: 'Share Tech Mono', monospace;
-  line-height: 1.5em;
   resize: none;
-  width: 100%;
 }
 
 .SettingsEditorMigrationModalTextarea:read-only {

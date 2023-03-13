@@ -61,7 +61,7 @@ code {
   background-color: var(--text-primary);
   border-radius: 0.25em;
   color: var(--elevation0);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Inconsolata', monospace;
   font-size: 0.9em;
   font-weight: 500;
   padding: 0.2em 0.5em;

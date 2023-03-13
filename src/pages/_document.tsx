@@ -39,7 +39,7 @@ const Document = () => {
         <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link href="https://fonts.gstatic.com" rel="preconnect" />
         <link
-          href="https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400&family=Fira+Sans+Condensed&family=Fira+Sans+Extra+Condensed&family=Fira+Sans:wght@300;400;500&family=Share+Tech+Mono&display=swap"
+          href="https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400&family=Fira+Sans+Condensed&family=Fira+Sans+Extra+Condensed&family=Fira+Sans:wght@300;400;500&family=Inconsolata&display=swap"
           rel="stylesheet"
         />
         <link rel="shortcut icon" href={`${basePath}/img/favicon.png`} />

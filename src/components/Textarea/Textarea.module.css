@@ -1,11 +1,11 @@
 .Textarea {
-  background-color: var(--elevation5);
+  background-color: var(--elevation3);
   border: thin solid var(--elevation6);
   border-radius: 0.25em;
   color: var(--text-primary);
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Inconsolata', monospace;
   font-size: 0.9em;
-  line-height: 1.3em;
+  line-height: 1.3rem;
   min-height: 5em;
   outline: none;
   padding: 0.5em;
