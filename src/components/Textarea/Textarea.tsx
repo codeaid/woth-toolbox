@@ -20,9 +20,9 @@ export const Textarea = forwardRef(
     );
 
     /**
-     * Prevent key presses from bubbling up
+     * Prevent key presses from bubbling up and creating markers on the maps
      */
-    const handleKeyPress = useCallback(
+    const handleKeyDown = useCallback(
       (event: KeyboardEvent<EventTarget>) => event.stopPropagation(),
       [],
     );
@@ -33,7 +33,7 @@ export const Textarea = forwardRef(
         {...rest}
         className={classNames}
         ref={ref}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
       />
     );
   },
