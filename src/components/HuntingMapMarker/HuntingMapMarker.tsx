@@ -60,14 +60,19 @@ export const HuntingMapMarker = forwardRef(
 
     // Generate marker's coordinate title in development mode
     const tooltip = useMemo(() => {
-      // Disable marker titles in production mode
-      if (process.env.NODE_ENV !== 'development') {
-        return title;
+      // Enable debug marker titles in development mode
+      if (process.env.NODE_ENV === 'development') {
+        const entries = Object.entries(marker).filter(([key]) =>
+          (
+            ['coords', 'id', 'meta', 'type'] as Array<keyof MarkerOptions>
+          ).includes(key as keyof MarkerOptions),
+        );
+        const json = JSON.stringify(Object.fromEntries(entries), undefined, 2);
+        return title ? title + '\n' + json : json;
       }
 
-      const [x, y] = marker.coords;
-      return title ? `${title} (${x} ... ${y})` : `${x} ... ${y}`;
-    }, [marker.coords, title]);
+      return title;
+    }, [marker, title]);
 
     /**
      * Handle clicking on the marker
