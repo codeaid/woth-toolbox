@@ -28,3 +28,29 @@
 .HuntingMapAnimalZone {
   z-index: 4;
 }
+
+.HuntingMapAnimalId {
+  font-size: 0.8em;
+  position: absolute;
+  transform: translateX(calc(-50% + 25px));
+}
+
+.HuntingMapAnimalIdLegacy {
+  bottom: -2em;
+}
+
+.HuntingMapAnimalTbx {
+  color: white;
+}
+
+.HuntingMapAnimalThq {
+  color: #f77f00;
+}
+
+.HuntingMapAnimalTbx.HuntingMapAnimalMatched {
+  color: yellow;
+}
+
+.HuntingMapAnimalThq.HuntingMapAnimalMatched {
+  color: royalblue;
+}

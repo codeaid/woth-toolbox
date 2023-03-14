@@ -188,6 +188,22 @@ export const HuntingMapAnimal = forwardRef(
       [marker, onToggleEditor],
     );
 
+    /**
+     * Render debug marker identifier
+     */
+    const renderedDebugIdentifier = useMemo(
+      () => (
+        <div
+          className={clsx(styles.HuntingMapAnimalId, {
+            [styles.HuntingMapAnimalIdLegacy]: marker.id.length === 8,
+          })}
+        >
+          {marker.id}
+        </div>
+      ),
+      [marker.id],
+    );
+
     // Render need zones
     const renderedNeedZoneIcons = useMemo(
       () =>
@@ -279,6 +295,9 @@ export const HuntingMapAnimal = forwardRef(
             {
               [styles.HuntingMapAnimalActive]: zonesVisible,
               [styles.HuntingMapAnimalEdited]: !!data,
+              [styles.HuntingMapAnimalMatched]: !!marker.meta?.matched,
+              [styles.HuntingMapAnimalTbx]: !!marker.meta?.tbx,
+              [styles.HuntingMapAnimalThq]: !!marker.meta?.thq,
             },
             className,
           )}
@@ -290,7 +309,7 @@ export const HuntingMapAnimal = forwardRef(
           onClick={handleTriggerClick}
           onLongPress={handleTriggerLongPress}
         >
-          {renderedTrophyRating}
+          {renderedDebugIdentifier}
         </HuntingMapMarker>
         {renderedNeedZoneIcons}
 
