@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
+import tbxMarkers from 'config/legacy/transylvania.json';
 import { markerVisibilityMap } from 'config/markers';
 import {
   animalMarkers,
@@ -17,6 +18,14 @@ import {
   useTranslator,
   useTutorial,
 } from 'hooks';
+import { getMigrationDebugMarkers } from 'lib/debug';
+import { MarkerOptionsAnimal } from 'types/markers';
+
+// Build a list of all matched and unmatched markers
+const debugMarkers = getMigrationDebugMarkers(
+  tbxMarkers as Array<MarkerOptionsAnimal>,
+  animalMarkers,
+);
 
 const TransylvaniaPage = () => {
   // Retrieve map type switcher
@@ -48,7 +57,7 @@ const TransylvaniaPage = () => {
       </Head>
 
       <HuntingMap
-        animalMarkers={animalMarkers}
+        animalMarkers={debugMarkers}
         imageHeight={mapHeight}
         imageSrc={`${basePath}/img/maps/transylvania.jpeg`}
         imageWidth={mapWidth}

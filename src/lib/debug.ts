@@ -1,4 +1,5 @@
 import { getCoordinateHash } from 'lib/markers';
+import { getMarkerMigrationPartitions } from 'lib/migration';
 import { AnimalType } from 'types/animals';
 import { Point } from 'types/generic';
 import { MarkerOptionsAnimal } from 'types/markers';
@@ -24,6 +25,93 @@ createAnimalMarkerOptions(
   ${JSON.stringify(marker.eat.map(zone => zone.coords))},
   ${JSON.stringify(marker.sleep.map(zone => zone.coords))},
 ),`;
+
+/**
+ * Build a merged list of matched and unmatched Toolbox and THQ markers
+ *
+ * @param tbxMarkers Original Toolbox markers
+ * @param thqMarkers THQ markers
+ * @param logPartitions TRUE to log generated partitions to the console
+ * @param logMigrationMap TRUE to log migration map entries to the console
+ */
+export const getMigrationDebugMarkers = (
+  tbxMarkers: Array<MarkerOptionsAnimal>,
+  thqMarkers: Array<MarkerOptionsAnimal>,
+  logPartitions = false,
+  logMigrationMap = false,
+) => {
+  // Get Toolbox and THQ markers split into matched and unmatched
+  const {
+    matchedResults,
+    matchedSource,
+    matchedTarget,
+    unmatchedSource,
+    unmatchedTarget,
+  } = getMarkerMigrationPartitions(tbxMarkers, thqMarkers, 0.001, 0.02, 0.001);
+
+  // Log migration results to console
+  if (logPartitions) {
+    console.info({
+      matchedResults,
+      matchedSource,
+      matchedTarget,
+      unmatchedSource,
+      unmatchedTarget,
+    });
+  }
+
+  // Log entries of old to new identifier map
+  if (logMigrationMap) {
+    matchedResults.forEach(result => {
+      const { marker, matches } = result;
+      const [match] = matches;
+
+      setTimeout(
+        console.log.bind(console, JSON.stringify([marker.id, match.id]) + ','),
+      );
+    });
+  }
+
+  // Generate a list of matched Toolbox markers
+  const tbxMarkersMatched = [
+    ...matchedSource.values(),
+  ].map<MarkerOptionsAnimal>(marker => ({
+    ...marker,
+    meta: { tbx: true, matched: true },
+  }));
+
+  // Generate a list of unmatched Toolbox markers
+  const tbxMarkersUnmatched = [
+    ...unmatchedSource.values(),
+  ].map<MarkerOptionsAnimal>(marker => ({
+    ...marker,
+    meta: { tbx: true, matched: false },
+  }));
+
+  // Generate a list of matched THQ markers
+  const thqMarkersMatched = [
+    ...matchedTarget.values(),
+  ].map<MarkerOptionsAnimal>(marker => ({
+    ...marker,
+    meta: { thq: true, matched: true },
+  }));
+
+  // Generate a list of unmatched THQ markers
+  const thqMarkersUnmatched = [
+    ...unmatchedTarget.values(),
+  ].map<MarkerOptionsAnimal>(marker => ({
+    ...marker,
+    meta: { thq: true, matched: false },
+  }));
+
+  // Merge all markers together
+  return [
+    ...tbxMarkersMatched,
+    ...tbxMarkersUnmatched,
+    ...thqMarkersMatched,
+    ...thqMarkersUnmatched,
+  ];
+};
 
 /**
  * Check if an animal marker contains the specified coordinates

@@ -10,6 +10,7 @@ import {
   mapLabels,
   mapWidth,
 } from 'config/idaho';
+import tbxMarkers from 'config/legacy/idaho.json';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useHuntingMapType,
@@ -17,6 +18,14 @@ import {
   useTranslator,
   useTutorial,
 } from 'hooks';
+import { getMigrationDebugMarkers } from 'lib/debug';
+import { MarkerOptionsAnimal } from 'types/markers';
+
+// Build a list of all matched and unmatched markers
+const debugMarkers = getMigrationDebugMarkers(
+  tbxMarkers as Array<MarkerOptionsAnimal>,
+  animalMarkers,
+);
 
 const NezPerceValleyPage = () => {
   // Retrieve map type switcher
@@ -46,7 +55,7 @@ const NezPerceValleyPage = () => {
       </Head>
 
       <HuntingMap
-        animalMarkers={animalMarkers}
+        animalMarkers={debugMarkers}
         imageHeight={mapHeight}
         imageSrc={`${basePath}/img/maps/nez_perce.jpeg`}
         imageWidth={mapWidth}

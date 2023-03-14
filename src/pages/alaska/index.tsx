@@ -10,6 +10,7 @@ import {
   mapWidth,
 } from 'config/alaska';
 import { basePath } from 'config/app';
+import tbxMarkers from 'config/legacy/alaska.json';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useHuntingMapType,
@@ -17,6 +18,14 @@ import {
   useTranslator,
   useTutorial,
 } from 'hooks';
+import { getMigrationDebugMarkers } from 'lib/debug';
+import { MarkerOptionsAnimal } from 'types/markers';
+
+// Build a list of all matched and unmatched markers
+const debugMarkers = getMigrationDebugMarkers(
+  tbxMarkers as Array<MarkerOptionsAnimal>,
+  animalMarkers,
+);
 
 const AlaskaPage = () => {
   // Retrieve map type switcher
@@ -48,7 +57,7 @@ const AlaskaPage = () => {
       </Head>
 
       <HuntingMap
-        animalMarkers={animalMarkers}
+        animalMarkers={debugMarkers}
         imageHeight={mapHeight}
         imageScale={2}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
