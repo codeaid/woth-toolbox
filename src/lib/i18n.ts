@@ -200,17 +200,17 @@ export const getMarkerKey = (type?: MarkerType) => {
 export const getTierKey = (tier: number): TranslationKey => {
   switch (tier) {
     case 1:
-      return 'UI:TIER1';
+      return 'UI:TIER_1';
     case 2:
-      return 'UI:TIER2';
+      return 'UI:TIER_2';
     case 3:
-      return 'UI:TIER3';
+      return 'UI:TIER_3';
     case 4:
-      return 'UI:TIER4';
+      return 'UI:TIER_4';
     case 5:
-      return 'UI:TIER5';
+      return 'UI:TIER_5';
     case 6:
-      return 'UI:TIER6';
+      return 'UI:TIER_6';
     default:
       throw new Error(`Invalid tier specified: ${tier}`);
   }
