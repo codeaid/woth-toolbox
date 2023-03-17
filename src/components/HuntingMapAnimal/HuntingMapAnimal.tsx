@@ -28,6 +28,7 @@ import {
 } from 'types/markers';
 import { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
+import { setClipboardValue } from 'lib/clipboard';
 
 export const HuntingMapAnimal = forwardRef(
   (props: HuntingMapAnimalProps, ref: ForwardedRef<MarkerRefAnimal>) => {
@@ -137,6 +138,9 @@ export const HuntingMapAnimal = forwardRef(
       (marker: MarkerOptionsAnimal, event: ReactMouseEvent<EventTarget>) => {
         const [mouseDownX, mouseDownY] = pageCoords.current;
         const { pageX: mouseUpX, pageY: mouseUpY } = event;
+
+        // noinspection JSIgnoredPromiseFromCall
+        setClipboardValue(marker.id);
 
         // Cancel trigger click if mouse up coordinates aren't the same as down
         if (mouseUpX !== mouseDownX || mouseUpY !== mouseDownY) {
