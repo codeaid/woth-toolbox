@@ -10,6 +10,7 @@ type GoogleEventName =
   | 'marker_save'
   | 'marker_zones_hide'
   | 'marker_zones_show'
+  | 'migration_success'
   | 'settings_language'
   | 'settings_markers_animal'
   | 'settings_markers_animal_rating'

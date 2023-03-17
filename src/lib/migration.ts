@@ -10,6 +10,7 @@ import {
   MarkerMatchResult,
   MigrationResult,
 } from 'types/migration';
+import { sendGoogleEvent } from 'lib/tracking';
 
 /**
  * Function used to sort markers by their type and identifier
@@ -336,8 +337,12 @@ export const migrateLegacyMarkers = (storage: Storage): MigrationResult => {
     });
   });
 
+  // Notify Google Analytics
+  const count = Object.keys(migrated).length;
+  sendGoogleEvent('migration_success', { count });
+
   return {
     code: base64Encode(JSON.stringify(migrated)),
-    count: Object.keys(migrated).length,
+    count,
   };
 };
