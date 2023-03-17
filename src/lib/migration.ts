@@ -2,6 +2,7 @@ import { markerMigrationMap } from 'config/migration';
 import { animalMarkerKeyLegacy } from 'config/storage';
 import { writeAnimalMarkerStorageItem } from 'lib/storage';
 import { base64Encode, isNotEmpty, roundNumber } from 'lib/utils';
+import { sendGoogleEvent } from 'lib/tracking';
 import { AnimalType } from 'types/animals';
 import { MapType } from 'types/cartography';
 import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
@@ -10,7 +11,6 @@ import {
   MarkerMatchResult,
   MigrationResult,
 } from 'types/migration';
-import { sendGoogleEvent } from 'lib/tracking';
 
 /**
  * Function used to sort markers by their type and identifier
@@ -339,7 +339,7 @@ export const migrateLegacyMarkers = (storage: Storage): MigrationResult => {
 
   // Notify Google Analytics
   const count = Object.keys(migrated).length;
-  sendGoogleEvent('migration_success', { count });
+  sendGoogleEvent('migration_success', { count, version: 2 });
 
   return {
     code: base64Encode(JSON.stringify(migrated)),
