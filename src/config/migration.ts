@@ -728,6 +728,9 @@ export const markerMigrationMap: Map<MapType, Map<string, string>> = new Map([
       ['4c6b6adf', 'db5f06'],
       ['602496f6', '85637b'],
       ['e9e88c9e', 'b83899'],
+      ['2ca62875', 'e9b44d'],
+      ['392e321c', '837d5e'],
+      ['25013fc2', 'a298cc'],
     ]),
   ],
   [
