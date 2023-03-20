@@ -176,7 +176,7 @@ export const HuntingMapMarker = forwardRef(
 
     return (
       <Transition
-        in={forceVisible || visible}
+        in={(forceVisible || visible) && markerSize > 0}
         mountOnEnter={mountOnEnter}
         nodeRef={nodeRef}
         timeout={75}

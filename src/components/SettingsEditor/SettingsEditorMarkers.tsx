@@ -51,7 +51,8 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
         {settings.genericMarkerSize})
       </Label>
       <Slider
-        min={15}
+        max={150}
+        min={0}
         value={settings.genericMarkerSize}
         onChange={handleGenericSizeChange}
       />
@@ -61,7 +62,8 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
         {settings.animalMarkerSize})
       </Label>
       <Slider
-        min={15}
+        max={150}
+        min={0}
         value={settings.animalMarkerSize}
         onChange={handleAnimalSizeChange}
       />
@@ -71,7 +73,8 @@ export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
         {settings.zoneMarkerSize})
       </Label>
       <Slider
-        min={15}
+        max={150}
+        min={0}
         value={settings.zoneMarkerSize}
         onChange={handleZoneSizeChange}
       />
