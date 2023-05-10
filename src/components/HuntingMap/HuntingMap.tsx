@@ -231,6 +231,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
    */
   const handleDocumentKeyDown = useCallback(
     (event: KeyboardEvent) => {
+      // Ignore marker creation if an animal is currently being edited
+      if (typeof editedAnimal !== 'undefined') {
+        return;
+      }
+
       // Ensure mouse is over the map
       const [offsetX, offsetY] = mouseRatio.current;
       if (offsetX < 0 || offsetY < 0 || offsetX > 1 || offsetY > 1) {
@@ -248,7 +253,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         onCreateCustomMarker('marker:tracking', mouseRatio.current);
       }
     },
-    [onCreateCustomMarker],
+    [editedAnimal, onCreateCustomMarker],
   );
 
   /**
@@ -361,6 +366,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Center map and reset its size
    */
   const handleMapReset = useCallback(() => {
+    // Ignore resetting the map if an animal is currently being edited
+    if (typeof editedAnimal !== 'undefined') {
+      return;
+    }
+
     // Calculate target image width and height at the default zoom
     const [mapWidth, mapHeight] = getMapDimensions(
       imageWidth,
@@ -385,6 +395,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     handleMapUpdate(handleUpdateMarkerVisibility, setForcedUpdate);
   }, [
     defaultZoomValue,
+    editedAnimal,
     handleMapUpdate,
     handleUpdateMarkerVisibility,
     imageHeight,
@@ -430,6 +441,30 @@ export const HuntingMap = (props: HuntingMapProps) => {
     },
     [handleMapUpdate, handleUpdateMarkerVisibility, setForcedUpdate],
   );
+
+  /**
+   * Handle zooming the current map in
+   */
+  const handleMapZoomIn = useCallback(() => {
+    // Ignore zooming the map if an animal is currently being edited
+    if (typeof editedAnimal !== 'undefined') {
+      return;
+    }
+
+    handleMapZoom(-50);
+  }, [editedAnimal, handleMapZoom]);
+
+  /**
+   * Handle zooming the current map out
+   */
+  const handleMapZoomOut = useCallback(() => {
+    // Ignore zooming the map if an animal is currently being edited
+    if (typeof editedAnimal !== 'undefined') {
+      return;
+    }
+
+    handleMapZoom(50);
+  }, [editedAnimal, handleMapZoom]);
 
   /**
    * Handle pressing left mouse button down
@@ -846,8 +881,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
       <HuntingMapToolbar
         onReset={handleMapReset}
-        onZoomIn={() => handleMapZoom(-50)}
-        onZoomOut={() => handleMapZoom(50)}
+        onZoomIn={handleMapZoomIn}
+        onZoomOut={handleMapZoomOut}
       />
 
       <HuntingMapFilter
