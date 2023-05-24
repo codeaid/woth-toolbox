@@ -83,7 +83,7 @@ export const getCurrentActivityByHour = (
   activities: Array<AnimalActivityData>,
   hour: number,
 ) => {
-  let current;
+  let current: Optional<AnimalActivityData>;
 
   // Sort activities by hour
   const sortedActivities = [...activities].sort((a, b) => a.time - b.time);
@@ -97,7 +97,9 @@ export const getCurrentActivityByHour = (
     current = activity;
   }
 
-  return current;
+  // Use the last activity of the day as the starting activity of the day
+  // when no zero hour activity is configured
+  return current ?? activities[activities.length - 1];
 };
 
 /**
