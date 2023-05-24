@@ -410,9 +410,9 @@ export const animals: Array<Animal> = [
       { activity: AnimalActivity.Feeding, time: 17 },
       { activity: AnimalActivity.Drinking, time: 22 },
     ],
-    slug: 'elk',
+    slug: 'rocky-mountain-elk',
     tier: 6,
-    type: 'animal:elk',
+    type: 'animal:rocky mountain elk',
   },
   {
     description: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_DESCRIPTION',
