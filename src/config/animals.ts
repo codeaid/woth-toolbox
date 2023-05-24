@@ -446,9 +446,9 @@ export const animals: Array<Animal> = [
       { activity: AnimalActivity.Feeding, time: 17 },
       { activity: AnimalActivity.Drinking, time: 22 },
     ],
-    slug: 'moose',
+    slug: 'western-moose',
     tier: 6,
-    type: 'animal:moose',
+    type: 'animal:western moose',
   },
   {
     description: 'ANIMAL:CERVUS_ELAPHUS_DESCRIPTION',
