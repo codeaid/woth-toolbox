@@ -60,6 +60,9 @@
     top: 0;
     transition: opacity 200ms linear;
     width: 100%;
+}
+
+.ModalDialogContainerBlurred {
     z-index: 301;
 }
 

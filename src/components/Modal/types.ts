@@ -5,6 +5,8 @@ type ModalCloseHandler = () => void;
 
 export interface ModalProps {
   actions?: Array<ButtonProps>;
+  blur?: boolean;
+  canClose?: boolean;
   children?: ReactNode;
   className?: string;
   header: string;

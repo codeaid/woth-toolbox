@@ -11,6 +11,8 @@ import styles from './Modal.module.css';
 export const Modal = (props: ModalProps) => {
   const {
     actions,
+    blur = true,
+    canClose = true,
     children,
     className,
     header,
@@ -41,6 +43,19 @@ export const Modal = (props: ModalProps) => {
     );
   }, [actions]);
 
+  // Render the close button when applicable
+  const renderedCloseButton = useMemo(() => {
+    if (!canClose) {
+      return null;
+    }
+
+    return (
+      <IconButton className={styles.ModalClose} onClick={onClose}>
+        <RiCloseFill />
+      </IconButton>
+    );
+  }, [canClose, onClose]);
+
   // Scroll body contents back up to top on change
   useEffect(() => {
     if (bodyRef.current) {
@@ -66,14 +81,16 @@ export const Modal = (props: ModalProps) => {
           })}
           ref={ref}
         >
-          <div className={styles.ModalOverlay} />
-          <div className={styles.ModalDialogContainer}>
+          {blur && <div className={styles.ModalOverlay} />}
+          <div
+            className={clsx(styles.ModalDialogContainer, {
+              [styles.ModalDialogContainerBlurred]: blur,
+            })}
+          >
             <div className={clsx(styles.ModalDialog, className)}>
               <div className={styles.ModalHeader}>
                 <TextEllipsis>{header}</TextEllipsis>
-                <IconButton className={styles.ModalClose} onClick={onClose}>
-                  <RiCloseFill />
-                </IconButton>
+                {renderedCloseButton}
               </div>
               <div className={styles.ModalBody} ref={bodyRef}>
                 {children}
