@@ -81,6 +81,10 @@ export const Toolbar = (props: ToolbarProps) => {
           children: translate('POI:MAP_NAME_ALASKA'),
           href: '/alaska',
         },
+        {
+          children: translate('POI:MAP_NAME_AFRICA'),
+          href: '/africa',
+        },
       ].map((action, index) => (
         <NavLink
           activeClassName={styles.ToolbarActionActive}
