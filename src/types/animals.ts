@@ -1,3 +1,4 @@
+import { MapType } from 'types/cartography';
 import { TranslationKey } from 'types/i18n';
 
 export interface Animal {
@@ -8,6 +9,7 @@ export interface Animal {
   hitEnergy: [number, number];
   latin: TranslationKey;
   lifeCycle: Array<AnimalActivityData>;
+  maps?: Array<MapType>;
   slug: string;
   tier: number;
   type: AnimalType;
@@ -39,16 +41,26 @@ export type AnimalType =
   | 'animal:american black bear'
   | 'animal:barren-ground caribou'
   | 'animal:bighorn sheep'
+  | 'animal:black wildebeest'
+  | 'animal:blue wildebeest'
   | 'animal:brown bear'
+  | 'animal:cape buffalo'
   | 'animal:chamois'
+  | 'animal:common warthog'
+  | 'animal:egyptian goose'
   | 'animal:eurasian badger'
   | 'animal:european hare'
   | 'animal:fallow deer'
+  | 'animal:gemsbok'
   | 'animal:golden jackal'
   | 'animal:gray wolf'
+  | 'animal:greater kudu'
   | 'animal:greylag goose'
+  | 'animal:helmeted guineafowl'
+  | 'animal:honey badger'
   | 'animal:kodiak bear'
   | 'animal:lesser scaup'
+  | 'animal:lion'
   | 'animal:mouflon'
   | 'animal:mountain goat'
   | 'animal:mule deer'
@@ -59,8 +71,10 @@ export type AnimalType =
   | 'animal:roe deer'
   | 'animal:roosevelt elk'
   | 'animal:ross goose'
-  | 'animal:snowshoe hare'
   | 'animal:sitka deer'
+  | 'animal:snowshoe hare'
+  | 'animal:spotted hyena'
+  | 'animal:springbok'
   | 'animal:surf scoter'
   | 'animal:western moose'
   | 'animal:white-tailed deer'

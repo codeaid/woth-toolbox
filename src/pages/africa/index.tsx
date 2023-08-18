@@ -1,9 +1,22 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Modal } from 'components/Modal';
-import { useHuntingMapType, useTranslator, useTutorial } from 'hooks';
-import styles from './styles.module.css';
+import { HuntingMap } from 'components/HuntingMap';
+import { basePath } from 'config/app';
+import {
+  animalMarkers,
+  genericMarkers,
+  mapHeight,
+  mapLabels,
+  mapWidth,
+} from 'config/africa';
+import { markerVisibilityMap } from 'config/markers';
+import {
+  useHuntingMapType,
+  useSettings,
+  useTranslator,
+  useTutorial,
+} from 'hooks';
 
 const AfricaPage = () => {
   // Retrieve map type switcher
@@ -11,6 +24,9 @@ const AfricaPage = () => {
 
   // Render map tutorial dialog
   const { component: tutorial } = useTutorial(true);
+
+  // Retrieve application settings
+  const { settings } = useSettings();
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -31,12 +47,20 @@ const AfricaPage = () => {
         </title>
       </Head>
 
-      <Modal blur={false} canClose={false} header="Notice">
-        <div className={styles.AfricaPageNotice}>
-          {translate('POI:MAP_NAME_AFRICA')} will be unlocked on Monday, 21
-          August
-        </div>
-      </Modal>
+      <HuntingMap
+        animalMarkers={animalMarkers}
+        imageHeight={mapHeight}
+        imageScale={2}
+        imageSrc={`${basePath}/img/maps/africa.jpeg`}
+        imageWidth={mapWidth}
+        genericMarkers={genericMarkers}
+        labels={mapLabels}
+        markerSizeAnimal={settings.animalMarkerSize}
+        markerSizeGeneric={settings.genericMarkerSize}
+        markerSizeZone={settings.zoneMarkerSize}
+        markerTrophyRating={settings.animalMarkerRatings}
+        zoomMarkerMap={markerVisibilityMap}
+      />
 
       {createPortal(tutorial, document.body)}
     </>

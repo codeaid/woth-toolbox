@@ -1,10 +1,16 @@
 import { getUserLocales } from 'get-user-locale';
-import { animals, birds } from 'config/animals';
+import { fauna } from 'config/animals';
 import {
   defaultLocale,
   defaultResource,
   localeDirectoryMap,
 } from 'config/i18n';
+import {
+  isAnimalMarkerType,
+  isCustomMarkerType,
+  isGenericMarkerType,
+  isNeedZoneMarkerType,
+} from 'lib/markers';
 import {
   AnimalActivity,
   AnimalAge,
@@ -18,12 +24,6 @@ import {
   MarkerTypeGeneric,
   MarkerTypeNeedZone,
 } from 'types/markers';
-import {
-  isAnimalMarkerType,
-  isCustomMarkerType,
-  isGenericMarkerType,
-  isNeedZoneMarkerType,
-} from 'lib/markers';
 
 /**
  * Get animal's activity translation key
@@ -92,7 +92,7 @@ export const getAnimalRatingGenderKey = (
  */
 export const getAnimalTypeKey = (type: AnimalType) => {
   // Find animal matching the type
-  const animal = [...animals, ...birds].find(animal => animal.type === type);
+  const animal = fauna.find(animal => animal.type === type);
 
   if (!animal) {
     throw new Error(`Specified animal does not exist: ${type}`);
@@ -164,6 +164,8 @@ export const getGenericMarkerKey = (
       return 'UI:MARKER_PHOTO';
     case 'shooting range':
       return 'TOOLBOX:MARKER_SHOOTING_RANGE';
+    case 'swing':
+      return 'UI:MARKER_SWING';
     case 'view':
       return 'UI:MARKER_VIEW';
     default:

@@ -5,6 +5,7 @@ import {
   AnimalRating,
   AnimalSpecimen,
 } from 'types/animals';
+import { MapType } from 'types/cartography';
 import { EntityGroup } from 'types/global';
 import { Translator } from 'types/i18n';
 
@@ -18,6 +19,15 @@ export const getActivityByHour = (
   activities: Array<AnimalActivityData>,
   hour: number,
 ) => activities.find(activity => activity.time === hour);
+
+/**
+ * Filter a list of animals to only include those that are associated with the specified map
+ *
+ * @param animals List of animals to filter
+ * @param map Target map type to include
+ */
+export const getAnimalsByMapType = (animals: Array<Animal>, map?: MapType) =>
+  !map ? animals : animals.filter(animal => animal.maps?.includes(map));
 
 /**
  * Group animals by their tier

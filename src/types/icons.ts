@@ -12,8 +12,9 @@ export type IconTypeGeneric =
   | 'lodge'
   | 'parking'
   | 'photo'
-  | 'racing'
+  | 'race'
   | 'shooting range'
+  | 'swing'
   | 'view';
 
 export type IconTypeMarker =

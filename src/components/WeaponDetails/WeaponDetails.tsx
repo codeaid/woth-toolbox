@@ -14,7 +14,7 @@ export const WeaponDetails = (props: WeaponDetailsProps) => {
         {translate(weapon.heading)}
       </div>
       <div className={styles.WeaponDetailsNameCaliber}>
-        {translate(weapon.caliber)}
+        {weapon.caliber ? translate(weapon.caliber) : '-'}
       </div>
       <hr />
       <div className={styles.WeaponDetailsDescription} key={weapon.heading}>

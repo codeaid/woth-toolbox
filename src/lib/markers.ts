@@ -6,15 +6,29 @@ import {
   genericMarkerTypes,
   needZoneMarkerTypes,
 } from 'config/markers';
-import { hasListValue } from 'lib/utils';
+import { hasListValue, partitionArray } from 'lib/utils';
 import { AnimalType } from 'types/animals';
-import { MapFilterOptions, MapZoomOptions } from 'types/cartography';
+import {
+  MapFilterOptions,
+  MapLabelOptions,
+  MapZoomOptions,
+} from 'types/cartography';
 import { Point } from 'types/generic';
+import {
+  JsonAnimalDocument,
+  JsonAnimalDocumentRecord,
+  JsonLabelDocument,
+  JsonMarkerDocument,
+} from 'types/json';
 import {
   MarkerDataAnimal,
   MarkerOptions,
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
+  MarkerOptionsZone,
+  MarkerOptionsZoneDrink,
+  MarkerOptionsZoneEat,
+  MarkerOptionsZoneSleep,
   MarkerReference,
   MarkerType,
   MarkerTypeAnimal,
@@ -22,30 +36,6 @@ import {
   MarkerTypeGeneric,
   MarkerTypeNeedZone,
 } from 'types/markers';
-
-/**
- * Create an animal marker from the supplied coordinates
- *
- * @param type Animal type
- * @param coords Animal icon coordinates
- * @param drinkZones List of drink zone coordinates
- * @param eatZones List of eat zone coordinates
- * @param sleepZones List of sleep zone coordinates
- */
-export const createAnimalMarkerOptions = (
-  type: MarkerTypeAnimal,
-  coords: Point,
-  drinkZones: Array<Point>,
-  eatZones: Array<Point>,
-  sleepZones: Array<Point>,
-): MarkerOptionsAnimal => ({
-  coords,
-  drink: createMarkerOptionsList('zone:drink', drinkZones),
-  eat: createMarkerOptionsList('zone:eat', eatZones),
-  id: getCoordinateHash(coords),
-  sleep: createMarkerOptionsList('zone:sleep', sleepZones),
-  type,
-});
 
 /**
  * Create new custom marker options
@@ -61,18 +51,6 @@ export const createMarkerOptions = <TMarkerType extends MarkerType>(
   id: getCoordinateHash(coords),
   type,
 });
-
-/**
- * Convert marker position to a marker options object of the specified type
- *
- * @param type Target marker type
- * @param positions Source list of marker positions
- */
-export const createMarkerOptionsList = <TMarkerType extends MarkerType>(
-  type: TMarkerType,
-  positions: Array<Point>,
-): Array<MarkerOptions<TMarkerType>> =>
-  positions.map(coords => createMarkerOptions(type, coords));
 
 /**
  * Generate a hash from the specified coordinates
@@ -113,7 +91,7 @@ export const getGenericMarkerColorClass = (
     case 'cabin':
     case 'camp':
     case 'parking':
-    case 'racing':
+    case 'race':
     case 'shooting range':
       return landmarkClass;
     case 'lodge':
@@ -215,6 +193,93 @@ export const isMarkerVisibleAtScale = (
 export const isNeedZoneMarkerType = (
   type?: MarkerType,
 ): type is MarkerTypeNeedZone => needZoneMarkerTypes.includes(type as any);
+
+/**
+ * Create a list of animal markers from the specified JSON document contents
+ *
+ * @param doc Source JSON document
+ */
+export const buildAnimalMarkers = (
+  doc: JsonAnimalDocument,
+): Array<MarkerOptionsAnimal> =>
+  (Object.entries(doc) as Array<[AnimalType, Array<JsonAnimalDocumentRecord>]>)
+    .map(([animalType, animalData]) =>
+      animalData.map<MarkerOptionsAnimal>(values => {
+        // Retrieve number of need zones this animal should have
+        const [drinkZoneCount, eatZoneCount, sleepZoneCount] =
+          getNeedZoneCounts(animalType);
+
+        // Extract animal marker identifier and list of coordinates associated with it.
+        const [id, ...coordinates] = values;
+
+        // Split list of coordinates into pairs
+        const [animalCoords, ...zoneCoords] = partitionArray(coordinates, 2);
+
+        // Extract the respective number of need zone coordinates for each type of need zone.
+        const drinkCoords = zoneCoords.splice(0, drinkZoneCount);
+        const eatCoords = zoneCoords.splice(0, eatZoneCount);
+        const sleepCoords = zoneCoords.splice(0, sleepZoneCount);
+
+        return {
+          id,
+          coords: animalCoords as Point,
+          drink: buildNeedZoneMarker(
+            drinkCoords,
+            'zone:drink',
+          ) as Array<MarkerOptionsZoneDrink>,
+          eat: buildNeedZoneMarker(
+            eatCoords,
+            'zone:eat',
+          ) as Array<MarkerOptionsZoneEat>,
+          sleep: buildNeedZoneMarker(
+            sleepCoords,
+            'zone:sleep',
+          ) as Array<MarkerOptionsZoneSleep>,
+          type: animalType,
+        };
+      }),
+    )
+    .flat();
+
+/**
+ * Create a list of generic markers from the specified JSON document contents
+ *
+ * @param doc Source JSON document
+ */
+export const buildGenericMarkers = (doc: JsonMarkerDocument) =>
+  doc.map<MarkerOptionsGeneric>(([type, ...coords]) => ({
+    coords,
+    type,
+    id: getCoordinateHash(coords as Point),
+  }));
+
+/**
+ * Create a list of labels from the specified JSON document contents
+ *
+ * @param doc Source JSON document
+ */
+export const buildLabelMarkers = (doc: JsonLabelDocument) =>
+  doc.map<MapLabelOptions>(([name, habitat, ...coords]) => ({
+    coords,
+    habitat,
+    name,
+  }));
+
+/**
+ * Create a need zone marker from the specified coordinates and type
+ *
+ * @param coords Marker coordinates
+ * @param type Need zone type
+ */
+const buildNeedZoneMarker = (
+  coords: Array<Array<number>>,
+  type: MarkerTypeNeedZone,
+): Array<MarkerOptionsZone> =>
+  coords.map(point => ({
+    id: getCoordinateHash(point as Point),
+    type,
+    coords: point as Point,
+  }));
 
 /**
  * Update marker visibility based on filters and zoom

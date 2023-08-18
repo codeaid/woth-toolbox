@@ -20,6 +20,20 @@ export const base64Encode = (value: string) =>
   window.btoa(encodeURIComponent(value));
 
 /**
+ * Split an array into multiple partitions
+ *
+ * @param array Source array to split
+ * @param partitionSize Number of elements in each partition
+ */
+export const partitionArray = <T>(
+  array: Array<T>,
+  partitionSize: number,
+): Array<Array<T>> =>
+  Array.from({ length: Math.ceil(array.length / partitionSize) }, (_, index) =>
+    array.slice(index * partitionSize, (index + 1) * partitionSize),
+  );
+
+/**
  * Get the distance between the given date and now in words
  *
  * @param value Timestamp value to convert

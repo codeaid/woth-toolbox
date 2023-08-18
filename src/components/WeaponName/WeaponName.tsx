@@ -25,7 +25,7 @@ export const WeaponName = (props: WeaponNameProps) => {
     <div className={className}>
       <div className={styles.WeaponNameTitle}>{translate(weapon.heading)}</div>
       <div className={styles.WeaponNameCalibre}>
-        {translate(weapon.caliber)}
+        {weapon.caliber ? translate(weapon.caliber) : '-'}
       </div>
     </div>
   );

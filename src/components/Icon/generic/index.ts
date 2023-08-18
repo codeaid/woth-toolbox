@@ -9,4 +9,5 @@ export * from './ParkingIcon';
 export * from './PhotoIcon';
 export * from './RacingIcon';
 export * from './ShootingRangeIcon';
+export * from './SwingIcon';
 export * from './ViewIcon';
