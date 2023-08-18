@@ -1,6 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslator } from 'hooks';
-import { getAnimalGroups } from 'lib/animals';
+import { getAnimalGroups, getAnimalsByMapType } from 'lib/animals';
+import { MapType } from 'types/cartography';
+import { AnimalActivityGridFilter } from './AnimalActivityGridFilter';
 import { AnimalActivityGridGroup } from './AnimalActivityGridGroup';
 import { AnimalActivityGridProps } from './types';
 import styles from './AnimalActivityGrid.module.css';
@@ -8,17 +10,26 @@ import styles from './AnimalActivityGrid.module.css';
 export const AnimalActivityGrid = (props: AnimalActivityGridProps) => {
   const { animals } = props;
 
+  const [mapType, setMapType] = useState<Optional<MapType>>(undefined);
+
   // Retrieve application translator
   const translate = useTranslator();
 
+  const selectedAnimals = useMemo(
+    () => getAnimalsByMapType(animals, mapType),
+    [animals, mapType],
+  );
+
   // Group animals by their tiers
   const animalGroups = useMemo(
-    () => getAnimalGroups(animals, translate),
-    [animals, translate],
+    () => getAnimalGroups(selectedAnimals, translate),
+    [selectedAnimals, translate],
   );
 
   return (
     <div className={styles.AnimalActivityGrid}>
+      <AnimalActivityGridFilter mapType={mapType} onChange={setMapType} />
+
       {animalGroups.map(group => (
         <AnimalActivityGridGroup group={group} key={group.tier} />
       ))}

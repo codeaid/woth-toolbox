@@ -1,8 +1,12 @@
 import { Animal, AnimalActivityData } from 'types/animals';
+import { MapType } from 'types/cartography';
 import { EntityGroup } from 'types/global';
 
-export interface AnimalActivityGridProps {
-  animals: Array<Animal>;
+type AnimalActivityGridButtonChangeHandler = (mapType?: MapType) => void;
+
+export interface AnimalActivityGridFilterProps {
+  mapType?: MapType;
+  onChange: AnimalActivityGridButtonChangeHandler;
 }
 
 export interface AnimalActivityGridGroupProps {
@@ -20,5 +24,9 @@ export interface AnimalActivityGridRowProps {
 }
 
 export interface AnimalActivityGridRowsProps {
+  animals: Array<Animal>;
+}
+
+export interface AnimalActivityGridProps {
   animals: Array<Animal>;
 }

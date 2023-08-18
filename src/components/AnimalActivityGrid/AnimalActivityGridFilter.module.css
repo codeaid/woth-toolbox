@@ -1,0 +1,22 @@
+.AnimalActivityGridFilter {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
+  margin-bottom: 1em;
+}
+
+.AnimalActivityGridFilterButton {
+  background-color: transparent;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  padding: 0.75em 1em;
+  text-transform: uppercase;
+}
+
+.AnimalActivityGridFilterButton:hover {
+  background-color: var(--elevation2);
+}
+
+.AnimalActivityGridFilterButtonActive {
+  background-color: var(--elevation2);
+  color: var(--brand);
+}
