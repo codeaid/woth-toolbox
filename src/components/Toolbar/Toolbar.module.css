@@ -5,7 +5,7 @@
   font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
   line-height: 1em;
   user-select: none;
-  z-index: 100;
+  z-index: 110;
   width: 100%;
 }
 
@@ -16,7 +16,6 @@
   line-height: 1.2em;
   min-width: 6.5em;
   outline: none;
-  overflow: hidden;
   padding: 0.65rem;
   text-align: center;
   text-decoration: none;
@@ -35,9 +34,33 @@
   color: var(--brand);
 }
 
+.ToolbarActionMenu {
+  background-color: var(--elevation0);
+  box-shadow: var(--shadow-strong);
+  display: none;
+  left: 0;
+  min-width: 10em;
+  position: absolute;
+  top: 100%;
+}
+
+.ToolbarActionMenu .ToolbarAction {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+.ToolbarActionMenuTrigger {
+  cursor: pointer;
+  position: relative;
+}
+
+.ToolbarActionMenuTrigger:focus .ToolbarActionMenu,
+.ToolbarActionMenuTrigger:hover .ToolbarActionMenu {
+  display: block;
+}
+
 .ToolbarActions {
   display: flex;
-  overflow: hidden;
 }
 
 .ToolbarButtons {

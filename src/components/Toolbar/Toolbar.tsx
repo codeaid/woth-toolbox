@@ -13,12 +13,12 @@ import { IconButton } from 'components/IconButton';
 import { NavLink } from 'components/NavLink';
 import { SettingsEditor } from 'components/SettingsEditor';
 import { urlDiscord, urlSteam } from 'config/app';
-import { useTutorial, useSettings, useTranslator } from 'hooks';
+import { useSettings, useTranslator, useTutorial } from 'hooks';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
 export const Toolbar = (props: ToolbarProps) => {
-  const { actions, subtitle, title } = props;
+  const { subtitle, title } = props;
 
   // Flag indicating whether the mobile menu is currently visible
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -38,10 +38,23 @@ export const Toolbar = (props: ToolbarProps) => {
   // Retrieve application translator
   const translate = useTranslator();
 
-  // Build list of links to render
-  const children = useMemo(
+  // Build list of toolbar action items
+  const baseActions = useMemo(
     () =>
-      actions.map((action, index) => (
+      [
+        {
+          children: translate('UI:SECTION_ANIMALS'),
+          href: '/animals',
+        },
+        {
+          children: translate('UI:SECTION_FIREARMS'),
+          href: '/firearms',
+        },
+        {
+          children: translate('UI:LIFE_CYCLE'),
+          href: '/life-cycle',
+        },
+      ].map((action, index) => (
         <NavLink
           activeClassName={styles.ToolbarActionActive}
           className={styles.ToolbarAction}
@@ -49,7 +62,34 @@ export const Toolbar = (props: ToolbarProps) => {
           {...action}
         />
       )),
-    [actions],
+    [translate],
+  );
+
+  // Build list of toolbar action items
+  const mapActions = useMemo(
+    () =>
+      [
+        {
+          children: translate('POI:MAP_NAME_IDAHO'),
+          href: '/nez-perce-valley',
+        },
+        {
+          children: translate('POI:MAP_NAME_TRANSYLVANIA'),
+          href: '/transylvania',
+        },
+        {
+          children: translate('POI:MAP_NAME_ALASKA'),
+          href: '/alaska',
+        },
+      ].map((action, index) => (
+        <NavLink
+          activeClassName={styles.ToolbarActionActive}
+          className={styles.ToolbarAction}
+          key={index}
+          {...action}
+        />
+      )),
+    [translate],
   );
 
   // Mobile menu contents
@@ -66,10 +106,13 @@ export const Toolbar = (props: ToolbarProps) => {
 
     // Render menu into the layout content component
     return createPortal(
-      <div className={styles.ToolbarMobileMenu}>{children}</div>,
+      <div className={styles.ToolbarMobileMenu}>
+        {baseActions}
+        {mapActions}
+      </div>,
       document.getElementById('layout-content') ?? document.body,
     );
-  }, [children, mobileMenuVisible]);
+  }, [baseActions, mapActions, mobileMenuVisible]);
 
   /**
    * Handle hiding settings
@@ -156,11 +199,21 @@ export const Toolbar = (props: ToolbarProps) => {
             <RiMenuLine className={styles.ToolbarMobileButtonIcon} />
           </div>
         </button>
+
         <div className={styles.ToolbarHeading}>
           <div className={styles.ToolbarTitle}>{title}</div>
           <div className={styles.ToolbarSubtitle}>{subtitle}</div>
         </div>
-        <div className={styles.ToolbarActions}>{children}</div>
+
+        <div className={styles.ToolbarActions}>
+          {baseActions}
+
+          <div className={styles.ToolbarActionMenuTrigger}>
+            <div className={styles.ToolbarAction}>{translate('UI:MAP')}</div>
+            <div className={styles.ToolbarActionMenu}>{mapActions}</div>
+          </div>
+        </div>
+
         <div className={styles.ToolbarButtons}>
           {tutorialEnabled && (
             <IconButton
@@ -184,6 +237,7 @@ export const Toolbar = (props: ToolbarProps) => {
           </IconButton>
         </div>
       </div>
+
       {renderedSettings}
       {mobileMenu}
     </>
