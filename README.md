@@ -2,13 +2,17 @@
 
 This interactive web application contains a suite of tools that can be used
 while playing [Way Of The Hunter](https://store.steampowered.com/app/1288320).
+
 It allows you to:
 
 - Choose the most appropriate weapons to hunt every animal in the game.
 - See which animals you can hunt with each individual weapon.
-- View life cycles of all animals and birds (drinking, feeding and sleeping).
+- View life cycles of all animals and birds (drinking, feeding and sleeping times).
 - Discover locations of all animals birds as well as their need zones on both
   in-game maps.
+
+Maps feature official data supplied by [Nine Rocks Games](https://ninerocksgames.com)
+and [THQ Nordic](https://www.thqnordic.com).
 
 Toolbox can be accessed by visiting https://codeaid.github.io/woth-toolbox/.
 
@@ -133,6 +137,9 @@ correct need zones that much easier.
 When hovering over individual life cycle activities (or alternatively tapping on
 mobile devices) activities of all other species will also be highlighted at the
 same hour making it easy to see what other animals are doing at the same time.
+
+Additionally animals can be filtered by the map they are available on. To change
+the target map simply click on one of the buttons at the top of the page.
 
 ## Maps
 
@@ -268,7 +275,7 @@ In this panel you will also be able to adjust marker sizes for all maps:
 
 ![Settings](docs/woth-toolbox-settings.jpg)
 
-## Nez Perce Valley map
+## Nez Perce Valley
 
 Contains locations of all animals, birds as well as their need zones on the Nez
 Perce Valley map. Please see the "Maps" section for more information on map
@@ -276,13 +283,29 @@ features and usage.
 
 ![Nez Perce Valley](docs/woth-toolbox-page-idaho.jpg)
 
-## Transylvania map
+## Transylvania
 
 Contains locations of all animals, birds as well as their need zones on the
 Transylvania map. Please see the "Maps" section for more information on map
 features and usage.
 
 ![Transylvania](docs/woth-toolbox-page-transylvania.jpg)
+
+## Aurora Shores
+
+Contains locations of all animals, birds as well as their need zones on the
+Aurora Shores (Alaska) map. Please see the "Maps" section for more information on map
+features and usage.
+
+![Alaska](docs/woth-toolbox-page-alaska.jpg)
+
+## Tikamoon Plains
+
+Contains locations of all animals, birds as well as their need zones on the
+Tikamoon Plains (Africa) map. Please see the "Maps" section for more information on map
+features and usage.
+
+![Africa](docs/woth-toolbox-page-africa.jpg)
 
 ## Notes
 
