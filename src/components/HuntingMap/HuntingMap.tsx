@@ -471,6 +471,19 @@ export const HuntingMap = (props: HuntingMapProps) => {
    *
    * @param event Mouse event object
    */
+  const handleContainerDoubleClick = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      // Zoom map in when double clicking/tapping on it
+      handleMapZoom(-500, event.clientX, event.clientY);
+    },
+    [handleMapZoom],
+  );
+
+  /**
+   * Handle pressing left mouse button down
+   *
+   * @param event Mouse event object
+   */
   const handleContainerMouseDown = useCallback(
     (event: MouseEvent<HTMLElement>) => {
       // Ignore right mouse or mouse wheel clicks
@@ -903,6 +916,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       <div
         className={styles.HuntingMap}
         ref={containerRef}
+        onDoubleClick={handleContainerDoubleClick}
         onMouseDown={handleContainerMouseDown}
         onMouseLeave={handleMapDragCancel}
         onMouseMove={handleContainerMouseMove}
