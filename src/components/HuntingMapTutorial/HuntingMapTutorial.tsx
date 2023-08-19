@@ -49,7 +49,7 @@ export const HuntingMapTutorial = (props: HuntingMapTutorialProps) => {
     () => [
       {
         children: 'Previous',
-        disabled: pageIndex === 0,
+        disabled: pageIndex === defaultPageIndex,
         onClick: handlePagePrev,
       },
       pageIndex < pages.length - 1
@@ -64,7 +64,7 @@ export const HuntingMapTutorial = (props: HuntingMapTutorialProps) => {
             onClick: onComplete,
           },
     ],
-    [handlePageNext, handlePagePrev, onComplete, pageIndex],
+    [defaultPageIndex, handlePageNext, handlePagePrev, onComplete, pageIndex],
   );
 
   // Reset tutorial when opening it
