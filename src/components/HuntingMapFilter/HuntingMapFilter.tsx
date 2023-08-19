@@ -211,7 +211,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    */
   const handleDocumentKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'r' && !event.ctrlKey) {
+      if (event.key === 'r' && !event.ctrlKey && !event.metaKey) {
         handleToggleVisibility();
       }
     },
