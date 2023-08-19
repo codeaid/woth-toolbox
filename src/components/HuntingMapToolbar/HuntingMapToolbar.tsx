@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { MouseEvent, useCallback, useEffect } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { IconButton } from 'components/IconButton';
 import { HuntingMapToolbarProps } from './types';
@@ -30,6 +30,45 @@ export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {
     [onReset, onZoomIn, onZoomOut],
   );
 
+  /**
+   * Handle resetting the map
+   *
+   * @param event Mouse click event
+   */
+  const handleReset = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      onReset();
+    },
+    [onReset],
+  );
+
+  /**
+   * Handle zooming map in
+   *
+   * @param event Mouse click event
+   */
+  const handleZoomIn = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      onZoomIn();
+    },
+    [onZoomIn],
+  );
+
+  /**
+   * Handle zooming map out
+   *
+   * @param event Mouse click event
+   */
+  const handleZoomOut = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      onZoomOut();
+    },
+    [onZoomOut],
+  );
+
   // Monitor keyboard key presses
   useEffect(() => {
     document.addEventListener('keypress', handleDocumentKeyPress);
@@ -41,13 +80,13 @@ export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {
 
   return (
     <div className={styles.HuntingMapToolbar}>
-      <IconButton tabIndex={-1} onClick={onZoomIn}>
+      <IconButton tabIndex={-1} onClick={handleZoomIn}>
         <RiZoomInLine />
       </IconButton>
-      <IconButton tabIndex={-1} onClick={onZoomOut}>
+      <IconButton tabIndex={-1} onClick={handleZoomOut}>
         <RiZoomOutLine />
       </IconButton>
-      <IconButton tabIndex={-1} onClick={onReset}>
+      <IconButton tabIndex={-1} onClick={handleReset}>
         <RiArrowGoBackFill />
       </IconButton>
     </div>
