@@ -20,6 +20,9 @@ import styles from './Toolbar.module.css';
 export const Toolbar = (props: ToolbarProps) => {
   const { subtitle, title } = props;
 
+  // Flag indicating whether the map list menu is visible
+  const [mapMenuVisible, setMapMenuVisible] = useState(false);
+
   // Flag indicating whether the mobile menu is currently visible
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
@@ -65,59 +68,6 @@ export const Toolbar = (props: ToolbarProps) => {
     [translate],
   );
 
-  // Build list of toolbar action items
-  const mapActions = useMemo(
-    () =>
-      [
-        {
-          children: translate('POI:MAP_NAME_IDAHO'),
-          href: '/nez-perce-valley',
-        },
-        {
-          children: translate('POI:MAP_NAME_TRANSYLVANIA'),
-          href: '/transylvania',
-        },
-        {
-          children: translate('POI:MAP_NAME_ALASKA'),
-          href: '/alaska',
-        },
-        {
-          children: translate('POI:MAP_NAME_AFRICA'),
-          href: '/africa',
-        },
-      ].map((action, index) => (
-        <NavLink
-          activeClassName={styles.ToolbarActionActive}
-          className={styles.ToolbarAction}
-          key={index}
-          {...action}
-        />
-      )),
-    [translate],
-  );
-
-  // Mobile menu contents
-  const mobileMenu = useMemo(() => {
-    // Ensure browser is initialized
-    if (typeof window === 'undefined') {
-      return null;
-    }
-
-    // Ensure menu is visible before proceeding
-    if (!mobileMenuVisible) {
-      return;
-    }
-
-    // Render menu into the layout content component
-    return createPortal(
-      <div className={styles.ToolbarMobileMenu}>
-        {baseActions}
-        {mapActions}
-      </div>,
-      document.getElementById('layout-content') ?? document.body,
-    );
-  }, [baseActions, mapActions, mobileMenuVisible]);
-
   /**
    * Handle hiding settings
    */
@@ -148,15 +98,25 @@ export const Toolbar = (props: ToolbarProps) => {
   );
 
   /**
-   * Handle toggling settings
+   * Handle hiding map menu
    */
-  const handleToggleSettings = useCallback((event: MouseEvent<EventTarget>) => {
-    event.stopPropagation();
-    setSettingsVisible(current => !current);
-  }, []);
+  const handleHideMapMenu = useCallback(() => setMapMenuVisible(false), []);
 
   /**
-   * Handle showing or hiding mobile menu
+   * Handle hiding mobile menu
+   */
+  const handleHideMobileMenu = useCallback(
+    () => setMobileMenuVisible(false),
+    [],
+  );
+
+  /**
+   * Handle showing map menu
+   */
+  const handleShowMapMenu = useCallback(() => setMapMenuVisible(true), []);
+
+  /**
+   * Handle toggling mobile menu visibility
    */
   const handleToggleMobileMenu = useCallback(
     (event: MouseEvent<EventTarget>) => {
@@ -167,6 +127,66 @@ export const Toolbar = (props: ToolbarProps) => {
     },
     [],
   );
+
+  /**
+   * Handle toggling settings
+   */
+  const handleToggleSettings = useCallback((event: MouseEvent<EventTarget>) => {
+    event.stopPropagation();
+    setSettingsVisible(current => !current);
+  }, []);
+
+  // Build list of toolbar action items
+  const renderedMapActions = useMemo(
+    () =>
+      [
+        {
+          children: translate('POI:MAP_NAME_IDAHO'),
+          href: '/nez-perce-valley',
+        },
+        {
+          children: translate('POI:MAP_NAME_TRANSYLVANIA'),
+          href: '/transylvania',
+        },
+        {
+          children: translate('POI:MAP_NAME_ALASKA'),
+          href: '/alaska',
+        },
+        {
+          children: translate('POI:MAP_NAME_AFRICA'),
+          href: '/africa',
+        },
+      ].map((action, index) => (
+        <NavLink
+          activeClassName={styles.ToolbarActionActive}
+          className={styles.ToolbarAction}
+          key={index}
+          onClick={() => {
+            handleHideMobileMenu();
+            handleHideMapMenu();
+          }}
+          {...action}
+        />
+      )),
+    [handleHideMapMenu, handleHideMobileMenu, translate],
+  );
+
+  // Mobile menu contents
+  const renderedMobileMenu = useMemo(() => {
+    // Ensure browser is initialized
+    if (typeof window === 'undefined' || !mobileMenuVisible) {
+      return null;
+    }
+
+    // Render menu into the layout content component
+    return createPortal(
+      <div className={styles.ToolbarMobileMenu}>
+        {baseActions}
+        {renderedMapActions}
+      </div>,
+      document.getElementById('layout-content') ?? document.body,
+    );
+  }, [baseActions, renderedMapActions, mobileMenuVisible]);
 
   // Rendered settings panel
   const renderedSettings = useMemo(() => {
@@ -212,9 +232,18 @@ export const Toolbar = (props: ToolbarProps) => {
         <div className={styles.ToolbarActions}>
           {baseActions}
 
-          <div className={styles.ToolbarActionMenuTrigger}>
+          <div
+            className={styles.ToolbarActionMenuTrigger}
+            onPointerDown={handleShowMapMenu}
+            onMouseEnter={handleShowMapMenu}
+            onMouseLeave={handleHideMapMenu}
+          >
             <div className={styles.ToolbarAction}>{translate('UI:MAP')}</div>
-            <div className={styles.ToolbarActionMenu}>{mapActions}</div>
+            {mapMenuVisible && (
+              <div className={styles.ToolbarActionMenu}>
+                {renderedMapActions}
+              </div>
+            )}
           </div>
         </div>
 
@@ -243,7 +272,7 @@ export const Toolbar = (props: ToolbarProps) => {
       </div>
 
       {renderedSettings}
-      {mobileMenu}
+      {renderedMobileMenu}
     </>
   );
 };
