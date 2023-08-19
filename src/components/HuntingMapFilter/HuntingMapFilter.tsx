@@ -359,10 +359,10 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
   // Monitor clicks outside the current marker and hide zones when needed
   useEffect(() => {
-    document.addEventListener('keypress', handleDocumentKeyPress);
+    document.addEventListener('keydown', handleDocumentKeyPress);
 
     return () => {
-      document.removeEventListener('keypress', handleDocumentKeyPress);
+      document.removeEventListener('keydown', handleDocumentKeyPress);
     };
   }, [handleDocumentKeyPress]);
 

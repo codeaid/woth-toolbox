@@ -11,12 +11,11 @@ export const AnimalEditorDescription = (
    * Handle changes to the comment text
    */
   const handleChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement>) => {
+    (event: ChangeEvent<HTMLTextAreaElement>) =>
       onChange({
         ...data,
         comment: event.target.value,
-      });
-    },
+      }),
     [data, onChange],
   );
 
