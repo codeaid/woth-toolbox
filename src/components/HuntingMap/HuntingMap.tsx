@@ -451,7 +451,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       return;
     }
 
-    handleMapZoom(-50);
+    handleMapZoom(-100);
   }, [editedAnimal, handleMapZoom]);
 
   /**
@@ -463,7 +463,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
       return;
     }
 
-    handleMapZoom(50);
+    handleMapZoom(100);
   }, [editedAnimal, handleMapZoom]);
 
   /**
