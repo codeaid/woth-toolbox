@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:BLUE_WILDEBEEST_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['savanna'],
     heading: 'ANIMAL:BLUE_WILDEBEEST_HEADING',
     hitEnergy: [2720, 4712],
     latin: 'ANIMAL:BLUE_WILDEBEEST_LATIN',
@@ -79,7 +79,8 @@ export default [
   },
   {
     description: 'ANIMAL:CAPE_BUFFALO_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['highlands', 'savanna'],
+    habitatSecondary: ['grasslands and forests'],
     heading: 'ANIMAL:CAPE_BUFFALO_HEADING',
     hitEnergy: [4486, 6523],
     latin: 'ANIMAL:CAPE_BUFFALO_LATIN',
@@ -98,7 +99,8 @@ export default [
   },
   {
     description: 'ANIMAL:GEMSBOK_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['arid savannah and desert'],
+    habitatSecondary: ['highlands', 'savanna'],
     heading: 'ANIMAL:GEMSBOK_HEADING',
     hitEnergy: [3050, 5132],
     latin: 'ANIMAL:GEMSBOK_LATIN',
@@ -117,7 +119,8 @@ export default [
   },
   {
     description: 'ANIMAL:GREATER_KUDU_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['grasslands and forests', 'savanna'],
+    habitatSecondary: ['highlands'],
     heading: 'ANIMAL:GREATER_KUDU_HEADING',
     hitEnergy: [2712, 4101],
     latin: 'ANIMAL:GREATER_KUDU_LATIN',
@@ -155,7 +158,8 @@ export default [
   },
   {
     description: 'ANIMAL:LION_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['savanna'],
+    habitatSecondary: ['highlands'],
     heading: 'ANIMAL:LION_HEADING',
     hitEnergy: [4223, 5763],
     latin: 'ANIMAL:LION_LATIN',
@@ -175,7 +179,7 @@ export default [
   {
     description: 'ANIMAL:CERVUS_ELAPHUS_DESCRIPTION',
     habitatPrimary: ['lowland forest', 'highland forest'],
-    habitatSecondary: 'grassland',
+    habitatSecondary: ['grassland'],
     heading: 'ANIMAL:CERVUS_ELAPHUS_HEADING',
     hitEnergy: [2693, 4579],
     latin: 'ANIMAL:CERVUS_ELAPHUS_LATIN',
@@ -195,7 +199,7 @@ export default [
   {
     description: 'ANIMAL:CERVUS_CANADENSIS_DESCRIPTION',
     habitatPrimary: ['highland forest'],
-    habitatSecondary: 'lowland forest',
+    habitatSecondary: ['lowland forest'],
     heading: 'ANIMAL:CERVUS_CANADENSIS_HEADING',
     hitEnergy: [2912, 4951],
     latin: 'ANIMAL:CERVUS_CANADENSIS_LATIN',

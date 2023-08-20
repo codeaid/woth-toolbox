@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:BLACK_WILDEBEEST_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['grasslands and forests'],
     heading: 'ANIMAL:BLACK_WILDEBEEST_HEADING',
     hitEnergy: [2332, 4026],
     latin: 'ANIMAL:BLACK_WILDEBEEST_LATIN',
@@ -79,7 +79,8 @@ export default [
   },
   {
     description: 'ANIMAL:COMMON_WARTHOG_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['grasslands and forests'],
+    habitatSecondary: ['savanna'],
     heading: 'ANIMAL:COMMON_WARTHOG_HEADING',
     hitEnergy: [2325, 3900],
     latin: 'ANIMAL:COMMON_WARTHOG_LATIN',
@@ -99,7 +100,7 @@ export default [
   {
     description: 'ANIMAL:DAMA_DAMA_DESCRIPTION',
     habitatPrimary: ['lowland forest'],
-    habitatSecondary: 'grassland',
+    habitatSecondary: ['grassland'],
     heading: 'ANIMAL:DAMA_DAMA_HEADING',
     hitEnergy: [1462, 3510],
     latin: 'ANIMAL:DAMA_DAMA_LATIN',
@@ -119,7 +120,7 @@ export default [
   {
     description: 'ANIMAL:CANIS_LUPUS_DESCRIPTION',
     habitatPrimary: ['highland forest', 'lowland forest'],
-    habitatSecondary: 'mountains',
+    habitatSecondary: ['mountains'],
     heading: 'ANIMAL:CANIS_LUPUS_HEADING',
     hitEnergy: [1165, 3029],
     latin: 'ANIMAL:CANIS_LUPUS_LATIN',
@@ -139,7 +140,7 @@ export default [
   {
     description: 'ANIMAL:OVIS_MUSIMON_DESCRIPTION',
     habitatPrimary: ['highland forest'],
-    habitatSecondary: 'mountains',
+    habitatSecondary: ['mountains'],
     heading: 'ANIMAL:OVIS_MUSIMON_HEADING',
     hitEnergy: [1345, 3498],
     latin: 'ANIMAL:OVIS_MUSIMON_LATIN',
@@ -178,7 +179,7 @@ export default [
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_DESCRIPTION',
     habitatPrimary: ['grassland', 'lowland forest'],
-    habitatSecondary: 'highland forest',
+    habitatSecondary: ['highland forest'],
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_HEADING',
     hitEnergy: [1576, 3783],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_LATIN',
@@ -198,7 +199,7 @@ export default [
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_DESCRIPTION',
     habitatPrimary: ['rainforest'],
-    habitatSecondary: 'highland forest',
+    habitatSecondary: ['highland forest'],
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_HEADING',
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_LATIN',
@@ -217,7 +218,8 @@ export default [
   },
   {
     description: 'ANIMAL:SPOTTED_HYENA_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['highlands'],
+    habitatSecondary: ['savanna'],
     heading: 'ANIMAL:SPOTTED_HYENA_HEADING',
     hitEnergy: [2501, 4003],
     latin: 'ANIMAL:SPOTTED_HYENA_LATIN',
@@ -237,7 +239,7 @@ export default [
   {
     description: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_DESCRIPTION',
     habitatPrimary: ['grassland', 'lowland forest'],
-    habitatSecondary: 'highland forest',
+    habitatSecondary: ['highland forest'],
     heading: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_HEADING',
     hitEnergy: [1543, 3705],
     latin: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_LATIN',
@@ -257,7 +259,7 @@ export default [
   {
     description: 'ANIMAL:SUS_SCROFA_DESCRIPTION',
     habitatPrimary: ['grassland', 'lowland forest'],
-    habitatSecondary: 'floodplain',
+    habitatSecondary: ['floodplain'],
     heading: 'ANIMAL:SUS_SCROFA_HEADING',
     hitEnergy: [1625, 3900],
     latin: 'ANIMAL:SUS_SCROFA_LATIN',

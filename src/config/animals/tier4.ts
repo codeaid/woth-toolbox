@@ -4,7 +4,7 @@ export default [
   {
     description: 'ANIMAL:CANIS_AUREUS_DESCRIPTION',
     habitatPrimary: ['lowland forest'],
-    habitatSecondary: 'grassland',
+    habitatSecondary: ['grassland'],
     heading: 'ANIMAL:CANIS_AUREUS_HEADING',
     hitEnergy: [350, 2000],
     latin: 'ANIMAL:CANIS_AUREUS_LATIN',
@@ -42,8 +42,9 @@ export default [
   },
   {
     description: 'ANIMAL:SPRINGBOK_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['arid savannah and desert'],
     heading: 'ANIMAL:SPRINGBOK_HEADING',
+    habitatSecondary: ['grasslands and forests'],
     hitEnergy: [1645, 3125],
     latin: 'ANIMAL:SPRINGBOK_LATIN',
     lifeCycle: [

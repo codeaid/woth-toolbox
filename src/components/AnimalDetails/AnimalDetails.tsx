@@ -70,7 +70,10 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
           </div>
           <div className={styles.AnimalDetailsStatValue}>
             {animal.habitatSecondary
-              ? translate(getAnimalHabitatKey(animal.habitatSecondary))
+              ? animal.habitatSecondary
+                  .map(getAnimalHabitatKey)
+                  .map(translate)
+                  .join(', ')
               : '-'}
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:EGYPTIAN_GOOSE_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['grasslands and forests', 'savanna'],
     heading: 'ANIMAL:EGYPTIAN_GOOSE_HEADING',
     hitEnergy: [1, 275],
     latin: 'ANIMAL:EGYPTIAN_GOOSE_LATIN',
@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:HELMETED_GUINEAFOWL_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['grasslands and forests', 'savanna'],
     heading: 'ANIMAL:HELMETED_GUINEAFOWL_HEADING',
     hitEnergy: [1, 255],
     latin: 'ANIMAL:HELMETED_GUINEAFOWL_LATIN',
@@ -137,7 +137,7 @@ export default [
   {
     description: 'ANIMAL:ANAS_PLATYRHYNCHOS_DESCRIPTION',
     habitatPrimary: ['swamps'],
-    habitatSecondary: 'floodplain',
+    habitatSecondary: ['floodplain'],
     heading: 'ANIMAL:ANAS_PLATYRHYNCHOS_HEADING',
     hitEnergy: [1, 255],
     latin: 'ANIMAL:ANAS_PLATYRHYNCHOS_LATIN',

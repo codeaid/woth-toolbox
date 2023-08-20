@@ -4,7 +4,7 @@ export default [
   {
     description: 'ANIMAL:TAXIDEA_TAXUS_DESCRIPTION',
     habitatPrimary: ['lowland forest', 'grassland'],
-    habitatSecondary: 'highland forest',
+    habitatSecondary: ['highland forest'],
     heading: 'ANIMAL:TAXIDEA_TAXUS_HEADING',
     hitEnergy: [612, 1836],
     latin: 'ANIMAL:TAXIDEA_TAXUS_LATIN',
@@ -24,7 +24,7 @@ export default [
   {
     description: 'ANIMAL:MELES_MELES_DESCRIPTION',
     habitatPrimary: ['highland forest'],
-    habitatSecondary: 'lowland forest',
+    habitatSecondary: ['lowland forest'],
     heading: 'ANIMAL:MELES_MELES_HEADING',
     hitEnergy: [700, 2100],
     latin: 'ANIMAL:MELES_MELES_LATIN',
@@ -43,7 +43,7 @@ export default [
   },
   {
     description: 'ANIMAL:HONEY_BADGER_DESCRIPTION',
-    habitatPrimary: ['highland forest'],
+    habitatPrimary: ['arid savannah and desert', 'highlands'],
     heading: 'ANIMAL:HONEY_BADGER_HEADING',
     hitEnergy: [725, 1950],
     latin: 'ANIMAL:HONEY_BADGER_LATIN',
@@ -61,7 +61,7 @@ export default [
   {
     description: 'ANIMAL:VULPES_VULPES_DESCRIPTION',
     habitatPrimary: ['grassland', 'lowland forest'],
-    habitatSecondary: 'highland forest',
+    habitatSecondary: ['highland forest'],
     heading: 'ANIMAL:VULPES_VULPES_HEADING',
     hitEnergy: [612, 1836],
     latin: 'ANIMAL:VULPES_VULPES_LATIN',
