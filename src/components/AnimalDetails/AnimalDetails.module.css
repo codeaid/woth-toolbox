@@ -2,16 +2,32 @@
   user-select: none;
 }
 
+.AnimalDetailsHeading {
+  display: grid;
+  grid-column-gap: 0.5em;
+  grid-template-areas: 'name icon'
+    'latin icon';
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
+}
+
+.AnimalDetailsIcon {
+  grid-area: icon;
+}
+
 .AnimalDetailsName {
   font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 1.5em;
+  grid-area: name;
   letter-spacing: 0.05em;
+  line-height: 1.2em;
   text-transform: uppercase;
 }
 
 .AnimalDetailsNameLatin {
   color: var(--text-secondary);
   font-style: italic;
+  grid-area: latin;
   margin-top: 0.25em;
 }
 
@@ -65,6 +81,20 @@
   letter-spacing: unset;
   line-height: 1em;
   margin-left: 0.8em;
+}
+
+@media (max-width: 600px) {
+  .AnimalDetailsStat {
+    flex-direction: column;
+  }
+
+  .AnimalDetailsStatName {
+    margin-bottom: 0.25em;
+  }
+
+  .AnimalDetailsStatValue {
+    margin: 0 0 0.5em;
+  }
 }
 
 @media (max-width: 864px) {

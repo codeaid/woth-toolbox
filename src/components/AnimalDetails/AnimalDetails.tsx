@@ -1,9 +1,11 @@
 import clsx from 'clsx';
+import { useMemo } from 'react';
 import { useLocale, useTranslator } from 'hooks';
+import { getAnimalHabitatKey } from 'lib/i18n';
+import { getIconComponent } from 'lib/icons';
 import { formatNumber } from 'lib/utils';
 import styles from './AnimalDetails.module.css';
 import { AnimalDetailsProps } from './types';
-import { getAnimalHabitatKey } from 'lib/i18n';
 
 export const AnimalDetails = (props: AnimalDetailsProps) => {
   const { animal } = props;
@@ -16,13 +18,22 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
   const locale = useLocale();
   const translate = useTranslator();
 
+  // Retrieve icon associated with the current animal
+  const AnimalIcon = useMemo(
+    () => getIconComponent(animal.type),
+    [animal.type],
+  );
+
   return (
     <div className={styles.AnimalDetails}>
-      <div className={styles.AnimalDetailsName}>
-        {translate(animal.heading)}
-      </div>
-      <div className={styles.AnimalDetailsNameLatin}>
-        {translate(animal.latin)}
+      <div className={styles.AnimalDetailsHeading}>
+        <div className={styles.AnimalDetailsName}>
+          {translate(animal.heading)}
+        </div>
+        <div className={styles.AnimalDetailsNameLatin}>
+          {translate(animal.latin)}
+        </div>
+        <AnimalIcon className={styles.AnimalDetailsIcon} size={50} />
       </div>
       <hr />
       <div className={styles.AnimalDetailsDescription} key={animal.heading}>
