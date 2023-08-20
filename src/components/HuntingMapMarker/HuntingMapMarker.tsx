@@ -85,6 +85,16 @@ export const HuntingMapMarker = forwardRef(
     );
 
     /**
+     * Handle double-clicking on the marker
+     *
+     * @param event Mouse event object
+     */
+    const handleDoubleClick = useCallback(
+      (event: MouseEvent<EventTarget>) => event.stopPropagation(),
+      [],
+    );
+
+    /**
      * Handle global key presses
      */
     const handleDocumentKeyDown = useCallback(
@@ -199,6 +209,7 @@ export const HuntingMapMarker = forwardRef(
             )}
             ref={setMarkerRef}
             style={style}
+            onDoubleClick={handleDoubleClick}
           >
             <IconComponent
               highlighted={highlighted}
