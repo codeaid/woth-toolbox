@@ -23,6 +23,7 @@ import {
   baseUrlTransylvania,
 } from 'config/routing';
 import { useSettings, useTranslator, useTutorial } from 'hooks';
+import { isMapUrl } from 'lib/routing';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
@@ -247,7 +248,13 @@ export const Toolbar = (props: ToolbarProps) => {
             onMouseEnter={handleShowMapMenu}
             onMouseLeave={handleHideMapMenu}
           >
-            <div className={styles.ToolbarAction}>{translate('UI:MAP')}</div>
+            <div
+              className={clsx(styles.ToolbarAction, {
+                [styles.ToolbarActionActive]: isMapUrl(window.location.href),
+              })}
+            >
+              {translate('UI:MAP')}
+            </div>
             {mapMenuVisible && (
               <div className={styles.ToolbarActionMenu}>
                 {renderedMapActions}

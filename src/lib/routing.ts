@@ -1,7 +1,30 @@
-import { fauna } from 'config/animals';
-import { baseUrlAnimals } from 'config/routing';
-import { AnimalType } from 'types/animals';
 import { NextRouter } from 'next/router';
+import { fauna } from 'config/animals';
+import {
+  baseUrlAfrica,
+  baseUrlAlaska,
+  baseUrlAnimals,
+  baseUrlIdaho,
+  baseUrlTransylvania,
+} from 'config/routing';
+import { AnimalType } from 'types/animals';
+
+/**
+ * Detect if the specified page URL represents a map page
+ *
+ * @param href Page URL to validate
+ */
+export const isMapUrl = (href: string) => {
+  const mapUrls = [
+    baseUrlAfrica,
+    baseUrlAlaska,
+    baseUrlIdaho,
+    baseUrlTransylvania,
+  ];
+
+  const url = new URL(href);
+  return mapUrls.includes(url.pathname);
+};
 
 /**
  * Redirect to the details page of the specified animal
