@@ -160,7 +160,7 @@ export default [
     description: 'ANIMAL:OREAMNOS_AMERICANUS_DESCRIPTION',
     habitatPrimary: ['POI:IDAHO_HABITAT_05'],
     heading: 'ANIMAL:OREAMNOS_AMERICANUS_HEADING',
-    hitEnergy: [1515, 3636],
+    hitEnergy: [1576, 3636],
     latin: 'ANIMAL:OREAMNOS_AMERICANUS_LATIN',
     lifeCycle: [
       { activity: AnimalActivity.Drinking, time: 0 },

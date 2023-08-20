@@ -5,7 +5,7 @@ export default [
     description: 'ANIMAL:ALCES_AMERICANUS_GIGAS_DESCRIPTION',
     habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_04'],
     heading: 'ANIMAL:ALCES_AMERICANUS_GIGAS_HEADING',
-    hitEnergy: [3088, 5867],
+    hitEnergy: [3426, 6032],
     latin: 'ANIMAL:ALCES_AMERICANUS_GIGAS_LATIN',
     lifeCycle: [
       { activity: AnimalActivity.Sleeping, time: 0 },
@@ -138,7 +138,7 @@ export default [
     description: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_DESCRIPTION',
     habitatPrimary: ['POI:ALASKA_HABITAT_01'],
     heading: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_HEADING',
-    hitEnergy: [2835, 4911],
+    hitEnergy: [3855, 6233],
     latin: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_LATIN',
     lifeCycle: [
       { activity: AnimalActivity.Sleeping, time: 0 },
@@ -197,7 +197,7 @@ export default [
     habitatPrimary: ['POI:IDAHO_HABITAT_04'],
     habitatSecondary: 'POI:IDAHO_HABITAT_03',
     heading: 'ANIMAL:CERVUS_CANADENSIS_HEADING',
-    hitEnergy: [2912, 5532],
+    hitEnergy: [2912, 4951],
     latin: 'ANIMAL:CERVUS_CANADENSIS_LATIN',
     lifeCycle: [
       { activity: AnimalActivity.Sleeping, time: 0 },
@@ -254,7 +254,7 @@ export default [
     description: 'ANIMAL:BISON_BISON_ATHABASCAE_DESCRIPTION',
     habitatPrimary: ['POI:IDAHO_HABITAT_04'],
     heading: 'ANIMAL:BISON_BISON_ATHABASCAE_HEADING',
-    hitEnergy: [2889, 5386],
+    hitEnergy: [3783, 6390],
     latin: 'ANIMAL:BISON_BISON_ATHABASCAE_LATIN',
     lifeCycle: [
       { activity: AnimalActivity.Sleeping, time: 0 },
