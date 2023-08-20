@@ -1,10 +1,17 @@
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { MdOutlineMyLocation } from 'react-icons/md';
-import { RiChat4Line, RiEdit2Fill, RiPaletteLine } from 'react-icons/ri';
+import {
+  RiChat4Line,
+  RiEdit2Fill,
+  RiInformationLine,
+  RiPaletteLine,
+} from 'react-icons/ri';
 import { ContextMenu, ContextMenuOption } from 'components/ContextMenu';
 import { useTranslator } from 'hooks';
 import { setClipboardValue } from 'lib/clipboard';
 import { getCoordinateRatio } from 'lib/markers';
+import { redirectToAnimalPage } from 'lib/routing';
 import { sendGoogleEvent } from 'lib/tracking';
 import { showNotification } from 'lib/utils';
 import { HuntingMapAnimalContextProps } from './types';
@@ -13,6 +20,9 @@ export const HuntingMapAnimalContext = (
   props: HuntingMapAnimalContextProps,
 ) => {
   const { enabled, marker, markerData, markerElement, onToggleEditor } = props;
+
+  // Retrieve application router
+  const router = useRouter();
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -71,8 +81,21 @@ export const HuntingMapAnimalContext = (
           }
         },
       },
+      {
+        icon: RiInformationLine,
+        label: translate('UI:ENCYCLOPEDIA'),
+        separator: true,
+        onClick: () => redirectToAnimalPage(marker.type, router),
+      },
     ],
-    [marker, markerData?.color, markerData?.comment, onToggleEditor, translate],
+    [
+      marker,
+      markerData?.color,
+      markerData?.comment,
+      onToggleEditor,
+      router,
+      translate,
+    ],
   );
 
   return (
