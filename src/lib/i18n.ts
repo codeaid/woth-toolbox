@@ -1,6 +1,7 @@
 import { getUserLocales } from 'get-user-locale';
 import { fauna } from 'config/animals';
 import {
+  animalHabitatTranslationMap,
   defaultLocale,
   defaultResource,
   localeDirectoryMap,
@@ -14,6 +15,7 @@ import {
 import {
   AnimalActivity,
   AnimalAge,
+  AnimalHabitat,
   AnimalRating,
   AnimalType,
 } from 'types/animals';
@@ -61,6 +63,19 @@ export const getAnimalAgeKey = (age?: AnimalAge): TranslationKey => {
     default:
       throw new Error(`Invalid animal age type specified: ${age}`);
   }
+};
+
+/**
+ * Get animal's habitat translation key
+ *
+ * @param habitat Target animal habitat
+ */
+export const getAnimalHabitatKey = (habitat: AnimalHabitat): TranslationKey => {
+  if (!animalHabitatTranslationMap.has(habitat)) {
+    throw new Error(`Invalid animal habitat type specified: ${habitat}`);
+  }
+
+  return animalHabitatTranslationMap.get(habitat)!;
 };
 
 /**

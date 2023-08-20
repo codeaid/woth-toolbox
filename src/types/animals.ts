@@ -3,8 +3,8 @@ import { TranslationKey } from 'types/i18n';
 
 export interface Animal {
   description: TranslationKey;
-  habitatPrimary: Array<TranslationKey>;
-  habitatSecondary?: TranslationKey;
+  habitatPrimary: Array<AnimalHabitat>;
+  habitatSecondary?: AnimalHabitat;
   heading: TranslationKey;
   hitEnergy: [number, number];
   latin: TranslationKey;
@@ -27,6 +27,19 @@ export interface AnimalActivityData {
 }
 
 export type AnimalAge = 'young' | 'adult' | 'mature';
+
+export type AnimalHabitat =
+  | 'arid savannah and desert'
+  | 'floodplain'
+  | 'grassland'
+  | 'grasslands and forests'
+  | 'highland forest'
+  | 'highlands'
+  | 'lowland forest'
+  | 'mountains'
+  | 'rainforest'
+  | 'savanna'
+  | 'swamps';
 
 export type AnimalRating = 'F' | 'M1' | 'M2' | 'M3' | 'M4' | 'M5';
 

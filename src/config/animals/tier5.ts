@@ -3,7 +3,7 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04', 'POI:IDAHO_HABITAT_05'],
+    habitatPrimary: ['highland forest', 'mountains'],
     heading: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_HEADING',
     hitEnergy: [1576, 3783],
     latin: 'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_LATIN',
@@ -22,7 +22,7 @@ export default [
   },
   {
     description: 'ANIMAL:OVIS_CANADENSIS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_05'],
+    habitatPrimary: ['mountains'],
     heading: 'ANIMAL:OVIS_CANADENSIS_HEADING',
     hitEnergy: [1669, 4005],
     latin: 'ANIMAL:OVIS_CANADENSIS_LATIN',
@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:BLACK_WILDEBEEST_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:BLACK_WILDEBEEST_HEADING',
     hitEnergy: [2332, 4026],
     latin: 'ANIMAL:BLACK_WILDEBEEST_LATIN',
@@ -60,7 +60,7 @@ export default [
   },
   {
     description: 'ANIMAL:RUPICAPRA_RUPICAPRA_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_05'],
+    habitatPrimary: ['mountains'],
     heading: 'ANIMAL:RUPICAPRA_RUPICAPRA_HEADING',
     hitEnergy: [1323, 3439],
     latin: 'ANIMAL:RUPICAPRA_RUPICAPRA_LATIN',
@@ -79,7 +79,7 @@ export default [
   },
   {
     description: 'ANIMAL:COMMON_WARTHOG_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:COMMON_WARTHOG_HEADING',
     hitEnergy: [2325, 3900],
     latin: 'ANIMAL:COMMON_WARTHOG_LATIN',
@@ -98,8 +98,8 @@ export default [
   },
   {
     description: 'ANIMAL:DAMA_DAMA_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_02',
+    habitatPrimary: ['lowland forest'],
+    habitatSecondary: 'grassland',
     heading: 'ANIMAL:DAMA_DAMA_HEADING',
     hitEnergy: [1462, 3510],
     latin: 'ANIMAL:DAMA_DAMA_LATIN',
@@ -118,8 +118,8 @@ export default [
   },
   {
     description: 'ANIMAL:CANIS_LUPUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04', 'POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_05',
+    habitatPrimary: ['highland forest', 'lowland forest'],
+    habitatSecondary: 'mountains',
     heading: 'ANIMAL:CANIS_LUPUS_HEADING',
     hitEnergy: [1165, 3029],
     latin: 'ANIMAL:CANIS_LUPUS_LATIN',
@@ -138,8 +138,8 @@ export default [
   },
   {
     description: 'ANIMAL:OVIS_MUSIMON_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_05',
+    habitatPrimary: ['highland forest'],
+    habitatSecondary: 'mountains',
     heading: 'ANIMAL:OVIS_MUSIMON_HEADING',
     hitEnergy: [1345, 3498],
     latin: 'ANIMAL:OVIS_MUSIMON_LATIN',
@@ -158,7 +158,7 @@ export default [
   },
   {
     description: 'ANIMAL:OREAMNOS_AMERICANUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_05'],
+    habitatPrimary: ['mountains'],
     heading: 'ANIMAL:OREAMNOS_AMERICANUS_HEADING',
     hitEnergy: [1576, 3636],
     latin: 'ANIMAL:OREAMNOS_AMERICANUS_LATIN',
@@ -177,8 +177,8 @@ export default [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_04',
+    habitatPrimary: ['grassland', 'lowland forest'],
+    habitatSecondary: 'highland forest',
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_HEADING',
     hitEnergy: [1576, 3783],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_LATIN',
@@ -197,8 +197,8 @@ export default [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_DESCRIPTION',
-    habitatPrimary: ['POI:ALASKA_HABITAT_01'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_04',
+    habitatPrimary: ['rainforest'],
+    habitatSecondary: 'highland forest',
     heading: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_HEADING',
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_LATIN',
@@ -217,7 +217,7 @@ export default [
   },
   {
     description: 'ANIMAL:SPOTTED_HYENA_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:SPOTTED_HYENA_HEADING',
     hitEnergy: [2501, 4003],
     latin: 'ANIMAL:SPOTTED_HYENA_LATIN',
@@ -236,8 +236,8 @@ export default [
   },
   {
     description: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_04',
+    habitatPrimary: ['grassland', 'lowland forest'],
+    habitatSecondary: 'highland forest',
     heading: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_HEADING',
     hitEnergy: [1543, 3705],
     latin: 'ANIMAL:ODOCOILEUS_VIRGINIANUS_LATIN',
@@ -256,8 +256,8 @@ export default [
   },
   {
     description: 'ANIMAL:SUS_SCROFA_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:TRANSYLVANIA_HABITAT_01',
+    habitatPrimary: ['grassland', 'lowland forest'],
+    habitatSecondary: 'floodplain',
     heading: 'ANIMAL:SUS_SCROFA_HEADING',
     hitEnergy: [1625, 3900],
     latin: 'ANIMAL:SUS_SCROFA_LATIN',

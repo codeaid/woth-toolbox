@@ -3,6 +3,7 @@ import { useLocale, useTranslator } from 'hooks';
 import { formatNumber } from 'lib/utils';
 import styles from './AnimalDetails.module.css';
 import { AnimalDetailsProps } from './types';
+import { getAnimalHabitatKey } from 'lib/i18n';
 
 export const AnimalDetails = (props: AnimalDetailsProps) => {
   const { animal } = props;
@@ -55,7 +56,10 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
             {translate('ANIMAL:ANIMAL_HABITAT_PRIMARY')}
           </div>
           <div className={styles.AnimalDetailsStatValue}>
-            {animal.habitatPrimary.map(translate).join(', ')}
+            {animal.habitatPrimary
+              .map(getAnimalHabitatKey)
+              .map(translate)
+              .join(', ')}
           </div>
         </div>
         <div
@@ -65,7 +69,9 @@ export const AnimalDetails = (props: AnimalDetailsProps) => {
             {translate('ANIMAL:ANIMAL_HABITAT_SECONDARY')}
           </div>
           <div className={styles.AnimalDetailsStatValue}>
-            {animal.habitatSecondary ? translate(animal.habitatSecondary) : '-'}
+            {animal.habitatSecondary
+              ? translate(getAnimalHabitatKey(animal.habitatSecondary))
+              : '-'}
           </div>
         </div>
       </div>

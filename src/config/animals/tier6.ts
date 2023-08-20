@@ -3,7 +3,7 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:ALCES_AMERICANUS_GIGAS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['grassland', 'highland forest'],
     heading: 'ANIMAL:ALCES_AMERICANUS_GIGAS_HEADING',
     hitEnergy: [3426, 6032],
     latin: 'ANIMAL:ALCES_AMERICANUS_GIGAS_LATIN',
@@ -22,7 +22,7 @@ export default [
   },
   {
     description: 'ANIMAL:URSUS_AMERICANUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:URSUS_AMERICANUS_HEADING',
     hitEnergy: [2889, 4911],
     latin: 'ANIMAL:URSUS_AMERICANUS_LATIN',
@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:BLUE_WILDEBEEST_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:BLUE_WILDEBEEST_HEADING',
     hitEnergy: [2720, 4712],
     latin: 'ANIMAL:BLUE_WILDEBEEST_LATIN',
@@ -60,7 +60,7 @@ export default [
   },
   {
     description: 'ANIMAL:URSUS_ARCTOS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:URSUS_ARCTOS_HEADING',
     hitEnergy: [2835, 5386],
     latin: 'ANIMAL:URSUS_ARCTOS_LATIN',
@@ -79,7 +79,7 @@ export default [
   },
   {
     description: 'ANIMAL:CAPE_BUFFALO_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:CAPE_BUFFALO_HEADING',
     hitEnergy: [4486, 6523],
     latin: 'ANIMAL:CAPE_BUFFALO_LATIN',
@@ -98,7 +98,7 @@ export default [
   },
   {
     description: 'ANIMAL:GEMSBOK_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:GEMSBOK_HEADING',
     hitEnergy: [3050, 5132],
     latin: 'ANIMAL:GEMSBOK_LATIN',
@@ -117,7 +117,7 @@ export default [
   },
   {
     description: 'ANIMAL:GREATER_KUDU_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:GREATER_KUDU_HEADING',
     hitEnergy: [2712, 4101],
     latin: 'ANIMAL:GREATER_KUDU_LATIN',
@@ -136,7 +136,7 @@ export default [
   },
   {
     description: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_DESCRIPTION',
-    habitatPrimary: ['POI:ALASKA_HABITAT_01'],
+    habitatPrimary: ['rainforest'],
     heading: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_HEADING',
     hitEnergy: [3855, 6233],
     latin: 'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_LATIN',
@@ -155,7 +155,7 @@ export default [
   },
   {
     description: 'ANIMAL:LION_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:LION_HEADING',
     hitEnergy: [4223, 5763],
     latin: 'ANIMAL:LION_LATIN',
@@ -174,8 +174,8 @@ export default [
   },
   {
     description: 'ANIMAL:CERVUS_ELAPHUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_03', 'POI:IDAHO_HABITAT_04'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_02',
+    habitatPrimary: ['lowland forest', 'highland forest'],
+    habitatSecondary: 'grassland',
     heading: 'ANIMAL:CERVUS_ELAPHUS_HEADING',
     hitEnergy: [2693, 4579],
     latin: 'ANIMAL:CERVUS_ELAPHUS_LATIN',
@@ -194,8 +194,8 @@ export default [
   },
   {
     description: 'ANIMAL:CERVUS_CANADENSIS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_03',
+    habitatPrimary: ['highland forest'],
+    habitatSecondary: 'lowland forest',
     heading: 'ANIMAL:CERVUS_CANADENSIS_HEADING',
     hitEnergy: [2912, 4951],
     latin: 'ANIMAL:CERVUS_CANADENSIS_LATIN',
@@ -214,7 +214,7 @@ export default [
   },
   {
     description: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04', 'POI:ALASKA_HABITAT_01'],
+    habitatPrimary: ['highland forest', 'rainforest'],
     heading: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_HEADING',
     hitEnergy: [2912, 5532],
     latin: 'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_LATIN',
@@ -233,7 +233,7 @@ export default [
   },
   {
     description: 'ANIMAL:ALCES_AMERICANUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_01'],
+    habitatPrimary: ['swamps'],
     heading: 'ANIMAL:ALCES_AMERICANUS_HEADING',
     hitEnergy: [3088, 5867],
     latin: 'ANIMAL:ALCES_AMERICANUS_LATIN',
@@ -252,7 +252,7 @@ export default [
   },
   {
     description: 'ANIMAL:BISON_BISON_ATHABASCAE_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:BISON_BISON_ATHABASCAE_HEADING',
     hitEnergy: [3783, 6390],
     latin: 'ANIMAL:BISON_BISON_ATHABASCAE_LATIN',

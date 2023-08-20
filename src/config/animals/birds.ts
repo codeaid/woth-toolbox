@@ -3,7 +3,7 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:EGYPTIAN_GOOSE_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:EGYPTIAN_GOOSE_HEADING',
     hitEnergy: [1, 275],
     latin: 'ANIMAL:EGYPTIAN_GOOSE_LATIN',
@@ -22,7 +22,7 @@ export default [
   },
   {
     description: 'ANIMAL:ANSER_ANSER_DESCRIPTION',
-    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_01'],
+    habitatPrimary: ['floodplain'],
     heading: 'ANIMAL:ANSER_ANSER_HEADING',
     hitEnergy: [1, 681],
     latin: 'ANIMAL:ANSER_ANSER_LATIN',
@@ -41,7 +41,7 @@ export default [
   },
   {
     description: 'ANIMAL:HELMETED_GUINEAFOWL_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:HELMETED_GUINEAFOWL_HEADING',
     hitEnergy: [1, 255],
     latin: 'ANIMAL:HELMETED_GUINEAFOWL_LATIN',
@@ -60,7 +60,7 @@ export default [
   },
   {
     description: 'ANIMAL:AYTHYA_AFFINIS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_01'],
+    habitatPrimary: ['swamps'],
     heading: 'ANIMAL:AYTHYA_AFFINIS_HEADING',
     hitEnergy: [1, 174],
     latin: 'ANIMAL:AYTHYA_AFFINIS_LATIN',
@@ -79,7 +79,7 @@ export default [
   },
   {
     description: 'ANIMAL:PHASIANUS_COLCHICUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02'],
+    habitatPrimary: ['grassland'],
     heading: 'ANIMAL:PHASIANUS_COLCHICUS_HEADING',
     hitEnergy: [1, 402],
     latin: 'ANIMAL:PHASIANUS_COLCHICUS_LATIN',
@@ -98,7 +98,7 @@ export default [
   },
   {
     description: 'ANIMAL:ANSER_ROSSII_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_01'],
+    habitatPrimary: ['swamps'],
     heading: 'ANIMAL:ANSER_ROSSII_HEADING',
     hitEnergy: [1, 279],
     latin: 'ANIMAL:ANSER_ROSSII_LATIN',
@@ -117,7 +117,7 @@ export default [
   },
   {
     description: 'ANIMAL:MELANITTA_PERSPICILLATA_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02'],
+    habitatPrimary: ['grassland'],
     heading: 'ANIMAL:MELANITTA_PERSPICILLATA_HEADING',
     hitEnergy: [1, 174],
     latin: 'ANIMAL:MELANITTA_PERSPICILLATA_LATIN',
@@ -136,7 +136,8 @@ export default [
   },
   {
     description: 'ANIMAL:ANAS_PLATYRHYNCHOS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_01'],
+    habitatPrimary: ['swamps'],
+    habitatSecondary: 'floodplain',
     heading: 'ANIMAL:ANAS_PLATYRHYNCHOS_HEADING',
     hitEnergy: [1, 255],
     latin: 'ANIMAL:ANAS_PLATYRHYNCHOS_LATIN',

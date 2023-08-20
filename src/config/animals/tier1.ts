@@ -3,7 +3,7 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:LEPUS_EUROPAEUS_DESCRIPTION',
-    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_02'],
+    habitatPrimary: ['grassland'],
     heading: 'ANIMAL:LEPUS_EUROPAEUS_HEADING',
     hitEnergy: [356, 1068],
     latin: 'ANIMAL:LEPUS_EUROPAEUS_LATIN',
@@ -20,7 +20,7 @@ export default [
   },
   {
     description: 'ANIMAL:LEPUS_AMERICANUS_DESCRIPTION',
-    habitatPrimary: ['POI:TRANSYLVANIA_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:LEPUS_AMERICANUS_HEADING',
     hitEnergy: [56, 628],
     latin: 'ANIMAL:LEPUS_AMERICANUS_LATIN',

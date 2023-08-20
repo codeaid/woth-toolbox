@@ -3,8 +3,8 @@ import { Animal, AnimalActivity } from 'types/animals';
 export default [
   {
     description: 'ANIMAL:CANIS_AUREUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_03'],
-    habitatSecondary: 'POI:IDAHO_HABITAT_02',
+    habitatPrimary: ['lowland forest'],
+    habitatSecondary: 'grassland',
     heading: 'ANIMAL:CANIS_AUREUS_HEADING',
     hitEnergy: [350, 2000],
     latin: 'ANIMAL:CANIS_AUREUS_LATIN',
@@ -23,7 +23,7 @@ export default [
   },
   {
     description: 'ANIMAL:CAPREOLUS_CAPREOLUS_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_02', 'POI:IDAHO_HABITAT_03'],
+    habitatPrimary: ['grassland', 'lowland forest'],
     heading: 'ANIMAL:CAPREOLUS_CAPREOLUS_HEADING',
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:CAPREOLUS_CAPREOLUS_LATIN',
@@ -42,7 +42,7 @@ export default [
   },
   {
     description: 'ANIMAL:SPRINGBOK_DESCRIPTION',
-    habitatPrimary: ['POI:IDAHO_HABITAT_04'],
+    habitatPrimary: ['highland forest'],
     heading: 'ANIMAL:SPRINGBOK_HEADING',
     hitEnergy: [1645, 3125],
     latin: 'ANIMAL:SPRINGBOK_LATIN',
