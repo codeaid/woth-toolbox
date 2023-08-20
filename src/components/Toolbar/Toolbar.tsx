@@ -13,6 +13,15 @@ import { IconButton } from 'components/IconButton';
 import { NavLink } from 'components/NavLink';
 import { SettingsEditor } from 'components/SettingsEditor';
 import { urlDiscord, urlSteam } from 'config/app';
+import {
+  baseUrlAfrica,
+  baseUrlAlaska,
+  baseUrlAnimals,
+  baseUrlFirearms,
+  baseUrlIdaho,
+  baseUrlLifeCycle,
+  baseUrlTransylvania,
+} from 'config/routing';
 import { useSettings, useTranslator, useTutorial } from 'hooks';
 import { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
@@ -47,15 +56,15 @@ export const Toolbar = (props: ToolbarProps) => {
       [
         {
           children: translate('UI:SECTION_ANIMALS'),
-          href: '/animals',
+          href: baseUrlAnimals,
         },
         {
           children: translate('UI:SECTION_FIREARMS'),
-          href: '/firearms',
+          href: baseUrlFirearms,
         },
         {
           children: translate('UI:LIFE_CYCLE'),
-          href: '/life-cycle',
+          href: baseUrlLifeCycle,
         },
       ].map((action, index) => (
         <NavLink
@@ -142,19 +151,19 @@ export const Toolbar = (props: ToolbarProps) => {
       [
         {
           children: translate('POI:MAP_NAME_IDAHO'),
-          href: '/nez-perce-valley',
+          href: baseUrlIdaho,
         },
         {
           children: translate('POI:MAP_NAME_TRANSYLVANIA'),
-          href: '/transylvania',
+          href: baseUrlTransylvania,
         },
         {
           children: translate('POI:MAP_NAME_ALASKA'),
-          href: '/alaska',
+          href: baseUrlAlaska,
         },
         {
           children: translate('POI:MAP_NAME_AFRICA'),
-          href: '/africa',
+          href: baseUrlAfrica,
         },
       ].map((action, index) => (
         <NavLink
