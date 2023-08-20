@@ -1,11 +1,10 @@
 import {
   animalMarkerKey,
-  animalMarkerKeyLegacy,
   customMarkerKey,
   mapTutorialKey,
   settingsKey,
 } from 'config/storage';
-import { base64Decode, base64Encode, isNotEmpty } from 'lib/utils';
+import { base64Decode, base64Encode } from 'lib/utils';
 import { Settings } from 'types/app';
 import { MapType } from 'types/cartography';
 import { MarkerDataAnimal, MarkerOptionsCustom } from 'types/markers';
@@ -127,17 +126,6 @@ const getAnimalMarkerStorageKey = (mapType: MapType) =>
  */
 const getCustomMarkerStorageKey = (mapType: MapType) =>
   `${customMarkerKey}:${mapType}`;
-
-/**
- * Check if any legacy marker identifiers are present in the storage
- *
- * @param storage Target storage
- */
-export const hasLegacyMarkerStorageKeys = (storage: Storage) =>
-  [...Array(storage.length).keys()]
-    .map(i => storage.key(i))
-    .filter(isNotEmpty)
-    .filter(key => key.startsWith(animalMarkerKeyLegacy)).length > 0;
 
 /**
  * Check if the specified marker data object does not contain any values

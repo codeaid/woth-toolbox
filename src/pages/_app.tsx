@@ -1,7 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { StrictMode, useEffect } from 'react';
+import { StrictMode } from 'react';
 import { App as Toolbox } from 'components/App';
 import { Notifications } from 'components/Notifications';
 import {
@@ -16,10 +15,8 @@ import {
   useCustomMarkerManager,
   useHuntingMapTypeManager,
   useSettingsManager,
-  useStorage,
   useTutorialManager,
 } from 'hooks';
-import { hasLegacyMarkerStorageKeys } from 'lib/storage';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
@@ -34,24 +31,6 @@ const App = (props: AppProps) => {
   const customManager = useCustomMarkerManager(mapType);
   const settingsManager = useSettingsManager();
   const tutorialManager = useTutorialManager();
-
-  // Retrieve application router and storage manager
-  const router = useRouter();
-  const storage = useStorage();
-
-  // Redirect users to the migration page if they still have any legacy markers
-  // left in their local storage
-  useEffect(() => {
-    if (!storage) {
-      return;
-    }
-
-    const path = '/news/migration';
-    if (router.pathname !== path && hasLegacyMarkerStorageKeys(storage)) {
-      // noinspection JSIgnoredPromiseFromCall
-      router.push(path);
-    }
-  }, [router, storage]);
 
   return (
     <>
