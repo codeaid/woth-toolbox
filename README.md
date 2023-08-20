@@ -1,7 +1,5 @@
 ![Way Of The Hunter Logo](docs/woth-logo.png)
 
-# Way Of The Hunter Toolbox
-
 This interactive web application contains a suite of tools that can be used
 while playing [Way Of The Hunter](https://store.steampowered.com/app/1288320).
 
