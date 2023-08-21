@@ -102,6 +102,14 @@ export const HuntingMapTutorialFilters = () => (
       width={imgFiltersItemToggle.width}
     />
 
+    <Heading size={6}>Note</Heading>
+    <p>
+      If only one type of generic or animal markers is selected they will be
+      visible even when the map is fully zoomed out. This can be useful if you
+      want to see all locations of one specific animal at once without having to
+      pan the map.
+    </p>
+
     <Heading size={4}>Other</Heading>
     <p>
       Options in this category allow you to turn the visibility of map labels ,
