@@ -67,22 +67,15 @@ const isWithinRange = (value: number, from: number, to: number) =>
  * @param distance Target distance
  */
 const getWeaponEnergy = (weapon: Weapon, distance: WeaponDistance) => {
-  const [m50, m100, m150, m200, m300] = weapon.hitEnergy;
+  const map = new Map<WeaponDistance, number>([
+    ['50m', weapon.hitEnergy[0]],
+    ['100m', weapon.hitEnergy[1]],
+    ['150m', weapon.hitEnergy[2]],
+    ['200m', weapon.hitEnergy[3]],
+    ['300m', weapon.hitEnergy[4]],
+  ]);
 
-  switch (distance) {
-    case WeaponDistance.M50:
-      return m50;
-    case WeaponDistance.M100:
-      return m100;
-    case WeaponDistance.M150:
-      return m150;
-    case WeaponDistance.M200:
-      return m200;
-    case WeaponDistance.M300:
-      return m300;
-    default:
-      return 0;
-  }
+  return map.get(distance) ?? 0;
 };
 
 /**

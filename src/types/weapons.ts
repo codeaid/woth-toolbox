@@ -10,10 +10,4 @@ export interface Weapon {
   tier: number;
 }
 
-export enum WeaponDistance {
-  M50 = 50,
-  M100 = 100,
-  M150 = 150,
-  M200 = 200,
-  M300 = 300,
-}
+export type WeaponDistance = '50m' | '100m' | '150m' | '200m' | '300m';

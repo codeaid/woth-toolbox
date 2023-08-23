@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { WeaponDistance } from 'types/weapons';
 import { PivotTableEnergyRating } from './PivotTableEnergyRating';
 import { Entity, EntityPivot, PivotTableRowProps } from './types';
 import styles from './PivotTableRow.module.css';
@@ -24,45 +23,45 @@ export const PivotTableRow = <
 
   // Generate optimal distance flags
   const optimal50 = useMemo(
-    () => onGetWeaponOptimal(entity, pivot, WeaponDistance.M50),
+    () => onGetWeaponOptimal(entity, pivot, '50m'),
     [entity, onGetWeaponOptimal, pivot],
   );
   const optimal100 = useMemo(
-    () => onGetWeaponOptimal(entity, pivot, WeaponDistance.M100),
+    () => onGetWeaponOptimal(entity, pivot, '100m'),
     [entity, onGetWeaponOptimal, pivot],
   );
   const optimal150 = useMemo(
-    () => onGetWeaponOptimal(entity, pivot, WeaponDistance.M150),
+    () => onGetWeaponOptimal(entity, pivot, '150m'),
     [entity, onGetWeaponOptimal, pivot],
   );
   const optimal200 = useMemo(
-    () => onGetWeaponOptimal(entity, pivot, WeaponDistance.M200),
+    () => onGetWeaponOptimal(entity, pivot, '200m'),
     [entity, onGetWeaponOptimal, pivot],
   );
   const optimal300 = useMemo(
-    () => onGetWeaponOptimal(entity, pivot, WeaponDistance.M300),
+    () => onGetWeaponOptimal(entity, pivot, '300m'),
     [entity, onGetWeaponOptimal, pivot],
   );
 
   // Generate suboptimal distance flags
   const suboptimal50 = useMemo(
-    () => onGetWeaponSuboptimal(entity, pivot, WeaponDistance.M50),
+    () => onGetWeaponSuboptimal(entity, pivot, '50m'),
     [entity, onGetWeaponSuboptimal, pivot],
   );
   const suboptimal100 = useMemo(
-    () => onGetWeaponSuboptimal(entity, pivot, WeaponDistance.M100),
+    () => onGetWeaponSuboptimal(entity, pivot, '100m'),
     [entity, onGetWeaponSuboptimal, pivot],
   );
   const suboptimal150 = useMemo(
-    () => onGetWeaponSuboptimal(entity, pivot, WeaponDistance.M150),
+    () => onGetWeaponSuboptimal(entity, pivot, '150m'),
     [entity, onGetWeaponSuboptimal, pivot],
   );
   const suboptimal200 = useMemo(
-    () => onGetWeaponSuboptimal(entity, pivot, WeaponDistance.M200),
+    () => onGetWeaponSuboptimal(entity, pivot, '200m'),
     [entity, onGetWeaponSuboptimal, pivot],
   );
   const suboptimal300 = useMemo(
-    () => onGetWeaponSuboptimal(entity, pivot, WeaponDistance.M300),
+    () => onGetWeaponSuboptimal(entity, pivot, '300m'),
     [entity, onGetWeaponSuboptimal, pivot],
   );
 
