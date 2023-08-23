@@ -67,20 +67,15 @@ export const getAnimalGroups = (
  * @param rating Source rating value
  */
 export const getAnimalRatingValue = (rating: AnimalRating) => {
-  switch (rating) {
-    case 'M1':
-      return 1;
-    case 'M2':
-      return 2;
-    case 'M3':
-      return 3;
-    case 'M4':
-      return 4;
-    case 'M5':
-      return 5;
-    default:
-      return 0;
-  }
+  const map = new Map<AnimalRating, number>([
+    ['M1', 1],
+    ['M2', 2],
+    ['M3', 3],
+    ['M4', 4],
+    ['M5', 5],
+  ]);
+
+  return map.get(rating) ?? 0;
 };
 
 /**
