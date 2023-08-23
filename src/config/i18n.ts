@@ -22,9 +22,9 @@ export const animalActivityTranslationMap = new Map<
   AnimalActivity,
   TranslationKey
 >([
-  ['AnimalActivity.Drinking', 'ANIMAL:NEED_ZONE_DRINKING'],
-  [AnimalActivity.Feeding, 'ANIMAL:NEED_ZONE_EATING'],
-  [AnimalActivity.Sleeping, 'ANIMAL:NEED_ZONE_RESTING'],
+  ['drinking', 'ANIMAL:NEED_ZONE_DRINKING'],
+  ['feeding', 'ANIMAL:NEED_ZONE_EATING'],
+  ['sleeping', 'ANIMAL:NEED_ZONE_RESTING'],
 ]);
 
 export const animalAgeTranslationMap = new Map<AnimalAge, TranslationKey>([

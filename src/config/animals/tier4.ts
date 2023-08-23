@@ -1,4 +1,4 @@
-import { Animal, AnimalActivity } from 'types/animals';
+import { Animal } from 'types/animals';
 
 export default [
   {
@@ -9,12 +9,12 @@ export default [
     hitEnergy: [350, 2000],
     latin: 'ANIMAL:CANIS_AUREUS_LATIN',
     lifeCycle: [
-      { activity: AnimalActivity.Sleeping, time: 2 },
-      { activity: AnimalActivity.Feeding, time: 5 },
-      { activity: AnimalActivity.Drinking, time: 9 },
-      { activity: AnimalActivity.Sleeping, time: 12 },
-      { activity: AnimalActivity.Feeding, time: 17 },
-      { activity: AnimalActivity.Drinking, time: 21 },
+      { activity: 'sleeping', time: 2 },
+      { activity: 'feeding', time: 5 },
+      { activity: 'drinking', time: 9 },
+      { activity: 'sleeping', time: 12 },
+      { activity: 'feeding', time: 17 },
+      { activity: 'drinking', time: 21 },
     ],
     maps: ['transylvania'],
     slug: 'golden-jackal',
@@ -28,12 +28,12 @@ export default [
     hitEnergy: [945, 2458],
     latin: 'ANIMAL:CAPREOLUS_CAPREOLUS_LATIN',
     lifeCycle: [
-      { activity: AnimalActivity.Feeding, time: 3 },
-      { activity: AnimalActivity.Drinking, time: 7 },
-      { activity: AnimalActivity.Sleeping, time: 11 },
-      { activity: AnimalActivity.Feeding, time: 15 },
-      { activity: AnimalActivity.Drinking, time: 20 },
-      { activity: AnimalActivity.Sleeping, time: 22 },
+      { activity: 'feeding', time: 3 },
+      { activity: 'drinking', time: 7 },
+      { activity: 'sleeping', time: 11 },
+      { activity: 'feeding', time: 15 },
+      { activity: 'drinking', time: 20 },
+      { activity: 'sleeping', time: 22 },
     ],
     maps: ['transylvania'],
     slug: 'roe-deer',
@@ -48,12 +48,12 @@ export default [
     hitEnergy: [1645, 3125],
     latin: 'ANIMAL:SPRINGBOK_LATIN',
     lifeCycle: [
-      { activity: AnimalActivity.Feeding, time: 3 },
-      { activity: AnimalActivity.Drinking, time: 7 },
-      { activity: AnimalActivity.Sleeping, time: 11 },
-      { activity: AnimalActivity.Feeding, time: 15 },
-      { activity: AnimalActivity.Drinking, time: 20 },
-      { activity: AnimalActivity.Sleeping, time: 22 },
+      { activity: 'feeding', time: 3 },
+      { activity: 'drinking', time: 7 },
+      { activity: 'sleeping', time: 11 },
+      { activity: 'feeding', time: 15 },
+      { activity: 'drinking', time: 20 },
+      { activity: 'sleeping', time: 22 },
     ],
     maps: ['africa'],
     slug: 'springbok',

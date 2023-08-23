@@ -1,4 +1,4 @@
-import { Animal, AnimalActivity } from 'types/animals';
+import { Animal } from 'types/animals';
 
 export default [
   {
@@ -8,10 +8,10 @@ export default [
     hitEnergy: [356, 1068],
     latin: 'ANIMAL:LEPUS_EUROPAEUS_LATIN',
     lifeCycle: [
-      { activity: AnimalActivity.Feeding, time: 0 },
-      { activity: AnimalActivity.Sleeping, time: 3 },
-      { activity: AnimalActivity.Feeding, time: 9 },
-      { activity: AnimalActivity.Sleeping, time: 17 },
+      { activity: 'feeding', time: 0 },
+      { activity: 'sleeping', time: 3 },
+      { activity: 'feeding', time: 9 },
+      { activity: 'sleeping', time: 17 },
     ],
     maps: ['transylvania'],
     slug: 'european-hare',
@@ -25,10 +25,10 @@ export default [
     hitEnergy: [56, 628],
     latin: 'ANIMAL:LEPUS_AMERICANUS_LATIN',
     lifeCycle: [
-      { activity: AnimalActivity.Feeding, time: 0 },
-      { activity: AnimalActivity.Sleeping, time: 3 },
-      { activity: AnimalActivity.Feeding, time: 9 },
-      { activity: AnimalActivity.Sleeping, time: 17 },
+      { activity: 'feeding', time: 0 },
+      { activity: 'sleeping', time: 3 },
+      { activity: 'feeding', time: 9 },
+      { activity: 'sleeping', time: 17 },
     ],
     maps: ['alaska', 'idaho'],
     slug: 'snowshoe-hare',

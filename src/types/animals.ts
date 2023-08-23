@@ -15,11 +15,7 @@ export interface Animal {
   type: AnimalType;
 }
 
-export enum AnimalActivity {
-  Drinking = 'drinking',
-  Feeding = 'feeding',
-  Sleeping = 'sleeping',
-}
+export type AnimalActivity = 'drinking' | 'feeding' | 'sleeping';
 
 export interface AnimalActivityData {
   activity: AnimalActivity;

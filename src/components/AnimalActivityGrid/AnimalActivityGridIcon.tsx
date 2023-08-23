@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { DrinkZoneIcon, EatZoneIcon, SleepZoneIcon } from 'components/Icon';
-import { AnimalActivity } from 'types/animals';
 import { AnimalActivityGridIconProps } from './types';
 import styles from './AnimalActivityGridIcon.module.css';
 
@@ -19,11 +18,11 @@ export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {
   };
 
   switch (activity) {
-    case AnimalActivity.Drinking:
+    case 'drinking':
       return <DrinkZoneIcon {...imgProps} />;
-    case AnimalActivity.Feeding:
+    case 'feeding':
       return <EatZoneIcon {...imgProps} />;
-    case AnimalActivity.Sleeping:
+    case 'sleeping':
       return <SleepZoneIcon {...imgProps} />;
     default:
       return null;
