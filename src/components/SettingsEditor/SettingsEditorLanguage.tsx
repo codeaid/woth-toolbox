@@ -28,6 +28,7 @@ export const SettingsEditorLanguage = (props: SettingsEditorLanguageProps) => {
         { content: translate('UI:LANGUAGE_TR_TR'), value: 'tr' },
         { content: translate('UI:LANGUAGE_ZH_HANS'), value: 'zh' },
         { content: translate('UI:LANGUAGE_ZH_HANT'), value: 'zh-Hant' },
+        { content: translate('TOOLBOX:LANGUAGE_NL_NL'), value: 'nl' },
       ].sort((a, b) => a.content.localeCompare(b.content)),
     [translate],
   );
