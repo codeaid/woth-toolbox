@@ -1,9 +1,16 @@
 import { getUserLocales } from 'get-user-locale';
 import { fauna } from 'config/animals';
 import {
+  animalActivityTranslationMap,
+  animalAgeTranslationMap,
   animalHabitatTranslationMap,
+  animalRatingTranslationMap,
+  animalTierTranslationMap,
+  animalZoneTranslationMap,
+  customMarkerTranslationMap,
   defaultLocale,
   defaultResource,
+  genericMarkerTranslationMap,
   localeDirectoryMap,
 } from 'config/i18n';
 import {
@@ -32,73 +39,48 @@ import {
  *
  * @param activity Target animal activity
  */
-export const getAnimalActivityKey = (
-  activity?: AnimalActivity,
-): TranslationKey => {
-  switch (activity) {
-    case AnimalActivity.Drinking:
-      return 'ANIMAL:NEED_ZONE_DRINKING';
-    case AnimalActivity.Feeding:
-      return 'ANIMAL:NEED_ZONE_EATING';
-    case AnimalActivity.Sleeping:
-      return 'ANIMAL:NEED_ZONE_RESTING';
-    default:
-      throw new Error(`Invalid animal activity specified: ${activity}`);
-  }
-};
+export const getAnimalActivityKey = (activity?: AnimalActivity) =>
+  tryGetTranslationKey(
+    animalActivityTranslationMap,
+    activity,
+    `Invalid animal activity specified: ${activity}`,
+  );
 
 /**
  * Get animal's age translation key
  *
  * @param age Target animal age
  */
-export const getAnimalAgeKey = (age?: AnimalAge): TranslationKey => {
-  switch (age) {
-    case 'young':
-      return 'ANIMAL:AGE_YOUNG';
-    case 'adult':
-      return 'ANIMAL:AGE_ADULT';
-    case 'mature':
-      return 'ANIMAL:AGE_MATURE';
-    default:
-      throw new Error(`Invalid animal age type specified: ${age}`);
-  }
-};
+export const getAnimalAgeKey = (age?: AnimalAge): TranslationKey =>
+  tryGetTranslationKey(
+    animalAgeTranslationMap,
+    age,
+    `Invalid animal age type specified: ${age}`,
+  );
 
 /**
  * Get animal's habitat translation key
  *
  * @param habitat Target animal habitat
  */
-export const getAnimalHabitatKey = (habitat: AnimalHabitat): TranslationKey => {
-  if (!animalHabitatTranslationMap.has(habitat)) {
-    throw new Error(`Invalid animal habitat type specified: ${habitat}`);
-  }
-
-  return animalHabitatTranslationMap.get(habitat)!;
-};
+export const getAnimalHabitatKey = (habitat: AnimalHabitat): TranslationKey =>
+  tryGetTranslationKey(
+    animalHabitatTranslationMap,
+    habitat,
+    `Invalid animal habitat type specified: ${habitat}`,
+  );
 
 /**
  * Get animal's rating translation key
  *
  * @param rating Target animal rating
  */
-export const getAnimalRatingGenderKey = (
-  rating?: AnimalRating,
-): TranslationKey => {
-  switch (rating) {
-    case 'F':
-      return 'ANIMAL:GENDER_FEMALE';
-    case 'M1':
-    case 'M2':
-    case 'M3':
-    case 'M4':
-    case 'M5':
-      return 'ANIMAL:GENDER_MALE';
-    default:
-      throw new Error(`Invalid animal rating specified: ${rating}`);
-  }
-};
+export const getAnimalRatingGenderKey = (rating?: AnimalRating) =>
+  tryGetTranslationKey(
+    animalRatingTranslationMap,
+    rating,
+    `Invalid animal rating specified: ${rating}`,
+  );
 
 /**
  * Get animal's type translation key
@@ -121,74 +103,36 @@ export const getAnimalTypeKey = (type: AnimalType) => {
  *
  * @param type Target zone type
  */
-export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey => {
-  switch (type) {
-    case 'zone:drink':
-      return 'ANIMAL:NEED_ZONE_DRINKING';
-    case 'zone:eat':
-      return 'ANIMAL:NEED_ZONE_EATING';
-    case 'zone:sleep':
-      return 'ANIMAL:NEED_ZONE_RESTING';
-    default:
-      throw new Error(`Invalid need zone type specified: ${type}`);
-  }
-};
+export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey =>
+  tryGetTranslationKey(
+    animalZoneTranslationMap,
+    type,
+    `Invalid need zone type specified: ${type}`,
+  );
 
 /**
  * Get custom marker type translation key
  *
  * @param type Target zone type
  */
-export const getCustomMarkerKey = (type?: MarkerTypeCustom): TranslationKey => {
-  switch (type) {
-    case 'marker:exploration':
-      return 'UI:MARKER_EXPLORATION';
-    case 'marker:level area':
-      return 'UI:MARKER_LABELS';
-    case 'marker:tracking':
-      return 'UI:MARKER_TRACKING';
-    default:
-      throw new Error(`Invalid need zone type specified: ${type}`);
-  }
-};
+export const getCustomMarkerKey = (type?: MarkerTypeCustom): TranslationKey =>
+  tryGetTranslationKey(
+    customMarkerTranslationMap,
+    type,
+    `Invalid need zone type specified: ${type}`,
+  );
 
 /**
  * Get generic marker type translation key
  *
  * @param type Target marker type
  */
-export const getGenericMarkerKey = (
-  type: MarkerTypeGeneric,
-): TranslationKey => {
-  switch (type) {
-    case 'cabin':
-      return 'TOOLBOX:MARKER_CABIN';
-    case 'camp':
-      return 'UI:MARKER_CAMPSITE';
-    case 'echo':
-      return 'UI:MARKER_ECHO';
-    case 'flower':
-      return 'UI:MARKER_FLOWER';
-    case 'hunting stand':
-      return 'UI:MARKER_HUNTING_STAND';
-    case 'lodge':
-      return 'TOOLBOX:MARKER_LODGE';
-    case 'parking':
-      return 'UI:MARKER_PARKING';
-    case 'photo':
-      return 'UI:MARKER_PHOTO';
-    case 'race':
-      return 'TOOLBOX:MARKER_RACE';
-    case 'shooting range':
-      return 'TOOLBOX:MARKER_SHOOTING_RANGE';
-    case 'swing':
-      return 'UI:MARKER_SWING';
-    case 'view':
-      return 'UI:MARKER_VIEW';
-    default:
-      throw new Error(`Invalid generic marker type specified: ${type}`);
-  }
-};
+export const getGenericMarkerKey = (type: MarkerTypeGeneric) =>
+  tryGetTranslationKey(
+    genericMarkerTranslationMap,
+    type,
+    `Invalid generic marker type specified: ${type}`,
+  );
 
 /**
  * Get marker type translation key
@@ -216,24 +160,12 @@ export const getMarkerKey = (type?: MarkerType) => {
  *
  * @param tier Target tier
  */
-export const getTierKey = (tier: number): TranslationKey => {
-  switch (tier) {
-    case 1:
-      return 'UI:TIER_1';
-    case 2:
-      return 'UI:TIER_2';
-    case 3:
-      return 'UI:TIER_3';
-    case 4:
-      return 'UI:TIER_4';
-    case 5:
-      return 'UI:TIER_5';
-    case 6:
-      return 'UI:TIER_6';
-    default:
-      throw new Error(`Invalid tier specified: ${tier}`);
-  }
-};
+export const getTierKey = (tier: number) =>
+  tryGetTranslationKey(
+    animalTierTranslationMap,
+    tier,
+    `Invalid tier specified: ${tier}`,
+  );
 
 /**
  * Get application locale corresponding to current browser's locale
@@ -306,4 +238,23 @@ export const getLocaleMessagesAsync = async (locale: string) => {
     ...defaultResource,
     ...resourceModule.default,
   } as TranslationResource;
+};
+
+/**
+ * Attempt to retrieve a translation key from the specified type/translation map
+ *
+ * @param map Source translation key map
+ * @param key Target translation key whose associated translation key to extract
+ * @param errorMessage Message of the error to throw in case of a failed lookup
+ */
+const tryGetTranslationKey = <T>(
+  map: Map<T, TranslationKey>,
+  key: Optional<T>,
+  errorMessage: string,
+): TranslationKey => {
+  if (typeof key === 'undefined' || !map.has(key)) {
+    throw new Error(errorMessage);
+  }
+
+  return map.get(key)!;
 };
