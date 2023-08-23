@@ -177,6 +177,8 @@ export const getGenericMarkerKey = (
       return 'UI:MARKER_PARKING';
     case 'photo':
       return 'UI:MARKER_PHOTO';
+    case 'race':
+      return 'TOOLBOX:MARKER_RACE';
     case 'shooting range':
       return 'TOOLBOX:MARKER_SHOOTING_RANGE';
     case 'swing':

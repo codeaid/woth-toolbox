@@ -74,6 +74,7 @@ export const genericMarkerTypes: Array<MarkerTypeGeneric> = [
   'lodge',
   'parking',
   'photo',
+  'race',
   'shooting range',
   'swing',
   'view',
