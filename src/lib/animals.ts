@@ -6,7 +6,7 @@ import {
   AnimalSpecimen,
 } from 'types/animals';
 import { MapType } from 'types/cartography';
-import { EntityGroup } from 'types/global';
+import { EntityGroup } from 'types/generic';
 import { Translator } from 'types/i18n';
 
 /**

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Animal } from 'types/animals';
-import { EntityGroup } from 'types/global';
+import { EntityGroup } from 'types/generic';
 import { Weapon, WeaponDistance } from 'types/weapons';
 
 // Base entity and opposite entity selector types

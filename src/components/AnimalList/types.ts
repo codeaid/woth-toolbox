@@ -1,5 +1,5 @@
 import { Animal } from 'types/animals';
-import { EntityGroup } from 'types/global';
+import { EntityGroup } from 'types/generic';
 
 type AnimalListItemClickHandler = (animal: Animal) => void;
 

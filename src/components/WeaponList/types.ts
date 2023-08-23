@@ -1,4 +1,4 @@
-import { EntityGroup } from 'types/global';
+import { EntityGroup } from 'types/generic';
 import { Weapon } from 'types/weapons';
 
 type WeaponListItemClickHandler = (weapon: Weapon) => void;
