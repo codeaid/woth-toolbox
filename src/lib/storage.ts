@@ -1,3 +1,4 @@
+import { mapTypes } from 'config/cartography';
 import {
   animalMarkerKey,
   customMarkerKey,
@@ -230,12 +231,8 @@ const readMapTutorialCompleted = (storage: Storage) => {
 export const readSerializedStore = (storage: Storage) => {
   // Generate list of keys that should be migrated
   const keys = [
-    getAnimalMarkerStorageKey('alaska'),
-    getAnimalMarkerStorageKey('idaho'),
-    getAnimalMarkerStorageKey('transylvania'),
-    getCustomMarkerStorageKey('alaska'),
-    getCustomMarkerStorageKey('idaho'),
-    getCustomMarkerStorageKey('transylvania'),
+    ...mapTypes.map(getAnimalMarkerStorageKey),
+    ...mapTypes.map(getCustomMarkerStorageKey),
     mapTutorialKey,
     settingsKey,
   ];
