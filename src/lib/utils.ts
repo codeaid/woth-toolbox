@@ -144,14 +144,6 @@ export const hasListValue = <TValue>(value: TValue, list?: Array<TValue>) =>
 export const isDevelopmentMode = () => process.env.NODE_ENV === 'development';
 
 /**
- * Determine if the specified value is not empty (not "undefined" or "null")
- *
- * @param value Value to check
- */
-export const isNotEmpty = <TValue>(value: Maybe<TValue>): value is TValue =>
-  value !== null && typeof value !== 'undefined';
-
-/**
  * Round number to the specified number of decimal places
  *
  * @param value Value to round
