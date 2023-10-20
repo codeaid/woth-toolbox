@@ -31,7 +31,7 @@ export * from './RedDeerIcon';
 export * from './RedFoxIcon';
 export * from './RockyMountainElkIcon';
 export * from './RoeDeerIcon';
-export * from './RoosveltElkIcon';
+export * from './RooseveltElkIcon';
 export * from './RossGooseIcon';
 export * from './ShowshoeHareIcon';
 export * from './SitkaDeerIcon';
