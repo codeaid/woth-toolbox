@@ -54,6 +54,15 @@ export default [
     tier: 6,
   },
   {
+    action: 'WEAPON:RIFLE_BOLT_09_FULLSTOCK_01_ACTION',
+    caliber: 'WEAPON:RIFLE_BOLT_09_FULLSTOCK_01_CALIBER',
+    description: 'WEAPON:RIFLE_BOLT_09_FULLSTOCK_01_DESCRIPTION',
+    heading: 'WEAPON:RIFLE_BOLT_09_FULLSTOCK_01_HEADING',
+    hitEnergy: [4540, 4320, 4080, 3860, 3440],
+    slug: 'steyr-mannlicher-cl-ii-fs',
+    tier: 6,
+  },
+  {
     action: 'WEAPON:RIFLE_BOLT_07_ACTION',
     caliber: 'WEAPON:RIFLE_BOLT_07_CALIBER',
     description: 'WEAPON:RIFLE_BOLT_07_DESCRIPTION',
