@@ -1,7 +1,7 @@
 import { Animal } from 'types/animals';
 import { EntityGroup } from 'types/generic';
 import { Translator } from 'types/i18n';
-import { Weapon, WeaponDistance } from 'types/weapons';
+import { Weapon, WeaponDistance, WeaponEnergyValue } from 'types/weapons';
 
 /**
  * Sort a list of weapons by their tier and name
@@ -67,7 +67,7 @@ const isWithinRange = (value: number, from: number, to: number) =>
  * @param distance Target distance
  */
 const getWeaponEnergy = (weapon: Weapon, distance: WeaponDistance) => {
-  const map = new Map<WeaponDistance, number>([
+  const map = new Map<WeaponDistance, WeaponEnergyValue>([
     ['50m', weapon.hitEnergy[0]],
     ['100m', weapon.hitEnergy[1]],
     ['150m', weapon.hitEnergy[2]],

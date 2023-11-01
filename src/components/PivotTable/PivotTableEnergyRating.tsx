@@ -23,7 +23,7 @@ export const PivotTableEnergyRating = (props: PivotTableEnergyRatingProps) => {
 
   // Format numeric value based on the current locale
   const formattedValue = useMemo(
-    () => formatNumber(value, locale),
+    () => (value ? formatNumber(value, locale) : '-'),
     [locale, value],
   );
 

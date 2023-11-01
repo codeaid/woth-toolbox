@@ -5,9 +5,20 @@ export interface Weapon {
   caliber?: TranslationKey;
   description: TranslationKey;
   heading: TranslationKey;
-  hitEnergy: [number, number, number, number, number]; // 50m, 100m, 150m, 200m, 300m
+  hitEnergy: WeaponEnergyRatings;
   slug: string;
   tier: number;
 }
 
 export type WeaponDistance = '50m' | '100m' | '150m' | '200m' | '300m';
+
+// 50m, 100m, 150m, 200m, 300m
+export type WeaponEnergyRatings = [
+  WeaponEnergyValue,
+  WeaponEnergyValue,
+  WeaponEnergyValue,
+  WeaponEnergyValue,
+  WeaponEnergyValue,
+];
+
+export type WeaponEnergyValue = number | undefined;

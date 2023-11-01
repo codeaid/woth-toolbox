@@ -1,7 +1,12 @@
 import { ReactNode } from 'react';
 import { Animal } from 'types/animals';
 import { EntityGroup } from 'types/generic';
-import { Weapon, WeaponDistance } from 'types/weapons';
+import {
+  Weapon,
+  WeaponDistance,
+  WeaponEnergyRatings,
+  WeaponEnergyValue,
+} from 'types/weapons';
 
 // Base entity and opposite entity selector types
 export type Entity = Animal | Weapon;
@@ -21,10 +26,7 @@ type PivotTableEntityNameRenderer<T> = (
 type PivotTableHitEnergyHandler<
   TEntity extends Entity,
   TPivot extends EntityPivot<TEntity>,
-> = (
-  entity: TEntity,
-  pivot: TPivot,
-) => [number, number, number, number, number];
+> = (entity: TEntity, pivot: TPivot) => WeaponEnergyRatings;
 
 type PivotTableHitEnergyValidator<
   TEntity extends Entity,
@@ -34,7 +36,7 @@ type PivotTableHitEnergyValidator<
 export interface PivotTableEnergyRatingProps {
   optimal?: boolean;
   suboptimal?: boolean;
-  value: number;
+  value: WeaponEnergyValue;
 }
 
 export interface PivotTableGroupProps<
