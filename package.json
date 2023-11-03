@@ -10,6 +10,7 @@
     "https": "npx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "prepare": "husky install",
     "prettier": "prettier ./src --check",
     "prettier:fix": "prettier ./src --fix",
     "start": "next start"
@@ -48,6 +49,7 @@
     "@typescript-eslint/parser": "^6.9.1",
     "eslint": "^8.52.0",
     "eslint-config-next": "^13.4.16",
+    "husky": "^8.0.3",
     "prettier": "^3.0.2",
     "process": "^0.11.10",
     "tsconfig-paths": "^4.2.0",
