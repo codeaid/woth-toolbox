@@ -1,4 +1,4 @@
-import { Weapon } from 'types/weapons';
+import type { Weapon } from 'types/weapons';
 
 export default [
   {

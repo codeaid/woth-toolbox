@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Button } from 'components/Button';
 import { useTranslator } from 'hooks';
 import { SettingsEditorMigrationModal } from './SettingsEditorMigrationModal';
-import { SettingsEditorMigrationProps } from './types';
+import type { SettingsEditorMigrationProps } from './types';
 import styles from './SettingsEditorMigration.module.css';
 
 export const SettingsEditorMigration = (

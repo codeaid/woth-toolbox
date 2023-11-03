@@ -1,5 +1,5 @@
-import { MapType } from 'types/cartography';
-import { TranslationKey } from 'types/i18n';
+import type { MapType } from 'types/cartography';
+import type { TranslationKey } from 'types/i18n';
 
 export interface Animal {
   description: TranslationKey;

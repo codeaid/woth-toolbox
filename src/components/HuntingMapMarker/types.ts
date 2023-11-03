@@ -1,5 +1,5 @@
-import { CSSProperties, MouseEvent, ReactNode } from 'react';
-import { MarkerOptions } from 'types/markers';
+import type { CSSProperties, MouseEvent, ReactNode } from 'react';
+import type { MarkerOptions } from 'types/markers';
 
 type HuntingMapMarkerClickHandler<TMarkerOptions extends MarkerOptions> = (
   marker: TMarkerOptions,

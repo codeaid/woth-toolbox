@@ -1,5 +1,5 @@
-import { MapFilterOptions } from 'types/cartography';
-import {
+import type { MapFilterOptions } from 'types/cartography';
+import type {
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
   MarkerType,

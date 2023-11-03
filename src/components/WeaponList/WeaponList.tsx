@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useTranslator } from 'hooks';
 import { getWeaponGroups } from 'lib/weapons';
 import { WeaponListGroup } from './WeaponListGroup';
-import { WeaponListProps } from './types';
+import type { WeaponListProps } from './types';
 import styles from './WeaponList.module.css';
 
 export const WeaponList = (props: WeaponListProps) => {

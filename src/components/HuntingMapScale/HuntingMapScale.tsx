@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslator } from 'hooks';
 import { floorNearestFloor10, formatNumber, getMapScaleStep } from 'lib/utils';
-import { HuntingMapScaleProps } from './types';
+import type { HuntingMapScaleProps } from './types';
 import styles from './HuntingMapScale.module.css';
 
 export const HuntingMapScale = (props: HuntingMapScaleProps) => {

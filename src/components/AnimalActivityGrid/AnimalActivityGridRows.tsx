@@ -1,5 +1,5 @@
 import { AnimalActivityGridRow } from './AnimalActivityGridRow';
-import { AnimalActivityGridRowsProps } from './types';
+import type { AnimalActivityGridRowsProps } from './types';
 import styles from './AnimalActivityGridRows.module.css';
 
 export const AnimalActivityGridRows = (props: AnimalActivityGridRowsProps) => {

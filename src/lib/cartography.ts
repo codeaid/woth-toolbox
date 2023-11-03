@@ -1,6 +1,6 @@
 import { roundNumber } from 'lib/utils';
-import { MapOptions, MapZoomOptions } from 'types/cartography';
-import { Point } from 'types/generic';
+import type { MapOptions, MapZoomOptions } from 'types/cartography';
+import type { Point } from 'types/generic';
 
 /**
  * Get position of an element relative to the page

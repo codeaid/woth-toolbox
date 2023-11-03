@@ -1,4 +1,4 @@
-import { MapFilterOptions } from 'types/cartography';
+import type { MapFilterOptions } from 'types/cartography';
 
 /**
  * Check if specified filter options contain any selection

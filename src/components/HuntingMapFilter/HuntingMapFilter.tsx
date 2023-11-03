@@ -1,13 +1,7 @@
-import {
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
-import { ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { SectionHeader } from 'components/SectionHeader';
 import { SidePanel } from 'components/SidePanel';
@@ -19,7 +13,7 @@ import {
   isAnimalMarkerType,
   isGenericMarkerType,
 } from 'lib/markers';
-import {
+import type {
   MarkerType,
   MarkerTypeAnimal,
   MarkerTypeCustom,
@@ -27,7 +21,7 @@ import {
 } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterOption } from './HuntingMapFilterOption';
-import { HuntingMapFilterProps } from './types';
+import type { HuntingMapFilterProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilter = (props: HuntingMapFilterProps) => {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
 import { Modal } from 'components/Modal';
 import { HuntingMapTutorialEditor } from './HuntingMapTutorialEditor';
 import { HuntingMapTutorialFilters } from './HuntingMapTutorialFilters';
@@ -8,7 +8,7 @@ import { HuntingMapTutorialMarkers } from './HuntingMapTutorialMarkers';
 import { HuntingMapTutorialOther } from './HuntingMapTutorialOther';
 import { HuntingMapTutorialSettings } from './HuntingMapTutorialSettings';
 import { HuntingMapTutorialWelcome } from './HuntingMapTutorialWelcome';
-import { HuntingMapTutorialProps } from './types';
+import type { HuntingMapTutorialProps } from './types';
 import styles from './HuntingMapTutorial.module.css';
 
 // List of pages shown in the tutorial

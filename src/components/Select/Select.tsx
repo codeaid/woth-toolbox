@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 import { zeroWidthSpace } from 'config/html';
-import { SelectOption, SelectProps } from './types';
+import type { SelectOption, SelectProps } from './types';
 import styles from './Select.module.css';
 
 export const Select = <TValue extends string | number>(

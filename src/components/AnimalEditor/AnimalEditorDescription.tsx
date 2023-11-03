@@ -1,6 +1,7 @@
-import { ChangeEvent, useCallback } from 'react';
+import { useCallback } from 'react';
+import type { ChangeEvent } from 'react';
 import { Textarea } from 'components/Textarea';
-import { AnimalEditorDescriptionProps } from './types';
+import type { AnimalEditorDescriptionProps } from './types';
 
 export const AnimalEditorDescription = (
   props: AnimalEditorDescriptionProps,

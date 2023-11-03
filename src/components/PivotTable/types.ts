@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import { Animal } from 'types/animals';
-import { EntityGroup } from 'types/generic';
-import {
+import type { ReactNode } from 'react';
+import type { Animal } from 'types/animals';
+import type { EntityGroup } from 'types/generic';
+import type {
   Weapon,
   WeaponDistance,
   WeaponEnergyRatings,

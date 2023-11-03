@@ -1,4 +1,4 @@
-import { EmphasisProps } from './types';
+import type { EmphasisProps } from './types';
 import styles from './Emphasis.module.css';
 
 export const Emphasis = (props: EmphasisProps) => (

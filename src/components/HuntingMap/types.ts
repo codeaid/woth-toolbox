@@ -1,5 +1,5 @@
-import { MapLabelOptions } from 'types/cartography';
-import {
+import type { MapLabelOptions } from 'types/cartography';
+import type {
   MarkerOptionsAnimal,
   MarkerOptionsGeneric,
   MarkerType,

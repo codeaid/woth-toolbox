@@ -1,6 +1,6 @@
 import clsx from 'clsx';
+import type { TransitionState } from 'types/dom';
 import type { Reference } from 'types/dom';
-import { TransitionState } from 'types/dom';
 
 /**
  * Generate CSS classname for the specified transition state

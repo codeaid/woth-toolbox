@@ -1,6 +1,7 @@
-import { ForwardedRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import type { ForwardedRef } from 'react';
 import { Icon } from './Icon';
-import { ImageIconProps } from './types';
+import type { ImageIconProps } from './types';
 
 export const ImageIcon = forwardRef(
   (props: ImageIconProps, ref: ForwardedRef<HTMLDivElement>) => {

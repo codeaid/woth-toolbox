@@ -1,4 +1,4 @@
-import { AnimalType } from 'types/animals';
+import type { AnimalType } from 'types/animals';
 
 export type IconTypeAnimal = AnimalType;
 

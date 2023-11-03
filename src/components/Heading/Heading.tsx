@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import { HeadingProps } from './types';
+import type { HeadingProps } from './types';
 import styles from './Heading.module.css';
 
 export const Heading = (props: HeadingProps) => {

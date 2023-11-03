@@ -1,6 +1,6 @@
 import { DefaultIcon } from 'components/Icon';
 import { iconComponentMap } from 'config/icons';
-import { MarkerType } from 'types/markers';
+import type { MarkerType } from 'types/markers';
 
 /**
  * Get icon component associated with the specified marker type

@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from 'react';
-import { ChromePicker, ColorResult } from 'react-color';
+import { ChromePicker } from 'react-color';
+import type { ColorResult } from 'react-color';
 import { getIconComponent } from 'lib/icons';
 import { getHexColor } from 'lib/utils';
-import { AnimalEditorColorPickerProps } from './types';
+import type { AnimalEditorColorPickerProps } from './types';
 import styles from './AnimalEditorColorPicker.module.css';
 
 export const AnimalEditorColorPicker = (

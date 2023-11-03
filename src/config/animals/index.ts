@@ -1,4 +1,4 @@
-import { Animal } from 'types/animals';
+import type { Animal } from 'types/animals';
 import birds from './birds';
 import tier1 from './tier1';
 import tier3 from './tier3';

@@ -1,4 +1,4 @@
-import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
+import type { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 export interface AnimalMarkerContextValue {
   markers: Record<string, MarkerDataAnimal>;

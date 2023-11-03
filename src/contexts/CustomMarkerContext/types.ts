@@ -1,5 +1,5 @@
-import { Point } from 'types/generic';
-import { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
+import type { Point } from 'types/generic';
+import type { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
 
 export interface CustomMarkerContextValue {
   markers: Array<MarkerOptionsCustom>;

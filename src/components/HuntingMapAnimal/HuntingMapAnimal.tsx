@@ -1,10 +1,7 @@
 import clsx from 'clsx';
 import {
   createRef,
-  ForwardedRef,
   forwardRef,
-  MouseEvent as ReactMouseEvent,
-  RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -12,21 +9,26 @@ import {
   useRef,
   useState,
 } from 'react';
+import type {
+  ForwardedRef,
+  MouseEvent as ReactMouseEvent,
+  RefObject,
+} from 'react';
 import { AnimalTrophyRating } from 'components/AnimalTrophyRating';
 import { HuntingMapAnimalContext } from 'components/HuntingMapAnimalContext';
 import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { useTranslator } from 'hooks';
+import { getAnimalRatingValue } from 'lib/animals';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
-import { getAnimalRatingValue } from 'lib/animals';
-import {
+import type {
   MarkerDataAnimal,
   MarkerOptionsAnimal,
   MarkerOptionsZone,
   MarkerRef,
   MarkerRefAnimal,
 } from 'types/markers';
-import { HuntingMapAnimalProps } from './types';
+import type { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
 
 export const HuntingMapAnimal = forwardRef(

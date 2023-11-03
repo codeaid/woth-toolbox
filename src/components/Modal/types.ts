@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { ReactNode } from 'react';
+import type { ButtonProps } from 'components/Button';
 
 type ModalCloseHandler = () => void;
 

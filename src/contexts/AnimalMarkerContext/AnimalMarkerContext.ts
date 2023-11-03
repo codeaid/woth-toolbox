@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { AnimalMarkerContextValue } from './types';
+import type { AnimalMarkerContextValue } from './types';
 
 export const AnimalMarkerContext = createContext<AnimalMarkerContextValue>({
   markers: {},

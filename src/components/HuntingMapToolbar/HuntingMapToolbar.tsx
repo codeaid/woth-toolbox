@@ -1,7 +1,8 @@
-import { MouseEvent, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import type { MouseEvent } from 'react';
 import { RiArrowGoBackFill, RiZoomInLine, RiZoomOutLine } from 'react-icons/ri';
 import { IconButton } from 'components/IconButton';
-import { HuntingMapToolbarProps } from './types';
+import type { HuntingMapToolbarProps } from './types';
 import styles from './HuntingMapToolbar.module.css';
 
 export const HuntingMapToolbar = (props: HuntingMapToolbarProps) => {

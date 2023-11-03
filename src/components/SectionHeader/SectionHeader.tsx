@@ -1,6 +1,6 @@
 import clsx from 'clsx';
+import type { SectionHeaderProps } from './types';
 import styles from './SectionHeader.module.css';
-import { SectionHeaderProps } from './types';
 
 export const SectionHeader = (props: SectionHeaderProps) => {
   const { children, className, ...rest } = props;

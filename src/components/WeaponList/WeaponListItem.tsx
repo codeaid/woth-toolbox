@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { WeaponName } from 'components/WeaponName';
-import { WeaponListItemProps } from './types';
+import type { WeaponListItemProps } from './types';
 import styles from './WeaponListItem.module.css';
 
 export const WeaponListItem = (props: WeaponListItemProps) => {

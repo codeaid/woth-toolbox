@@ -1,6 +1,6 @@
-import { Animal, AnimalActivityData } from 'types/animals';
-import { MapType } from 'types/cartography';
-import { EntityGroup } from 'types/generic';
+import type { Animal, AnimalActivityData } from 'types/animals';
+import type { MapType } from 'types/cartography';
+import type { EntityGroup } from 'types/generic';
 
 type AnimalActivityGridButtonChangeHandler = (mapType?: MapType) => void;
 

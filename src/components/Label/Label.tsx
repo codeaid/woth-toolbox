@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import { LabelProps } from './types';
+import type { LabelProps } from './types';
 import styles from './Label.module.css';
 
 export const Label = (props: LabelProps) => {

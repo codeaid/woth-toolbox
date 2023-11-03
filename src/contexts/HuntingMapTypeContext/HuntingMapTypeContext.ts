@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { HuntingMapTypeContextValue } from './types';
+import type { HuntingMapTypeContextValue } from './types';
 
 export const HuntingMapTypeContext = createContext<HuntingMapTypeContextValue>({
   mapType: undefined,

@@ -1,4 +1,4 @@
-import { Animal } from 'types/animals';
+import type { Animal } from 'types/animals';
 
 export default [
   {

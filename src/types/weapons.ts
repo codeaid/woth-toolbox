@@ -1,4 +1,4 @@
-import { TranslationKey } from 'types/i18n';
+import type { TranslationKey } from 'types/i18n';
 
 export interface Weapon {
   action: TranslationKey;

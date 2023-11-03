@@ -1,5 +1,5 @@
 import { defaultLocale } from 'config/i18n';
-import { Settings } from 'types/app';
+import type { Settings } from 'types/app';
 
 // Detect base URL and path to use when loading assets
 export const baseURL = process.env.NEXT_PUBLIC_BASE_URL || '';

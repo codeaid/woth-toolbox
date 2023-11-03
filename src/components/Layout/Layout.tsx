@@ -2,8 +2,8 @@ import { LayoutBackground } from 'components/LayoutBackground';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { Toolbar } from 'components/Toolbar';
 import { useTranslator } from 'hooks';
+import type { LayoutProps } from './types';
 import styles from './Layout.module.css';
-import { LayoutProps } from './types';
 
 export const Layout = (props: LayoutProps) => {
   const { children, ready = false } = props;

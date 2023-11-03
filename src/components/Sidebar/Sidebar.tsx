@@ -1,11 +1,6 @@
 import clsx from 'clsx';
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri';
 import { IconButton } from 'components/IconButton';
 import styles from './Sidebar.module.css';

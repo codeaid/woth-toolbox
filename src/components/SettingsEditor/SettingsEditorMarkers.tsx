@@ -1,9 +1,10 @@
-import { ChangeEvent, useCallback } from 'react';
+import { useCallback } from 'react';
+import type { ChangeEvent } from 'react';
 import { Checkbox } from 'components/Checkbox';
 import { Label } from 'components/Label';
 import { Slider } from 'components/Slider';
 import { useTranslator } from 'hooks';
-import { SettingsEditorMarkersProps } from './types';
+import type { SettingsEditorMarkersProps } from './types';
 
 export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
   const { settings, onChange } = props;

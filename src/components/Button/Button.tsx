@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import { ForwardedRef, forwardRef, useMemo } from 'react';
-import { ButtonProps } from './types';
+import { forwardRef, useMemo } from 'react';
+import type { ForwardedRef } from 'react';
+import type { ButtonProps } from './types';
 import styles from './Button.module.css';
 
 export const Button = forwardRef(

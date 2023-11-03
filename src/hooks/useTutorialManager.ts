@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { TutorialContextValue } from 'contexts';
+import type { TutorialContextValue } from 'contexts';
 import { isMapTutorialCompleted, writeMapTutorialCompleted } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { useStorage } from './useStorage';

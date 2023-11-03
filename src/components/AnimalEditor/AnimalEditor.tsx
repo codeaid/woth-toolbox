@@ -1,17 +1,17 @@
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
 import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
 import { formatDateTime, showNotification } from 'lib/utils';
-import { MarkerDataAnimal } from 'types/markers';
+import type { MarkerDataAnimal } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
 import { AnimalEditorGroupBuilder } from './AnimalEditorGroupBuilder';
-import { AnimalEditorProps } from './types';
+import type { AnimalEditorProps } from './types';
 import styles from './AnimalEditor.module.css';
 
 export const AnimalEditor = (props: AnimalEditorProps) => {

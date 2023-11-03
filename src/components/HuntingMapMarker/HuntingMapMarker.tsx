@@ -1,10 +1,6 @@
 import clsx from 'clsx';
 import {
-  ForwardedRef,
   forwardRef,
-  MouseEvent,
-  ReactElement,
-  Ref,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -12,12 +8,13 @@ import {
   useRef,
   useState,
 } from 'react';
+import type { ForwardedRef, MouseEvent, ReactElement, Ref } from 'react';
 import { Transition } from 'react-transition-group';
 import { useRefCallback } from 'hooks';
 import { getTransitionClassName } from 'lib/dom';
 import { getIconComponent } from 'lib/icons';
-import { MarkerOptions, MarkerRef } from 'types/markers';
-import { HuntingMapMarkerProps } from './types';
+import type { MarkerOptions, MarkerRef } from 'types/markers';
+import type { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
 export const HuntingMapMarker = forwardRef(

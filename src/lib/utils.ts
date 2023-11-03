@@ -1,7 +1,8 @@
 import colors from 'color';
-import { ColorResult } from 'react-color';
-import { TypeOptions as ToastType } from 'react-toastify';
-import { toast, ToastContent, ToastOptions } from 'components/Notifications';
+import type { ColorResult } from 'react-color';
+import type { TypeOptions as ToastType } from 'react-toastify';
+import { toast } from 'components/Notifications';
+import type { ToastContent, ToastOptions } from 'components/Notifications';
 
 /**
  * Decode a base64 encoded string

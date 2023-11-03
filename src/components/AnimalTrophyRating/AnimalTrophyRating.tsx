@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import { RiCheckboxBlankCircleFill, RiStarSFill } from 'react-icons/ri';
 import { times } from 'lib/utils';
-import { AnimalTrophyRatingProps } from './types';
+import type { AnimalTrophyRatingProps } from './types';
 import styles from './AnimalTrophyRating.module.css';
 
 export const AnimalTrophyRating = (props: AnimalTrophyRatingProps) => {

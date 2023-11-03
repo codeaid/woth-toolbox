@@ -1,4 +1,4 @@
-import { Settings, SettingsChangeHandler } from 'types/app';
+import type { Settings, SettingsChangeHandler } from 'types/app';
 
 type SettingsEditorMigrationModalHandler = (visible: boolean) => void;
 type SettingsEditorVoidHandler = () => void;

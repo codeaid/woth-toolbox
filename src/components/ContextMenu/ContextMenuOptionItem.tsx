@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useCallback } from 'react';
-import { ContextMenuOptionItemProps } from './types';
+import type { ContextMenuOptionItemProps } from './types';
 import styles from './ContextMenuOptionItem.module.css';
 
 export const ContextMenuOptionItem = (props: ContextMenuOptionItemProps) => {

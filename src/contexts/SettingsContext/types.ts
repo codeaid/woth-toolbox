@@ -1,4 +1,4 @@
-import { Settings, SettingsChangeHandler } from 'types/app';
+import type { Settings, SettingsChangeHandler } from 'types/app';
 
 export interface SettingsContextValue<TSettings extends Settings = Settings> {
   initialized: boolean;

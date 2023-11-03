@@ -1,5 +1,5 @@
-import { MutableRefObject, RefCallback } from 'react';
-import {
+import type { MutableRefObject, RefCallback } from 'react';
+import type {
   ENTERED,
   ENTERING,
   EXITED,

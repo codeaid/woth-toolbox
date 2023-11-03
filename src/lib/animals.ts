@@ -1,13 +1,13 @@
-import {
+import type {
   Animal,
   AnimalActivityData,
   AnimalAge,
   AnimalRating,
   AnimalSpecimen,
 } from 'types/animals';
-import { MapType } from 'types/cartography';
-import { EntityGroup } from 'types/generic';
-import { Translator } from 'types/i18n';
+import type { MapType } from 'types/cartography';
+import type { EntityGroup } from 'types/generic';
+import type { Translator } from 'types/i18n';
 
 /**
  * Find activity defined for the exact hour

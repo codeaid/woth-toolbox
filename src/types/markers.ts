@@ -1,7 +1,7 @@
-import { RefObject } from 'react';
-import { AnimalSpecimen } from 'types/animals';
-import { Point } from 'types/generic';
-import {
+import type { RefObject } from 'react';
+import type { AnimalSpecimen } from 'types/animals';
+import type { Point } from 'types/generic';
+import type {
   IconType,
   IconTypeAnimal,
   IconTypeGeneric,
@@ -79,7 +79,8 @@ export type MarkerRefAnimal = MarkerRef & {
 // an HTML element that represents them on the map
 export type MarkerReference<
   TMarkerType extends MarkerType = MarkerType,
-  TMarkerOptions extends MarkerOptions<TMarkerType> = MarkerOptions<TMarkerType>,
+  TMarkerOptions extends
+    MarkerOptions<TMarkerType> = MarkerOptions<TMarkerType>,
   TMarkerRef extends MarkerRef = MarkerRef,
 > = {
   marker: TMarkerOptions;

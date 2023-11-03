@@ -1,14 +1,9 @@
-import {
-  ForwardedRef,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useState,
-} from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
+import type { ForwardedRef } from 'react';
 import { MdOutlineMyLocation } from 'react-icons/md';
 import { getCoordinateRatio } from 'lib/markers';
-import { Point } from 'types/generic';
-import { HuntingMapCoordsProps, HuntingMapCoordsRef } from './types';
+import type { Point } from 'types/generic';
+import type { HuntingMapCoordsProps, HuntingMapCoordsRef } from './types';
 import styles from './HuntingMapCoords.module.css';
 
 export const HuntingMapCoords = forwardRef(

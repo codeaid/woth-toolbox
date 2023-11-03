@@ -1,5 +1,5 @@
+import type { PageContentProps } from './types';
 import styles from './PageContent.module.css';
-import { PageContentProps } from './types';
 
 export const PageContent = (props: PageContentProps) => {
   const { children } = props;

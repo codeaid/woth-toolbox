@@ -1,4 +1,4 @@
-import { MapLabelOptions } from 'types/cartography';
+import type { MapLabelOptions } from 'types/cartography';
 
 export interface HuntingMapLabelProps extends MapLabelOptions {
   mapScale: number;

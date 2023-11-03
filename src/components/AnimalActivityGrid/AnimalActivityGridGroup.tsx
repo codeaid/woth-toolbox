@@ -4,7 +4,7 @@ import { useTranslator } from 'hooks';
 import { getTierKey } from 'lib/i18n';
 import { AnimalActivityGridHeader } from './AnimalActivityGridHeader';
 import { AnimalActivityGridRows } from './AnimalActivityGridRows';
-import { AnimalActivityGridGroupProps } from './types';
+import type { AnimalActivityGridGroupProps } from './types';
 
 const AnimalActivityGridHeaderMemo = memo(AnimalActivityGridHeader);
 

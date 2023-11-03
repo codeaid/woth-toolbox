@@ -1,5 +1,5 @@
 import { PivotTableRow } from './PivotTableRow';
-import { Entity, EntityPivot, PivotTableRowsProps } from './types';
+import type { Entity, EntityPivot, PivotTableRowsProps } from './types';
 import styles from './PivotTableRows.module.css';
 
 export const PivotTableRows = <

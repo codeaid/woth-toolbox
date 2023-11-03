@@ -5,7 +5,7 @@ import { Transition } from 'react-transition-group';
 import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { TextEllipsis } from 'components/TextEllipsis';
-import { ModalProps } from './types';
+import type { ModalProps } from './types';
 import styles from './Modal.module.css';
 
 export const Modal = (props: ModalProps) => {

@@ -19,15 +19,15 @@ import {
   isGenericMarkerType,
   isNeedZoneMarkerType,
 } from 'lib/markers';
-import {
+import type {
   AnimalActivity,
   AnimalAge,
   AnimalHabitat,
   AnimalRating,
   AnimalType,
 } from 'types/animals';
-import { TranslationKey, TranslationResource } from 'types/i18n';
-import {
+import type { TranslationKey, TranslationResource } from 'types/i18n';
+import type {
   MarkerType,
   MarkerTypeCustom,
   MarkerTypeGeneric,

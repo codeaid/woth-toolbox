@@ -1,5 +1,5 @@
-import { CSSProperties, ReactNode } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { CSSProperties, ReactNode } from 'react';
+import type { ButtonProps } from 'components/Button';
 
 type SidePanelCloseHandler = () => void;
 type SidePanelVisibleChangeHandler = (visible: boolean) => void;

@@ -1,32 +1,29 @@
 import {
   createRef,
   memo,
-  MouseEvent,
-  ReactElement,
-  TouchEvent as ReactTouchEvent,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
+} from 'react';
+import type {
+  MouseEvent,
+  ReactElement,
+  TouchEvent as ReactTouchEvent,
   WheelEvent,
 } from 'react';
-import useResizeObserver, { ObservedSize } from 'use-resize-observer';
+import useResizeObserver from 'use-resize-observer';
+import type { ObservedSize } from 'use-resize-observer';
 import { AnimalEditor } from 'components/AnimalEditor';
-import {
-  HuntingMapAnimal,
-  HuntingMapAnimalProps,
-} from 'components/HuntingMapAnimal';
-import {
-  HuntingMapCoords,
-  HuntingMapCoordsRef,
-} from 'components/HuntingMapCoords';
+import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
+import type { HuntingMapAnimalProps } from 'components/HuntingMapAnimal';
+import { HuntingMapCoords } from 'components/HuntingMapCoords';
+import type { HuntingMapCoordsRef } from 'components/HuntingMapCoords';
 import { HuntingMapFilter } from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
-import {
-  HuntingMapMarker,
-  HuntingMapMarkerProps,
-} from 'components/HuntingMapMarker';
+import { HuntingMapMarker } from 'components/HuntingMapMarker';
+import type { HuntingMapMarkerProps } from 'components/HuntingMapMarker';
 import { HuntingMapScale } from 'components/HuntingMapScale';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
@@ -47,13 +44,13 @@ import {
 } from 'lib/markers';
 import { sendGoogleEvent } from 'lib/tracking';
 import { roundNumber } from 'lib/utils';
-import {
+import type {
   MapFilterOptions,
   MapOptions,
   MapZoomOptions,
 } from 'types/cartography';
-import { Point } from 'types/generic';
-import {
+import type { Point } from 'types/generic';
+import type {
   MarkerOptionsAnimal,
   MarkerOptionsCustom,
   MarkerOptionsGeneric,
@@ -62,7 +59,7 @@ import {
   MarkerReferenceAnimal,
   MarkerReferenceGeneric,
 } from 'types/markers';
-import { HuntingMapDragOptions, HuntingMapProps } from './types';
+import type { HuntingMapDragOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
 
 const HuntingMapAnimalMemo = memo(HuntingMapAnimal);

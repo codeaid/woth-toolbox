@@ -14,8 +14,8 @@ import { weapons } from 'config/weapons';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups } from 'lib/animals';
 import { isOptimal, isSuboptimal } from 'lib/weapons';
-import { Animal } from 'types/animals';
-import { Weapon } from 'types/weapons';
+import type { Animal } from 'types/animals';
+import type { Weapon } from 'types/weapons';
 import styles from './styles.module.css';
 
 const AnimalSelectorPage = () => {

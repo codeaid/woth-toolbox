@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { PivotTableGroup } from './PivotTableGroup';
 import { PivotTableHeader } from './PivotTableHeader';
-import { Entity, EntityPivot, PivotTableProps } from './types';
+import type { Entity, EntityPivot, PivotTableProps } from './types';
 import styles from './PivotTable.module.css';
 
 export const PivotTable = <

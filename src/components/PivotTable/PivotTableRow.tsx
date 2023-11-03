@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { PivotTableEnergyRating } from './PivotTableEnergyRating';
-import { Entity, EntityPivot, PivotTableRowProps } from './types';
+import type { Entity, EntityPivot, PivotTableRowProps } from './types';
 import styles from './PivotTableRow.module.css';
 
 export const PivotTableRow = <

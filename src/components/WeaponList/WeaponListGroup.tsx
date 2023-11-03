@@ -2,7 +2,7 @@ import { SectionHeader } from 'components/SectionHeader';
 import { useTranslator } from 'hooks';
 import { getTierKey } from 'lib/i18n';
 import { WeaponListItem } from './WeaponListItem';
-import { WeaponListGroupProps } from './types';
+import type { WeaponListGroupProps } from './types';
 import styles from './WeaponListGroup.module.css';
 
 export const WeaponListGroup = (props: WeaponListGroupProps) => {

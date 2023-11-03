@@ -1,8 +1,9 @@
 import { useContext, useMemo } from 'react';
-import { SettingsContext, SettingsContextValue } from 'contexts';
 import { defaultSettings } from 'config/app';
+import { SettingsContext } from 'contexts';
+import type { SettingsContextValue } from 'contexts';
 import { getBrowserLocale } from 'lib/i18n';
-import { Settings } from 'types/app';
+import type { Settings } from 'types/app';
 
 /**
  * Retrieve current application settings

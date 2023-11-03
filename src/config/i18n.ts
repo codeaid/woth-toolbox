@@ -1,12 +1,12 @@
 import en_US from 'locales';
-import {
+import type {
   AnimalActivity,
   AnimalAge,
   AnimalHabitat,
   AnimalRating,
 } from 'types/animals';
-import { TranslationKey } from 'types/i18n';
-import {
+import type { TranslationKey } from 'types/i18n';
+import type {
   MarkerTypeCustom,
   MarkerTypeGeneric,
   MarkerTypeNeedZone,

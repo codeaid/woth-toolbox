@@ -7,14 +7,15 @@ import {
   RiInformationLine,
   RiPaletteLine,
 } from 'react-icons/ri';
-import { ContextMenu, ContextMenuOption } from 'components/ContextMenu';
+import { ContextMenu } from 'components/ContextMenu';
+import type { ContextMenuOption } from 'components/ContextMenu';
 import { useTranslator } from 'hooks';
 import { setClipboardValue } from 'lib/clipboard';
 import { getCoordinateRatio } from 'lib/markers';
 import { redirectToAnimalPage } from 'lib/routing';
 import { sendGoogleEvent } from 'lib/tracking';
 import { showNotification } from 'lib/utils';
-import { HuntingMapAnimalContextProps } from './types';
+import type { HuntingMapAnimalContextProps } from './types';
 
 export const HuntingMapAnimalContext = (
   props: HuntingMapAnimalContextProps,

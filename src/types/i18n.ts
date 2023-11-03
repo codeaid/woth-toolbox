@@ -1,4 +1,4 @@
-import { defaultResource } from 'config/i18n';
+import type { defaultResource } from 'config/i18n';
 
 export type TranslationKey = keyof typeof defaultResource;
 

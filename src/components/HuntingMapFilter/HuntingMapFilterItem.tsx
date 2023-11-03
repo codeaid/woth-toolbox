@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { getIconComponent } from 'lib/icons';
-import { HuntingMapFilterItemProps } from './types';
+import type { HuntingMapFilterItemProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilterItem = (props: HuntingMapFilterItemProps) => {

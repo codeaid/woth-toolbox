@@ -16,8 +16,8 @@ import {
   isAnimalSexMale,
 } from 'lib/animals';
 import { getAnimalAgeKey, getAnimalRatingGenderKey } from 'lib/i18n';
-import { AnimalAge, AnimalRating, AnimalSpecimen } from 'types/animals';
-import { AnimalEditorGroupBuilderProps } from './types';
+import type { AnimalAge, AnimalRating, AnimalSpecimen } from 'types/animals';
+import type { AnimalEditorGroupBuilderProps } from './types';
 import styles from './AnimalEditorGroupBuilder.module.css';
 
 export const AnimalEditorGroupBuilder = (

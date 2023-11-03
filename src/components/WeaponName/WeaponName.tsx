@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import { useTranslator } from 'hooks';
-import { WeaponNameProps } from './types';
+import type { WeaponNameProps } from './types';
 import styles from './WeaponName.module.css';
 
 export const WeaponName = (props: WeaponNameProps) => {

@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
-import { ButtonProps } from 'components/Button';
+import type { ButtonProps } from 'components/Button';
 import { Heading } from 'components/Heading';
 import { SidePanel } from 'components/SidePanel';
 import { useTranslator } from 'hooks';
 import { SettingsEditorLanguage } from './SettingsEditorLanguage';
 import { SettingsEditorMarkers } from './SettingsEditorMarkers';
 import { SettingsEditorMigration } from './SettingsEditorMigration';
-import { SettingsEditorProps } from './types';
+import type { SettingsEditorProps } from './types';
 import styles from './SettingsEditor.module.css';
 
 export const SettingsEditor = (props: SettingsEditorProps) => {

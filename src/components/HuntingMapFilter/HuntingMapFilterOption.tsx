@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { ChangeEvent, useCallback } from 'react';
+import { useCallback } from 'react';
+import type { ChangeEvent } from 'react';
 import { Checkbox } from 'components/Checkbox';
-import { HuntingMapFilterOptionProps } from './types';
+import type { HuntingMapFilterOptionProps } from './types';
 import styles from './HuntingMapFilter.module.css';
 
 export const HuntingMapFilterOption = (props: HuntingMapFilterOptionProps) => {

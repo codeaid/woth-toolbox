@@ -1,6 +1,7 @@
-import { ForwardedRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import type { ForwardedRef } from 'react';
 import { VectorIcon } from '../VectorIcon';
-import { IconProps } from '../types';
+import type { IconProps } from '../types';
 import RoeDeerSvg from './assets/RoeDeer.svg';
 
 export const RoeDeerIcon = forwardRef(

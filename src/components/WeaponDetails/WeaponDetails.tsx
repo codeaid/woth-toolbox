@@ -1,6 +1,6 @@
 import { useTranslator } from 'hooks';
+import type { WeaponDetailsProps } from './types';
 import styles from './WeaponDetails.module.css';
-import { WeaponDetailsProps } from './types';
 
 export const WeaponDetails = (props: WeaponDetailsProps) => {
   const { weapon } = props;

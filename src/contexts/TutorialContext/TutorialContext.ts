@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { TutorialContextValue } from './types';
+import type { TutorialContextValue } from './types';
 
 export const TutorialContext = createContext<TutorialContextValue>({
   completed: false,

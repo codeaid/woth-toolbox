@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { DrinkZoneIcon, EatZoneIcon, SleepZoneIcon } from 'components/Icon';
-import { AnimalActivityGridIconProps } from './types';
+import type { AnimalActivityGridIconProps } from './types';
 import styles from './AnimalActivityGridIcon.module.css';
 
 export const AnimalActivityGridIcon = (props: AnimalActivityGridIconProps) => {

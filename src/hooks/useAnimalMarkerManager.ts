@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { AnimalMarkerContextValue } from 'contexts';
-import { MapType } from 'types/cartography';
+import type { AnimalMarkerContextValue } from 'contexts';
 import {
   clearAnimalMarkerStorageItem,
   isEmptyAnimalMarker,
@@ -8,7 +7,8 @@ import {
   readAnimalMarkerStorageItem,
   writeAnimalMarkerStorageItem,
 } from 'lib/storage';
-import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
+import type { MapType } from 'types/cartography';
+import type { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 import { useStorage } from './useStorage';
 
 /**

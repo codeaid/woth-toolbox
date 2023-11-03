@@ -1,5 +1,5 @@
 import type { LinkProps } from 'next/link';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export type NavLinkProps = PropsWithChildren<LinkProps> & {
   active?: boolean;

@@ -1,6 +1,7 @@
-import { ForwardedRef, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import type { ForwardedRef } from 'react';
 import { ImageIcon } from '../ImageIcon';
-import { IconProps } from '../types';
+import type { IconProps } from '../types';
 import DrinkZoneImage from './assets/DrinkZone.png';
 
 export const DrinkZoneIcon = forwardRef(

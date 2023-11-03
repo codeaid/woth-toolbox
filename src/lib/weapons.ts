@@ -1,7 +1,7 @@
-import { Animal } from 'types/animals';
-import { EntityGroup } from 'types/generic';
-import { Translator } from 'types/i18n';
-import { Weapon, WeaponDistance, WeaponEnergyValue } from 'types/weapons';
+import type { Animal } from 'types/animals';
+import type { EntityGroup } from 'types/generic';
+import type { Translator } from 'types/i18n';
+import type { Weapon, WeaponDistance, WeaponEnergyValue } from 'types/weapons';
 
 /**
  * Sort a list of weapons by their tier and name

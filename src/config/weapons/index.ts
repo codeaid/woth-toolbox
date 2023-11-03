@@ -1,4 +1,4 @@
-import { Weapon } from 'types/weapons';
+import type { Weapon } from 'types/weapons';
 import tier1 from './tier1';
 import tier2 from './tier2';
 import tier3 from './tier3';

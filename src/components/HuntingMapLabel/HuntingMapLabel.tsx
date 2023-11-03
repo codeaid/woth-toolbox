@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import { CSSProperties, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
+import type { CSSProperties } from 'react';
 import { Transition } from 'react-transition-group';
 import { useTranslator } from 'hooks';
-import { HuntingMapLabelProps } from './types';
+import type { HuntingMapLabelProps } from './types';
 import styles from './HuntingMapLabel.module.css';
 
 export const HuntingMapLabel = (props: HuntingMapLabelProps) => {

@@ -2,7 +2,7 @@ import { SectionHeader } from 'components/SectionHeader';
 import { useTranslator } from 'hooks';
 import { getTierKey } from 'lib/i18n';
 import { PivotTableRows } from './PivotTableRows';
-import { Entity, EntityPivot, PivotTableGroupProps } from './types';
+import type { Entity, EntityPivot, PivotTableGroupProps } from './types';
 
 export const PivotTableGroup = <
   TEntity extends Entity,

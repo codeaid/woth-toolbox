@@ -7,20 +7,20 @@ import {
   needZoneMarkerTypes,
 } from 'config/markers';
 import { hasListValue, partitionArray } from 'lib/utils';
-import { AnimalType } from 'types/animals';
-import {
+import type { AnimalType } from 'types/animals';
+import type {
   MapFilterOptions,
   MapLabelOptions,
   MapZoomOptions,
 } from 'types/cartography';
-import { Point } from 'types/generic';
-import {
+import type { Point } from 'types/generic';
+import type {
   JsonAnimalDocument,
   JsonAnimalDocumentRecord,
   JsonLabelDocument,
   JsonMarkerDocument,
 } from 'types/json';
-import {
+import type {
   MarkerDataAnimal,
   MarkerOptions,
   MarkerOptionsAnimal,

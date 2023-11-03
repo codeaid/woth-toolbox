@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups, getAnimalsByMapType } from 'lib/animals';
-import { MapType } from 'types/cartography';
+import type { MapType } from 'types/cartography';
 import { AnimalActivityGridFilter } from './AnimalActivityGridFilter';
 import { AnimalActivityGridGroup } from './AnimalActivityGridGroup';
-import { AnimalActivityGridProps } from './types';
+import type { AnimalActivityGridProps } from './types';
 import styles from './AnimalActivityGrid.module.css';
 
 export const AnimalActivityGrid = (props: AnimalActivityGridProps) => {

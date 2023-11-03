@@ -1,4 +1,5 @@
-import { MouseEvent, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import type { MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from 'components/Button';
 import { Modal } from 'components/Modal';
@@ -14,7 +15,7 @@ import { setClipboardValue } from 'lib/clipboard';
 import { readSerializedStore, writeSerializedStorage } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { showNotification } from 'lib/utils';
-import { SettingsEditorMigrationModalProps } from './types';
+import type { SettingsEditorMigrationModalProps } from './types';
 import styles from './SettingsEditorMigrationModal.module.css';
 
 export const SettingsEditorMigrationModal = (

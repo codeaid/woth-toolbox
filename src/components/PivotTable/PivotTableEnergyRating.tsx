@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import { useLocale } from 'hooks';
 import { formatNumber } from 'lib/utils';
-import { PivotTableEnergyRatingProps } from './types';
+import type { PivotTableEnergyRatingProps } from './types';
 import styles from './PivotTableEnergyRating.module.css';
 
 export const PivotTableEnergyRating = (props: PivotTableEnergyRatingProps) => {

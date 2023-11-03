@@ -1,13 +1,7 @@
 import clsx from 'clsx';
-import {
-  ForwardedRef,
-  forwardRef,
-  TouchEvent,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
-import { IconComponentProps } from './types';
+import { forwardRef, useCallback, useMemo, useRef } from 'react';
+import type { ForwardedRef, TouchEvent } from 'react';
+import type { IconComponentProps } from './types';
 import styles from './Icon.module.css';
 
 export const Icon = forwardRef(

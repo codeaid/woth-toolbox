@@ -1,15 +1,10 @@
-import {
-  MouseEvent as ReactMouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { Transition } from 'react-transition-group';
 import { getTransitionClassName } from 'lib/dom';
 import { ContextMenuOptionList } from './ContextMenuOptionList';
-import { ContextMenuProps } from './types';
+import type { ContextMenuProps } from './types';
 import styles from './ContextMenu.module.css';
 
 export const ContextMenu = (props: ContextMenuProps) => {

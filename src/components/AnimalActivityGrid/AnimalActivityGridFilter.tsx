@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { Button } from 'components/Button';
 import { useTranslator } from 'hooks';
-import { AnimalActivityGridFilterProps } from './types';
+import type { MapType } from 'types/cartography';
+import type { TranslationKey } from 'types/i18n';
+import type { AnimalActivityGridFilterProps } from './types';
 import styles from './AnimalActivityGridFilter.module.css';
-import { MapType } from 'types/cartography';
-import { TranslationKey } from 'types/i18n';
 
 export const AnimalActivityGridFilter = (
   props: AnimalActivityGridFilterProps,

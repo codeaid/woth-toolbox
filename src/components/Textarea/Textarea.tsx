@@ -1,12 +1,7 @@
 import clsx from 'clsx';
-import {
-  ForwardedRef,
-  forwardRef,
-  KeyboardEvent,
-  useCallback,
-  useMemo,
-} from 'react';
-import { TextareaProps } from './types';
+import { forwardRef, useCallback, useMemo } from 'react';
+import type { ForwardedRef, KeyboardEvent } from 'react';
+import type { TextareaProps } from './types';
 import styles from './Textarea.module.css';
 
 export const Textarea = forwardRef(

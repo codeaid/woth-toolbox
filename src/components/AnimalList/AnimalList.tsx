@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups } from 'lib/animals';
 import { AnimalListGroup } from './AnimalListGroup';
-import { AnimalListProps } from './types';
+import type { AnimalListProps } from './types';
 import styles from './AnimalList.module.css';
 
 export const AnimalList = (props: AnimalListProps) => {

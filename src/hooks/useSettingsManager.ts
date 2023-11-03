@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { SettingsContextValue } from 'contexts';
+import type { SettingsContextValue } from 'contexts';
 import {
   clearSettingsStorage,
   readSettingsStorage,
   writeSettingsStorage,
 } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
-import { Settings } from 'types/app';
+import type { Settings } from 'types/app';
 import { useStorage } from './useStorage';
 
 /**

@@ -6,8 +6,8 @@ import imgEditorAnimals from './assets/editor-animals.gif';
 import imgEditorColors from './assets/editor-colors.gif';
 import imgEditorContext from './assets/editor-context.jpg';
 import imgEditorDescription from './assets/editor-description.jpg';
+import imgSettingsMarkersRatings from './assets/editor-markers-ratings.jpg';
 import imgEditorMarkers from './assets/editor-markers.jpg';
-import imgSettingsMarkersRatings from 'components/HuntingMapTutorial/assets/editor-markers-ratings.jpg';
 
 export const HuntingMapTutorialEditor = () => (
   <>

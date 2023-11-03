@@ -1,5 +1,5 @@
 import { ContextMenuOptionItem } from './ContextMenuOptionItem';
-import { ContextMenuOptionListProps } from './types';
+import type { ContextMenuOptionListProps } from './types';
 
 export const ContextMenuOptionList = (props: ContextMenuOptionListProps) => {
   const { options, onOptionClick } = props;

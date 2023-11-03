@@ -1,8 +1,8 @@
 import { Emphasis } from 'components/Emphasis';
 import { Heading } from 'components/Heading';
 import { HuntingMapTutorialImage } from './HuntingMapTutorialImage';
-import imgFiltersButton from './assets/filters-button.jpg';
 import imgFiltersButtonActive from './assets/filters-button-active.jpg';
+import imgFiltersButton from './assets/filters-button.jpg';
 import imgFiltersCustom from './assets/filters-custom.jpg';
 import imgFiltersGroupToggle from './assets/filters-groups-toggle.gif';
 import imgFiltersItemToggle from './assets/filters-items-toggle.gif';

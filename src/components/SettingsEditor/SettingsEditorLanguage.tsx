@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react';
-import { Select, SelectOption } from 'components/Select';
+import { Select } from 'components/Select';
+import type { SelectOption } from 'components/Select';
 import { useTranslator } from 'hooks';
-import { SettingsEditorLanguageProps } from './types';
+import type { SettingsEditorLanguageProps } from './types';
 
 export const SettingsEditorLanguage = (props: SettingsEditorLanguageProps) => {
   const { settings, onChange } = props;

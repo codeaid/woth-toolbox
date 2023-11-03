@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useIntl } from 'react-intl';
-import { TranslationKey, Translator } from 'types/i18n';
+import type { TranslationKey, Translator } from 'types/i18n';
 
 /**
  * Create an instance of a function retrieving internationalized strings

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSettings } from 'hooks';
 import { getLocaleMessagesAsync } from 'lib/i18n';
-import { TranslationResource } from 'types/i18n';
+import type { TranslationResource } from 'types/i18n';
 
 /**
  * Retrieve message resources associated with the specified locale

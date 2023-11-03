@@ -1,1 +1,4 @@
 next.config.js
+*.css
+*.json
+*.svg

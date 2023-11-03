@@ -1,6 +1,6 @@
 import ReactSlider from 'react-slider';
+import type { SliderProps } from './types';
 import styles from './Slider.module.css';
-import { SliderProps } from './types';
 
 export const Slider = (props: SliderProps) => {
   const { max = 100, min = 0, value, onChange } = props;

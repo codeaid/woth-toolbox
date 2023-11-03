@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { AnimalName } from 'components/AnimalName';
-import { AnimalListItemProps } from './types';
+import type { AnimalListItemProps } from './types';
 import styles from './AnimalListItem.module.css';
 
 export const AnimalListItem = (props: AnimalListItemProps) => {

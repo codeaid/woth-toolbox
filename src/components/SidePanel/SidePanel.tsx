@@ -5,7 +5,7 @@ import { Transition } from 'react-transition-group';
 import { Button } from 'components/Button';
 import { IconButton } from 'components/IconButton';
 import { Spinner } from 'components/Spinner';
-import { SidePanelProps } from './types';
+import type { SidePanelProps } from './types';
 import styles from './SidePanel.module.css';
 
 export const SidePanel = (props: SidePanelProps) => {

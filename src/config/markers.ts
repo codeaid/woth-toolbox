@@ -1,5 +1,5 @@
-import { AnimalType } from 'types/animals';
-import {
+import type { AnimalType } from 'types/animals';
+import type {
   MarkerType,
   MarkerTypeAnimal,
   MarkerTypeCustom,

@@ -1,4 +1,4 @@
-import { Point } from 'types/generic';
+import type { Point } from 'types/generic';
 
 export interface HuntingMapCoordsRef {
   setCoords: (coords: Point) => void;

@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import { MarkerOptionsAnimal } from 'types/markers';
+import type { CSSProperties } from 'react';
+import type { MarkerOptionsAnimal } from 'types/markers';
 
 type HuntingMapAnimalToggleEditorHandler = (
   marker: MarkerOptionsAnimal,

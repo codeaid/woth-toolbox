@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { FaDiscord } from 'react-icons/fa';
 import {
@@ -24,7 +25,7 @@ import {
 } from 'config/routing';
 import { useSettings, useTranslator, useTutorial } from 'hooks';
 import { isMapUrl } from 'lib/routing';
-import { ToolbarProps } from './types';
+import type { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
 
 export const Toolbar = (props: ToolbarProps) => {

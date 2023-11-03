@@ -4,8 +4,8 @@ import { useLocale, useTranslator } from 'hooks';
 import { getAnimalHabitatKey } from 'lib/i18n';
 import { getIconComponent } from 'lib/icons';
 import { formatNumber } from 'lib/utils';
+import type { AnimalDetailsProps } from './types';
 import styles from './AnimalDetails.module.css';
-import { AnimalDetailsProps } from './types';
 
 export const AnimalDetails = (props: AnimalDetailsProps) => {
   const { animal } = props;

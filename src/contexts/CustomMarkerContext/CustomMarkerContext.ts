@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { CustomMarkerContextValue } from './types';
+import type { CustomMarkerContextValue } from './types';
 
 export const CustomMarkerContext = createContext<CustomMarkerContextValue>({
   markers: [],

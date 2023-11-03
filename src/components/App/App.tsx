@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import { IntlProvider } from 'react-intl';
 import { Layout } from 'components/Layout';
 import { useLocale, useLocaleResource } from 'hooks';

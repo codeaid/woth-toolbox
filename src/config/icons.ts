@@ -1,7 +1,7 @@
-import { ForwardRefExoticComponent, RefAttributes } from 'react';
-import { IconProps } from 'components/Icon';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import * as icons from 'components/Icon';
-import { MarkerType } from 'types/markers';
+import type { IconProps } from 'components/Icon';
+import type { MarkerType } from 'types/markers';
 
 // Map of icon types and their respective icon components
 export const iconComponentMap = new Map<

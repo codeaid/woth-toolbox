@@ -1,6 +1,6 @@
-import { AnimalType } from 'types/animals';
-import { TranslationKey } from 'types/i18n';
-import { MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
+import type { AnimalType } from 'types/animals';
+import type { TranslationKey } from 'types/i18n';
+import type { MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
 
 // Type describing a JSON document containing animal marker data
 export type JsonAnimalDocument = {

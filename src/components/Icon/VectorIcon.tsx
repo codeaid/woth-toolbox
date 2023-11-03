@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { ForwardedRef, forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
+import type { ForwardedRef } from 'react';
 import { Icon } from './Icon';
-import { VectorIconProps } from './types';
+import type { VectorIconProps } from './types';
 import styles from './VectorIcon.module.css';
 
 export const VectorIcon = forwardRef(

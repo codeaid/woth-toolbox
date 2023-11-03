@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslator } from 'hooks';
-import { AnimalNameProps } from './types';
+import type { AnimalNameProps } from './types';
 import styles from './AnimalName.module.css';
 
 export const AnimalName = (props: AnimalNameProps) => {

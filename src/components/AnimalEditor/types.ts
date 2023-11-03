@@ -1,4 +1,4 @@
-import { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
+import type { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
 
 export type AnimalEditorCloseHandler = () => void;
 export type AnimalEditorDataClearHandler = (

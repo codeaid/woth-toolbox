@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
-import { NavLinkProps } from './types';
+import type { NavLinkProps } from './types';
 
 export const NavLink = (props: NavLinkProps) => {
   const {

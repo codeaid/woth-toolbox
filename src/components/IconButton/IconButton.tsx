@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { ForwardedRef, forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
+import type { ForwardedRef } from 'react';
 import { Button } from 'components/Button';
-import { IconButtonProps } from './types';
+import type { IconButtonProps } from './types';
 import styles from './IconButton.module.css';
 
 export const IconButton = forwardRef(

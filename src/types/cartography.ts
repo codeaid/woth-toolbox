@@ -1,6 +1,6 @@
-import { Point } from 'types/generic';
-import { TranslationKey } from 'types/i18n';
-import { MarkerType } from 'types/markers';
+import type { Point } from 'types/generic';
+import type { TranslationKey } from 'types/i18n';
+import type { MarkerType } from 'types/markers';
 
 export interface MapFilterOptions {
   hideUnedited: boolean;

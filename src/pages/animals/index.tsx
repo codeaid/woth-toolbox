@@ -13,8 +13,8 @@ import { fauna } from 'config/animals';
 import { weapons } from 'config/weapons';
 import { useTranslator } from 'hooks';
 import { getWeaponGroups, isOptimal, isSuboptimal } from 'lib/weapons';
-import { Animal } from 'types/animals';
-import { Weapon, WeaponDistance } from 'types/weapons';
+import type { Animal } from 'types/animals';
+import type { Weapon, WeaponDistance } from 'types/weapons';
 import styles from './styles.module.css';
 
 const WeaponSelectorPage = () => {

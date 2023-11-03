@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { ForwardedRef, forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
+import type { ForwardedRef } from 'react';
 import { VectorIcon } from '../VectorIcon';
-import { IconProps } from '../types';
+import type { IconProps } from '../types';
 import MarkerTrackingSvg from './assets/MarkerTracking.svg';
 import styles from './MarkerTrackingIcon.module.css';
 

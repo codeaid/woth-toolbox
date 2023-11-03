@@ -1,4 +1,4 @@
-import { NextRouter } from 'next/router';
+import type { NextRouter } from 'next/router';
 import { fauna } from 'config/animals';
 import {
   baseUrlAfrica,
@@ -7,7 +7,7 @@ import {
   baseUrlIdaho,
   baseUrlTransylvania,
 } from 'config/routing';
-import { AnimalType } from 'types/animals';
+import type { AnimalType } from 'types/animals';
 
 /**
  * Detect if the specified page URL represents a map page

@@ -6,9 +6,9 @@ import {
   settingsKey,
 } from 'config/storage';
 import { base64Decode, base64Encode } from 'lib/utils';
-import { Settings } from 'types/app';
-import { MapType } from 'types/cartography';
-import { MarkerDataAnimal, MarkerOptionsCustom } from 'types/markers';
+import type { Settings } from 'types/app';
+import type { MapType } from 'types/cartography';
+import type { MarkerDataAnimal, MarkerOptionsCustom } from 'types/markers';
 
 /**
  * Check if the specified storage is both supported and available

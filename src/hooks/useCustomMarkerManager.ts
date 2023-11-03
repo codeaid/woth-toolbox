@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { maxTrackingMarkerCount } from 'config/markers';
-import { CustomMarkerContextValue } from 'contexts';
+import type { CustomMarkerContextValue } from 'contexts';
 import { createMarkerOptions, hasSameCoordinates } from 'lib/markers';
 import { readCustomMarkerStorage, writeCustomMarkerStorage } from 'lib/storage';
-import { MapType } from 'types/cartography';
-import { Point } from 'types/generic';
-import { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
+import type { MapType } from 'types/cartography';
+import type { Point } from 'types/generic';
+import type { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
 import { useStorage } from './useStorage';
 
 /**

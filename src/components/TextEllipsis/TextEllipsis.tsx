@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { TextEllipsisProps } from './types';
+import type { TextEllipsisProps } from './types';
 import styles from './TextEllipsis.module.css';
 
 export const TextEllipsis = (props: TextEllipsisProps) => {

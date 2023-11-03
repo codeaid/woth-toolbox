@@ -3,7 +3,7 @@ import {
   buildGenericMarkers,
   buildLabelMarkers,
 } from 'lib/markers';
-import {
+import type {
   JsonAnimalDocument,
   JsonLabelDocument,
   JsonMarkerDocument,

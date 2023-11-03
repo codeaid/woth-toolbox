@@ -1,12 +1,13 @@
 import clsx from 'clsx';
-import { MouseEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { useTranslator } from 'hooks';
 import { getActivityByHour, getCurrentActivityByHour } from 'lib/animals';
 import { getAnimalActivityKey } from 'lib/i18n';
 import { formatHour } from 'lib/utils';
 import { AnimalActivityGridIcon } from './AnimalActivityGridIcon';
-import { AnimalActivityGridRowProps } from './types';
+import type { AnimalActivityGridRowProps } from './types';
 import styles from './AnimalActivityGridRow.module.css';
 
 export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {

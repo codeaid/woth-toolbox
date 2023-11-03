@@ -1,6 +1,7 @@
-import { RefCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { RefCallback } from 'react';
 import { setReferenceValue } from 'lib/dom';
-import { Reference } from 'types/dom';
+import type { Reference } from 'types/dom';
 
 /**
  * Accept a list of references (both functional and object) and return the current reference

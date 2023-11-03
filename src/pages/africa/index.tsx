@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
-import { basePath } from 'config/app';
 import {
   animalMarkers,
   genericMarkers,
@@ -10,6 +9,7 @@ import {
   mapLabels,
   mapWidth,
 } from 'config/africa';
+import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useHuntingMapType,
