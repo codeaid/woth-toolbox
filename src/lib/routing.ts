@@ -1,5 +1,6 @@
 import type { NextRouter } from 'next/router';
 import { fauna } from 'config/animals';
+import { basePath, baseURL } from 'config/app';
 import {
   baseUrlAfrica,
   baseUrlAlaska,
@@ -37,7 +38,8 @@ export const redirectToAnimalPage = async (
   router: NextRouter,
 ) => {
   // Build base URL object for the animals page and add target animal as the search parameter
-  const url = new URL(baseUrlAnimals, window.location.href);
+  const base = (baseURL || window.location.origin) + basePath;
+  const url = new URL(baseUrlAnimals, base);
   url.searchParams.append('q', getAnimalUrlSlug(type));
 
   await router.push(url.toString());
