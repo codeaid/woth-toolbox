@@ -33,7 +33,6 @@
     "react-toastify": "^10.0.4",
     "react-transition-group": "^4.4.5",
     "sha1": "^1.1.1",
-    "sharp": "^0.33.2",
     "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {

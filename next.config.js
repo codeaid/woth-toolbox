@@ -1,5 +1,5 @@
-const loaderUtils = require('loader-utils');
 const path = require('path');
+const loaderUtils = require('loader-utils');
 
 // @see https://gist.github.com/herlon214/7da6a39b885014a5d5f51716f6530ce4
 const getLocalIdentHash = (context, localIdentName, localName) =>
@@ -22,6 +22,10 @@ const getLocalIdentHash = (context, localIdentName, localName) =>
 const config = {
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  images: {
+    unoptimized: true,
+  },
+  output: 'export',
   pageExtensions: ['tsx'],
   reactStrictMode: true,
   swcMinify: true,
