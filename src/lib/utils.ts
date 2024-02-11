@@ -164,7 +164,7 @@ export const roundNumber = (value: number, decimals = 2) =>
 export const showNotification = <TData>(
   content: ToastContent<TData>,
   type?: ToastType,
-  options?: ToastOptions | undefined,
+  options?: ToastOptions<TData> | undefined,
 ) => toast(content, { type, ...options });
 
 /**
