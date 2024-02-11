@@ -37,14 +37,13 @@ export const isMapUrl = (href: string) => {
 export const redirectToAnimalPage = async (
   type: AnimalType,
   router: NextRouter,
-) => {
-  // Build base URL object for the animals page and add target animal as the search parameter
-  const base = (baseURL || window.location.origin) + basePath;
-  const url = new URL(baseUrlAnimals, base);
-  url.searchParams.append('q', getAnimalUrlSlug(type));
-
-  await router.push(url.toString());
-};
+) =>
+  await router.push({
+    pathname: baseUrlAnimals,
+    query: {
+      q: getAnimalUrlSlug(type),
+    },
+  });
 
 /**
  * Retrieve URL slug for the specified animal type

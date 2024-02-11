@@ -17,7 +17,7 @@ import type { Animal } from 'types/animals';
 import type { Weapon, WeaponDistance } from 'types/weapons';
 import styles from './styles.module.css';
 
-const WeaponSelectorPage = () => {
+const AnimalsPage = () => {
   // Extract route parameters
   const router = useRouter();
   const { q: animalId } = router.query;
@@ -89,9 +89,14 @@ const WeaponSelectorPage = () => {
   );
 
   /**
-   * Render details of an animal and weapons
+   * Pre-render page content
    */
-  const renderDetails = () => {
+  const pageContent = useMemo(() => {
+    // Ensure router fields are updated client-side and ready for use
+    if (!router.isReady) {
+      return null;
+    }
+
     if (animalId && !selectedAnimal) {
       return <Error status={404} />;
     }
@@ -119,7 +124,17 @@ const WeaponSelectorPage = () => {
         />
       </>
     );
-  };
+  }, [
+    animalId,
+    handleGetEntityGroups,
+    handleGetWeaponHitEnergy,
+    handleGetWeaponOptimal,
+    handleGetWeaponSuboptimal,
+    handleRenderEntityName,
+    router.isReady,
+    selectedAnimal,
+    translate,
+  ]);
 
   return (
     <>
@@ -137,10 +152,10 @@ const WeaponSelectorPage = () => {
             onAnimalClick={handleAnimalClick}
           />
         </Sidebar>
-        <PageContent>{renderDetails()}</PageContent>
+        <PageContent>{pageContent}</PageContent>
       </div>
     </>
   );
 };
 
-export default WeaponSelectorPage;
+export default AnimalsPage;
