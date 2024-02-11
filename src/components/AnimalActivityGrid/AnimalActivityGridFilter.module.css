@@ -1,7 +1,7 @@
 .AnimalActivityGridFilter {
   display: grid;
   grid-gap: 0.5em;
-  grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
   margin-bottom: 1em;
 }
 
