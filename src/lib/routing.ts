@@ -1,11 +1,11 @@
 import type { NextRouter } from 'next/router';
 import { fauna } from 'config/animals';
-import { basePath, baseURL } from 'config/app';
 import {
   baseUrlAfrica,
   baseUrlAlaska,
   baseUrlAnimals,
   baseUrlIdaho,
+  baseUrlNewZealand,
   baseUrlTransylvania,
 } from 'config/routing';
 import type { AnimalType } from 'types/animals';
@@ -20,6 +20,7 @@ export const isMapUrl = (href: string) => {
     baseUrlAfrica,
     baseUrlAlaska,
     baseUrlIdaho,
+    baseUrlNewZealand,
     baseUrlTransylvania,
   ];
 

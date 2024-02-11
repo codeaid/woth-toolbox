@@ -7,4 +7,5 @@ export const baseUrlLifeCycle = '/life-cycle';
 export const baseUrlAfrica = '/africa';
 export const baseUrlAlaska = '/alaska';
 export const baseUrlIdaho = '/nez-perce-valley';
+export const baseUrlNewZealand = '/new-zealand';
 export const baseUrlTransylvania = '/transylvania';

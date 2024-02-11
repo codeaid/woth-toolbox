@@ -21,6 +21,7 @@ import {
   baseUrlFirearms,
   baseUrlIdaho,
   baseUrlLifeCycle,
+  baseUrlNewZealand,
   baseUrlTransylvania,
 } from 'config/routing';
 import { useSettings, useTranslator, useTutorial } from 'hooks';
@@ -166,6 +167,10 @@ export const Toolbar = (props: ToolbarProps) => {
         {
           children: translate('POI:MAP_NAME_AFRICA'),
           href: baseUrlAfrica,
+        },
+        {
+          children: translate('POI:MAP_NAME_NEW_ZEALAND'),
+          href: baseUrlNewZealand,
         },
       ].map((action, index) => (
         <NavLink
