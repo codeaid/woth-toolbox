@@ -14,6 +14,7 @@ export type IconTypeGeneric =
   | 'photo'
   | 'race'
   | 'shooting range'
+  | 'stamp'
   | 'swing'
   | 'view';
 

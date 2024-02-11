@@ -79,6 +79,7 @@ export const iconComponentMap = new Map<
   ['sex:male', icons.AnimalSexMaleIcon],
   ['shooting range', icons.ShootingRangeIcon],
   ['species', icons.AnimalSpeciesIcon],
+  ['stamp', icons.StampIcon],
   ['swing', icons.SwingIcon],
   ['trophy', icons.AnimalTrophyIcon],
   ['view', icons.ViewIcon],

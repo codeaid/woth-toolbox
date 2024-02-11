@@ -159,6 +159,7 @@ export const markerVisibilityMap = new Map<MarkerType, number>([
   ['photo', 0.35],
   ['race', 0.25],
   ['shooting range', 0.25],
+  ['stamp', 0.35],
   ['swing', 0.35],
   ['view', 0.35],
   ['zone:drink', 0.65],

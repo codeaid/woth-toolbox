@@ -102,6 +102,7 @@ export const genericMarkerTranslationMap = new Map<
   ['photo', 'UI:MARKER_PHOTO'],
   ['race', 'TOOLBOX:MARKER_RACE'],
   ['shooting range', 'TOOLBOX:MARKER_SHOOTING_RANGE'],
+  ['stamp', 'UI:MARKER_STAMP'],
   ['swing', 'UI:MARKER_SWING'],
   ['view', 'UI:MARKER_VIEW'],
 ]);
