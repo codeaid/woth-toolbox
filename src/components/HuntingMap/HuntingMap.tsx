@@ -876,7 +876,9 @@ export const HuntingMap = (props: HuntingMapProps) => {
     // Store container reference to ensure events are detached correctly
     const container = containerRef.current;
 
-    container?.addEventListener('touchmove', handleContainerTouchMove);
+    container?.addEventListener('touchmove', handleContainerTouchMove, {
+      passive: true,
+    });
     document.addEventListener('keydown', handleDocumentKeyDown);
 
     return () => {
