@@ -35,6 +35,7 @@ export const AnimalActivityGridFilter = (
       {renderButton('POI:MAP_NAME_TRANSYLVANIA', 'transylvania')}
       {renderButton('POI:MAP_NAME_ALASKA', 'alaska')}
       {renderButton('POI:MAP_NAME_AFRICA', 'africa')}
+      {renderButton('POI:MAP_NAME_NEW_ZEALAND', 'new-zealand')}
     </div>
   );
 };
