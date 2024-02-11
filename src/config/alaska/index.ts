@@ -17,7 +17,3 @@ export const genericMarkers = buildGenericMarkers(
   generic as JsonMarkerDocument,
 );
 export const mapLabels = buildLabelMarkers(labels as JsonLabelDocument);
-
-// Map size configuration
-export const mapHeight = 4096;
-export const mapWidth = 4096;
