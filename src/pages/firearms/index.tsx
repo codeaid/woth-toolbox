@@ -18,7 +18,7 @@ import type { Animal } from 'types/animals';
 import type { Weapon } from 'types/weapons';
 import styles from './styles.module.css';
 
-const AnimalSelectorPage = () => {
+const FirearmsPage = () => {
   // Extract route parameters
   const router = useRouter();
   const { q: weaponId } = router.query;
@@ -129,4 +129,4 @@ const AnimalSelectorPage = () => {
   );
 };
 
-export default AnimalSelectorPage;
+export default FirearmsPage;

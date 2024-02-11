@@ -119,7 +119,7 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
  *
  * @param type Target animal type
  */
-export const getNeedZoneCounts = (type: AnimalType) =>
+const getNeedZoneCounts = (type: AnimalType) =>
   animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
 
 /**
@@ -164,10 +164,8 @@ export const isGenericMarkerType = (
  * @param marker Marker to validate
  * @param options Target filter options
  */
-export const isMarkerFiltered = (
-  marker: MarkerOptions,
-  options: MapFilterOptions,
-) => hasListValue(marker.type, options.types);
+const isMarkerFiltered = (marker: MarkerOptions, options: MapFilterOptions) =>
+  hasListValue(marker.type, options.types);
 
 /**
  * Determine if a marker is visible at the current map scale
@@ -176,7 +174,7 @@ export const isMarkerFiltered = (
  * @param type Marker type
  * @param visibilityMap Map of marker types and their minimum visibility scale
  */
-export const isMarkerVisibleAtScale = (
+const isMarkerVisibleAtScale = (
   mapScale: number,
   type: MarkerType,
   visibilityMap: Map<MarkerType, number>,

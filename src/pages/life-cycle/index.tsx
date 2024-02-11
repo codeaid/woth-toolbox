@@ -4,7 +4,7 @@ import { PageContent } from 'components/PageContent';
 import { fauna } from 'config/animals';
 import { useTranslator } from 'hooks';
 
-const AnimalLifeCyclesPage = () => {
+const LifeCyclePage = () => {
   // Retrieve application translator
   const translate = useTranslator();
 
@@ -23,4 +23,4 @@ const AnimalLifeCyclesPage = () => {
   );
 };
 
-export default AnimalLifeCyclesPage;
+export default LifeCyclePage;
