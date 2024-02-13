@@ -1,4 +1,3 @@
-import type { AnimalType } from 'types/animals';
 import type {
   MarkerType,
   MarkerTypeAnimal,
@@ -118,32 +117,6 @@ export const markerVisibilityMap = new Map(
       ['zone:drink', 0.65],
       ['zone:eat', 0.65],
       ['zone:sleep', 0.65],
-    ]),
-);
-
-// Map of animal types and number of their drink, eat and sleep zones
-export const animalMarkerNeedZoneCounts = new Map<
-  AnimalType,
-  [number, number, number]
->(
-  animalMarkerTypes
-    .reduce(
-      (acc, type) => acc.concat([[type, [2, 2, 2]]]),
-      [] as Array<[AnimalType, [number, number, number]]>,
-    )
-    .concat([
-      ['animal:egyptian goose', [0, 6, 3]],
-      ['animal:european hare', [0, 2, 2]],
-      ['animal:european rabbit', [0, 2, 2]],
-      ['animal:greylag goose', [0, 6, 3]],
-      ['animal:helmeted guineafowl', [0, 2, 2]],
-      ['animal:honey badger', [0, 2, 2]],
-      ['animal:lesser scaup', [0, 6, 3]],
-      ['animal:pheasant', [0, 2, 2]],
-      ['animal:ross goose', [0, 6, 3]],
-      ['animal:snowshoe hare', [0, 2, 2]],
-      ['animal:surf scoter', [0, 6, 3]],
-      ['animal:wild duck', [0, 6, 3]],
     ]),
 );
 

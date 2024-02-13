@@ -18,7 +18,9 @@ export type JsonAnimalDocumentRecord = [
   MarkerTypeAnimal, // Marker identifier
   number, // Marker X coordinate
   number, // Marker Y coordinate
-  ...Array<number>, // Need zone coordinates
+  Array<number>, // Drink zone coordinates
+  Array<number>, // Eat zone coordinates
+  Array<number>, // Sleep zone coordinates
 ];
 
 // Type describing an entry in a label data array

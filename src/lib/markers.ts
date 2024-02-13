@@ -1,6 +1,5 @@
 import sha1 from 'sha1';
 import {
-  animalMarkerNeedZoneCounts,
   animalMarkerTypes,
   customMarkerTypes,
   genericMarkerTypes,
@@ -115,14 +114,6 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
   );
 
 /**
- * Get number of each need zone for the specified animal type
- *
- * @param type Target animal type
- */
-const getNeedZoneCounts = (type: AnimalType) =>
-  animalMarkerNeedZoneCounts.get(type) ?? [0, 0, 0];
-
-/**
  * Check if both markers have the same coordinates
  *
  * @param marker Source marker
@@ -203,34 +194,29 @@ export const buildAnimalMarkers = (
   (Object.entries(doc) as Array<[AnimalType, Array<JsonAnimalDocumentRecord>]>)
     .map(([animalType, animalData]) =>
       animalData.map<MarkerOptionsAnimal>(values => {
-        // Retrieve number of need zones this animal should have
-        const [drinkZoneCount, eatZoneCount, sleepZoneCount] =
-          getNeedZoneCounts(animalType);
-
         // Extract animal marker identifier and list of coordinates associated with it.
-        const [id, ...coordinates] = values;
-
-        // Split list of coordinates into pairs
-        const [animalCoords, ...zoneCoords] = partitionArray(coordinates, 2);
-
-        // Extract the respective number of need zone coordinates for each type of need zone.
-        const drinkCoords = zoneCoords.splice(0, drinkZoneCount);
-        const eatCoords = zoneCoords.splice(0, eatZoneCount);
-        const sleepCoords = zoneCoords.splice(0, sleepZoneCount);
+        const [
+          id,
+          animalCoordsX,
+          animalCoordsY,
+          drinkCoords,
+          eatCoords,
+          sleepCoords,
+        ] = values;
 
         return {
           id,
-          coords: animalCoords as Point,
+          coords: [animalCoordsX, animalCoordsY] as Point,
           drink: buildNeedZoneMarker(
-            drinkCoords,
+            partitionArray(drinkCoords, 2),
             'zone:drink',
           ) as Array<MarkerOptionsZoneDrink>,
           eat: buildNeedZoneMarker(
-            eatCoords,
+            partitionArray(eatCoords, 2),
             'zone:eat',
           ) as Array<MarkerOptionsZoneEat>,
           sleep: buildNeedZoneMarker(
-            sleepCoords,
+            partitionArray(sleepCoords, 2),
             'zone:sleep',
           ) as Array<MarkerOptionsZoneSleep>,
           type: animalType,
