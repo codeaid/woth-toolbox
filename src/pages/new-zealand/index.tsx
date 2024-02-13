@@ -4,13 +4,7 @@ import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import {
-  animalMarkers,
-  genericMarkers,
-  mapHeight,
-  mapLabels,
-  mapWidth,
-} from 'config/new-zealand';
+import { animalMarkers, genericMarkers, mapLabels } from 'config/new-zealand';
 import {
   useHuntingMapType,
   useSettings,
@@ -49,9 +43,7 @@ const NewZealandPage = () => {
 
       <HuntingMap
         animalMarkers={animalMarkers}
-        imageHeight={mapHeight}
         imageSrc={`${basePath}/img/maps/new_zealand.jpeg`}
-        imageWidth={mapWidth}
         genericMarkers={genericMarkers}
         labels={mapLabels}
         markerSizeAnimal={settings.animalMarkerSize}

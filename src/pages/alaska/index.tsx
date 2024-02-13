@@ -2,13 +2,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
-import {
-  animalMarkers,
-  genericMarkers,
-  mapHeight,
-  mapLabels,
-  mapWidth,
-} from 'config/alaska';
+import { animalMarkers, genericMarkers, mapLabels } from 'config/alaska';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
@@ -49,10 +43,8 @@ const AlaskaPage = () => {
 
       <HuntingMap
         animalMarkers={animalMarkers}
-        imageHeight={mapHeight}
         imageScale={2}
         imageSrc={`${basePath}/img/maps/alaska.jpeg`}
-        imageWidth={mapWidth}
         genericMarkers={genericMarkers}
         labels={mapLabels}
         markerSizeAnimal={settings.animalMarkerSize}

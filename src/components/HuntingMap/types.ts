@@ -18,10 +18,10 @@ export interface HuntingMapProps {
   animalMarkers: Array<MarkerOptionsAnimal>;
   defaultZoomValue?: number;
   genericMarkers: Array<MarkerOptionsGeneric>;
-  imageHeight: number;
+  imageHeight?: number;
   imageScale?: number;
   imageSrc: string;
-  imageWidth: number;
+  imageWidth?: number;
   labels?: Array<MapLabelOptions>;
   mapBoundary?: number;
   markerSizeAnimal?: number;

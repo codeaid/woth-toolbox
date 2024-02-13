@@ -3,13 +3,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
-import {
-  animalMarkers,
-  genericMarkers,
-  mapHeight,
-  mapLabels,
-  mapWidth,
-} from 'config/idaho';
+import { animalMarkers, genericMarkers, mapLabels } from 'config/idaho';
 import { markerVisibilityMap } from 'config/markers';
 import {
   useHuntingMapType,
@@ -47,9 +41,7 @@ const NezPerceValleyPage = () => {
 
       <HuntingMap
         animalMarkers={animalMarkers}
-        imageHeight={mapHeight}
         imageSrc={`${basePath}/img/maps/nez_perce.jpeg`}
-        imageWidth={mapWidth}
         genericMarkers={genericMarkers}
         labels={mapLabels}
         markerSizeAnimal={settings.animalMarkerSize}
