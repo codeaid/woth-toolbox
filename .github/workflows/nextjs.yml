@@ -21,24 +21,139 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  deps:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache application dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+  audit:
+    name: Audit dependencies
+    runs-on: ubuntu-latest
+    needs: deps
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore application dependencies
+        uses: actions/cache/restore@v4
+        with:
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+          fail-on-cache-miss: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Perform dependency audit
+        run: yarn audit
+
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    needs: deps
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore application dependencies
+        uses: actions/cache/restore@v4
+        with:
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+          fail-on-cache-miss: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Perform code linting
+        run: yarn lint
+
+  prettier:
+    name: Validate code formatting
+    runs-on: ubuntu-latest
+    needs: deps
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore application dependencies
+        uses: actions/cache/restore@v4
+        id: cache
+        with:
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+          fail-on-cache-miss: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Validate code formatting
+        run: yarn prettier
+
   # Build job
   build:
+    name: Build
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_BASE_URL: "https://codeaid.github.io"
       NEXT_PUBLIC_BASE_PATH: "/woth-toolbox"
       NEXT_PUBLIC_GOOGLE_ANALYTICS: "G-3NG0GF80JK"
+    needs:
+      - audit
+      - lint
+      - prettier
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Restore application dependencies
+        uses: actions/cache/restore@v4
+        id: cache
+        with:
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+          fail-on-cache-miss: true
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
           cache: yarn
 
-      - name: Setup Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
         with:
           # Automatically inject basePath in your Next.js configuration file and disable
@@ -47,7 +162,7 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
 
-      - name: Restore cache
+      - name: Configure output cache
         uses: actions/cache@v4
         with:
           path: |
@@ -57,15 +172,6 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}-
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Validate code formatting
-        run: yarn prettier
-
-      - name: Perform code analysis
-        run: yarn lint
 
       - name: Export static application assets
         run: yarn build

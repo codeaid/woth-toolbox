@@ -3,6 +3,7 @@
   "version": "1.25.1",
   "private": true,
   "scripts": {
+    "audit": "npm audit --all --recursive",
     "build": "next build",
     "dev": "next dev",
     "export:animals": "npx ts-node ./src/scripts/animals.ts > animals.json",
