@@ -1,0 +1,13 @@
+.ColorSelectorCell {
+  border: thin solid transparent;
+  border-radius: 0.15em;
+  cursor: pointer;
+  height: 1em;
+  opacity: 1;
+  transition: border-color 100ms ease-in-out;
+}
+
+.ColorSelectorCell:hover,
+.ColorSelectorCellActive {
+  border-color: var(--light-primary);
+}
