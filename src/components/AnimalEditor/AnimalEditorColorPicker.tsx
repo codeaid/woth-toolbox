@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
-import { ChromePicker } from 'react-color';
 import type { ColorResult } from 'react-color';
+import { ChromePicker } from 'react-color';
+import { ColorSelector } from 'components/ColorSelector';
 import { getIconComponent } from 'lib/icons';
 import { getHexColor } from 'lib/utils';
 import type { AnimalEditorColorPickerProps } from './types';
@@ -17,23 +18,35 @@ export const AnimalEditorColorPicker = (
     [marker?.type],
   );
 
+  // Determine currently selected color
+  const color = useMemo(
+    () => data?.color ?? defaultIconColor,
+    [data, defaultIconColor],
+  );
+
   /**
    * Handle changes to the color
    */
   const handleChange = useCallback(
-    (color: ColorResult) =>
-      onChange({
-        ...data,
-        color: getHexColor(color),
-      }),
+    (color: ColorResult) => onChange({ ...data, color: getHexColor(color) }),
+    [data, onChange],
+  );
+
+  /**
+   * Handle changes to the color
+   */
+  const handleColorSelectorChange = useCallback(
+    (color: string) => onChange({ ...data, color }),
     [data, onChange],
   );
 
   return (
     <>
+      <ColorSelector color={color} onChange={handleColorSelectorChange} />
+
       <ChromePicker
         className={styles.AnimalEditorColorPicker}
-        color={data?.color ?? defaultIconColor}
+        color={color}
         disableAlpha={true}
         styles={{
           default: {
@@ -51,6 +64,7 @@ export const AnimalEditorColorPicker = (
         }}
         onChange={handleChange}
       />
+
       <div className={styles.AnimalEditorColorPickerIcon}>
         <IconComponent
           size={50}
