@@ -260,6 +260,7 @@ Application is available in the following languages:
 - Italian
 - Japanese
 - Polish
+- Portuguese (Brazil)
 - Russian
 - Slovak
 - Spanish

@@ -12,6 +12,7 @@ export default [
   },
   {
     action: 'WEAPON:BOW_04_ACTION',
+    caliber: 'WEAPON:BOW_04_CALIBER',
     description: 'WEAPON:BOW_04_DESCRIPTION',
     heading: 'WEAPON:BOW_04_HEADING',
     hitEnergy: [30, 0, 0, 0, 0],

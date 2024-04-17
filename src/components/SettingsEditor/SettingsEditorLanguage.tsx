@@ -24,6 +24,7 @@ export const SettingsEditorLanguage = (props: SettingsEditorLanguageProps) => {
         { content: translate('UI:LANGUAGE_IT_IT'), value: 'it' },
         { content: translate('UI:LANGUAGE_JA_JP'), value: 'ja' },
         { content: translate('UI:LANGUAGE_PL_PL'), value: 'pl' },
+        { content: translate('UI:LANGUAGE_PT_BR'), value: 'pt-br' },
         { content: translate('UI:LANGUAGE_RU_RU'), value: 'ru' },
         { content: translate('UI:LANGUAGE_SK_SK'), value: 'sk' },
         { content: translate('UI:LANGUAGE_TR_TR'), value: 'tr' },
