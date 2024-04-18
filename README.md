@@ -260,6 +260,7 @@ Application is available in the following languages:
 - Italian
 - Japanese
 - Polish
+- Portuguese (Brazil) by Flyskin
 - Russian
 - Slovak
 - Spanish

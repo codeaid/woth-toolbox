@@ -38,7 +38,8 @@ export default [
     tier: 5,
   },
   {
-    action: 'WEAPON:BOW_02_HEADING',
+    action: 'WEAPON:BOW_02_ACTION',
+    caliber: 'WEAPON:BOW_02_CALIBER',
     description: 'WEAPON:BOW_02_DESCRIPTION',
     heading: 'WEAPON:BOW_02_HEADING',
     hitEnergy: [100, 0, 0, 0, 0],
