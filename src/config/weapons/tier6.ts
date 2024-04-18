@@ -30,7 +30,6 @@ export default [
   },
   {
     action: 'WEAPON:BOW_01_ACTION',
-    caliber: 'WEAPON:BOW_01_CALIBER',
     description: 'WEAPON:BOW_01_DESCRIPTION',
     heading: 'WEAPON:BOW_01_HEADING',
     hitEnergy: [125, 105, 0, 0, 0],
@@ -39,7 +38,6 @@ export default [
   },
   {
     action: 'WEAPON:BOW_03_ACTION',
-    caliber: 'WEAPON:BOW_03_CALIBER',
     description: 'WEAPON:BOW_03_DESCRIPTION',
     heading: 'WEAPON:BOW_03_HEADING',
     hitEnergy: [125, 105, 0, 0, 0],
