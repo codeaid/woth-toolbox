@@ -120,6 +120,7 @@ export const localeDirectoryMap = new Map<string, string>([
   ['ja', 'ja'],
   ['nl', 'nl'],
   ['pl', 'pl'],
+  ['pt-br', 'pt-br'],
   ['ru', 'ru'],
   ['sk', 'sk'],
   ['tr', 'tr'],
