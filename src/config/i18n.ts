@@ -5,6 +5,7 @@ import type {
   AnimalHabitat,
   AnimalRating,
 } from 'types/animals';
+import type { MapType } from 'types/cartography';
 import type { TranslationKey } from 'types/i18n';
 import type {
   MarkerTypeCustom,
@@ -128,4 +129,12 @@ export const localeDirectoryMap = new Map<string, string>([
   ['zh-Hant', 'zh-Hant'],
   ['zh-HK', 'zh-Hant'],
   ['zh-TW', 'zh-Hant'],
+]);
+
+export const mapTypeTranslationMap = new Map<MapType, TranslationKey>([
+  ['africa', 'POI:MAP_NAME_AFRICA'],
+  ['alaska', 'POI:MAP_NAME_ALASKA'],
+  ['idaho', 'POI:MAP_NAME_IDAHO'],
+  ['new-zealand', 'POI:MAP_NAME_NEW_ZEALAND'],
+  ['transylvania', 'POI:MAP_NAME_TRANSYLVANIA'],
 ]);
