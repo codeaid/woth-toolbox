@@ -1,7 +1,7 @@
 import colors from 'color';
 import type { ColorResult } from 'react-color';
 import type { TypeOptions as ToastType } from 'react-toastify';
-import { toast } from 'components/Notifications';
+import { toast } from 'react-toastify';
 import type { ToastContent, ToastOptions } from 'components/Notifications';
 
 /**
