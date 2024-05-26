@@ -5,10 +5,11 @@
   "scripts": {
     "audit": "npm audit --all --recursive",
     "build": "next build",
+    "companion": "tsx --trace-warnings ./src/scripts/companion",
     "dev": "next dev",
-    "export:animals": "npx ts-node ./src/scripts/animals.ts > animals.json",
-    "export:weapons": "npx ts-node ./src/scripts/weapons.ts > weapons.json",
-    "https": "npx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000",
+    "export:animals": "tsx ./src/scripts/animals.ts > animals.json",
+    "export:weapons": "tsx ./src/scripts/weapons.ts > weapons.json",
+    "https": "pnpm dlx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prepare": "husky install",
@@ -54,6 +55,7 @@
     "prettier": "^3.2.5",
     "process": "^0.11.10",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.11.0",
     "typescript": "^5.3.3"
   }
 }
