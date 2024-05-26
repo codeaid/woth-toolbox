@@ -32,19 +32,24 @@ jobs:
         id: cache
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           path: |
             node_modules
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
+        run: pnpm install
 
   audit:
     name: Audit dependencies
@@ -57,19 +62,24 @@ jobs:
       - name: Restore application dependencies
         uses: actions/cache/restore@v4
         with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           path: |
             node_modules
           fail-on-cache-miss: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: Perform dependency audit
-        run: yarn audit
+        run: pnpm audit
 
   lint:
     name: Lint code
@@ -82,19 +92,24 @@ jobs:
       - name: Restore application dependencies
         uses: actions/cache/restore@v4
         with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           path: |
             node_modules
           fail-on-cache-miss: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: Perform code linting
-        run: yarn lint
+        run: pnpm lint
 
   prettier:
     name: Validate code formatting
@@ -108,19 +123,24 @@ jobs:
         uses: actions/cache/restore@v4
         id: cache
         with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           path: |
             node_modules
           fail-on-cache-miss: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: Validate code formatting
-        run: yarn prettier
+        run: pnpm prettier
 
   # Build job
   build:
@@ -142,16 +162,21 @@ jobs:
         uses: actions/cache/restore@v4
         id: cache
         with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           path: |
             node_modules
           fail-on-cache-miss: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
@@ -168,13 +193,13 @@ jobs:
           path: |
             .next/cache
           # Generate a new cache whenever packages or source files change.
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
 
       - name: Export static application assets
-        run: yarn build
+        run: pnpm build
 
       - name: Upload assets as artifacts
         uses: actions/upload-pages-artifact@v3
