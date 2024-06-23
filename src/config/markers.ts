@@ -121,4 +121,4 @@ export const markerVisibilityMap = new Map(
 );
 
 // Maximum number of tracking markers that can exist on the map
-export const maxTrackingMarkerCount = 100;
+export const maxTrackingMarkerCount = 1000;
