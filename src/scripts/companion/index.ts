@@ -6,10 +6,7 @@ import process from 'process';
 const outputDir = path.join(process.cwd(), '.companion');
 
 const writeFile = (name: string, data: unknown) =>
-  fs.writeFileSync(
-    path.join(outputDir, name),
-    JSON.stringify(data, undefined, 2),
-  );
+  fs.writeFileSync(path.join(outputDir, name), JSON.stringify(data));
 
 // Ensure output directory exists before proceeding
 if (!fs.existsSync(outputDir)) {

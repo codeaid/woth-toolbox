@@ -1,0 +1,102 @@
+import type { TranslationKey } from 'types/i18n';
+
+type Filtered<T> = T extends `ANIMAL:${infer _}_HEADING` ? T : never;
+export type AnimalKey = Filtered<TranslationKey>;
+type TrophyArray = [number, number, number, number, number];
+
+export const trophyRangesMap = new Map<AnimalKey, TrophyArray | null>([
+  ['ANIMAL:ALCES_AMERICANUS_HEADING' as AnimalKey, [100, 284, 361, 411, 459]],
+  [
+    'ANIMAL:ALCES_AMERICANUS_GIGAS_HEADING' as AnimalKey,
+    [100, 285, 362, 412, 460],
+  ],
+  ['ANIMAL:ANAS_PLATYRHYNCHOS_HEADING' as AnimalKey, [180, 300, 359, 409, 460]],
+  ['ANIMAL:ANSER_ANSER_HEADING' as AnimalKey, [164, 295, 358, 407, 450]],
+  ['ANIMAL:ANSER_ROSSII_HEADING' as AnimalKey, [180, 268, 339, 395, 446]],
+  ['ANIMAL:AYTHYA_AFFINIS_HEADING' as AnimalKey, [164, 319, 377, 419, 456]],
+  [
+    'ANIMAL:BISON_BISON_ATHABASCAE_HEADING' as AnimalKey,
+    [100, 309, 371, 418, 458],
+  ],
+  ['ANIMAL:CANIS_AUREUS_HEADING' as AnimalKey, [360, 412, 443, 465, 483]],
+  ['ANIMAL:CANIS_LUPUS_HEADING' as AnimalKey, [336, 400, 436, 461, 483]],
+  [
+    'ANIMAL:CAPREOLUS_CAPREOLUS_HEADING' as AnimalKey,
+    [164, 297, 368, 423, 466],
+  ],
+  ['ANIMAL:CERVUS_CANADENSIS_HEADING' as AnimalKey, [100, 284, 356, 408, 459]],
+  [
+    'ANIMAL:CERVUS_CANADENSIS_ROOSEVELTI_HEADING' as AnimalKey,
+    [146, 285, 357, 409, 460],
+  ],
+  ['ANIMAL:CERVUS_ELAPHUS_HEADING' as AnimalKey, [100, 259, 339, 399, 459]],
+  ['ANIMAL:DAMA_DAMA_HEADING' as AnimalKey, [100, 284, 356, 408, 459]],
+  ['ANIMAL:LEPUS_AMERICANUS_HEADING' as AnimalKey, [326, 394, 429, 465, 485]],
+  ['ANIMAL:LEPUS_EUROPAEUS_HEADING' as AnimalKey, [80, 237, 331, 394, 458]],
+  [
+    'ANIMAL:MELANITTA_PERSPICILLATA_HEADING' as AnimalKey,
+    [180, 345, 402, 439, 469],
+  ],
+  ['ANIMAL:MELES_MELES_HEADING' as AnimalKey, [274, 362, 404, 435, 467]],
+  [
+    'ANIMAL:ODOCOILEUS_HEMIONUS_HEADING' as AnimalKey,
+    [100, 264, 339, 399, 459],
+  ],
+  [
+    'ANIMAL:ODOCOILEUS_HEMIONUS_SITKENSIS_HEADING' as AnimalKey,
+    [118, 212, 327, 403, 464],
+  ],
+  [
+    'ANIMAL:ODOCOILEUS_VIRGINIANUS_HEADING' as AnimalKey,
+    [118, 283, 350, 417, 460],
+  ],
+  [
+    'ANIMAL:OREAMNOS_AMERICANUS_HEADING' as AnimalKey,
+    [260, 350, 396, 430, 464],
+  ],
+  ['ANIMAL:OVIS_CANADENSIS_HEADING' as AnimalKey, [229, 330, 388, 417, 460]],
+  ['ANIMAL:OVIS_MUSIMON_HEADING' as AnimalKey, [253, 335, 380, 421, 470]],
+  [
+    'ANIMAL:PHASIANUS_COLCHICUS_HEADING' as AnimalKey,
+    [100, 329, 384, 429, 459],
+  ],
+  [
+    'ANIMAL:RANGIFER_TARANDUS_GROENLANDICUS_HEADING' as AnimalKey,
+    [100, 255, 350, 423, 460],
+  ],
+  [
+    'ANIMAL:RUPICAPRA_RUPICAPRA_HEADING' as AnimalKey,
+    [263, 355, 400, 437, 465],
+  ],
+  ['ANIMAL:SUS_SCROFA_HEADING' as AnimalKey, [243, 342, 391, 426, 463]],
+  ['ANIMAL:TAXIDEA_TAXUS_HEADING' as AnimalKey, [212, 315, 370, 415, 460]],
+  ['ANIMAL:URSUS_AMERICANUS_HEADING' as AnimalKey, [100, 409, 437, 457, 477]],
+  ['ANIMAL:URSUS_ARCTOS_HEADING' as AnimalKey, [280, 362, 405, 435, 467]],
+  [
+    'ANIMAL:URSUS_ARCTOS_MIDDENDORFFI_HEADING' as AnimalKey,
+    [280, 340, 390, 426, 462],
+  ],
+  ['ANIMAL:VULPES_VULPES_HEADING' as AnimalKey, [296, 386, 430, 459, 483]],
+  ['ANIMAL:SAMBAR_DEER_HEADING' as AnimalKey, [100, 260, 340, 400, 460]],
+  ['ANIMAL:EGYPTIAN_GOOSE_HEADING' as AnimalKey, [199, 312, 370, 415, 456]],
+  ['ANIMAL:EUROPEAN_RABBIT_HEADING' as AnimalKey, [80, 237, 331, 394, 458]],
+  [
+    'ANIMAL:HELMETED_GUINEAFOWL_HEADING' as AnimalKey,
+    [190, 313, 375, 422, 469],
+  ],
+  ['ANIMAL:HONEY_BADGER_HEADING' as AnimalKey, [379, 422, 451, 474, 488]],
+  ['ANIMAL:SIKA_DEER_HEADING' as AnimalKey, [118, 212, 327, 403, 464]],
+  ['ANIMAL:HIMALAYAN_TAHR_HEADING' as AnimalKey, [263, 355, 400, 437, 465]],
+  ['ANIMAL:FERAL_GOAT_HEADING' as AnimalKey, [260, 350, 396, 430, 464]],
+  ['ANIMAL:FERAL_PIG_HEADING' as AnimalKey, [243, 342, 391, 426, 463]],
+  ['ANIMAL:RED_STAG_HEADING' as AnimalKey, [100, 260, 340, 400, 460]],
+  ['ANIMAL:CAPE_BUFFALO_HEADING' as AnimalKey, [280, 363, 406, 438, 470]],
+  ['ANIMAL:SPRINGBOK_HEADING' as AnimalKey, [267, 327, 379, 419, 458]],
+  ['ANIMAL:SPOTTED_HYENA_HEADING' as AnimalKey, [373, 422, 448, 468, 487]],
+  ['ANIMAL:BLACK_WILDEBEEST_HEADING' as AnimalKey, [267, 355, 399, 435, 466]],
+  ['ANIMAL:BLUE_WILDEBEEST_HEADING' as AnimalKey, [290, 370, 410, 441, 470]],
+  ['ANIMAL:COMMON_WARTHOG_HEADING' as AnimalKey, [111, 256, 330, 387, 441]],
+  ['ANIMAL:GREATER_KUDU_HEADING' as AnimalKey, [210, 330, 390, 440, 472]],
+  ['ANIMAL:LION_HEADING' as AnimalKey, [380, 422, 447, 466, 488]],
+  ['ANIMAL:GEMSBOK_HEADING' as AnimalKey, [210, 319, 375, 418, 458]],
+]);
