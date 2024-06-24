@@ -10,21 +10,20 @@ import { genericMarkers as transylvaniaLabels } from 'config/transylvania';
 import type { MapType } from 'types/cartography';
 import type { MarkerOptionsGeneric, MarkerTypeGeneric } from 'types/markers';
 
-const validTypes: MarkerTypeGeneric[] = ['camp', 'hunting stand', 'lodge'];
-
-const typeMap = new Map<MarkerTypeGeneric, number>([
-  ['lodge', 0],
-  ['camp', 1],
-  ['hunting stand', 2],
-]);
+const validTypes: MarkerTypeGeneric[] = [
+  'camp',
+  'hunting stand',
+  'lodge',
+  'cabin',
+];
 
 const createOutput = (markers: MarkerOptionsGeneric[], mapType: MapType) =>
   markers
     .filter(marker => validTypes.includes(marker.type))
     .map(marker => ({
-      ID: genericMarkerTranslationMap.get(marker.type),
+      ID: marker.id,
+      BUILDING: genericMarkerTranslationMap.get(marker.type),
       RESERVE: mapTypeTranslationMap.get(mapType),
-      TYPE: typeMap.get(marker.type),
       X: marker.coords[0],
       Y: marker.coords[1],
     }));

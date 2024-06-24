@@ -1,19 +1,23 @@
 import { weapons } from 'config/weapons';
-import type { TranslationKey } from 'types/i18n';
+import {
+  type WeaponKey,
+  magazineSizesMap,
+} from './data/firearms_magazine_sizes';
 
-type Filtered<T> = T extends `WEAPON:${infer _}_HEADING` ? T : never;
-type WeaponKey = Filtered<TranslationKey>;
+export default weapons.map(entry => {
+  const caliber = entry.heading.startsWith('WEAPON:BOW')
+    ? 'WEAPON:BOW_00_CALIBER'
+    : entry.caliber;
+  const magazineSize = magazineSizesMap.get(entry.heading as WeaponKey) ?? -1;
 
-const magSizeMap = new Map<WeaponKey, number>([
-  ['WEAPON:CROSSBOW_03_HEADING', 1],
-  // To be populated with the remaining entries...
-]);
-
-export default weapons.map(entry => ({
-  ID: entry.heading,
-  ACTION: entry.action,
-  CALIBER: entry.caliber,
-  ENERGY: entry.hitEnergy,
-  MAG: magSizeMap.get(entry.heading as WeaponKey) ?? -1,
-  TIER: entry.tier,
-}));
+  return {
+    ID: entry.heading,
+    ACTION: entry.action,
+    CALIBER: caliber,
+    ...(entry.hitEnergy.every(value => value === 0)
+      ? {}
+      : { ENERGY: entry.hitEnergy }),
+    MAG: magazineSize,
+    TIER: entry.tier,
+  };
+});
