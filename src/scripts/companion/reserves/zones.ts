@@ -23,17 +23,17 @@ const getAnimalTranslationKey = (type: MarkerTypeAnimal) =>
 
 const createOutput = (markers: MarkerOptionsAnimal[], mapType: MapType) =>
   markers.map(marker => ({
-    ID: getAnimalTranslationKey(marker.type),
+    ID: marker.id,
+    ANIMAL: getAnimalTranslationKey(marker.type),
     RESERVE: mapTypeTranslationMap.get(mapType),
     X: marker.coords[0],
     Y: marker.coords[1],
-    ZONES: [
-      [...marker.eat, ...marker.drink, ...marker.sleep].map(zone => ({
-        TYPE: zoneMap.get(zone.type),
-        X: zone.coords[0],
-        Y: zone.coords[1],
-      })),
-    ],
+    ZONES: [...marker.eat, ...marker.drink, ...marker.sleep].map(zone => ({
+      ID: zone.id,
+      TYPE: zoneMap.get(zone.type),
+      X: zone.coords[0],
+      Y: zone.coords[1],
+    })),
   }));
 
 // eslint-disable-next-line import/no-anonymous-default-export
