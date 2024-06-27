@@ -1,5 +1,6 @@
 import { weapons } from 'config/weapons';
-import { type WeaponKey, magazineSizesMap } from './data/firearmsMagazineSizes';
+import type { WeaponKey } from './data/firearmsMagazineSizes';
+import { magazineSizesMap } from './data/firearmsMagazineSizes';
 
 export default weapons.map(entry => {
   const caliber = entry.heading.startsWith('WEAPON:BOW')
