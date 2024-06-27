@@ -5,6 +5,7 @@ import imgMarkersExploration from './assets/markers-exploration.gif';
 import imgMarkersMulti from './assets/markers-multi.gif';
 import imgMarkersNeedZones from './assets/markers-need-zones.gif';
 import imgMarkersTracking from './assets/markers-tracking.gif';
+import { maxTrackingMarkerCount } from 'config/markers';
 
 export const HuntingMapTutorialMarkers = () => (
   <>
