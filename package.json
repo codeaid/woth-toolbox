@@ -10,7 +10,7 @@
     "https": "pnpm dlx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "start": "next start"
   },
   "dependencies": {
