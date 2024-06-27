@@ -1,11 +1,11 @@
 import { Emphasis } from 'components/Emphasis';
 import { Heading } from 'components/Heading';
+import { maxTrackingMarkerCount } from 'config/markers';
 import { HuntingMapTutorialImage } from './HuntingMapTutorialImage';
 import imgMarkersExploration from './assets/markers-exploration.gif';
 import imgMarkersMulti from './assets/markers-multi.gif';
 import imgMarkersNeedZones from './assets/markers-need-zones.gif';
 import imgMarkersTracking from './assets/markers-tracking.gif';
-import { maxTrackingMarkerCount } from 'config/markers';
 
 export const HuntingMapTutorialMarkers = () => (
   <>
@@ -117,8 +117,9 @@ export const HuntingMapTutorialMarkers = () => (
 
     <p>
       The number of tracking markers that can be placed on the map at once is
-      limited to <Emphasis>{maxTrackingMarkerCount}</Emphasis>. Once an additional marker is placed, the
-      earliest placed marker will be automatically removed from the map.
+      limited to <Emphasis>{maxTrackingMarkerCount}</Emphasis>. Once an
+      additional marker is placed, the earliest placed marker will be
+      automatically removed from the map.
     </p>
   </>
 );
