@@ -7,7 +7,9 @@ const set = weapons.reduce(
   new Set<TranslationKey | undefined>(),
 );
 
-export default [...set]
+const extraBowCaliber = 'WEAPON:BOW_00_CALIBER';
+
+export default [...set, extraBowCaliber]
   .filter(value => !!value)
   .map(translationKey => ({
     ID: translationKey,
