@@ -1,0 +1,42 @@
+name: Pull Request
+
+# Run the pipeline on new pull requests or changes made to existing ones
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+# Only allow one concurrent deployment
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  default:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Perform dependency audit
+        run: pnpm audit
+
+      - name: Perform code linting
+        run: pnpm lint
