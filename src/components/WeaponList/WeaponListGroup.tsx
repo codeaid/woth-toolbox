@@ -20,8 +20,8 @@ export const WeaponListGroup = (props: WeaponListGroupProps) => {
       {group.entities.map(weapon => (
         <WeaponListItem
           active={weapon.slug === selected?.slug}
-          weapon={weapon}
           key={weapon.slug}
+          weapon={weapon}
           onClick={onWeaponClick}
         />
       ))}

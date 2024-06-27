@@ -5,9 +5,9 @@ const NewZealandPage = () => (
   <HuntingMapPage
     animalMarkers={animalMarkers}
     genericMarkers={genericMarkers}
-    mapType="new-zealand"
     mapImageSrc="/img/maps/new_zealand.jpeg"
     mapLabels={mapLabels}
+    mapType="new-zealand"
     titleKey="POI:MAP_NAME_NEW_ZEALAND"
   />
 );

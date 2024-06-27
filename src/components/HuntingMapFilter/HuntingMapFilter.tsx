@@ -303,24 +303,24 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         <SectionHeader>{translate('UI:OTHER')}</SectionHeader>
         <HuntingMapFilterItem
           iconSize={20}
-          type="marker:level area"
           selected={options.showLabels}
+          type="marker:level area"
           onChange={handleToggleLabels}
         >
           {translate('UI:MARKER_LABELS')}
         </HuntingMapFilterItem>
         <HuntingMapFilterItem
           iconSize={20}
-          type="marker:exploration"
           selected={options.showExplorationMarkers}
+          type="marker:exploration"
           onChange={handleToggleExplorationMarkers}
         >
           {translate('UI:MARKER_EXPLORATION')}
         </HuntingMapFilterItem>
         <HuntingMapFilterItem
           iconSize={20}
-          type="marker:tracking"
           selected={options.showTrackingMarkers}
+          type="marker:tracking"
           onChange={handleToggleTrackingMarkers}
         >
           {translate('UI:MARKER_TRACKING')}
@@ -374,10 +374,10 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       <SidePanel
         actions={sidebarActions}
         className={styles.HuntingMapFilter}
-        closeOnOutsideClick={true}
+        closeOnOutsideClick
         side="left"
-        visible={menuVisible}
         title={translate('UI:TOGGLE_FILTERS')}
+        visible={menuVisible}
         onClose={handleClose}
       >
         <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>

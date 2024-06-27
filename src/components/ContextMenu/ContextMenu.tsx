@@ -141,11 +141,11 @@ export const ContextMenu = (props: ContextMenuProps) => {
 
   return createPortal(
     <Transition
-      mountOnEnter={true}
-      nodeRef={ref}
       in={visible}
+      mountOnEnter
+      nodeRef={ref}
       timeout={75}
-      unmountOnExit={true}
+      unmountOnExit
     >
       {state => (
         <ul

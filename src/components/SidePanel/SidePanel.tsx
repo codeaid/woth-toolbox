@@ -124,12 +124,12 @@ export const SidePanel = (props: SidePanelProps) => {
   return (
     <Transition
       in={visible}
-      mountOnEnter={true}
+      mountOnEnter
       nodeRef={ref}
       timeout={100}
+      unmountOnExit
       onEntering={handleEntering}
       onExited={handleExited}
-      unmountOnExit={true}
     >
       {state => (
         <div

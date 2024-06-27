@@ -5,9 +5,9 @@ const AlaskaPage = () => (
   <HuntingMapPage
     animalMarkers={animalMarkers}
     genericMarkers={genericMarkers}
-    mapType="alaska"
     mapImageSrc="/img/maps/alaska.jpeg"
     mapLabels={mapLabels}
+    mapType="alaska"
     titleKey="POI:MAP_NAME_ALASKA"
   />
 );

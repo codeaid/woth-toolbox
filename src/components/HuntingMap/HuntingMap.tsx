@@ -767,10 +767,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
           <HuntingMapAnimalMemo
             key={marker.id}
             marker={marker}
-            ref={ref}
             markerSize={markerSizeAnimal}
             markerSizeZone={markerSizeZone}
             markerTrophyRating={markerTrophyRating}
+            ref={ref}
             onToggleEditor={handleToggleAnimalEditor}
             onToggleZones={handleToggleAnimalZones}
           />

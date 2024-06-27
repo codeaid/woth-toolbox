@@ -5,9 +5,9 @@ const TransylvaniaPage = () => (
   <HuntingMapPage
     animalMarkers={animalMarkers}
     genericMarkers={genericMarkers}
-    mapType="transylvania"
     mapImageSrc="/img/maps/transylvania.jpeg"
     mapLabels={mapLabels}
+    mapType="transylvania"
     titleKey="POI:MAP_NAME_TRANSYLVANIA"
   />
 );

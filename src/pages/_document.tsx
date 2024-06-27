@@ -25,7 +25,7 @@ const Document = () => {
     return (
       <>
         <script
-          async={true}
+          async
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
         ></script>
         <script dangerouslySetInnerHTML={{ __html: code.join('\n') }}></script>
@@ -42,30 +42,30 @@ const Document = () => {
           href="https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400&family=Fira+Sans+Condensed&family=Fira+Sans+Extra+Condensed&family=Fira+Sans:wght@300;400;500&family=Inconsolata&display=swap"
           rel="stylesheet"
         />
-        <link rel="shortcut icon" href={`${basePath}/img/favicon.png`} />
+        <link href={`${basePath}/img/favicon.png`} rel="shortcut icon" />
         <style
           dangerouslySetInnerHTML={{
             __html: `html { cursor: url("${basePath}/img/mouse.png"), auto; }`,
           }}
         ></style>
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${baseURL}${basePath}`} />
-        <meta property="og:title" content="Way Of The Hunter Toolbox" />
+        <meta content="website" property="og:type" />
+        <meta content={`${baseURL}${basePath}`} property="og:url" />
+        <meta content="Way Of The Hunter Toolbox" property="og:title" />
         <meta
-          property="og:description"
           content="Unleash your inner hunter with the ultimate resource for weapons, animals and locations, featuring interactive maps and species life cycles."
+          property="og:description"
         />
         <meta
+          content={`${baseURL}${basePath}/img/og.jpg`}
           property="og:image"
-          content={`${baseURL}${basePath}/img/og.jpg`}
         />
         <meta
-          property="og:image:secure_url"
           content={`${baseURL}${basePath}/img/og.jpg`}
+          property="og:image:secure_url"
         />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="627" />
+        <meta content="image/jpeg" property="og:image:type" />
+        <meta content="1200" property="og:image:width" />
+        <meta content="627" property="og:image:height" />
         {renderGoogleAnalytics()}
       </Head>
       <body>

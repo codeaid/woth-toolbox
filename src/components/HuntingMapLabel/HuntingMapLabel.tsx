@@ -42,10 +42,10 @@ export const HuntingMapLabel = (props: HuntingMapLabelProps) => {
   return (
     <Transition
       in={visible && visibleAtScale}
-      mountOnEnter={true}
+      mountOnEnter
       nodeRef={ref}
       timeout={100}
-      unmountOnExit={true}
+      unmountOnExit
     >
       {state => (
         <div

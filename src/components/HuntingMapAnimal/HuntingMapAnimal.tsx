@@ -214,11 +214,11 @@ export const HuntingMapAnimal = forwardRef(
                 forceVisible={zonesVisible}
                 key={zone.id}
                 marker={zone}
-                mountOnEnter={true}
-                ref={ref}
                 markerSize={markerSizeZone}
+                mountOnEnter
+                ref={ref}
                 title={`${animalName} : ${zoneName}`}
-                unmountOnExit={true}
+                unmountOnExit
               />
             );
           }),
@@ -286,8 +286,8 @@ export const HuntingMapAnimal = forwardRef(
           )}
           highlighted={editorActive || zonesVisible}
           marker={marker}
-          ref={setMarkerRef}
           markerSize={markerSize}
+          ref={setMarkerRef}
           style={{ ...style, color }}
           onClick={handleTriggerClick}
           onLongPress={handleTriggerLongPress}

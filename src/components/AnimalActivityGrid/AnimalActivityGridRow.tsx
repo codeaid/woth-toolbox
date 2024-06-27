@@ -76,7 +76,7 @@ export const AnimalActivityGridRow = (props: AnimalActivityGridRowProps) => {
       if (currentActivity) {
         return (
           <AnimalActivityGridIcon
-            intermediate={true}
+            intermediate
             key={`${animal.type}:${hour}:icon`}
             title={`${formatHour(hour)} - ${translate(
               getAnimalActivityKey(currentActivity.activity),

@@ -66,10 +66,10 @@ export const Modal = (props: ModalProps) => {
   return (
     <Transition
       in={visible}
-      mountOnEnter={true}
+      mountOnEnter
       nodeRef={ref}
       timeout={200}
-      unmountOnExit={true}
+      unmountOnExit
     >
       {state => (
         <div

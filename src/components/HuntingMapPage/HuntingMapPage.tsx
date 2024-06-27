@@ -52,10 +52,10 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
 
       <HuntingMap
         animalMarkers={animalMarkers}
+        genericMarkers={genericMarkers}
         imageHeight={mapHeight}
         imageSrc={basePath + mapImageSrc}
         imageWidth={mapWidth}
-        genericMarkers={genericMarkers}
         labels={mapLabels}
         markerSizeAnimal={settings.animalMarkerSize}
         markerSizeGeneric={settings.genericMarkerSize}

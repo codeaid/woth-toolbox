@@ -6,12 +6,12 @@ export const Notifications = () => (
     autoClose={3000}
     bodyClassName={styles.NotificationsBody}
     closeButton={false}
-    closeOnClick={true}
+    closeOnClick
     draggable={false}
-    hideProgressBar={true}
+    hideProgressBar
     newestOnTop={false}
-    pauseOnFocusLoss={true}
-    pauseOnHover={true}
+    pauseOnFocusLoss
+    pauseOnHover
     position="bottom-center"
     theme="dark"
     toastClassName={styles.NotificationsToast}

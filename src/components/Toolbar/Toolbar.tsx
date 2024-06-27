@@ -250,9 +250,9 @@ export const Toolbar = (props: ToolbarProps) => {
 
           <div
             className={styles.ToolbarActionMenuTrigger}
-            onPointerDown={handleShowMapMenu}
             onMouseEnter={handleShowMapMenu}
             onMouseLeave={handleHideMapMenu}
+            onPointerDown={handleShowMapMenu}
           >
             <div
               className={clsx(styles.ToolbarAction, {

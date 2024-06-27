@@ -143,9 +143,9 @@ export const SettingsEditorMigrationModal = (
         <div className={styles.SettingsEditorMigrationModalPanel}>
           <Textarea
             className={styles.SettingsEditorMigrationModalTextarea}
+            readOnly
             ref={exportRef}
             rows={8}
-            readOnly={true}
             onClick={handleSelectAll}
           />
           <Button

@@ -1,5 +1,5 @@
 import { ScaleLoader } from 'react-spinners';
 
 export const Spinner = () => (
-  <ScaleLoader height={20} width={3} color="#DCBB7B" />
+  <ScaleLoader color="#DCBB7B" height={20} width={3} />
 );

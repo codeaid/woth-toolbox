@@ -4,7 +4,6 @@ import styles from './HuntingMapTutorialImage.module.css';
 
 export const HuntingMapTutorialImage = (props: ImageProps) => (
   <div className={styles.HuntingMapTutorialImage}>
-    {/* eslint-disable-next-line jsx-a11y/alt-text */}
-    <Image {...props} priority={true} quality={100} />
+    <Image {...props} priority quality={100} />
   </div>
 );
