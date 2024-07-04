@@ -38,6 +38,15 @@ export default [
     tier: 5,
   },
   {
+    action: 'WEAPON:SHOTGUN_PUMP_01_FIELD_01_ACTION',
+    caliber: 'WEAPON:SHOTGUN_PUMP_01_FIELD_01_CALIBER',
+    description: 'WEAPON:SHOTGUN_PUMP_01_FIELD_01_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_PUMP_01_FIELD_01_HEADING',
+    hitEnergy: [3210, 2490, 1900, 1530, 1050],
+    slug: 'remington-870-fieldmaster',
+    tier: 5,
+  },
+  {
     action: 'WEAPON:BOW_02_ACTION',
     description: 'WEAPON:BOW_02_DESCRIPTION',
     heading: 'WEAPON:BOW_02_HEADING',
