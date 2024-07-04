@@ -1,6 +1,6 @@
 {
   "name": "woth-toolbox",
-  "version": "1.26.1",
+  "version": "1.26.2",
   "private": true,
   "scripts": {
     "audit": "npm audit --all --recursive",
