@@ -1,4 +1,5 @@
-import Head from 'next/head';
+'use client';
+
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { HuntingMap } from 'components/HuntingMap';
@@ -44,11 +45,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
 
   return (
     <>
-      <Head>
-        <title>
-          {`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}
-        </title>
-      </Head>
+      <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
 
       <HuntingMap
         animalMarkers={animalMarkers}

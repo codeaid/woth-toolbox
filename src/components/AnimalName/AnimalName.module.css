@@ -15,7 +15,7 @@
 
 .AnimalNameTitle {
   color: var(--text-primary);
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   line-height: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;

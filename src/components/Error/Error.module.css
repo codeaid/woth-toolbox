@@ -5,7 +5,7 @@
 }
 
 .ErrorHeading {
-  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-bench-nine), var(--font-fira-sans-extra-condensed), sans-serif;
   font-size: 7em;
   font-weight: 300;
   text-align: center;

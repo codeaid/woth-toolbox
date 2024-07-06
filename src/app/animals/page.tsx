@@ -1,5 +1,6 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { AnimalDetails } from 'components/AnimalDetails';
 import { AnimalList } from 'components/AnimalList';
@@ -15,12 +16,13 @@ import { useTranslator } from 'hooks';
 import { getWeaponGroups, isOptimal, isSuboptimal } from 'lib/weapons';
 import type { Animal } from 'types/animals';
 import type { Weapon, WeaponDistance } from 'types/weapons';
-import styles from './styles.module.css';
+import styles from './page.module.css';
 
 const AnimalsPage = () => {
   // Extract route parameters
   const router = useRouter();
-  const { q: animalId } = router.query;
+  const params = useSearchParams();
+  const animalId = params.get('q');
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -92,11 +94,6 @@ const AnimalsPage = () => {
    * Pre-render page content
    */
   const pageContent = useMemo(() => {
-    // Ensure router fields are updated client-side and ready for use
-    if (!router.isReady) {
-      return null;
-    }
-
     if (animalId && !selectedAnimal) {
       return <Error status={404} />;
     }
@@ -131,18 +128,15 @@ const AnimalsPage = () => {
     handleGetWeaponOptimal,
     handleGetWeaponSuboptimal,
     handleRenderEntityName,
-    router.isReady,
     selectedAnimal,
     translate,
   ]);
 
   return (
     <>
-      <Head>
-        <title>
-          {`${translate('UI:SECTION_ANIMALS')} - ${translate('UI:GAME_TITLE')}`}
-        </title>
-      </Head>
+      <title>
+        {`${translate('UI:SECTION_ANIMALS')} - ${translate('UI:GAME_TITLE')}`}
+      </title>
 
       <div className={styles.WeaponSelectorPage}>
         <Sidebar>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useState } from 'react';
 import { maxTrackingMarkerCount } from 'config/markers';
 import type { CustomMarkerContextValue } from 'contexts';

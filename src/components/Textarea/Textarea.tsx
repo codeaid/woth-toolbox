@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { forwardRef, useCallback, useMemo } from 'react';
-import type { ForwardedRef, KeyboardEvent } from 'react';
+import type { ForwardedRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import type { TextareaProps } from './types';
 import styles from './Textarea.module.css';
 
@@ -14,23 +14,8 @@ export const Textarea = forwardRef(
       [className],
     );
 
-    /**
-     * Prevent key presses from bubbling up and creating markers on the maps
-     */
-    const handleKeyDown = useCallback(
-      (event: KeyboardEvent<EventTarget>) => event.stopPropagation(),
-      [],
-    );
-
     // noinspection XmlDeprecatedElement
-    return (
-      <textarea
-        {...rest}
-        className={classNames}
-        ref={ref}
-        onKeyDown={handleKeyDown}
-      />
-    );
+    return <textarea {...rest} className={classNames} ref={ref} />;
   },
 );
 

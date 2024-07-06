@@ -1,5 +1,7 @@
+'use client';
+
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { createPortal } from 'react-dom';
@@ -42,7 +44,7 @@ export const Toolbar = (props: ToolbarProps) => {
   const [settingsVisible, setSettingsVisible] = useState(false);
 
   // Retrieve current application path
-  const { asPath } = useRouter();
+  const pathname = usePathname();
 
   // Retrieve application settings and their updater
   const { settings, onChange: onSettingsChange } = useSettings();
@@ -223,7 +225,7 @@ export const Toolbar = (props: ToolbarProps) => {
   }, [handleHideSettings, onSettingsChange, settings, settingsVisible]);
 
   // Hide mobile menu when navigating to a new page
-  useEffect(() => setMobileMenuVisible(false), [asPath]);
+  useEffect(() => setMobileMenuVisible(false), [pathname]);
 
   return (
     <>

@@ -20,16 +20,11 @@ const getLocalIdentHash = (context, localIdentName, localName) =>
 
 /** @type {import('next').NextConfig} */
 const config = {
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: {
-    unoptimized: true,
-  },
   output: 'export',
-  pageExtensions: ['tsx'],
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: false,
@@ -55,7 +50,7 @@ const config = {
           moduleLoader.loader?.includes('css-loader') &&
           !moduleLoader.loader?.includes('postcss-loader')
         )
-          moduleLoader.options.modules.getLocalIdent = getLocalIdentHash;
+          moduleLoader.options.getLocalIdent = getLocalIdentHash;
       });
     });
 

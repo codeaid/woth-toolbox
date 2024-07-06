@@ -1,3 +1,4 @@
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import type { NextRouter } from 'next/router';
 import { fauna } from 'config/animals';
 import {
@@ -34,16 +35,13 @@ export const isMapUrl = (href: string) => {
  * @param type Target animal type
  * @param router Application router
  */
-export const redirectToAnimalPage = async (
+export const redirectToAnimalPage = (
   type: AnimalType,
-  router: NextRouter,
-) =>
-  await router.push({
-    pathname: baseUrlAnimals,
-    query: {
-      q: getAnimalUrlSlug(type),
-    },
-  });
+  router: AppRouterInstance,
+) => {
+  const url = `${baseUrlAnimals}?q=${getAnimalUrlSlug(type)}`;
+  router.push(url);
+};
 
 /**
  * Retrieve URL slug for the specified animal type

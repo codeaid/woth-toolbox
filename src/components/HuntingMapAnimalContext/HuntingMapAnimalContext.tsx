@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 import { MdOutlineMyLocation } from 'react-icons/md';
 import {

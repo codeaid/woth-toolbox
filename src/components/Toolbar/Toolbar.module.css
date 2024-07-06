@@ -2,7 +2,7 @@
   background-color: var(--elevation0);
   display: grid;
   grid-template-columns: auto 1fr auto;
-  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-bench-nine), var(--font-fira-sans-extra-condensed), sans-serif;
   line-height: 1em;
   user-select: none;
   z-index: 110;
@@ -120,7 +120,7 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-bench-nine), var(--font-fira-sans-extra-condensed), sans-serif;
   left: 0;
   overflow: auto;
   position: absolute;

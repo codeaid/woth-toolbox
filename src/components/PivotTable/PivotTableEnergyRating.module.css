@@ -5,9 +5,8 @@
   color: var(--text-secondary);
   display: flex;
   flex: 1;
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   font-size: 1.1em;
-  font-weight: 500;
   justify-content: center;
   margin: 0 auto;
   min-width: 5rem;

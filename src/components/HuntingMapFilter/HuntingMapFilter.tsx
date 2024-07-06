@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import type { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
@@ -201,18 +201,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
   );
 
   /**
-   * Handle pressing keyboard keys
-   */
-  const handleDocumentKeyPress = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'r' && !event.ctrlKey && !event.metaKey) {
-        handleToggleVisibility();
-      }
-    },
-    [handleToggleVisibility],
-  );
-
-  /**
    * Render generic options
    *
    * @param types List of option types to render
@@ -350,15 +338,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     ],
     [handleClearFilters, options, translate],
   );
-
-  // Monitor clicks outside the current marker and hide zones when needed
-  useEffect(() => {
-    document.addEventListener('keydown', handleDocumentKeyPress);
-
-    return () => {
-      document.removeEventListener('keydown', handleDocumentKeyPress);
-    };
-  }, [handleDocumentKeyPress]);
 
   return (
     <>

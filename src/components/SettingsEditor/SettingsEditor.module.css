@@ -6,7 +6,7 @@
 }
 
 .SettingsEditorResetButton {
-  background-color: var(--variance-suboptimal);
+  background-color: var(--variance-suboptimal) !important;
 }
 
 .SettingsEditorSidePanel {

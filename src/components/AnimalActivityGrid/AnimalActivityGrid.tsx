@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo, useState } from 'react';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups, getAnimalsByMapType } from 'lib/animals';

@@ -1,22 +1,12 @@
-import type { AppProps } from 'next/app';
-import { IntlProvider } from 'react-intl';
+import type { PropsWithChildren } from 'react';
 import { Layout } from 'components/Layout';
-import { useLocale, useLocaleResource } from 'hooks';
+import { useLocaleResource } from 'hooks';
 
-export const App = (props: AppProps) => {
-  const { Component, pageProps } = props;
-
-  // Retrieve current application settings and locale
-  const locale = useLocale();
+export const App = (props: PropsWithChildren) => {
+  const { children } = props;
 
   // Retrieve locale's translation messages
   const messages = useLocaleResource();
 
-  return (
-    <IntlProvider locale={locale} messages={messages}>
-      <Layout ready={!!messages}>
-        <Component {...pageProps} />
-      </Layout>
-    </IntlProvider>
-  );
+  return <Layout ready={!!messages}>{children}</Layout>;
 };

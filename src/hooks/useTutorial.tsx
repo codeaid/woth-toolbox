@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext, useEffect } from 'react';
 import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
 import { TutorialContext } from 'contexts';

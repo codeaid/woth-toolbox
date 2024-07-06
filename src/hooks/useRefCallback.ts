@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import type { RefCallback } from 'react';
 import { setReferenceValue } from 'lib/dom';

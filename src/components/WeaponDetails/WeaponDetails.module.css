@@ -3,7 +3,7 @@
 }
 
 .WeaponDetailsName {
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   font-size: 1.5em;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -39,7 +39,7 @@
 
 .WeaponDetailsStatName {
   color: var(--text-secondary);
-  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-bench-nine), var(--font-fira-sans-extra-condensed), sans-serif;
   letter-spacing: 0.1em;
   line-height: 1em;
   text-transform: uppercase;

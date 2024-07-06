@@ -32,6 +32,11 @@
   --variance-optimal: #208b3a;
   --variance-suboptimal: #f35b04;
 
+  --font-bench-nine: '';
+  --font-fira-sans: '';
+  --font-fira-sans-condensed: '';
+  --font-fira-sans-extra-condensed: '';
+
   --toastify-color-dark: var(--elevation0);
   --toastify-text-color-dark: var(--text-primary);
   --toastify-toast-min-height: 3em;
@@ -40,20 +45,12 @@
 
 html,
 body {
-  font-family: 'Fira Sans', sans-serif;
+  cursor: url("./mouse.png"), auto;
+  font-family: var(--font-fira-sans), sans-serif;
   font-size: 15px;
   font-weight: 400;
   height: 100%;
-  width: 100%;
-}
-
-body,
-#__next {
   overflow: hidden;
-}
-
-#__next {
-  height: 100%;
   width: 100%;
 }
 

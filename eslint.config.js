@@ -53,7 +53,7 @@ module.exports = [
         'error',
         {
           callbacksLast: true,
-        }
+        },
       ],
 
       // Ensure the `type` keyword is always outside the import braces
@@ -67,7 +67,15 @@ module.exports = [
             caseInsensitive: true,
             order: 'asc',
           },
-          'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
+          'groups': [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+          ],
           'pathGroups': [
             {
               pattern: '{.,..}/types',
@@ -132,7 +140,7 @@ module.exports = [
     rules: {
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,
-      "@next/next/no-img-element": "off",
+      '@next/next/no-img-element': 'off',
     },
   },
 

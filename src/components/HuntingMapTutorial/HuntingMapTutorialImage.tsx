@@ -1,9 +1,10 @@
-import Image from 'next/image';
-import type { ImageProps } from 'next/image';
+import type { ImgHTMLAttributes } from 'react';
 import styles from './HuntingMapTutorialImage.module.css';
 
-export const HuntingMapTutorialImage = (props: ImageProps) => (
+export const HuntingMapTutorialImage = (
+  props: ImgHTMLAttributes<HTMLImageElement>,
+) => (
   <div className={styles.HuntingMapTutorialImage}>
-    <Image {...props} priority quality={100} />
+    <img alt="" {...props} />
   </div>
 );

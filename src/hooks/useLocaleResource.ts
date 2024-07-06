@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useSettings } from 'hooks';
 import { getLocaleMessagesAsync } from 'lib/i18n';

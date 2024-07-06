@@ -6,7 +6,7 @@
 
 .SectionHeaderContent {
   color: var(--text-primary);
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   font-size: 1.3em;
   line-height: 1em;
   text-transform: uppercase;

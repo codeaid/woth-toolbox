@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import type { HuntingMapTypeContextValue } from 'contexts';
 import type { MapType } from 'types/cartography';

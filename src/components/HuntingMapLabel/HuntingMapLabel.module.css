@@ -61,7 +61,7 @@
 
 .HuntingMapLabelTitle {
   display: flex;
-  font-family: BenchNine, 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-bench-nine), var(--font-fira-sans-extra-condensed), sans-serif;
   font-size: 1.1em;
   justify-content: center;
   letter-spacing: 0.1em;

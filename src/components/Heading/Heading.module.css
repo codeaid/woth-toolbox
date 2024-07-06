@@ -1,6 +1,6 @@
 .Heading {
   color: var(--brand);
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  font-family: var(--font-fira-sans-extra-condensed), sans-serif;
   font-weight: 400;
   margin: 1em 0 0.5em 0;
   padding: 0;

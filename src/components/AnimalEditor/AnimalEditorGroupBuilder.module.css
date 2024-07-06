@@ -76,7 +76,7 @@
 
 .AnimalEditorGroupBuilderListEntryValue {
   color: var(--text-primary);
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   font-size: 0.8em;
   font-weight: 400;
   margin-right: 0.2em;
@@ -96,7 +96,7 @@
 
 .AnimalEditorGroupBuilderButtonToggle {
   background-color: var(--elevation5);
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: var(--font-fira-sans-condensed), sans-serif;
   font-size: 0.9em;
   font-weight: 400;
   padding: 0.5em 0.25em;

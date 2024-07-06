@@ -1,5 +1,6 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { AnimalName } from 'components/AnimalName';
 import { Card } from 'components/Card';
@@ -16,12 +17,13 @@ import { getAnimalGroups } from 'lib/animals';
 import { isOptimal, isSuboptimal } from 'lib/weapons';
 import type { Animal } from 'types/animals';
 import type { Weapon } from 'types/weapons';
-import styles from './styles.module.css';
+import styles from './page.module.css';
 
 const FirearmsPage = () => {
-  // Extract route parameters
+  // Extract router and route parameters
   const router = useRouter();
-  const { q: weaponId } = router.query;
+  const params = useSearchParams();
+  const weaponId = params.get('q');
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -106,13 +108,9 @@ const FirearmsPage = () => {
 
   return (
     <>
-      <Head>
-        <title>
-          {`${translate('UI:SECTION_FIREARMS')} - ${translate(
-            'UI:GAME_TITLE',
-          )}`}
-        </title>
-      </Head>
+      <title>
+        {`${translate('UI:SECTION_FIREARMS')} - ${translate('UI:GAME_TITLE')}`}
+      </title>
 
       <div className={styles.AnimalSelectorPage}>
         <Sidebar>

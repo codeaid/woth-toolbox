@@ -32,7 +32,7 @@ export const SidePanel = (props: SidePanelProps) => {
    */
   const handleDocumentMouseDown = useCallback(
     (event: MouseEvent) => {
-      if (!closeOnOutsideClick || !onClose) {
+      if (!closeOnOutsideClick || !onClose || !visible) {
         return;
       }
 
@@ -46,7 +46,7 @@ export const SidePanel = (props: SidePanelProps) => {
         onClose();
       }
     },
-    [closeOnOutsideClick, onClose],
+    [closeOnOutsideClick, onClose, visible],
   );
 
   /**

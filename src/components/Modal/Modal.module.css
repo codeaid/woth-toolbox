@@ -87,7 +87,7 @@
     background-color: var(--elevation1);
     color: var(--brand);
     display: flex;
-    font-family: 'Fira Sans Condensed', sans-serif;
+    font-family: var(--font-fira-sans-condensed), sans-serif;
     justify-content: space-between;
     padding: 0.75rem;
     text-transform: uppercase;

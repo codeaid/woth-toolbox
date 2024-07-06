@@ -53,7 +53,7 @@ export const AnimalEditorColorPicker = (
             picker: {
               backgroundColor: '#121212',
               boxShadow: 'unset',
-              fontFamily: '"Fira Sans", sans-serif',
+              fontFamily: 'var(--font-fira-sans), sans-serif',
               userSelect: 'none',
               width: 'auto',
             },
