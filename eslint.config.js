@@ -106,20 +106,6 @@ module.exports = [
   },
 
   {
-    plugins: {
-      react: pluginReact,
-    },
-    rules: pluginReact.configs['jsx-runtime'].rules,
-  },
-
-  {
-    plugins: {
-      'react-hooks': pluginReactHooks,
-    },
-    rules: pluginReactHooks.configs.recommended.rules,
-  },
-
-  {
     languageOptions: {
       globals: {
         ...globals.es2021,
@@ -134,6 +120,30 @@ module.exports = [
   },
 
   {
+    languageOptions: {
+      globals: {
+        ...globals.es2021,
+        ...globals.jest,
+        ...globals.node,
+      },
+    },
+  },
+
+  {
+    plugins: {
+      'react-hooks': pluginReactHooks,
+    },
+    rules: pluginReactHooks.configs.recommended.rules,
+  },
+
+  {
+    plugins: {
+      react: pluginReact,
+    },
+    rules: pluginReact.configs['jsx-runtime'].rules,
+  },
+
+  {
     plugins: {
       '@next/next': pluginNext,
     },
@@ -141,16 +151,6 @@ module.exports = [
       ...pluginNext.configs.recommended.rules,
       ...pluginNext.configs['core-web-vitals'].rules,
       '@next/next/no-img-element': 'off',
-    },
-  },
-
-  {
-    languageOptions: {
-      globals: {
-        ...globals.es2021,
-        ...globals.jest,
-        ...globals.node,
-      },
     },
   },
 

@@ -9,7 +9,6 @@ export const ImageIcon = forwardRef(
 
     return (
       <Icon size={size} {...rest} ref={ref}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt="" draggable={false} height={size} src={src} width={size} />
       </Icon>
     );

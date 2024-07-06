@@ -930,7 +930,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
           {renderedLabels}
           {renderedCustomMarkers}
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             className={styles.HuntingMapImage}

@@ -36,7 +36,6 @@ const createOutput = (markers: MarkerOptionsAnimal[], mapType: MapType) =>
     })),
   }));
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default [
   ...createOutput(africaLabels, 'africa'),
   ...createOutput(alaskaLabels, 'alaska'),

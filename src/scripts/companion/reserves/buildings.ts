@@ -28,7 +28,6 @@ const createOutput = (markers: MarkerOptionsGeneric[], mapType: MapType) =>
       Y: marker.coords[1],
     }));
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default [
   ...createOutput(africaLabels, 'africa'),
   ...createOutput(alaskaLabels, 'alaska'),
