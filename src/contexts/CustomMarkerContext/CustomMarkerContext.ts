@@ -11,4 +11,4 @@ export const CustomMarkerContext = createContext<CustomMarkerContextValue>({
   onReload: () => undefined,
 });
 
-export const { Provider: CustomMarkerProvider } = CustomMarkerContext;
+export const CustomMarkerProvider = CustomMarkerContext.Provider;

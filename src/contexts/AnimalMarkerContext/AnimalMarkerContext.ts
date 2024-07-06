@@ -11,4 +11,4 @@ export const AnimalMarkerContext = createContext<AnimalMarkerContextValue>({
   onReload: () => undefined,
 });
 
-export const { Provider: AnimalMarkerProvider } = AnimalMarkerContext;
+export const AnimalMarkerProvider = AnimalMarkerContext.Provider;

@@ -10,4 +10,4 @@ export const SettingsContext = createContext<SettingsContextValue>({
   onReload: () => undefined,
 });
 
-export const { Provider: SettingsProvider } = SettingsContext;
+export const SettingsProvider = SettingsContext.Provider;

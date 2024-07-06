@@ -8,4 +8,4 @@ export const HuntingMapTypeContext = createContext<HuntingMapTypeContextValue>({
   onSetMapType: () => undefined,
 });
 
-export const { Provider: HuntingMapTypeProvider } = HuntingMapTypeContext;
+export const HuntingMapTypeProvider = HuntingMapTypeContext.Provider;
