@@ -1,6 +1,5 @@
 import fs from 'fs';
-import path from 'path';
-import process from 'process';
+import path from 'node:path';
 
 // Generate path to the target output directory
 const outputDir = path.join(process.cwd(), '.companion');

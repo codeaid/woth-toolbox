@@ -1,6 +1,5 @@
 'use client';
 
-import process from 'process';
 import { useCallback } from 'react';
 import defaultMessages from 'locales';
 import type { TranslationKey, Translator } from 'types/i18n';
