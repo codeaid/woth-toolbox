@@ -2,7 +2,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import clsx from 'clsx';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
-import { ApplicationProvider } from 'components/ApplicationProvider';
 import {
   benchNineFont,
   firaSansCondensedFont,
@@ -11,6 +10,7 @@ import {
   googleAnalyticsId,
   metadataBase,
 } from 'config/app';
+import { ApplicationProvider } from 'contexts';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
