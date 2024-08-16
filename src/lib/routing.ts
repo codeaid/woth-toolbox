@@ -1,5 +1,4 @@
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import type { NextRouter } from 'next/router';
 import { fauna } from 'config/animals';
 import {
   baseUrlAfrica,
