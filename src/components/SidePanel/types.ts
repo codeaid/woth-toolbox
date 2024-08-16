@@ -7,6 +7,7 @@ type SidePanelSide = 'left' | 'right';
 
 export interface SidePanelProps {
   actions?: Array<ButtonProps>;
+  canClose?: boolean;
   children?: ReactNode;
   className?: string;
   loading?: boolean;

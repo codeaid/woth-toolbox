@@ -11,6 +11,7 @@ import styles from './SidePanel.module.css';
 export const SidePanel = (props: SidePanelProps) => {
   const {
     actions = [],
+    canClose = true,
     children,
     className,
     closeOnEscape = true,
@@ -153,6 +154,7 @@ export const SidePanel = (props: SidePanelProps) => {
             <h1 className={styles.SidePanelHeaderTitle}>{title}</h1>
             <IconButton
               className={styles.SidePanelHeaderAction}
+              disabled={!canClose}
               onClick={onClose}
             >
               <RiCloseFill />
