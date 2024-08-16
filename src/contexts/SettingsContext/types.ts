@@ -1,8 +1,13 @@
-import type { Settings, SettingsChangeHandler } from 'types/app';
+import type { UserSettingsKey, UserSettingsTypeMap } from 'types/settings';
 
-export interface SettingsContextValue<TSettings extends Settings = Settings> {
-  initialized: boolean;
-  settings?: TSettings;
-  onChange: SettingsChangeHandler;
-  onReload: () => void;
+export interface SettingsContextValue {
+  onSettingsClearAsync: () => Promise<void>;
+  onSettingsRead: <TKey extends UserSettingsKey>(
+    key: TKey,
+    fallback: UserSettingsTypeMap[TKey],
+  ) => UserSettingsTypeMap[TKey];
+  onSettingsUpdateAsync: <TKey extends UserSettingsKey>(
+    key: TKey,
+    value?: UserSettingsTypeMap[TKey],
+  ) => Promise<void>;
 }

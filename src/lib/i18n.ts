@@ -29,9 +29,9 @@ import type {
 import type { TranslationKey, TranslationResource } from 'types/i18n';
 import type {
   MarkerType,
-  MarkerTypeCustom,
-  MarkerTypeGeneric,
-  MarkerTypeNeedZone,
+  CustomMarkerType,
+  GenericMarkerType,
+  NeedZoneMarkerType,
 } from 'types/markers';
 
 /**
@@ -103,7 +103,7 @@ export const getAnimalTypeKey = (type: AnimalType) => {
  *
  * @param type Target zone type
  */
-export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey =>
+export const getAnimalZoneKey = (type?: NeedZoneMarkerType): TranslationKey =>
   tryGetTranslationKey(
     animalZoneTranslationMap,
     type,
@@ -115,7 +115,7 @@ export const getAnimalZoneKey = (type?: MarkerTypeNeedZone): TranslationKey =>
  *
  * @param type Target zone type
  */
-export const getCustomMarkerKey = (type?: MarkerTypeCustom): TranslationKey =>
+export const getCustomMarkerKey = (type?: CustomMarkerType): TranslationKey =>
   tryGetTranslationKey(
     customMarkerTranslationMap,
     type,
@@ -127,7 +127,7 @@ export const getCustomMarkerKey = (type?: MarkerTypeCustom): TranslationKey =>
  *
  * @param type Target marker type
  */
-export const getGenericMarkerKey = (type: MarkerTypeGeneric) =>
+export const getGenericMarkerKey = (type: GenericMarkerType) =>
   tryGetTranslationKey(
     genericMarkerTranslationMap,
     type,

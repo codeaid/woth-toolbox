@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ButtonProps } from 'components/Button';
@@ -5,9 +6,10 @@ import { Label } from 'components/Label';
 import { SidePanel } from 'components/SidePanel';
 import { useLocale, useTranslator } from 'hooks';
 import { getAnimalTypeKey } from 'lib/i18n';
+import { isEmptyAnimalMarker } from 'lib/markers';
 import { sendGoogleEvent } from 'lib/tracking';
 import { formatDateTime, showNotification } from 'lib/utils';
-import type { MarkerDataAnimal } from 'types/markers';
+import type { AnimalMarkerRecord } from 'types/markers';
 import { AnimalEditorColorPicker } from './AnimalEditorColorPicker';
 import { AnimalEditorDescription } from './AnimalEditorDescription';
 import { AnimalEditorGroupBuilder } from './AnimalEditorGroupBuilder';
@@ -18,27 +20,19 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   const {
     defaultIconColor = '#ffffff',
     marker,
+    record,
     onClose,
-    onDataClear,
-    onDataRead,
-    onDataWrite,
+    onCreateRecordAsync,
+    onDeleteRecordAsync,
+    onUpdateRecordAsync,
   } = props;
 
-  // Internal animal marker data to edit
-  const [data, setData] = useState<MarkerDataAnimal>();
+  // Internal animal marker record to edit
+  const [pendingRecord, setPendingRecord] = useState<AnimalMarkerRecord>();
 
   // Formatted created and updated date/times
   const [dateCreated, setDateCreated] = useState<string>();
   const [dateUpdated, setDateUpdated] = useState<string>();
-
-  // Flag indicating if data existed when the editor was opened
-  const [hadData, setHadData] = useState(false);
-
-  // Flag indicating whether side panel's loading overlay should be visible
-  const [loading, setLoading] = useState(true);
-
-  // Flag indicating whether side panel is visible or not
-  const [visible, setVisible] = useState(false);
 
   // Retrieve application locale and translator
   const locale = useLocale();
@@ -51,67 +45,92 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
   );
 
   /**
-   * Handle closing the editor
+   * Handle changes to pending record data
    */
-  const handleClose = useCallback(() => {
-    setData({});
-    onClose();
-  }, [onClose]);
+  const handleChange = useCallback(
+    (patch: Partial<AnimalMarkerRecord>) => {
+      if (!marker) {
+        return;
+      }
 
-  /**
-   * Handle persisting current marker's data from the storage
-   */
-  const handleDataClear = useCallback(() => {
-    // Ensure a valid marker is present before continuing
-    if (!marker) {
-      return;
-    }
+      // Trim comments to 10000 characters
+      if (patch.comment) {
+        patch.comment = patch.comment.substring(0, 10000);
+      }
 
-    // Send custom Google Analytics event
-    sendGoogleEvent('marker_reset', { id: marker.id });
-
-    // Persist changes and close the editor
-    onDataClear(marker);
-    handleClose();
-
-    // Show notification about a successful operation
-    showNotification(translate('TOOLBOX:DATA_CLEARED'), 'info');
-  }, [handleClose, marker, onDataClear, translate]);
-
-  /**
-   * Handle persisting current changes to the storage
-   */
-  const handleDataWrite = useCallback(() => {
-    // Ensure a valid marker is present before continuing
-    if (!marker || !data) {
-      return;
-    }
-
-    // Send custom Google Analytics event
-    sendGoogleEvent('marker_save', { id: marker.id });
-
-    // Persist changes and close the editor
-    onDataWrite(marker, data);
-    handleClose();
-
-    // Show notification about a successful operation
-    showNotification(translate('TOOLBOX:DATA_SAVED'), 'info');
-  }, [data, handleClose, marker, onDataWrite, translate]);
+      setPendingRecord(current => ({
+        id: marker.id,
+        ...record,
+        ...current,
+        ...patch,
+      }));
+    },
+    [marker, record],
+  );
 
   /**
    * Refresh created and update date strings
    */
   const handleRefreshDates = useCallback(() => {
     // Update formatted creation date
-    if (data && data.created) {
-      setDateCreated(formatDateTime(data.created, locale));
+    if (pendingRecord && pendingRecord.createdAt) {
+      setDateCreated(formatDateTime(pendingRecord.createdAt, locale));
     }
 
     // Update formatted update date
-    if (data && data.updated) {
-      setDateUpdated(formatDateTime(data.updated, locale));
+    if (pendingRecord && pendingRecord.updatedAt) {
+      setDateUpdated(formatDateTime(pendingRecord.updatedAt, locale));
     }
-  }, [data, locale]);
+  }, [pendingRecord, locale]);
+
+  // Create marker update mutator
+  const { isPending: isPersisting, mutate: handlePersist } = useMutation({
+    mutationKey: ['firestore', 'record', 'set', marker?.id],
+    mutationFn: async () => {
+      // Ensure a valid marker is present before continuing
+      if (!marker || !pendingRecord) {
+        return;
+      }
+
+      // Send custom Google Analytics event
+      sendGoogleEvent('marker_save', { id: marker.id });
+
+      // Persist changes and close the editor
+      if (record) {
+        // Update existing record if it existed
+        await onUpdateRecordAsync({ ...record, ...pendingRecord });
+      } else {
+        // Create a new record if it didn't exist
+        await onCreateRecordAsync({ ...pendingRecord, id: marker.id });
+      }
+
+      onClose();
+
+      // Show notification about a successful operation
+      showNotification(translate('TOOLBOX:DATA_SAVED'), 'info');
+    },
+  });
+
+  // Create marker delete mutator
+  const { isPending: isDeleting, mutate: handleDelete } = useMutation({
+    mutationKey: ['firestore', 'record', 'delete', marker?.id],
+    mutationFn: async () => {
+      // Ensure a valid marker is present before continuing
+      if (!marker) {
+        return;
+      }
+
+      // Send custom Google Analytics event
+      sendGoogleEvent('marker_reset', { id: marker.id });
+
+      // Persist changes and close the editor
+      await onDeleteRecordAsync(marker);
+      onClose();
+
+      // Show notification about a successful operation
+      showNotification(translate('TOOLBOX:DATA_CLEARED'), 'info');
+    },
+  });
 
   // List of sidebar action button properties
   const actions = useMemo<Array<ButtonProps>>(
@@ -119,23 +138,37 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
       {
         children: translate('UI:OK'),
         className: clsx(styles.AnimalEditorActionSave),
-        disabled: !data,
-        onClick: handleDataWrite,
+        disabled:
+          !marker ||
+          !pendingRecord ||
+          isEmptyAnimalMarker(pendingRecord) ||
+          isPersisting ||
+          isDeleting,
+        onClick: () => handlePersist(),
       },
       {
         children: translate('UI:CLEAR'),
         className: clsx(styles.AnimalEditorActionReset),
-        disabled: !hadData,
-        onClick: handleDataClear,
+        disabled: !marker || !record || isPersisting || isDeleting,
+        onClick: () => handleDelete(),
       },
     ],
-    [data, hadData, handleDataClear, handleDataWrite, translate],
+    [
+      handleDelete,
+      handlePersist,
+      isDeleting,
+      isPersisting,
+      marker,
+      pendingRecord,
+      record,
+      translate,
+    ],
   );
 
   // Creation and last updated date of existing data entries
   const renderedDates = useMemo(() => {
     // Ensure both dates are present before continuing
-    if (!data?.created || !data?.updated) {
+    if (!pendingRecord?.createdAt || !pendingRecord?.updatedAt) {
       return;
     }
 
@@ -151,70 +184,46 @@ export const AnimalEditor = (props: AnimalEditorProps) => {
         </div>
       </div>
     );
-  }, [data?.created, data?.updated, dateCreated, dateUpdated, translate]);
-
-  // Load animal details on mount
-  useEffect(() => {
-    // Ensure a valid marker is present before continuing
-    if (!marker || !visible) {
-      return;
-    }
-
-    // Read data from the storage and store it locally for editing
-    const data = onDataRead(marker);
-    setData(data);
-    setHadData(!!data);
-  }, [marker, visible, onDataRead]);
-
-  // Hide loading indicator if data gets loaded
-  useEffect(() => {
-    setLoading(false);
-  }, [data]);
+  }, [
+    pendingRecord?.createdAt,
+    pendingRecord?.updatedAt,
+    dateCreated,
+    dateUpdated,
+    translate,
+  ]);
 
   // Refresh dates when data changes
-  useEffect(() => {
-    handleRefreshDates();
-  }, [data, handleRefreshDates]);
+  useEffect(() => handleRefreshDates(), [pendingRecord, handleRefreshDates]);
 
-  // Hide loading overlay after a certain amount of time
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-
-    if (visible) {
-      // Hide loading if no data is loaded within half a second
-      timeout = setTimeout(() => setLoading(false), 500);
-    } else {
-      // Show loading as soon as panel disappears
-      timeout = setTimeout(() => setLoading(true), 0);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [visible]);
+  // Update editor data when marker record is changed externally
+  useEffect(() => setPendingRecord(record), [record]);
 
   return (
     <SidePanel
       actions={actions}
-      loading={loading}
+      canClose={!isPersisting && !isDeleting}
       title={animalName}
       visible={!!marker}
-      onClose={handleClose}
-      onVisible={setVisible}
+      onClose={onClose}
     >
       <div className={styles.AnimalEditorContent}>
         {renderedDates}
 
         <Label>{translate('UI:DESCRIPTION')}</Label>
-        <AnimalEditorDescription data={data} onChange={setData} />
+        <AnimalEditorDescription data={pendingRecord} onChange={handleChange} />
 
         <Label>{translate('UI:SECTION_ANIMALS')}</Label>
-        <AnimalEditorGroupBuilder data={data} onChange={setData} />
+        <AnimalEditorGroupBuilder
+          data={pendingRecord}
+          onChange={handleChange}
+        />
 
         <Label>{translate('UI:HL_COLOR')}</Label>
         <AnimalEditorColorPicker
-          data={data}
+          data={pendingRecord}
           defaultIconColor={defaultIconColor}
           marker={marker}
-          onChange={setData}
+          onChange={handleChange}
         />
       </div>
     </SidePanel>

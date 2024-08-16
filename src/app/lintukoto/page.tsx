@@ -5,9 +5,9 @@ const LintukotoPage = () => (
   <HuntingMapPage
     animalMarkers={animalMarkers}
     genericMarkers={genericMarkers}
+    mapId="lintukoto"
     mapImageSrc="/img/maps/lintukoto.jpeg"
     mapLabels={mapLabels}
-    mapType="lintukoto"
     titleKey="POI:MAP_NAME_LINTUKOTO"
   />
 );

@@ -5,9 +5,9 @@ const AfricaPage = () => (
   <HuntingMapPage
     animalMarkers={animalMarkers}
     genericMarkers={genericMarkers}
+    mapId="africa"
     mapImageSrc="/img/maps/africa.jpeg"
     mapLabels={mapLabels}
-    mapType="africa"
     titleKey="POI:MAP_NAME_AFRICA"
   />
 );

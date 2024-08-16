@@ -1,88 +1,93 @@
-import { useCallback } from 'react';
 import type { ChangeEvent } from 'react';
+import { useCallback } from 'react';
 import { Checkbox } from 'components/Checkbox';
 import { Label } from 'components/Label';
 import { Slider } from 'components/Slider';
-import { useTranslator } from 'hooks';
-import type { SettingsEditorMarkersProps } from './types';
+import { useSettings, useTranslator } from 'hooks';
 
-export const SettingsEditorMarkers = (props: SettingsEditorMarkersProps) => {
-  const { settings, onChange } = props;
+export const SettingsEditorMarkers = () => {
+  const { onSettingsRead, onSettingsUpdateAsync } = useSettings();
 
   // Retrieve application translator
   const translate = useTranslator();
+
+  const animalMarkerRatings = onSettingsRead('marker:animal:ratings', true);
+  const animalMarkerSize = onSettingsRead('marker:animal:size', 50);
+  const genericMarkerSize = onSettingsRead('marker:generic:size', 50);
+  const zoneMarkerSize = onSettingsRead('marker:zone:size', 35);
 
   /**
    * Handle changing checkbox value
    */
   const handleAnimalRatingChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) =>
-      onChange({ animalMarkerRatings: event.target.checked }),
-    [onChange],
+      onSettingsUpdateAsync('marker:animal:ratings', event.target.checked),
+    [onSettingsUpdateAsync],
   );
 
   /**
    * Handle changes to animal marker size
    */
   const handleAnimalSizeChange = useCallback(
-    (animalMarkerSize: number) => onChange({ animalMarkerSize }),
-    [onChange],
+    (animalMarkerSize: number) =>
+      onSettingsUpdateAsync('marker:animal:size', animalMarkerSize),
+    [onSettingsUpdateAsync],
   );
 
   /**
    * Handle changes to generic marker size
    */
   const handleGenericSizeChange = useCallback(
-    (genericMarkerSize: number) => onChange({ genericMarkerSize }),
-    [onChange],
+    (genericMarkerSize: number) =>
+      onSettingsUpdateAsync('marker:generic:size', genericMarkerSize),
+    [onSettingsUpdateAsync],
   );
 
   /**
    * Handle changes to animal need zone marker size
    */
   const handleZoneSizeChange = useCallback(
-    (zoneMarkerSize: number) => onChange({ zoneMarkerSize }),
-    [onChange],
+    (zoneMarkerSize: number) =>
+      onSettingsUpdateAsync('marker:zone:size', zoneMarkerSize),
+    [onSettingsUpdateAsync],
   );
 
   return (
     <div>
       <Label>
-        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} (
-        {settings.genericMarkerSize})
+        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_GENERIC')} ({genericMarkerSize}
+        )
       </Label>
       <Slider
         max={150}
         min={0}
-        value={settings.genericMarkerSize}
+        value={genericMarkerSize}
         onChange={handleGenericSizeChange}
       />
 
       <Label>
-        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS')} (
-        {settings.animalMarkerSize})
+        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ANIMALS')} ({animalMarkerSize})
       </Label>
       <Slider
         max={150}
         min={0}
-        value={settings.animalMarkerSize}
+        value={animalMarkerSize}
         onChange={handleAnimalSizeChange}
       />
 
       <Label>
-        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ZONES')} (
-        {settings.zoneMarkerSize})
+        {translate('TOOLBOX:SETTINGS_MARKER_SIZE_ZONES')} ({zoneMarkerSize})
       </Label>
       <Slider
         max={150}
         min={0}
-        value={settings.zoneMarkerSize}
+        value={zoneMarkerSize}
         onChange={handleZoneSizeChange}
       />
 
       <Label>{translate('UI:TROPHY_RATING')}</Label>
       <Checkbox
-        checked={settings.animalMarkerRatings}
+        checked={animalMarkerRatings}
         onChange={handleAnimalRatingChange}
       />
     </div>

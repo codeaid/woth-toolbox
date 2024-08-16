@@ -1,10 +1,10 @@
 import type { Point } from 'types/generic';
-import type { MarkerOptionsCustom, MarkerTypeCustom } from 'types/markers';
+import type { CustomMarker, CustomMarkerType } from 'types/markers';
 
 export interface CustomMarkerContextValue {
-  markers: Array<MarkerOptionsCustom>;
-  onClear: (type: MarkerTypeCustom) => void;
-  onCreate: (type: MarkerTypeCustom, coords: Point) => void;
-  onDelete: (marker: MarkerOptionsCustom) => void;
+  markers: Array<CustomMarker>;
+  onClear: (type: CustomMarkerType) => void;
+  onCreate: (type: CustomMarkerType, coords: Point) => void;
+  onDelete: (marker: CustomMarker) => void;
   onReload: () => void;
 }

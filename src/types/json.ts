@@ -1,6 +1,6 @@
 import type { AnimalType } from 'types/animals';
 import type { TranslationKey } from 'types/i18n';
-import type { MarkerTypeAnimal, MarkerTypeGeneric } from 'types/markers';
+import type { AnimalMarkerType, GenericMarkerType } from 'types/markers';
 
 // Type describing a JSON document containing animal marker data
 export type JsonAnimalDocument = {
@@ -15,7 +15,7 @@ export type JsonMarkerDocument = Array<JsonMarkerDocumentRecord>;
 
 // Type describing an entry in an animal marker data array
 export type JsonAnimalDocumentRecord = [
-  MarkerTypeAnimal, // Marker identifier
+  AnimalMarkerType, // Marker identifier
   number, // Marker X coordinate
   number, // Marker Y coordinate
   Array<number>, // Drink zone coordinates
@@ -33,7 +33,7 @@ export type JsonMarkerLabelRecord = [
 
 // Type describing an entry in a generic marker data array
 export type JsonMarkerDocumentRecord = [
-  MarkerTypeGeneric, // Marker type
+  GenericMarkerType, // Marker type
   number, // Marker X coordinate
   number, // Marker Y coordinate
 ];

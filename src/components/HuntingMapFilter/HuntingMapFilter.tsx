@@ -15,9 +15,9 @@ import {
 } from 'lib/markers';
 import type {
   MarkerType,
-  MarkerTypeAnimal,
-  MarkerTypeCustom,
-  MarkerTypeGeneric,
+  AnimalMarkerType,
+  CustomMarkerType,
+  GenericMarkerType,
 } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterOption } from './HuntingMapFilterOption';
@@ -45,25 +45,25 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
   // Extract list of types available in the options
   const markerTypesAnimals = useMemo(
-    () => markerTypes.filter(isAnimalMarkerType) as Array<MarkerTypeAnimal>,
+    () => markerTypes.filter(isAnimalMarkerType) as Array<AnimalMarkerType>,
     [markerTypes],
   );
 
   // Extract list of types available in the options
   const markerTypesGeneric = useMemo(
-    () => markerTypes.filter(isGenericMarkerType) as Array<MarkerTypeGeneric>,
+    () => markerTypes.filter(isGenericMarkerType) as Array<GenericMarkerType>,
     [markerTypes],
   );
 
   // Extract list of selected animal types
   const selectedTypesAnimals = useMemo(
-    () => options.types.filter(isAnimalMarkerType) as Array<MarkerTypeAnimal>,
+    () => options.types.filter(isAnimalMarkerType) as Array<AnimalMarkerType>,
     [options.types],
   );
 
   // Extract list of selected generic types
   const selectedTypesGeneric = useMemo(
-    () => options.types.filter(isGenericMarkerType) as Array<MarkerTypeGeneric>,
+    () => options.types.filter(isGenericMarkerType) as Array<GenericMarkerType>,
     [options.types],
   );
 
@@ -208,7 +208,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
    */
   const renderOptions = useCallback(
     (
-      types: Array<MarkerTypeAnimal | MarkerTypeCustom | MarkerTypeGeneric>,
+      types: Array<AnimalMarkerType | CustomMarkerType | GenericMarkerType>,
       iconSize: number,
     ) => (
       <>

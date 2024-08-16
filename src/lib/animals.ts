@@ -5,7 +5,7 @@ import type {
   AnimalRating,
   AnimalSpecimen,
 } from 'types/animals';
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import type { EntityGroup } from 'types/generic';
 import type { Translator } from 'types/i18n';
 
@@ -26,7 +26,7 @@ export const getActivityByHour = (
  * @param animals List of animals to filter
  * @param map Target map type to include
  */
-export const getAnimalsByMapType = (animals: Array<Animal>, map?: MapType) =>
+export const getAnimalsByMapType = (animals: Array<Animal>, map?: MapId) =>
   !map ? animals : animals.filter(animal => animal.maps?.includes(map));
 
 /**

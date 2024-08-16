@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Button } from 'components/Button';
 import { useTranslator } from 'hooks';
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import type { TranslationKey } from 'types/i18n';
 import type { AnimalActivityGridFilterProps } from './types';
 import styles from './AnimalActivityGridFilter.module.css';
@@ -14,10 +14,7 @@ export const AnimalActivityGridFilter = (
   // Retrieve application translator
   const translate = useTranslator();
 
-  const renderButton = (
-    translationKey: TranslationKey,
-    targetType?: MapType,
-  ) => (
+  const renderButton = (translationKey: TranslationKey, targetType?: MapId) => (
     <Button
       className={clsx(styles.AnimalActivityGridFilterButton, {
         [styles.AnimalActivityGridFilterButtonActive]: targetType === mapType,

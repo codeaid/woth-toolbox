@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useTranslator } from 'hooks';
 import { getAnimalGroups, getAnimalsByMapType } from 'lib/animals';
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import { AnimalActivityGridFilter } from './AnimalActivityGridFilter';
 import { AnimalActivityGridGroup } from './AnimalActivityGridGroup';
 import type { AnimalActivityGridProps } from './types';
@@ -12,7 +12,7 @@ import styles from './AnimalActivityGrid.module.css';
 export const AnimalActivityGrid = (props: AnimalActivityGridProps) => {
   const { animals } = props;
 
-  const [mapType, setMapType] = useState<Optional<MapType>>(undefined);
+  const [mapType, setMapType] = useState<Optional<MapId>>(undefined);
 
   // Retrieve application translator
   const translate = useTranslator();

@@ -12,6 +12,8 @@ export const mapIds = [
   'transylvania',
 ] as const;
 
+export type MapId = (typeof mapIds)[number];
+
 export interface MapFilterOptions {
   hideUnedited: boolean;
   showExplorationMarkers: boolean;
@@ -37,8 +39,6 @@ export interface MapOptions {
   mapTop: number;
   mapWidth: number;
 }
-
-export type MapType = (typeof mapIds)[number];
 
 export interface MapZoomOptions {
   zoomMax: number;

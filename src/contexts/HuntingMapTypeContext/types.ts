@@ -1,6 +1,6 @@
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 
 export interface HuntingMapTypeContextValue {
-  mapType?: MapType;
-  onSetMapType: (mapType?: MapType) => void;
+  mapType?: MapId;
+  onSetMapType: (mapType?: MapId) => void;
 }

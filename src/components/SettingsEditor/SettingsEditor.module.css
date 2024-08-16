@@ -1,14 +1,7 @@
-.SettingsEditor {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  padding: 0.65em;
-}
-
 .SettingsEditorResetButton {
-  background-color: var(--variance-suboptimal) !important;
+  background-color: var(--danger) !important;
 }
 
-.SettingsEditorSidePanel {
-  z-index: 200;
+.SettingsEditorModal {
+  max-width: 30rem;
 }

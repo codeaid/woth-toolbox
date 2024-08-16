@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { defaultLocale } from 'config/i18n';
 import { useSettings } from './useSettings';
 
 /**
@@ -6,7 +7,10 @@ import { useSettings } from './useSettings';
  */
 export const useLocale = () => {
   // Retrieve current application settings
-  const { settings } = useSettings();
+  const { onSettingsRead } = useSettings();
 
-  return useMemo(() => settings.locale, [settings.locale]);
+  return useMemo(
+    () => onSettingsRead<'locale'>('locale', defaultLocale),
+    [onSettingsRead],
+  );
 };

@@ -1,20 +1,16 @@
 'use client';
 
+import type { PropsWithChildren } from 'react';
 import { useCallback, useEffect, useState } from 'react';
-import type { TutorialContextValue } from 'contexts';
-import {
-  storageReadTutorialFlagAsync,
-  storageWriteTutorialFlagAsync,
-} from 'lib/storage';
+import { useSettings } from 'hooks';
 import { sendGoogleEvent } from 'lib/tracking';
-import { useStorage } from './useStorage';
+import { TutorialContext } from './TutorialContext';
 
-/**
- * Hook exposing map tutorial states and functionality
- */
-export const useTutorialManager = (): TutorialContextValue => {
+export const TutorialProvider = (props: PropsWithChildren) => {
+  const { children } = props;
+
   // Flag indicating whether tutorial has been previously completed
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState<boolean>();
 
   // Index of the page that is activated by default
   const [defaultPageIndex, setDefaultPageIndex] = useState(0);
@@ -25,8 +21,8 @@ export const useTutorialManager = (): TutorialContextValue => {
   // Flag indicating whether tutorial is currently open
   const [visible, setVisible] = useState(false);
 
-  // Browser storage manager
-  const storage = useStorage();
+  // Get settings settings and accessors
+  const { onSettingsRead, onSettingsUpdateAsync } = useSettings();
 
   /**
    * Handle closing tutorial halfway through
@@ -48,11 +44,8 @@ export const useTutorialManager = (): TutorialContextValue => {
 
     // Send custom Google Analytics event
     sendGoogleEvent('help_complete');
-
-    if (storage) {
-      await storageWriteTutorialFlagAsync(storage);
-    }
-  }, [storage]);
+    await onSettingsUpdateAsync('tutorial:completed', true);
+  }, [onSettingsUpdateAsync]);
 
   /**
    * Handle showing tutorial
@@ -77,22 +70,24 @@ export const useTutorialManager = (): TutorialContextValue => {
 
   // Set tutorial completion state
   useEffect(() => {
-    // Ensure storage is available before proceeding
-    if (!storage) {
-      return;
-    }
+    const completed = onSettingsRead('tutorial:completed', false);
+    setCompleted(completed);
+  }, [onSettingsRead]);
 
-    storageReadTutorialFlagAsync(storage).then(setCompleted);
-  }, [storage]);
-
-  return {
-    completed,
-    defaultPageIndex,
-    enabled,
-    visible,
-    onTutorialClose: handleTutorialClose,
-    onTutorialComplete: handleTutorialComplete,
-    onTutorialEnable: setEnabled,
-    onTutorialOpen: handleTutorialOpen,
-  };
+  return (
+    <TutorialContext.Provider
+      value={{
+        completed,
+        defaultPageIndex,
+        enabled,
+        visible,
+        onTutorialClose: handleTutorialClose,
+        onTutorialComplete: handleTutorialComplete,
+        onTutorialEnable: setEnabled,
+        onTutorialOpen: handleTutorialOpen,
+      }}
+    >
+      {children}
+    </TutorialContext.Provider>
+  );
 };

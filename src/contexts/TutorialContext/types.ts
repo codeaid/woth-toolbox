@@ -3,7 +3,7 @@ type HuntingMapTutorialContextOpenHandler = (defaultPageIndex?: number) => void;
 type HuntingMapTutorialContextVoidHandler = () => void;
 
 export interface TutorialContextValue {
-  completed: boolean;
+  completed?: boolean;
   defaultPageIndex: number;
   enabled: boolean;
   visible: boolean;

@@ -1,3 +1,9 @@
+import type {
+  MouseEvent,
+  ReactElement,
+  TouchEvent as ReactTouchEvent,
+  WheelEvent,
+} from 'react';
 import {
   createRef,
   memo,
@@ -7,27 +13,20 @@ import {
   useRef,
   useState,
 } from 'react';
-import type {
-  MouseEvent,
-  ReactElement,
-  TouchEvent as ReactTouchEvent,
-  WheelEvent,
-} from 'react';
-import useResizeObserver from 'use-resize-observer';
 import type { ObservedSize } from 'use-resize-observer';
-import { AnimalEditor } from 'components/AnimalEditor';
-import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
+import useResizeObserver from 'use-resize-observer';
 import type { HuntingMapAnimalProps } from 'components/HuntingMapAnimal';
-import { HuntingMapCoords } from 'components/HuntingMapCoords';
+import { HuntingMapAnimal } from 'components/HuntingMapAnimal';
 import type { HuntingMapCoordsRef } from 'components/HuntingMapCoords';
+import { HuntingMapCoords } from 'components/HuntingMapCoords';
 import { HuntingMapFilter } from 'components/HuntingMapFilter';
 import { HuntingMapLabel } from 'components/HuntingMapLabel';
-import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import type { HuntingMapMarkerProps } from 'components/HuntingMapMarker';
+import { HuntingMapMarker } from 'components/HuntingMapMarker';
 import { HuntingMapScale } from 'components/HuntingMapScale';
 import { HuntingMapToolbar } from 'components/HuntingMapToolbar';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { useAnimalMarkers, useCustomMarkers, useForceUpdate } from 'hooks';
+import { useForceUpdate } from 'hooks';
 import {
   getCenteredMapOptions,
   getMapDimensions,
@@ -51,13 +50,13 @@ import type {
 } from 'types/cartography';
 import type { Point } from 'types/generic';
 import type {
-  MarkerOptionsAnimal,
-  MarkerOptionsCustom,
-  MarkerOptionsGeneric,
+  AnimalMarker,
+  AnimalMarkerRef,
+  AnimalMarkerReference,
+  CustomMarker,
+  GenericMarker,
+  GenericMarkerReference,
   MarkerRef,
-  MarkerRefAnimal,
-  MarkerReferenceAnimal,
-  MarkerReferenceGeneric,
 } from 'types/markers';
 import type { HuntingMapDragOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
@@ -68,7 +67,10 @@ const HuntingMapMarkerMemo = memo(HuntingMapMarker);
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
     animalMarkers,
+    animalRecordMap,
+    customMarkers,
     defaultZoomValue = 0.25,
+    editedAnimal,
     genericMarkers,
     imageHeight = 4096,
     imageScale = 3,
@@ -88,6 +90,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
     zoomSpeed = 1,
     zoomStep = 0.05,
     onClick,
+    onClearTrackingMarkers,
+    onCreateCustomMarker,
+    onDeleteCustomMarker,
+    onEditAnimalMarker,
   } = props;
 
   // References to component elements
@@ -127,8 +133,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
   });
 
   // Lists of marker options to be rendered on the page
-  const animalMarkerRefs = useRef<Array<MarkerReferenceAnimal>>([]);
-  const genericMarkerRefs = useRef<Array<MarkerReferenceGeneric>>([]);
+  const animalMarkerRefs = useRef<Array<AnimalMarkerReference>>([]);
+  const genericMarkerRefs = useRef<Array<GenericMarkerReference>>([]);
 
   // Flag indicating whether left mouse button is being held down
   const isMouseDown = useRef(false);
@@ -144,12 +150,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const [animalMarkerElements, setAnimalMarkerElements] =
     useState<Array<ReactElement<HuntingMapAnimalProps>>>();
   const [genericMarkerElements, setGenericMarkerElements] =
-    useState<
-      Array<ReactElement<HuntingMapMarkerProps<MarkerOptionsGeneric>>>
-    >();
-
-  // Animal marker that is currently being edited
-  const [editedAnimal, setEditedAnimal] = useState<MarkerOptionsAnimal>();
+    useState<Array<ReactElement<HuntingMapMarkerProps<GenericMarker>>>>();
 
   // The currently selected filters
   const [filterOptions, setFilterOptions] = useState<MapFilterOptions>({
@@ -163,32 +164,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // Flag indicating that the map image has loaded
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Extract animal marker functionality
-  const {
-    markers: animalMarkerRecords,
-    onCreateData: onUpdateAnimalMarker,
-    onDeleteData: onClearAnimalMarker,
-    onReadData: onLoadAnimalMarker,
-  } = useAnimalMarkers();
-
-  // Extract custom marker functionality
-  const {
-    markers: customMarkers,
-    onClear: onClearCustomMarkers,
-    onCreate: onCreateCustomMarker,
-    onDelete: onDeleteCustomMarker,
-  } = useCustomMarkers();
-
   // Update trigger function
   const [forcedUpdate, setForcedUpdate] = useForceUpdate();
-
-  /**
-   * Clear currently active animal
-   */
-  const handleAnimalEditorClose = useCallback(
-    () => setEditedAnimal(undefined),
-    [],
-  );
 
   /**
    * Handle removing tracking or exploration markers
@@ -197,7 +174,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param event Source keyboard event
    */
   const handleCustomMarkerKeyDown = useCallback(
-    (marker: MarkerOptionsCustom, event: KeyboardEvent) => {
+    (marker: CustomMarker, event: KeyboardEvent) => {
       // Standardize keyboard key value and retrieve marker type
       const key = event.key.toLowerCase();
 
@@ -216,11 +193,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
           case ' ':
             return onDeleteCustomMarker(marker);
           case 't':
-            return onClearCustomMarkers('marker:tracking');
+            return onClearTrackingMarkers();
         }
       }
     },
-    [onClearCustomMarkers, onDeleteCustomMarker],
+    [onClearTrackingMarkers, onDeleteCustomMarker],
   );
 
   /**
@@ -262,10 +239,10 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const { marker, ref } = options;
 
         // Set data associated with the current animal marker
-        const data = animalMarkerRecords[marker.id];
+        const data = animalRecordMap[marker.id];
         ref.current?.setData(data);
       }),
-    [animalMarkerRecords],
+    [animalRecordMap],
   );
 
   /**
@@ -277,11 +254,11 @@ export const HuntingMap = (props: HuntingMapProps) => {
         filterOptions,
         customZoomOptions ?? zoomOptions.current,
         zoomMarkerMap,
-        animalMarkerRecords,
+        animalRecordMap,
         animalMarkerRefs.current,
         genericMarkerRefs.current,
       ),
-    [animalMarkerRecords, filterOptions, zoomMarkerMap],
+    [animalRecordMap, filterOptions, zoomMarkerMap],
   );
 
   /**
@@ -655,15 +632,15 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * Handle opening or closing an animal marker editor
    */
   const handleToggleAnimalEditor = useCallback(
-    (marker: MarkerOptionsAnimal, visible: boolean, source: string) => {
-      setEditedAnimal(visible ? marker : undefined);
+    (marker: AnimalMarker, visible: boolean, source: string) => {
+      onEditAnimalMarker(visible ? marker : undefined);
 
       if (visible) {
         // Send custom Google Analytics event
         sendGoogleEvent('marker_edit', { id: marker.id, source });
       }
     },
-    [],
+    [onEditAnimalMarker],
   );
 
   /**
@@ -673,7 +650,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
    * @param expanded TRUE if the need zones are visible, FALSE otherwise
    */
   const handleToggleAnimalZones = useCallback(
-    (marker: MarkerOptionsAnimal) =>
+    (marker: AnimalMarker) =>
       animalMarkerRefs.current.forEach(options => {
         // Detect if the current animal marker is the one being toggled
         const isCurrentAnimal = options.marker.id === marker.id;
@@ -690,7 +667,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   const renderedCustomMarkers = useMemo(
     () =>
       customMarkers.map(marker => (
-        <HuntingMapMarker<MarkerOptionsCustom>
+        <HuntingMapMarker<CustomMarker>
           className={styles.HuntingMapMarkerCustom}
           forceVisible={
             marker.type === 'marker:exploration'
@@ -758,7 +735,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
     setAnimalMarkerElements(() =>
       animalMarkers.map(marker => {
         // Create component reference
-        const ref = createRef<MarkerRefAnimal>();
+        const ref = createRef<AnimalMarkerRef>();
 
         // Add reference to the list of animal marker references
         animalMarkerRefs.current.push({ marker, ref });
@@ -822,7 +799,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // Update editor and need zone states when edited animal changes
   useEffect(() => {
     // Determine if editor is visible
-    const editorVisible = !!editedAnimal;
+    const editorVisible = typeof editedAnimal !== 'undefined';
 
     animalMarkerRefs.current.forEach(options => {
       // Detect if the current animal marker is the one being toggled
@@ -845,7 +822,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
   // Trigger updates to icon appearance when custom animal data changes
   useEffect(
     () => handleUpdateAnimalData(),
-    [animalMarkerElements, animalMarkerRecords, handleUpdateAnimalData],
+    [animalMarkerElements, animalRecordMap, handleUpdateAnimalData],
   );
 
   // Update marker visibility whenever any of function dependencies change
@@ -853,23 +830,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
     () => handleUpdateMarkerVisibility(),
     [animalMarkerElements, genericMarkerElements, handleUpdateMarkerVisibility],
   );
-
-  // Ensure debug markers are always visible if there are any present
-  useEffect(() => {
-    animalMarkerRefs.current
-      .filter(options => options.marker.meta?.debug)
-      .forEach((options, index, list) => {
-        // Update marker visibility once references are available
-        setTimeout(() => {
-          // Update marker and zone visibility
-          options.ref.current?.setVisible(true);
-          options.ref.current?.setZonesVisible(index === list.length - 1);
-        }, 100);
-      });
-
-    // Force markers to be re-rendered
-    setForcedUpdate();
-  }, [animalMarkers, setForcedUpdate]);
 
   // Enable custom marker creation functionality and disable viewport zoom
   useEffect(() => {
@@ -902,14 +862,6 @@ export const HuntingMap = (props: HuntingMapProps) => {
         genericMarkers={genericMarkers}
         options={filterOptions}
         onChange={setFilterOptions}
-      />
-
-      <AnimalEditor
-        marker={editedAnimal}
-        onClose={handleAnimalEditorClose}
-        onDataClear={onClearAnimalMarker}
-        onDataRead={onLoadAnimalMarker}
-        onDataWrite={onUpdateAnimalMarker}
       />
 
       <div

@@ -27,7 +27,7 @@ import {
   baseUrlNewZealand,
   baseUrlTransylvania,
 } from 'config/routing';
-import { useSettings, useTranslator, useTutorial } from 'hooks';
+import { useTranslator, useTutorial } from 'hooks';
 import { isMapUrl } from 'lib/routing';
 import type { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
@@ -46,9 +46,6 @@ export const Toolbar = (props: ToolbarProps) => {
 
   // Retrieve current application path
   const pathname = usePathname();
-
-  // Retrieve application settings and their updater
-  const { settings, onChange: onSettingsChange } = useSettings();
 
   // Retrieve map tutorial state and open functionality
   const { enabled: tutorialEnabled, onTutorialOpen } = useTutorial();
@@ -219,15 +216,10 @@ export const Toolbar = (props: ToolbarProps) => {
     }
 
     return createPortal(
-      <SettingsEditor
-        settings={settings}
-        visible={settingsVisible}
-        onChange={onSettingsChange}
-        onClose={handleHideSettings}
-      />,
+      <SettingsEditor visible={settingsVisible} onClose={handleHideSettings} />,
       document.getElementById('layout-content') ?? document.body,
     );
-  }, [handleHideSettings, onSettingsChange, settings, settingsVisible]);
+  }, [handleHideSettings, settingsVisible]);
 
   // Hide mobile menu when navigating to a new page
   useEffect(() => setMobileMenuVisible(false), [pathname]);

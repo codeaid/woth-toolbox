@@ -6,21 +6,24 @@ import type { AnimalEditorDescriptionProps } from './types';
 export const AnimalEditorDescription = (
   props: AnimalEditorDescriptionProps,
 ) => {
-  const { data, onChange } = props;
+  const { data, disabled, onChange } = props;
 
   /**
    * Handle changes to the comment text
    */
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) =>
-      onChange({
-        ...data,
-        comment: event.target.value,
-      }),
-    [data, onChange],
+      onChange({ comment: event.target.value }),
+    [onChange],
   );
 
   return (
-    <Textarea rows={3} value={data?.comment ?? ''} onChange={handleChange} />
+    <Textarea
+      disabled={disabled}
+      maxLength={10000}
+      rows={3}
+      value={data?.comment ?? ''}
+      onChange={handleChange}
+    />
   );
 };

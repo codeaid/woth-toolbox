@@ -4,8 +4,6 @@ import {
   Fira_Sans_Condensed as createFiraSansCondensedFont,
   Fira_Sans_Extra_Condensed as createFiraSansExtraCondensedFont,
 } from 'next/font/google';
-import { defaultLocale } from 'config/i18n';
-import type { Settings } from 'types/app';
 
 export const benchNineFont = createBenchNineFont({
   display: 'block',
@@ -43,15 +41,6 @@ export const firaSansExtraCondensedFont = createFiraSansExtraCondensedFont({
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 export const metadataBase = baseUrl ? new URL(baseUrl) : undefined;
-
-// Default application settings values
-export const defaultSettings: Required<Settings> = {
-  animalMarkerRatings: true,
-  animalMarkerSize: 50,
-  genericMarkerSize: 40,
-  locale: defaultLocale,
-  zoneMarkerSize: 35,
-};
 
 // Google Analytics tracking ID
 export const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ?? '';

@@ -2,9 +2,10 @@ import { mapLabels as africaLabels } from 'config/africa';
 import { mapLabels as alaskaLabels } from 'config/alaska';
 import { mapTypeTranslationMap } from 'config/i18n';
 import { mapLabels as idahoLabels } from 'config/idaho';
+import { mapLabels as lintukotoLabels } from 'config/lintukoto';
 import { mapLabels as newZealandLabels } from 'config/new-zealand';
 import { mapLabels as transylvaniaLabels } from 'config/transylvania';
-import type { MapLabelOptions, MapType } from 'types/cartography';
+import type { MapLabelOptions, MapId } from 'types/cartography';
 
 type Coords = [number, number];
 
@@ -15,7 +16,7 @@ const clampCoords = (coords: Coords): Coords => {
   return [clampedX, clampedY];
 };
 
-const createOutput = (labels: MapLabelOptions[], mapType: MapType) =>
+const createOutput = (labels: MapLabelOptions[], mapType: MapId) =>
   labels.map(label => {
     const [clampedX, clampedY] = clampCoords(label.coords as Coords);
 
@@ -32,6 +33,8 @@ export default [
   ...createOutput(africaLabels, 'africa'),
   ...createOutput(alaskaLabels, 'alaska'),
   ...createOutput(idahoLabels, 'idaho'),
+  ...createOutput(idahoLabels, 'idaho'),
+  ...createOutput(lintukotoLabels, 'lintukoto'),
   ...createOutput(newZealandLabels, 'new-zealand'),
   ...createOutput(transylvaniaLabels, 'transylvania'),
 ];

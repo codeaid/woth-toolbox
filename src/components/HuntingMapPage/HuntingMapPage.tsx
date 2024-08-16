@@ -1,16 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { AnimalEditor } from 'components/AnimalEditor';
+import type { HuntingMapProps } from 'components/HuntingMap';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
 import {
+  useAnimalMarkers,
+  useCustomMarkers,
   useHuntingMapType,
   useSettings,
   useTranslator,
   useTutorial,
 } from 'hooks';
+import type { AnimalMarker } from 'types/markers';
 import type { HuntingMapPageProps } from './types';
 
 export const HuntingMapPage = (props: HuntingMapPageProps) => {
@@ -18,47 +23,108 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
     animalMarkers,
     genericMarkers,
     mapHeight = 4096,
+    mapId,
     mapImageSrc,
     mapLabels,
-    mapType,
     mapWidth = 4096,
     titleKey,
   } = props;
 
-  // Retrieve map type switcher
+  // Retrieve animal marker helpers
+  const {
+    recordMap: animalRecordMap,
+    onCreateRecordAsync: onCreateAnimalMarkerRecord,
+    onDeleteRecordAsync: onDeleteAnimalMarkerRecord,
+    onReadRecord: onReadAnimalMarkerRecord,
+    onUpdateRecordAsync: onUpdateAnimalMarkerRecord,
+  } = useAnimalMarkers(mapId);
+
+  const {
+    markers: customMarkers,
+    onClearTrackingMarkersAsync,
+    onCreateCustomMarkerAsync,
+    onDeleteCustomMarkerAsync,
+  } = useCustomMarkers(mapId);
+
+  // Retrieve map context switcher
   const { onSetMapType } = useHuntingMapType();
 
-  // Render map tutorial dialog
+  // Retrieve map dependencies
+  const { onSettingsRead } = useSettings();
+  const translate = useTranslator();
   const { component: tutorial } = useTutorial(true);
 
-  // Retrieve application settings
-  const { settings } = useSettings();
+  // Animal marker that is currently being edited
+  const [pendingMarker, setPendingMarker] = useState<AnimalMarker>();
 
-  // Retrieve application translator
-  const translate = useTranslator();
+  // Find animal marker record for the currently edited marker
+  const record = useMemo(
+    () =>
+      pendingMarker ? onReadAnimalMarkerRecord(pendingMarker.id) : undefined,
+    [pendingMarker, onReadAnimalMarkerRecord],
+  );
+
+  const settings = useMemo<
+    Pick<
+      HuntingMapProps,
+      | 'markerSizeAnimal'
+      | 'markerSizeGeneric'
+      | 'markerSizeZone'
+      | 'markerTrophyRating'
+    >
+  >(
+    () => ({
+      markerSizeAnimal: onSettingsRead('marker:animal:size', 40),
+      markerSizeGeneric: onSettingsRead('marker:generic:size', 50),
+      markerSizeZone: onSettingsRead('marker:zone:size', 35),
+      markerTrophyRating: onSettingsRead('marker:animal:ratings', true),
+    }),
+    [onSettingsRead],
+  );
+
+  /**
+   * Clear currently active animal
+   */
+  const handleAnimalEditorClose = useCallback(
+    () => setPendingMarker(undefined),
+    [],
+  );
 
   // Toggle currently active map type on page load and unload
   useEffect(() => {
-    onSetMapType(mapType);
+    onSetMapType(mapId);
     return () => onSetMapType();
-  }, [mapType, onSetMapType]);
+  }, [mapId, onSetMapType]);
 
   return (
     <>
       <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
 
       <HuntingMap
+        {...settings}
         animalMarkers={animalMarkers}
+        animalRecordMap={animalRecordMap}
+        customMarkers={customMarkers}
+        editedAnimal={pendingMarker}
         genericMarkers={genericMarkers}
         imageHeight={mapHeight}
         imageSrc={basePath + mapImageSrc}
         imageWidth={mapWidth}
         labels={mapLabels}
-        markerSizeAnimal={settings.animalMarkerSize}
-        markerSizeGeneric={settings.genericMarkerSize}
-        markerSizeZone={settings.zoneMarkerSize}
-        markerTrophyRating={settings.animalMarkerRatings}
         zoomMarkerMap={markerVisibilityMap}
+        onClearTrackingMarkers={onClearTrackingMarkersAsync}
+        onCreateCustomMarker={onCreateCustomMarkerAsync}
+        onDeleteCustomMarker={onDeleteCustomMarkerAsync}
+        onEditAnimalMarker={setPendingMarker}
+      />
+
+      <AnimalEditor
+        marker={pendingMarker}
+        record={record}
+        onClose={handleAnimalEditorClose}
+        onCreateRecordAsync={onCreateAnimalMarkerRecord}
+        onDeleteRecordAsync={onDeleteAnimalMarkerRecord}
+        onUpdateRecordAsync={onUpdateAnimalMarkerRecord}
       />
 
       {createPortal(tutorial, document.body)}

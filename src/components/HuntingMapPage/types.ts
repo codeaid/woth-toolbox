@@ -1,14 +1,14 @@
-import type { MapLabelOptions, MapType } from 'types/cartography';
+import type { MapLabelOptions, MapId } from 'types/cartography';
 import type { TranslationKey } from 'types/i18n';
-import type { MarkerOptionsAnimal, MarkerOptionsGeneric } from 'types/markers';
+import type { AnimalMarker, GenericMarker } from 'types/markers';
 
 export interface HuntingMapPageProps {
-  animalMarkers: Array<MarkerOptionsAnimal>;
-  genericMarkers: Array<MarkerOptionsGeneric>;
+  animalMarkers: Array<AnimalMarker>;
+  genericMarkers: Array<GenericMarker>;
   mapHeight?: number;
+  mapId: MapId;
   mapImageSrc: string;
   mapLabels: Array<MapLabelOptions>;
-  mapType: MapType;
   mapWidth?: number;
   titleKey: TranslationKey;
 }

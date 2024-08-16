@@ -39,13 +39,8 @@ export const AnimalEditorGroupBuilder = (
    * Handle changes to notable specimens
    */
   const handleChange = useCallback(
-    (group?: Array<AnimalSpecimen>) => {
-      onChange({
-        ...data,
-        group,
-      });
-    },
-    [data, onChange],
+    (group?: Array<AnimalSpecimen>) => onChange({ group }),
+    [onChange],
   );
 
   /**

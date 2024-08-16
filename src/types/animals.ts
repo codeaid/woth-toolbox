@@ -1,4 +1,4 @@
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import type { TranslationKey } from 'types/i18n';
 
 export interface Animal {
@@ -9,7 +9,7 @@ export interface Animal {
   hitEnergy: [number, number];
   latin: TranslationKey;
   lifeCycle: Array<AnimalActivityData>;
-  maps?: Array<MapType>;
+  maps?: Array<MapId>;
   slug: string;
   tier: number;
   type: AnimalType;

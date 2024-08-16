@@ -20,36 +20,21 @@ import type {
   JsonMarkerDocument,
 } from 'types/json';
 import type {
-  MarkerDataAnimal,
-  MarkerOptions,
-  MarkerOptionsAnimal,
-  MarkerOptionsGeneric,
-  MarkerOptionsZone,
-  MarkerOptionsZoneDrink,
-  MarkerOptionsZoneEat,
-  MarkerOptionsZoneSleep,
+  AnimalMarker,
+  AnimalMarkerRecord,
+  AnimalMarkerType,
+  CustomMarkerType,
+  DrinkZoneMarker,
+  EatZoneMarker,
+  GenericMarker,
+  GenericMarkerType,
+  Marker,
   MarkerReference,
   MarkerType,
-  MarkerTypeAnimal,
-  MarkerTypeCustom,
-  MarkerTypeGeneric,
-  MarkerTypeNeedZone,
+  NeedZoneMarker,
+  NeedZoneMarkerType,
+  SleepZoneMarker,
 } from 'types/markers';
-
-/**
- * Create new custom marker options
- *
- * @param type Target marker type
- * @param coords Marker coordinates
- */
-export const createMarkerOptions = <TMarkerType extends MarkerType>(
-  type: TMarkerType,
-  coords: Point,
-) => ({
-  coords,
-  id: getCoordinateHash(coords),
-  type,
-});
 
 /**
  * Generate a hash from the specified coordinates
@@ -75,13 +60,13 @@ export const getCoordinateRatio = (
 /**
  * Get marker color class based on its type
  *
- * @param marker Marker options
+ * @param marker Marker object
  * @param genericClass Generic marker CSS class
  * @param landmarkClass Landmark marker CSS class (cabin, camp, shooting range)
  * @param lodgeClass Lodge marker CSS class
  */
 export const getGenericMarkerColorClass = (
-  marker: MarkerOptionsGeneric,
+  marker: GenericMarker,
   genericClass: string,
   landmarkClass: string,
   lodgeClass: string,
@@ -101,11 +86,11 @@ export const getGenericMarkerColorClass = (
 };
 
 /**
- * Get list of marker types from the specified list of options
+ * Get list of marker types from the specified list of objects
  *
  * @param markers Source list of markers
  */
-export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
+export const getMarkerOptionTypes = (...markers: Array<Marker>) =>
   Array.from(
     markers.reduce<Set<MarkerType>>(
       (acc, current) => acc.add(current.type),
@@ -119,7 +104,7 @@ export const getMarkerOptionTypes = (...markers: Array<MarkerOptions>) =>
  * @param marker Source marker
  * @param coords Target coordinates
  */
-export const hasSameCoordinates = (marker: MarkerOptions, coords: Point) =>
+export const hasSameCoordinates = (marker: Marker, coords: Point) =>
   marker.coords[0] === coords[0] && marker.coords[1] === coords[1];
 
 /**
@@ -129,7 +114,7 @@ export const hasSameCoordinates = (marker: MarkerOptions, coords: Point) =>
  */
 export const isAnimalMarkerType = (
   type?: MarkerType,
-): type is MarkerTypeAnimal => animalMarkerTypes.includes(type as any);
+): type is AnimalMarkerType => animalMarkerTypes.includes(type as any);
 
 /**
  * Check if the specified type represents a custom marker type
@@ -138,7 +123,7 @@ export const isAnimalMarkerType = (
  */
 export const isCustomMarkerType = (
   type?: MarkerType,
-): type is MarkerTypeCustom => customMarkerTypes.includes(type as any);
+): type is CustomMarkerType => customMarkerTypes.includes(type as any);
 
 /**
  * Check if the specified type represents a generic marker type
@@ -147,7 +132,7 @@ export const isCustomMarkerType = (
  */
 export const isGenericMarkerType = (
   type?: MarkerType,
-): type is MarkerTypeGeneric => genericMarkerTypes.includes(type as any);
+): type is GenericMarkerType => genericMarkerTypes.includes(type as any);
 
 /**
  * Check if a marker is included in the specified filter
@@ -155,7 +140,7 @@ export const isGenericMarkerType = (
  * @param marker Marker to validate
  * @param options Target filter options
  */
-const isMarkerFiltered = (marker: MarkerOptions, options: MapFilterOptions) =>
+const isMarkerFiltered = (marker: Marker, options: MapFilterOptions) =>
   hasListValue(marker.type, options.types);
 
 /**
@@ -181,7 +166,7 @@ const isMarkerVisibleAtScale = (
  */
 export const isNeedZoneMarkerType = (
   type?: MarkerType,
-): type is MarkerTypeNeedZone => needZoneMarkerTypes.includes(type as any);
+): type is NeedZoneMarkerType => needZoneMarkerTypes.includes(type as any);
 
 /**
  * Create a list of animal markers from the specified JSON document contents
@@ -190,10 +175,10 @@ export const isNeedZoneMarkerType = (
  */
 export const buildAnimalMarkers = (
   doc: JsonAnimalDocument,
-): Array<MarkerOptionsAnimal> =>
+): Array<AnimalMarker> =>
   (Object.entries(doc) as Array<[AnimalType, Array<JsonAnimalDocumentRecord>]>)
     .map(([animalType, animalData]) =>
-      animalData.map<MarkerOptionsAnimal>(values => {
+      animalData.map<AnimalMarker>(values => {
         // Extract animal marker identifier and list of coordinates associated with it.
         const [
           id,
@@ -210,15 +195,15 @@ export const buildAnimalMarkers = (
           drink: buildNeedZoneMarker(
             partitionArray(drinkCoords, 2),
             'zone:drink',
-          ) as Array<MarkerOptionsZoneDrink>,
+          ) as Array<DrinkZoneMarker>,
           eat: buildNeedZoneMarker(
             partitionArray(eatCoords, 2),
             'zone:eat',
-          ) as Array<MarkerOptionsZoneEat>,
+          ) as Array<EatZoneMarker>,
           sleep: buildNeedZoneMarker(
             partitionArray(sleepCoords, 2),
             'zone:sleep',
-          ) as Array<MarkerOptionsZoneSleep>,
+          ) as Array<SleepZoneMarker>,
           type: animalType,
         };
       }),
@@ -231,7 +216,7 @@ export const buildAnimalMarkers = (
  * @param doc Source JSON document
  */
 export const buildGenericMarkers = (doc: JsonMarkerDocument) =>
-  doc.map<MarkerOptionsGeneric>(([type, ...coords]) => ({
+  doc.map<GenericMarker>(([type, ...coords]) => ({
     coords,
     type,
     id: getCoordinateHash(coords as Point),
@@ -257,8 +242,8 @@ export const buildLabelMarkers = (doc: JsonLabelDocument) =>
  */
 const buildNeedZoneMarker = (
   coords: Array<Array<number>>,
-  type: MarkerTypeNeedZone,
-): Array<MarkerOptionsZone> =>
+  type: NeedZoneMarkerType,
+): Array<NeedZoneMarker> =>
   coords.map(point => ({
     id: getCoordinateHash(point as Point),
     type,
@@ -266,19 +251,30 @@ const buildNeedZoneMarker = (
   }));
 
 /**
+ * Check if the specified marker data object does not contain any values
+ *
+ * @param data Animal data object to validate
+ */
+export const isEmptyAnimalMarker = (data?: AnimalMarkerRecord) =>
+  !data ||
+  ((!data.color || data.color === '#ffffff') &&
+    (!data.comment || data.comment.trim() === '') &&
+    (!data.group || !data.group.length));
+
+/**
  * Update marker visibility based on filters and zoom
  *
  * @param filterOptions Filter options
  * @param zoomOptions Zoom options
  * @param zoomVisibilityMap Marker zoom visibility map
- * @param animalMarkerRecords Animal marker data records
+ * @param animalRecordMap Animal marker data records
  * @param markerOptions List of marker options to process
  */
 export const updateMarkerVisibility = (
   filterOptions: MapFilterOptions,
   zoomOptions: MapZoomOptions,
   zoomVisibilityMap: Map<MarkerType, number>,
-  animalMarkerRecords: Record<string, MarkerDataAnimal>,
+  animalRecordMap: Record<string, AnimalMarkerRecord>,
   ...markerOptions: Array<Array<MarkerReference>>
 ) =>
   markerOptions
@@ -288,19 +284,13 @@ export const updateMarkerVisibility = (
       const { marker, ref } = options;
       const { zoomValue } = zoomOptions;
 
-      // Always show debug markers
-      if (marker.meta?.debug) {
-        ref.current?.setVisible(true);
-        return;
-      }
-
       // Determine if marker should be visible with current filters
       const visibleWithFilter = isMarkerFiltered(marker, filterOptions);
 
       // Only show animal markers containing custom data
       if (filterOptions.hideUnedited && isAnimalMarkerType(marker.type)) {
         ref.current?.setVisible(
-          visibleWithFilter && marker.id in animalMarkerRecords,
+          visibleWithFilter && marker.id in animalRecordMap,
         );
         return;
       }

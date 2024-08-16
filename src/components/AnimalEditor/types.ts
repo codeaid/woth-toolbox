@@ -1,40 +1,42 @@
-import type { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
+import type { AnimalMarkerRecord, AnimalMarker } from 'types/markers';
 
 export type AnimalEditorCloseHandler = () => void;
-export type AnimalEditorDataClearHandler = (
-  marker: MarkerOptionsAnimal,
+export type AnimalEditorDataClearHandler = (marker: AnimalMarker) => void;
+type AnimalEditorDataChangeHandler = (
+  data: Partial<AnimalMarkerRecord>,
 ) => void;
-type AnimalEditorDataChangeHandler = (data: MarkerDataAnimal) => void;
 export type AnimalEditorDataReadHandler = (
-  marker: MarkerOptionsAnimal,
-) => Optional<MarkerDataAnimal>;
+  marker: AnimalMarker,
+) => Promise<Optional<AnimalMarkerRecord>>;
 export type AnimalEditorDataWriteHandler = (
-  marker: MarkerOptionsAnimal,
-  data: MarkerDataAnimal,
-) => void;
+  marker: AnimalMarker,
+  data: AnimalMarkerRecord,
+) => Promise<void>;
 
 export interface AnimalEditorColorPickerProps {
-  data?: MarkerDataAnimal;
+  data?: AnimalMarkerRecord;
   defaultIconColor?: string;
-  marker?: MarkerOptionsAnimal;
+  marker?: AnimalMarker;
   onChange: AnimalEditorDataChangeHandler;
 }
 
 export interface AnimalEditorDescriptionProps {
-  data?: MarkerDataAnimal;
+  data?: AnimalMarkerRecord;
+  disabled?: boolean;
   onChange: AnimalEditorDataChangeHandler;
 }
 
 export interface AnimalEditorProps {
   defaultIconColor?: string;
-  marker?: MarkerOptionsAnimal;
+  marker?: AnimalMarker;
+  record?: AnimalMarkerRecord;
   onClose: AnimalEditorCloseHandler;
-  onDataClear: AnimalEditorDataClearHandler;
-  onDataRead: AnimalEditorDataReadHandler;
-  onDataWrite: AnimalEditorDataWriteHandler;
+  onCreateRecordAsync: (record: AnimalMarkerRecord) => Promise<void>;
+  onUpdateRecordAsync: (record: AnimalMarkerRecord) => Promise<void>;
+  onDeleteRecordAsync: (record: AnimalMarkerRecord) => Promise<void>;
 }
 
 export interface AnimalEditorGroupBuilderProps {
-  data?: MarkerDataAnimal;
+  data?: AnimalMarkerRecord;
   onChange: AnimalEditorDataChangeHandler;
 }

@@ -1,15 +1,15 @@
-import type { MarkerDataAnimal, MarkerOptionsAnimal } from 'types/markers';
+import type { AnimalMarkerRecord, AnimalMarker } from 'types/markers';
 
 type HuntingMapAnimalContextToggleEditorHandler = (
-  marker: MarkerOptionsAnimal,
+  marker: AnimalMarker,
   visible: boolean,
   source: string,
 ) => void;
 
 export interface HuntingMapAnimalContextProps {
   enabled: boolean;
-  marker: MarkerOptionsAnimal;
-  markerData?: MarkerDataAnimal;
+  marker: AnimalMarker;
+  markerData?: AnimalMarkerRecord;
   markerElement?: Nullable<HTMLElement>;
   onToggleEditor: HuntingMapAnimalContextToggleEditorHandler;
 }

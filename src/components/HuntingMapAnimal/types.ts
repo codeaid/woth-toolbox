@@ -1,18 +1,16 @@
 import type { CSSProperties } from 'react';
-import type { MarkerOptionsAnimal } from 'types/markers';
+import type { AnimalMarker } from 'types/markers';
 
 type HuntingMapAnimalToggleEditorHandler = (
-  marker: MarkerOptionsAnimal,
+  marker: AnimalMarker,
   visible: boolean,
   source: string,
 ) => void;
-type HuntingMapAnimalMarkerToggleZonesHandler = (
-  marker: MarkerOptionsAnimal,
-) => void;
+type HuntingMapAnimalMarkerToggleZonesHandler = (marker: AnimalMarker) => void;
 
 export interface HuntingMapAnimalProps {
   className?: string;
-  marker: MarkerOptionsAnimal;
+  marker: AnimalMarker;
   markerSize?: number;
   markerSizeZone?: number;
   markerTrophyRating?: boolean;

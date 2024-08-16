@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { Select } from 'components/Select';
 import type { SelectOption } from 'components/Select';
-import { useTranslator } from 'hooks';
-import type { SettingsEditorLanguageProps } from './types';
+import { Select } from 'components/Select';
+import { useLocale, useSettings, useTranslator } from 'hooks';
 
-export const SettingsEditorLanguage = (props: SettingsEditorLanguageProps) => {
-  const { settings, onChange } = props;
+export const SettingsEditorLanguage = () => {
+  const locale = useLocale();
+  const { onSettingsUpdateAsync } = useSettings();
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -39,14 +39,15 @@ export const SettingsEditorLanguage = (props: SettingsEditorLanguageProps) => {
    * Handle changes to application language
    */
   const handleLanguageChange = useCallback(
-    (locale?: string) => onChange({ locale }),
-    [onChange],
+    async (locale?: string) =>
+      await onSettingsUpdateAsync<'locale'>('locale', locale),
+    [onSettingsUpdateAsync],
   );
 
   return (
     <Select
       options={languageOptions}
-      value={settings.locale}
+      value={locale}
       onChange={handleLanguageChange}
     />
   );

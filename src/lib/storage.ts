@@ -1,4 +1,3 @@
-import { mapTypes } from 'config/cartography';
 import {
   animalMarkerKey,
   customMarkerKey,
@@ -6,9 +5,75 @@ import {
   settingsKey,
 } from 'config/storage';
 import { base64Decode, base64Encode } from 'lib/utils';
-import type { Settings } from 'types/app';
-import type { MapType } from 'types/cartography';
-import type { MarkerDataAnimal, MarkerOptionsCustom } from 'types/markers';
+import type { MapId } from 'types/cartography';
+import { mapIds } from 'types/cartography';
+import type {
+  AnimalMarkerRecord,
+  CustomMarker,
+  LocalStorageAnimalMarkerRecord,
+} from 'types/markers';
+import type {
+  UserSettings,
+  UserSettingsKey,
+  UserSettingsTypeMap,
+} from 'types/settings';
+
+type LegacySettings = {
+  animalMarkerRatings?: boolean;
+  animalMarkerSize?: number;
+  genericMarkerSize?: number;
+  locale?: string;
+  zoneMarkerSize?: number;
+};
+
+// Map of legacy keys and their current counterparts
+const settingsLegacyKeyMap: Record<keyof LegacySettings, UserSettingsKey> = {
+  animalMarkerRatings: 'marker:animal:ratings',
+  animalMarkerSize: 'marker:animal:size',
+  genericMarkerSize: 'marker:generic:size',
+  locale: 'locale',
+  zoneMarkerSize: 'marker:zone:size',
+};
+
+// Map of current keys and their legacy counterparts
+export const settingsCurrentKeyMap: Record<
+  UserSettingsKey,
+  Optional<keyof LegacySettings>
+> = {
+  'marker:animal:ratings': 'animalMarkerRatings',
+  'marker:animal:size': 'animalMarkerSize',
+  'marker:generic:size': 'genericMarkerSize',
+  'locale': 'locale',
+  'marker:zone:size': 'zoneMarkerSize',
+  'tutorial:completed': undefined,
+};
+
+/**
+ * Get animal marker storage key for the specified map
+ *
+ * @param mapId Target map type
+ */
+const getAnimalMarkerStorageKey = (mapId: MapId) =>
+  `${animalMarkerKey}:${mapId}`;
+
+/**
+ * Get custom marker storage key for the specified map
+ *
+ * @param mapId Target map type
+ */
+const getCustomMarkerStorageKey = (mapId: MapId) =>
+  `${customMarkerKey}:${mapId}`;
+
+/**
+ * Check if the specified marker data object does not contain any values
+ *
+ * @param data Animal data object to validate
+ */
+export const isEmptyAnimalMarker = (data?: AnimalMarkerRecord) =>
+  !data ||
+  ((!data.color || data.color === '#ffffff') &&
+    (!data.comment || data.comment.trim() === '') &&
+    (!data.group || !data.group.length));
 
 /**
  * Check if the specified storage is both supported and available
@@ -63,206 +128,212 @@ export const getStorage = () => {
 };
 
 /**
- * Clear the whole animal marker storage for the specified map
+ * Read custom markers from the storage
  *
  * @param storage Target storage
- * @param mapType Target map type
+ * @param mapId Source map type
  */
-const clearAnimalMarkerStorage = (storage: Storage, mapType: MapType) => {
-  const storageKey = getAnimalMarkerStorageKey(mapType);
+export const storageReadCustomMarkerListAsync = async (
+  storage: Storage,
+  mapId: MapId,
+) => {
+  // Read custom marker data from the storage
+  const storageKey = getCustomMarkerStorageKey(mapId);
+  const json = storage.getItem(storageKey);
+  if (!json) {
+    return [];
+  }
+
+  return JSON.parse(json) as CustomMarker[];
+};
+
+/**
+ * Remove individual custom markers from the storage
+ *
+ * @param storage Target storage
+ * @param mapId Target map type
+ */
+const storageClearCustomMarkerListAsync = async (
+  storage: Storage,
+  mapId: MapId,
+) => {
+  const storageKey = getCustomMarkerStorageKey(mapId);
   storage.removeItem(storageKey);
+};
+
+/**
+ * Persist custom markers to the storage
+ *
+ * @param storage Target storage
+ * @param mapId Target map type
+ * @param customMarkers List of markers to persist
+ */
+export const storageWriteCustomMarkerListAsync = async (
+  storage: Storage,
+  mapId: MapId,
+  customMarkers: CustomMarker[],
+) => {
+  // Generate storage key for the custom marker storage
+  const storageKey = getCustomMarkerStorageKey(mapId);
+
+  // Remove the custom marker storage key
+  if (!customMarkers.length) {
+    await storageClearCustomMarkerListAsync(storage, mapId);
+    return;
+  }
+
+  const json = JSON.stringify(customMarkers);
+  storage.setItem(storageKey, json);
+};
+
+/**
+ * Retrieve animal marker data from the storage
+ *
+ * @param storage Marker data storage
+ * @param mapId Parent map
+ * @param markerId Marker identifier
+ */
+export const storageReadAnimalMarkerAsync = async (
+  storage: Storage,
+  mapId: MapId,
+  markerId: string,
+) => {
+  const dataMap = await storageReadAnimalMarkerMapAsync(storage, mapId);
+  return dataMap?.get(markerId);
+};
+
+/**
+ * Read stored custom animal marker data for the specified map
+ *
+ * @param storage Target storage
+ * @param mapId Source map type
+ */
+export const storageReadAnimalMarkerMapAsync = async (
+  storage: Storage,
+  mapId: MapId,
+) => {
+  // Generate storage key containing marker data of the specified map
+  const storageKey = getAnimalMarkerStorageKey(mapId);
+
+  // Read map marker data from the storage
+  const json = storage.getItem(storageKey);
+  if (!json) {
+    return new Map<string, AnimalMarkerRecord>();
+  }
+
+  const contents = JSON.parse(json) as Record<
+    string,
+    LocalStorageAnimalMarkerRecord
+  >;
+
+  return new Map<string, AnimalMarkerRecord>(
+    Object.entries(contents).map<[string, AnimalMarkerRecord]>(
+      ([key, { created, updated, ...rest }]) => [
+        key,
+        {
+          ...rest,
+          id: key,
+          createdAt: created ? new Date(created) : undefined,
+          updatedAt: updated ? new Date(updated) : undefined,
+        },
+      ],
+    ),
+  );
+};
+
+/**
+ * Store animal marker data in the storage
+ *
+ * @param storage Marker data storage
+ * @param mapId Parent map
+ * @param markerId Marker identifier
+ * @param record Marker record to store
+ */
+export const storageUpdateAnimalMarkerAsync = async (
+  storage: Storage,
+  mapId: MapId,
+  markerId: string,
+  record: AnimalMarkerRecord,
+) => {
+  // Retrieve the current map of marker identifiers and their associated data
+  const dataMap = await storageReadAnimalMarkerMapAsync(storage, mapId);
+
+  // Remove empty data objects from Firebase
+  if (isEmptyAnimalMarker(record)) {
+    return storageDeleteAnimalMarkerAsync(storage, mapId, markerId);
+  }
+
+  // Insert or update data for the specified marker
+  dataMap.set(markerId, record);
+  await storageWriteAnimalMarkerMapAsync(storage, mapId, dataMap);
 };
 
 /**
  * Clear marker data from the storage
  *
  * @param storage Target storage
- * @param mapType Target map type
+ * @param mapId Target map type
  * @param markerId Marker identifier
  */
-export const clearAnimalMarkerStorageItem = (
+export const storageDeleteAnimalMarkerAsync = async (
   storage: Storage,
-  mapType: MapType,
+  mapId: MapId,
   markerId: string,
 ) => {
   // Retrieve the current map of marker identifiers and their associated data
-  const dataMap = readAnimalMarkerStorage(storage, mapType);
+  const dataMap = await storageReadAnimalMarkerMapAsync(storage, mapId);
 
   // Remove data for the specified marker and persist changes to the storage
   dataMap.delete(markerId);
-  writeAnimalMarkerStorage(storage, mapType, dataMap);
+  await storageWriteAnimalMarkerMapAsync(storage, mapId, dataMap);
 };
 
 /**
- * Remove custom markers from the storage
+ * Clear the whole animal marker storage for the specified map
  *
  * @param storage Target storage
- * @param mapType Target map type
+ * @param mapId Target map type
  */
-const clearCustomMarkerStorage = (storage: Storage, mapType: MapType) => {
-  const storageKey = getCustomMarkerStorageKey(mapType);
+const storageClearAnimalMarkersAsync = async (
+  storage: Storage,
+  mapId: MapId,
+) => {
+  const storageKey = getAnimalMarkerStorageKey(mapId);
   storage.removeItem(storageKey);
 };
 
 /**
- * Remove application settings from the storage
+ * Replace custom animal marker data in the storage
  *
  * @param storage Target storage
+ * @param mapId Target map type
+ * @param dataMap Map of marker identifiers and their associated data
  */
-export const clearSettingsStorage = (storage: Storage) =>
-  storage.removeItem(settingsKey);
-
-/**
- * Get animal marker storage key for the specified map
- *
- * @param mapType Target map type
- */
-const getAnimalMarkerStorageKey = (mapType: MapType) =>
-  `${animalMarkerKey}:${mapType}`;
-
-/**
- * Get custom marker storage key for the specified map
- *
- * @param mapType Target map type
- */
-const getCustomMarkerStorageKey = (mapType: MapType) =>
-  `${customMarkerKey}:${mapType}`;
-
-/**
- * Check if the specified marker data object does not contain any values
- *
- * @param data Animal data object to validate
- */
-export const isEmptyAnimalMarker = (data?: MarkerDataAnimal) =>
-  !data ||
-  ((!data.color || data.color === '#ffffff') &&
-    (!data.comment || data.comment.trim() === '') &&
-    (!data.group || !data.group.length));
-
-/**
- * Check if map tutorial has previously been completed
- *
- * @param storage Target storage
- */
-export const isMapTutorialCompleted = (storage: Storage) =>
-  !!readMapTutorialCompleted(storage);
-
-/**
- * Read stored custom animal marker data for the specified map
- *
- * @param storage Target storage
- * @param mapType Source map type
- */
-export const readAnimalMarkerStorage = (storage: Storage, mapType: MapType) => {
-  // Generate storage key containing marker data of the specified map
-  const storageKey = getAnimalMarkerStorageKey(mapType);
-  const fallback = new Map<string, MarkerDataAnimal>();
-
-  try {
-    // Read map marker data from the storage
-    const json = storage.getItem(storageKey);
-    if (!json) {
-      return fallback;
-    }
-
-    const obj = JSON.parse(json) as Record<string, MarkerDataAnimal>;
-    return new Map<string, MarkerDataAnimal>(Object.entries(obj));
-  } catch (e) {
-    return fallback;
-  }
-};
-
-/**
- * Retrieve marker data from the storage
- *
- * @param storage Marker data storage
- * @param mapType Parent map
- * @param markerId Marker identifier
- */
-export const readAnimalMarkerStorageItem = (
+const storageWriteAnimalMarkerMapAsync = async (
   storage: Storage,
-  mapType: MapType,
-  markerId: string,
-): Optional<MarkerDataAnimal> => {
-  const dataMap = readAnimalMarkerStorage(storage, mapType);
-  return dataMap?.get(markerId);
-};
-
-/**
- * Read custom markers from the storage
- *
- * @param storage Target storage
- * @param mapType Source map type
- */
-export const readCustomMarkerStorage = (storage: Storage, mapType: MapType) => {
-  try {
-    // Read custom marker data from the storage
-    const storageKey = getCustomMarkerStorageKey(mapType);
-    const json = storage.getItem(storageKey);
-    if (!json) {
-      return;
-    }
-
-    return JSON.parse(json) as Array<MarkerOptionsCustom>;
-  } catch (e) {}
-};
-
-/**
- * Read tutorial completion status from the storage
- *
- * @param storage Target storage
- */
-const readMapTutorialCompleted = (storage: Storage) => {
-  try {
-    const json = storage.getItem(mapTutorialKey);
-    if (!json) {
-      return;
-    }
-
-    return JSON.parse(json) as boolean;
-  } catch (e) {}
-};
-
-/**
- * Serialize current storage contents for migration
- *
- * @param storage Source storage manager
- */
-export const readSerializedStore = (storage: Storage) => {
-  // Generate list of keys that should be migrated
-  const keys = [
-    ...mapTypes.map(getAnimalMarkerStorageKey),
-    ...mapTypes.map(getCustomMarkerStorageKey),
-    mapTutorialKey,
-    settingsKey,
-  ];
-
-  try {
-    // Fetch contents of each key and add it to the map
-    const data = keys.reduce((acc, key) => {
-      try {
-        const json = storage.getItem(key);
-        if (!json) {
-          return acc;
-        }
-
-        const value = JSON.parse(json);
-        if (!value) {
-          return acc;
-        }
-
-        return acc.set(key, value);
-      } catch (e) {
-        return acc;
-      }
-    }, new Map());
-
-    // Serialize local storage data
-    const json = JSON.stringify(Object.fromEntries(data));
-    return base64Encode(json);
-  } catch (e) {
-    return '';
+  mapId: MapId,
+  dataMap: Map<string, AnimalMarkerRecord>,
+) => {
+  // Delete the storage key if data map doesn't contain any values
+  if (!dataMap.size) {
+    return await storageClearAnimalMarkersAsync(storage, mapId);
   }
+
+  const legacyEntries = [...dataMap.entries()].map<
+    [string, LocalStorageAnimalMarkerRecord]
+  >(([key, { createdAt, updatedAt, id, ...rest }]) => [
+    key,
+    {
+      ...rest,
+      created: createdAt?.getTime(),
+      updated: updatedAt?.getTime(),
+    },
+  ]);
+
+  const json = JSON.stringify(Object.fromEntries(legacyEntries));
+
+  const storageKey = getAnimalMarkerStorageKey(mapId);
+  storage.setItem(storageKey, json);
 };
 
 /**
@@ -270,96 +341,164 @@ export const readSerializedStore = (storage: Storage) => {
  *
  * @param storage Target storage
  */
-export const readSettingsStorage = (storage: Storage) => {
-  try {
-    // Read settings value from the storage
-    const json = storage.getItem(settingsKey);
-    if (!json) {
-      return;
+export const storageReadSettingsListAsync = async (storage: Storage) => {
+  const settings: UserSettings[] = [];
+
+  // Read settings value from the storage
+  const settingsJson = storage.getItem(settingsKey);
+  if (settingsJson) {
+    const contents = JSON.parse(settingsJson) as Partial<LegacySettings>;
+
+    Object.entries(contents).forEach(([oldKey, value]) => {
+      const newKey = settingsLegacyKeyMap[oldKey as keyof LegacySettings];
+      settings.push({ key: newKey, value });
+    });
+  }
+
+  const tutorial = storage.getItem(mapTutorialKey);
+  if (!tutorial) {
+    return settings;
+  }
+
+  return settings.concat({ key: 'tutorial:completed', value: true });
+};
+
+/**
+ * Store application settings in the storage
+ *
+ * @param storage Target storage
+ * @param key Configuration entry key
+ * @param value Configuration entry value
+ */
+export const storageUpdateSettingsValueAsync = async <
+  TKey extends UserSettingsKey,
+>(
+  storage: Storage,
+  key: TKey,
+  value: UserSettingsTypeMap[TKey],
+) => {
+  if (key === 'tutorial:completed') {
+    storage.setItem(mapTutorialKey, JSON.stringify(true));
+    return;
+  }
+
+  const settings = await storageReadSettingsListAsync(storage);
+  const replacement = settings
+    .filter(item => item.key !== key)
+    .concat({ key, value });
+
+  await storageWriteSettingsAsync(storage, replacement);
+};
+
+/**
+ * Delete a settings entry from the storage
+ *
+ * @param storage Target storage
+ * @param key Configuration entry key
+ */
+export const storageDeleteSettingsValueAsync = async (
+  storage: Storage,
+  key: UserSettingsKey,
+) => {
+  const settings = await storageReadSettingsListAsync(storage);
+  const replacement = settings.filter(entry => entry.key !== key);
+
+  if (!replacement.length) {
+    await storageClearSettingsAsync(storage);
+    return;
+  }
+
+  return await storageWriteSettingsAsync(storage, replacement);
+};
+
+/**
+ * Persist a list of settings to the local storage
+ *
+ * @param storage Target storage
+ * @param settings List of settings to persist
+ */
+const storageWriteSettingsAsync = async (
+  storage: Storage,
+  settings: UserSettings[],
+) => {
+  const legacyMap = settings.reduce<LegacySettings>((acc, current) => {
+    const legacyKey = settingsCurrentKeyMap[current.key];
+    if (!legacyKey) {
+      return acc;
     }
 
-    return JSON.parse(json) as Partial<Settings>;
-  } catch (e) {}
+    return { ...acc, [legacyKey]: current.value };
+  }, {} as LegacySettings);
+
+  storage.setItem(settingsKey, JSON.stringify(legacyMap));
 };
 
 /**
- * Replace custom animal marker data in the storage
+ * Remove application settings from the storage
  *
  * @param storage Target storage
- * @param mapType Target map type
- * @param dataMap Map of marker identifiers and their associated data
  */
-const writeAnimalMarkerStorage = (
-  storage: Storage,
-  mapType: MapType,
-  dataMap: Map<string, MarkerDataAnimal>,
-) => {
-  // Delete the storage key if data map doesn't contain any values
-  if (!dataMap.size) {
-    clearAnimalMarkerStorage(storage, mapType);
-    return true;
-  }
+export const storageClearSettingsAsync = async (storage: Storage) =>
+  storage.removeItem(settingsKey);
 
-  try {
-    const json = JSON.stringify(Object.fromEntries(dataMap));
-
-    const storageKey = getAnimalMarkerStorageKey(mapType);
-    storage.setItem(storageKey, json);
-    return true;
-  } catch (e) {
+/**
+ * Read tutorial completion status from the storage
+ *
+ * @param storage Target storage
+ */
+export const storageReadTutorialFlagAsync = async (storage: Storage) => {
+  const json = storage.getItem(mapTutorialKey);
+  if (!json) {
     return false;
   }
+
+  return JSON.parse(json) as boolean;
 };
 
 /**
- * Store marker data in the storage
- *
- * @param storage Marker data storage
- * @param mapType Parent map
- * @param markerId Marker identifier
- * @param data Marker data to store
- */
-export const writeAnimalMarkerStorageItem = (
-  storage: Storage,
-  mapType: MapType,
-  markerId: string,
-  data: MarkerDataAnimal,
-) => {
-  // Retrieve the current map of marker identifiers and their associated data
-  const dataMap = readAnimalMarkerStorage(storage, mapType);
-
-  // Insert or update data for the specified marker
-  dataMap.set(markerId, data);
-
-  // Persist changes to the data map
-  return writeAnimalMarkerStorage(storage, mapType, dataMap);
-};
-
-/**
- * Persist custom markers to the storage
+ * Mark map tutorial as completed
  *
  * @param storage Target storage
- * @param mapType Target map type
- * @param customMarkers List of markers to persist
  */
-export const writeCustomMarkerStorage = (
-  storage: Storage,
-  mapType: MapType,
-  customMarkers: Array<MarkerOptionsCustom>,
-) => {
-  // Generate storage key for the custom marker storage
-  const storageKey = getCustomMarkerStorageKey(mapType);
+export const storageWriteTutorialFlagAsync = async (storage: Storage) =>
+  storage.setItem(mapTutorialKey, JSON.stringify(true));
 
-  // Remove the custom marker storage key
-  if (!customMarkers.length) {
-    clearCustomMarkerStorage(storage, mapType);
-    return true;
-  }
+/**
+ * Serialize current storage contents for migration
+ *
+ * @param storage Source storage manager
+ */
+export const storageSerializeAsync = async (storage: Storage) => {
+  // Generate list of keys that should be migrated
+  const keys = [
+    ...mapIds.map(getAnimalMarkerStorageKey),
+    ...mapIds.map(getCustomMarkerStorageKey),
+    mapTutorialKey,
+    settingsKey,
+  ];
 
-  try {
-    const json = JSON.stringify(customMarkers);
-    storage.setItem(storageKey, json);
-  } catch (e) {}
+  // Fetch contents of each key and add it to the map
+  const data = keys.reduce((acc, key) => {
+    try {
+      const json = storage.getItem(key);
+      if (!json) {
+        return acc;
+      }
+
+      const value = JSON.parse(json);
+      if (!value) {
+        return acc;
+      }
+
+      return acc.set(key, value);
+    } catch (e) {
+      return acc;
+    }
+  }, new Map());
+
+  // Serialize local storage data
+  const json = JSON.stringify(Object.fromEntries(data));
+  return base64Encode(json);
 };
 
 /**
@@ -369,7 +508,10 @@ export const writeCustomMarkerStorage = (
  * @param value Encoded storage data
  * @throws Errors are intentionally not caught to allow showing notifications
  */
-export const writeSerializedStorage = (storage: Storage, value: string) => {
+export const storageUnserializeAsync = async (
+  storage: Storage,
+  value: string,
+) => {
   // Trim value before processing
   value = value.trim();
 
@@ -384,22 +526,3 @@ export const writeSerializedStorage = (storage: Storage, value: string) => {
     storage.setItem(key, JSON.stringify(value)),
   );
 };
-
-/**
- * Store application settings in the storage
- *
- * @param storage Target storage
- * @param settings Settings object to persist
- */
-export const writeSettingsStorage = (
-  storage: Storage,
-  settings: Partial<Settings>,
-) => storage.setItem(settingsKey, JSON.stringify(settings));
-
-/**
- * Mark map tutorial as completed
- *
- * @param storage Target storage
- */
-export const writeMapTutorialCompleted = (storage: Storage) =>
-  storage.setItem(mapTutorialKey, JSON.stringify(true));

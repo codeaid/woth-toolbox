@@ -13,5 +13,3 @@ export const TutorialContext = createContext<TutorialContextValue>({
   onTutorialEnable: () => undefined,
   onTutorialOpen: () => undefined,
 });
-
-export const TutorialProvider = TutorialContext.Provider;

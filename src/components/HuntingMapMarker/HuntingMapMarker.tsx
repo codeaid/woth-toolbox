@@ -13,13 +13,13 @@ import { Transition } from 'react-transition-group';
 import { useRefCallback } from 'hooks';
 import { getTransitionClassName } from 'lib/dom';
 import { getIconComponent } from 'lib/icons';
-import type { MarkerOptions, MarkerRef } from 'types/markers';
+import type { Marker, MarkerRef } from 'types/markers';
 import type { HuntingMapMarkerProps } from './types';
 import styles from './HuntingMapMarker.module.css';
 
 export const HuntingMapMarker = forwardRef(
-  <TMarkerOptions extends MarkerOptions>(
-    props: HuntingMapMarkerProps<TMarkerOptions>,
+  <TMarker extends Marker>(
+    props: HuntingMapMarkerProps<TMarker>,
     ref: ForwardedRef<MarkerRef>,
   ) => {
     const {
@@ -54,22 +54,6 @@ export const HuntingMapMarker = forwardRef(
       () => getIconComponent(marker.type),
       [marker.type],
     );
-
-    // Generate marker's coordinate title in development mode
-    const tooltip = useMemo(() => {
-      // Enable debug marker titles in development mode
-      if (process.env.NODE_ENV === 'development') {
-        const entries = Object.entries(marker).filter(([key]) =>
-          (
-            ['coords', 'id', 'meta', 'type'] as Array<keyof MarkerOptions>
-          ).includes(key as keyof MarkerOptions),
-        );
-        const json = JSON.stringify(Object.fromEntries(entries), undefined, 2);
-        return title ? title + '\n' + json : json;
-      }
-
-      return title;
-    }, [marker, title]);
 
     /**
      * Handle clicking on the marker
@@ -211,7 +195,7 @@ export const HuntingMapMarker = forwardRef(
             <IconComponent
               highlighted={highlighted}
               size={markerSize}
-              title={tooltip}
+              title={title}
               onClick={handleClick}
               onLongPress={handleLongPress}
               onMouseEnter={handleMouseEnter}
@@ -223,7 +207,7 @@ export const HuntingMapMarker = forwardRef(
       </Transition>
     );
   },
-) as <TMarkerOptions extends MarkerOptions>(
+) as <TMarkerOptions extends Marker>(
   props: HuntingMapMarkerProps<TMarkerOptions> & { ref?: Ref<MarkerRef> },
 ) => ReactElement;
 

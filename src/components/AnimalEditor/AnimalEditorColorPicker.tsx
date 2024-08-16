@@ -28,16 +28,16 @@ export const AnimalEditorColorPicker = (
    * Handle changes to the color
    */
   const handleChange = useCallback(
-    (color: ColorResult) => onChange({ ...data, color: getHexColor(color) }),
-    [data, onChange],
+    (color: ColorResult) => onChange({ color: getHexColor(color) }),
+    [onChange],
   );
 
   /**
    * Handle changes to the color
    */
   const handleColorSelectorChange = useCallback(
-    (color: string) => onChange({ ...data, color }),
-    [data, onChange],
+    (color: string) => onChange({ color }),
+    [onChange],
   );
 
   return (

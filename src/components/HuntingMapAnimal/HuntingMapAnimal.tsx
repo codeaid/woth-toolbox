@@ -22,17 +22,17 @@ import { getAnimalRatingValue } from 'lib/animals';
 import { getAnimalTypeKey, getAnimalZoneKey } from 'lib/i18n';
 import { sendGoogleEvent } from 'lib/tracking';
 import type {
-  MarkerDataAnimal,
-  MarkerOptionsAnimal,
-  MarkerOptionsZone,
+  AnimalMarkerRecord,
+  AnimalMarker,
+  NeedZoneMarker,
   MarkerRef,
-  MarkerRefAnimal,
+  AnimalMarkerRef,
 } from 'types/markers';
 import type { HuntingMapAnimalProps } from './types';
 import styles from './HuntingMapAnimal.module.css';
 
 export const HuntingMapAnimal = forwardRef(
-  (props: HuntingMapAnimalProps, ref: ForwardedRef<MarkerRefAnimal>) => {
+  (props: HuntingMapAnimalProps, ref: ForwardedRef<AnimalMarkerRef>) => {
     const {
       className,
       marker,
@@ -55,7 +55,7 @@ export const HuntingMapAnimal = forwardRef(
     const zoneRefs = useRef<Array<RefObject<MarkerRef>>>([]);
 
     // Custom data associated with the marker
-    const [data, setData] = useState<MarkerDataAnimal>();
+    const [data, setData] = useState<AnimalMarkerRecord>();
 
     // Flag indicating if the marker editor is currently active
     const [editorActive, setEditorActive] = useState(false);
@@ -136,7 +136,7 @@ export const HuntingMapAnimal = forwardRef(
      * @param event Mouse event object
      */
     const handleTriggerClick = useCallback(
-      (marker: MarkerOptionsAnimal, event: ReactMouseEvent<EventTarget>) => {
+      (marker: AnimalMarker, event: ReactMouseEvent<EventTarget>) => {
         const [mouseDownX, mouseDownY] = pageCoords.current;
         const { pageX: mouseUpX, pageY: mouseUpY } = event;
 
@@ -195,7 +195,7 @@ export const HuntingMapAnimal = forwardRef(
       () =>
         [marker.drink, marker.eat, marker.sleep]
           .flat()
-          .map((zone: MarkerOptionsZone) => {
+          .map((zone: NeedZoneMarker) => {
             // Create a reference to each need zone icon
             const ref = createRef<MarkerRef>();
             zoneRefs.current.push(ref);
@@ -248,7 +248,7 @@ export const HuntingMapAnimal = forwardRef(
 
     // Expose control functions of the main trigger component as well as
     // functionality to change zone visibility externally
-    useImperativeHandle<MarkerRefAnimal, MarkerRefAnimal>(ref, () => ({
+    useImperativeHandle<AnimalMarkerRef, AnimalMarkerRef>(ref, () => ({
       element: markerRef?.element,
       setData,
       setEditorActive,
@@ -275,7 +275,7 @@ export const HuntingMapAnimal = forwardRef(
 
     return (
       <>
-        <HuntingMapMarker<MarkerOptionsAnimal>
+        <HuntingMapMarker<AnimalMarker>
           className={clsx(
             styles.HuntingMapAnimal,
             {

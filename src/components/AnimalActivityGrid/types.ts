@@ -1,11 +1,11 @@
 import type { Animal, AnimalActivityData } from 'types/animals';
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import type { EntityGroup } from 'types/generic';
 
-type AnimalActivityGridButtonChangeHandler = (mapType?: MapType) => void;
+type AnimalActivityGridButtonChangeHandler = (mapType?: MapId) => void;
 
 export interface AnimalActivityGridFilterProps {
-  mapType?: MapType;
+  mapType?: MapId;
   onChange: AnimalActivityGridButtonChangeHandler;
 }
 

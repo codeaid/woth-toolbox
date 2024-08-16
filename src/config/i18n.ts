@@ -5,12 +5,12 @@ import type {
   AnimalHabitat,
   AnimalRating,
 } from 'types/animals';
-import type { MapType } from 'types/cartography';
+import type { MapId } from 'types/cartography';
 import type { TranslationKey } from 'types/i18n';
 import type {
-  MarkerTypeCustom,
-  MarkerTypeGeneric,
-  MarkerTypeNeedZone,
+  CustomMarkerType,
+  GenericMarkerType,
+  NeedZoneMarkerType,
 } from 'types/markers';
 
 // Fallback application locale
@@ -76,7 +76,7 @@ export const animalTierTranslationMap = new Map<number, TranslationKey>([
 ]);
 
 export const animalZoneTranslationMap = new Map<
-  MarkerTypeNeedZone,
+  NeedZoneMarkerType,
   TranslationKey
 >([
   ['zone:drink', 'ANIMAL:NEED_ZONE_DRINKING'],
@@ -85,7 +85,7 @@ export const animalZoneTranslationMap = new Map<
 ]);
 
 export const customMarkerTranslationMap = new Map<
-  MarkerTypeCustom,
+  CustomMarkerType,
   TranslationKey
 >([
   ['marker:exploration', 'UI:MARKER_EXPLORATION'],
@@ -94,7 +94,7 @@ export const customMarkerTranslationMap = new Map<
 ]);
 
 export const genericMarkerTranslationMap = new Map<
-  MarkerTypeGeneric,
+  GenericMarkerType,
   TranslationKey
 >([
   ['cabin', 'TOOLBOX:MARKER_CABIN'],
@@ -136,7 +136,7 @@ export const localeDirectoryMap = new Map<string, string>([
   ['zh-TW', 'zh-Hant'],
 ]);
 
-export const mapTypeTranslationMap = new Map<MapType, TranslationKey>([
+export const mapTypeTranslationMap = new Map<MapId, TranslationKey>([
   ['africa', 'POI:MAP_NAME_AFRICA'],
   ['alaska', 'POI:MAP_NAME_ALASKA'],
   ['idaho', 'POI:MAP_NAME_IDAHO'],

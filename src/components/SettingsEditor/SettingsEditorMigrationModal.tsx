@@ -1,18 +1,12 @@
-import { useCallback, useEffect, useRef } from 'react';
 import type { MouseEvent } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from 'components/Button';
 import { Modal } from 'components/Modal';
 import { Textarea } from 'components/Textarea';
-import {
-  useAnimalMarkers,
-  useCustomMarkers,
-  useSettings,
-  useStorage,
-  useTranslator,
-} from 'hooks';
+import { useStorage, useTranslator } from 'hooks';
 import { setClipboardValue } from 'lib/clipboard';
-import { readSerializedStore, writeSerializedStorage } from 'lib/storage';
+import { storageSerializeAsync, storageUnserializeAsync } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { showNotification } from 'lib/utils';
 import type { SettingsEditorMigrationModalProps } from './types';
@@ -26,11 +20,6 @@ export const SettingsEditorMigrationModal = (
   // References to textarea elements
   const exportRef = useRef<HTMLTextAreaElement>(null);
   const importRef = useRef<HTMLTextAreaElement>(null);
-
-  // Retrieve data reload functions
-  const { onReload: onReloadAnimalMarkers } = useAnimalMarkers();
-  const { onReload: onReloadCustomMarkers } = useCustomMarkers();
-  const { onReload: onReloadSettings } = useSettings();
 
   // Browser storage manager
   const storage = useStorage();
@@ -71,12 +60,7 @@ export const SettingsEditorMigrationModal = (
     try {
       // Ensure text exists on system clipboard
       const data = importRef.current.value;
-      writeSerializedStorage(storage, data);
-
-      // Reload custom animal data and settings to force the map to update
-      onReloadAnimalMarkers();
-      onReloadCustomMarkers();
-      onReloadSettings();
+      await storageUnserializeAsync(storage, data);
 
       // Send tracking event, show notification and close the modal
       sendGoogleEvent('settings_migrate_paste');
@@ -85,14 +69,7 @@ export const SettingsEditorMigrationModal = (
     } catch (e) {
       showNotification(translate('TOOLBOX:MIGRATION_IMPORT_ERROR'), 'error');
     }
-  }, [
-    onClose,
-    onReloadAnimalMarkers,
-    onReloadCustomMarkers,
-    onReloadSettings,
-    storage,
-    translate,
-  ]);
+  }, [onClose, storage, translate]);
 
   /**
    * Handle selecting all text when clicking inside
@@ -108,11 +85,18 @@ export const SettingsEditorMigrationModal = (
   // Load migration data string
   useEffect(() => {
     // Ensure storage and textarea element exist before continuing
-    if (!storage || !exportRef.current) {
+    if (!storage) {
       return;
     }
 
-    exportRef.current.value = readSerializedStore(storage);
+    storageSerializeAsync(storage).then(value => {
+      // Ensure storage and textarea element exist before continuing
+      if (!exportRef.current) {
+        return;
+      }
+
+      exportRef.current.value = value;
+    });
   }, [storage]);
 
   // Load migration data string
@@ -123,7 +107,14 @@ export const SettingsEditorMigrationModal = (
     }
 
     try {
-      exportRef.current.value = readSerializedStore(storage);
+      storageSerializeAsync(storage).then(value => {
+        // Ensure storage and textarea element exist before continuing
+        if (!exportRef.current) {
+          return;
+        }
+
+        exportRef.current.value = value;
+      });
     } catch (e) {
       if (e instanceof Error) {
         exportRef.current.value = e.message;

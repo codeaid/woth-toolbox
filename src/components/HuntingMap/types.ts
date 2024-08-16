@@ -1,11 +1,16 @@
 import type { MapLabelOptions } from 'types/cartography';
+import type { Point } from 'types/generic';
 import type {
-  MarkerOptionsAnimal,
-  MarkerOptionsGeneric,
+  AnimalMarkerRecord,
+  AnimalMarker,
+  GenericMarker,
   MarkerType,
+  CustomMarker,
+  CustomMarkerType,
 } from 'types/markers';
 
 type HuntingMapClickHandler = (x: number, y: number) => void;
+type HuntingMapEditAnimalHandler = (marker?: AnimalMarker) => void;
 
 export interface HuntingMapDragOptions {
   mapLeft: number;
@@ -15,9 +20,12 @@ export interface HuntingMapDragOptions {
 }
 
 export interface HuntingMapProps {
-  animalMarkers: Array<MarkerOptionsAnimal>;
+  animalMarkers: Array<AnimalMarker>;
+  animalRecordMap: Readonly<Record<string, AnimalMarkerRecord>>;
+  customMarkers: Array<CustomMarker>;
   defaultZoomValue?: number;
-  genericMarkers: Array<MarkerOptionsGeneric>;
+  editedAnimal?: AnimalMarker;
+  genericMarkers: Array<GenericMarker>;
   imageHeight?: number;
   imageScale?: number;
   imageSrc: string;
@@ -36,4 +44,8 @@ export interface HuntingMapProps {
   zoomSpeed?: number;
   zoomStep?: number;
   onClick?: HuntingMapClickHandler;
+  onClearTrackingMarkers: () => void;
+  onCreateCustomMarker: (type: CustomMarkerType, coords: Point) => void;
+  onDeleteCustomMarker: (marker: CustomMarker) => void;
+  onEditAnimalMarker: HuntingMapEditAnimalHandler;
 }

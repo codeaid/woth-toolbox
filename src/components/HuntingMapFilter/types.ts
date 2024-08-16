@@ -1,9 +1,5 @@
 import type { MapFilterOptions } from 'types/cartography';
-import type {
-  MarkerOptionsAnimal,
-  MarkerOptionsGeneric,
-  MarkerType,
-} from 'types/markers';
+import type { AnimalMarker, GenericMarker, MarkerType } from 'types/markers';
 
 export type HuntingMapFilterChangeHandler = (options: MapFilterOptions) => void;
 type HuntingMapFilterOptionChangeHandler = (checked: boolean) => void;
@@ -13,8 +9,8 @@ type HuntingMapFilterValueChangeHandler = (
 ) => void;
 
 export interface HuntingMapFilterProps {
-  animalMarkers: Array<MarkerOptionsAnimal>;
-  genericMarkers: Array<MarkerOptionsGeneric>;
+  animalMarkers: Array<AnimalMarker>;
+  genericMarkers: Array<GenericMarker>;
   options: MapFilterOptions;
   onChange: HuntingMapFilterChangeHandler;
 }
