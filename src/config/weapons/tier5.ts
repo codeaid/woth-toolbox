@@ -20,6 +20,15 @@ export default [
     tier: 5,
   },
   {
+    action: 'WEAPON:RIFLE_BOLT_11_CDL_01_ACTION',
+    caliber: 'WEAPON:RIFLE_BOLT_11_CDL_01_CALIBER',
+    description: 'WEAPON:RIFLE_BOLT_11_CDL_01_DESCRIPTION',
+    heading: 'WEAPON:RIFLE_BOLT_11_CDL_01_HEADING',
+    hitEnergy: [4370, 4280, 4200, 4110, 3910],
+    slug: 'remington-700-cdl',
+    tier: 5,
+  },
+  {
     action: 'WEAPON:RIFLE_PUMP_01_ACTION',
     caliber: 'WEAPON:RIFLE_PUMP_01_CALIBER',
     description: 'WEAPON:RIFLE_PUMP_01_DESCRIPTION',

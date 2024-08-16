@@ -64,4 +64,13 @@ export default [
     slug: 'remington-v3-waterfowl-pro',
     tier: 1,
   },
+  {
+    action: 'WEAPON:SHOTGUN_BREAK_01_ACTION',
+    caliber: 'WEAPON:SHOTGUN_BREAK_01_CALIBER',
+    description: 'WEAPON:SHOTGUN_BREAK_01_CUSTOM_01_DESCRIPTION',
+    heading: 'WEAPON:SHOTGUN_BREAK_01_CUSTOM_01_HEADING',
+    hitEnergy: [0, 0, 0, 0, 0],
+    slug: 'wispys-shotgun',
+    tier: 1,
+  },
 ] as Array<Weapon>;
