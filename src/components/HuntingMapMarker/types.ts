@@ -20,10 +20,8 @@ export interface HuntingMapMarkerProps<TMarker extends Marker> {
   highlighted?: boolean;
   marker: TMarker;
   markerSize?: number;
-  mountOnEnter?: boolean;
   style?: CSSProperties;
   title?: string;
-  unmountOnExit?: boolean;
   onClick?: HuntingMapMarkerClickHandler<TMarker>;
   onKeyDown?: HuntingMapMarkerKeyboardEventHandler<TMarker>;
   onLongPress?: HuntingMapMarkerLongPressHandler<TMarker>;

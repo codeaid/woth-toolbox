@@ -2,9 +2,9 @@
 
 .HuntingMapMarker {
   color: #ffffff;
-  display: none;
+  display: block;
   position: absolute;
-  transform: scale(0) translate(-50%, -50%);
+  transform: scale(1) translate(-50%, -50%);
   transition: color 100ms ease-in-out,
     fill 100ms ease-in-out,
     opacity 75ms linear;
@@ -22,33 +22,4 @@
 
 .HuntingMapMarker:hover .Icon {
   transform: scale(1.2);
-}
-
-.HuntingMapMarkerHidden {
-  opacity: 0 !important;
-  transform: scale(0) translate(-50%, -50%) !important;
-}
-
-.HuntingMapMarkerStateEntering {
-  display: block;
-  opacity: 0;
-  transform: scale(0) translate(-50%, -50%);
-}
-
-.HuntingMapMarkerStateEntered {
-  display: block;
-  opacity: 1;
-  transform: scale(1) translate(-50%, -50%);
-}
-
-.HuntingMapMarkerStateExiting {
-  display: block;
-  opacity: 0;
-  transform: scale(1) translate(-50%, -50%);
-}
-
-.HuntingMapMarkerStateExited {
-  display: block;
-  opacity: 0;
-  transform: scale(0) translate(-50%, -50%);
 }

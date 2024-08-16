@@ -215,10 +215,8 @@ export const HuntingMapAnimal = forwardRef(
                 key={zone.id}
                 marker={zone}
                 markerSize={markerSizeZone}
-                mountOnEnter
                 ref={ref}
                 title={`${animalName} : ${zoneName}`}
-                unmountOnExit
               />
             );
           }),

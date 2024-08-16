@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import type { ForwardedRef, MouseEvent, ReactElement, Ref } from 'react';
 import {
   forwardRef,
   useCallback,
@@ -8,10 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { ForwardedRef, MouseEvent, ReactElement, Ref } from 'react';
-import { Transition } from 'react-transition-group';
 import { useRefCallback } from 'hooks';
-import { getTransitionClassName } from 'lib/dom';
 import { getIconComponent } from 'lib/icons';
 import type { Marker, MarkerRef } from 'types/markers';
 import type { HuntingMapMarkerProps } from './types';
@@ -29,10 +27,8 @@ export const HuntingMapMarker = forwardRef(
       highlighted,
       marker,
       markerSize = 35,
-      mountOnEnter = true,
       style,
       title,
-      unmountOnExit = true,
       onClick,
       onKeyDown,
       onLongPress,
@@ -165,46 +161,29 @@ export const HuntingMapMarker = forwardRef(
         });
     }, [handleDocumentKeyDown, marker, onKeyDown]);
 
+    const isVisible = (visible || forceVisible) && !hidden && markerSize > 0;
+    if (!isVisible) {
+      return null;
+    }
+
     return (
-      <Transition
-        in={(forceVisible || visible) && markerSize > 0}
-        mountOnEnter={mountOnEnter}
-        nodeRef={nodeRef}
-        timeout={75}
-        unmountOnExit={unmountOnExit}
-        onEntering={handleUpdatePosition}
+      <div
+        className={clsx(styles.HuntingMapMarker, className)}
+        ref={setMarkerRef}
+        style={style}
+        onDoubleClick={handleDoubleClick}
       >
-        {state => (
-          <div
-            className={clsx(
-              styles.HuntingMapMarker,
-              getTransitionClassName(
-                state,
-                styles.HuntingMapMarkerStateEntering,
-                styles.HuntingMapMarkerStateEntered,
-                styles.HuntingMapMarkerStateExiting,
-                styles.HuntingMapMarkerStateExited,
-              ),
-              { [styles.HuntingMapMarkerHidden]: hidden },
-              className,
-            )}
-            ref={setMarkerRef}
-            style={style}
-            onDoubleClick={handleDoubleClick}
-          >
-            <IconComponent
-              highlighted={highlighted}
-              size={markerSize}
-              title={title}
-              onClick={handleClick}
-              onLongPress={handleLongPress}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            />
-            {children}
-          </div>
-        )}
-      </Transition>
+        <IconComponent
+          highlighted={highlighted}
+          size={markerSize}
+          title={title}
+          onClick={handleClick}
+          onLongPress={handleLongPress}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+        {children}
+      </div>
     );
   },
 ) as <TMarkerOptions extends Marker>(
