@@ -7,6 +7,8 @@
     "build": "next build",
     "companion": "tsx --trace-warnings ./src/scripts/companion",
     "dev": "next dev",
+    "dev:firebase": "firebase emulators:start --project demo-woth-toolbox",
+    "dev:firebase:persist": "dev:firebase --export-on-exit ./.firebase --import ./.firebase",
     "https": "pnpm dlx local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3000",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -16,10 +18,13 @@
   "dependencies": {
     "@next/third-parties": "^14.2.4",
     "@svgr/webpack": "^8.1.0",
+    "@tanstack/react-query": "^5.50.1",
     "clsx": "^2.1.1",
     "color": "^4.2.3",
+    "firebase": "^10.12.3",
     "get-user-locale": "^2.3.2",
     "modern-normalize": "^2.0.0",
+    "nanoid": "^5.0.7",
     "next": "^14.2.4",
     "react": "^18.3.1",
     "react-color": "^2.19.3",
@@ -30,6 +35,7 @@
     "react-toastify": "^10.0.5",
     "react-transition-group": "^4.4.5",
     "sha1": "^1.1.1",
+    "use-debounce": "^10.0.2",
     "use-resize-observer": "^9.1.0"
   },
   "devDependencies": {
