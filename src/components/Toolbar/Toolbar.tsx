@@ -2,8 +2,8 @@
 
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { MouseEvent } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { FaDiscord } from 'react-icons/fa';
 import {
@@ -20,6 +20,7 @@ import {
   baseUrlAfrica,
   baseUrlAlaska,
   baseUrlAnimals,
+  baseUrlFinland,
   baseUrlFirearms,
   baseUrlIdaho,
   baseUrlLifeCycle,
@@ -173,6 +174,10 @@ export const Toolbar = (props: ToolbarProps) => {
         {
           children: translate('POI:MAP_NAME_NEW_ZEALAND'),
           href: baseUrlNewZealand,
+        },
+        {
+          children: translate('POI:MAP_NAME_LINTUKOTO'),
+          href: baseUrlFinland,
         },
       ].map((action, index) => (
         <NavLink
