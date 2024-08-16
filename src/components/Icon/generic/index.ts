@@ -12,3 +12,4 @@ export * from './ShootingRangeIcon';
 export * from './StampIcon';
 export * from './SwingIcon';
 export * from './ViewIcon';
+export * from './WhisperIcon';
