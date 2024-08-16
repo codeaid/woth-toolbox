@@ -9,7 +9,8 @@
 *.pem
 
 # Environment files
-.env*.local
+.env.local
+.env.*.local
 
 # TypeScript
 next-env.d.ts
