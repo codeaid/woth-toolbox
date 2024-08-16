@@ -16,7 +16,8 @@ export type IconTypeGeneric =
   | 'shooting range'
   | 'stamp'
   | 'swing'
-  | 'view';
+  | 'view'
+  | 'whisper';
 
 export type IconTypeMarker =
   | 'marker:exploration'

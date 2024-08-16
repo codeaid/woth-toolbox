@@ -5,6 +5,7 @@ export const mapTypes: Array<MapType> = [
   'africa',
   'alaska',
   'idaho',
+  'lintukoto',
   'new-zealand',
   'transylvania',
 ];

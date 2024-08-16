@@ -11,6 +11,7 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:alaska moose',
   'animal:american badger',
   'animal:american black bear',
+  'animal:arctic fox',
   'animal:barren-ground caribou',
   'animal:bighorn sheep',
   'animal:black wildebeest',
@@ -21,6 +22,8 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:common warthog',
   'animal:egyptian goose',
   'animal:eurasian badger',
+  'animal:eurasian moose',
+  'animal:eurasian wolverine',
   'animal:european hare',
   'animal:european rabbit',
   'animal:fallow deer',
@@ -39,7 +42,9 @@ export const animalMarkerTypes: Array<MarkerTypeAnimal> = [
   'animal:lion',
   'animal:mouflon',
   'animal:mountain goat',
+  'animal:mountain reindeer',
   'animal:mule deer',
+  'animal:northern lynx',
   'animal:pheasant',
   'animal:red deer',
   'animal:red fox',
@@ -85,6 +90,7 @@ export const genericMarkerTypes: Array<MarkerTypeGeneric> = [
   'stamp',
   'swing',
   'view',
+  'whisper',
 ];
 
 // List of marker types that represent need zones
@@ -114,6 +120,7 @@ export const markerVisibilityMap = new Map(
       ['stamp', 0.35],
       ['swing', 0.35],
       ['view', 0.35],
+      ['whisper', 0.35],
       ['zone:drink', 0.65],
       ['zone:eat', 0.65],
       ['zone:sleep', 0.65],

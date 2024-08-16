@@ -44,6 +44,10 @@ export const animalHabitatTranslationMap = new Map<
   ['grasslands and forests', 'POI:AFRICA_HABITAT_GRASSLANDS'],
   ['highland forest', 'POI:IDAHO_HABITAT_04'],
   ['highlands', 'POI:AFRICA_HABITAT_HIGHLANDS'],
+  [
+    'highland forests and grasslands',
+    'POI:LINTUKOTO_HABITAT_HIGHLAND_FORESTS_GRASSLANDS',
+  ],
   ['lowland forest', 'POI:IDAHO_HABITAT_03'],
   ['mountains', 'POI:IDAHO_HABITAT_05'],
   ['rainforest', 'POI:ALASKA_HABITAT_01'],
@@ -106,6 +110,7 @@ export const genericMarkerTranslationMap = new Map<
   ['stamp', 'UI:MARKER_STAMP'],
   ['swing', 'UI:MARKER_SWING'],
   ['view', 'UI:MARKER_VIEW'],
+  ['whisper', 'UI:MARKER_WHISPER_LABEL'],
 ]);
 
 // Map of language codes and their respective locale directories
@@ -135,6 +140,7 @@ export const mapTypeTranslationMap = new Map<MapType, TranslationKey>([
   ['africa', 'POI:MAP_NAME_AFRICA'],
   ['alaska', 'POI:MAP_NAME_ALASKA'],
   ['idaho', 'POI:MAP_NAME_IDAHO'],
+  ['lintukoto', 'POI:MAP_NAME_LINTUKOTO'],
   ['new-zealand', 'POI:MAP_NAME_NEW_ZEALAND'],
   ['transylvania', 'POI:MAP_NAME_TRANSYLVANIA'],
 ]);

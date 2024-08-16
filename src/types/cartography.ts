@@ -2,6 +2,16 @@ import type { Point } from 'types/generic';
 import type { TranslationKey } from 'types/i18n';
 import type { MarkerType } from 'types/markers';
 
+// All available map types
+export const mapIds = [
+  'africa',
+  'alaska',
+  'idaho',
+  'lintukoto',
+  'new-zealand',
+  'transylvania',
+] as const;
+
 export interface MapFilterOptions {
   hideUnedited: boolean;
   showExplorationMarkers: boolean;
@@ -28,12 +38,7 @@ export interface MapOptions {
   mapWidth: number;
 }
 
-export type MapType =
-  | 'africa'
-  | 'alaska'
-  | 'idaho'
-  | 'new-zealand'
-  | 'transylvania';
+export type MapType = (typeof mapIds)[number];
 
 export interface MapZoomOptions {
   zoomMax: number;
