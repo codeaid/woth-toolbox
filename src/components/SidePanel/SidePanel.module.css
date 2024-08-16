@@ -43,6 +43,7 @@
 }
 
 .SidePanelHeader {
+  background-color: var(--elevation1);
   display: flex;
   justify-content: space-between;
   padding: 0.65em;
@@ -50,15 +51,15 @@
 }
 
 .SidePanelHeaderAction {
-  background-color: transparent;
   border-radius: 100%;
-  font-size: 0.7em;
-  padding: 0;
+  height: 2rem;
+  padding: 0.25em;
+  width: 2rem;
 }
 
 .SidePanelHeaderAction:active,
 .SidePanelHeaderAction:hover {
-  background-color: var(--elevation0);
+  background-color: var(--elevation6);
 }
 
 .SidePanelHeaderTitle {

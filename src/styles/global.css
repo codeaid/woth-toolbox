@@ -32,11 +32,6 @@
   --variance-optimal: #208b3a;
   --variance-suboptimal: #f35b04;
 
-  --font-bench-nine: '';
-  --font-fira-sans: '';
-  --font-fira-sans-condensed: '';
-  --font-fira-sans-extra-condensed: '';
-
   --toastify-color-dark: var(--elevation0);
   --toastify-text-color-dark: var(--text-primary);
   --toastify-toast-min-height: 3em;
@@ -80,16 +75,6 @@ ol,
 ul {
   margin: 0;
   padding: 0 0 0 1.8em;
-}
-
-ol:not(:first-child),
-ul:not(:first-child) {
-  margin-top: 0.5em;
-}
-
-ol:not(:last-child),
-ul:not(:last-child) {
-  margin-bottom: 0.5em;
 }
 
 li {

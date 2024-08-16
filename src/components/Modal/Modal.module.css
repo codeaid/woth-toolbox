@@ -32,8 +32,14 @@
 }
 
 .ModalClose {
-    height: 1.2rem;
-    width: 1.2rem;
+    border-radius: 100%;
+    height: 2rem;
+    padding: 0.25em;
+    width: 2rem;
+}
+
+.ModalClose:hover {
+    background-color: var(--elevation6);
 }
 
 .ModalDialog {
@@ -90,7 +96,7 @@
     font-family: var(--font-fira-sans-condensed), sans-serif;
     font-size: 1.4em;
     justify-content: space-between;
-    padding: 1rem 0.75rem;
+    padding: 0.75rem;
     text-transform: uppercase;
     user-select: none;
 }

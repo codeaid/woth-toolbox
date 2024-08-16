@@ -1,5 +1,5 @@
 import type { MouseEvent } from 'react';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { BsEyeFill } from 'react-icons/bs';
 import type { ButtonProps } from 'components/Button';
 import { IconButton } from 'components/IconButton';
@@ -14,10 +14,10 @@ import {
   isGenericMarkerType,
 } from 'lib/markers';
 import type {
-  MarkerType,
   AnimalMarkerType,
   CustomMarkerType,
   GenericMarkerType,
+  MarkerType,
 } from 'types/markers';
 import { HuntingMapFilterItem } from './HuntingMapFilterItem';
 import { HuntingMapFilterOption } from './HuntingMapFilterOption';
@@ -29,10 +29,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
 
   // Flag indicating whether the filter menu is currently visible
   const [menuVisible, setMenuVisible] = useState(false);
-
-  // References to component elements
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLUListElement>(null);
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -211,7 +207,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       types: Array<AnimalMarkerType | CustomMarkerType | GenericMarkerType>,
       iconSize: number,
     ) => (
-      <>
+      <ul className={styles.HuntingMapFilterMenu}>
         {types
           .map(type => ({
             name: translate(getMarkerKey(type)),
@@ -229,7 +225,7 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
               {name}
             </HuntingMapFilterItem>
           ))}
-      </>
+      </ul>
     ),
     [handleTypeChange, options.types, translate],
   );
@@ -256,12 +252,14 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () => (
       <>
         <SectionHeader>{translate('UI:CUSTOM')}</SectionHeader>
-        <HuntingMapFilterOption
-          checked={options.hideUnedited}
-          onChange={handleToggleUneditedMarkers}
-        >
-          {translate('TOOLBOX:HIDE_UNEDITED')}
-        </HuntingMapFilterOption>
+        <ul className={styles.HuntingMapFilterMenu}>
+          <HuntingMapFilterOption
+            checked={options.hideUnedited}
+            onChange={handleToggleUneditedMarkers}
+          >
+            {translate('TOOLBOX:HIDE_UNEDITED')}
+          </HuntingMapFilterOption>
+        </ul>
       </>
     ),
     [handleToggleUneditedMarkers, options.hideUnedited, translate],
@@ -289,30 +287,32 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
     () => (
       <>
         <SectionHeader>{translate('UI:OTHER')}</SectionHeader>
-        <HuntingMapFilterItem
-          iconSize={20}
-          selected={options.showLabels}
-          type="marker:level area"
-          onChange={handleToggleLabels}
-        >
-          {translate('UI:MARKER_LABELS')}
-        </HuntingMapFilterItem>
-        <HuntingMapFilterItem
-          iconSize={20}
-          selected={options.showExplorationMarkers}
-          type="marker:exploration"
-          onChange={handleToggleExplorationMarkers}
-        >
-          {translate('UI:MARKER_EXPLORATION')}
-        </HuntingMapFilterItem>
-        <HuntingMapFilterItem
-          iconSize={20}
-          selected={options.showTrackingMarkers}
-          type="marker:tracking"
-          onChange={handleToggleTrackingMarkers}
-        >
-          {translate('UI:MARKER_TRACKING')}
-        </HuntingMapFilterItem>
+        <ul className={styles.HuntingMapFilterMenu}>
+          <HuntingMapFilterItem
+            iconSize={20}
+            selected={options.showLabels}
+            type="marker:level area"
+            onChange={handleToggleLabels}
+          >
+            {translate('UI:MARKER_LABELS')}
+          </HuntingMapFilterItem>
+          <HuntingMapFilterItem
+            iconSize={20}
+            selected={options.showExplorationMarkers}
+            type="marker:exploration"
+            onChange={handleToggleExplorationMarkers}
+          >
+            {translate('UI:MARKER_EXPLORATION')}
+          </HuntingMapFilterItem>
+          <HuntingMapFilterItem
+            iconSize={20}
+            selected={options.showTrackingMarkers}
+            type="marker:tracking"
+            onChange={handleToggleTrackingMarkers}
+          >
+            {translate('UI:MARKER_TRACKING')}
+          </HuntingMapFilterItem>
+        </ul>
       </>
     ),
     [
@@ -344,7 +344,6 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
       <IconButton
         className={styles.HuntingMapFilterToggle}
         highlighted={hasSelectedFilters(options)}
-        ref={buttonRef}
         onClick={handleToggleVisibility}
       >
         <BsEyeFill />
@@ -359,12 +358,10 @@ export const HuntingMapFilter = (props: HuntingMapFilterProps) => {
         visible={menuVisible}
         onClose={handleClose}
       >
-        <ul className={styles.HuntingMapFilterMenu} ref={menuRef}>
-          {renderedGenericOptions}
-          {renderedAnimalOptions}
-          {renderedOtherOptions}
-          {renderedCustomOptions}
-        </ul>
+        {renderedGenericOptions}
+        {renderedAnimalOptions}
+        {renderedOtherOptions}
+        {renderedCustomOptions}
       </SidePanel>
     </>
   );
