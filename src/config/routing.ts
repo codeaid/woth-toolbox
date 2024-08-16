@@ -1,14 +1,14 @@
 // Base URL values for all base pages
-import { baseUrl } from 'config/app';
+import { basePath } from 'config/app';
 
-export const baseUrlAnimals = baseUrl + '/animals';
-export const baseUrlFirearms = baseUrl + '/firearms';
-export const baseUrlLifeCycle = baseUrl + '/life-cycle';
+export const baseUrlAnimals = basePath + '/animals';
+export const baseUrlFirearms = basePath + '/firearms';
+export const baseUrlLifeCycle = basePath + '/life-cycle';
 
 // Base URL values for all map pages
-export const baseUrlAfrica = baseUrl + '/africa';
-export const baseUrlAlaska = baseUrl + '/alaska';
-export const baseUrlFinland = baseUrl + '/lintukoto';
-export const baseUrlIdaho = baseUrl + '/nez-perce-valley';
-export const baseUrlNewZealand = baseUrl + '/new-zealand';
-export const baseUrlTransylvania = baseUrl + '/transylvania';
+export const baseUrlAfrica = basePath + '/africa';
+export const baseUrlAlaska = basePath + '/alaska';
+export const baseUrlFinland = basePath + '/lintukoto';
+export const baseUrlIdaho = basePath + '/nez-perce-valley';
+export const baseUrlNewZealand = basePath + '/new-zealand';
+export const baseUrlTransylvania = basePath + '/transylvania';
