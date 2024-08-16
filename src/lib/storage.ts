@@ -1,3 +1,4 @@
+import { explorationMarkerId } from 'config/markers';
 import {
   animalMarkerKey,
   customMarkerKey,
@@ -144,7 +145,11 @@ export const storageReadCustomMarkerListAsync = async (
     return [];
   }
 
-  return JSON.parse(json) as CustomMarker[];
+  return (JSON.parse(json) as CustomMarker[]).map(marker =>
+    marker.type === 'marker:exploration'
+      ? { ...marker, id: explorationMarkerId }
+      : marker,
+  );
 };
 
 /**

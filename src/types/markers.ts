@@ -1,4 +1,5 @@
 import type { RefObject } from 'react';
+import type { explorationMarkerId } from 'config/markers';
 import type { AnimalSpecimen } from 'types/animals';
 import type { Point } from 'types/generic';
 import type {
@@ -29,6 +30,7 @@ export type AnimalMarker = Marker<AnimalMarkerType> & {
 
 // Type describing a custom map marker object
 export type CustomMarker = Marker<CustomMarkerType>;
+export type ExplorationMarkerId = typeof explorationMarkerId;
 
 // Type describing a generic map marker object
 export type GenericMarker = Marker<GenericMarkerType>;

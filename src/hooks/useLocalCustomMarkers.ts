@@ -2,14 +2,13 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { maxTrackingMarkerCount } from 'config/markers';
-import { getCoordinateHash, hasSameCoordinates } from 'lib/markers';
+import { hasSameCoordinates } from 'lib/markers';
 import {
   storageReadCustomMarkerListAsync,
   storageWriteCustomMarkerListAsync,
 } from 'lib/storage';
 import type { MapId } from 'types/cartography';
-import type { Point } from 'types/generic';
-import type { CustomMarker, CustomMarkerType } from 'types/markers';
+import type { CustomMarker } from 'types/markers';
 import { useStorage } from './useStorage';
 
 /**
@@ -41,15 +40,9 @@ export const useLocalCustomMarkers = (mapId: MapId) => {
    * @param coords Target marker coordinates
    */
   const handleCreateExplorationAsync = useCallback(
-    async (coords: Point) =>
+    async (marker: CustomMarker) =>
       setMarkers(current =>
-        current
-          .filter(marker => marker.type !== 'marker:exploration')
-          .concat({
-            coords,
-            id: getCoordinateHash(coords),
-            type: 'marker:exploration',
-          }),
+        current.filter(item => item.type !== marker.type).concat(marker),
       ),
     [],
   );
@@ -60,15 +53,11 @@ export const useLocalCustomMarkers = (mapId: MapId) => {
    * @param coords Target marker coordinates
    */
   const handleCreateTrackingAsync = useCallback(
-    async (coords: Point) =>
+    async (marker: CustomMarker) =>
       setMarkers(current =>
         current
-          .filter(marker => !hasSameCoordinates(marker, coords))
-          .concat({
-            coords,
-            id: getCoordinateHash(coords),
-            type: 'marker:tracking',
-          })
+          .filter(item => !hasSameCoordinates(item, marker.coords))
+          .concat(marker)
           .slice(-maxTrackingMarkerCount),
       ),
     [],
@@ -78,11 +67,11 @@ export const useLocalCustomMarkers = (mapId: MapId) => {
    * Handle creating a new custom marker
    */
   const handleCreateCustomAsync = useCallback(
-    async (type: CustomMarkerType, coords: Point) => {
-      if (type === 'marker:exploration') {
-        await handleCreateExplorationAsync(coords);
-      } else if (type === 'marker:tracking') {
-        await handleCreateTrackingAsync(coords);
+    async (marker: CustomMarker) => {
+      if (marker.type === 'marker:exploration') {
+        await handleCreateExplorationAsync(marker);
+      } else if (marker.type === 'marker:tracking') {
+        await handleCreateTrackingAsync(marker);
       }
     },
     [handleCreateExplorationAsync, handleCreateTrackingAsync],

@@ -1,8 +1,8 @@
 import { signInAnonymously } from 'firebase/auth';
-import type { DocumentSnapshot } from 'firebase/firestore';
 import type {
   CollectionReference,
   DocumentReference,
+  DocumentSnapshot,
 } from 'firebase/firestore';
 import {
   collection,
@@ -14,8 +14,9 @@ import {
   Timestamp,
   writeBatch,
 } from 'firebase/firestore';
+import { explorationMarkerId } from 'config/markers';
 import { getConfigValueAsync, setConfigValueAsync } from 'lib/db';
-import { getCoordinateHash, isEmptyAnimalMarker } from 'lib/markers';
+import { isEmptyAnimalMarker } from 'lib/markers';
 import { validateUserId } from 'lib/persistence';
 import { firebaseAuth, firestore } from 'lib/services';
 import {
@@ -28,11 +29,9 @@ import { mapIds } from 'types/cartography';
 import type {
   AnimalMarkerDocument,
   CustomMarkerDocument,
-  CustomMarkerDocumentEntryId,
   UserSettingsDocument,
 } from 'types/firestore';
-import type { Point } from 'types/generic';
-import type { AnimalMarkerRecord, CustomMarkerType } from 'types/markers';
+import type { AnimalMarkerRecord, CustomMarker } from 'types/markers';
 import type { UserSettingsKey, UserSettingsTypeMap } from 'types/settings';
 import { userSettingsKeysPermanent } from 'types/settings';
 
@@ -216,14 +215,10 @@ const firestoreMigrateCustomMarkersAsync = async (
       continue;
     }
 
-    const document = markers.reduce<CustomMarkerDocument>((acc, marker) => {
-      const id: CustomMarkerDocumentEntryId =
-        marker.type === 'marker:exploration'
-          ? 'exploration'
-          : getCoordinateHash(marker.coords);
-
-      return { ...acc, [id]: marker.coords };
-    }, {} as CustomMarkerDocument);
+    const document = markers.reduce<CustomMarkerDocument>(
+      (acc, marker) => ({ ...acc, [marker.id]: marker.coords }),
+      {} as CustomMarkerDocument,
+    );
 
     const docRef = firestoreCreateCustomMarkerRef(userId, mapId);
     await setDoc(docRef, document);
@@ -265,23 +260,18 @@ const firestoreMigrateSettingsAsync = async (
  *
  * @param userId Current user identifier
  * @param mapId Target map identifier
- * @param type Marker type
- * @param coords Marker coordinates
+ * @param marker Marker to create
  */
 export const firestoreCreateCustomMarkerAsync = async (
   userId: string,
   mapId: MapId,
-  type: CustomMarkerType,
-  coords: Point,
+  marker: CustomMarker,
 ) => {
   const docRef = firestoreCreateCustomMarkerRef(userId, mapId);
   const snapshot = await getDoc(docRef);
   const data = snapshot.data() ?? {};
 
-  const id: CustomMarkerDocumentEntryId =
-    type === 'marker:exploration' ? 'exploration' : getCoordinateHash(coords);
-
-  await setDoc(docRef, { ...data, [id]: coords });
+  await setDoc(docRef, { ...data, [marker.id]: marker.coords });
 };
 
 /**
@@ -324,8 +314,8 @@ export const firestoreClearTrackingMarkersAsync = async (
   const snapshot = await getDoc(docRef);
   const data = snapshot.data() ?? {};
 
-  if ('exploration' in data) {
-    await setDoc(docRef, { exploration: data.exploration });
+  if (explorationMarkerId in data) {
+    await setDoc(docRef, { [explorationMarkerId]: data.exploration });
   } else {
     await deleteDoc(docRef);
   }

@@ -74,6 +74,8 @@ export const customMarkerTypes: Array<CustomMarkerType> = [
   'marker:tracking',
 ];
 
+export const explorationMarkerId = 'exploration' as const;
+
 // List of marker types that represent generic markers
 export const genericMarkerTypes: Array<GenericMarkerType> = [
   'cabin',
@@ -128,4 +130,4 @@ export const markerVisibilityMap = new Map(
 );
 
 // Maximum number of tracking markers that can exist on the map
-export const maxTrackingMarkerCount = 1000;
+export const maxTrackingMarkerCount = 500;
