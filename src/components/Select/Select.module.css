@@ -14,14 +14,14 @@
 
 .SelectInput {
   align-items: center;
-  background-color: var(--elevation5);
+  background-color: var(--elevation4);
   border: thin solid var(--elevation6);
   border-radius: 0.25em;
   color: var(--text-primary);
   cursor: pointer;
   display: flex;
   outline: none;
-  padding: 0.5em;
+  padding: 0.75em;
   position: relative;
   transition: border-color 150ms ease-in-out;
   user-select: none;
@@ -57,9 +57,9 @@
 }
 
 .SelectOptionItem {
-  border-bottom: thin solid var(--elevation5);
+  border-bottom: thin solid var(--elevation4);
   cursor: pointer;
-  padding: 0.5em;
+  padding: 0.75em;
   transition: background-color 100ms ease-in-out;
 }
 
@@ -72,14 +72,14 @@
 }
 
 .SelectOptionList {
-  background-color: var(--elevation3);
+  background-color: var(--elevation4);
   border: thin solid var(--highlight);
   border-top: none;
   border-bottom-left-radius: 0.25em;
   border-bottom-right-radius: 0.25em;
   box-shadow: var(--shadow);
   color: var(--text-primary);
-  max-height: 14.3em;
+  max-height: 15.3em;
   outline: none;
   overflow-y: auto;
   position: absolute;
