@@ -6,7 +6,6 @@ import type {
 } from 'react';
 import {
   createRef,
-  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -60,9 +59,6 @@ import type {
 } from 'types/markers';
 import type { HuntingMapDragOptions, HuntingMapProps } from './types';
 import styles from './HuntingMap.module.css';
-
-const HuntingMapAnimalMemo = memo(HuntingMapAnimal);
-const HuntingMapMarkerMemo = memo(HuntingMapMarker);
 
 export const HuntingMap = (props: HuntingMapProps) => {
   const {
@@ -741,7 +737,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         animalMarkerRefs.current.push({ marker, ref });
 
         return (
-          <HuntingMapAnimalMemo
+          <HuntingMapAnimal
             key={marker.id}
             marker={marker}
             markerSize={markerSizeAnimal}
@@ -779,7 +775,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
         genericMarkerRefs.current.push({ marker, ref });
 
         return (
-          <HuntingMapMarkerMemo
+          <HuntingMapMarker
             className={getGenericMarkerColorClass(
               marker,
               styles.HuntingMapMarkerGeneric,
