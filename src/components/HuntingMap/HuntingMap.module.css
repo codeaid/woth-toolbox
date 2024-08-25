@@ -23,17 +23,17 @@
 }
 
 .HuntingMapMarkerCustom {
-  z-index: 6;
+  z-index: 6 !important;
 }
 
 .HuntingMapMarkerGeneric {
-  color: var(--marker-generic);
+  color: var(--marker-generic) !important;
 }
 
 .HuntingMapMarkerLandmark {
-  color: var(--marker-landmark);
+  color: var(--marker-landmark) !important;
 }
 
 .HuntingMapMarkerLodge {
-  color: var(--marker-lodge);
+  color: var(--marker-lodge) !important;
 }
