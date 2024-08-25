@@ -65,5 +65,8 @@
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2"
+  },
+  "resolutions": {
+    "micromatch": "^4.0.8"
   }
 }
