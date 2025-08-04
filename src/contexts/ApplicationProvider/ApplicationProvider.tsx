@@ -6,7 +6,6 @@ import { StrictMode } from 'react';
 import { App } from 'components/App';
 import { Notifications } from 'components/Notifications';
 import {
-  FirebaseProvider,
   HuntingMapTypeProvider,
   SettingsProvider,
   TutorialProvider,
@@ -23,16 +22,14 @@ export const ApplicationProvider = (props: PropsWithChildren) => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <FirebaseProvider>
-          <SettingsProvider>
-            <TutorialProvider>
-              <HuntingMapTypeProvider value={mapTypeManager}>
-                <Notifications />
-                <App>{children}</App>
-              </HuntingMapTypeProvider>
-            </TutorialProvider>
-          </SettingsProvider>
-        </FirebaseProvider>
+        <SettingsProvider>
+          <TutorialProvider>
+            <HuntingMapTypeProvider value={mapTypeManager}>
+              <Notifications />
+              <App>{children}</App>
+            </HuntingMapTypeProvider>
+          </TutorialProvider>
+        </SettingsProvider>
       </QueryClientProvider>
     </StrictMode>
   );

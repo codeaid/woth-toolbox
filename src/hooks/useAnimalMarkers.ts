@@ -3,7 +3,6 @@
 import { useCallback } from 'react';
 import type { MapId } from 'types/cartography';
 import type { AnimalMarkerRecord } from 'types/markers';
-import { useFirestoreAnimalMarkers } from './useFirestoreAnimalMarkers';
 import { useLocalAnimalMarkers } from './useLocalAnimalMarkers';
 
 /**
@@ -16,12 +15,6 @@ export const useAnimalMarkers = (mapId: MapId) => {
     onDeleteRecordAsync: onDeleteLocalRecordAsync,
     onUpdateRecordAsync: onUpdateLocalRecordAsync,
   } = useLocalAnimalMarkers(mapId);
-
-  const {
-    onCreateRecordAsync: onCreateFirestoreRecordAsync,
-    onDeleteRecordAsync: onDeleteFirestoreRecordAsync,
-    onUpdateRecordAsync: onUpdateFirestoreRecordAsync,
-  } = useFirestoreAnimalMarkers(mapId);
 
   /**
    * Handle creating a new animal marker record
@@ -37,9 +30,8 @@ export const useAnimalMarkers = (mapId: MapId) => {
 
       // Create marker record on the server
       await onCreateLocalRecordAsync(patch);
-      await onCreateFirestoreRecordAsync(patch);
     },
-    [onCreateFirestoreRecordAsync, onCreateLocalRecordAsync],
+    [onCreateLocalRecordAsync],
   );
 
   /**
@@ -63,9 +55,8 @@ export const useAnimalMarkers = (mapId: MapId) => {
 
       // Update marker record on the server
       await onUpdateLocalRecordAsync(patch);
-      await onUpdateFirestoreRecordAsync(patch);
     },
-    [onUpdateFirestoreRecordAsync, onUpdateLocalRecordAsync],
+    [onUpdateLocalRecordAsync],
   );
 
   /**
@@ -75,9 +66,8 @@ export const useAnimalMarkers = (mapId: MapId) => {
     async (record: AnimalMarkerRecord) => {
       // Delete marker record from the server
       await onDeleteLocalRecordAsync(record);
-      await onDeleteFirestoreRecordAsync(record);
     },
-    [onDeleteFirestoreRecordAsync, onDeleteLocalRecordAsync],
+    [onDeleteLocalRecordAsync],
   );
 
   return {

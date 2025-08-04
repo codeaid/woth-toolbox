@@ -6,7 +6,6 @@ import { getCoordinateHash } from 'lib/markers';
 import type { MapId } from 'types/cartography';
 import type { Point } from 'types/generic';
 import type { CustomMarker, CustomMarkerType } from 'types/markers';
-import { useFirestoreCustomMarkers } from './useFirestoreCustomMarkers';
 import { useLocalCustomMarkers } from './useLocalCustomMarkers';
 
 export const useCustomMarkers = (mapId: MapId) => {
@@ -17,19 +16,12 @@ export const useCustomMarkers = (mapId: MapId) => {
     onDeleteCustomMarkerAsync: onDeleteLocalCustomMarkerAsync,
   } = useLocalCustomMarkers(mapId);
 
-  const {
-    onClearTrackingMarkersAsync: onClearFirestoreTrackingMarkersAsync,
-    onCreateCustomMarkerAsync: onCreateFirestoreCustomMarkerAsync,
-    onDeleteCustomMarkerAsync: onDeleteFirestoreCustomMarkerAsync,
-  } = useFirestoreCustomMarkers(mapId);
-
   /**
    * Handle clearing all tracking markers
    */
   const handleClearTrackingAsync = useCallback(async () => {
-    await onClearFirestoreTrackingMarkersAsync();
     await onClearLocalTrackingMarkersAsync();
-  }, [onClearFirestoreTrackingMarkersAsync, onClearLocalTrackingMarkersAsync]);
+  }, [onClearLocalTrackingMarkersAsync]);
 
   /**
    * Handle creating a new custom marker
@@ -45,10 +37,9 @@ export const useCustomMarkers = (mapId: MapId) => {
         type,
       };
 
-      await onCreateFirestoreCustomMarkerAsync(marker);
       await onCreateLocalCustomMarkerAsync(marker);
     },
-    [onCreateFirestoreCustomMarkerAsync, onCreateLocalCustomMarkerAsync],
+    [onCreateLocalCustomMarkerAsync],
   );
 
   /**
@@ -56,10 +47,9 @@ export const useCustomMarkers = (mapId: MapId) => {
    */
   const handleDeleteCustomAsync = useCallback(
     async (marker: CustomMarker) => {
-      await onDeleteFirestoreCustomMarkerAsync(marker);
       await onDeleteLocalCustomMarkerAsync(marker);
     },
-    [onDeleteFirestoreCustomMarkerAsync, onDeleteLocalCustomMarkerAsync],
+    [onDeleteLocalCustomMarkerAsync],
   );
 
   return {

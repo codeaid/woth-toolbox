@@ -3,7 +3,7 @@
 import type { PropsWithChildren } from 'react';
 import { useCallback } from 'react';
 import { LoadingOverlay } from 'components/LoadingOverlay';
-import { useFirestoreSettings, useLocalSettings } from 'hooks';
+import { useLocalSettings } from 'hooks';
 import { sendGoogleEvent } from 'lib/tracking';
 import type { UserSettingsKey, UserSettingsTypeMap } from 'types/settings';
 import { SettingsContext } from './SettingsContext';
@@ -18,11 +18,6 @@ export const SettingsProvider = (props: PropsWithChildren) => {
     onSettingsUpdateAsync: onLocalSettingsUpdateAsync,
   } = useLocalSettings();
 
-  const {
-    onSettingsClearAsync: onFirestoreSettingsClearAsync,
-    onSettingsUpdateAsync: onFirestoreSettingsUpdateAsync,
-  } = useFirestoreSettings();
-
   /**
    * Update value of the specified configuration key
    */
@@ -32,7 +27,6 @@ export const SettingsProvider = (props: PropsWithChildren) => {
       value?: UserSettingsTypeMap[TKey],
     ) => {
       await onLocalSettingsUpdateAsync(key, value);
-      await onFirestoreSettingsUpdateAsync(key, value);
 
       // Send Google tracking event
       switch (key) {
@@ -48,7 +42,7 @@ export const SettingsProvider = (props: PropsWithChildren) => {
           return sendGoogleEvent('settings_markers_need_zone', { value });
       }
     },
-    [onFirestoreSettingsUpdateAsync, onLocalSettingsUpdateAsync],
+    [onLocalSettingsUpdateAsync],
   );
 
   /**
@@ -62,14 +56,6 @@ export const SettingsProvider = (props: PropsWithChildren) => {
     [onSettingsRead],
   );
 
-  /**
-   * Handle clearing all stored settings
-   */
-  const handleClearAsync = useCallback(async () => {
-    await onLocalSettingsClearAsync();
-    await onFirestoreSettingsClearAsync();
-  }, [onFirestoreSettingsClearAsync, onLocalSettingsClearAsync]);
-
   if (!initialized) {
     return <LoadingOverlay />;
   }
@@ -77,7 +63,7 @@ export const SettingsProvider = (props: PropsWithChildren) => {
   return (
     <SettingsContext.Provider
       value={{
-        onSettingsClearAsync: handleClearAsync,
+        onSettingsClearAsync: onLocalSettingsClearAsync,
         onSettingsRead: handleGetValue,
         onSettingsUpdateAsync: handleUpdateAsync,
       }}
