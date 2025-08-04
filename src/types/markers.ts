@@ -99,7 +99,7 @@ export type MarkerReference<
   TMarkerRef extends MarkerRef = MarkerRef,
 > = {
   marker: TMarkerOptions;
-  ref: RefObject<TMarkerRef>;
+  ref: RefObject<TMarkerRef | null>;
 };
 
 // Type describing an object that contains animal marker options

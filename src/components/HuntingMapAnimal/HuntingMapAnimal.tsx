@@ -52,7 +52,7 @@ export const HuntingMapAnimal = forwardRef(
     const pageCoords = useRef<[number, number]>([-1, -1]);
 
     // References to all need zone icons
-    const zoneRefs = useRef<Array<RefObject<MarkerRef>>>([]);
+    const zoneRefs = useRef<Array<RefObject<MarkerRef | null>>>([]);
 
     // Custom data associated with the marker
     const [data, setData] = useState<AnimalMarkerRecord>();

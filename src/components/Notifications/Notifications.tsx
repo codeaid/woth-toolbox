@@ -4,7 +4,7 @@ import styles from './Notifications.module.css';
 export const Notifications = () => (
   <ToastContainer
     autoClose={3000}
-    bodyClassName={styles.NotificationsBody}
+    className={styles.NotificationsBody}
     closeButton={false}
     closeOnClick
     draggable={false}

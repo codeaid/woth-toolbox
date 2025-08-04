@@ -487,8 +487,8 @@ export const HuntingMap = (props: HuntingMapProps) => {
         const [mouseRatioX, mouseRatioY] = getMapMouseOffsetRatio(
           event.pageX,
           event.pageY,
-          containerRef.current,
-          imageRef.current,
+          container,
+          image,
           mapOptions.current,
         );
 
@@ -704,7 +704,7 @@ export const HuntingMap = (props: HuntingMapProps) => {
 
   // Monitor changes to wrapper size and update canvas size accordingly
   useResizeObserver<HTMLDivElement>({
-    ref: containerRef,
+    ref: containerRef.current,
     onResize: handleContainerResize,
   });
 

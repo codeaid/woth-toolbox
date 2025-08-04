@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { forwardRef, useCallback, useMemo, useRef } from 'react';
 import type { ForwardedRef, TouchEvent } from 'react';
@@ -19,7 +21,7 @@ export const Icon = forwardRef(
     } = props;
 
     // Long press timeout handle
-    const longPressHandle = useRef<NodeJS.Timeout>();
+    const longPressHandle = useRef(0);
 
     // Generate component class name
     const iconClassName = useMemo(
@@ -31,7 +33,7 @@ export const Icon = forwardRef(
      * Cancel long press timer if set
      */
     const handleTouchEnd = useCallback(
-      () => clearTimeout(longPressHandle.current),
+      () => window.clearTimeout(longPressHandle.current),
       [],
     );
 
@@ -44,7 +46,7 @@ export const Icon = forwardRef(
           return;
         }
 
-        longPressHandle.current = setTimeout(
+        longPressHandle.current = window.setTimeout(
           () => onLongPress(event),
           longPressMs,
         );

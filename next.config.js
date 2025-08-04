@@ -26,7 +26,6 @@ const config = {
   },
   output: 'export',
   reactStrictMode: true,
-  swcMinify: true,
   trailingSlash: false,
   webpack: (config, { dev }) => {
     const rules = config.module.rules
