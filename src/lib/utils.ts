@@ -140,11 +140,6 @@ export const hasListValue = <TValue>(value: TValue, list?: Array<TValue>) =>
   !list || !list.length || list.includes(value);
 
 /**
- * Check if application is running in development mode
- */
-export const isDevelopmentMode = () => process.env.NODE_ENV === 'development';
-
-/**
  * Round number to the specified number of decimal places
  *
  * @param value Value to round
