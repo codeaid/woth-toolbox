@@ -24,7 +24,7 @@
     "get-user-locale": "^3.0.0",
     "modern-normalize": "^3.0.1",
     "nanoid": "^5.1.5",
-    "next": "^15.4.5",
+    "next": "^15.5.4",
     "react": "^19.1.1",
     "react-color": "^2.19.3",
     "react-dom": "^19.1.1",
