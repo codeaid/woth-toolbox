@@ -1,3 +1,5 @@
+import { CommonElandIcon } from 'components/Icon/animals/CommonElandIcon';
+
 export * from './AlaskaMooseIcon';
 export * from './AmericanBadgerIcon';
 export * from './AmericanBlackBearIcon';
@@ -9,6 +11,7 @@ export * from './BlueWildebeestIcon';
 export * from './BrownBearIcon';
 export * from './CapeBuffaloIcon';
 export * from './ChamoisIcon';
+export * from './CommonElandIcon';
 export * from './CommonWarthogIcon';
 export * from './EgyptianGooseIcon';
 export * from './EurasianBadgerIcon';

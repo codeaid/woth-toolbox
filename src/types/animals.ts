@@ -57,6 +57,7 @@ export type AnimalType =
   | 'animal:brown bear'
   | 'animal:cape buffalo'
   | 'animal:chamois'
+  | 'animal:common eland'
   | 'animal:common warthog'
   | 'animal:egyptian goose'
   | 'animal:eurasian badger'

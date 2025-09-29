@@ -20,6 +20,7 @@ export const iconComponentMap = new Map<
   ['animal:brown bear', icons.BrownBearIcon],
   ['animal:cape buffalo', icons.CapeBuffaloIcon],
   ['animal:chamois', icons.ChamoisIcon],
+  ['animal:common eland', icons.CommonElandIcon],
   ['animal:common warthog', icons.CommonWarthogIcon],
   ['animal:egyptian goose', icons.EgyptianGooseIcon],
   ['animal:eurasian badger', icons.EurasianBadgerIcon],
