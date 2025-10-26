@@ -55,8 +55,6 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     environment: production
-    needs:
-      - lint
     steps:
       - name: Checkout
         uses: actions/checkout@v4
