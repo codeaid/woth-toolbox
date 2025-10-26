@@ -11,6 +11,7 @@ import {
   metadataBase,
 } from 'config/app';
 import { ApplicationProvider } from 'contexts';
+import { DiscordAuth } from 'components/DiscordAuth';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
@@ -45,6 +46,7 @@ const RootLayout = (props: PropsWithChildren) => (
   >
     <body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
+      <DiscordAuth />
       <ApplicationProvider>{props.children}</ApplicationProvider>
     </body>
   </html>
