@@ -2,8 +2,8 @@
 
 import { HerdMapOverlay } from 'components/HerdMapOverlay';
 import { HuntingMapPage } from 'components/HuntingMapPage';
-import { animalMarkers, genericMarkers, mapLabels } from 'config/idaho'
-import { isUserLoggedIn } from 'services/discordApiService'
+import { animalMarkers, genericMarkers, mapLabels } from 'config/idaho';
+import { isUserLoggedIn } from 'services/discordApiService';
 const NezPerceValleyPage = () => (
   <>
     <HuntingMapPage
