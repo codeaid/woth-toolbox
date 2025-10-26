@@ -1,5 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import clsx from 'clsx';
+import { DiscordAuth } from 'components/DiscordAuth';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 import {
@@ -11,7 +12,6 @@ import {
   metadataBase,
 } from 'config/app';
 import { ApplicationProvider } from 'contexts';
-import { DiscordAuth } from 'components/DiscordAuth';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
