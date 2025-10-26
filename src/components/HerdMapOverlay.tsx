@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { HerdsResponse, TrackedAnimal, Herd } from '../services/discordApiService';
 import {
     fetchUserHerds,
     fetchHerdAnimals,
-    calculateCullingRecommendation
+    calculateCullingRecommendation,
+    type HerdsResponse,
+    type TrackedAnimal,
+    type Herd
 } from '../services/discordApiService';
-
 interface HerdMapOverlayProps {
   currentMap?: string;
   onHerdsLoaded?: (herds: Herd[]) => void;
