@@ -1,7 +1,7 @@
 'use client';
 
-import { HuntingMapPage } from 'components/HuntingMapPage';
-import { HerdMapOverlay } from 'components/HerdMapOverlay';
+import { HerdMapOverlay } from 'components/HerdMapOverlay'
+import { HuntingMapPage } from 'components/HuntingMapPage'
 import { isUserLoggedIn } from 'services/discordApiService';
 import { animalMarkers, genericMarkers, mapLabels } from 'config/idaho';
 
