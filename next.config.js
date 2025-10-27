@@ -42,28 +42,16 @@ const config = {
 
     // Don't change names in development mode
     if (dev) {
-      return config;
-    }
+          return config;
+  }  // Closes webpack - NO COMMA
+};  // Closes main config object
 
-    rules.forEach(rule => {
-      rule.use.forEach(moduleLoader => {
-        if (
-          moduleLoader.loader?.includes('css-loader') &&
-          !moduleLoader.loader?.includes('postcss-loader')
-        )
-          moduleLoader.options.getLocalIdent = getLocalIdentHash;
-      });
-    });
-
-    return config;
-    },  // Line 60 - this stays
-
-// Add these NEW lines here:
+// Remove experimental.images
 if (config.experimental?.images) {
   delete config.experimental.images;
   if (!Object.keys(config.experimental).length) {
     delete config.experimental;
   }
-};
+}
 
 module.exports = config;
