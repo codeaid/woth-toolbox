@@ -25,10 +25,9 @@ const config = {
     ignoreDuringBuilds: true,
   },
   output: 'export',
-  images: { unoptimized: true },  // ADD THIS LINE
+  images: { unoptimized: true },
   reactStrictMode: true,
   trailingSlash: false,
-  // ... rest of the config
   webpack: (config, { dev }) => {
     const rules = config.module.rules
       .find(rule => typeof rule.oneOf === 'object')
@@ -42,8 +41,24 @@ const config = {
 
     // Don't change names in development mode
     if (dev) {
-          return config;
-  // Remove unsupported experimental.images for Next.js 15
+      return config;
+    }
+
+    rules.forEach(rule => {
+      rule.use.forEach(moduleLoader => {
+        if (
+          moduleLoader.loader?.includes('css-loader') &&
+          !moduleLoader.loader?.includes('postcss-loader')
+        )
+          moduleLoader.options.getLocalIdent = getLocalIdentHash;
+      });
+    });
+
+    return config;
+  }
+};
+
+// Remove unsupported experimental.images for Next.js 15
 if (config.experimental?.images) {
   delete config.experimental.images;
   if (Object.keys(config.experimental).length === 0) {
@@ -52,4 +67,3 @@ if (config.experimental?.images) {
 }
 
 module.exports = config;
-
