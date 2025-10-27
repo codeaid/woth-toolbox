@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-// Clean up experimental.images if it exists
 const nextConfig = {
-  basePath: '/woth-toolbox',
-  assetPrefix: '/woth-toolbox/',
   output: 'export',
   trailingSlash: true,
   eslint: {
