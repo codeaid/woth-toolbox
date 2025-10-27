@@ -56,7 +56,7 @@ const config = {
     });
 
     return config;
-    };  // Line 60 - this stays
+    },  // Line 60 - this stays
 
 // Add these NEW lines here:
 if (config.experimental?.images) {
@@ -64,6 +64,6 @@ if (config.experimental?.images) {
   if (!Object.keys(config.experimental).length) {
     delete config.experimental;
   }
-}
+};
 
 module.exports = config;
