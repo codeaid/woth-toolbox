@@ -25,8 +25,10 @@ const config = {
     ignoreDuringBuilds: true,
   },
   output: 'export',
+  images: { unoptimized: true },  // ADD THIS LINE
   reactStrictMode: true,
   trailingSlash: false,
+  // ... rest of the config
   webpack: (config, { dev }) => {
     const rules = config.module.rules
       .find(rule => typeof rule.oneOf === 'object')
