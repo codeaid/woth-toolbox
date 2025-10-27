@@ -4,16 +4,11 @@ import { Suspense, useEffect, useState } from 'react';
 import { DiscordAuth } from 'components/DiscordAuth';
 
 const NotFoundPage = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    // Mark that we're now on the client side
-    setIsClient(true);
-  }, []);
-
   return (
     <>
-      {isClient && <DiscordAuth />}
+      <Suspense fallback={<div>Loading...</div>}>
+        <DiscordAuth />
+      </Suspense>
       <div style={{
         display: 'flex',
         flexDirection: 'column',
