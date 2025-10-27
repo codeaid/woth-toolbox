@@ -56,7 +56,16 @@ const config = {
     });
 
     return config;
+    };  // Line 60 - this stays
+
+// Add these NEW lines here:
+if (config.experimental?.images) {
+  delete config.experimental.images;
+  if (!Object.keys(config.experimental).length) {
+    delete config.experimental;
   }
-};
+}
+
+module.exports = config;  // Line 62 - this stays
 
 module.exports = config;
