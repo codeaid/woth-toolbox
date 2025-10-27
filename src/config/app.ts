@@ -38,7 +38,7 @@ export const firaSansExtraCondensedFont = createFiraSansExtraCondensedFont({
 });
 
 // Detect base URL and path to use when loading assets
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://smithyhelen.github.io/woth-toolbox'';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://smithyhelen.github.io/woth-toolbox';
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 export const metadataBase = baseUrl ? new URL(baseUrl) : undefined;
 
