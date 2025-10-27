@@ -1,26 +1,13 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   images: {
     unoptimized: true,
   },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.md$/,
-      use: 'raw-loader',
-    });
-    return config;
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
-
-// Remove experimental.images if it exists to avoid Next.js 15 error
-if (nextConfig.experimental?.images) {
-  delete nextConfig.experimental.images;
-}
 
 module.exports = nextConfig;
