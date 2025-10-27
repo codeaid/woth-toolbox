@@ -1,6 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import clsx from 'clsx';
-import { DiscordAuth } from 'components/DiscordAuth';
+import dynamic from 'next/dynamic';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 import {
@@ -15,6 +15,12 @@ import { ApplicationProvider } from 'contexts';
 import 'modern-normalize/modern-normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'styles/global.css';
+
+// Load DiscordAuth only on client side (skip during static build)
+const DiscordAuth = dynamic(
+  () => import('components/DiscordAuth').then(mod => ({ default: mod.DiscordAuth })),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title: 'Way Of The Hunter Toolbox',
