@@ -66,6 +66,4 @@ if (config.experimental?.images) {
   }
 }
 
-module.exports = config;  // Line 62 - this stays
-
 module.exports = config;
