@@ -160,14 +160,15 @@ function DiscordAuthContent() {
           </button>
         </div>
       )}
-    </div>
-  );
-}
+        </div>
+    );
+  }
 
-export default function ClientDiscordAuth() {
+export default function DiscordAuth() {
   return (
     <Suspense fallback={null}>
       <DiscordAuthContent />
     </Suspense>
   );
 }
+
