@@ -102,9 +102,9 @@ jobs:
       - name: Export static application assets
       
   env:
-    NEXT_PUBLIC_BASE_PATH: /woth-toolbox
-    NEXT_PUBLIC_BASE_URL: https://smithyhelen.github.io/woth-toolbox
-    NEXT_PUBLIC_API_URL: http://65.109.100.181:8080
+    NEXT_PUBLIC_BASE_PATH: "/woth-toolbox"
+    NEXT_PUBLIC_BASE_URL: "https://smithyhelen.github.io/woth-toolbox"
+    NEXT_PUBLIC_API_URL: "http://65.109.100.181:8080"
   run: pnpm build
 
       - name: Upload assets as artifacts
