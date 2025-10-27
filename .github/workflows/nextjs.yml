@@ -99,7 +99,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
 
-            - name: Export static application assets
+      - name: Export static application assets
         env:
           NEXT_PUBLIC_BASE_PATH: "/woth-toolbox"
           NEXT_PUBLIC_BASE_URL: "https://smithyhelen.github.io/woth-toolbox"
