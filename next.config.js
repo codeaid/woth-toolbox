@@ -43,15 +43,13 @@ const config = {
     // Don't change names in development mode
     if (dev) {
           return config;
-  }  // Closes webpack - NO COMMA
-};  // Closes main config object
-
-// Remove experimental.images
+  // Remove unsupported experimental.images for Next.js 15
 if (config.experimental?.images) {
   delete config.experimental.images;
-  if (!Object.keys(config.experimental).length) {
+  if (Object.keys(config.experimental).length === 0) {
     delete config.experimental;
   }
 }
 
 module.exports = config;
+
