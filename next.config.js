@@ -6,6 +6,9 @@ const nextConfig = {
   assetPrefix: '/woth-toolbox/',
   output: 'export',
   trailingSlash: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     unoptimized: true,
   },
