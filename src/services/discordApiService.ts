@@ -1,5 +1,43 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://65.109.100.181:8080';
+export async function exchangeCodeForToken(code: string): Promise<any> {
+  const clientId = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID;
+  const clientSecret = process.env.NEXT_PUBLIC_DISCORD_CLIENT_SECRET;
+  const redirectUri = `${process.env.NEXT_PUBLIC_BASE_URL}/`;
 
+  const response = await fetch('https://discord.com/api/oauth2/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      client_id: clientId!,
+      client_secret: clientSecret!,
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: redirectUri,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to exchange code for token');
+  }
+
+  return await response.json();
+}
+
+export async function fetchUserData(accessToken: string): Promise<any> {
+  const response = await fetch('https://discord.com/api/users/@me', {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user data');
+  }
+
+  return await response.json();
+}
 export interface Herd {
   id: number;
   herd_name: string;
