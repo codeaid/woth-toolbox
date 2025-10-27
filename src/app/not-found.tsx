@@ -1,25 +1,30 @@
 'use client';
 
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
+import { DiscordAuth } from 'components/DiscordAuth';
+import { HerdMapOverlay } from 'components/HerdMapOverlay';
+import { NotFoundContent } from 'components/NotFoundContent';
 
-function NotFoundContent() {
-  const searchParams = useSearchParams();
-  
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
-        <p className="mt-4">The page you're looking for doesn't exist.</p>
-      </div>
-    </div>
-  );
-}
+const NotFoundPage = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-export default function NotFound() {
+  useEffect(() => {
+    // Only check login status on client side (after page loads in browser)
+    const token = typeof window !== 'undefined' ? localStorage.getItem('jwt_token') : null;
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
+      <DiscordAuth />
       <NotFoundContent />
-    </Suspense>
+      {isLoggedIn && (
+        <Suspense fallback={<div>Loading herd overlay...</div>}>
+          <HerdMapOverlay currentMap="Unknown" />
+        </Suspense>
+      )}
+    </>
   );
-}
+};
+
+export default NotFoundPage;
