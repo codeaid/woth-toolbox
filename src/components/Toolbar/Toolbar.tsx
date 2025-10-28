@@ -27,7 +27,7 @@ import {
   baseUrlNewZealand,
   baseUrlTransylvania,
 } from 'config/routing';
-import { useTranslator, useTutorial } from 'hooks';
+import { useTranslator } from 'hooks';
 import { isMapUrl } from 'lib/routing';
 import type { ToolbarProps } from './types';
 import styles from './Toolbar.module.css';
@@ -48,7 +48,6 @@ export const Toolbar = (props: ToolbarProps) => {
   const pathname = usePathname();
 
   // Retrieve map tutorial state and open functionality
-  const { enabled: tutorialEnabled, onTutorialOpen } = useTutorial();
 
   // Retrieve application translator
   const translate = useTranslator();
@@ -104,10 +103,6 @@ export const Toolbar = (props: ToolbarProps) => {
   /**
    * Handle opening tutorial
    */
-  const handleOpenTutorial = useCallback(
-    () => onTutorialOpen(1),
-    [onTutorialOpen],
-  );
 
   /**
    * Handle hiding map menu
@@ -269,14 +264,6 @@ export const Toolbar = (props: ToolbarProps) => {
         </div>
 
         <div className={styles.ToolbarButtons}>
-          {tutorialEnabled && (
-            <IconButton
-              title={translate('UI:TUTORIAL')}
-              onClick={handleOpenTutorial}
-            >
-              <RiQuestionLine />
-            </IconButton>
-          )}
           <IconButton title="Discord" onClick={handleOpenDiscord}>
             <FaDiscord />
           </IconButton>
