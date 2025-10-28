@@ -21,7 +21,7 @@ function DiscordAuthContent() {
       const storedUser = localStorage.getItem('discord_user');
       if (storedToken && storedUser && !user) {
         setUser(JSON.parse(storedUser));
-        loadUserHerds(storedToken);
+        loadUserHerds();
       }
     }
   }, [searchParams]);
@@ -36,7 +36,7 @@ function DiscordAuthContent() {
           localStorage.setItem('discord_token', tokenData.access_token);
           localStorage.setItem('discord_user', JSON.stringify(userData));
           setUser(userData);
-          await loadUserHerds(tokenData.access_token);
+          await loadUserHerds();
         }
       }
     } catch (error) {
@@ -46,14 +46,14 @@ function DiscordAuthContent() {
     }
   };
 
-  const loadUserHerds = async (token: string) => {
-    try {
-      const userHerds = await fetchUserHerds(token);
-      setHerds(userHerds || []);
-    } catch (error) {
-      console.error('Error loading herds:', error);
-    }
-  };
+  const loadUserHerds = async () => {
+  try {
+    const userHerds = await fetchUserHerds();  // ✅ Correct - no token parameter
+    setHerds(userHerds || []);
+  } catch (error) {
+    console.error('Error loading herds:', error);
+  }
+};
 
   const handleLogin = () => {
     const clientId = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID;
