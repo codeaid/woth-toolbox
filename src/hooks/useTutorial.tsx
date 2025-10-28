@@ -36,16 +36,13 @@ export const useTutorial = (enable = false) => {
   }, [completed, onTutorialOpen]);
 
   return {
-    component: (
-      <HuntingMapTutorial
-        defaultPageIndex={defaultPageIndex}
-        key="woth:tutorial"
-        visible={visible}
-        onClose={onTutorialClose}
-        onComplete={onTutorialComplete}
-      />
-    ),
-    enabled,
-    onTutorialOpen,
-  };
+  tutorialProps: {
+    defaultPageIndex,
+    visible,
+    onClose: onTutorialClose,
+    onComplete: onTutorialComplete,
+  },
+  enabled,
+  onTutorialOpen,
+
 };
