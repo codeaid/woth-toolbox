@@ -127,7 +127,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
         onUpdateRecordAsync={onUpdateAnimalMarkerRecord}
       />
 
-      {typeof document !== 'undefined' && tutorial && createPortal(tutorial, document.body)}
+      {tutorial}
     </>
   );
 };
