@@ -97,8 +97,8 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
   }, [mapId, onSetMapType]);
 
   return (
-    <>
-      <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
+  <>
+    <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
 
       <HuntingMap
         {...settings}
