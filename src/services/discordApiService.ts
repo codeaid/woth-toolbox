@@ -172,5 +172,6 @@ export function calculateCullingRecommendation(
 }
 
 export function isUserLoggedIn(): boolean {
+  if (typeof window === 'undefined') return false;
   return !!localStorage.getItem('jwt_token');
 }
