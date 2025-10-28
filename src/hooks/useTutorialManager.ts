@@ -12,7 +12,7 @@ import { useStorage } from './useStorage';
 /**
  * Hook exposing map tutorial states and functionality
  */
-export const useTutorialManager = (): TutorialContextValue => {
+export const useTutorialManager = (): any => {
   // Flag indicating whether tutorial has been previously completed
   const [completed, setCompleted] = useState(false);
 
