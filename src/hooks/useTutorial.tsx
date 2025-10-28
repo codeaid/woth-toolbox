@@ -44,5 +44,5 @@ export const useTutorial = (enable = false) => {
   },
   enabled,
   onTutorialOpen,
-
+  };
 };
