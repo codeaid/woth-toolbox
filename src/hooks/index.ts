@@ -11,4 +11,3 @@ export * from './useRefCallback';
 export * from './useSettings';
 export * from './useStorage';
 export * from './useTranslator';
-export * from './useTutorial';
