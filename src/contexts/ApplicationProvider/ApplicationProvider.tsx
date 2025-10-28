@@ -23,10 +23,9 @@ export const ApplicationProvider = (props: PropsWithChildren) => {
       <QueryClientProvider client={queryClient}>
         <SettingsProvider>
             <HuntingMapTypeProvider value={mapTypeManager}>
-              <Notifications>
+              <Notifications/>
               <App>{children}</App>
             </HuntingMapTypeProvider>
-          </TutorialProvider>
         </SettingsProvider>
       </QueryClientProvider>
     </StrictMode>
