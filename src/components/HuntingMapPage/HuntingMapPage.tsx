@@ -126,7 +126,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
         onUpdateRecordAsync={onUpdateAnimalMarkerRecord}
       />
 
-      {tutorial}
+      {typeof window !== 'undefined' && tutorial}
     </>
   );
 };
