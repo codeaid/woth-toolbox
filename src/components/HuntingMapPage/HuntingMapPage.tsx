@@ -3,7 +3,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import Head from 'next/head';
 import { AnimalEditor } from 'components/AnimalEditor';
 import type { HuntingMapProps } from 'components/HuntingMap';
 import { HuntingMap } from 'components/HuntingMap';
@@ -100,11 +99,6 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
 
   return (
   <>
-    <>
-  <Head>
-    <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
-  </Head>
-
       <HuntingMap
         {...settings}
         animalMarkers={animalMarkers}
