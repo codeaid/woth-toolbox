@@ -48,8 +48,9 @@ function DiscordAuthContent() {
 
   const loadUserHerds = async () => {
   try {
-    const userHerds = await fetchUserHerds();  // ✅ Correct - no token parameter
-    setHerds(userHerds || []);
+    const response = await fetchUserHerds();
+    const animals = response?.herds || response?.habitats?.flatMap(h => h.animals) || [];
+    setHerds(animals);  // ✅ Correct - extract the array from the response
   } catch (error) {
     console.error('Error loading herds:', error);
   }
