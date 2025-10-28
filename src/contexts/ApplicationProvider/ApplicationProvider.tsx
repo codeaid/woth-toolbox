@@ -8,7 +8,6 @@ import { Notifications } from 'components/Notifications';
 import {
   HuntingMapTypeProvider,
   SettingsProvider,
-  TutorialProvider,
 } from 'contexts';
 import { useHuntingMapTypeManager } from 'hooks';
 import { queryClient } from 'lib/services';
@@ -23,7 +22,6 @@ export const ApplicationProvider = (props: PropsWithChildren) => {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <SettingsProvider>
-          <TutorialProvider>
             <HuntingMapTypeProvider value={mapTypeManager}>
               <Notifications />
               <App>{children}</App>
