@@ -10,39 +10,15 @@ import { useContext, useEffect } from 'react';
  * @param enable Forces tutorial functionality to be enabled
  */
 export const useTutorial = (enable = false) => {
-  const {
-    completed,
-    defaultPageIndex,
-    enabled,
-    visible,
-    onTutorialClose,
-    onTutorialComplete,
-    onTutorialEnable,
-    onTutorialOpen,
-  } = useContext(TutorialContext);
-
-  // Enable tutorial if required and disable it on unmount
-  useEffect(() => {
-    if (enable) {
-      onTutorialEnable(true);
-    }
-
-    return () => onTutorialEnable(false);
-  }, [enable, onTutorialEnable]);
-
-  // Show tutorial if it has previously not been completed
-  useEffect(() => {
-    completed === false && onTutorialOpen();
-  }, [completed, onTutorialOpen]);
-
+  // Tutorial functionality disabled - return empty implementation
   return {
-  tutorialProps: {
-    defaultPageIndex,
-    visible,
-    onClose: onTutorialClose,
-    onComplete: onTutorialComplete,
-  },
-  enabled,
-  onTutorialOpen,
+    tutorialProps: {
+      defaultPageIndex: 0,
+      visible: false,
+      onClose: () => {},
+      onComplete: () => {},
+    },
+    enabled: false,
+    onTutorialOpen: () => {},
   };
 };
