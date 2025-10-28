@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 
 const DiscordAuth = dynamic(
-  () => import('./DiscordAuth').then(mod => ({ default: mod.DiscordAuth })),
+  () => import('./DiscordAuth'),
   { ssr: false }
 );
 
