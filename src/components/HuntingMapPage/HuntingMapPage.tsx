@@ -8,14 +8,12 @@ import type { HuntingMapProps } from 'components/HuntingMap';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
-import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
 import {
   useAnimalMarkers,
   useCustomMarkers,
   useHuntingMapType,
   useSettings,
   useTranslator,
-  useTutorial,
 } from 'hooks';
 import type { AnimalMarker } from 'types/markers';
 import type { HuntingMapPageProps } from './types';
@@ -54,7 +52,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
   // Retrieve map dependencies
   const { onSettingsRead } = useSettings();
   const translate = useTranslator();
-  const { tutorialProps } = useTutorial(true);
+  
 
   // Animal marker that is currently being edited
   const [pendingMarker, setPendingMarker] = useState<AnimalMarker>();
@@ -127,9 +125,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
         onUpdateRecordAsync={onUpdateAnimalMarkerRecord}
       />
 
-      {typeof window !== 'undefined' && tutorialProps && (
-  <HuntingMapTutorial key="woth:tutorial" {...tutorialProps} />
-)}
+      
     </>
   );
 };
