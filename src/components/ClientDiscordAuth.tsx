@@ -73,7 +73,7 @@ function DiscordAuthContent() {
   return (
     <div style={{ 
       position: 'fixed', 
-      top: '80px',
+      bottom: '20px',
       right: '20px', 
       zIndex: 9999,
       display: 'flex',
