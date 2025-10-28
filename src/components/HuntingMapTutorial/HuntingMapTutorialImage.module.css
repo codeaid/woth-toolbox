@@ -1,0 +1,24 @@
+.HuntingMapTutorialImage {
+  background-color: var(--elevation3);
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  margin: 1em auto;
+  overflow: hidden;
+  padding: 1em;
+  position: relative;
+}
+
+.HuntingMapTutorialImage img {
+  border-radius: 0.4em;
+  height: fit-content;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media screen and (max-width: 768px) {
+  .HuntingMapTutorialImage {
+    padding: 0.5em;
+  }
+}
