@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimalEditor } from 'components/AnimalEditor';
@@ -7,6 +8,7 @@ import type { HuntingMapProps } from 'components/HuntingMap';
 import { HuntingMap } from 'components/HuntingMap';
 import { basePath } from 'config/app';
 import { markerVisibilityMap } from 'config/markers';
+import { Head } from 'next/head';
 import {
   useAnimalMarkers,
   useCustomMarkers,
@@ -98,7 +100,10 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
 
   return (
   <>
+    <>
+  <Head>
     <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
+  </Head>
 
       <HuntingMap
         {...settings}
