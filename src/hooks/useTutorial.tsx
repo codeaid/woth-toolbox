@@ -1,8 +1,8 @@
 'use client';
 
 import { useContext, useEffect } from 'react';
-import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
-import { TutorialContext } from 'contexts';
+/*import { HuntingMapTutorial } from 'components/HuntingMapTutorial';
+import { TutorialContext } from 'contexts';,
 
 /**
  * Hook exposing the map tutorial component and its associated functionality
