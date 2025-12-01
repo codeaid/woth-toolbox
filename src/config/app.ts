@@ -38,7 +38,7 @@ export const firaSansExtraCondensedFont = createFiraSansExtraCondensedFont({
 });
 
 // Detect base URL and path to use when loading assets
-export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://smithyhelen.github.io/woth-toolbox';
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 export const metadataBase = baseUrl ? new URL(baseUrl) : undefined;
 
@@ -49,3 +49,4 @@ export const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ?? '';
 export const urlDiscord = 'https://discord.gg/wayofthehunter';
 export const urlSteam =
   'https://steamcommunity.com/sharedfiles/filedetails/?id=2882064749';
+

@@ -32,7 +32,7 @@ export const useTutorial = (enable = false) => {
 
   // Show tutorial if it has previously not been completed
   useEffect(() => {
-    completed === false && onTutorialOpen();
+    !completed && onTutorialOpen();
   }, [completed, onTutorialOpen]);
 
   return {

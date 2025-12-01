@@ -56,9 +56,9 @@ export const SettingsProvider = (props: PropsWithChildren) => {
     [onSettingsRead],
   );
 
-  if (!initialized) {
-    return <LoadingOverlay />;
-  }
+  if (!initialized || typeof window === 'undefined') {
+  return <LoadingOverlay />;
+}
 
   return (
     <SettingsContext.Provider

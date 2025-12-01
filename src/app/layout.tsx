@@ -1,5 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import clsx from 'clsx';
+import ClientDiscordAuth from 'components/ClientDiscordAuth';
 import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 import {
@@ -45,6 +46,7 @@ const RootLayout = (props: PropsWithChildren) => (
   >
     <body>
       <GoogleAnalytics gaId={googleAnalyticsId} />
+      <ClientDiscordAuth />
       <ApplicationProvider>{props.children}</ApplicationProvider>
     </body>
   </html>

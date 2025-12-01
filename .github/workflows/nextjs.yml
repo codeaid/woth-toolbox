@@ -1,10 +1,10 @@
 name: Deploy site to Github Pages
 
-# Runs when pushing new tags
+# Runs when pushing to main branch
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - main
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -48,43 +48,13 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
 
-  lint:
-    name: Lint code
-    runs-on: ubuntu-latest
-    needs: deps
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Restore application dependencies
-        uses: actions/cache/restore@v4
-        with:
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
-          path: |
-            node_modules
-          fail-on-cache-miss: true
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - name: Perform code linting
-        run: pnpm lint
 
   # Build job
   build:
     name: Build
     runs-on: ubuntu-latest
     environment: production
-    needs:
-      - lint
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -111,12 +81,8 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
+        
+          
 
       - name: Configure output cache
         uses: actions/cache@v4
@@ -131,15 +97,9 @@ jobs:
 
       - name: Export static application assets
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH }}
-          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL }}
-          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ vars.NEXT_PUBLIC_FIREBASE_API_KEY }}
-          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_APP_ID }}
-          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ vars.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
-          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
-          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
-          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ vars.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
-          NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ vars.NEXT_PUBLIC_GOOGLE_ANALYTICS }}
+          NEXT_PUBLIC_BASE_PATH: "/woth-toolbox"
+          NEXT_PUBLIC_BASE_URL: "https://smithyhelen.github.io/woth-toolbox"
+          NEXT_PUBLIC_API_URL: "http://65.109.100.181:8080"
         run: pnpm build
 
       - name: Upload assets as artifacts

@@ -1,3 +1,19 @@
+# WOTH Toolbox - Discord Enhanced 🦌
+
+> This is a fork of [codeaid/woth-toolbox](https://github.com/codeaid/woth-toolbox) with Discord integration for personal herd tracking.
+
+## Discord Integration Features
+- Login with Discord to see your personally tracked herds on the maps
+- Automatic map filtering - only shows herds from the currently selected map
+- Color-coded markers: 🏆 Trophy, ✅ Leave, ⏳ Monitor, ❌ Cull
+- Real-time sync with your Discord bot's database
+
+## Credits
+- **Original WOTH Toolbox** by [codeaid](https://github.com/codeaid)
+- **Map Data** courtesy of Nine Rocks Games and THQ Nordic
+- **Discord Integration** for "Antlers in the Mist" community
+
+---
 ![Way Of The Hunter Logo](docs/woth-logo.png)
 
 This interactive web application contains a suite of tools that can be used

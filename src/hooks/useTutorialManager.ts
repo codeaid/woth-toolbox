@@ -2,10 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import type { TutorialContextValue } from 'contexts';
-import {
-  storageReadTutorialFlagAsync,
-  storageWriteTutorialFlagAsync,
-} from 'lib/storage';
+import { isMapTutorialCompleted, writeMapTutorialCompleted } from 'lib/storage';
 import { sendGoogleEvent } from 'lib/tracking';
 import { useStorage } from './useStorage';
 
@@ -42,7 +39,7 @@ export const useTutorialManager = (): TutorialContextValue => {
   /**
    * Handle completing tutorial
    */
-  const handleTutorialComplete = useCallback(async () => {
+  const handleTutorialComplete = useCallback(() => {
     setCompleted(true);
     setVisible(false);
 
@@ -50,7 +47,7 @@ export const useTutorialManager = (): TutorialContextValue => {
     sendGoogleEvent('help_complete');
 
     if (storage) {
-      await storageWriteTutorialFlagAsync(storage);
+      writeMapTutorialCompleted(storage);
     }
   }, [storage]);
 
@@ -82,7 +79,7 @@ export const useTutorialManager = (): TutorialContextValue => {
       return;
     }
 
-    storageReadTutorialFlagAsync(storage).then(setCompleted);
+    setCompleted(isMapTutorialCompleted(storage));
   }, [storage]);
 
   return {

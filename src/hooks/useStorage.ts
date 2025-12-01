@@ -8,13 +8,19 @@ import { getStorage } from 'lib/storage';
  */
 export const useStorage = () => {
   // Browser storage manager
-  const [storage, setStorage] = useState<Storage>();
+  const [storage, setStorage] = useState<Storage | undefined>(
+    typeof window !== 'undefined' ? getStorage() : undefined
+  );
 
   // Create storage manager on load
   useEffect(() => {
-    try {
-      setStorage(getStorage());
-    } catch (e) {}
+    if (typeof window !== 'undefined') {
+      try {
+        setStorage(getStorage());
+      } catch (e) {
+        console.error('Failed to initialize storage:', e);
+      }
+    }
   }, []);
 
   return storage;

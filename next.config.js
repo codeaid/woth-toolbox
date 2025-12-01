@@ -21,6 +21,8 @@ const getLocalIdentHash = (context, localIdentName, localName) =>
 /** @type {import('next').NextConfig} */
 const config = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+
+  // Don't run linter during production builds
   eslint: {
     ignoreDuringBuilds: true,
   },

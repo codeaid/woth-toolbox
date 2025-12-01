@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimalEditor } from 'components/AnimalEditor';
@@ -13,7 +14,6 @@ import {
   useHuntingMapType,
   useSettings,
   useTranslator,
-  useTutorial,
 } from 'hooks';
 import type { AnimalMarker } from 'types/markers';
 import type { HuntingMapPageProps } from './types';
@@ -52,7 +52,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
   // Retrieve map dependencies
   const { onSettingsRead } = useSettings();
   const translate = useTranslator();
-  const { component: tutorial } = useTutorial(true);
+  
 
   // Animal marker that is currently being edited
   const [pendingMarker, setPendingMarker] = useState<AnimalMarker>();
@@ -97,9 +97,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
   }, [mapId, onSetMapType]);
 
   return (
-    <>
-      <title>{`${translate(titleKey)} - ${translate('UI:GAME_TITLE')}`}</title>
-
+  <>
       <HuntingMap
         {...settings}
         animalMarkers={animalMarkers}
@@ -127,7 +125,7 @@ export const HuntingMapPage = (props: HuntingMapPageProps) => {
         onUpdateRecordAsync={onUpdateAnimalMarkerRecord}
       />
 
-      {createPortal(tutorial, document.body)}
+      
     </>
   );
 };
