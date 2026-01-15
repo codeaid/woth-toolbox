@@ -52,4 +52,22 @@ export default [
     tier: 1,
     type: 'animal:snowshoe hare',
   },
+  {
+    description: 'ANIMAL:WILD_TURKEY_DESCRIPTION',
+    habitatPrimary: ['highland forest'],
+    habitatSecondary: ['lowland forest'],
+    heading: 'ANIMAL:WILD_TURKEY_HEADING',
+    hitEnergy: [20, 1200],
+    latin: 'ANIMAL:WILD_TURKEY_LATIN',
+    lifeCycle: [
+      { activity: 'feeding', time: 0 },
+      { activity: 'sleeping', time: 3 },
+      { activity: 'feeding', time: 9 },
+      { activity: 'sleeping', time: 17 },
+    ],
+    maps: ['idaho', 'new-zealand'],
+    slug: 'eastern-wild-turkey',
+    tier: 1,
+    type: 'animal:eastern wild turkey',
+  },
 ] as Array<Animal>;

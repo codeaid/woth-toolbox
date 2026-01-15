@@ -21,6 +21,7 @@ export const animalMarkerTypes: Array<AnimalMarkerType> = [
   'animal:chamois',
   'animal:common eland',
   'animal:common warthog',
+  'animal:eastern wild turkey',
   'animal:egyptian goose',
   'animal:eurasian badger',
   'animal:eurasian moose',

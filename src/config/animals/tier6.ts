@@ -98,12 +98,12 @@ export default [
     type: 'animal:cape buffalo',
   },
   {
-    description: 'ANIMAL:COMMONELAND_DESC',
+    description: 'ANIMAL:COMMON_ELAND_DESCRIPTION',
     habitatPrimary: ['grasslands and forests', 'savanna'],
     habitatSecondary: ['highlands'],
-    heading: 'ANIMAL:COMMONELAND',
+    heading: 'ANIMAL:COMMON_ELAND_HEADING',
     hitEnergy: [3450, 6215],
-    latin: 'ANIMAL:COMMONELAND_LATIN',
+    latin: 'ANIMAL:COMMON_ELAND_LATIN',
     lifeCycle: [
       { activity: 'sleeping', time: 0 },
       { activity: 'feeding', time: 5 },
