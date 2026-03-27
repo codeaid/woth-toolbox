@@ -11,8 +11,10 @@ import type {
 type IconClickHandler = (event: MouseEvent<EventTarget>) => void;
 type IconLongPressHandler = (event: TouchEvent<EventTarget>) => void;
 
-export interface IconProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface IconProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> {
   highlighted?: boolean;
   longPressMs?: number;
   size?: number;

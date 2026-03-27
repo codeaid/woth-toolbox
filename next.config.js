@@ -21,12 +21,18 @@ const getLocalIdentHash = (context, localIdentName, localName) =>
 /** @type {import('next').NextConfig} */
 const config = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   output: 'export',
   reactStrictMode: true,
   trailingSlash: false,
+  turbopack: {
+    rules: {
+      // Enable importing SVG images as components
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
   webpack: (config, { dev }) => {
     const rules = config.module.rules
       .find(rule => typeof rule.oneOf === 'object')

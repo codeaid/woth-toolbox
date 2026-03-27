@@ -133,7 +133,13 @@ module.exports = [
     plugins: {
       'react-hooks': pluginReactHooks,
     },
-    rules: pluginReactHooks.configs.recommended.rules,
+    rules: {
+      ...pluginReactHooks.configs.recommended.rules,
+      'react-hooks/immutability': 'off',
+      'react-hooks/refs': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/static-components': 'off',
+    },
   },
 
   {
