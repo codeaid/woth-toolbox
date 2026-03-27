@@ -1,0 +1,107 @@
+.DeprecationNoticeBackdrop {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 200;
+}
+
+.DeprecationNoticeModal {
+  background: linear-gradient(180deg, #1e1e1e, #171717);
+  border: 1px solid rgba(231, 190, 112, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  margin: 1em;
+  max-width: 380px;
+  padding: 1.75em 2em;
+  text-align: center;
+  width: 100%;
+}
+
+.DeprecationNoticeTitle {
+  align-items: center;
+  color: var(--text-primary);
+  display: flex;
+  font-size: 1.7rem;
+  font-weight: 500;
+  gap: 0.5em;
+  justify-content: center;
+  line-height: 1;
+  margin-bottom: 0.75em;
+}
+
+.DeprecationNoticeTitleIcon {
+  color: orange;
+}
+
+.DeprecationNoticeBody {
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  gap: 0.6em;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.DeprecationNoticeUrl {
+  color: var(--brand);
+}
+
+.DeprecationNoticeBenefits {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.DeprecationNoticeBenefit {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 2;
+}
+
+.DeprecationNoticeBenefit::before {
+  color: var(--brand);
+  content: '✦';
+  margin-right: 0.4em;
+}
+
+.DeprecationNoticeActions {
+  display: flex;
+  gap: 0.6em;
+  justify-content: center;
+}
+
+.DeprecationNoticeHighlight {
+  color: var(--brand);
+}
+
+.DeprecationNoticePrimary {
+  background-color: var(--brand);
+  border: none;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5em 1.25em;
+  text-decoration: none;
+}
+
+.DeprecationNoticePrimary:hover {
+  filter: brightness(1.1);
+}
+
+.DeprecationNoticeSecondary {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.5em 0.9em;
+}
+
+.DeprecationNoticeSecondary:hover {
+  color: var(--text-primary);
+}

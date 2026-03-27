@@ -1,0 +1,55 @@
+.DeprecationBanner {
+  align-items: center;
+  background-color: #f63e02;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 200, 100, 0.1);
+  display: flex;
+  font-size: 0.9rem;
+  gap: 1em;
+  justify-content: center;
+  line-height: 1.4;
+  padding: 0.75em 1em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.DeprecationBannerContent {
+  align-items: start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.DeprecationBannerIcon {
+  color: orange;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.DeprecationBannerText {
+  color: var(--text-primary);
+}
+
+.DeprecationBannerLink {
+  align-items: center;
+  color: var(--brand);
+  display: flex;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.1s ease-in-out;
+}
+
+.DeprecationBannerLink:hover {
+  color: var(--text-highlight);
+}
+
+.DeprecationBannerLinkIcon {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 550px) {
+  .DeprecationBannerContent {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

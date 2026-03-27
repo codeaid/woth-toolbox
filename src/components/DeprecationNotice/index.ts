@@ -1,0 +1,1 @@
+export { DeprecationNotice } from './DeprecationNotice';

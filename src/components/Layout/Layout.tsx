@@ -1,3 +1,5 @@
+import { DeprecationBanner } from 'components/DeprecationBanner';
+import { DeprecationNotice } from 'components/DeprecationNotice';
 import { LayoutBackground } from 'components/LayoutBackground';
 import { LoadingOverlay } from 'components/LoadingOverlay';
 import { Toolbar } from 'components/Toolbar';
@@ -18,6 +20,7 @@ export const Layout = (props: LayoutProps) => {
 
   return (
     <div className={styles.Layout}>
+      <DeprecationBanner />
       <Toolbar
         subtitle={translate('TOOLBOX:TITLE')}
         title={translate('UI:GAME_TITLE')}
@@ -26,6 +29,7 @@ export const Layout = (props: LayoutProps) => {
       <div className={styles.LayoutContent} id="layout-content">
         {children}
       </div>
+      <DeprecationNotice />
     </div>
   );
 };

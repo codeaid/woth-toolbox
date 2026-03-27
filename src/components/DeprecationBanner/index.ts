@@ -1,0 +1,1 @@
+export { DeprecationBanner } from './DeprecationBanner';
