@@ -474,13 +474,8 @@ export const storageWriteTutorialFlagAsync = async (storage: Storage) =>
  * @param storage Source storage manager
  */
 export const storageSerializeAsync = async (storage: Storage) => {
-  // Generate list of keys that should be migrated
-  const keys = [
-    ...mapIds.map(getAnimalMarkerStorageKey),
-    ...mapIds.map(getCustomMarkerStorageKey),
-    mapTutorialKey,
-    settingsKey,
-  ];
+  // Generate list of keys that should be migrated (only animal territory data)
+  const keys = mapIds.map(getAnimalMarkerStorageKey);
 
   // Fetch contents of each key and add it to the map
   const data = keys.reduce((acc, key) => {
@@ -500,6 +495,11 @@ export const storageSerializeAsync = async (storage: Storage) => {
       return acc;
     }
   }, new Map());
+
+  // Return empty string if no data was found
+  if (data.size === 0) {
+    return '';
+  }
 
   // Serialize local storage data
   const json = JSON.stringify(Object.fromEntries(data));

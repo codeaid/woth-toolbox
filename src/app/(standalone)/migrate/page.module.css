@@ -1,0 +1,137 @@
+.page {
+  align-items: center;
+  background: var(--elevation1);
+  color: var(--text-primary);
+  display: flex;
+  font-family: var(--font-fira-sans), sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.branding {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Popup mode */
+.popup {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+  border: 3px solid rgba(231, 190, 112, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--brand);
+  height: 40px;
+  margin-bottom: 1rem;
+  width: 40px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.checkmark {
+  color: #4caf50;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Standalone mode */
+.standalone {
+  max-width: 600px;
+  width: 100%;
+}
+
+.heading {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.loadingText {
+  color: var(--text-secondary);
+}
+
+.instructions {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+}
+
+.link {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.codeBlock {
+  background: var(--elevation0);
+  border: 1px solid var(--elevation6);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  overflow: auto;
+  padding: 0.75rem;
+}
+
+.code {
+  color: var(--text-secondary);
+  font-family: monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.copyButton {
+  background: var(--brand);
+  border: none;
+  border-radius: 6px;
+  color: var(--elevation0);
+  cursor: pointer;
+  font-family: var(--font-fira-sans), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: opacity 0.15s;
+  width: 100%;
+}
+
+.copyButton:hover {
+  opacity: 0.9;
+}
+
+.noData {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.noData p {
+  margin: 0 0 0.5rem;
+}
